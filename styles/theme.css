@@ -1,0 +1,1623 @@
+:root {
+  /* =====================================================
+     BRAND
+  ====================================================== */
+
+  --brand-navy-950: #071421;
+  --brand-navy-900: #0b1929;
+  --brand-navy-800: #10243a;
+  --brand-navy-700: #122f4c;
+  --brand-navy: #12253e;
+
+  --brand-charcoal: #23262d;
+
+  --brand-gold-700: #a86d1f;
+  --brand-gold-600: #bd812b;
+  --brand-gold: #d7a04a;
+  --brand-gold-300: #e6c88f;
+
+  --brand-champagne: #cdbb83;
+
+  --brand-ivory-50: #fffdf8;
+  --brand-ivory-100: #fbf7ef;
+  --brand-ivory: #f5f2ea;
+  --brand-cream: #ebe1d3;
+  --brand-cream-dark: #d9c9b4;
+
+  --brand-text: #12253e;
+  --brand-text-muted: #69645c;
+
+  /* =====================================================
+     CLAY SURFACES
+  ====================================================== */
+
+  --clay-light-1: #fffdf8;
+  --clay-light-2: #f6eee3;
+  --clay-light-3: #e9ddcd;
+
+  --clay-dark-1: #173653;
+  --clay-dark-2: #10263e;
+  --clay-dark-3: #091827;
+
+  /* =====================================================
+     CLAY SHADOWS
+  ====================================================== */
+
+  --shadow-clay-xs:
+    4px 5px 9px rgba(91, 65, 38, 0.13), -3px -3px 7px rgba(255, 255, 255, 0.8),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.8);
+
+  --shadow-clay-sm:
+    7px 9px 18px rgba(91, 65, 38, 0.14),
+    -6px -6px 14px rgba(255, 255, 255, 0.74),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 2px rgba(112, 82, 49, 0.06);
+
+  --shadow-clay-md:
+    12px 14px 28px rgba(91, 65, 38, 0.16),
+    -9px -9px 22px rgba(255, 255, 255, 0.76),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.9),
+    inset -2px -2px 4px rgba(117, 84, 48, 0.07);
+
+  --shadow-clay-lg:
+    20px 24px 48px rgba(85, 61, 35, 0.18),
+    -14px -14px 34px rgba(255, 255, 255, 0.78),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.96),
+    inset -3px -3px 6px rgba(120, 86, 48, 0.08);
+
+  --shadow-clay-inset:
+    inset 7px 7px 15px rgba(115, 84, 50, 0.14),
+    inset -7px -7px 15px rgba(255, 255, 255, 0.9);
+
+  --shadow-clay-dark:
+    12px 16px 28px rgba(3, 13, 24, 0.34),
+    -6px -6px 16px rgba(255, 255, 255, 0.15),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.08),
+    inset -3px -3px 7px rgba(0, 0, 0, 0.22);
+
+  /* =====================================================
+     RADIUS
+  ====================================================== */
+
+  --radius-xs: 12px;
+  --radius-sm: 16px;
+  --radius-md: 22px;
+  --radius-lg: 30px;
+  --radius-xl: 40px;
+  --radius-2xl: 52px;
+  --radius-pill: 999px;
+
+  /* =====================================================
+     LAYOUT
+  ====================================================== */
+
+  --site-width: 1480px;
+  --navbar-height: 88px;
+
+  /* =====================================================
+     ANIMATION
+  ====================================================== */
+
+  --ease-clay: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 180ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+}
+
+/* =====================================================
+   TYPOGRAPHY
+====================================================== */
+
+.font-brand-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+}
+
+.font-brand-sans {
+  font-family: var(--font-sans), Arial, sans-serif;
+}
+
+/* =====================================================
+   GENERIC CLAY COMPONENTS
+====================================================== */
+
+.clay-surface {
+  position: relative;
+
+  background: linear-gradient(145deg, var(--clay-light-1), var(--clay-light-3));
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+
+  box-shadow: var(--shadow-clay-md);
+}
+
+.clay-surface-soft {
+  position: relative;
+
+  background: linear-gradient(145deg, #fffdf9, #efe4d5);
+
+  border: 1px solid rgba(255, 255, 255, 0.72);
+
+  box-shadow: var(--shadow-clay-sm);
+}
+
+.clay-surface-strong {
+  position: relative;
+
+  background: linear-gradient(145deg, #fffefa, #eadccb);
+
+  border: 1px solid rgba(255, 255, 255, 0.82);
+
+  box-shadow: var(--shadow-clay-lg);
+}
+
+.clay-inset {
+  position: relative;
+
+  background: linear-gradient(145deg, #e9dccb, #fffaf3);
+
+  box-shadow: var(--shadow-clay-inset);
+}
+
+.clay-dark {
+  position: relative;
+
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      rgba(255, 255, 255, 0.08),
+      transparent 32%
+    ),
+    linear-gradient(145deg, var(--clay-dark-1), var(--clay-dark-3));
+
+  box-shadow: var(--shadow-clay-dark);
+}
+
+/* subtle inner highlight */
+
+.clay-surface::after,
+.clay-surface-soft::after,
+.clay-surface-strong::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+
+  inset: 2px;
+
+  border-radius: inherit;
+
+  box-shadow:
+    inset 2px 2px 3px rgba(255, 255, 255, 0.65),
+    inset -2px -2px 4px rgba(111, 78, 42, 0.04);
+}
+
+/* =====================================================
+   CLAY ICONS
+====================================================== */
+
+.clay-icon {
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(145deg, #fffdf9 0%, #f8f0e5 44%, #e7d8c5 100%);
+
+  border: 1px solid rgba(255, 255, 255, 0.76);
+
+  box-shadow:
+    6px 7px 14px rgba(87, 62, 36, 0.14),
+    -4px -4px 10px rgba(255, 255, 255, 0.82),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.95),
+    inset -1px -1px 3px rgba(117, 80, 42, 0.06);
+}
+.clay-icon-inset {
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(145deg, #e8dac8, #fffaf3);
+
+  box-shadow:
+    inset 4px 4px 9px rgba(101, 72, 40, 0.13),
+    inset -4px -4px 9px rgba(255, 255, 255, 0.9);
+}
+
+/* =====================================================
+   BUTTONS
+====================================================== */
+
+.clay-button-outline-dark {
+  color: #f0c978;
+
+  border: 1px solid rgba(215, 160, 74, 0.75);
+
+  background: linear-gradient(
+    145deg,
+    rgba(27, 55, 82, 0.96),
+    rgba(8, 25, 42, 0.98)
+  );
+
+  box-shadow:
+    7px 9px 16px rgba(2, 12, 23, 0.26),
+    -3px -3px 9px rgba(255, 255, 255, 0.08),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.07),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.18);
+
+  transition:
+    transform 280ms var(--ease-clay),
+    border-color 280ms var(--ease-clay),
+    color 280ms var(--ease-clay);
+}
+.clay-button-outline-dark:hover {
+  color: #fff3d5;
+  border-color: var(--brand-gold);
+  transform: translateY(-3px);
+}
+
+.clay-button-gold {
+  background: linear-gradient(145deg, #e5b560, #b97923);
+
+  color: #fff;
+
+  border: 1px solid rgba(255, 232, 186, 0.5);
+
+  box-shadow:
+    8px 10px 18px rgba(130, 80, 22, 0.23),
+    -4px -4px 10px rgba(255, 242, 210, 0.38),
+    inset 2px 2px 2px rgba(255, 255, 255, 0.3),
+    inset -2px -2px 4px rgba(90, 50, 10, 0.15);
+
+  transition:
+    transform var(--duration-normal) var(--ease-clay),
+    box-shadow var(--duration-normal) var(--ease-clay);
+}
+
+.clay-button-gold:hover {
+  transform: translateY(-3px);
+}
+
+/* =====================================================
+   INTERACTION
+====================================================== */
+
+.clay-lift {
+  transition:
+    transform var(--duration-normal) var(--ease-clay),
+    box-shadow var(--duration-normal) var(--ease-clay);
+}
+
+.clay-lift:hover {
+  transform: translateY(-5px);
+}
+/* =========================================================
+   SOFA N MORE — BUTTON SYSTEM
+========================================================= */
+
+.snm-button {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  width: fit-content;
+
+  border: 0;
+  outline: none;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  font-family: var(--font-sans), sans-serif;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  user-select: none;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  transition:
+    transform 240ms var(--ease-clay),
+    box-shadow 240ms var(--ease-clay),
+    background 240ms var(--ease-clay),
+    color 240ms var(--ease-clay);
+}
+
+/* ---------------------------------------------------------
+   Clay highlight
+--------------------------------------------------------- */
+
+.snm-button::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 1px 2px auto 2px;
+
+  height: 45%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.24),
+    rgba(255, 255, 255, 0)
+  );
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+/* ---------------------------------------------------------
+   Content
+--------------------------------------------------------- */
+
+.snm-button__label {
+  position: relative;
+
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+
+  line-height: 1;
+}
+
+.snm-button__icon,
+.snm-button__arrow {
+  position: relative;
+
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.snm-button__arrow {
+  transition: transform 240ms var(--ease-clay);
+}
+
+.snm-button:hover .snm-button__arrow {
+  transform: translateX(4px);
+}
+
+/* =========================================================
+   SIZES
+========================================================= */
+
+.snm-button--sm {
+  min-height: 38px;
+
+  padding: 0 15px;
+
+  border-radius: 35px;
+
+  gap: 10px;
+
+  font-size: 10px;
+}
+
+.snm-button--md {
+  min-height: 46px;
+
+  padding: 0 20px;
+
+  border-radius: 35px;
+
+  font-size: 11px;
+}
+
+.snm-button--lg {
+  min-height: 54px;
+
+  padding: 0 26px;
+
+  border-radius: 35px;
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   GOLD
+========================================================= */
+
+.snm-button--gold {
+  color: #ffffff;
+
+  background: linear-gradient(
+    145deg,
+    #e8b45a 0%,
+    var(--brand-gold) 48%,
+    #c48528 100%
+  );
+
+  border: 1px solid rgba(255, 224, 166, 0.65);
+
+  box-shadow:
+    0 9px 17px rgba(150, 93, 19, 0.24),
+    0 3px 5px rgba(124, 75, 14, 0.14),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.33),
+    inset -2px -3px 5px rgba(110, 61, 10, 0.16);
+}
+
+.snm-button--gold:hover {
+  transform: translateY(-2px);
+
+  background: linear-gradient(145deg, #edbd67 0%, #dda549 48%, #c78427 100%);
+
+  box-shadow:
+    0 12px 21px rgba(150, 93, 19, 0.29),
+    0 4px 7px rgba(124, 75, 14, 0.16),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.38),
+    inset -2px -3px 5px rgba(110, 61, 10, 0.16);
+}
+
+.snm-button--gold:active {
+  transform: translateY(1px) scale(0.985);
+
+  box-shadow:
+    0 4px 8px rgba(150, 93, 19, 0.18),
+    inset 3px 3px 6px rgba(115, 65, 10, 0.14),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.2);
+}
+
+/* =========================================================
+   NAVY
+========================================================= */
+
+.snm-button--navy {
+  color: var(--brand-gold);
+
+  background: linear-gradient(
+    145deg,
+    #193c5c 0%,
+    var(--brand-navy) 50%,
+    var(--brand-navy-900) 100%
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 9px 18px rgba(4, 17, 30, 0.28),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.08),
+    inset -2px -3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.snm-button--navy:hover {
+  transform: translateY(-2px);
+
+  color: #f3cc7c;
+
+  background: linear-gradient(145deg, #20496d, #122b46, #081827);
+
+  box-shadow:
+    0 12px 22px rgba(4, 17, 30, 0.32),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.09);
+}
+
+/* =========================================================
+   IVORY
+========================================================= */
+
+.snm-button--ivory {
+  color: var(--brand-navy);
+
+  background: linear-gradient(145deg, #fffdf8, #ede1d1);
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  box-shadow: var(--shadow-clay-sm);
+}
+
+.snm-button--ivory:hover {
+  transform: translateY(-2px);
+
+  color: var(--brand-gold-700);
+}
+
+/* =========================================================
+   OUTLINE
+========================================================= */
+
+.snm-button--outline {
+  color: var(--brand-gold);
+
+  background: rgba(13, 31, 49, 0.72);
+
+  border: 1px solid rgba(215, 160, 74, 0.74);
+
+  box-shadow:
+    inset 2px 2px 3px rgba(255, 255, 255, 0.05),
+    0 6px 13px rgba(5, 16, 28, 0.18);
+}
+
+.snm-button--outline:hover {
+  transform: translateY(-2px);
+
+  color: #ffffff;
+
+  background: var(--brand-navy);
+}
+
+/* =========================================================
+   FULL WIDTH
+========================================================= */
+
+.snm-button--full {
+  width: 100%;
+}
+
+/* =========================================================
+   DISABLED
+========================================================= */
+
+.snm-button--disabled {
+  cursor: not-allowed;
+
+  opacity: 0.52;
+
+  transform: none !important;
+
+  box-shadow: none;
+}
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.snm-button__loader {
+  width: 15px;
+  height: 15px;
+
+  flex-shrink: 0;
+
+  border: 2px solid currentColor;
+
+  border-right-color: transparent;
+
+  border-radius: 50%;
+
+  animation: snm-button-spin 0.7s linear infinite;
+}
+
+@keyframes snm-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   KEYBOARD FOCUS
+========================================================= */
+
+.snm-button:focus-visible {
+  outline: 3px solid rgba(215, 160, 74, 0.3);
+
+  outline-offset: 4px;
+}
+
+/* =========================================================
+   SERVICES CAROUSEL
+========================================================= */
+
+.services-carousel-slot {
+  --services-slot-x: 6px;
+  --services-slot-y: 0px;
+  --services-slot-scale: 1;
+  --services-slot-opacity: 1;
+  --services-slot-z: 30;
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: var(--services-slot-z);
+
+  width: clamp(248px, 70vw, 282px);
+  height: 408px;
+
+  opacity: var(--services-slot-opacity);
+  transform: translate3d(
+      calc(-50% + var(--services-slot-x)),
+      var(--services-slot-y),
+      0
+    )
+    scale(var(--services-slot-scale));
+  transform-origin: center top;
+  backface-visibility: hidden;
+  contain: layout paint style;
+  will-change: transform, opacity;
+
+  transition:
+    transform 640ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 260ms ease;
+}
+
+.services-carousel-slot--previous {
+  --services-slot-x: -78vw;
+  --services-slot-y: 18px;
+  --services-slot-scale: 0.98;
+  --services-slot-z: 20;
+}
+
+.services-carousel-slot--next {
+  --services-slot-x: 76vw;
+  --services-slot-y: 18px;
+  --services-slot-scale: 0.98;
+  --services-slot-z: 20;
+}
+
+.services-carousel-slot--previous-edge {
+  --services-slot-x: -154vw;
+  --services-slot-y: 35px;
+  --services-slot-scale: 0.94;
+  --services-slot-opacity: 0;
+  --services-slot-z: 10;
+}
+
+.services-carousel-slot--next-edge {
+  --services-slot-x: 154vw;
+  --services-slot-y: 35px;
+  --services-slot-scale: 0.94;
+  --services-slot-opacity: 0;
+  --services-slot-z: 10;
+}
+
+@media (min-width: 1024px) {
+  .services-carousel-slot {
+    --services-slot-x: 0px;
+
+    width: clamp(300px, 27vw, 360px);
+    height: 430px;
+  }
+
+  .services-carousel-slot--previous {
+    --services-slot-x: clamp(-330px, -24vw, -250px);
+    --services-slot-y: 30px;
+    --services-slot-scale: 0.86;
+  }
+
+  .services-carousel-slot--next {
+    --services-slot-x: clamp(250px, 24vw, 330px);
+    --services-slot-y: 30px;
+    --services-slot-scale: 0.86;
+  }
+
+  .services-carousel-slot--previous-edge {
+    --services-slot-x: clamp(-590px, -43vw, -450px);
+    --services-slot-y: 65px;
+    --services-slot-scale: 0.64;
+    --services-slot-opacity: 1;
+  }
+
+  .services-carousel-slot--next-edge {
+    --services-slot-x: clamp(450px, 43vw, 590px);
+    --services-slot-y: 65px;
+    --services-slot-scale: 0.64;
+    --services-slot-opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-carousel-slot {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.service-card-frame {
+  background: linear-gradient(145deg, #fffdf8 0%, #f6ecde 48%, #eadcc9 100%);
+  border-color: rgba(255, 255, 255, 0.88);
+  box-shadow:
+    0 18px 32px rgba(91, 65, 38, 0.18),
+    0 4px 10px rgba(91, 65, 38, 0.1),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.95),
+    inset -2px -2px 5px rgba(118, 83, 45, 0.08);
+}
+
+.service-card-image-frame {
+  background: linear-gradient(145deg, #e5d7c4, #fffaf1);
+  box-shadow:
+    inset 6px 7px 14px rgba(115, 84, 50, 0.16),
+    inset -6px -6px 14px rgba(255, 255, 255, 0.9);
+}
+
+.service-card-frame::after {
+  box-shadow:
+    inset 2px 2px 4px rgba(255, 255, 255, 0.72),
+    inset -2px -2px 5px rgba(111, 78, 42, 0.05);
+}
+/* =========================================================
+   HERO SECTION ENHANCEMENTS
+========================================================= */
+
+/* ---------------------------------------------------------
+   Scroll indicator animation
+--------------------------------------------------------- */
+
+.scroll-indicator-line {
+  animation: scroll-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scaleY(0.6);
+    transform-origin: top;
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* ---------------------------------------------------------
+   Card stagger animation on load
+--------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .hero-card-stagger-0,
+  .hero-card-stagger-1,
+  .hero-card-stagger-2,
+  .hero-card-stagger-3 {
+    animation: card-stagger-in 0.7s var(--ease-clay) both;
+  }
+
+  .hero-card-stagger-0 {
+    animation-delay: 0.15s;
+  }
+  .hero-card-stagger-1 {
+    animation-delay: 0.3s;
+  }
+  .hero-card-stagger-2 {
+    animation-delay: 0.22s;
+  }
+  .hero-card-stagger-3 {
+    animation-delay: 0.38s;
+  }
+
+  @keyframes card-stagger-in {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+/* ---------------------------------------------------------
+   Mobile sticky CTA — shows when hero scrolls out of view
+   
+   Uses IntersectionObserver via a small script or 
+   CSS-only with scroll-driven animations (modern browsers).
+   Fallback: hidden on page load, JS adds .visible class.
+--------------------------------------------------------- */
+
+.mobile-sticky-cta.visible {
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------
+   Reduced motion
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-indicator-line {
+    animation: none;
+    opacity: 0.5;
+  }
+
+  .hero-card-stagger-0,
+  .hero-card-stagger-1,
+  .hero-card-stagger-2,
+  .hero-card-stagger-3 {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  .clay-surface,
+  .clay-surface-soft,
+  .clay-surface-strong,
+  .clay-icon,
+  .snm-button,
+  .mobile-sticky-cta {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   Focus indicators — accessibility
+--------------------------------------------------------- */
+
+.clay-surface:focus-visible,
+.snm-button:focus-visible {
+  outline: 3px solid var(--brand-gold);
+  outline-offset: 4px;
+}
+
+/* ---------------------------------------------------------
+   Touch targets — ensure 44px minimum on mobile
+--------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .clay-surface,
+  .snm-button {
+    min-height: 44px;
+  }
+}
+
+/* ---------------------------------------------------------
+   Hero main shell — proper min-height on desktop
+--------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .hero-main-shell {
+    min-height: clamp(360px, 52vh, 500px);
+    max-height: 520px;
+  }
+}
+
+/* ---------------------------------------------------------
+   Dark button for mobile hero
+--------------------------------------------------------- */
+
+.clay-button-dark {
+  color: #fff;
+  background: linear-gradient(145deg, var(--clay-dark-1), var(--clay-dark-3));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    8px 10px 18px rgba(3, 12, 22, 0.28),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.07),
+    inset -2px -2px 5px rgba(0, 0, 0, 0.18);
+  transition:
+    transform 280ms var(--ease-clay),
+    box-shadow 280ms var(--ease-clay);
+}
+
+.clay-button-dark:active {
+  transform: scale(0.97);
+  box-shadow:
+    4px 5px 10px rgba(3, 12, 22, 0.2),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------------------------------------------------------
+   Safe area padding on iOS for sticky bar
+--------------------------------------------------------- */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .mobile-sticky-cta {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ---------------------------------------------------------
+   High contrast mode support
+--------------------------------------------------------- */
+
+@media (forced-colors: active) {
+  .clay-surface,
+  .clay-surface-soft,
+  .clay-surface-strong,
+  .clay-dark,
+  .clay-inset {
+    border: 2px solid CanvasText;
+    box-shadow: none;
+    background: Canvas;
+  }
+}
+
+/* ---------------------------------------------------------
+   Print styles
+--------------------------------------------------------- */
+
+@media print {
+  .hero-section {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  .hero-section .clay-surface,
+  .hero-section .clay-surface-strong,
+  .hero-section .clay-inset,
+  .hero-section .clay-dark {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .scroll-indicator-line,
+  .mobile-sticky-cta {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   NAVBAR ENHANCEMENTS
+========================================================= */
+
+/* ---------------------------------------------------------
+   Scroll transition
+--------------------------------------------------------- */
+
+.navbar-bar {
+  transition:
+    height 400ms var(--ease-clay),
+    box-shadow 400ms var(--ease-clay),
+    background 400ms var(--ease-clay);
+}
+
+.navbar-scrolled {
+  box-shadow:
+    0 12px 40px rgba(85, 61, 35, 0.12),
+    0 4px 12px rgba(85, 61, 35, 0.08),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.96),
+    inset -3px -3px 6px rgba(120, 86, 48, 0.08) !important;
+}
+
+/* ---------------------------------------------------------
+   Desktop link hover pill
+--------------------------------------------------------- */
+
+.navbar-link {
+  position: relative;
+}
+
+.navbar-link::after {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--brand-gold);
+  transform: translateX(-50%);
+  transition: width 300ms var(--ease-clay);
+}
+
+.navbar-link:hover::after {
+  width: 60%;
+}
+
+/* ---------------------------------------------------------
+   Mega menu active tab
+--------------------------------------------------------- */
+
+.mega-tab-active {
+  box-shadow:
+    6px 8px 16px rgba(91, 65, 38, 0.12),
+    -4px -4px 10px rgba(255, 255, 255, 0.78),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 3px rgba(117, 80, 42, 0.05) !important;
+}
+
+/* ---------------------------------------------------------
+   Mega menu entry animation
+--------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .clay-surface-strong[role="region"] {
+    transform-origin: top center;
+  }
+}
+
+/* ---------------------------------------------------------
+   Mobile menu link ripple
+--------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .clay-surface-soft:active {
+    transition: transform 100ms ease;
+  }
+}
+
+/* ---------------------------------------------------------
+   Mobile accordion smooth height
+--------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  [class*="grid-rows-"] {
+    transition:
+      grid-template-rows 400ms var(--ease-clay),
+      opacity 300ms var(--ease-clay);
+  }
+}
+
+/* ---------------------------------------------------------
+   Safe area for mobile bottom CTA
+--------------------------------------------------------- */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .mobile-nav-cta-area {
+    padding-bottom: calc(8px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ---------------------------------------------------------
+   Reduced motion
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-bar,
+  .navbar-link::after,
+  .mega-tab-active,
+  [class*="grid-rows-"] {
+    transition-duration: 0.01ms !important;
+  }
+
+  .navbar-link::after {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------
+   Focus visible — consistent brand focus ring
+--------------------------------------------------------- */
+
+.navbar-bar *:focus-visible {
+  outline: 2.5px solid var(--brand-gold);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* ---------------------------------------------------------
+   Print — hide navbar
+--------------------------------------------------------- */
+
+@media print {
+  header {
+    display: none !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   High contrast
+--------------------------------------------------------- */
+
+@media (forced-colors: active) {
+  .navbar-bar {
+    border: 2px solid CanvasText !important;
+    box-shadow: none !important;
+    background: Canvas !important;
+  }
+
+  .navbar-link::after {
+    background: LinkText;
+  }
+}
+/* =========================================================
+   DYNAMIC ISLAND — MOBILE BOTTOM NAV
+========================================================= */
+
+/* ---------------------------------------------------------
+   Island bar — the bottom pill
+--------------------------------------------------------- */
+
+.island-bar {
+  box-shadow:
+    0 -6px 28px rgba(85, 61, 35, 0.12),
+    0 -2px 8px rgba(85, 61, 35, 0.06),
+    0 12px 32px rgba(85, 61, 35, 0.18),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.96),
+    inset -2px -2px 5px rgba(120, 86, 48, 0.07) !important;
+}
+
+/* ---------------------------------------------------------
+   Island tab — individual button
+--------------------------------------------------------- */
+
+.island-tab {
+  min-width: 54px;
+  min-height: 48px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.island-tab-active {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 253, 248, 0.6),
+    rgba(234, 220, 197, 0.4)
+  );
+  box-shadow:
+    inset 3px 3px 7px rgba(115, 84, 50, 0.09),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+}
+
+/* ---------------------------------------------------------
+   Safe area
+--------------------------------------------------------- */
+
+.island-safe-area {
+  padding-bottom: env(safe-area-inset-bottom, 8px);
+}
+
+/* ---------------------------------------------------------
+   Panel — expanded content
+--------------------------------------------------------- */
+
+.island-panel {
+  box-shadow:
+    0 -8px 40px rgba(60, 40, 20, 0.15),
+    0 20px 60px rgba(60, 40, 20, 0.12);
+}
+
+/* ---------------------------------------------------------
+   Panel slide-in animation
+--------------------------------------------------------- */
+
+.island-panel-enter {
+  animation: islandPanelIn 400ms var(--ease-clay) both;
+}
+
+@keyframes islandPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---------------------------------------------------------
+   Backdrop fade-in
+--------------------------------------------------------- */
+
+.animate-fadeIn {
+  animation: fadeIn 300ms ease both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------------------------------
+   Navbar desktop enhancements
+--------------------------------------------------------- */
+
+.navbar-bar {
+  transition:
+    height 400ms var(--ease-clay),
+    box-shadow 400ms var(--ease-clay),
+    background 400ms var(--ease-clay);
+}
+
+.navbar-scrolled {
+  box-shadow:
+    0 12px 40px rgba(85, 61, 35, 0.12),
+    0 4px 12px rgba(85, 61, 35, 0.08),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.96),
+    inset -3px -3px 6px rgba(120, 86, 48, 0.08) !important;
+}
+
+.navbar-link {
+  position: relative;
+}
+
+.navbar-link::after {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--brand-gold);
+  transform: translateX(-50%);
+  transition: width 300ms var(--ease-clay);
+}
+
+.navbar-link:hover::after {
+  width: 60%;
+}
+
+.mega-tab-active {
+  box-shadow:
+    6px 8px 16px rgba(91, 65, 38, 0.12),
+    -4px -4px 10px rgba(255, 255, 255, 0.78),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 3px rgba(117, 80, 42, 0.05) !important;
+}
+
+.mega-subcategory-link {
+  transition:
+    background 180ms var(--ease-clay),
+    border-color 180ms var(--ease-clay),
+    box-shadow 180ms var(--ease-clay),
+    color 180ms var(--ease-clay),
+    transform 180ms var(--ease-clay);
+}
+
+.mega-subcategory-link:hover,
+.mega-subcategory-link:focus-visible {
+  background: linear-gradient(145deg, #eee0ce, #fffaf2);
+  border-color: rgba(215, 160, 74, 0.14);
+  box-shadow:
+    inset 4px 5px 10px rgba(118, 82, 42, 0.13),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.78);
+  transform: translateY(1px);
+}
+
+/* ---------------------------------------------------------
+   Haptic feedback for touch
+--------------------------------------------------------- */
+
+@media (hover: none) and (pointer: coarse) {
+  .island-tab:active {
+    transform: scale(0.88);
+    transition: transform 80ms ease;
+  }
+
+  .clay-surface-soft:active,
+  .snm-button:active {
+    transform: scale(0.97);
+    transition: transform 80ms ease;
+  }
+}
+
+/* ---------------------------------------------------------
+   Reduced motion
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .island-panel-enter {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  .animate-fadeIn {
+    animation: none !important;
+    opacity: 1;
+  }
+
+  .island-bar,
+  .island-tab,
+  .navbar-bar,
+  .navbar-link::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   High contrast
+--------------------------------------------------------- */
+
+@media (forced-colors: active) {
+  .island-bar,
+  .island-tab-active,
+  .island-panel {
+    border: 2px solid CanvasText !important;
+    box-shadow: none !important;
+    background: Canvas !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   Landscape phone — compact island
+--------------------------------------------------------- */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .island-bar {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .island-tab {
+    min-height: 40px;
+    gap: 1px;
+  }
+
+  .island-tab span:last-child {
+    font-size: 6px;
+  }
+
+  .island-panel {
+    max-height: calc(100dvh - 100px) !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   Tablet (640px–1023px) — wider island
+--------------------------------------------------------- */
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .island-bar {
+    max-width: 480px !important;
+    border-radius: 32px !important;
+    padding: 10px 16px !important;
+  }
+
+  .island-tab {
+    min-width: 64px;
+    min-height: 52px;
+  }
+
+  .island-panel {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 520px;
+  }
+}
+
+/* ---------------------------------------------------------
+   Print
+--------------------------------------------------------- */
+
+@media print {
+  .island-bar,
+  .island-panel,
+  header {
+    display: none !important;
+  }
+}
+/* =========================================================
+   FOOTER — CLAYMORPHISM
+========================================================= */
+
+.clay-footer-section {
+  background: linear-gradient(
+    180deg,
+    var(--brand-ivory) 0%,
+    var(--brand-ivory-100) 100%
+  );
+}
+
+/* ---------------------------------------------------------
+   Dark CTA button matching image
+--------------------------------------------------------- */
+
+.clay-cta-dark {
+  background: linear-gradient(
+    145deg,
+    #1a3a5c 0%,
+    var(--brand-navy) 50%,
+    var(--brand-navy-900) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 10px 22px rgba(4, 17, 30, 0.28),
+    0 3px 8px rgba(4, 17, 30, 0.14),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.08),
+    inset -2px -2px 5px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 300ms var(--ease-clay),
+    box-shadow 300ms var(--ease-clay);
+}
+
+.clay-cta-dark:hover {
+  box-shadow:
+    0 14px 26px rgba(4, 17, 30, 0.34),
+    0 5px 10px rgba(4, 17, 30, 0.16),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.1),
+    inset -2px -2px 5px rgba(0, 0, 0, 0.22);
+}
+
+.clay-cta-dark:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ---------------------------------------------------------
+   Social icon — inset clay
+--------------------------------------------------------- */
+
+.clay-social-icon {
+  background: linear-gradient(145deg, #f6ecdd, #fffdf8);
+  box-shadow:
+    inset 3px 3px 6px rgba(115, 84, 50, 0.11),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.9);
+}
+
+.clay-social-icon:hover {
+  background: linear-gradient(145deg, #fffdf8, #f0e3d0);
+  box-shadow:
+    inset 2px 2px 4px rgba(115, 84, 50, 0.08),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.95),
+    3px 4px 8px rgba(85, 61, 35, 0.14);
+}
+
+/* ---------------------------------------------------------
+   Decorative clay spheres
+--------------------------------------------------------- */
+
+.clay-sphere {
+  position: absolute;
+  pointer-events: none;
+ }
+
+.clay-sphere-ball {
+  position: absolute;
+  inset: 25%;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at 30% 25%,
+    #ffffff 0%,
+    #fbf1de 30%,
+    #e8d5b8 65%,
+    #d0b58c 100%
+  );
+  box-shadow:
+    8px 12px 24px rgba(120, 82, 40, 0.28),
+    -4px -4px 12px rgba(255, 255, 255, 0.7),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.75),
+    inset -4px -4px 10px rgba(140, 100, 55, 0.22);
+}
+
+.clay-sphere-ball--gold {
+  background: radial-gradient(
+    circle at 30% 25%,
+    #fff2c8 0%,
+    #f0c978 35%,
+    #d4a04b 70%,
+    #a86d1f 100%
+  );
+  box-shadow:
+    8px 12px 24px rgba(120, 74, 21, 0.35),
+    -4px -4px 12px rgba(255, 240, 200, 0.5),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.6),
+    inset -4px -4px 10px rgba(120, 60, 10, 0.3);
+}
+
+.clay-sphere-shadow {
+  position: absolute;
+  inset: 15%;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(200, 165, 110, 0.14),
+    transparent 70%
+  );
+  filter: blur(8px);
+}
+
+.clay-sphere-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 1.5px solid var(--brand-gold);
+  opacity: 0.55;
+  transform: rotate(-25deg);
+  box-shadow: 0 0 20px rgba(215, 160, 74, 0.15);
+}
+
+/* ---------------------------------------------------------
+   Sphere floating animation
+--------------------------------------------------------- */
+
+.clay-sphere:nth-of-type(1) .clay-sphere-ball {
+  animation: sphere-float-1 8s ease-in-out infinite;
+}
+
+.clay-sphere:nth-of-type(2) .clay-sphere-ball {
+  animation: sphere-float-2 10s ease-in-out infinite;
+}
+
+.clay-sphere:nth-of-type(3) .clay-sphere-ball {
+  animation: sphere-float-3 9s ease-in-out infinite;
+}
+
+@keyframes sphere-float-1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(4px, -6px);
+  }
+}
+
+@keyframes sphere-float-2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-5px, -4px);
+  }
+}
+
+@keyframes sphere-float-3 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-3px, 5px);
+  }
+}
+
+/* ---------------------------------------------------------
+   Mobile — hide some decorations to reduce clutter
+--------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .clay-sphere {
+    opacity: 0.5;
+    transform: scale(0.75);
+  }
+}
+
+/* ---------------------------------------------------------
+   Reduced motion
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .clay-sphere-ball {
+    animation: none !important;
+  }
+
+  .clay-cta-dark,
+  .clay-social-icon {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   High contrast
+--------------------------------------------------------- */
+
+@media (forced-colors: active) {
+  .clay-sphere {
+    display: none;
+  }
+
+  .clay-cta-dark,
+  .clay-social-icon {
+    border: 2px solid CanvasText !important;
+    box-shadow: none !important;
+    background: Canvas !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   Print
+--------------------------------------------------------- */
+
+@media print {
+  .clay-sphere,
+  .clay-social-icon {
+    display: none !important;
+  }
+
+  footer {
+    box-shadow: none !important;
+    background: white !important;
+  }
+}
+/* Hide scrollbar */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Snap scrolling for services carousel */
+.services-scroll {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.services-scroll > div > article {
+  scroll-snap-align: center;
+}
