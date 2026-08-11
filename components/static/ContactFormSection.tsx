@@ -1133,36 +1133,7 @@ function MobileContactForm() {
               Submit
             </ClayButton>
 
-            <div
-              className="
-                flex
-                items-start
-                justify-center
-                gap-2
-                pt-1
-              "
-            >
-              <LockKeyhole
-                size={12}
-                strokeWidth={1.6}
-                className="
-                  mt-[1px]
-                  text-[var(--brand-gold-700)]
-                "
-              />
-
-              <p
-                className="
-                  max-w-[220px]
-                  font-brand-sans
-                  text-[8px]
-                  leading-[1.45]
-                  text-[var(--brand-text-muted)]
-                "
-              >
-                Please enable JavaScript in your browser to complete this form.
-              </p>
-            </div>
+           
           </form>
         </div>
       </div>
