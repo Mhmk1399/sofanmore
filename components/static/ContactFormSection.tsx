@@ -490,39 +490,8 @@ function DesktopContactForm() {
                 </ClayButton>
               </div>
 
-              {/* NOTE - now fully inside the card */}
-
-              <div
-                className="
-                  mt-5
-                  flex
-                  items-center
-                  justify-center
-                  gap-2.5
-                "
-              >
-                <LockKeyhole
-                  size={13}
-                  strokeWidth={1.6}
-                  className="
-                    shrink-0
-                    text-[var(--brand-gold-700)]
-                  "
-                />
-
-                <p
-                  className="
-                    max-w-[260px]
-                    font-brand-sans
-                    text-[8px]
-                    leading-[1.5]
-                    text-[var(--brand-text-muted)]
-                  "
-                >
-                  Please enable JavaScript in your browser to complete this
-                  form.
-                </p>
-              </div>
+ 
+        
             </form>
           </div>
         </div>

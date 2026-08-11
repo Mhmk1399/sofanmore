@@ -109,7 +109,7 @@ export default function ContactHeroSection() {
         mt-20
         overflow-hidden
 
-        bg-[var(--brand-navy)]
+         
 
         px-3
         py-4

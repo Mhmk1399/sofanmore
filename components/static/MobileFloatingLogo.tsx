@@ -2,21 +2,28 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 
 const SHOW_AFTER_SCROLL = 92;
 
 export default function MobileFloatingLogo() {
-  const [isMounted, setIsMounted] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const pathname = usePathname();
+  const shouldWaitForScroll = pathname === "/";
+  const [hasScrolledPastLogo, setHasScrolledPastLogo] = useState(false);
+
+  const isVisible = !shouldWaitForScroll || hasScrolledPastLogo;
 
   useEffect(() => {
+    if (!shouldWaitForScroll) {
+      return;
+    }
+
     let frameId: number | null = null;
 
     const updateVisibility = () => {
       frameId = null;
-      setIsVisible(window.scrollY > SHOW_AFTER_SCROLL);
+      setHasScrolledPastLogo(window.scrollY > SHOW_AFTER_SCROLL);
     };
 
     const handleScroll = () => {
@@ -25,8 +32,7 @@ export default function MobileFloatingLogo() {
       }
     };
 
-    updateVisibility();
-    setIsMounted(true);
+    frameId = window.requestAnimationFrame(updateVisibility);
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
@@ -35,13 +41,9 @@ export default function MobileFloatingLogo() {
       }
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [shouldWaitForScroll]);
 
-  if (!isMounted) {
-    return null;
-  }
-
-  return createPortal(
+  return (
     <div
       aria-hidden={!isVisible}
       className={`
@@ -119,7 +121,6 @@ export default function MobileFloatingLogo() {
           </span>
         </span>
       </Link>
-    </div>,
-    document.body,
+    </div>
   );
 }

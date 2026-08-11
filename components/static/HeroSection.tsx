@@ -15,7 +15,6 @@ import {
   Star,
 } from "lucide-react";
 import ClayButton from "../ui/ClayButton";
-import MobileFloatingLogo from "./MobileFloatingLogo";
 
 /* =========================================================
    TYPES
@@ -1036,7 +1035,6 @@ function TabletTrust() {
 function MobileHero() {
   return (
     <div className="space-y-5 -mt-16 sm:hidden">
-      <MobileFloatingLogo />
       <MobileHeroLogo />
       <MobileHeroMain />
 
