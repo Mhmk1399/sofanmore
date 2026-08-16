@@ -29,18 +29,18 @@ type Position = -2 | -1 | 0 | 1 | 2;
 
 const services: Service[] = [
   {
-    title: "Bespoke Furniture",
+    title: "Bespoke sofa",
     shortDescription:
-      "Made-to-measure furniture handcrafted in London, tailored to your space and style.",
+      "Made-to-measure sofa handcrafted in London, tailored to your space and style.",
     cta: "Explore Bespoke",
     image: "/assets/images/bespokesofa.webp",
-    href: "/services/bespoke-furniture",
+    href: "/services/bespoke-sofa",
   },
 
   {
     title: "Repair & Restoration",
     shortDescription:
-      "Expert care and reupholstery that gives treasured furniture new life while preserving its character.",
+      "Expert care and reupholstery that gives treasured sofa new life while preserving its character.",
     cta: "Explore Restoration",
     image: "/assets/images/Repair.webp",
     href: "/services/repair-restoration",
@@ -65,12 +65,12 @@ const services: Service[] = [
   },
 
   {
-    title: "Office Furniture",
+    title: "Office sofa",
     shortDescription:
-      "Premium ergonomic furniture solutions designed for stylish, functional and productive workspaces.",
-    cta: "Explore Office Furniture",
+      "Premium ergonomic sofa solutions designed for stylish, functional and productive workspaces.",
+    cta: "Explore Office sofa",
     image: "/assets/images/Office.webp",
-    href: "/services/office-furniture",
+    href: "/services/office-sofa",
   },
 ];
 
@@ -490,7 +490,7 @@ function ServicesHeader() {
           lg:text-[13px]
         "
       >
-        From bespoke furniture to complete interiors and expert restoration,
+        From bespoke sofa to complete interiors and expert restoration,
         discover services crafted around the way you live and work.
       </p>
     </div>

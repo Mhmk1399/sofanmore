@@ -29,8 +29,8 @@ const columns: FooterColumn[] = [
   {
     title: "Our Services",
     links: [
-      { label: "Bespoke Furniture", href: "/services/bespoke-furniture" },
-      { label: "Commercial Furniture", href: "/services/commercial-furniture" },
+      { label: "Bespoke sofa", href: "/services/bespoke-sofa" },
+      { label: "Commercial sofa", href: "/services/commercial-sofa" },
       { label: "Interior Design & Staging", href: "/services/interior-design" },
       { label: "Repair & Restoration", href: "/services/repair-restoration" },
     ],
@@ -265,7 +265,7 @@ function BrandColumn() {
           leading-[1.7] text-[var(--brand-text-muted)]
         "
       >
-        Bespoke furniture and interior solutions, handcrafted in London for
+        Bespoke sofa and interior solutions, handcrafted in London for
         exceptional spaces.
       </p>
 

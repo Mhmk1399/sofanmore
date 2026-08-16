@@ -148,7 +148,7 @@ export default function FloatingContactMenu({
       className={`
         fixed
         pointer-events-none
-        z-[250]
+        z-[1300]
         flex
         flex-col
         items-end
@@ -181,6 +181,25 @@ export default function FloatingContactMenu({
         }
       `}
     >
+      <button
+        type="button"
+        aria-hidden="true"
+        tabIndex={-1}
+        onClick={() => setOpen(false)}
+        className={`
+          fixed inset-0 z-0
+          bg-[rgba(7,18,30,0.20)]
+          transition-[opacity,backdrop-filter]
+          duration-300 ease-[var(--ease-clay)]
+          motion-reduce:transition-none
+          ${
+            open
+              ? "pointer-events-auto opacity-100 backdrop-blur-[7px]"
+              : "pointer-events-none opacity-0 backdrop-blur-0"
+          }
+        `}
+      />
+
       {/* ===================================================
           ACTIONS
       ==================================================== */}
@@ -188,6 +207,7 @@ export default function FloatingContactMenu({
       <div
         id="floating-contact-actions"
         className={`
+          relative z-10
           mb-3
           flex
           flex-col
@@ -215,7 +235,7 @@ export default function FloatingContactMenu({
           MAIN BUTTON
       ==================================================== */}
 
-      <div className="pointer-events-auto relative">
+      <div className="pointer-events-auto relative z-10">
         {/* ambient glow */}
 
         <div

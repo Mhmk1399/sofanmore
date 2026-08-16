@@ -31,11 +31,11 @@ const listings: Listing[] = [
     id: 1,
     badge: "Bespoke",
     date: "08 AUG 2026",
-    title: "Bespoke Furniture Opportunity",
+    title: "Bespoke sofa Opportunity",
     description:
-      "Discover our latest handcrafted furniture opportunity in London.",
+      "Discover our latest handcrafted sofa opportunity in London.",
     image: "/assets/images/1.webp",
-    href: "/listings/bespoke-furniture-opportunity",
+    href: "/listings/bespoke-sofa-opportunity",
   },
 
   {

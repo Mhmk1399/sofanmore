@@ -283,7 +283,7 @@ function AboutCopy() {
           xl:text-[14px]
         "
       >
-        Sofa N More creates timeless, bespoke furniture that brings together
+        Sofa N More creates timeless, bespoke sofa that brings together
         master craftsmanship, refined design and enduring comfort. From concept
         to completion, we offer a personalised service encompassing bespoke
         design, interior design and expert restoration.
@@ -342,7 +342,7 @@ function DesktopImage() {
         >
           <Image
             src="/assets/images/2.webp"
-            alt="Sofa N More bespoke furniture interior"
+            alt="Sofa N More bespoke sofa interior"
             fill
             sizes="(min-width: 1024px) 55vw, 100vw"
             className="object-cover object-center"
@@ -728,7 +728,7 @@ function MobileCopy() {
           text-[var(--brand-text-muted)]
         "
       >
-        Sofa N More creates timeless, bespoke furniture that brings together
+        Sofa N More creates timeless, bespoke sofa that brings together
         master craftsmanship, refined design and enduring comfort. From concept
         to completion, we offer a personalised service encompassing bespoke
         design, interior design and expert restoration.
@@ -781,7 +781,7 @@ function MobileImage() {
         >
           <Image
             src="/assets/images/7.webp"
-            alt="Sofa N More bespoke furniture interior"
+            alt="Sofa N More bespoke sofa interior"
             fill
             sizes="100vw"
             className="object-cover object-center"

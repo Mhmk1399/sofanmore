@@ -8,7 +8,7 @@ import ClayButton from "@/components/ui/ClayButton";
 ========================================================= */
 
 const description =
-  "Welcome to Sofa N More, where tradition meets innovation in bespoke furniture craftsmanship. Nestled in London, our family-owned business has been a cornerstone of the city’s interior design landscape for over a decade. We pride ourselves on blending timeless British craftsmanship with contemporary design to create furniture that embodies luxury, quality, and functionality.";
+  "Welcome to Sofa N More, where tradition meets innovation in bespoke sofa craftsmanship. Nestled in London, our family-owned business has been a cornerstone of the city’s interior design landscape for over a decade. We pride ourselves on blending timeless British craftsmanship with contemporary design to create sofa that embodies luxury, quality, and functionality.";
 
 /* =========================================================
    ROOT
@@ -120,7 +120,7 @@ function DesktopComposition() {
             >
               <Image
                 src="/assets/images/6.webp"
-                alt="Sofa N More bespoke furniture craftsmanship in London"
+                alt="Sofa N More bespoke sofa craftsmanship in London"
                 fill
                 priority
                 sizes="60vw"
@@ -365,7 +365,7 @@ function DesktopComposition() {
           >
             Crafting Bespoke
             <br />
-            Furniture with
+            sofa with
             <br />
             London
             <br />
@@ -818,7 +818,7 @@ function MobileComposition() {
             >
               Crafting Bespoke
               <br />
-              Furniture with
+              sofa with
               <br />
               London
               <br />

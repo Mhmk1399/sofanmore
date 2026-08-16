@@ -41,22 +41,22 @@ type TrustItem = {
 
 const services: Service[] = [
   {
-    title: "Bespoke Furniture",
+    title: "Bespoke sofa",
     subtitle: "Made for your space",
     description:
-      "Custom-designed furniture tailored to your exact specifications and style.",
+      "Custom-designed sofa tailored to your exact specifications and style.",
     icon: Armchair,
     image: "/assets/images/1.webp",
-    href: "/services/bespoke-furniture",
+    href: "/services/bespoke-sofa",
   },
   {
-    title: "Commercial Furniture",
+    title: "Commercial sofa",
     subtitle: "Built for business",
     description:
-      "Durable, elegant furniture solutions for offices, hotels, and restaurants.",
+      "Durable, elegant sofa solutions for offices, hotels, and restaurants.",
     icon: Building2,
     image: "/assets/images/2.webp",
-    href: "/services/commercial-furniture",
+    href: "/services/commercial-sofa",
   },
   {
     title: "Interior Design",
@@ -71,7 +71,7 @@ const services: Service[] = [
     title: "Repair & Restoration",
     subtitle: "Expert craftsmanship",
     description:
-      "Professional restoration of antique and damaged furniture to its former glory.",
+      "Professional restoration of antique and damaged sofa to its former glory.",
     icon: Hammer,
     image: "/assets/images/4.webp",
     href: "/services/repair-restoration",
@@ -106,7 +106,7 @@ export default function HeroSection() {
     "@type": "LocalBusiness",
     name: "Sofa N More",
     description:
-      "Bespoke luxury furniture, commercial interiors, and expert restoration handcrafted in London.",
+      "Bespoke luxury sofa, commercial interiors, and expert restoration handcrafted in London.",
     address: {
       "@type": "PostalAddress",
       addressLocality: "London",
@@ -119,7 +119,7 @@ export default function HeroSection() {
     telephone: "+44-20-XXXX-XXXX",
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Furniture Services",
+      name: "sofa Services",
       itemListElement: services.map((s, i) => ({
         "@type": "Offer",
         itemOffered: {
@@ -437,7 +437,7 @@ function HeroCopy() {
             text-white/70
           "
         >
-          Bespoke furniture, commercial interiors &amp; expert restoration —
+          Bespoke sofa, commercial interiors &amp; expert restoration —
           handcrafted in London with premium materials.
         </p>
 
@@ -448,7 +448,7 @@ function HeroCopy() {
             variant="gold"
             size="md"
             showArrow
-            aria-label="Start your bespoke furniture project"
+            aria-label="Start your bespoke sofa project"
           >
             Start Your Project
           </ClayButton>
@@ -458,7 +458,7 @@ function HeroCopy() {
             variant="navy"
             size="md"
             showArrow
-            aria-label="View our furniture portfolio"
+            aria-label="View our sofa portfolio"
           >
               Our Work
           </ClayButton>
@@ -842,7 +842,7 @@ function TabletMainHero() {
               />
 
               <p className="max-w-[280px] font-brand-sans text-[11px] font-medium leading-[1.65] text-white/65">
-                Bespoke furniture, commercial interiors &amp; expert
+                Bespoke sofa, commercial interiors &amp; expert
                 restoration, handcrafted in London.
               </p>
 
@@ -885,7 +885,7 @@ function TabletMainHero() {
             <div className="relative h-full min-h-[380px] overflow-hidden rounded-[19px]">
               <Image
                 src="/assets/images/7.webp"
-                alt="Luxury handcrafted furniture by Sofa N More London"
+                alt="Luxury handcrafted sofa by Sofa N More London"
                 fill
                 priority
                 sizes="(min-width: 640px) 55vw, 100vw"
@@ -1108,7 +1108,7 @@ function MobileHeroMain() {
           {/* Image background */}
           <Image
             src="/assets/images/2.webp"
-            alt="Bespoke luxury furniture by Sofa N More, handcrafted in London"
+            alt="Bespoke luxury sofa by Sofa N More, handcrafted in London"
             fill
             priority
             sizes="100vw"
@@ -1192,7 +1192,7 @@ function MobileHeroMain() {
                 text-white/78
               "
             >
-              Bespoke furniture, commercial interiors &amp; expert restoration.
+              Bespoke sofa, commercial interiors &amp; expert restoration.
             </p>
 
             {/* Stars */}
@@ -1221,7 +1221,7 @@ function MobileHeroMain() {
                 size="md"
                 fullWidth
                 showArrow
-                ariaLabel="Start your bespoke furniture project"
+                ariaLabel="Start your bespoke sofa project"
                 className="!min-h-[44px] !justify-between !rounded-[15px] !px-4 !text-[10px]"
               >
                 Start Your Project
@@ -1233,7 +1233,7 @@ function MobileHeroMain() {
                 size="md"
                 fullWidth
                 showArrow
-                ariaLabel="View our furniture portfolio"
+                ariaLabel="View our sofa portfolio"
                 className="!min-h-[44px] !justify-between !rounded-[15px] !px-4 !text-[10px]"
               >
                 View Our Work

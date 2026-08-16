@@ -34,7 +34,7 @@ const features: FeatureItem[] = [
   {
     title: "Bespoke\nby Design",
     description:
-      "Furniture tailored around your space, requirements and lifestyle.",
+      "sofa tailored around your space, requirements and lifestyle.",
     icon: Compass,
   },
   {

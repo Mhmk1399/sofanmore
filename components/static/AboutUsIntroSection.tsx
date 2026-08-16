@@ -13,10 +13,10 @@ import ClayButton from "../ui/ClayButton";
 ========================================================= */
 
 const heritageText =
-  "Founded over 12 years ago in the heart of London, Sofa N More began as a passion project to redefine furniture making. From our humble beginnings, we’ve grown into a trusted name in bespoke furniture, serving discerning clients across the capital and beyond.";
+  "Founded over 12 years ago in the heart of London, Sofa N More began as a passion project to redefine sofa making. From our humble beginnings, we’ve grown into a trusted name in bespoke sofa, serving discerning clients across the capital and beyond.";
 
 const craftsmanshipText =
-  "At Sofa N More, craftsmanship is at the core of everything we do. Our skilled artisans meticulously handcraft each piece of furniture using locally sourced materials, ensuring every sofa, chair, and dining table meets our exacting standards of quality and durability. From the initial concept to the final finish, our commitment to superior craftsmanship is unwavering.";
+  "At Sofa N More, craftsmanship is at the core of everything we do. Our skilled artisans meticulously handcraft each piece of sofa using locally sourced materials, ensuring every sofa, chair, and dining table meets our exacting standards of quality and durability. From the initial concept to the final finish, our commitment to superior craftsmanship is unwavering.";
 
 const highlights = [
   {
@@ -158,7 +158,7 @@ function DesktopAboutUsCard() {
               >
                 <Image
                   src="/assets/images/7.webp"
-                  alt="Craftsman handcrafting bespoke furniture in the Sofa N More London workshop"
+                  alt="Craftsman handcrafting bespoke sofa in the Sofa N More London workshop"
                   fill
                   priority
                   className="object-cover object-center"
@@ -274,7 +274,7 @@ function MobileAboutUsCard() {
             >
               <Image
                 src="/assets/images/3.webp"
-                alt="Craftsman handcrafting bespoke furniture in the Sofa N More London workshop"
+                alt="Craftsman handcrafting bespoke sofa in the Sofa N More London workshop"
                 fill
                 className="object-cover object-center"
                 sizes="100vw"

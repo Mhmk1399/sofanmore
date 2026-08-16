@@ -5,7 +5,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Armchair,
-  BookOpen,
   Building2,
   ChevronDown,
   ChevronRight,
@@ -26,6 +25,7 @@ import {
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import ClayButton from "../ui/ClayButton";
+import { FaPhotoFilm } from "react-icons/fa6";
 
 /* =========================================================
    TYPES
@@ -46,41 +46,41 @@ type ServiceGroup = {
 
 const serviceGroups: ServiceGroup[] = [
   {
-    title: "Bespoke Furniture",
+    title: "Bespoke sofa",
     subtitle: "Made for your space",
     icon: Armchair,
-    href: "/services/bespoke-furniture",
+    href: "/services/bespoke-sofa",
     image: "/assets/images/1.webp",
     links: [
-      { label: "Bespoke Sofas", href: "/services/bespoke-furniture/sofas" },
+      { label: "Bespoke Sofas", href: "/services/bespoke-sofa/sofas" },
       {
         label: "Chairs & Armchairs",
-        href: "/services/bespoke-furniture/chairs",
+        href: "/services/bespoke-sofa/chairs",
       },
-      { label: "Dining Tables", href: "/services/bespoke-furniture/tables" },
-      { label: "Beds & Headboards", href: "/services/bespoke-furniture/beds" },
+      { label: "Dining Tables", href: "/services/bespoke-sofa/tables" },
+      { label: "Beds & Headboards", href: "/services/bespoke-sofa/beds" },
       {
         label: "Benches & Ottomans",
-        href: "/services/bespoke-furniture/benches",
+        href: "/services/bespoke-sofa/benches",
       },
     ],
   },
   {
-    title: "Commercial Furniture",
+    title: "Commercial sofa",
     subtitle: "Built for business",
     icon: Building2,
-    href: "/services/commercial-furniture",
+    href: "/services/commercial-sofa",
     image: "/assets/images/2.webp",
     links: [
       {
-        label: "Restaurant Furniture",
+        label: "Restaurant sofa",
         href: "/services/commercial/restaurant",
       },
-      { label: "Café Furniture", href: "/services/commercial/cafe" },
-      { label: "Office Furniture", href: "/services/commercial/office" },
+      { label: "Café sofa", href: "/services/commercial/cafe" },
+      { label: "Office sofa", href: "/services/commercial/office" },
       { label: "Banquette Seating", href: "/services/commercial/banquette" },
       {
-        label: "Hospitality Furniture",
+        label: "Hospitality sofa",
         href: "/services/commercial/hospitality",
       },
     ],
@@ -116,8 +116,8 @@ const serviceGroups: ServiceGroup[] = [
     image: "/assets/images/4.webp",
     links: [
       {
-        label: "Furniture Restoration",
-        href: "/services/restoration/furniture",
+        label: "sofa Restoration",
+        href: "/services/restoration/sofa",
       },
       { label: "Reupholstery", href: "/services/restoration/reupholstery" },
       {
@@ -134,20 +134,23 @@ const serviceGroups: ServiceGroup[] = [
 ];
 
 const navLinks = [
-  { label: "About Us", href: "/about" },
-  { label: "Collections", href: "/collections" },
-  { label: "Our Work", href: "/portfolio" },
-  { label: "Journal", href: "/journal" },
-  { label: "Contact", href: "/contact" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact-us" },
+  { label: "Faq", href: "/faqs" },
 ];
 
 // Mobile bottom bar quick tabs
 const mobileTabs = [
-  { label: "Home", icon: Home, href: "/" },
-  { label: "Services", icon: Layers, href: "#services" },
-  { label: "Work", icon: FolderOpen, href: "/portfolio" },
-  { label: "About", icon: Info, href: "/about" },
   { label: "Menu", icon: Menu, href: "#menu" },
+  { label: "Home", icon: Home, href: "/" },
+
+  { label: "Gallery", href: "/gallery", icon: FaPhotoFilm },
+  { label: "Services", icon: Layers, href: "#services" },
+  { label: "Contact", icon: FolderOpen, href: "/contact-us" },
+  // { label: "About", icon: Info, href: "/about-us" },
+  // { label: "Blog", icon: Menu, href: "/blog" },
 ];
 
 /* =========================================================
@@ -352,7 +355,7 @@ function DesktopBar({
               navbar-link group
               flex h-10 items-center gap-1.5
               rounded-[13px] px-3.5
-              font-brand-sans text-[11px] font-semibold
+              font-brand-sans   font-semibold
               uppercase tracking-[0.07em]
               transition-all duration-300
               ${
@@ -378,8 +381,8 @@ function DesktopBar({
         ))}
       </nav>
 
-      <ClayButton href="/contact" variant="gold" size="md" showArrow>
-        Book Consultation
+      <ClayButton href="tel:+4407400577844" variant="navy" size="lg">
+        Call +44 074005 77844
       </ClayButton>
     </div>
   );
@@ -539,9 +542,7 @@ function DesktopMegaMenu({
               })}
             </div>
 
-            <div
-              className="clay-surface-soft grid grid-cols-[1fr_200px] gap-4 rounded-[23px] p-5"
-            >
+            <div className="clay-surface-soft grid grid-cols-[1fr_200px] gap-4 rounded-[23px] p-5">
               <div>
                 <div className="mb-4 flex items-center gap-2.5">
                   <Sparkles size={14} className="text-[var(--brand-gold)]" />
@@ -710,6 +711,7 @@ function MobileDynamicIsland({
             <div className="clay-inset overflow-hidden rounded-[26px]">
               {/* Panel content — slides between views */}
               <div
+                data-lenis-prevent
                 className="relative overflow-y-auto overscroll-contain"
                 style={{ maxHeight: "calc(100dvh - 200px)" }}
               >
@@ -976,22 +978,14 @@ function IslandMainPanel({
       </div>
 
       {/* CTA */}
-      <div className="mt-2 flex gap-2">
+      <div className="mt-2  ">
         <Link
-          href="/contact"
+          href="tel:+4407400577844"
           onClick={close}
           className="snm-button snm-button--gold snm-button--md snm-button--full justify-center"
         >
-          <span className="snm-button__label">Book Consultation</span>
+          <span className="snm-button__label">Call Us</span>
           <MoveRight size={14} className="snm-button__arrow" />
-        </Link>
-        <Link
-          href="tel:+442000000000"
-          onClick={close}
-          aria-label="Call us"
-          className="snm-button snm-button--navy snm-button--md !px-4"
-        >
-          <Phone size={16} />
         </Link>
       </div>
     </div>

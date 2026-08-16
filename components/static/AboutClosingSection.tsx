@@ -18,10 +18,10 @@ import ClayButton from "@/components/ui/ClayButton";
 
 const services = [
   {
-    title: "Bespoke Furniture",
+    title: "Bespoke sofa",
     description:
-      "Made-to-measure sofas, chairs and furniture handcrafted around your space, style and requirements.",
-    href: "/services/bespoke-furniture",
+      "Made-to-measure sofas, chairs and sofa handcrafted around your space, style and requirements.",
+    href: "/services/bespoke-sofa",
     icon: Armchair,
   },
   {
@@ -34,15 +34,15 @@ const services = [
   {
     title: "Repair & Restoration",
     description:
-      "Expert furniture restoration and reupholstery designed to preserve character and extend the life of treasured pieces.",
+      "Expert sofa restoration and reupholstery designed to preserve character and extend the life of treasured pieces.",
     href: "/services/repair-restoration",
     icon: Hammer,
   },
   {
-    title: "Commercial Furniture",
+    title: "Commercial sofa",
     description:
-      "Bespoke furniture solutions for offices, hospitality spaces and distinctive commercial interiors.",
-    href: "/services/commercial-furniture",
+      "Bespoke sofa solutions for offices, hospitality spaces and distinctive commercial interiors.",
+    href: "/services/commercial-sofa",
     icon: Building2,
   },
 ];
@@ -285,7 +285,7 @@ function DesktopStoryPanel() {
             text-[#FFFDF8]
           "
         >
-          Bespoke Furniture
+          Bespoke sofa
           <br />
           for Exceptional
           <br />
@@ -312,8 +312,8 @@ function DesktopStoryPanel() {
             xl:text-[14px]
           "
         >
-          From bespoke sofas and handcrafted furniture to complete interior
-          design, commercial furniture and specialist restoration, Sofa N More
+          From bespoke sofas and handcrafted sofa to complete interior
+          design, commercial sofa and specialist restoration, Sofa N More
           brings London craftsmanship to spaces created around the people who
           use them.
         </p>
@@ -361,7 +361,7 @@ function DesktopStoryPanel() {
                 text-white
               "
             >
-              London Furniture Studio
+              London sofa Studio
             </div>
 
             <div
@@ -769,7 +769,7 @@ function MobileLayout() {
               min-[390px]:text-[43px]
             "
           >
-            Bespoke Furniture
+            Bespoke sofa
             <br />
             for Exceptional
             <br />
@@ -802,8 +802,8 @@ function MobileLayout() {
               text-white/68
             "
           >
-            From bespoke sofas and handcrafted furniture to interior design,
-            commercial furniture and specialist restoration, Sofa N More brings
+            From bespoke sofas and handcrafted sofa to interior design,
+            commercial sofa and specialist restoration, Sofa N More brings
             London craftsmanship to spaces designed around you.
           </p>
 
@@ -848,7 +848,7 @@ function MobileLayout() {
                 text-white/75
               "
             >
-              Bespoke Furniture Studio · London
+              Bespoke sofa Studio · London
             </span>
           </div>
 

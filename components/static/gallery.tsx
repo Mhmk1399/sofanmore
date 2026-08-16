@@ -17,7 +17,7 @@ import ClayButton from "../ui/ClayButton";
 
 type GalleryCategory =
   | "All"
-  | "Bespoke Furniture"
+  | "Bespoke sofa"
   | "Interiors"
   | "Restoration"
   | "Commercial";
@@ -36,7 +36,7 @@ type GalleryItem = {
 
 const categories: GalleryCategory[] = [
   "All",
-  "Bespoke Furniture",
+  "Bespoke sofa",
   "Interiors",
   "Restoration",
   "Commercial",
@@ -46,7 +46,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 1,
     title: "Mayfair Residence",
-    category: "Bespoke Furniture",
+    category: "Bespoke sofa",
     image: "/assets/images/1.webp",
     alt: "Luxury bespoke navy sofa in London interior",
   },
@@ -67,7 +67,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 4,
     title: "Blue Curve Collection",
-    category: "Bespoke Furniture",
+    category: "Bespoke sofa",
     image: "/assets/images/4.webp",
     alt: "Deep navy bespoke curved sofa",
   },
@@ -76,7 +76,7 @@ const galleryItems: GalleryItem[] = [
     title: "Hand Restoration",
     category: "Restoration",
     image: "/assets/images/5.webp",
-    alt: "Furniture restoration craftsmanship",
+    alt: "sofa restoration craftsmanship",
   },
   {
     id: 6,
@@ -104,7 +104,7 @@ const galleryItems: GalleryItem[] = [
     title: "Executive Office",
     category: "Commercial",
     image: "/assets/images/2.webp",
-    alt: "Executive office furniture",
+    alt: "Executive office sofa",
   },
   {
     id: 10,
@@ -116,7 +116,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 11,
     title: "Sculpted Armchair",
-    category: "Bespoke Furniture",
+    category: "Bespoke sofa",
     image: "/assets/images/3.webp",
     alt: "Luxury sculptural armchair",
   },
@@ -298,7 +298,7 @@ function DesktopIntro() {
         <div className="mt-4 h-[2px] w-10 bg-[var(--brand-gold)]" />
 
         <p className="mt-5 max-w-[215px] font-brand-sans text-[11px] font-medium leading-[1.65] text-[var(--brand-text-muted)] xl:text-[12px]">
-          Explore a selection of bespoke furniture, restored pieces and
+          Explore a selection of bespoke sofa, restored pieces and
           beautifully considered interiors crafted by Sofa N More.
         </p>
 
@@ -355,7 +355,7 @@ function MobileIntro() {
       <div className="mt-3 h-[2px] w-9 bg-[var(--brand-gold)]" />
 
       <p className="mt-4 max-w-[310px] font-brand-sans text-[10px] font-medium leading-[1.6] text-[var(--brand-text-muted)]">
-        Explore bespoke furniture, restored pieces and beautifully considered
+        Explore bespoke sofa, restored pieces and beautifully considered
         interiors crafted by Sofa N More.
       </p>
 
@@ -414,10 +414,10 @@ function GalleryFilters({
                 }
               `}
             >
-              {category === "Bespoke Furniture"
+              {category === "Bespoke sofa"
                 ? mobile
                   ? "Bespoke"
-                  : "Bespoke Furniture"
+                  : "Bespoke sofa"
                 : category}
             </ClayButton>
           );
@@ -787,6 +787,7 @@ function GalleryLightbox({
 
   const lightbox = (
     <div
+      data-lenis-prevent
       role="dialog"
       aria-modal="true"
       aria-label="Gallery image viewer"

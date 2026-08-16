@@ -144,7 +144,7 @@ export default function ScrollAssemblyRoom() {
 
       /*
        * Background responds much more
-       * subtly than furniture.
+       * subtly than sofa.
        */
 
       svg.style.setProperty("--scene-progress", progress.toFixed(4));

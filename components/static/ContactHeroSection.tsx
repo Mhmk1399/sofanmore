@@ -330,7 +330,7 @@ function DesktopContactHero() {
                 xl:text-[17px]
               "
             >
-              Looking to transform your space with bespoke furniture, expert
+              Looking to transform your space with bespoke sofa, expert
               home staging, or innovative interior design? Get in touch with
               Sofa N More today! Located in London, we are dedicated to creating
               tailored solutions that reflect your unique style and enhance your
@@ -521,60 +521,6 @@ function DesktopVisualAndMap() {
               border-white/35
             "
           />
-
-          {/* BRAND PLAQUE */}
-
-          <div
-            className="
-              clay-surface-soft
-
-              absolute
-              left-8
-              top-8
-
-              rounded-[22px]
-
-              px-5
-              py-4
-            "
-          >
-            <div
-              className="
-                flex
-                items-center
-                gap-2
-
-                text-[var(--brand-gold)]
-              "
-            >
-              <Crown size={14} strokeWidth={1.5} />
-
-              <span
-                className="
-                  font-brand-display
-                  text-[14px]
-                  tracking-[0.06em]
-                "
-              >
-                Sofa N More
-              </span>
-            </div>
-
-            <div
-              className="
-                mt-1
-
-                font-brand-sans
-                text-[8px]
-                uppercase
-                tracking-[0.22em]
-
-                text-[var(--brand-text-muted)]
-              "
-            >
-              London
-            </div>
-          </div>
         </div>
       </div>
 
@@ -1272,7 +1218,7 @@ function MobileContactHero() {
                 text-[var(--brand-text-muted)]
               "
             >
-              Looking to transform your space with bespoke furniture, expert
+              Looking to transform your space with bespoke sofa, expert
               home staging, or innovative interior design? Get in touch with
               Sofa N More today! Located in London, we are dedicated to creating
               tailored solutions that reflect your unique style.

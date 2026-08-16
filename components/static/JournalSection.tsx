@@ -18,7 +18,7 @@ const posts: Post[] = [
     id: 1,
     category: "Bespoke",
     date: "12 MAY 2024",
-    title: "How Bespoke Furniture Transforms a Space",
+    title: "How Bespoke sofa Transforms a Space",
     excerpt:
       "Thoughtful design, expert craftsmanship and the finest materials come together to create spaces with soul.",
     image: "/assets/images/1.webp",
