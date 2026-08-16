@@ -34,8 +34,11 @@ export default function ScrollAssemblyRoom() {
       return;
     }
 
+    const sectionElement: HTMLElement = section;
+    const svgElement: SVGSVGElement = svg;
+
     const pieces = Array.from(
-      svg.querySelectorAll<SVGGElement>("[data-piece]"),
+      svgElement.querySelectorAll<SVGGElement>("[data-piece]"),
     );
 
     const reducedMotion = window.matchMedia(
@@ -101,9 +104,9 @@ export default function ScrollAssemblyRoom() {
         return;
       }
 
-      const rect = section.getBoundingClientRect();
+      const rect = sectionElement.getBoundingClientRect();
 
-      const scrollable = section.offsetHeight - window.innerHeight;
+      const scrollable = sectionElement.offsetHeight - window.innerHeight;
 
       const progress = clamp(-rect.top / Math.max(scrollable, 1));
 
@@ -147,7 +150,7 @@ export default function ScrollAssemblyRoom() {
        * subtly than sofa.
        */
 
-      svg.style.setProperty("--scene-progress", progress.toFixed(4));
+      svgElement.style.setProperty("--scene-progress", progress.toFixed(4));
     }
 
     function requestUpdate() {

@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronDown, Crown } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const LINE_HEIGHT = 28;
@@ -8,17 +9,25 @@ const COLLAPSED_LINES = 3;
 const COLLAPSED_HEIGHT = LINE_HEIGHT * COLLAPSED_LINES;
 
 const mainText =
-  "Sofa N More is a London-based bespoke sofa studio specialising in custom sofas, made-to-measure sofa, sofa repair, reupholstery, sofa restoration, commercial seating, home staging and interior design services for residential and commercial spaces.";
+  "Sofa N More is a bespoke sofa and interior studio based in North West London, near Cricklewood, Staples Corner and Brent Cross. We create made-to-measure sofas, commercial seating and tailored interiors, and provide professional sofa repair and restoration for homes, hospitality venues, offices and other commercial spaces.";
 
 const fullText = `${mainText}
 
-Our website is designed to help customers understand every part of our service before booking a consultation. You can explore bespoke sofa design, luxury custom sofa, sofa repair in London, upholstery and reupholstery, sofa restoration, commercial sofas, office sofa, hospitality seating, home staging and interior design support in one place.
+Our work is organised around four connected services: bespoke sofas for rooms that require specific dimensions or configurations; commercial sofas and contract seating for restaurants, cafés, hotels, offices and reception spaces; residential and commercial interior design; and sofa repair and restoration for existing pieces worth keeping.
 
-Every Sofa N More project starts with the space, the client and the way the sofa will be used. We consider room proportions, comfort, fabric, colour, frame construction, durability and long-term practicality before recommending a tailored solution. This allows us to create sofa that feels refined, comfortable and made for the way you live or work.
+Every project begins with the space, the people using it and the result the sofa or interior needs to achieve. We consider room proportions, circulation, access, comfort, upholstery, colour, materials, durability and the wider visual direction before recommending an appropriate approach. This helps us create seating and interiors that look considered, feel comfortable and continue to work in everyday use.
 
-For homeowners, we create bespoke sofas, chairs, beds, headboards, dining sofa, benches, ottomans and soft furnishings with a personal finish. For commercial clients, we design and produce contract seating, banquette seating, office sofa, hospitality sofas and tailored sofa solutions for restaurants, hotels, showrooms, offices and business interiors.
+For residential projects, we can develop made-to-measure sofas, corner and modular configurations, armchairs, upholstered benches and selected tailored seating around the room and agreed brief. Each piece can be considered in relation to the available dimensions, access requirements, preferred comfort and surrounding interior.
 
-Our repair and restoration service helps extend the life of existing sofa through careful upholstery, frame care, foam replacement, fabric selection and professional finishing. This makes Sofa N More a trusted choice for customers searching for bespoke sofa London, sofa repair London, sofa restoration, reupholstery, commercial sofa and interior design services across London.`;
+For businesses and design professionals, we create commercial sofas, banquettes, booths, fixed wall seating and lounge seating for restaurants, cafés, hotels, hospitality spaces, offices, reception areas and other customer-facing interiors. The seating can be developed around the floor plan, intended use, customer flow and visual identity of the business.
+
+Our interior design service brings layout, colour, materials, lighting, atmosphere and bespoke seating into one clear direction. Projects may range from an individual residential room to a restaurant, hospitality environment, office or more complete commercial interior.
+
+Our sofa repair and restoration service is intended for worn, damaged, older or much-loved sofas that may be worth preserving. The process begins by assessing the condition of the sofa, what has changed and what you would like to retain or improve before an appropriate restoration direction is discussed.
+
+Sofa N More is based at Unit G19, Atlas Business Centre, Oxgate Lane, Staples Corner West, London NW2 7HJ. We welcome suitable enquiries from Cricklewood, Staples Corner, Brent Cross, Neasden, Dollis Hill, Hendon, Golders Green, Willesden Green, West Hampstead, Kilburn, Hampstead, Colindale, Wembley and Finchley, as well as other nearby areas of North West London.
+
+Project suitability, measuring visits, collection, delivery and installation requirements depend on the selected service, project scope, access and postcode. Include your project location when contacting us so our team can provide more relevant information from the beginning.`;
 
 export default function HomeSeoDescriptionSection() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -155,12 +164,15 @@ export default function HomeSeoDescriptionSection() {
                 <h2
                   id="home-seo-description-heading"
                   className="
-                    font-brand-sans text-[9px]
-                    font-bold uppercase tracking-[0.22em]
-                    text-[var(--brand-navy)]
-                  "
+    font-brand-sans
+    text-[9px]
+    font-bold
+    uppercase
+    tracking-[0.22em]
+    text-[var(--brand-navy)]
+  "
                 >
-                  About Sofa N More
+                  Sofa & Interior Services in North West London
                 </h2>
               </div>
 
@@ -213,16 +225,6 @@ export default function HomeSeoDescriptionSection() {
                   >
                     {fullText}
                   </div>
-
-                  <div
-                    aria-hidden
-                    className={`
-                      pointer-events-none absolute inset-x-0 bottom-0 h-12
-                      bg-[linear-gradient(180deg,rgba(255,253,248,0),#fffaf3_82%)]
-                      transition-opacity duration-[250ms] ease-[var(--ease-clay)]
-                      ${!isExpanded && showToggle ? "opacity-100" : "opacity-0"}
-                    `}
-                  />
                 </div>
               </div>
 

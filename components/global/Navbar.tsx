@@ -175,7 +175,7 @@ const mobileTabs = [
   { label: "Home", icon: Home, href: "/" },
 
   { label: "Gallery", href: "/gallery", icon: FaPhotoFilm },
-  { label: "Services", icon: Layers, href: "#services" },
+  { label: "Services", icon: Layers, href: "/services" },
   { label: "Contact", icon: FolderOpen, href: "/contact-us" },
   // { label: "About", icon: Info, href: "/about-us" },
   // { label: "Blog", icon: Menu, href: "/blog" },
