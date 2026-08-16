@@ -3,8 +3,9 @@ import LuxuryCtaBanner from "@/components/static/Cta";
 import FAQSection from "@/components/static/FAQSection";
 import GallerySection from "@/components/static/gallery";
 import HeroSection from "@/components/static/HeroSection";
+import HomeSeoDescriptionSection from "@/components/static/HomeSeoDescriptionSection";
 import LatestListingsSection from "@/components/static/LatestListingsSection";
- import ServicesSection from "@/components/static/servicesSection";
+import ServicesSection from "@/components/static/servicesSection";
 import WhyChooseSection from "@/components/static/WhyChooseSection";
 
 export default function HomePage() {
@@ -19,6 +20,7 @@ export default function HomePage() {
         <LuxuryCtaBanner />
         <LatestListingsSection />
         <FAQSection />
+        <HomeSeoDescriptionSection />
 
         {/* Next sections */}
         <section id="about" />

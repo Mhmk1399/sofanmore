@@ -5,7 +5,7 @@ import BespokeProjectCTASection from "./BespokeProjectCTASection";
 import BespokeSofasWeCanCreateSection from "./BespokeSofasWeCanCreateSection";
 import CommercialSofaProjectsSection from "./CommercialSofaProjectsSection";
 import CustomsofaForYourSpaceSection from "./CustomFurnitureForYourSpaceSection";
-import SeeWhatWeCreateSection from "./SeeWhatWeCreateSection";
+ import SeeWhatWeCreateSection from "./SeeWhatWeCreateSection";
 import WhyChooseBespokeSofasSection from "./WhyChooseBespokeSofasSection";
 
 export type BespokesofaFaqItem = {

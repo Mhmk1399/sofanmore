@@ -1,9 +1,8 @@
+import BespokesofaPageContent, { bespokesofaFaqs } from "@/components/static/services/BespokeSofa/BespokeFurniturePageContent";
 import type { Metadata } from "next";
 
-import BespokesofaPageContent from "@/components/static/services/BespokeSofa/BespokeFurniturePageContent";
-
-import { bespokesofaFaqs } from "@/components/static/services/BespokeSofa/BespokeFurniturePageContent";
-
+ 
+ 
 /* =========================================================
    CONSTANTS
 ========================================================= */
