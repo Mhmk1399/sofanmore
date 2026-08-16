@@ -5,7 +5,14 @@ import Link from "next/link";
 
 import { ChevronLeft, ChevronRight, MoveRight } from "lucide-react";
 
-import { useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import type { PointerEvent as ReactPointerEvent } from "react";
 
@@ -22,6 +29,28 @@ type Service = {
 };
 
 type Position = -2 | -1 | 0 | 1 | 2;
+
+type SlotElements = {
+  layout: HTMLDivElement;
+  motion: HTMLDivElement;
+  resize: HTMLDivElement;
+  scale: HTMLDivElement;
+};
+
+type MotionSnapshot = {
+  rect: DOMRect;
+  opacity: number;
+  position: Position;
+};
+
+const CAROUSEL_DURATION = 540;
+
+const CAROUSEL_EASING = "cubic-bezier(0.16, 1, 0.3, 1)";
+
+/* Finish resizing before translation settles to avoid a late size change. */
+const CAROUSEL_RESIZE_DURATION = 340;
+
+const CAROUSEL_RESIZE_EASING = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 /* =========================================================
    DATA
@@ -109,7 +138,19 @@ export default function ServicesSection() {
 
   const [isDragging, setIsDragging] = useState(false);
 
+  const [motionRevision, setMotionRevision] = useState(0);
+
   const stageRef = useRef<HTMLDivElement>(null);
+
+  const cardsTrackRef = useRef<HTMLDivElement>(null);
+
+  const slotElementsRef = useRef(new Map<number, SlotElements>());
+
+  const motionSnapshotRef = useRef(new Map<number, MotionSnapshot>());
+
+  const dragFrameRef = useRef<number | null>(null);
+
+  const pendingDragXRef = useRef(0);
 
   const pointerRef = useRef<{
     id: number;
@@ -118,6 +159,8 @@ export default function ServicesSection() {
   } | null>(null);
 
   const suppressClickRef = useRef(false);
+
+  const suppressClickTimerRef = useRef<number | null>(null);
 
   const positionedServices = useMemo(
     () =>
@@ -129,25 +172,293 @@ export default function ServicesSection() {
     [activeIndex],
   );
 
+  const registerSlot = useCallback(
+    (index: number, elements: SlotElements | null) => {
+      if (elements) {
+        slotElementsRef.current.set(index, elements);
+      } else {
+        slotElementsRef.current.delete(index);
+      }
+    },
+    [],
+  );
+
+  useEffect(() => {
+    return () => {
+      if (dragFrameRef.current !== null) {
+        cancelAnimationFrame(dragFrameRef.current);
+      }
+
+      if (suppressClickTimerRef.current !== null) {
+        window.clearTimeout(suppressClickTimerRef.current);
+      }
+
+      slotElementsRef.current.forEach(({ motion, resize }) => {
+        motion.getAnimations().forEach((animation) => animation.cancel());
+        resize.getAnimations().forEach((animation) => animation.cancel());
+      });
+    };
+  }, []);
+
+  /* =======================================================
+     GPU MOTION / FLIP ENGINE
+  ======================================================== */
+
+  function commitDragX(value: number) {
+    pendingDragXRef.current = value;
+
+    if (dragFrameRef.current !== null) {
+      cancelAnimationFrame(dragFrameRef.current);
+      dragFrameRef.current = null;
+    }
+
+    if (cardsTrackRef.current) {
+      cardsTrackRef.current.style.transform = `translate3d(${value}px, 0, 0)`;
+    }
+  }
+
+  function scheduleDragX(value: number) {
+    pendingDragXRef.current = value;
+
+    if (dragFrameRef.current !== null) {
+      return;
+    }
+
+    dragFrameRef.current = requestAnimationFrame(() => {
+      dragFrameRef.current = null;
+
+      if (cardsTrackRef.current) {
+        cardsTrackRef.current.style.transform = `translate3d(${pendingDragXRef.current}px, 0, 0)`;
+      }
+    });
+  }
+
+  function pauseMotionAnimations() {
+    slotElementsRef.current.forEach(({ motion, resize }) => {
+      motion.getAnimations().forEach((animation) => {
+        if (animation.playState === "running") {
+          animation.pause();
+        }
+      });
+
+      resize.getAnimations().forEach((animation) => {
+        if (animation.playState === "running") {
+          animation.pause();
+        }
+      });
+    });
+  }
+
+  function captureMotionSnapshot() {
+    const snapshot = new Map<number, MotionSnapshot>();
+
+    slotElementsRef.current.forEach(({ layout, scale }, index) => {
+      snapshot.set(index, {
+        rect: scale.getBoundingClientRect(),
+        opacity: Number.parseFloat(getComputedStyle(layout).opacity) || 0,
+        position: getPosition(index, activeIndex),
+      });
+    });
+
+    /*
+     * Measure first, then cancel. The next layout effect starts
+     * a new animation from the exact on-screen position, so rapid
+     * clicks never stack several transitions on top of each other.
+     */
+    slotElementsRef.current.forEach(({ motion, resize }) => {
+      motion.getAnimations().forEach((animation) => animation.cancel());
+      resize.getAnimations().forEach((animation) => animation.cancel());
+    });
+
+    motionSnapshotRef.current = snapshot;
+  }
+
+  function animateTo(index: number) {
+    captureMotionSnapshot();
+
+    /*
+     * Drag reset is immediate. FLIP recreates the current visual
+     * position and performs one single compositor-only animation.
+     */
+    commitDragX(0);
+
+    setActiveIndex(wrapIndex(index));
+    setMotionRevision((current) => current + 1);
+  }
+
+  useLayoutEffect(() => {
+    const snapshot = motionSnapshotRef.current;
+
+    if (snapshot.size === 0) {
+      return;
+    }
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    positionedServices.forEach(({ index, position }) => {
+      const previous = snapshot.get(index);
+      const elements = slotElementsRef.current.get(index);
+
+      if (!previous || !elements) {
+        return;
+      }
+
+      const finalRect = elements.scale.getBoundingClientRect();
+
+      if (finalRect.width === 0 || finalRect.height === 0) {
+        return;
+      }
+
+      const previousCenterX = previous.rect.left + previous.rect.width / 2;
+      const previousCenterY = previous.rect.top + previous.rect.height / 2;
+      const finalCenterX = finalRect.left + finalRect.width / 2;
+      const finalCenterY = finalRect.top + finalRect.height / 2;
+
+      const deltaX = previousCenterX - finalCenterX;
+      const deltaY = previousCenterY - finalCenterY;
+
+      const startResizeX = previous.rect.width / finalRect.width;
+      const startResizeY = previous.rect.height / finalRect.height;
+
+      if (!Number.isFinite(startResizeX) || !Number.isFinite(startResizeY)) {
+        return;
+      }
+
+      /*
+       * FLIP owns translation only. The nested scale layer keeps its
+       * Tailwind transform untouched, so animation cleanup can never
+       * reveal a slightly different scale at the end of the movement.
+       */
+      const startTransform = `translate3d(${deltaX}px, ${deltaY}px, 0)`;
+      const endTransform = "translate3d(0, 0, 0)";
+
+      const hasTranslation =
+        Math.abs(deltaX) > 0.5 ||
+        Math.abs(deltaY) > 0.5 ||
+        Math.abs(previous.opacity - 1) > 0.01;
+
+      const hasResize =
+        Math.abs(startResizeX - 1) > 0.002 ||
+        Math.abs(startResizeY - 1) > 0.002;
+
+      if (reduceMotion || (!hasTranslation && !hasResize)) {
+        return;
+      }
+
+      const crossesLoopBoundary = Math.abs(previous.position - position) >= 3;
+
+      if (hasTranslation) {
+        const keyframes: Keyframe[] = crossesLoopBoundary
+          ? [
+              {
+                transform: startTransform,
+                opacity: previous.opacity,
+                offset: 0,
+              },
+              {
+                transform: `translate3d(${deltaX + (previous.position < 0 ? -64 : 64)}px, ${deltaY}px, 0)`,
+                opacity: 0,
+                offset: 0.28,
+              },
+              {
+                transform: `translate3d(${position < 0 ? -64 : 64}px, 0, 0)`,
+                opacity: 0,
+                offset: 0.32,
+              },
+              {
+                transform: endTransform,
+                opacity: 1,
+                offset: 1,
+              },
+            ]
+          : [
+              {
+                transform: startTransform,
+                opacity: previous.opacity,
+              },
+              {
+                transform: endTransform,
+                opacity: 1,
+              },
+            ];
+
+        const translationAnimation = elements.motion.animate(keyframes, {
+          duration: CAROUSEL_DURATION,
+          easing: CAROUSEL_EASING,
+          fill: "both",
+        });
+
+        translationAnimation.addEventListener(
+          "finish",
+          () => {
+            /* Translation returns to the static identity transform. */
+            translationAnimation.cancel();
+          },
+          { once: true },
+        );
+      }
+
+      if (hasResize) {
+        const resizeAnimation = elements.resize.animate(
+          [
+            {
+              transform: `scale3d(${startResizeX}, ${startResizeY}, 1)`,
+            },
+            {
+              transform: "scale3d(1, 1, 1)",
+            },
+          ],
+          {
+            duration: CAROUSEL_RESIZE_DURATION,
+            easing: CAROUSEL_RESIZE_EASING,
+            fill: "both",
+          },
+        );
+
+        resizeAnimation.addEventListener(
+          "finish",
+          () => {
+            /* The final static transform is identity on this layer. */
+            resizeAnimation.cancel();
+          },
+          { once: true },
+        );
+      }
+    });
+
+    motionSnapshotRef.current = new Map();
+  }, [motionRevision, positionedServices]);
+
   /* =======================================================
      NAVIGATION
   ======================================================== */
 
   function goNext() {
-    setActiveIndex((current) => wrapIndex(current + 1));
+    animateTo(activeIndex + 1);
   }
 
   function goPrev() {
-    setActiveIndex((current) => wrapIndex(current - 1));
+    animateTo(activeIndex - 1);
   }
 
   function goTo(index: number) {
-    setActiveIndex(index);
+    if (index !== activeIndex) {
+      animateTo(index);
+    }
   }
 
   /* =======================================================
      DRAG ENGINE
   ======================================================== */
+
+  function getResistedDrag(deltaX: number) {
+    const stageWidth = stageRef.current?.clientWidth ?? 400;
+    const resistanceDistance = Math.max(180, stageWidth * 0.55);
+
+    return deltaX / (1 + Math.abs(deltaX) / resistanceDistance);
+  }
 
   function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
     if (event.pointerType === "mouse" && event.button !== 0) {
@@ -158,6 +469,8 @@ export default function ServicesSection() {
       return;
     }
 
+    pauseMotionAnimations();
+
     pointerRef.current = {
       id: event.pointerId,
       startX: event.clientX,
@@ -166,7 +479,7 @@ export default function ServicesSection() {
 
     event.currentTarget.setPointerCapture(event.pointerId);
 
-    stageRef.current?.style.setProperty("--drag-x", "0px");
+    commitDragX(0);
 
     setIsDragging(true);
   }
@@ -180,13 +493,8 @@ export default function ServicesSection() {
 
     const deltaX = event.clientX - pointer.startX;
 
-    /*
-     * No React state update here.
-     * Direct CSS variable update keeps drag
-     * extremely smooth even on slower devices.
-     */
-
-    stageRef.current?.style.setProperty("--drag-x", `${deltaX}px`);
+    /* Coalesce high-frequency pointer events into one GPU update per frame. */
+    scheduleDragX(getResistedDrag(deltaX));
   }
 
   function finishDrag(
@@ -195,50 +503,53 @@ export default function ServicesSection() {
   ) {
     const pointer = pointerRef.current;
 
-    if (!pointer) return;
+    if (!pointer || pointer.id !== event.pointerId) {
+      return;
+    }
 
     const deltaX = event.clientX - pointer.startX;
-
     const elapsed = Math.max(performance.now() - pointer.startTime, 1);
-
     const velocity = deltaX / elapsed;
-
     const stageWidth = stageRef.current?.clientWidth ?? 400;
-
     const threshold = Math.min(90, Math.max(38, stageWidth * 0.08));
-
     const dragged = Math.abs(deltaX) > 8;
+
+    /* Make sure the final pointer coordinate is included in the snapshot. */
+    commitDragX(getResistedDrag(deltaX));
 
     if (dragged) {
       suppressClickRef.current = true;
 
-      window.setTimeout(() => {
+      if (suppressClickTimerRef.current !== null) {
+        window.clearTimeout(suppressClickTimerRef.current);
+      }
+
+      suppressClickTimerRef.current = window.setTimeout(() => {
         suppressClickRef.current = false;
-      }, 250);
+        suppressClickTimerRef.current = null;
+      }, 300);
     }
+
+    let nextIndex = activeIndex;
 
     if (!cancelled) {
       if (deltaX < -threshold || velocity < -0.55) {
-        goNext();
+        nextIndex = wrapIndex(activeIndex + 1);
       } else if (deltaX > threshold || velocity > 0.55) {
-        goPrev();
+        nextIndex = wrapIndex(activeIndex - 1);
       }
     }
 
     pointerRef.current = null;
 
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
     setIsDragging(false);
 
-    /*
-     * Wait until transition class is restored,
-     * then animate drag offset back to zero.
-     */
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        stageRef.current?.style.setProperty("--drag-x", "0px");
-      });
-    });
+    /* Also animates a short drag back to the current card when no slide wins. */
+    animateTo(nextIndex);
   }
 
   return (
@@ -283,6 +594,13 @@ export default function ServicesSection() {
             if (suppressClickRef.current) {
               event.preventDefault();
               event.stopPropagation();
+
+              suppressClickRef.current = false;
+
+              if (suppressClickTimerRef.current !== null) {
+                window.clearTimeout(suppressClickTimerRef.current);
+                suppressClickTimerRef.current = null;
+              }
             }
           }}
           className={`
@@ -291,27 +609,36 @@ export default function ServicesSection() {
             h-[580px]
             w-full
             overflow-hidden
+            overscroll-x-contain
             select-none
             touch-pan-y
 
-             
             lg:h-[480px]
-
-          
 
             ${isDragging ? "cursor-grabbing" : "lg:cursor-grab"}
           `}
         >
-          {positionedServices.map(({ service, index, position }) => (
-            <CarouselSlot
-              key={service.title}
-              service={service}
-              serviceIndex={index}
-              position={position}
-              isDragging={isDragging}
-              onSelect={() => goTo(index)}
-            />
-          ))}
+          <div
+            ref={cardsTrackRef}
+            className="
+              absolute
+              inset-0
+              transform-gpu
+              will-change-transform
+              [backface-visibility:hidden]
+            "
+          >
+            {positionedServices.map(({ service, index, position }) => (
+              <CarouselSlot
+                key={service.title}
+                service={service}
+                serviceIndex={index}
+                position={position}
+                onRegister={registerSlot}
+                onSelect={() => goTo(index)}
+              />
+            ))}
+          </div>
 
           {/* DESKTOP PREV */}
 
@@ -490,8 +817,8 @@ function ServicesHeader() {
           lg:text-[13px]
         "
       >
-        From bespoke sofa to complete interiors and expert restoration,
-        discover services crafted around the way you live and work.
+        From bespoke sofa to complete interiors and expert restoration, discover
+        services crafted around the way you live and work.
       </p>
     </div>
   );
@@ -505,50 +832,106 @@ function CarouselSlot({
   service,
   serviceIndex,
   position,
-  isDragging,
+  onRegister,
   onSelect,
 }: {
   service: Service;
   serviceIndex: number;
   position: Position;
-  isDragging: boolean;
+  onRegister: (index: number, elements: SlotElements | null) => void;
   onSelect: () => void;
 }) {
+  const layoutRef = useRef<HTMLDivElement>(null);
+
+  const motionRef = useRef<HTMLDivElement>(null);
+
+  const resizeRef = useRef<HTMLDivElement>(null);
+
+  const scaleRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const layout = layoutRef.current;
+    const motion = motionRef.current;
+    const resize = resizeRef.current;
+    const scale = scaleRef.current;
+
+    if (!layout || !motion || !resize || !scale) {
+      return;
+    }
+
+    onRegister(serviceIndex, { layout, motion, resize, scale });
+
+    return () => {
+      onRegister(serviceIndex, null);
+    };
+  }, [onRegister, serviceIndex]);
+
   return (
     <div
+      ref={layoutRef}
       className={`
         absolute
-        transition-[left,top,width,height,opacity,transform]
-        duration-700
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        will-change-transform
+        transition-opacity
+        duration-300
+        ease-out
 
         ${getSlotClasses(position)}
       `}
     >
-      {/* DRAG TRANSLATION LAYER */}
+      {/* FLIP TRANSLATION LAYER */}
 
       <div
-        className={`
+        ref={motionRef}
+        className="
           h-full
           w-full
-
-          ${
-            isDragging
-              ? "transition-none"
-              : "transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-          }
-        `}
-        style={{
-          transform: "translate3d(var(--drag-x, 0px), 0, 0)",
-        }}
+          transform-gpu
+          will-change-transform
+          [backface-visibility:hidden]
+        "
       >
-        <ServiceCard
-          service={service}
-          serviceIndex={serviceIndex}
-          position={position}
-          onSelect={onSelect}
-        />
+        {/*
+         * RESIZE CORRECTION LAYER
+         *
+         * Geometry changes finish earlier than the slide translation, so a
+         * card never keeps growing after it has visually reached its slot.
+         */}
+        <div
+          ref={resizeRef}
+          className="
+            w-full
+            origin-center
+            transform-gpu
+            will-change-transform
+            [backface-visibility:hidden]
+          "
+        >
+          {/*
+           * STATIC SCALE LAYER
+           *
+           * Tailwind owns this transform permanently. FLIP never replaces
+           * it, so cancelling an animation cannot cause a final scale pop.
+           */}
+          <div
+            ref={scaleRef}
+            className={`
+              w-full
+              origin-center
+              transform-gpu
+              transition-none
+              [backface-visibility:hidden]
+
+              ${getSlotScaleClasses(position)}
+            `}
+          >
+            <ServiceCard
+              service={service}
+              serviceIndex={serviceIndex}
+              position={position}
+              onSelect={onSelect}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -567,7 +950,6 @@ function getSlotClasses(position: Position) {
         z-30
         h-[550px]
         w-[82%]
-        scale-100
         opacity-100
 
         lg:left-[38%]
@@ -583,14 +965,12 @@ function getSlotClasses(position: Position) {
         z-20
         h-[535px]
         w-[82%]
-        scale-[0.98]
         opacity-100
 
         lg:left-[18%]
         lg:top-[30px]
         lg:h-[460px]
         lg:w-[22%]
-        lg:scale-[0.96]
       `;
 
     case 1:
@@ -600,14 +980,12 @@ function getSlotClasses(position: Position) {
         z-20
         h-[535px]
         w-[82%]
-        scale-[0.98]
         opacity-100
 
         lg:left-[60%]
         lg:top-[30px]
         lg:h-[460px]
         lg:w-[22%]
-        lg:scale-[0.96]
       `;
 
     case -2:
@@ -617,14 +995,12 @@ function getSlotClasses(position: Position) {
         z-10
         h-[500px]
         w-[82%]
-        scale-[0.94]
         opacity-0
 
         lg:left-[4%]
         lg:top-[65px]
         lg:h-[390px]
         lg:w-[15%]
-        lg:scale-[0.9]
         lg:opacity-100
       `;
 
@@ -635,16 +1011,29 @@ function getSlotClasses(position: Position) {
         z-10
         h-[500px]
         w-[82%]
-        scale-[0.94]
         opacity-0
 
         lg:left-[81%]
         lg:top-[65px]
         lg:h-[390px]
         lg:w-[15%]
-        lg:scale-[0.9]
         lg:opacity-100
       `;
+  }
+}
+
+function getSlotScaleClasses(position: Position) {
+  switch (position) {
+    case 0:
+      return "scale-100";
+
+    case -1:
+    case 1:
+      return "scale-[0.98] lg:scale-[0.96]";
+
+    case -2:
+    case 2:
+      return "scale-[0.94] lg:scale-[0.9]";
   }
 }
 
