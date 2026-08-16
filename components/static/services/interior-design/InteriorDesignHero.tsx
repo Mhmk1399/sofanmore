@@ -20,12 +20,13 @@ const heroPoints = [
    ROOT
 ========================================================= */
 
-export default function InteriorDesignHero() {
+export default function InteriorDesignHero({ id = "service" }: { id?: string }) {
   return (
     <section
+      id={id}
       aria-labelledby="interior-design-hero-heading"
       className="
-        relative mt-20
+        relative mt-20 scroll-mt-24
         overflow-hidden
 
         bg-[var(--brand-ivory)]

@@ -35,14 +35,14 @@ const services = [
     title: "Repair & Restoration",
     description:
       "Expert sofa restoration and reupholstery designed to preserve character and extend the life of treasured pieces.",
-    href: "/services/repair-restoration",
+    href: "/services/sofa-repair-restoration",
     icon: Hammer,
   },
   {
     title: "Commercial sofa",
     description:
       "Bespoke sofa solutions for offices, hospitality spaces and distinctive commercial interiors.",
-    href: "/services/commercial-sofa",
+    href: "/services/commercial-sofas",
     icon: Building2,
   },
 ];

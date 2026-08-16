@@ -64,11 +64,17 @@ const hospitalityAreas: HospitalityArea[] = [
    ROOT
 ========================================================= */
 
-export default function HotelHospitalityCommercialSofasSection() {
+export default function HotelHospitalityCommercialSofasSection({
+  id = "hotel-hospitality-seating",
+}: {
+  id?: string;
+}) {
   return (
     <section
+      id={id}
       aria-labelledby="hotel-hospitality-sofas-heading"
       className="
+        scroll-mt-24
         bg-[var(--brand-ivory)]
 
         px-3

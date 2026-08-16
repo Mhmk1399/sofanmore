@@ -20,12 +20,13 @@ const heroPoints = [
    ROOT
 ========================================================= */
 
-export default function SofaRepairHero() {
+export default function SofaRepairHero({ id = "service" }: { id?: string }) {
   return (
     <section
+      id={id}
       aria-labelledby="sofa-repair-hero-heading"
       className="
-        relative mt-20
+        relative mt-20 scroll-mt-24
         overflow-hidden
 
         bg-[var(--brand-ivory)]

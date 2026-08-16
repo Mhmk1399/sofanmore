@@ -130,7 +130,7 @@ function DesktopAboutUsCard() {
 
             <div className="mt-7">
               <ClayButton
-                href="/about"
+                href="/about-us"
                 variant="gold"
                 size="lg"
                 showArrow
@@ -302,7 +302,7 @@ function MobileAboutUsCard() {
         {/* CTA */}
         <div className="mt-5">
           <ClayButton
-            href="/about"
+            href="/about-us"
             variant="gold"
             size="lg"
             fullWidth

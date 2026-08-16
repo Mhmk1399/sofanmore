@@ -98,22 +98,23 @@ export const commercialSofasFaqs = [
 export default function CommercialSofasPageContent() {
   return (
     <main
+      id="webpage"
       className="
         overflow-hidden
         bg-[var(--brand-ivory)]
       "
     >
-      <CommercialSofasHero />
+      <CommercialSofasHero id="service" />
       <CommercialSofasRealBusinessSpacesSection />
       <CommercialSofaSolutionsSection />
       <WhyChooseCommercialSofasSection />
       <CommercialSofaProcessSection />
-      <RestaurantCafeCommercialSofasSection />
-      <HotelHospitalityCommercialSofasSection />
-      <OfficeWorkspaceCommercialSofasSection />
+      <RestaurantCafeCommercialSofasSection id="restaurant-cafe-seating" />
+      <HotelHospitalityCommercialSofasSection id="hotel-hospitality-seating" />
+      <OfficeWorkspaceCommercialSofasSection id="office-seating" />
       <CommercialSofasMadeInLondonSection />
       <CommercialProjectsGallerySection />
-      <FAQSection items={commercialSofasFaqs} />
+      <FAQSection id="faq" items={commercialSofasFaqs} />
       <CommercialSofasFinalCTASection />
     </main>
   );

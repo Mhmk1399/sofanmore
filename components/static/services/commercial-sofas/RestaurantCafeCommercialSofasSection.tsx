@@ -21,11 +21,17 @@ const venueConsiderations = [
    ROOT
 ========================================================= */
 
-export default function RestaurantCafeCommercialSofasSection() {
+export default function RestaurantCafeCommercialSofasSection({
+  id = "restaurant-cafe-seating",
+}: {
+  id?: string;
+}) {
   return (
     <section
+      id={id}
       aria-labelledby="restaurant-cafe-sofas-heading"
       className="
+        scroll-mt-24
         bg-[var(--brand-ivory)]
 
         px-3

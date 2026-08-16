@@ -420,7 +420,7 @@ export default function ServicesHero() {
                   </ClayButton>
 
                   <ClayButton
-                    href="#our-services"
+                    href="#services"
                     variant="navy"
                     size="lg"
                     showArrow

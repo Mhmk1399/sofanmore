@@ -132,6 +132,7 @@ export default function Breadcrumbs() {
     >
       <div className="mx-auto flex max-w-[var(--site-width)] justify-center lg:justify-start">
         <nav
+          id="breadcrumb"
           aria-label="Breadcrumb"
           className="
             pointer-events-auto

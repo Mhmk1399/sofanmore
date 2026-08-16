@@ -1,7 +1,6 @@
 import AboutSection from "@/components/static/AboutSection";
 import LuxuryCtaBanner from "@/components/static/Cta";
 import FAQSection from "@/components/static/FAQSection";
-import GallerySection from "@/components/static/gallery";
 import HeroSection from "@/components/static/HeroSection";
 import HomeSeoDescriptionSection from "@/components/static/HomeSeoDescriptionSection";
 import LatestListingsSection from "@/components/static/LatestListingsSection";
@@ -15,27 +14,12 @@ export default function HomePage() {
         <HeroSection />
         <AboutSection />
         <ServicesSection />
-        <GallerySection />
+
         <WhyChooseSection />
         <LuxuryCtaBanner />
         <LatestListingsSection />
-        <FAQSection />
+        <FAQSection id="faq" />
         <HomeSeoDescriptionSection />
-
-        {/* Next sections */}
-        <section id="about" />
-
-        <section id="services" />
-
-        <section id="collections" />
-
-        <section id="work" />
-
-        <section id="journal" />
-
-        <section id="contact" />
-
-        <section id="consultation" />
       </main>
     </>
   );

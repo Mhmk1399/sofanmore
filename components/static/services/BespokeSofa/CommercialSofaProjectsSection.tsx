@@ -1022,7 +1022,7 @@ function CommercialCTA({ mobile = false }: { mobile?: boolean }) {
             `}
           >
             <ClayButton
-              href="/services/commercial-sofa"
+              href="/services/commercial-sofas"
               variant="navy"
               size="lg"
               showArrow

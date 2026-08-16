@@ -56,7 +56,7 @@ const services: Service[] = [
       "Durable, elegant sofa solutions for offices, hotels, and restaurants.",
     icon: Building2,
     image: "/assets/images/2.webp",
-    href: "/services/commercial-sofa",
+    href: "/services/commercial-sofas",
   },
   {
     title: "Interior Design",
@@ -74,7 +74,7 @@ const services: Service[] = [
       "Professional restoration of antique and damaged sofa to its former glory.",
     icon: Hammer,
     image: "/assets/images/4.webp",
-    href: "/services/repair-restoration",
+    href: "/services/sofa-repair-restoration",
   },
 ];
 
@@ -204,7 +204,6 @@ function HeroBackground() {
           src="/assets/images/herodesktop.webp"
           alt=""
           fill
-          priority
           quality={75}
           sizes="100vw"
           className="
@@ -226,7 +225,6 @@ function HeroBackground() {
           src="/assets/images/heromobile.webp"
           alt=""
           fill
-          priority
           quality={70}
           sizes="100vw"
           className="
@@ -444,7 +442,7 @@ function HeroCopy() {
         {/* CTAs */}
         <div className="mt-[clamp(16px,2.4vh,28px)] flex flex-wrap gap-3">
           <ClayButton
-            href="/contact"
+            href="/contact-us"
             variant="gold"
             size="md"
             showArrow
@@ -504,7 +502,7 @@ function HeroImage() {
           src="/assets/images/7.webp"
           alt="Luxury bespoke sofa handcrafted in our London workshop, featuring premium Italian leather upholstery"
           fill
-          priority
+          fetchPriority="high"
           sizes="(min-width: 1280px) 38vw, (min-width: 1024px) 32vw, 100vw"
           className="object-cover object-center"
         />
@@ -887,7 +885,7 @@ function TabletMainHero() {
                 src="/assets/images/7.webp"
                 alt="Luxury handcrafted sofa by Sofa N More London"
                 fill
-                priority
+                fetchPriority="high"
                 sizes="(min-width: 640px) 55vw, 100vw"
                 className="object-cover object-center"
               />
@@ -1110,7 +1108,7 @@ function MobileHeroMain() {
             src="/assets/images/2.webp"
             alt="Bespoke luxury sofa by Sofa N More, handcrafted in London"
             fill
-            priority
+            fetchPriority="high"
             sizes="100vw"
             className="object-cover object-center"
           />
@@ -1216,7 +1214,7 @@ function MobileHeroMain() {
             {/* CTAs */}
             <div className="mt-5 space-y-3">
               <ClayButton
-                href="/contact"
+                href="/contact-us"
                 variant="navy"
                 size="md"
                 fullWidth
@@ -1374,7 +1372,7 @@ function MobileStickyBar() {
     >
       <div className="flex gap-2.5">
         <Link
-          href="/contact"
+          href="/contact-us"
           className="
             snm-button snm-button--gold snm-button--sm snm-button--full
             justify-center

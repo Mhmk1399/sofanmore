@@ -8,11 +8,13 @@ import type { LucideIcon } from "lucide-react";
 
 const restorationAreas = [
   {
+    anchorIds: ["sofa-reupholstery", "commercial-upholstery"],
     title: "Appearance",
     text: "The visible condition, upholstery and details that shape how the sofa looks.",
     icon: Sparkles,
   },
   {
+    anchorIds: ["cushion-refilling"],
     title: "Comfort",
     text: "How the sofa supports you and how comfortable it feels in everyday use.",
     icon: Armchair,
@@ -28,6 +30,7 @@ const restorationAreas = [
     icon: Layers3,
   },
 ] satisfies {
+  anchorIds?: string[];
   title: string;
   text: string;
   icon: LucideIcon;
@@ -525,9 +528,10 @@ function RestorationAreasPanel() {
             sm:grid-cols-2
           "
         >
-          {restorationAreas.map(({ title, text, icon: Icon }) => (
+          {restorationAreas.map(({ anchorIds, title, text, icon: Icon }) => (
             <RestorationArea
               key={title}
+              anchorIds={anchorIds}
               title={title}
               text={text}
               icon={Icon}
@@ -598,10 +602,12 @@ function RestorationAreasPanel() {
 ========================================================= */
 
 function RestorationArea({
+  anchorIds,
   title,
   text,
   icon: Icon,
 }: {
+  anchorIds?: string[];
   title: string;
   text: string;
   icon: LucideIcon;
@@ -617,6 +623,15 @@ function RestorationArea({
         py-3.5
       "
     >
+      {anchorIds?.map((anchorId) => (
+        <span
+          key={anchorId}
+          id={anchorId}
+          aria-hidden
+          className="block h-0 scroll-mt-24"
+        />
+      ))}
+
       <div
         className="
           flex

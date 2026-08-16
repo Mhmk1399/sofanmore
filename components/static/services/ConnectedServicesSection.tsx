@@ -79,10 +79,14 @@ const services: ServiceItem[] = [
    ROOT
 ========================================================= */
 
-export default function ConnectedServicesSection() {
+export default function ConnectedServicesSection({
+  id = "services",
+}: {
+  id?: string;
+}) {
   return (
     <section
-      id="our-services"
+      id={id}
       aria-labelledby="connected-services-heading"
       className="
         scroll-mt-24

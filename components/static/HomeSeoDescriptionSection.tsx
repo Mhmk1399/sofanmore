@@ -157,7 +157,7 @@ export default function HomeSeoDescriptionSection() {
                   className="
                     font-brand-sans text-[9px]
                     font-bold uppercase tracking-[0.22em]
-                    text-[var(--brand-gold-700)]
+                    text-[var(--brand-navy)]
                   "
                 >
                   About Sofa N More

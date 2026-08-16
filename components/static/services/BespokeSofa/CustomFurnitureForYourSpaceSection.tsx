@@ -32,12 +32,18 @@ const designBenefits = [
    ROOT
 ========================================================= */
 
-export default function CustomsofaForYourSpaceSection() {
+export default function CustomsofaForYourSpaceSection({
+  id = "made-to-measure-sofas",
+}: {
+  id?: string;
+}) {
   return (
     <section
+      id={id}
       aria-labelledby="custom-sofa-space-heading"
       className="
         relative
+        scroll-mt-24
         overflow-hidden
         bg-[var(--brand-ivory)]
         px-3

@@ -16,12 +16,17 @@ const PHONE_NUMBER = "+447400577844";
    ROOT
 ========================================================= */
 
-export default function CommercialSofasHero() {
+export default function CommercialSofasHero({
+  id = "service",
+}: {
+  id?: string;
+}) {
   return (
     <section
+      id={id}
       aria-labelledby="commercial-sofas-hero-heading"
       className="
-        relative
+        relative scroll-mt-24
         overflow-hidden
         bg-[var(--brand-ivory)]
 

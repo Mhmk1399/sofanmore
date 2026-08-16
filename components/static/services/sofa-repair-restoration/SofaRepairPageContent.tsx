@@ -90,18 +90,18 @@ export const sofaRepairFaqs = [
 
 export default function SofaRepairPageContent() {
   return (
-    <main className="overflow-hidden bg-[var(--brand-ivory)]">
-      <SofaRepairHero />
+    <main id="webpage" className="overflow-hidden bg-[var(--brand-ivory)]">
+      <SofaRepairHero id="service" />
       <BeforeYouReplaceSection />
-      <SofaTypesRepairSection />
+      <SofaTypesRepairSection id="sofa-restoration" />
       <WhatSofaRestorationMeansSection />
       <RepairRestoreReplaceSection />
       <SofaRestorationProcessSection />
       <RestoreTheSofaYouKnowSection />
       <SofaRestorationChangingInteriorsSection />
       <SofaRepairLondonBaseSection />
-      <MoreThanAppearanceSection />
-       <FAQSection items={sofaRepairFaqs} />
+      <MoreThanAppearanceSection id="before-after-projects" />
+      <FAQSection id="faq" items={sofaRepairFaqs} />
     </main>
   );
 }

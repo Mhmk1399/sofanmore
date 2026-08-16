@@ -333,7 +333,7 @@ function DesktopCopy() {
         "
       >
         <ClayButton
-          href="/contact"
+          href="/contact-us"
           variant="gold"
           size="md"
           fullWidth
@@ -713,7 +713,7 @@ function MobileCTA({ chairSrc }: { chairSrc: string }) {
               "
             >
               <ClayButton
-                href="/contact"
+                href="/contact-us"
                 variant="gold"
                 size="lg"
                 fullWidth

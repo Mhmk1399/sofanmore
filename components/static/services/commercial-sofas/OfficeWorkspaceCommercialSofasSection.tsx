@@ -61,11 +61,17 @@ const workspaceAreas: WorkspaceArea[] = [
    ROOT
 ========================================================= */
 
-export default function OfficeWorkspaceCommercialSofasSection() {
+export default function OfficeWorkspaceCommercialSofasSection({
+  id = "office-seating",
+}: {
+  id?: string;
+}) {
   return (
     <section
+      id={id}
       aria-labelledby="office-workspace-sofas-heading"
       className="
+        scroll-mt-24
         bg-[var(--brand-ivory)]
 
         px-3

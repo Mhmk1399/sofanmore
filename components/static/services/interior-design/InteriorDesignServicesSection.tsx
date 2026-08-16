@@ -73,7 +73,11 @@ const commercialServices: CommercialService[] = [
    ROOT
 ========================================================= */
 
-export default function InteriorDesignServicesSection() {
+export default function InteriorDesignServicesSection({
+  residentialId = "residential",
+}: {
+  residentialId?: string;
+}) {
   return (
     <section
       aria-labelledby="interior-design-services-heading"
@@ -280,7 +284,7 @@ export default function InteriorDesignServicesSection() {
                 lg:gap-5
               "
             >
-              <ResidentialPanel />
+              <ResidentialPanel id={residentialId} />
 
               <CommercialPanel />
             </div>
@@ -295,11 +299,13 @@ export default function InteriorDesignServicesSection() {
    RESIDENTIAL
 ========================================================= */
 
-function ResidentialPanel() {
+function ResidentialPanel({ id }: { id: string }) {
   return (
     <article
+      id={id}
       className="
         clay-surface-soft
+        scroll-mt-24
 
         rounded-[23px]
 

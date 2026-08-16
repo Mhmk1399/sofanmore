@@ -73,11 +73,17 @@ const sofaTypes: SofaType[] = [
    ROOT
 ========================================================= */
 
-export default function SofaTypesRepairSection() {
+export default function SofaTypesRepairSection({
+  id = "sofa-restoration",
+}: {
+  id?: string;
+}) {
   return (
     <section
+      id={id}
       aria-labelledby="sofa-types-repair-heading"
       className="
+        scroll-mt-24
         bg-[var(--brand-ivory)]
         px-3
         py-9

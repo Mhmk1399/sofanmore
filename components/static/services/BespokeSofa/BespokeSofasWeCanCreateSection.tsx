@@ -1,7 +1,4 @@
-import Link from "next/link";
-
 import {
-  ArrowRight,
   Armchair,
   BedDouble,
   Sofa,
@@ -16,7 +13,7 @@ import ClayButton from "@/components/ui/ClayButton";
 
 const bespokePieces = [
   {
-    id: "bespoke-sofas",
+    id: "corner-modular-sofas",
     number: "01",
     eyebrow: "Signature Seating",
     title: "Bespoke Sofas",
@@ -29,7 +26,7 @@ const bespokePieces = [
   },
 
   {
-    id: "custom-chairs",
+    id: "chairs-armchairs",
     number: "02",
     eyebrow: "Individual Seating",
     title: "Custom Chairs & Armchairs",
@@ -39,7 +36,7 @@ const bespokePieces = [
   },
 
   {
-    id: "bespoke-benches",
+    id: "benches-ottomans",
     number: "03",
     eyebrow: "Made for the Space",
     title: "Bespoke Benches & Seating",
@@ -49,7 +46,7 @@ const bespokePieces = [
   },
 
   {
-    id: "other-pieces",
+    id: "beds-headboards",
     number: "04",
     eyebrow: "Beyond Seating",
     title: "Beds, Headboards & Bespoke Pieces",
@@ -284,6 +281,16 @@ export default function BespokeSofasWeCanCreateSection() {
                   </span>
                 </div>
               </div>
+            </div>
+
+            <div aria-hidden className="relative z-20">
+              {bespokePieces.map((item) => (
+                <span
+                  key={item.id}
+                  id={item.id}
+                  className="block scroll-mt-24"
+                />
+              ))}
             </div>
 
             {/* =================================================
@@ -1330,7 +1337,7 @@ function CommercialProjectCallout() {
         */}
 
         <ClayButton
-          href="/services/commercial-sofa"
+          href="/services/commercial-sofas"
           showArrow
           className="
             group

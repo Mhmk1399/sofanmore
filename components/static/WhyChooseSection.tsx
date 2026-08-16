@@ -361,7 +361,7 @@ function DesktopContent() {
 
           <div className="grid grid-cols-2 gap-4">
             <ClayButton
-              href="/contact"
+              href="/contact-us"
               variant="navy"
               size="lg"
               fullWidth
@@ -582,7 +582,7 @@ function MobileWhyChoose({ imageSrc }: { imageSrc: string }) {
 
         <div className="mt-5 space-y-3">
           <ClayButton
-            href="/contact"
+            href="/contact-us"
             variant="navy"
             size="lg"
             fullWidth

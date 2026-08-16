@@ -7,9 +7,13 @@ import {
   MapPin,
   Phone,
   ShieldCheck,
-  
 } from "lucide-react";
-import { FaInstagram, FaLinkedinIn, FaFacebookF ,FaPinterest } from "react-icons/fa6";
+import {
+  FaInstagram,
+  FaLinkedinIn,
+  FaFacebookF,
+  FaPinterest,
+} from "react-icons/fa6";
 import type { LucideIcon } from "lucide-react";
 import ClayButton from "../ui/ClayButton";
 
@@ -29,30 +33,31 @@ const columns: FooterColumn[] = [
   {
     title: "Our Services",
     links: [
+      { label: "All services", href: "/services" },
       { label: "Bespoke sofa", href: "/services/bespoke-sofa" },
-      { label: "Commercial sofa", href: "/services/commercial-sofa" },
+      { label: "Commercial sofa", href: "/services/commercial-sofas" },
       { label: "Interior Design & Staging", href: "/services/interior-design" },
-      { label: "Repair & Restoration", href: "/services/repair-restoration" },
+      {
+        label: "Repair & Restoration",
+        href: "/services/sofa-repair-restoration",
+      },
     ],
   },
   {
     title: "Explore",
     links: [
-      { label: "Our Work", href: "/portfolio" },
-      { label: "About Us", href: "/about" },
-      { label: "Our Process", href: "/process" },
-      { label: "Materials", href: "/materials" },
-      { label: "Case Studies", href: "/case-studies" },
+      { label: "About Us", href: "/about-us" },
+      { label: "Contact Us", href: "/contact-us" },
+      { label: "Blog", href: "/blog" },
+      { label: "Gallery", href: "/gallery" },
     ],
   },
   {
     title: "Information",
     links: [
       { label: "FAQ", href: "/faq" },
-      { label: "Care Guide", href: "/care-guide" },
-      { label: "Delivery & Installation", href: "/delivery" },
-      { label: "Warranty", href: "/warranty" },
       { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
     ],
   },
 ];

@@ -32,11 +32,17 @@ const beforeRestoration = [
    ROOT
 ========================================================= */
 
-export default function MoreThanAppearanceSection() {
+export default function MoreThanAppearanceSection({
+  id = "before-after-projects",
+}: {
+  id?: string;
+}) {
   return (
     <section
+      id={id}
       aria-labelledby="more-than-appearance-heading"
       className="
+        scroll-mt-24
         bg-[var(--brand-ivory)]
 
         px-3

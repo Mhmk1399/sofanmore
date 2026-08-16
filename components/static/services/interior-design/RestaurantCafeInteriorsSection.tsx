@@ -54,11 +54,17 @@ const designExamples = [
    ROOT
 ========================================================= */
 
-export default function RestaurantCafeInteriorsSection() {
+export default function RestaurantCafeInteriorsSection({
+  id = "restaurant-cafe",
+}: {
+  id?: string;
+}) {
   return (
     <section
+      id={id}
       aria-labelledby="restaurant-cafe-interiors-heading"
       className="
+        scroll-mt-24
         bg-[var(--brand-ivory)]
         px-3
         py-9

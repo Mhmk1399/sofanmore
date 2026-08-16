@@ -76,7 +76,7 @@ const faqItems = [
 export default function FaqsPage() {
   return (
     <main className="mt-20">
-      <FAQSection items={faqItems} />
+      <FAQSection id="faq" items={faqItems} />
     </main>
   );
 }

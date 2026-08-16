@@ -12,8 +12,7 @@ import {
   FolderOpen,
   Hammer,
   Home,
-  Info,
-  Layers,
+   Layers,
   Mail,
   Menu,
   MoveRight,
@@ -46,89 +45,118 @@ type ServiceGroup = {
 
 const serviceGroups: ServiceGroup[] = [
   {
-    title: "Bespoke sofa",
+    title: "Bespoke Sofas",
     subtitle: "Made for your space",
     icon: Armchair,
     href: "/services/bespoke-sofa",
     image: "/assets/images/1.webp",
+
     links: [
-      { label: "Bespoke Sofas", href: "/services/bespoke-sofa/sofas" },
+      {
+        label: "Made-to-Measure Sofas",
+        href: "/services/bespoke-sofa#made-to-measure-sofas",
+      },
+      {
+        label: "Corner & Modular Sofas",
+        href: "/services/bespoke-sofa#corner-modular-sofas",
+      },
       {
         label: "Chairs & Armchairs",
-        href: "/services/bespoke-sofa/chairs",
+        href: "/services/bespoke-sofa#chairs-armchairs",
       },
-      { label: "Dining Tables", href: "/services/bespoke-sofa/tables" },
-      { label: "Beds & Headboards", href: "/services/bespoke-sofa/beds" },
+      {
+        label: "Beds & Headboards",
+        href: "/services/bespoke-sofa#beds-headboards",
+      },
       {
         label: "Benches & Ottomans",
-        href: "/services/bespoke-sofa/benches",
+        href: "/services/bespoke-sofa#benches-ottomans",
       },
     ],
   },
+
   {
-    title: "Commercial sofa",
+    title: "Commercial Sofas",
     subtitle: "Built for business",
     icon: Building2,
-    href: "/services/commercial-sofa",
+    href: "/services/commercial-sofas",
     image: "/assets/images/2.webp",
+
     links: [
       {
-        label: "Restaurant sofa",
-        href: "/services/commercial/restaurant",
+        label: "Restaurant & Café Seating",
+        href: "/services/commercial-sofas#restaurant-cafe-seating",
       },
-      { label: "Café sofa", href: "/services/commercial/cafe" },
-      { label: "Office sofa", href: "/services/commercial/office" },
-      { label: "Banquette Seating", href: "/services/commercial/banquette" },
       {
-        label: "Hospitality sofa",
-        href: "/services/commercial/hospitality",
+        label: "Banquette Seating",
+        href: "/services/commercial-sofas#banquette-seating",
+      },
+      {
+        label: "Office Seating",
+        href: "/services/commercial-sofas#office-seating",
+      },
+      {
+        label: "Hotel & Hospitality Seating",
+        href: "/services/commercial-sofas#hotel-hospitality-seating",
       },
     ],
   },
+
   {
     title: "Interior Design",
     subtitle: "Complete environments",
     icon: Palette,
     href: "/services/interior-design",
     image: "/assets/images/3.webp",
+
     links: [
       {
-        label: "Residential Interiors",
-        href: "/services/interior-design/residential",
+        label: "Residential Interior Design",
+        href: "/services/interior-design#residential",
       },
       {
-        label: "Commercial Interiors",
-        href: "/services/interior-design/commercial",
+        label: "Commercial Interior Design",
+        href: "/services/interior-design#commercial",
       },
       {
-        label: "Restaurant & Café Design",
-        href: "/services/interior-design/restaurant",
+        label: "Restaurant & Café Interiors",
+        href: "/services/interior-design#restaurant-cafe",
       },
-      { label: "Interior Styling", href: "/services/interior-design/styling" },
-      { label: "Home Staging", href: "/services/interior-design/staging" },
+      {
+        label: "Interior Styling",
+        href: "/services/interior-design#interior-styling",
+      },
     ],
   },
+
   {
     title: "Repair & Restoration",
     subtitle: "Expert craftsmanship",
     icon: Hammer,
-    href: "/services/repair-restoration",
+    href: "/services/sofa-repair-restoration",
     image: "/assets/images/4.webp",
+
     links: [
       {
-        label: "sofa Restoration",
-        href: "/services/restoration/sofa",
+        label: "Sofa Repair & Restoration",
+        href: "/services/sofa-repair-restoration#sofa-restoration",
       },
-      { label: "Reupholstery", href: "/services/restoration/reupholstery" },
       {
-        label: "Commercial Upholstery",
-        href: "/services/restoration/commercial",
+        label: "Sofa Reupholstery",
+        href: "/services/sofa-repair-restoration#sofa-reupholstery",
       },
       {
         label: "Cushion Refilling",
-        href: "/services/restoration/cushion-refilling",
+        href: "/services/sofa-repair-restoration#cushion-refilling",
       },
-      { label: "Before & After", href: "/services/restoration/before-after" },
+      {
+        label: "Commercial Upholstery",
+        href: "/services/sofa-repair-restoration#commercial-upholstery",
+      },
+      {
+        label: "Before & After Projects",
+        href: "/services/sofa-repair-restoration#before-after-projects",
+      },
     ],
   },
 ];
@@ -181,7 +209,9 @@ export default function Navbar() {
 
   // Close on route change
   useEffect(() => {
-    closeNavigation();
+    const frameId = window.requestAnimationFrame(closeNavigation);
+
+    return () => window.cancelAnimationFrame(frameId);
   }, [pathname, closeNavigation]);
 
   // Scroll
@@ -617,7 +647,7 @@ function DesktopMegaMenu({
                 <span className="snm-button__label">Call Us</span>
               </Link>
               <Link
-                href="/contact"
+                href="/contact-us"
                 onClick={close}
                 className="snm-button snm-button--gold snm-button--sm"
               >
@@ -1096,7 +1126,7 @@ function IslandServicesPanel({
       {/* Quick CTA */}
       <div className="mt-3">
         <Link
-          href="/contact"
+          href="/contact-us"
           onClick={close}
           className="snm-button snm-button--gold snm-button--sm snm-button--full justify-center"
         >

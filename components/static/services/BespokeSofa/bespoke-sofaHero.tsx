@@ -35,11 +35,12 @@ const features = [
    HERO
 ========================================================= */
 
-export default function BespokesofaHero() {
+export default function BespokesofaHero({ id = "service" }: { id?: string }) {
   return (
     <section
+      id={id}
       aria-labelledby="bespoke-sofa-heading"
-      className="relative overflow-hidden bg-[var(--brand-ivory)] px-3 pb-10 pt-20 sm:px-5 sm:pb-12 sm:pt-24 lg:px-7 lg:pb-16 lg:pt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-[var(--brand-ivory)] px-3 pb-10 pt-20 sm:px-5 sm:pb-12 sm:pt-24 lg:px-7 lg:pb-16 lg:pt-28"
     >
       <HeroPageBackground />
 

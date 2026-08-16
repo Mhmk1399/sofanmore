@@ -97,7 +97,7 @@ const breadcrumbSchema = {
 
       name: "Services",
 
-      item: `${SITE_URL}/our-services`,
+      item: `${SITE_URL}/services`,
     },
 
     {

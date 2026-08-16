@@ -5,7 +5,7 @@ import BespokeProjectCTASection from "./BespokeProjectCTASection";
 import BespokeSofasWeCanCreateSection from "./BespokeSofasWeCanCreateSection";
 import CommercialSofaProjectsSection from "./CommercialSofaProjectsSection";
 import CustomsofaForYourSpaceSection from "./CustomFurnitureForYourSpaceSection";
- import SeeWhatWeCreateSection from "./SeeWhatWeCreateSection";
+import SeeWhatWeCreateSection from "./SeeWhatWeCreateSection";
 import WhyChooseBespokeSofasSection from "./WhyChooseBespokeSofasSection";
 
 export type BespokesofaFaqItem = {
@@ -87,23 +87,25 @@ export const bespokesofaFaqs = [
       "Yes. Sofa N More also works on sofa for commercial environments. Visit our Commercial sofa page to learn more about solutions for restaurants, cafés, offices and hospitality spaces.",
   },
 ] satisfies BespokesofaFaqItem[];
+
 export default function BespokesofaPageContent() {
   return (
     <main
+      id="webpage"
       className="
         overflow-hidden
         bg-[var(--brand-ivory)]
       "
     >
-      <BespokesofaHero />
-      <CustomsofaForYourSpaceSection />
+      <BespokesofaHero id="service" />
+      <CustomsofaForYourSpaceSection id="made-to-measure-sofas" />
       <BespokeSofasWeCanCreateSection />
       <WhyChooseBespokeSofasSection />
       <BespokeProcessSection />
 
       <CommercialSofaProjectsSection />
       <SeeWhatWeCreateSection />
-      <FAQSection items={bespokesofaFaqs} />
+      <FAQSection id="faq" items={bespokesofaFaqs} />
       <BespokeProjectCTASection />
     </main>
   );

@@ -75,11 +75,17 @@ const designExamples = [
    ROOT
 ========================================================= */
 
-export default function DesignedAroundYourSpaceSection() {
+export default function DesignedAroundYourSpaceSection({
+  id = "interior-styling",
+}: {
+  id?: string;
+}) {
   return (
     <section
+      id={id}
       aria-labelledby="designed-around-space-heading"
       className="
+        scroll-mt-24
         bg-[var(--brand-ivory)]
 
         px-3

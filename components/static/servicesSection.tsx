@@ -72,7 +72,7 @@ const services: Service[] = [
       "Expert care and reupholstery that gives treasured sofa new life while preserving its character.",
     cta: "Explore Restoration",
     image: "/assets/images/Repair.webp",
-    href: "/services/repair-restoration",
+    href: "/services/sofa-repair-restoration",
   },
 
   {
@@ -184,6 +184,8 @@ export default function ServicesSection() {
   );
 
   useEffect(() => {
+    const slotElements = slotElementsRef.current;
+
     return () => {
       if (dragFrameRef.current !== null) {
         cancelAnimationFrame(dragFrameRef.current);
@@ -193,7 +195,7 @@ export default function ServicesSection() {
         window.clearTimeout(suppressClickTimerRef.current);
       }
 
-      slotElementsRef.current.forEach(({ motion, resize }) => {
+      slotElements.forEach(({ motion, resize }) => {
         motion.getAnimations().forEach((animation) => animation.cancel());
         resize.getAnimations().forEach((animation) => animation.cancel());
       });
@@ -474,7 +476,7 @@ export default function ServicesSection() {
     pointerRef.current = {
       id: event.pointerId,
       startX: event.clientX,
-      startTime: performance.now(),
+      startTime: event.timeStamp,
     };
 
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -508,7 +510,7 @@ export default function ServicesSection() {
     }
 
     const deltaX = event.clientX - pointer.startX;
-    const elapsed = Math.max(performance.now() - pointer.startTime, 1);
+    const elapsed = Math.max(event.timeStamp - pointer.startTime, 1);
     const velocity = deltaX / elapsed;
     const stageWidth = stageRef.current?.clientWidth ?? 400;
     const threshold = Math.min(90, Math.max(38, stageWidth * 0.08));
@@ -1347,17 +1349,26 @@ function Pagination({
             aria-label={`Show ${service.title}`}
             aria-current={active}
             className={`
+                flex h-11 min-w-11 items-center justify-center
                 rounded-full
                 transition-all
                 duration-300
-
+              `}
+          >
+            <span
+              aria-hidden
+              className={`
+                rounded-full
+                transition-all
+                duration-300
                 ${
                   active
                     ? "h-[5px] w-9 bg-[var(--brand-gold)] shadow-[0_2px_7px_rgba(168,109,31,0.28)]"
                     : "h-[7px] w-[7px] border border-[var(--brand-navy)]/30 bg-[var(--brand-ivory-50)]"
                 }
               `}
-          />
+            />
+          </button>
         );
       })}
     </div>

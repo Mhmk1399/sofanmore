@@ -79,15 +79,17 @@ const trustItems: TrustItem[] = [
 ========================================================= */
 
 export default function FAQSection({
+  id = "faq",
   items = defaultFaqs,
 }: {
+  id?: string;
   items?: FAQItem[];
 }) {
   return (
     <section
-      id="faq"
+      id={id}
       aria-labelledby="faq-heading"
-      className="relative overflow-hidden bg-[var(--brand-ivory)] px-3 py-12 sm:px-5 sm:py-14 lg:px-8 lg:py-20"
+      className="relative scroll-mt-24 overflow-hidden bg-[var(--brand-ivory)] px-3 py-12 sm:px-5 sm:py-14 lg:px-8 lg:py-20"
     >
       {/* بک‌گراند خیلی ساده */}
       <div
@@ -146,7 +148,7 @@ const DesktopFAQ = memo(function DesktopFAQ({ items }: { items: FAQItem[] }) {
 
             <div className="mt-6">
               <ClayButton
-                href="/contact"
+                href="/contact-us"
                 variant="navy"
                 size="md"
                 showArrow
@@ -245,7 +247,7 @@ const MobileFAQ = memo(function MobileFAQ({ items }: { items: FAQItem[] }) {
 
         <div className="mt-5">
           <ClayButton
-            href="/contact"
+            href="/contact-us"
             variant="navy"
             size="md"
             fullWidth

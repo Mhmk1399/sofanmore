@@ -970,26 +970,37 @@ function MobileLayout() {
             aria-label={`Go to listing ${index + 1}`}
             onClick={() => goToSlide(index)}
             className={`
+                flex h-11 min-w-11 items-center justify-center
                 rounded-full
                 transition-all
                 duration-500
                 ease-[cubic-bezier(0.22,1,0.36,1)]
-
-                ${
-                  index === activeIndex
-                    ? `
-                      h-[7px]
-                      w-10
-                      bg-[var(--brand-gold)]
-                    `
-                    : `
-                      h-[7px]
-                      w-[7px]
-                      bg-[var(--brand-navy)]
-                    `
-                }
               `}
-          />
+          >
+            <span
+              aria-hidden
+              className={`
+                  rounded-full
+                  transition-all
+                  duration-500
+                  ease-[cubic-bezier(0.22,1,0.36,1)]
+
+                  ${
+                    index === activeIndex
+                      ? `
+                        h-[7px]
+                        w-10
+                        bg-[var(--brand-gold)]
+                      `
+                      : `
+                        h-[7px]
+                        w-[7px]
+                        bg-[var(--brand-navy)]
+                      `
+                  }
+                `}
+            />
+          </button>
         ))}
       </div>
     </div>

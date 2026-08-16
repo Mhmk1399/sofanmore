@@ -105,18 +105,18 @@ export const servicesFaqs = [
 
 export default function ServicesPageContent() {
   return (
-    <main className="overflow-hidden bg-[var(--brand-ivory)]">
+    <main id="webpage" className="overflow-hidden bg-[var(--brand-ivory)]">
       <ServicesHero />
-      <ConnectedServicesSection />
+      <ConnectedServicesSection id="services" />
       <BespokeSofasServiceSection />
       <CommercialSofasServiceSection />
       <InteriorDesignServiceSection />
       <SofaRepairServiceSection />
-      <NorthWestLondonServiceAreaSection />
+      <NorthWestLondonServiceAreaSection id="north-west-london-services" />
       <WhichServiceIsRightSection />
       <DesignedAroundUseSection />
       <HowYourProjectBeginsSection />
-      <FAQSection items={servicesFaqs} />
+      <FAQSection id="faq" items={servicesFaqs} />
     </main>
   );
 }

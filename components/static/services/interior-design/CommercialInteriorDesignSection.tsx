@@ -76,11 +76,17 @@ const experienceExamples = [
    ROOT
 ========================================================= */
 
-export default function CommercialInteriorDesignSection() {
+export default function CommercialInteriorDesignSection({
+  id = "commercial",
+}: {
+  id?: string;
+}) {
   return (
     <section
+      id={id}
       aria-labelledby="commercial-interior-design-heading"
       className="
+        scroll-mt-24
         bg-[var(--brand-ivory)]
 
         px-3

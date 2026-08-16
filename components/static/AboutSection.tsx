@@ -291,7 +291,7 @@ function AboutCopy() {
 
       <div className="mt-8">
         <ClayButton
-          href="/about"
+          href="/about-us"
           variant="navy"
           size="lg"
           showArrow
@@ -735,7 +735,7 @@ function MobileCopy() {
       </p>
 
       <div className="mt-5">
-        <ClayButton href="/about" variant="navy" size="md" showArrow>
+        <ClayButton href="/about-us" variant="navy" size="md" showArrow>
           Discover Our Story
         </ClayButton>
       </div>

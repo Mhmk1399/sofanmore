@@ -14,6 +14,7 @@ import type { LucideIcon } from "lucide-react";
 ========================================================= */
 
 type CommercialSolution = {
+  id?: string;
   number: string;
   title: string;
   shortDescription: string;
@@ -103,6 +104,8 @@ const commercialSolutions: CommercialSolution[] = [
   },
 
   {
+    id: "banquette-seating",
+
     number: "05",
 
     title: "Bespoke Banquette, Booth & Fixed Seating",
@@ -487,9 +490,11 @@ function CommercialSolutionRow({
 
   return (
     <details
+      id={solution.id}
       open={defaultOpen}
       className="
         group
+        scroll-mt-24
 
         clay-surface-soft
 

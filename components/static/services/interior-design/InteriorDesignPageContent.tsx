@@ -92,22 +92,23 @@ export const interiorDesignFaqs = [
 export default function InteriorDesignPageContent() {
   return (
     <main
+      id="webpage"
       className="
         overflow-hidden
         bg-[var(--brand-ivory)]
       "
     >
-      <InteriorDesignHero />
+      <InteriorDesignHero id="service" />
       <BespokeInteriorDesignPhilosophySection />
-      <InteriorDesignServicesSection />
-      <DesignedAroundYourSpaceSection />
+      <InteriorDesignServicesSection residentialId="residential" />
+      <DesignedAroundYourSpaceSection id="interior-styling" />
       <BespokeSofasInteriorIntegrationSection />
       <InteriorDesignProcessSection />
-      <CommercialInteriorDesignSection />
-      <RestaurantCafeInteriorsSection />
+      <CommercialInteriorDesignSection id="commercial" />
+      <RestaurantCafeInteriorsSection id="restaurant-cafe" />
       <InteriorDesignLondonBaseSection />
       <InteriorDesignProjectsGallerySection />
-      <FAQSection items={interiorDesignFaqs} />
+      <FAQSection id="faq" items={interiorDesignFaqs} />
       <InteriorDesignFinalCTASection />
     </main>
   );

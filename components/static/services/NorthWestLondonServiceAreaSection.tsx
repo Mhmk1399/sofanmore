@@ -55,11 +55,18 @@ const serviceLinks = [
    ROOT
 ========================================================= */
 
-export default function NorthWestLondonServiceAreaSection() {
+export default function NorthWestLondonServiceAreaSection({
+  id = "north-west-london-services",
+}: {
+  id?: string;
+}) {
   return (
     <section
+      id={id}
       aria-labelledby="north-west-london-service-area-heading"
       className="
+        scroll-mt-24
+
         bg-[var(--brand-ivory)]
 
         px-3
