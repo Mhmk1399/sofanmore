@@ -283,6 +283,22 @@ const imageGallerySchema = {
     "@id": `${SITE_URL}/#organization`,
   },
 
+  publisher: {
+    "@id": `${SITE_URL}/#organization`,
+  },
+
+  creator: {
+    "@id": `${SITE_URL}/#organization`,
+  },
+
+  keywords: [
+    "bespoke sofas London",
+    "commercial sofas",
+    "interior design",
+    "sofa restoration",
+    "upholstery craftsmanship",
+  ],
+
   breadcrumb: {
     "@id": `${CANONICAL_URL}#breadcrumb`,
   },
@@ -326,6 +342,22 @@ const webPageSchema = {
   about: {
     "@id": `${SITE_URL}/#organization`,
   },
+
+  publisher: {
+    "@id": `${SITE_URL}/#organization`,
+  },
+
+  creator: {
+    "@id": `${SITE_URL}/#organization`,
+  },
+
+  keywords: [
+    "bespoke sofa gallery",
+    "London sofa makers",
+    "custom sofa projects",
+    "commercial seating gallery",
+    "sofa restoration gallery",
+  ],
 
   breadcrumb: {
     "@id": `${CANONICAL_URL}#breadcrumb`,

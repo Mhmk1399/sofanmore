@@ -35,7 +35,7 @@ const listings: Listing[] = [
     description:
       "Discover our latest handcrafted sofa opportunity in London.",
     image: "/assets/images/1.webp",
-    href: "/listings/bespoke-sofa-opportunity",
+    href: "/listings/bespoke-sofas-opportunity",
   },
 
   {

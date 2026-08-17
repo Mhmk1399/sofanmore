@@ -3,7 +3,6 @@ import Image from "next/image";
 import type { ComponentType, ReactNode } from "react";
 
 import {
-  Crown,
   ExternalLink,
   Mail,
   MapPin,
@@ -487,7 +486,7 @@ function DesktopVisualAndMap() {
             src="/assets/images/4.webp"
             alt="Luxury Sofa N More showroom interior in London"
             fill
-            priority
+            preload
             sizes="45vw"
             className="
               object-cover

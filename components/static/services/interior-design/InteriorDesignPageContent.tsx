@@ -87,6 +87,13 @@ export const interiorDesignFaqs = [
     answer:
       "Timescales depend on the scale and complexity of the project and the agreed scope of work. A more relevant schedule can be discussed once the requirements of your project are understood.",
   },
+
+  {
+    id: 11,
+    question: "Can bespoke sofas in an interior project be waterproof and fire-resistant?",
+    answer:
+      "Yes. Bespoke sofas and upholstered seating can be specified with water-resistant upholstery and fire-retardant materials, depending on the design, fabric choice and intended use of the space.",
+  },
 ] satisfies InteriorDesignFaqItem[];
 
 export default function InteriorDesignPageContent() {

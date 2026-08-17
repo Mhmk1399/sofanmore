@@ -481,7 +481,7 @@ function HeroImage() {
             src={HERO_IMAGE}
             alt="Bespoke commercial sofa and contract seating project by Sofa N More in London"
             fill
-            priority
+            preload
             sizes="(max-width: 1023px) 100vw, 52vw"
             className="
               

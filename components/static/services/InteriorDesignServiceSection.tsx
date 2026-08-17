@@ -681,7 +681,7 @@ export default function InteriorDesignServiceSection() {
 
                 <div className="lg:justify-self-end">
                   <ClayButton
-                    href="/services/bespoke-sofa"
+                    href="/services/bespoke-sofas"
                     variant="ivory"
                     size="sm"
                     showArrow

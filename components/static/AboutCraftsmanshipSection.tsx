@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Crown, Landmark, Menu } from "lucide-react";
+import { Crown, Landmark } from "lucide-react";
 
 import ClayButton from "@/components/ui/ClayButton";
 
@@ -122,7 +122,7 @@ function DesktopComposition() {
                 src="/assets/images/6.webp"
                 alt="Sofa N More bespoke sofa craftsmanship in London"
                 fill
-                priority
+                preload
                 sizes="60vw"
                 className="
                   object-cover

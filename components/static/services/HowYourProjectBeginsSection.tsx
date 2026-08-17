@@ -48,7 +48,7 @@ const briefExamples: BriefExample[] = [
   {
     label: "Bespoke Sofas",
     text: "Dimensions, configuration, comfort and upholstery.",
-    href: "/services/bespoke-sofa",
+    href: "/services/bespoke-sofas",
   },
   {
     label: "Commercial Sofas",
@@ -867,7 +867,7 @@ function ServiceLinks() {
   const links = [
     {
       label: "Bespoke Sofas",
-      href: "/services/bespoke-sofa",
+      href: "/services/bespoke-sofas",
     },
     {
       label: "Commercial Sofas",

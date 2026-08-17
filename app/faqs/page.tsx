@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 
 import FAQSection from "@/components/static/FAQSection";
+import { absoluteUrl, siteConfig } from "@/lib/site";
+
+const CANONICAL_PATH = "/faqs";
+const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
+const SEO_TITLE = "FAQs | Bespoke Sofa & Sofa Restoration London";
+const META_DESCRIPTION =
+  "Answers to common questions about Sofa N More bespoke sofa, water-resistant and fire-retardant upholstery, home staging, interior design, delivery and sustainability.";
 
 export const metadata: Metadata = {
-  title: "FAQs",
-  description:
-    "Answers to common questions about Sofa N More bespoke sofa, home staging, interior design, office sofa, delivery and sustainability.",
+  title: SEO_TITLE,
+  description: META_DESCRIPTION,
+  alternates: {
+    canonical: CANONICAL_PATH,
+  },
+  openGraph: {
+    type: "website",
+    url: CANONICAL_PATH,
+    title: SEO_TITLE,
+    description:
+      "Answers to common questions about Sofa N More bespoke sofas, water-resistant and fire-retardant upholstery, interior design, delivery, and sofa restoration.",
+  },
 };
 
 const faqItems = [
@@ -71,11 +87,84 @@ const faqItems = [
     answer:
       "Stay connected with us through our website and social media channels for the latest updates on new products, promotions, and design inspirations.",
   },
+  {
+    id: 11,
+    question: "Are Sofa N More sofas waterproof and fire-resistant?",
+    answer:
+      "The sofas we make can be specified with water-resistant upholstery and fire-retardant materials. During fabric selection, we confirm the most suitable protective finish for your home, office, restaurant or hospitality project.",
+  },
 ];
+
+const breadcrumbSchema = {
+  "@type": "BreadcrumbList",
+  "@id": `${CANONICAL_URL}#breadcrumb`,
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: siteConfig.url,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "FAQs",
+      item: CANONICAL_URL,
+    },
+  ],
+};
+
+const faqPageSchema = {
+  "@type": "FAQPage",
+  "@id": `${CANONICAL_URL}#webpage`,
+  url: CANONICAL_URL,
+  name: SEO_TITLE,
+  headline: "Frequently Asked Questions",
+  description: META_DESCRIPTION,
+  inLanguage: siteConfig.language,
+  isPartOf: {
+    "@id": `${siteConfig.url}/#website`,
+  },
+  about: {
+    "@id": `${siteConfig.url}/#organization`,
+  },
+  publisher: {
+    "@id": `${siteConfig.url}/#organization`,
+  },
+  breadcrumb: {
+    "@id": `${CANONICAL_URL}#breadcrumb`,
+  },
+  mainEntity: faqItems.map((faq) => ({
+      "@type": "Question",
+      "@id": `${CANONICAL_URL}#question-${faq.id}`,
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [faqPageSchema, breadcrumbSchema],
+};
+
+function JsonLd({ data }: { data: unknown }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
+      }}
+    />
+  );
+}
 
 export default function FaqsPage() {
   return (
     <main className="mt-20">
+      <JsonLd data={structuredData} />
       <FAQSection id="faq" items={faqItems} />
     </main>
   );

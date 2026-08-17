@@ -47,7 +47,7 @@ const services: Service[] = [
       "Custom-designed sofa tailored to your exact specifications and style.",
     icon: Armchair,
     image: "/assets/images/1.webp",
-    href: "/services/bespoke-sofa",
+    href: "/services/bespoke-sofas",
   },
   {
     title: "Commercial sofa",
@@ -103,40 +103,32 @@ const trustItems: TrustItem[] = [
 export default function HeroSection() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Sofa N More",
-    description:
-      "Bespoke luxury sofa, commercial interiors, and expert restoration handcrafted in London.",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "London",
-      addressCountry: "GB",
-    },
-    url: "https://www.sofanmore.co.uk",
-    image: "https://www.sofanmore.co.uk/assets/images/7.webp",
-    priceRange: "£££",
-    openingHours: "Mo-Fr 09:00-18:00",
-    telephone: "+44-20-XXXX-XXXX",
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "sofa Services",
-      itemListElement: services.map((s, i) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: s.title,
-          description: s.description,
+    "@type": "ItemList",
+    "@id": "https://sofanmore.co.uk/#home-services",
+    name: "Sofa N More service highlights",
+    numberOfItems: services.length,
+    itemListElement: services.map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Service",
+        name: service.title,
+        description: service.description,
+        url: `https://sofanmore.co.uk${service.href}`,
+        provider: {
+          "@id": "https://sofanmore.co.uk/#organization",
         },
-        position: i + 1,
-      })),
-    },
+      },
+    })),
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
 
       <section
@@ -845,7 +837,12 @@ function TabletMainHero() {
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2.5">
-                <ClayButton href="/contact" variant="gold" size="sm" showArrow>
+                <ClayButton
+                  href="/contact-us"
+                  variant="gold"
+                  size="sm"
+                  showArrow
+                >
                   Start Your Project
                 </ClayButton>
                 <ClayButton
@@ -1382,7 +1379,7 @@ function MobileStickyBar() {
           <MoveRight size={12} className="snm-button__arrow" />
         </Link>
         <Link
-          href="tel:+442000000000"
+          href="tel:+447400577844"
           className="
             snm-button snm-button--navy snm-button--sm
             justify-center px-4

@@ -1,4 +1,4 @@
-import { ArrowLeft, Compass, Home, Sofa } from "lucide-react";
+import { Compass, Home, Sofa } from "lucide-react";
 
 import ClayButton from "@/components/ui/ClayButton";
 

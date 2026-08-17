@@ -10,9 +10,7 @@ import {
 } from "lucide-react";
 import {
   FaInstagram,
-  FaLinkedinIn,
   FaFacebookF,
-  FaPinterest,
 } from "react-icons/fa6";
 import type { LucideIcon } from "lucide-react";
 import ClayButton from "../ui/ClayButton";
@@ -34,7 +32,7 @@ const columns: FooterColumn[] = [
     title: "Our Services",
     links: [
       { label: "All services", href: "/services" },
-      { label: "Bespoke sofa", href: "/services/bespoke-sofa" },
+      { label: "Bespoke sofa", href: "/services/bespoke-sofas" },
       { label: "Commercial sofa", href: "/services/commercial-sofas" },
       { label: "Interior Design & Staging", href: "/services/interior-design" },
       {
@@ -47,6 +45,7 @@ const columns: FooterColumn[] = [
     title: "Explore",
     links: [
       { label: "About Us", href: "/about-us" },
+      { label: "Workshop", href: "/workshop" },
       { label: "Contact Us", href: "/contact-us" },
       { label: "Blog", href: "/blog" },
       { label: "Gallery", href: "/gallery" },
@@ -55,9 +54,9 @@ const columns: FooterColumn[] = [
   {
     title: "Information",
     links: [
-      { label: "FAQ", href: "/faq" },
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Terms of Service", href: "/terms" },
+      { label: "FAQ", href: "/faqs" },
+      { label: "Service Area", href: "/services#north-west-london-services" },
+      { label: "Sitemap", href: "/sitemap.xml" },
     ],
   },
 ];
@@ -81,10 +80,8 @@ const trustItems: TrustItem[] = [
 ];
 
 const socialLinks = [
-  { label: "Instagram", href: "https://instagram.com", icon: FaInstagram },
-  { label: "LinkedIn", href: "https://linkedin.com", icon: FaLinkedinIn },
-  { label: "Pinterest", href: "https://pinterest.com", icon: FaPinterest }, // swap for Pinterest icon if you have one
-  { label: "Facebook", href: "https://facebook.com", icon: FaFacebookF },
+  { label: "Instagram", href: "https://www.instagram.com/sofa_n_more_london/", icon: FaInstagram },
+    { label: "Facebook", href: "https://www.facebook.com/people/sofa_n_more_/100091997793795/", icon: FaFacebookF },
 ];
 
 /* =========================================================
@@ -463,7 +460,7 @@ function GetInTouchColumn() {
 
       {/* CTA Button */}
       <ClayButton
-        href="/contact"
+        href="/contact-us"
         ariaLabel="Start your project"
         variant="gold"
         size="lg"

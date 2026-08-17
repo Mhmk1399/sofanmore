@@ -63,7 +63,7 @@ const services: Service[] = [
       "Made-to-measure sofa handcrafted in London, tailored to your space and style.",
     cta: "Explore Bespoke",
     image: "/assets/images/bespokesofa.webp",
-    href: "/services/bespoke-sofa",
+    href: "/services/bespoke-sofas",
   },
 
   {

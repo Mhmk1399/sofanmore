@@ -86,6 +86,15 @@ export const bespokesofaFaqs = [
     answer:
       "Yes. Sofa N More also works on sofa for commercial environments. Visit our Commercial sofa page to learn more about solutions for restaurants, cafés, offices and hospitality spaces.",
   },
+
+  {
+    id: 9,
+
+    question: "Are your bespoke sofas waterproof and fire-resistant?",
+
+    answer:
+      "The sofas we make can be specified with water-resistant upholstery and fire-retardant materials. Fabric choice, finish and intended use are discussed during the bespoke design process.",
+  },
 ] satisfies BespokesofaFaqItem[];
 
 export default function BespokesofaPageContent() {

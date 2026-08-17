@@ -528,7 +528,7 @@ function RepairHeroVisual() {
             src={HERO_IMAGE}
             alt="Sofa repair and restoration craftsmanship at Sofa N More in London"
             fill
-            priority
+            preload
             sizes="
               (max-width: 1023px) 100vw,
               52vw

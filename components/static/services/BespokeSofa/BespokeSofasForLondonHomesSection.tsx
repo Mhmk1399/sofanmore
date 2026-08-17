@@ -1,4 +1,4 @@
-import { Building2, Check, Ruler, Sofa, Sparkles } from "lucide-react";
+import { Building2, Check, Ruler } from "lucide-react";
 
 import ClayButton from "@/components/ui/ClayButton";
 

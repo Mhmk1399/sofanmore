@@ -36,7 +36,7 @@ const services: ServiceLink[] = [
     title: "Bespoke Sofas",
     description:
       "Made-to-measure sofas and seating designed around your dimensions, layout and style.",
-    href: "/services/bespoke-sofa",
+    href: "/services/bespoke-sofas",
     icon: Sofa,
   },
   {

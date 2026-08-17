@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
@@ -891,7 +891,7 @@ function GalleryLightbox({
               src={current.image}
               alt={current.alt}
               fill
-              priority
+              preload
               draggable={false}
               sizes="100vw"
               className="

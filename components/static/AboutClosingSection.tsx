@@ -21,7 +21,7 @@ const services = [
     title: "Bespoke sofa",
     description:
       "Made-to-measure sofas, chairs and sofa handcrafted around your space, style and requirements.",
-    href: "/services/bespoke-sofa",
+    href: "/services/bespoke-sofas",
     icon: Armchair,
   },
   {

@@ -12,14 +12,15 @@ import {
   FolderOpen,
   Hammer,
   Home,
-   Layers,
+  Layers,
   Mail,
   Menu,
   MoveRight,
   Palette,
   Phone,
   Sparkles,
-  X,
+  Wrench,
+   X,
 } from "lucide-react";
 
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -48,13 +49,13 @@ const serviceGroups: ServiceGroup[] = [
     title: "Bespoke Sofas",
     subtitle: "Made for your space",
     icon: Armchair,
-    href: "/services/bespoke-sofa",
+    href: "/services/bespoke-sofas",
     image: "/assets/images/1.webp",
 
     links: [
       {
         label: "Made-to-Measure Sofas",
-        href: "/services/bespoke-sofa#made-to-measure-sofas",
+        href: "/services/bespoke-sofas#made-to-measure-sofas",
       },
       {
         label: "Corner & Modular Sofas",
@@ -62,7 +63,7 @@ const serviceGroups: ServiceGroup[] = [
       },
       {
         label: "Chairs & Armchairs",
-        href: "/services/bespoke-sofa#chairs-armchairs",
+        href: "/services/bespoke-sofas#chairs-armchairs",
       },
       {
         label: "Beds & Headboards",
@@ -70,7 +71,7 @@ const serviceGroups: ServiceGroup[] = [
       },
       {
         label: "Benches & Ottomans",
-        href: "/services/bespoke-sofa#benches-ottomans",
+        href: "/services/bespoke-sofas#benches-ottomans",
       },
     ],
   },
@@ -162,9 +163,11 @@ const serviceGroups: ServiceGroup[] = [
 ];
 
 const navLinks = [
-  { label: "About Us", href: "/about-us" },
   { label: "Gallery", href: "/gallery" },
+  { label: "Workshop", href: "/workshop" },
   { label: "Blog", href: "/blog" },
+  { label: "About Us", href: "/about-us" },
+
   { label: "Contact", href: "/contact-us" },
   { label: "Faq", href: "/faqs" },
 ];
@@ -173,6 +176,7 @@ const navLinks = [
 const mobileTabs = [
   { label: "Menu", icon: Menu, href: "#menu" },
   { label: "Home", icon: Home, href: "/" },
+  { label: "Workshop", icon: Wrench, href: "/workshop" },
 
   { label: "Gallery", href: "/gallery", icon: FaPhotoFilm },
   { label: "Services", icon: Layers, href: "/services" },
@@ -194,8 +198,6 @@ export default function Navbar() {
   const [activeServiceIdx, setActiveServiceIdx] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [activeGroup, setActiveGroup] = useState(0);
-  const [islandExpanded, setIslandExpanded] = useState(false);
-
   const navbarRef = useRef<HTMLElement>(null);
   const megaTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
@@ -204,7 +206,6 @@ export default function Navbar() {
     setMegaOpen(false);
     setMobileOpen(false);
     setMobilePanel("main");
-    setIslandExpanded(false);
   }, []);
 
   // Close on route change
@@ -266,13 +267,11 @@ export default function Navbar() {
     if (tab.label === "Menu") {
       setMobileOpen(true);
       setMobilePanel("main");
-      setIslandExpanded(true);
       return;
     }
     if (tab.label === "Services") {
       setMobileOpen(true);
       setMobilePanel("services");
-      setIslandExpanded(true);
       return;
     }
     closeNavigation();
@@ -318,7 +317,6 @@ export default function Navbar() {
       ====================================================== */}
       <MobileDynamicIsland
         tabs={mobileTabs}
-        isExpanded={islandExpanded}
         mobileOpen={mobileOpen}
         mobilePanel={mobilePanel}
         setMobilePanel={setMobilePanel}
@@ -639,7 +637,7 @@ function DesktopMegaMenu({
             </div>
             <div className="flex items-center gap-2.5">
               <Link
-                href="tel:+442000000000"
+                href="tel:+447400577844"
                 onClick={close}
                 className="snm-button snm-button--ivory snm-button--sm gap-2"
               >
@@ -668,7 +666,6 @@ function DesktopMegaMenu({
 
 function MobileDynamicIsland({
   tabs,
-  isExpanded,
   mobileOpen,
   mobilePanel,
   setMobilePanel,
@@ -679,7 +676,6 @@ function MobileDynamicIsland({
   pathname,
 }: {
   tabs: typeof mobileTabs;
-  isExpanded: boolean;
   mobileOpen: boolean;
   mobilePanel: "main" | "services" | "service-detail";
   setMobilePanel: React.Dispatch<
@@ -792,7 +788,6 @@ function MobileDynamicIsland({
           `}
         >
           {tabs.map((tab) => {
-            const Icon = tab.icon;
             const isActive =
               tab.label === "Menu"
                 ? mobileOpen
@@ -986,12 +981,12 @@ function IslandMainPanel({
       {/* Contact strip */}
       <div className="flex items-center justify-center gap-4 px-2 py-1">
         <Link
-          href="tel:+442000000000"
+          href="tel:+447400577844"
           onClick={close}
           className="flex items-center gap-1.5 font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]"
         >
           <Phone size={11} className="text-[var(--brand-gold)]" />
-          020 0000 0000
+          +44 7400 577844
         </Link>
         <span
           aria-hidden

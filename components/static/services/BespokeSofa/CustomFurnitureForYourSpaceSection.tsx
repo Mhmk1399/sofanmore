@@ -313,7 +313,7 @@ function ImageStage() {
             fill
             sizes="(max-width: 1024px) 90vw, 55vw"
             className="object-cover object-center"
-            priority
+            preload
           />
 
           {/* SUBTLE OVERLAY — preserves legibility of cards */}

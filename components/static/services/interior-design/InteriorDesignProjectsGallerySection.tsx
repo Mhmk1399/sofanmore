@@ -432,7 +432,7 @@ function GalleryCard({
           src={item.image}
           alt={`${item.title} by Sofa N More`}
           fill
-          priority={priority}
+          preload={priority}
           sizes={
             priority
               ? "(max-width: 1023px) 100vw, 58vw"

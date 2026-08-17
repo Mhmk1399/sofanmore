@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import AboutSection from "@/components/static/AboutSection";
 import LuxuryCtaBanner from "@/components/static/Cta";
 import FAQSection from "@/components/static/FAQSection";
@@ -6,6 +8,33 @@ import HomeSeoDescriptionSection from "@/components/static/HomeSeoDescriptionSec
 import LatestListingsSection from "@/components/static/LatestListingsSection";
 import ServicesSection from "@/components/static/servicesSection";
 import WhyChooseSection from "@/components/static/WhyChooseSection";
+import { defaultOgImage, siteConfig } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Bespoke Sofas, Sofa Repair & Interior Design London",
+  description:
+    "Sofa N More creates bespoke sofas, commercial seating, interior design projects, and sofa repair and restoration from North West London.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    title: "Bespoke Sofas, Sofa Repair & Interior Design London",
+    description:
+      "Bespoke sofas, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bespoke Sofas, Sofa Repair & Interior Design London",
+    description:
+      "Bespoke sofas, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
+    images: [defaultOgImage.url],
+  },
+};
 
 export default function HomePage() {
   return (

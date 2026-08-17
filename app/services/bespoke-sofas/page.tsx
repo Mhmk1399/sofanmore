@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 
 const SITE_URL = "https://sofanmore.co.uk";
 
-const CANONICAL_URL = "https://sofanmore.co.uk/services/bespoke-sofa";
+const CANONICAL_URL = "https://sofanmore.co.uk/services/bespoke-sofas";
 
 const SEO_TITLE = "Bespoke sofa London | Custom-Made | Sofa N More";
 

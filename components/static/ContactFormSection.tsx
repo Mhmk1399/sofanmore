@@ -1,6 +1,6 @@
-import type { ComponentType, InputHTMLAttributes } from "react";
+import type { InputHTMLAttributes } from "react";
 
-import { Armchair, Crown, LockKeyhole } from "lucide-react";
+import { Armchair, Crown } from "lucide-react";
 
 import ClayButton from "@/components/ui/ClayButton";
 

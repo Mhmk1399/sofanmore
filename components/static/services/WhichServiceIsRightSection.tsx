@@ -29,7 +29,7 @@ const serviceChoices: ServiceChoice[] = [
     service: "Bespoke Sofas & Made-to-Measure Seating",
     description:
       "For new sofas and upholstered seating designed around a particular room, layout, comfort preference and visual direction.",
-    href: "/services/bespoke-sofa",
+    href: "/services/bespoke-sofas",
     cta: "Explore Bespoke Sofas",
     icon: Ruler,
   },
@@ -755,7 +755,7 @@ function MultiServicePanel() {
               },
               {
                 label: "Bespoke Sofas",
-                href: "/services/bespoke-sofa",
+                href: "/services/bespoke-sofas",
               },
             ]}
           />

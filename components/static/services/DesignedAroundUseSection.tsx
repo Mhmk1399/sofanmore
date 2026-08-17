@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Check, Ruler, Sofa, Users } from "lucide-react";
+import { Check, Ruler, Users } from "lucide-react";
 
 /* =========================================================
    DATA
@@ -421,7 +421,7 @@ export default function DesignedAroundUseSection() {
               </span>
 
               <ServiceTextLink
-                href="/services/bespoke-sofa"
+                href="/services/bespoke-sofas"
                 label="Bespoke Sofas"
               />
 

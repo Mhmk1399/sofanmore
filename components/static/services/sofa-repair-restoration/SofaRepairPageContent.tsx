@@ -86,6 +86,14 @@ export const sofaRepairFaqs = [
     answer:
       "Start by contacting Sofa N More with photographs of the complete sofa and close-ups of the areas that need attention. Include a short description of the issue and what you would like to achieve. We can then advise you on the appropriate next step.",
   },
+
+  {
+    id: 11,
+    question:
+      "Can water-resistant and fire-retardant upholstery be used during restoration?",
+    answer:
+      "Where suitable, new upholstery for a restoration project can be discussed with water-resistant and fire-retardant fabric options. The right material depends on the sofa, the restoration approach and how the piece will be used.",
+  },
 ] satisfies SofaRepairFaqItem[];
 
 export default function SofaRepairPageContent() {

@@ -3,21 +3,23 @@ import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
 import ClayButton from "@/components/ui/ClayButton";
 
-type Post = {
+export type JournalPost = {
   id: number;
   title: string;
   excerpt: string;
   category: string;
   date: string;
+  datePublished: string;
   image: string;
   featured?: boolean;
 };
 
-const posts: Post[] = [
+export const journalPosts: JournalPost[] = [
   {
     id: 1,
     category: "Bespoke",
     date: "12 MAY 2024",
+    datePublished: "2024-05-12",
     title: "How Bespoke sofa Transforms a Space",
     excerpt:
       "Thoughtful design, expert craftsmanship and the finest materials come together to create spaces with soul.",
@@ -28,6 +30,7 @@ const posts: Post[] = [
     id: 2,
     category: "Craftsmanship",
     date: "28 APR 2024",
+    datePublished: "2024-04-28",
     title: "Inside Our London Workshop",
     excerpt:
       "A behind-the-scenes look at where craftsmanship and passion meet.",
@@ -37,6 +40,7 @@ const posts: Post[] = [
     id: 3,
     category: "Interiors",
     date: "18 APR 2024",
+    datePublished: "2024-04-18",
     title: "Choosing the Right Upholstery Fabric",
     excerpt:
       "Explore fabric types, textures and finishes to find the perfect match.",
@@ -46,6 +50,7 @@ const posts: Post[] = [
     id: 4,
     category: "Interiors",
     date: "07 APR 2024",
+    datePublished: "2024-04-07",
     title: "Interior Styling for Modern London Homes",
     excerpt:
       "Timeless styling ideas to elevate your home with elegance and character.",
@@ -55,6 +60,7 @@ const posts: Post[] = [
     id: 5,
     category: "Restoration",
     date: "29 MAR 2024",
+    datePublished: "2024-03-29",
     title: "Restoration Secrets for Timeless Pieces",
     excerpt:
       "Preserving heritage through traditional techniques and meticulous care.",
@@ -64,6 +70,7 @@ const posts: Post[] = [
     id: 6,
     category: "Bespoke",
     date: "17 MAR 2024",
+    datePublished: "2024-03-17",
     title: "Designing a Signature Sofa from Scratch",
     excerpt: "From concept to creation – the journey of a bespoke masterpiece.",
     image: "/assets/images/6.webp",
@@ -71,10 +78,10 @@ const posts: Post[] = [
 ];
 
 export default function JournalSection() {
-  const featuredPost = posts.find((post) => post.featured);
-  const secondaryPosts = posts.filter((post) => !post.featured);
-  const mobilePrimary = posts[0];
-  const mobileList = posts.slice(1);
+  const featuredPost = journalPosts.find((post) => post.featured);
+  const secondaryPosts = journalPosts.filter((post) => !post.featured);
+  const mobilePrimary = journalPosts[0];
+  const mobileList = journalPosts.slice(1);
 
   if (!featuredPost) return null;
 
@@ -91,6 +98,12 @@ export default function JournalSection() {
       <JournalDecorations />
 
       <div className="relative z-10 mx-auto max-w-[1500px]">
+        <div aria-hidden className="sr-only">
+          {journalPosts.map((post) => (
+            <span key={post.id} id={`post-${post.id}`} />
+          ))}
+        </div>
+
         {/* ========================= DESKTOP ========================= */}
         <div className="hidden xl:block">
           <div className="clay-surface-strong rounded-[44px] p-[10px]">
@@ -301,7 +314,7 @@ export default function JournalSection() {
 
 /* ========================= CARDS ========================= */
 
-function FeaturedPostCard({ post }: { post: Post }) {
+function FeaturedPostCard({ post }: { post: JournalPost }) {
   return (
     <article className="clay-surface-soft rounded-[34px] p-[6px]">
       <div className="clay-inset rounded-[28px] p-4">
@@ -361,7 +374,7 @@ function FeaturedPostCard({ post }: { post: Post }) {
   );
 }
 
-function LargePostCard({ post }: { post: Post }) {
+function LargePostCard({ post }: { post: JournalPost }) {
   return (
     <article className="clay-surface-soft rounded-[30px] p-[6px]">
       <div className="clay-inset rounded-[24px] p-4">
@@ -405,7 +418,7 @@ function LargePostCard({ post }: { post: Post }) {
   );
 }
 
-function StandardPostCard({ post }: { post: Post }) {
+function StandardPostCard({ post }: { post: JournalPost }) {
   return (
     <article className="clay-surface-soft rounded-[30px] p-[6px]">
       <div className="clay-inset h-full rounded-[24px] p-4">
@@ -450,7 +463,7 @@ function StandardPostCard({ post }: { post: Post }) {
   );
 }
 
-function TabletFeaturedPostCard({ post }: { post: Post }) {
+function TabletFeaturedPostCard({ post }: { post: JournalPost }) {
   return (
     <article className="clay-surface-soft row-span-2 rounded-[28px] p-[6px]">
       <div className="clay-inset h-full rounded-[22px] p-4">
@@ -509,7 +522,7 @@ function TabletFeaturedPostCard({ post }: { post: Post }) {
   );
 }
 
-function CompactPostCard({ post }: { post: Post }) {
+function CompactPostCard({ post }: { post: JournalPost }) {
   return (
     <article className="clay-surface-soft rounded-[24px] p-[5px]">
       <div className="clay-inset rounded-[18px] p-3.5">
@@ -553,7 +566,7 @@ function CompactPostCard({ post }: { post: Post }) {
   );
 }
 
-function MobileFeaturedPostCard({ post }: { post: Post }) {
+function MobileFeaturedPostCard({ post }: { post: JournalPost }) {
   return (
     <article className="clay-surface-soft rounded-[24px] p-[5px]">
       <div className="clay-inset rounded-[20px] p-3">
@@ -613,7 +626,7 @@ function MobileFeaturedPostCard({ post }: { post: Post }) {
   );
 }
 
-function MobileListPostCard({ post }: { post: Post }) {
+function MobileListPostCard({ post }: { post: JournalPost }) {
   return (
     <article className="clay-surface-soft rounded-[20px] p-[5px]">
       <div className="clay-inset flex items-center gap-3 rounded-[16px] p-2.5">

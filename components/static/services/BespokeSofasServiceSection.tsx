@@ -306,7 +306,7 @@ export default function BespokeSofasServiceSection() {
 
                 <div className="mt-7">
                   <ClayButton
-                    href="/services/bespoke-sofa"
+                    href="/services/bespoke-sofas"
                     variant="gold"
                     size="lg"
                     showArrow

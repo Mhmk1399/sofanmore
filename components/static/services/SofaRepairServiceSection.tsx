@@ -2,7 +2,6 @@ import Image from "next/image";
 
 import {
   Camera,
-  Check,
   Heart,
   MapPin,
   Search,
@@ -724,7 +723,7 @@ export default function SofaRepairServiceSection() {
 
                     <div className="mt-3">
                       <ClayButton
-                        href="/services/bespoke-sofa"
+                        href="/services/bespoke-sofas"
                         variant="outline"
                         size="sm"
                         showArrow

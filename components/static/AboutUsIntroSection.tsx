@@ -160,7 +160,7 @@ function DesktopAboutUsCard() {
                   src="/assets/images/7.webp"
                   alt="Craftsman handcrafting bespoke sofa in the Sofa N More London workshop"
                   fill
-                  priority
+                  preload
                   className="object-cover object-center"
                   sizes="(max-width: 1279px) 42vw, 560px"
                 />

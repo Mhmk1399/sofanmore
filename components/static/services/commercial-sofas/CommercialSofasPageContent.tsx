@@ -94,6 +94,13 @@ export const commercialSofasFaqs = [
     answer:
       "Delivery and installation can form part of the agreed project scope.",
   },
+
+  {
+    id: 12,
+    question: "Can commercial sofas be waterproof and fire-resistant?",
+    answer:
+      "Commercial sofas can be specified with water-resistant upholstery and fire-retardant materials where suitable for the project. Fabric performance, cleaning requirements and intended use are discussed before production.",
+  },
 ] satisfies CommercialSofasFaqItem[];
 export default function CommercialSofasPageContent() {
   return (

@@ -1,6 +1,5 @@
 import {
   Armchair,
-  LampFloor,
   Layers3,
   LayoutTemplate,
   Palette,

@@ -169,7 +169,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
                       src="/assets/images/bespoke-sofa-london-sofa-n-more.webp"
                       alt="Bespoke sofa handcrafted for a luxury London living room"
                       fill
-                      priority
+                      preload
                       sizes="(max-width: 1023px) 100vw, 52vw"
                       className="object-cover object-center"
                     />

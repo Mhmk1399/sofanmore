@@ -23,6 +23,7 @@ const segmentLabels: Record<string, string> = {
   "interior-design": "Interior Design",
   gallery: "Gallery",
   portfolio: "Portfolio",
+  workshop: "Workshop",
 };
 
 const disabledLinks = new Set(["/services"]);

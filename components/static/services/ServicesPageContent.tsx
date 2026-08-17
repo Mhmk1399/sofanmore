@@ -101,6 +101,13 @@ export const servicesFaqs = [
     answer:
       "Sofa N More is based at Unit G19, Atlas Business Centre, Oxgate Lane, Staples Corner West, London NW2 7HJ, close to Cricklewood and Brent Cross. Please contact the team before travelling.",
   },
+
+  {
+    id: 13,
+    question: "Are your bespoke sofas waterproof and fire-resistant?",
+    answer:
+      "The sofas we make can be specified with water-resistant upholstery and fire-retardant materials. The right protective fabric or finish can be discussed during the design process for residential or commercial use.",
+  },
 ] satisfies ServicesFaqItem[];
 
 export default function ServicesPageContent() {

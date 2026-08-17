@@ -55,6 +55,12 @@ const defaultFaqs: FAQItem[] = [
       "Yes. We offer tailored interior design and home staging solutions to help elevate residential and commercial spaces.",
   },
   {
+    id: 6,
+    question: "Are your bespoke sofas water-resistant and fire-retardant?",
+    answer:
+      "Yes. The sofas we make can be specified with water-resistant upholstery and fire-retardant materials, with suitable fabric choices discussed during the design process.",
+  },
+  {
     id: 7,
     question: "What is the typical timeline for a bespoke project?",
     answer:

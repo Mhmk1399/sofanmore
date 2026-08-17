@@ -1,7 +1,6 @@
 "use client";
 
 import { ChevronDown, Crown } from "lucide-react";
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const LINE_HEIGHT = 28;
@@ -81,7 +80,7 @@ export default function HomeSeoDescriptionSection() {
       id="sofa-n-more-description"
       aria-labelledby="home-seo-description-heading"
       itemScope
-      itemType="https://schema.org/sofaStore"
+      itemType="https://schema.org/FurnitureStore"
       className="
         relative overflow-hidden
         bg-[linear-gradient(180deg,#f5f2ea_0%,#fffdf8_52%,#f1e6d6_100%)]

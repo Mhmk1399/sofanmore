@@ -37,7 +37,7 @@ const services: ServiceItem[] = [
       "For spaces where standard sofa sizes, proportions or configurations do not give you the result you need.",
     useCase:
       "Ideal for awkward layouts, specific dimensions and sofas designed around the room.",
-    href: "/services/bespoke-sofa",
+    href: "/services/bespoke-sofas",
     icon: Ruler,
   },
   {
