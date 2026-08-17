@@ -30,6 +30,7 @@ function getAnchorOffset(target: HTMLElement) {
 export default function SmoothScrollProvider() {
   const pathname = usePathname();
   const lenisRef = useRef<Lenis | null>(null);
+  const isAdminRoute = pathname?.startsWith("/admin");
 
   const scrollToCurrentHash = useCallback(() => {
     const lenis = lenisRef.current;
@@ -49,6 +50,12 @@ export default function SmoothScrollProvider() {
   }, []);
 
   useEffect(() => {
+    if (isAdminRoute) {
+      lenisRef.current?.destroy();
+      lenisRef.current = null;
+      return;
+    }
+
     const lenis = new Lenis({
       autoRaf: true,
       anchors: true,
@@ -68,7 +75,7 @@ export default function SmoothScrollProvider() {
       lenis.destroy();
       lenisRef.current = null;
     };
-  }, []);
+  }, [isAdminRoute]);
 
   useEffect(() => {
     const lenis = lenisRef.current;

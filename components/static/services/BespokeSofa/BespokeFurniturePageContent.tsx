@@ -1,7 +1,7 @@
+import BespokeSofaLeadForm from "@/components/lead-capture/BespokeSofaLeadForm";
 import FAQSection from "../../FAQSection";
 import BespokesofaHero from "./bespoke-sofaHero";
 import BespokeProcessSection from "./BespokeProcessSection";
-import BespokeProjectCTASection from "./BespokeProjectCTASection";
 import BespokeSofasWeCanCreateSection from "./BespokeSofasWeCanCreateSection";
 import CommercialSofaProjectsSection from "./CommercialSofaProjectsSection";
 import CustomsofaForYourSpaceSection from "./CustomFurnitureForYourSpaceSection";
@@ -115,7 +115,7 @@ export default function BespokesofaPageContent() {
       <CommercialSofaProjectsSection />
       <SeeWhatWeCreateSection />
       <FAQSection id="faq" items={bespokesofaFaqs} />
-      <BespokeProjectCTASection />
+      <BespokeSofaLeadForm />
     </main>
   );
 }

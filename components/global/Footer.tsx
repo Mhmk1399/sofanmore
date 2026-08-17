@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import {
   Crown,
@@ -8,12 +9,10 @@ import {
   Phone,
   ShieldCheck,
 } from "lucide-react";
-import {
-  FaInstagram,
-  FaFacebookF,
-} from "react-icons/fa6";
+import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 import type { LucideIcon } from "lucide-react";
 import ClayButton from "../ui/ClayButton";
+import { usePathname } from "next/navigation";
 
 /* =========================================================
    TYPES
@@ -80,8 +79,16 @@ const trustItems: TrustItem[] = [
 ];
 
 const socialLinks = [
-  { label: "Instagram", href: "https://www.instagram.com/sofa_n_more_london/", icon: FaInstagram },
-    { label: "Facebook", href: "https://www.facebook.com/people/sofa_n_more_/100091997793795/", icon: FaFacebookF },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/sofa_n_more_london/",
+    icon: FaInstagram,
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/people/sofa_n_more_/100091997793795/",
+    icon: FaFacebookF,
+  },
 ];
 
 /* =========================================================
@@ -89,6 +96,11 @@ const socialLinks = [
 ========================================================= */
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === "/login") {
+    return null;
+  }
   return (
     <footer
       className="

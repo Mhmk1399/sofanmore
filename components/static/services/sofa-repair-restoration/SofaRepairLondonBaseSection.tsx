@@ -450,7 +450,7 @@ export default function SofaRepairLondonBaseSection() {
 
                 <div className="mt-7">
                   <ClayButton
-                    href="/contact-us"
+                    href="#sofa-repair-enquiry"
                     variant="gold"
                     size="lg"
                     showArrow

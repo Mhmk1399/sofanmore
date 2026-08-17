@@ -1,6 +1,7 @@
 "use client";
 
 import { Headphones, Mail, MessageCircle, PhoneCall, Plus } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -48,6 +49,8 @@ export default function FloatingContactMenu({
 
   mobileAboveBottomNav = true,
 }: FloatingContactMenuProps) {
+  const pathname = usePathname();
+  const isAdminRoute = pathname?.startsWith("/admin");
   const [open, setOpen] = useState(false);
 
   const rootRef = useRef<HTMLDivElement>(null);
@@ -141,6 +144,10 @@ export default function FloatingContactMenu({
   /* =======================================================
      RENDER
   ======================================================== */
+
+  if (isAdminRoute) {
+    return null;
+  }
 
   return (
     <div

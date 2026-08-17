@@ -439,7 +439,7 @@ export default function RepairRestoreReplaceSection() {
               </div>
 
               <ClayButton
-                href="/contact-us"
+                href="#sofa-repair-enquiry"
                 variant="gold"
                 size="lg"
                 showArrow

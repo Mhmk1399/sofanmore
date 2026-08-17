@@ -9,6 +9,7 @@ const SHOW_AFTER_SCROLL = 92;
 
 export default function MobileFloatingLogo() {
   const pathname = usePathname();
+  const isAdminRoute = pathname?.startsWith("/admin");
   const shouldWaitForScroll = pathname === "/";
   const [hasScrolledPastLogo, setHasScrolledPastLogo] = useState(false);
 
@@ -42,6 +43,10 @@ export default function MobileFloatingLogo() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [shouldWaitForScroll]);
+
+  if (isAdminRoute) {
+    return null;
+  }
 
   return (
     <div

@@ -20,7 +20,7 @@ import {
   Phone,
   Sparkles,
   Wrench,
-   X,
+  X,
 } from "lucide-react";
 
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -276,7 +276,9 @@ export default function Navbar() {
     }
     closeNavigation();
   }
-
+  if (pathname === "/login") {
+    return null;
+  }
   return (
     <>
       {/* =====================================================

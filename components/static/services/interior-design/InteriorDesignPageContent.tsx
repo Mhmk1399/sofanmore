@@ -1,4 +1,5 @@
 import FAQSection from "../../FAQSection";
+import InteriorDesignLeadForm from "@/components/lead-capture/InteriorDesignLeadForm";
 import BespokeInteriorDesignPhilosophySection from "./BespokeInteriorDesignPhilosophySection";
 import BespokeSofasInteriorIntegrationSection from "./BespokeSofasInteriorIntegrationSection";
 import CommercialInteriorDesignSection from "./CommercialInteriorDesignSection";
@@ -115,6 +116,7 @@ export default function InteriorDesignPageContent() {
       <RestaurantCafeInteriorsSection id="restaurant-cafe" />
       <InteriorDesignLondonBaseSection />
       <InteriorDesignProjectsGallerySection />
+      <InteriorDesignLeadForm />
       <FAQSection id="faq" items={interiorDesignFaqs} />
       <InteriorDesignFinalCTASection />
     </main>

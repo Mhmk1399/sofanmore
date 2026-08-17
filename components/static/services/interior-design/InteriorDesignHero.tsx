@@ -407,7 +407,7 @@ export default function InteriorDesignHero({ id = "service" }: { id?: string }) 
                   "
                 >
                   <ClayButton
-                    href="/contact-us"
+                    href="#interior-design-enquiry"
                     variant="gold"
                     size="lg"
                     showArrow

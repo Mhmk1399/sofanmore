@@ -257,7 +257,7 @@ export default function InteriorDesignFinalCTASection() {
                   "
                 >
                   <ClayButton
-                    href="/contact-us"
+                    href="#interior-design-enquiry"
                     variant="gold"
                     size="lg"
                     showArrow
@@ -268,7 +268,7 @@ export default function InteriorDesignFinalCTASection() {
                   </ClayButton>
 
                   <ClayButton
-                    href="/contact-us"
+                    href="#interior-design-enquiry"
                     variant="ivory"
                     size="lg"
                     showArrow

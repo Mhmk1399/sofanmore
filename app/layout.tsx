@@ -8,6 +8,7 @@ import Footer from "@/components/global/Footer";
 import Breadcrumbs from "@/components/global/Breadcrumbs";
 import SmoothScrollProvider from "@/components/global/SmoothScrollProvider";
 import FloatingContactMenu from "@/components/ui/FloatingContactMenu";
+import ToastProvider from "@/components/ui/ToastProvider";
 import MobileFloatingLogo from "@/components/static/MobileFloatingLogo";
 import PwaRegister from "@/components/global/PwaRegister";
 import { defaultOgImage, siteConfig } from "@/lib/site";
@@ -155,6 +156,7 @@ export default function RootLayout({
     <html lang="en" className={`${manrope.variable} ${playfair.variable}`}>
       <body>
         <PwaRegister />
+        <ToastProvider />
         <JsonLd data={siteStructuredData} />
         <SmoothScrollProvider />
         <Navbar />

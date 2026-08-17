@@ -372,7 +372,7 @@ export default function SofaRepairHero({ id = "service" }: { id?: string }) {
                   "
                 >
                   <ClayButton
-                    href="/contact-us"
+                    href="#sofa-repair-enquiry"
                     variant="gold"
                     size="lg"
                     showArrow

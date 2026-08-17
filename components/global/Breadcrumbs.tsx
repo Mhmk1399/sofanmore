@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSyncExternalStore } from "react";
 
 type BreadcrumbItem = {
   label: string;
@@ -27,42 +26,6 @@ const segmentLabels: Record<string, string> = {
 };
 
 const disabledLinks = new Set(["/services"]);
-const SCROLL_TRIGGER = 20;
-
-function subscribeToScroll(callback: () => void) {
-  let frameId: number | null = null;
-
-  const update = () => {
-    frameId = null;
-    callback();
-  };
-
-  const handleScroll = () => {
-    if (frameId === null) {
-      frameId = window.requestAnimationFrame(update);
-    }
-  };
-
-  window.addEventListener("scroll", handleScroll, { passive: true });
-  window.addEventListener("resize", handleScroll);
-
-  return () => {
-    if (frameId !== null) {
-      window.cancelAnimationFrame(frameId);
-    }
-
-    window.removeEventListener("scroll", handleScroll);
-    window.removeEventListener("resize", handleScroll);
-  };
-}
-
-function getScrollSnapshot() {
-  return window.scrollY > SCROLL_TRIGGER;
-}
-
-function getServerScrollSnapshot() {
-  return false;
-}
 
 function formatSegment(segment: string) {
   let decodedSegment = segment;
@@ -108,27 +71,21 @@ function buildBreadcrumbs(pathname: string): BreadcrumbItem[] {
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
-  const isScrolled = useSyncExternalStore(
-    subscribeToScroll,
-    getScrollSnapshot,
-    getServerScrollSnapshot,
-  );
 
-  if (!pathname || pathname === "/") return null;
+  if (!pathname || pathname === "/" || pathname.startsWith("/admin")) {
+    return null;
+  }
 
   const breadcrumbs = buildBreadcrumbs(pathname);
 
   return (
     <div
       className={`
-        pointer-events-none fixed inset-x-0
+        pointer-events-none absolute inset-x-0
         top-[calc(env(safe-area-inset-top)+72px)]
         z-[950] px-3
-        transition-[top,transform,opacity]
-        duration-300 ease-[var(--ease-clay)]
         sm:px-5
-        lg:z-[195] lg:px-8
-        ${isScrolled ? "lg:top-[88px]" : "lg:top-[100px]"}
+        lg:top-[100px] lg:z-[195] lg:px-8
       `}
     >
       <div className="mx-auto flex max-w-[var(--site-width)] justify-center lg:justify-start">
@@ -154,16 +111,9 @@ export default function Breadcrumbs() {
               text-[var(--brand-text-muted)]
               shadow-[0_10px_24px_rgba(18,37,62,0.10)]
               backdrop-blur-md
-              transition-[transform,padding,font-size,box-shadow]
-              duration-300 ease-[var(--ease-clay)]
               origin-top
               min-[380px]:text-[8px]
               lg:origin-top-left lg:px-4 lg:py-2.5 lg:text-[11px]
-              ${
-                isScrolled
-                  ? "lg:scale-[0.94] lg:px-3.5 lg:py-2 lg:text-[10px] lg:shadow-[0_8px_18px_rgba(18,37,62,0.09)]"
-                  : "lg:scale-100"
-              }
             `}
           >
             {breadcrumbs.map((item, index) => (

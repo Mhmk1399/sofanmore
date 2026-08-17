@@ -1,4 +1,5 @@
 import FAQSection from "../../FAQSection";
+import SofaRepairLeadForm from "@/components/lead-capture/SofaRepairLeadForm";
 import BeforeYouReplaceSection from "./BeforeYouReplaceSection";
 import MoreThanAppearanceSection from "./MoreThanAppearanceSection";
 import RepairRestoreReplaceSection from "./RepairRestoreReplaceSection";
@@ -9,6 +10,7 @@ import SofaRestorationChangingInteriorsSection from "./SofaRestorationChangingIn
 import SofaRestorationProcessSection from "./SofaRestorationProcessSection";
 import SofaTypesRepairSection from "./SofaTypesRepairSection";
 import WhatSofaRestorationMeansSection from "./WhatSofaRestorationMeansSection";
+import SofaRepairFinalCTASection from "./SofaRepairFinalCTASection";
 
 export type SofaRepairFaqItem = {
   id: number;
@@ -109,6 +111,9 @@ export default function SofaRepairPageContent() {
       <SofaRestorationChangingInteriorsSection />
       <SofaRepairLondonBaseSection />
       <MoreThanAppearanceSection id="before-after-projects" />
+      <SofaRepairLeadForm />
+      <SofaRepairFinalCTASection />
+
       <FAQSection id="faq" items={sofaRepairFaqs} />
     </main>
   );

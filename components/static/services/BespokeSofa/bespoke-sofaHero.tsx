@@ -129,7 +129,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
                   {/* Primary row — Quote + Phone */}
                   <div className="flex flex-col gap-2.5 sm:flex-row sm:items-stretch">
                     <ClayButton
-                      href="/contact-us"
+                      href="#bespoke-sofa-enquiry"
                       variant="gold"
                       size="md"
                       showArrow

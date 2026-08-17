@@ -1,8 +1,12 @@
-import type { InputHTMLAttributes } from "react";
+"use client";
 
+import { useState, type FormEvent, type InputHTMLAttributes } from "react";
+
+import Link from "next/link";
 import { Armchair, Crown } from "lucide-react";
 
 import ClayButton from "@/components/ui/ClayButton";
+import { useToast } from "@/components/ui/ToastProvider";
 
 /* =========================================================
    CONTENT
@@ -10,6 +14,291 @@ import ClayButton from "@/components/ui/ClayButton";
 
 const description =
   "Have questions about our services or want to discuss your project? Fill out the form below or give us a call. We’re committed to providing exceptional customer service and helping you achieve your design goals.";
+
+type ContactFormValues = {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  privacyConsent: boolean;
+  marketingConsent: boolean;
+  honeypot: string;
+};
+
+type ContactFormErrors = Partial<Record<keyof ContactFormValues | "form", string>>;
+
+type ContactLeadResponse = {
+  ok: true;
+  leadId: string;
+};
+
+const emptyContactValues: ContactFormValues = {
+  name: "",
+  email: "",
+  phone: "",
+  message: "",
+  privacyConsent: false,
+  marketingConsent: false,
+  honeypot: "",
+};
+
+function createClientId(prefix: string) {
+  return `${prefix}:${Date.now().toString(36)}:${Math.random()
+    .toString(36)
+    .slice(2)}`;
+}
+
+function getUtmParams() {
+  if (typeof window === "undefined") return undefined;
+
+  const params = new URLSearchParams(window.location.search);
+  const utm = {
+    source: params.get("utm_source") || undefined,
+    medium: params.get("utm_medium") || undefined,
+    campaign: params.get("utm_campaign") || undefined,
+    term: params.get("utm_term") || undefined,
+    content: params.get("utm_content") || undefined,
+  };
+
+  return Object.values(utm).some(Boolean) ? utm : undefined;
+}
+
+function trackContactFormEvent(
+  eventName:
+    | "contact_form_started"
+    | "contact_form_success"
+    | "contact_form_error",
+  details: Record<string, unknown> = {},
+) {
+  if (typeof window === "undefined") return;
+
+  const payload = {
+    eventName,
+    service: "contact_enquiry",
+    sourcePage: `${window.location.pathname}${window.location.search}`,
+    ...details,
+  };
+
+  window.dispatchEvent(new CustomEvent("lead-form-event", { detail: payload }));
+
+  const analyticsWindow = window as typeof window & {
+    dataLayer?: Record<string, unknown>[];
+  };
+
+  analyticsWindow.dataLayer?.push(payload);
+}
+
+function normalizeServerFieldErrors(fieldErrors?: Record<string, string>) {
+  if (!fieldErrors) return {};
+
+  const mappedErrors: ContactFormErrors = {};
+  const fieldMap: Record<string, keyof ContactFormErrors> = {
+    name: "name",
+    email: "email",
+    phone: "phone",
+    message: "message",
+    privacyConsent: "privacyConsent",
+    consentPrivacy: "privacyConsent",
+    formStartedAt: "form",
+    service: "form",
+    body: "form",
+  };
+
+  for (const [key, message] of Object.entries(fieldErrors)) {
+    mappedErrors[fieldMap[key] || "form"] = message;
+  }
+
+  return mappedErrors;
+}
+
+async function readContactApiResponse(response: Response) {
+  const body = (await response.json()) as
+    | ContactLeadResponse
+    | {
+        ok: false;
+        message?: string;
+        fieldErrors?: Record<string, string>;
+      };
+
+  if (!response.ok || body.ok !== true) {
+    const error = new Error(
+      body.ok === false && body.message
+        ? body.message
+        : "We couldn't send your message.",
+    ) as Error & { fieldErrors?: ContactFormErrors };
+
+    if (body.ok === false) {
+      error.fieldErrors = normalizeServerFieldErrors(body.fieldErrors);
+    }
+
+    throw error;
+  }
+
+  return body;
+}
+
+function validateContactValues(values: ContactFormValues) {
+  const errors: ContactFormErrors = {};
+  const email = values.email.trim().toLowerCase();
+  const phone = values.phone.trim();
+  const message = values.message.trim();
+
+  if (!values.name.trim()) {
+    errors.name = "Enter your name.";
+  }
+
+  if (!email) {
+    errors.email = "Enter an email address.";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    errors.email = "Enter a valid email address.";
+  }
+
+  if (!phone) {
+    errors.phone = "Enter a phone number.";
+  } else if (!/^\+?[0-9][0-9\s().-]{6,30}$/.test(phone)) {
+    errors.phone = "Enter a valid phone number.";
+  }
+
+  if (message.length < 10) {
+    errors.message = "Share at least 10 characters in your message.";
+  }
+
+  if (!values.privacyConsent) {
+    errors.privacyConsent = "Privacy consent is required.";
+  }
+
+  return errors;
+}
+
+function useContactLeadForm() {
+  const toast = useToast();
+  const [values, setValues] = useState<ContactFormValues>(emptyContactValues);
+  const [errors, setErrors] = useState<ContactFormErrors>({});
+  const [submitError, setSubmitError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successLeadId, setSuccessLeadId] = useState<string | null>(null);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [idempotencyKey, setIdempotencyKey] = useState(() =>
+    createClientId("contact-lead"),
+  );
+  const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
+
+  function updateValue<Field extends keyof ContactFormValues>(
+    field: Field,
+    value: ContactFormValues[Field],
+  ) {
+    setValues((current) => ({ ...current, [field]: value }));
+    setErrors((current) => {
+      const next = { ...current };
+
+      delete next[field];
+      delete next.form;
+
+      return next;
+    });
+    setSubmitError("");
+
+    if (successLeadId) {
+      setSuccessLeadId(null);
+      setIdempotencyKey(createClientId("contact-lead"));
+      setFormStartedAt(Date.now());
+    }
+
+    if (!hasStarted) {
+      setHasStarted(true);
+      trackContactFormEvent("contact_form_started");
+    }
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const nextErrors = validateContactValues(values);
+
+    setErrors(nextErrors);
+    setSubmitError("");
+
+    if (Object.keys(nextErrors).length > 0) {
+      trackContactFormEvent("contact_form_error", {
+        stage: "client_validation",
+      });
+      toast.error("Please check the highlighted fields.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const sourcePage =
+        typeof window !== "undefined"
+          ? `${window.location.pathname}${window.location.search}`
+          : "/contact-us";
+
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service: "CONTACT_ENQUIRY",
+          contact: {
+            name: values.name,
+            email: values.email,
+            phone: values.phone,
+          },
+          serviceData: {
+            enquiryType: "general",
+          },
+          message: values.message,
+          uploadTokens: [],
+          privacyConsent: values.privacyConsent,
+          marketingConsent: values.marketingConsent,
+          idempotencyKey,
+          sourcePage,
+          referrer:
+            typeof document !== "undefined" ? document.referrer : undefined,
+          utm: getUtmParams(),
+          honeypot: values.honeypot,
+          formStartedAt,
+        }),
+      });
+      const result = await readContactApiResponse(response);
+
+      setSuccessLeadId(result.leadId);
+      trackContactFormEvent("contact_form_success", {
+        leadId: result.leadId,
+      });
+      toast.success(
+        "Thank you. Your message has been received.",
+        "Our team will get back to you soon.",
+      );
+    } catch (error) {
+      const errorWithFields = error as Error & {
+        fieldErrors?: ContactFormErrors;
+      };
+      const message =
+        error instanceof Error ? error.message : "We couldn't send your message.";
+
+      if (errorWithFields.fieldErrors) {
+        setErrors(errorWithFields.fieldErrors);
+      }
+
+      setSubmitError(message);
+      toast.error("We couldn't send your message.", message);
+      trackContactFormEvent("contact_form_error", { stage: "submit" });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  return {
+    values,
+    errors,
+    submitError,
+    isSubmitting,
+    successLeadId,
+    updateValue,
+    handleSubmit,
+  };
+}
 
 /* =========================================================
    ROOT
@@ -78,6 +367,8 @@ export default function ContactFormSection() {
 ========================================================= */
 
 function DesktopContactForm() {
+  const form = useContactLeadForm();
+
   return (
     <div
       className="
@@ -379,13 +670,14 @@ function DesktopContactForm() {
             "
           >
             <form
-              action="#"
-              method="post"
+              onSubmit={form.handleSubmit}
+              noValidate
               className="
                 clay-inset
                 flex
                 h-full
                 flex-col
+                overflow-y-auto
                 rounded-[31px]
                 px-9
                 py-9
@@ -402,6 +694,9 @@ function DesktopContactForm() {
                 label="Name"
                 autoComplete="name"
                 required
+                value={form.values.name}
+                onChange={(value) => form.updateValue("name", value)}
+                error={form.errors.name}
               />
 
               {/* EMAIL / PHONE */}
@@ -421,6 +716,9 @@ function DesktopContactForm() {
                   type="email"
                   autoComplete="email"
                   required
+                  value={form.values.email}
+                  onChange={(value) => form.updateValue("email", value)}
+                  error={form.errors.email}
                 />
 
                 <FormField
@@ -430,6 +728,9 @@ function DesktopContactForm() {
                   type="tel"
                   autoComplete="tel"
                   required
+                  value={form.values.phone}
+                  onChange={(value) => form.updateValue("phone", value)}
+                  error={form.errors.phone}
                 />
               </div>
 
@@ -461,6 +762,15 @@ function DesktopContactForm() {
                     id="contact-message"
                     name="message"
                     rows={5}
+                    value={form.values.message}
+                    onChange={(event) =>
+                      form.updateValue("message", event.target.value)
+                    }
+                    required
+                    aria-invalid={Boolean(form.errors.message)}
+                    aria-describedby={
+                      form.errors.message ? "contact-message-error" : undefined
+                    }
                     className="
                       block
                       min-h-[145px]
@@ -480,18 +790,39 @@ function DesktopContactForm() {
                     "
                   />
                 </div>
+              
               </div>
+
+              <ContactConsentFields
+                values={form.values}
+                errors={form.errors}
+                updateValue={form.updateValue}
+                idPrefix="contact"
+                className="mt-5"
+              />
 
               {/* BUTTON */}
 
-              <div className="mt-7">
-                <ClayButton type="submit" variant="gold" size="lg" fullWidth>
-                  Submit
+              <div className="mt-5">
+                <ClayButton
+                  type="submit"
+                  variant="gold"
+                  size="lg"
+                  fullWidth
+                  loading={form.isSubmitting}
+                  disabled={Boolean(form.successLeadId)}
+                >
+                  {form.successLeadId ? "Message Sent" : "Send Message"}
                 </ClayButton>
               </div>
-
- 
-        
+                {form.errors.message && (
+                  <p
+                    id="contact-message-error"
+                    className="mt-2 font-brand-sans text-[11px] font-semibold text-red-700"
+                  >
+                    {form.errors.message}
+                  </p>
+                )}
             </form>
           </div>
         </div>
@@ -834,6 +1165,9 @@ type FormFieldProps = {
   type?: InputHTMLAttributes<HTMLInputElement>["type"];
   required?: boolean;
   autoComplete?: string;
+  value: string;
+  onChange: (value: string) => void;
+  error?: string;
 };
 
 function FormField({
@@ -843,6 +1177,9 @@ function FormField({
   type = "text",
   required = false,
   autoComplete,
+  value,
+  onChange,
+  error,
 }: FormFieldProps) {
   return (
     <div>
@@ -884,6 +1221,10 @@ function FormField({
           type={type}
           required={required}
           autoComplete={autoComplete}
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? `${id}-error` : undefined}
           className="
             block
             h-[58px]
@@ -901,6 +1242,119 @@ function FormField({
           "
         />
       </div>
+      {error && (
+        <p
+          id={`${id}-error`}
+          className="mt-2 font-brand-sans text-[11px] font-semibold text-red-700"
+        >
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+type ContactFormUpdate = <Field extends keyof ContactFormValues>(
+  field: Field,
+  value: ContactFormValues[Field],
+) => void;
+
+function ContactConsentFields({
+  values,
+  errors,
+  updateValue,
+  idPrefix,
+  compact = false,
+  className = "",
+}: {
+  values: ContactFormValues;
+  errors: ContactFormErrors;
+  updateValue: ContactFormUpdate;
+  idPrefix: string;
+  compact?: boolean;
+  className?: string;
+}) {
+  const textSize = compact ? "text-[10px]" : "text-[11px]";
+  const privacyId = `${idPrefix}-privacy-consent`;
+  const privacyErrorId = `${idPrefix}-privacy-error`;
+  const marketingId = `${idPrefix}-marketing-consent`;
+
+  return (
+    <div className={`${className} space-y-3`}>
+      <input
+        type="text"
+        name="website"
+        value={values.honeypot}
+        onChange={(event) => updateValue("honeypot", event.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+      />
+
+      <div
+        className={`
+          flex items-start gap-3
+          font-brand-sans ${textSize}
+          font-medium leading-[1.55]
+          text-[var(--brand-text-muted)]
+        `}
+      >
+        <input
+          id={privacyId}
+          type="checkbox"
+          checked={values.privacyConsent}
+          onChange={(event) =>
+            updateValue("privacyConsent", event.target.checked)
+          }
+          aria-invalid={Boolean(errors.privacyConsent)}
+          aria-describedby={errors.privacyConsent ? privacyErrorId : undefined}
+          className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--brand-gold)]"
+        />
+        <span>
+          <label htmlFor={privacyId} className="cursor-pointer">
+            I agree that Sofa N More may use my details to respond to this
+            enquiry. See the{" "}
+          </label>
+          <Link
+            href="/privacy-policy"
+            className="font-bold text-[var(--brand-gold-700)] underline-offset-4 hover:underline"
+          >
+            privacy policy
+          </Link>
+          .
+        </span>
+      </div>
+
+      {errors.privacyConsent && (
+        <p
+          id={privacyErrorId}
+          className="font-brand-sans text-[10px] font-semibold text-red-700"
+        >
+          {errors.privacyConsent}
+        </p>
+      )}
+
+      <label
+        htmlFor={marketingId}
+        className={`
+          flex cursor-pointer items-start gap-3
+          font-brand-sans ${textSize}
+          font-medium leading-[1.55]
+          text-[var(--brand-text-muted)]
+        `}
+      >
+        <input
+          id={marketingId}
+          type="checkbox"
+          checked={values.marketingConsent}
+          onChange={(event) =>
+            updateValue("marketingConsent", event.target.checked)
+          }
+          className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--brand-gold)]"
+        />
+        <span>I am happy to receive occasional Sofa N More updates.</span>
+      </label>
     </div>
   );
 }
@@ -910,6 +1364,8 @@ function FormField({
 ========================================================= */
 
 function MobileContactForm() {
+  const form = useContactLeadForm();
+
   return (
     <div
       className="
@@ -1020,8 +1476,8 @@ function MobileContactForm() {
           {/* FORM */}
 
           <form
-            method="post"
-            action="#"
+            onSubmit={form.handleSubmit}
+            noValidate
             className="
               mt-7
               space-y-5
@@ -1033,6 +1489,9 @@ function MobileContactForm() {
               label="Name"
               autoComplete="name"
               required
+              value={form.values.name}
+              onChange={(value) => form.updateValue("name", value)}
+              error={form.errors.name}
             />
 
             <MobileField
@@ -1042,6 +1501,9 @@ function MobileContactForm() {
               type="email"
               autoComplete="email"
               required
+              value={form.values.email}
+              onChange={(value) => form.updateValue("email", value)}
+              error={form.errors.email}
             />
 
             <MobileField
@@ -1051,6 +1513,9 @@ function MobileContactForm() {
               type="tel"
               autoComplete="tel"
               required
+              value={form.values.phone}
+              onChange={(value) => form.updateValue("phone", value)}
+              error={form.errors.phone}
             />
 
             <div>
@@ -1078,6 +1543,15 @@ function MobileContactForm() {
                   id="mobile-message"
                   name="message"
                   rows={6}
+                  value={form.values.message}
+                  onChange={(event) =>
+                    form.updateValue("message", event.target.value)
+                  }
+                  required
+                  aria-invalid={Boolean(form.errors.message)}
+                  aria-describedby={
+                    form.errors.message ? "mobile-message-error" : undefined
+                  }
                   className="
                     block
                     min-h-[145px]
@@ -1096,13 +1570,34 @@ function MobileContactForm() {
                   "
                 />
               </div>
+              {form.errors.message && (
+                <p
+                  id="mobile-message-error"
+                  className="mt-2 font-brand-sans text-[10px] font-semibold text-red-700"
+                >
+                  {form.errors.message}
+                </p>
+              )}
             </div>
 
-            <ClayButton type="submit" variant="gold" size="lg" fullWidth>
-              Submit
-            </ClayButton>
+            <ContactConsentFields
+              values={form.values}
+              errors={form.errors}
+              updateValue={form.updateValue}
+              idPrefix="mobile-contact"
+              compact
+            />
 
-           
+            <ClayButton
+              type="submit"
+              variant="gold"
+              size="lg"
+              fullWidth
+              loading={form.isSubmitting}
+              disabled={Boolean(form.successLeadId)}
+            >
+              {form.successLeadId ? "Message Sent" : "Send Message"}
+            </ClayButton>
           </form>
         </div>
       </div>
@@ -1297,6 +1792,9 @@ function MobileField({
   type = "text",
   required = false,
   autoComplete,
+  value,
+  onChange,
+  error,
 }: FormFieldProps) {
   return (
     <div>
@@ -1338,6 +1836,10 @@ function MobileField({
           type={type}
           required={required}
           autoComplete={autoComplete}
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? `${id}-error` : undefined}
           className="
             block
             h-[52px]
@@ -1354,6 +1856,14 @@ function MobileField({
           "
         />
       </div>
+      {error && (
+        <p
+          id={`${id}-error`}
+          className="mt-2 font-brand-sans text-[10px] font-semibold text-red-700"
+        >
+          {error}
+        </p>
+      )}
     </div>
   );
 }

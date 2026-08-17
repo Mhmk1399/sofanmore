@@ -49,6 +49,7 @@ const galleryItems = [
 export default function SeeWhatWeCreateSection() {
   return (
     <section
+      id="commercial-projects"
       aria-labelledby="see-what-we-create-heading"
       className="
         relative

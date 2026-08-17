@@ -1,3 +1,5 @@
+import CommercialSofaLeadForm from "@/components/lead-capture/CommercialSofaLeadForm";
+
 import FAQSection from "../../FAQSection";
 import CommercialProjectsGallerySection from "./CommercialProjectsGallerySection";
 import CommercialSofaProcessSection from "./CommercialSofaProcessSection";
@@ -121,6 +123,7 @@ export default function CommercialSofasPageContent() {
       <OfficeWorkspaceCommercialSofasSection id="office-seating" />
       <CommercialSofasMadeInLondonSection />
       <CommercialProjectsGallerySection />
+      <CommercialSofaLeadForm />
       <FAQSection id="faq" items={commercialSofasFaqs} />
       <CommercialSofasFinalCTASection />
     </main>

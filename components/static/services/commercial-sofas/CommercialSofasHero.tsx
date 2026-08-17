@@ -316,7 +316,7 @@ export default function CommercialSofasHero({
                   "
                 >
                   <ClayButton
-                    href="/contact-us"
+                    href="#commercial-sofa-enquiry"
                     variant="gold"
                     size="lg"
                     showArrow
