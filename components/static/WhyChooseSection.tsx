@@ -374,15 +374,15 @@ function DesktopContent() {
             </ClayButton>
 
             <ClayButton
-              href="/our-work"
+              href="/gallery"
               variant="ivory"
               size="lg"
               fullWidth
               showArrow
-              ariaLabel="View our portfolio"
+              ariaLabel="View our gallery"
               className="!min-h-[66px] border  border-[var(--brand-gold)]/55"
             >
-              View Our Portfolio
+              View Our gallery
             </ClayButton>
           </div>
         </div>
@@ -595,15 +595,15 @@ function MobileWhyChoose({ imageSrc }: { imageSrc: string }) {
           </ClayButton>
 
           <ClayButton
-            href="/our-work"
+            href="/gallery"
             variant="ivory"
             size="lg"
             fullWidth
             showArrow
-            ariaLabel="View our portfolio"
+            ariaLabel="View our gallery"
             className="!min-h-[54px] border  border-[var(--brand-gold)]/50"
           >
-            View Our Portfolio
+            View Our gallery
           </ClayButton>
         </div>
       </div>

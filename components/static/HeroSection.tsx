@@ -452,11 +452,11 @@ function HeroCopy() {
           </ClayButton>
 
           <ClayButton
-            href="/portfolio"
+            href="/gallery"
             variant="navy"
             size="md"
             showArrow
-            aria-label="View our sofa portfolio"
+            aria-label="View our sofa gallery"
           >
               Our Work
           </ClayButton>
@@ -849,7 +849,7 @@ function TabletMainHero() {
                   Start Your Project
                 </ClayButton>
                 <ClayButton
-                  href="/portfolio"
+                  href="/gallery"
                   variant="navy"
                   size="sm"
                   showArrow
@@ -1226,12 +1226,12 @@ function MobileHeroMain() {
               </ClayButton>
 
               <ClayButton
-                href="/portfolio"
+                href="/gallery"
                 variant="gold"
                 size="md"
                 fullWidth
                 showArrow
-                ariaLabel="View our sofa portfolio"
+                ariaLabel="View our sofa gallery"
                 className="!min-h-[44px] !justify-between !rounded-[15px] !px-4 !text-[10px]"
               >
                 View Our Work

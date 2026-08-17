@@ -394,7 +394,7 @@ function DesktopStoryPanel() {
         </ClayButton>
 
         <Link
-          href="/our-work"
+          href="/gallery"
           className="
             group
             inline-flex
@@ -917,7 +917,7 @@ function MobileLayout() {
         </nav>
 
         <Link
-          href="/our-work"
+          href="/gallery"
           className="
             mt-6
             flex
