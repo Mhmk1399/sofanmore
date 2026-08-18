@@ -574,10 +574,7 @@ function IntegratedSofaVisual() {
             src="/assets/images/bespokesofa.webp"
             alt="Bespoke sofa designed as part of a complete interior by Sofa N More"
             fill
-            sizes="
-              (max-width: 1023px) 100vw,
-              52vw
-            "
+            sizes="(max-width: 1023px) 100vw, 52vw"
             className="
               object-cover
              "

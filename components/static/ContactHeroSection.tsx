@@ -2,13 +2,7 @@ import Image from "next/image";
 
 import type { ComponentType, ReactNode } from "react";
 
-import {
-  ExternalLink,
-  Mail,
-  MapPin,
-  Navigation,
-  Phone,
-} from "lucide-react";
+import { ExternalLink, Mail, MapPin, Navigation, Phone } from "lucide-react";
 
 import ClayButton from "@/components/ui/ClayButton";
 
@@ -329,9 +323,9 @@ function DesktopContactHero() {
                 xl:text-[17px]
               "
             >
-              Looking to transform your space with bespoke sofa, expert
-              home staging, or innovative interior design? Get in touch with
-              Sofa N More today! Located in London, we are dedicated to creating
+              Looking to transform your space with bespoke sofa, expert home
+              staging, or innovative interior design? Get in touch with Sofa N
+              More today! Located in London, we are dedicated to creating
               tailored solutions that reflect your unique style and enhance your
               living or working environment.
             </p>
@@ -362,70 +356,9 @@ function DesktopContactHero() {
             DECORATIVE OBJECTS
         ================================================ */}
 
-        <div
-          aria-hidden
-          className="
-            clay-sphere
-
-            absolute
-            bottom-8
-            left-[53%]
-            z-10
-
-            h-[115px]
-            w-[115px]
-
-            xl:h-[128px]
-            xl:w-[128px]
-          "
-        >
-          <div className="clay-sphere-shadow" />
-
-          <div className="clay-sphere-ball" />
-        </div>
-
         {/* GOLD RING */}
 
-        <div
-          aria-hidden
-          className="
-            absolute
-            right-11
-            top-10
-            z-10
-
-            h-[120px]
-            w-[120px]
-
-            rounded-full
-
-            border-[3px]
-            border-[var(--brand-gold)]/85
-
-            shadow-[inset_1px_1px_1px_rgba(255,255,255,0.5),0_8px_20px_rgba(150,103,32,0.12)]
-          "
-        />
-
         {/* GOLD SPHERE */}
-
-        <div
-          aria-hidden
-          className="
-            absolute
-            right-[88px]
-            top-[89px]
-            z-20
-
-            h-[21px]
-            w-[21px]
-
-            rounded-full
-
-            bg-[radial-gradient(circle_at_30%_30%,#FFE9B8_0%,#D7A04A_50%,#9F6A1F_100%)]
-
-            shadow-[0_10px_20px_rgba(215,160,74,0.28)]
-          "
-        />
       </div>
     </div>
   );
@@ -816,7 +749,7 @@ function WorkshopMapCard({ mobile = false }: { mobile?: boolean }) {
                 px-3
                 py-2
 
-                backdrop-blur-sm
+                
               "
             >
               <MapPin
@@ -853,8 +786,8 @@ function WorkshopMapCard({ mobile = false }: { mobile?: boolean }) {
             target="_blank"
             rel="noopener noreferrer"
             className="
-              clay-dark
-
+              
+              bg-[var(--brand-gold)]
               mt-3
 
               flex
@@ -1217,9 +1150,9 @@ function MobileContactHero() {
                 text-[var(--brand-text-muted)]
               "
             >
-              Looking to transform your space with bespoke sofa, expert
-              home staging, or innovative interior design? Get in touch with
-              Sofa N More today! Located in London, we are dedicated to creating
+              Looking to transform your space with bespoke sofa, expert home
+              staging, or innovative interior design? Get in touch with Sofa N
+              More today! Located in London, we are dedicated to creating
               tailored solutions that reflect your unique style.
             </p>
           </div>

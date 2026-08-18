@@ -152,20 +152,7 @@ function DesktopAbout() {
           />
         </div>
 
-        <div
-          aria-hidden
-          className="
-            absolute
-            -left-[34px]
-            bottom-[92px]
-            h-[145px]
-            w-[145px]
-            rounded-full
-            border-[28px]
-            border-[var(--brand-ivory-50)]
-            shadow-[var(--shadow-clay-sm)]
-          "
-        />
+     
 
         {/* MAIN GRID */}
 
@@ -205,8 +192,7 @@ function DesktopAbout() {
         </div>
       </div>
 
-      <DesktopDecorations />
-    </div>
+     </div>
   );
 }
 
@@ -498,100 +484,7 @@ function DesktopFeatureCard({ card }: { card: FeatureCard }) {
   );
 }
 
-/* =========================================================
-   DESKTOP DECORATIONS
-========================================================= */
-
-function DesktopDecorations() {
-  return (
-    <>
-      {/* bottom-left pedestal */}
-
-      <div
-        aria-hidden
-        className="
-          clay-surface-soft
-          absolute
-          -bottom-[10px]
-          -left-[28px]
-          z-20
-          h-[90px]
-          w-[200px]
-          rounded-[50%]
-        "
-      />
-
-      {/* left ivory sphere */}
-
-      <div
-        aria-hidden
-        className="
-          clay-sphere
-          absolute
-          -bottom-[12px]
-          left-[34px]
-          z-30
-          h-[130px]
-          w-[130px]
-        "
-      >
-        <div className="clay-sphere-shadow" />
-        <div className="clay-sphere-ball" />
-      </div>
-
-      {/* small gold sphere */}
-
-      <div
-        aria-hidden
-        className="
-          clay-sphere
-          absolute
-          bottom-[4px]
-          left-[122px]
-          z-40
-          h-[55px]
-          w-[55px]
-        "
-      >
-        <div className="clay-sphere-ball clay-sphere-ball--gold" />
-      </div>
-
-      {/* right sphere */}
-
-      <div
-        aria-hidden
-        className="
-          clay-sphere
-          absolute
-          -right-[42px]
-          bottom-[90px]
-          z-30
-          h-[150px]
-          w-[150px]
-        "
-      >
-        <div className="clay-sphere-shadow" />
-        <div className="clay-sphere-ball" />
-      </div>
-
-      {/* right gold ring */}
-
-      <div
-        aria-hidden
-        className="
-          absolute
-          -bottom-[4px]
-          right-[16px]
-          z-40
-          h-[135px]
-          w-[135px]
-        "
-      >
-        <div className="clay-sphere-ring" />
-      </div>
-    </>
-  );
-}
+ 
 
 /* =========================================================
    MOBILE

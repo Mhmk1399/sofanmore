@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { absoluteUrl, siteRoutes } from "@/lib/site";
 
-const lastModified = new Date("2026-08-17T00:00:00.000Z");
+const lastModified = new Date("2026-08-18T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return siteRoutes.map((route) => ({

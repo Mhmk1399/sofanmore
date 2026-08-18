@@ -469,10 +469,7 @@ function LondonBaseVisual() {
             src="/assets/images/Repair.webp"
             alt="Sofa N More London workshop"
             fill
-            sizes="
-              (max-width: 1023px) 100vw,
-              46vw
-            "
+            sizes="(max-width: 1023px) 100vw, 46vw"
             className="
               object-cover
               object-center

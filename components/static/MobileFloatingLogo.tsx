@@ -61,7 +61,7 @@ export default function MobileFloatingLogo() {
         ${
           isVisible
             ? "pointer-events-auto -translate-x-1/2 translate-y-0 scale-100 opacity-100 blur-0"
-            : "pointer-events-none -translate-x-1/2 -translate-y-4 scale-[0.92] opacity-0 blur-[2px]"
+            : "pointer-events-none -translate-x-1/2 -translate-y-4 scale-[0.92] opacity-0  "
         }
       `}
     >
@@ -80,7 +80,7 @@ export default function MobileFloatingLogo() {
             clay-surface-strong
             relative block rounded-full p-[5px]
             shadow-[0_18px_42px_rgba(18,37,62,0.18),7px_9px_18px_rgba(128,91,48,0.18),inset_2px_2px_4px_rgba(255,255,255,0.74),inset_-2px_-2px_5px_rgba(118,82,38,0.08)]
-            backdrop-blur-xl
+            
             transition-transform duration-300 ease-[var(--ease-clay)]
             group-active:scale-[0.97]
           "
@@ -111,7 +111,7 @@ export default function MobileFloatingLogo() {
               "
             />
 
-            <span className="relative h-[36px] w-[142px]">
+            <span className="relative h-[30px] w-[142px]">
               <Image
                 src="/assets/images/Sofa_Logo.webp"
                 alt=""

@@ -84,8 +84,7 @@ export default function BespokeSofasWeCanCreateSection() {
         lg:py-16
       "
     >
-      <SectionBackground />
-
+ 
       <div
         className="
           relative

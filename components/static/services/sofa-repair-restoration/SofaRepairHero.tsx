@@ -529,10 +529,7 @@ function RepairHeroVisual() {
             alt="Sofa repair and restoration craftsmanship at Sofa N More in London"
             fill
             preload
-            sizes="
-              (max-width: 1023px) 100vw,
-              52vw
-            "
+            sizes="(max-width: 1023px) 100vw, 52vw"
             className="
               object-cover
               object-center

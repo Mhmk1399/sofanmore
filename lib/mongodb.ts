@@ -4,11 +4,13 @@ import type {
   LeadAttachmentDocument,
   LeadDocument,
 } from "@/models/lead";
+import type { ProductDocument } from "@/models/product";
 import type { UserDocument } from "@/models/user";
 
 const globalForMongo = globalThis as typeof globalThis & {
   mongoClientPromise?: Promise<MongoClient>;
   leadIndexesPromise?: Promise<void>;
+  productIndexesPromise?: Promise<void>;
   userIndexesPromise?: Promise<void>;
 };
 
@@ -58,6 +60,14 @@ export async function getUserCollections() {
 
   return {
     users: db.collection<UserDocument>("users"),
+  };
+}
+
+export async function getProductCollections() {
+  const db = await getDb();
+
+  return {
+    products: db.collection<ProductDocument>("products"),
   };
 }
 
@@ -123,4 +133,33 @@ export function ensureUserIndexes() {
   }
 
   return globalForMongo.userIndexesPromise;
+}
+
+export function ensureProductIndexes() {
+  if (!globalForMongo.productIndexesPromise) {
+    globalForMongo.productIndexesPromise = (async () => {
+      const { products } = await getProductCollections();
+
+      await Promise.all([
+        products.createIndex(
+          { productCode: 1 },
+          { name: "unique_product_code", unique: true, sparse: true },
+        ),
+        products.createIndex(
+          { productCode: -1, createdAt: -1 },
+          { name: "admin_product_code_created" },
+        ),
+        products.createIndex(
+          { name: 1, createdAt: -1 },
+          { name: "admin_product_name_created" },
+        ),
+        products.createIndex(
+          { createdAt: -1 },
+          { name: "product_created_at_desc" },
+        ),
+      ]);
+    })();
+  }
+
+  return globalForMongo.productIndexesPromise;
 }

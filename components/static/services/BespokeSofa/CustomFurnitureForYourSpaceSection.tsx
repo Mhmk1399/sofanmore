@@ -54,8 +54,7 @@ export default function CustomsofaForYourSpaceSection({
         lg:py-16
       "
     >
-      <SectionBackground />
-
+ 
       <div
         className="
           relative

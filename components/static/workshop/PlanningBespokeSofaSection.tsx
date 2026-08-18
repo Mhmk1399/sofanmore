@@ -313,7 +313,7 @@ export default function PlanningBespokeSofaSection() {
 
                 <div className="mt-6">
                   <ClayButton
-                    href="/contact-us"
+                    href="/services/bespoke-sofas#bespoke-sofa-enquiry"
                     variant="gold"
                     size="lg"
                     showArrow

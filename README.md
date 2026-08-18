@@ -1,5 +1,18 @@
 # Sofa N More
 
+## Latest admin/product additions
+
+- Product model and admin CRUD are available from `/admin`.
+- Each product has a required unique `productCode` that must be `1000` or higher.
+- The products API returns `latestCode` so the admin can see the latest used product code before creating the next product.
+- Admin product image upload uses the shared S3-compatible upload storage and stores optional `imageStorageKey`.
+- Product uploads are stored under `product-uploads/`; lead uploads remain under `lead-uploads/`.
+- Admin profile management is available from the sidebar. Admins can update their own name, phone and password.
+- Changing name/phone does not require a password change. Current password is required only when setting a new password.
+- Admin action feedback uses the shared Toast system, including success, error and info messages.
+- Logout now requires a confirmation modal.
+- A `View site` button in the admin header opens the public site in a new tab.
+
 وب سایت و سیستم lead capture اختصاصی Sofa N More با Next.js، MongoDB، فرم های چند سرویس، آپلود فایل، احراز هویت، پنل ادمین و داشبورد مدیریتی.
 
 داکیومنت کامل پروژه در این فایل است:
@@ -40,4 +53,3 @@ npm run test
 ## نکته امنیتی
 
 مقادیر واقعی `.env`، connection string دیتابیس، secretها و کلیدهای upload storage نباید داخل git یا داکیومنت commit شوند.
-

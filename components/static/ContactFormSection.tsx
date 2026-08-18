@@ -382,10 +382,14 @@ function DesktopContactForm() {
         className="
           clay-inset
           relative
-          min-h-[800px]
           overflow-hidden
           rounded-[38px]
           bg-[#F5EDE1]
+          px-8
+          py-10
+
+          xl:px-12
+          xl:py-12
         "
       >
         {/* =================================================
@@ -487,18 +491,33 @@ function DesktopContactForm() {
           </div>
         </div>
 
+        <div
+          className="
+            relative
+            z-30
+            grid
+            gap-8
+
+            lg:min-h-[690px]
+            lg:grid-cols-[minmax(0,0.88fr)_minmax(520px,1.12fr)]
+            lg:items-center
+            lg:pl-[250px]
+
+            xl:min-h-[720px]
+            xl:grid-cols-[minmax(0,0.92fr)_minmax(580px,1.08fr)]
+            xl:pl-[285px]
+          "
+        >
         {/* =================================================
             LEFT COPY
         ================================================== */}
 
         <div
           className="
-            absolute
-            left-[18%]
-            top-[25%]
+            relative
             z-30
-            w-[29%]
-            max-w-[390px]
+            min-w-0
+            max-w-[410px]
           "
         >
           <p
@@ -652,18 +671,15 @@ function DesktopContactForm() {
 
         <div
           className="
-            absolute
-            bottom-[7%]
-            right-[6%]
-            top-[17%]
+            relative
             z-30
-            w-[49%]
+            min-w-0
+            w-full
           "
         >
           <div
             className="
               clay-surface-strong
-              h-full
               rounded-[38px]
               p-[8px]
               shadow-[0_22px_42px_rgba(70,58,42,0.16)]
@@ -675,9 +691,7 @@ function DesktopContactForm() {
               className="
                 clay-inset
                 flex
-                h-full
                 flex-col
-                overflow-y-auto
                 rounded-[31px]
                 px-9
                 py-9
@@ -790,7 +804,14 @@ function DesktopContactForm() {
                     "
                   />
                 </div>
-              
+                {form.errors.message && (
+                  <p
+                    id="contact-message-error"
+                    className="mt-2 font-brand-sans text-[11px] font-semibold text-red-700"
+                  >
+                    {form.errors.message}
+                  </p>
+                )}
               </div>
 
               <ContactConsentFields
@@ -815,16 +836,9 @@ function DesktopContactForm() {
                   {form.successLeadId ? "Message Sent" : "Send Message"}
                 </ClayButton>
               </div>
-                {form.errors.message && (
-                  <p
-                    id="contact-message-error"
-                    className="mt-2 font-brand-sans text-[11px] font-semibold text-red-700"
-                  >
-                    {form.errors.message}
-                  </p>
-                )}
             </form>
           </div>
+        </div>
         </div>
 
         {/* =================================================
@@ -1400,8 +1414,11 @@ function MobileContactForm() {
             relative
             z-20
             px-5
-            pb-[calc(115px+env(safe-area-inset-bottom))]
+            pb-7
             pt-8
+
+            sm:px-6
+            sm:pb-8
           "
         >
           <p

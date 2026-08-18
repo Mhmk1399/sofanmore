@@ -40,8 +40,19 @@ const services: ServiceItem[] = [
     href: "/services/bespoke-sofas",
     icon: Ruler,
   },
-  {
+    {
     number: "02",
+    eyebrow: "Preserve What Works",
+    title: "Sofa Repair & Restoration",
+    description:
+      "Professional repair and restoration for an existing sofa that is worn, damaged or simply worth keeping.",
+    useCase:
+      "For sofas that already fit the room but need attention before they can be enjoyed again.",
+    href: "/services/sofa-repair-restoration",
+    icon: Hammer,
+  },
+  {
+    number: "03",
     eyebrow: "Business & Hospitality",
     title: "Commercial Sofas",
     description:
@@ -52,7 +63,7 @@ const services: ServiceItem[] = [
     icon: BriefcaseBusiness,
   },
   {
-    number: "03",
+    number: "04",
     eyebrow: "Complete Spaces",
     title: "Interior Design",
     description:
@@ -62,17 +73,7 @@ const services: ServiceItem[] = [
     href: "/services/interior-design",
     icon: Building2,
   },
-  {
-    number: "04",
-    eyebrow: "Preserve What Works",
-    title: "Sofa Repair & Restoration",
-    description:
-      "Professional repair and restoration for an existing sofa that is worn, damaged or simply worth keeping.",
-    useCase:
-      "For sofas that already fit the room but need attention before they can be enjoyed again.",
-    href: "/services/sofa-repair-restoration",
-    icon: Hammer,
-  },
+
 ];
 
 /* =========================================================
@@ -277,79 +278,7 @@ export default function ConnectedServicesSection({
               </div>
             </div>
 
-            {/* =================================================
-                INTRO MESSAGE
-            ================================================== */}
-
-            <div
-              className="
-                relative
-                z-10
-
-                mt-7
-
-                rounded-[19px]
-
-                bg-[var(--brand-navy)]
-
-                px-4
-                py-4
-
-                sm:px-5
-                sm:py-5
-              "
-            >
-              <div
-                className="
-                  grid
-                  gap-3
-
-                  sm:grid-cols-[auto_1fr]
-                  sm:items-start
-                "
-              >
-                <span
-                  className="
-                    flex
-                    h-9
-                    w-9
-
-                    items-center
-                    justify-center
-
-                    rounded-full
-
-                    bg-[var(--brand-gold)]
-
-                    text-[var(--brand-navy)]
-                  "
-                >
-                  <Sofa size={14} strokeWidth={1.5} />
-                </span>
-
-                <p
-                  className="
-                    max-w-[1050px]
-
-                    font-brand-display
-
-                    text-[18px]
-                    font-semibold
-                    leading-[1.4]
-
-                    text-white
-
-                    sm:text-[20px]
-
-                    lg:text-[22px]
-                  "
-                >
-                  Start with the need you have today — a custom sofa, commercial
-                  seating, a complete interior or an existing sofa worth
-                  restoring.
-                </p>
-              </div>
-            </div>
+           
 
             {/* =================================================
                 SERVICE GRID
@@ -375,71 +304,7 @@ export default function ConnectedServicesSection({
               ))}
             </div>
 
-            {/* =================================================
-                CLOSING
-            ================================================== */}
-
-            <div
-              className="
-                relative
-                z-10
-
-                mt-6
-
-                border-t
-                border-[var(--brand-navy)]/10
-
-                pt-6
-              "
-            >
-              <div
-                className="
-                  flex
-                  flex-col
-                  gap-2
-
-                  sm:flex-row
-                  sm:items-center
-                  sm:justify-between
-                  sm:gap-8
-                "
-              >
-                <span
-                  className="
-                    font-brand-sans
-
-                    text-[7px]
-                    font-bold
-                    uppercase
-
-                    tracking-[0.17em]
-
-                    text-[var(--brand-gold-700)]
-                  "
-                >
-                  Find the Right Starting Point
-                </span>
-
-                <p
-                  className="
-                    max-w-[720px]
-
-                    font-brand-display
-
-                    text-[16px]
-                    font-medium
-                    leading-[1.45]
-
-                    text-[var(--brand-navy)]
-
-                    sm:text-[17px]
-                    sm:text-right
-                  "
-                >
-                  Explore the dedicated service that best matches your project.
-                </p>
-              </div>
-            </div>
+        
           </div>
         </div>
       </div>
@@ -670,7 +535,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
         >
           <ClayButton
             href={service.href}
-            variant="outline"
+            variant="ivory"
             size="sm"
             showArrow
             ariaLabel={`Explore ${service.title}`}

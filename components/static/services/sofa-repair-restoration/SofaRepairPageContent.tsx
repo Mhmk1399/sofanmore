@@ -1,5 +1,6 @@
 import FAQSection from "../../FAQSection";
 import SofaRepairLeadForm from "@/components/lead-capture/SofaRepairLeadForm";
+import ServiceStickyCta from "@/components/static/services/ServiceStickyCta";
 import BeforeYouReplaceSection from "./BeforeYouReplaceSection";
 import MoreThanAppearanceSection from "./MoreThanAppearanceSection";
 import RepairRestoreReplaceSection from "./RepairRestoreReplaceSection";
@@ -101,6 +102,11 @@ export const sofaRepairFaqs = [
 export default function SofaRepairPageContent() {
   return (
     <main id="webpage" className="overflow-hidden bg-[var(--brand-ivory)]">
+      <ServiceStickyCta
+        href="#sofa-repair-enquiry"
+        label="Send Sofa Photos"
+        note="Quick assessment"
+      />
       <SofaRepairHero id="service" />
       <BeforeYouReplaceSection />
       <SofaTypesRepairSection id="sofa-restoration" />

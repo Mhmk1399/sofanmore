@@ -76,12 +76,12 @@ const services: Service[] = [
   },
 
   {
-    title: "Home Staging",
+    title: "All Services",
     shortDescription:
-      "Thoughtfully styled interiors designed to maximise your property's appeal for sale or rental.",
-    cta: "Explore Home Staging",
+      "",
+    cta: "Explore Our Services",
     image: "/assets/images/Staging.webp",
-    href: "/services/home-staging",
+    href: "/services",
   },
 
   {
@@ -94,12 +94,12 @@ const services: Service[] = [
   },
 
   {
-    title: "Office sofa",
+    title: "Commercial sofa",
     shortDescription:
       "Premium ergonomic sofa solutions designed for stylish, functional and productive workspaces.",
     cta: "Explore Office sofa",
     image: "/assets/images/Office.webp",
-    href: "/services/office-sofa",
+    href: "/services/commercial-sofas",
   },
 ];
 
@@ -563,11 +563,10 @@ export default function ServicesSection() {
         overflow-hidden
         bg-[var(--brand-ivory)]
         px-0
-        py-14
+        pt-14
 
-        sm:py-16
-
-        lg:py-16
+ 
+        lg:pt-16
       "
     >
       <ServicesBackground />
@@ -615,7 +614,7 @@ export default function ServicesSection() {
             select-none
             touch-pan-y
 
-            lg:h-[480px]
+            lg:h-[470px]
 
             ${isDragging ? "cursor-grabbing" : "lg:cursor-grab"}
           `}
@@ -1120,11 +1119,7 @@ function ServiceCard({
             alt={service.title}
             fill
             draggable={false}
-            sizes="
-              (max-width: 1023px) 82vw,
-              (max-width: 1400px) 24vw,
-              360px
-            "
+            sizes="(max-width: 1023px) 82vw, (max-width: 1400px) 24vw, 360px"
             className="
               pointer-events-none
               object-cover
@@ -1333,7 +1328,7 @@ function Pagination({
         flex
         items-center
         justify-center
-        gap-3
+         
 
         lg:mt-3
       "
@@ -1428,7 +1423,7 @@ function ServicesBackground() {
         className="
           absolute
           left-1/2
-          top-[-66px]
+          top-[-1px]
           h-[320px]
           w-[320px]
           -translate-x-1/2
@@ -1550,35 +1545,9 @@ function ServicesBackground() {
           LEFT LOWER PODIUM
       ============================================== */}
 
-      <div
-        className="
-          clay-surface-soft
-          absolute
-          -bottom-[55px]
-          -left-[80px]
-          hidden
-          h-[120px]
-          w-[300px]
-          rounded-[50%]
+   
 
-          lg:block
-        "
-      />
-
-      <div
-        className="
-          clay-surface-soft
-          absolute
-          -bottom-[4px]
-          left-[8px]
-          hidden
-          h-[70px]
-          w-[205px]
-          rounded-[50%]
-
-          lg:block
-        "
-      />
+     
     </div>
   );
 }

@@ -1,5 +1,8 @@
 "use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import {
   Crown,
   Diamond,
@@ -9,18 +12,31 @@ import {
   Phone,
   ShieldCheck,
 } from "lucide-react";
-import { FaInstagram, FaFacebookF } from "react-icons/fa6";
+
 import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
+
 import ClayButton from "../ui/ClayButton";
-import { usePathname } from "next/navigation";
 
 /* =========================================================
    TYPES
 ========================================================= */
 
-type FooterLink = { label: string; href: string };
-type FooterColumn = { title: string; links: FooterLink[] };
-type TrustItem = { title: string; subtitle: string; icon: LucideIcon };
+type FooterLink = {
+  label: string;
+  href: string;
+};
+
+type FooterColumn = {
+  title: string;
+  links: FooterLink[];
+};
+
+type TrustItem = {
+  title: string;
+  subtitle: string;
+  icon: LucideIcon;
+};
 
 /* =========================================================
    DATA
@@ -30,32 +46,78 @@ const columns: FooterColumn[] = [
   {
     title: "Our Services",
     links: [
-      { label: "All services", href: "/services" },
-      { label: "Bespoke sofa", href: "/services/bespoke-sofas" },
-      { label: "Commercial sofa", href: "/services/commercial-sofas" },
-      { label: "Interior Design & Staging", href: "/services/interior-design" },
+      {
+        label: "All Services",
+        href: "/services",
+      },
+      {
+        label: "Bespoke Sofas",
+        href: "/services/bespoke-sofas",
+      },
+      {
+        label: "Commercial Sofas",
+        href: "/services/commercial-sofas",
+      },
+      {
+        label: "Interior Design",
+        href: "/services/interior-design",
+      },
       {
         label: "Repair & Restoration",
         href: "/services/sofa-repair-restoration",
       },
     ],
   },
+
   {
     title: "Explore",
     links: [
-      { label: "About Us", href: "/about-us" },
-      { label: "Workshop", href: "/workshop" },
-      { label: "Contact Us", href: "/contact-us" },
-      { label: "Blog", href: "/blog" },
-      { label: "Gallery", href: "/gallery" },
+      {
+        label: "About Us",
+        href: "/about-us",
+      },
+      {
+        label: "Contact Us",
+        href: "/contact-us",
+      },
+      {
+        label: "Workshop",
+        href: "/workshop",
+      },
+      {
+        label: "Gallery",
+        href: "/gallery",
+      },
+      {
+        label: "Blog",
+        href: "/blog",
+      },
     ],
   },
+
   {
     title: "Information",
     links: [
-      { label: "FAQ", href: "/faqs" },
-      { label: "Service Area", href: "/services#north-west-london-services" },
-      { label: "Sitemap", href: "/sitemap.xml" },
+      {
+        label: "FAQ",
+        href: "/faqs",
+      },
+      {
+        label: "Service Area",
+        href: "/services#north-west-london-services",
+      },
+      {
+        label: "Privacy Policy",
+        href: "/privacy-policy",
+      },
+      {
+        label: "Terms & Conditions",
+        href: "/terms-and-conditions",
+      },
+      {
+        label: "Sitemap",
+        href: "/sitemap.xml",
+      },
     ],
   },
 ];
@@ -78,19 +140,6 @@ const trustItems: TrustItem[] = [
   },
 ];
 
-const socialLinks = [
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/sofa_n_more_london/",
-    icon: FaInstagram,
-  },
-  {
-    label: "Facebook",
-    href: "https://www.facebook.com/people/sofa_n_more_/100091997793795/",
-    icon: FaFacebookF,
-  },
-];
-
 /* =========================================================
    ROOT
 ========================================================= */
@@ -101,122 +150,181 @@ export default function Footer() {
   if (pathname === "/login") {
     return null;
   }
+
   return (
     <footer
-      className="
-        clay-footer-section
-        relative
-        overflow-hidden
-        bg-[var(--brand-ivory)]
-        px-4 py-10
-        sm:px-6
-        lg:px-10 lg:py-14
-      "
       aria-labelledby="footer-heading"
+      className="
+        relative
+
+        bg-[var(--brand-ivory)]
+
+        px-3
+        pb-[calc(105px+env(safe-area-inset-bottom))]
+        pt-8
+
+        sm:px-5
+        sm:pb-10
+        sm:pt-10
+
+        lg:px-8
+        lg:pb-24
+        lg:pt-12
+      "
     >
       <h2 id="footer-heading" className="sr-only">
-        Footer
+        Sofa N More Footer
       </h2>
 
-      {/* Decorative claymorphism spheres */}
-      <ClayDecorations />
+      {/* =====================================================
+          ONE CLAY SHELL ONLY
+      ====================================================== */}
 
-      {/* Main footer shell */}
       <div
         className="
-          clay-surface-strong
-          relative z-10
+          clay-surface-soft
+
           mx-auto
           max-w-[var(--site-width)]
-          rounded-[38px]
-          p-[9px]
-          lg:rounded-[46px]
-          lg:p-[11px]
+
+          overflow-hidden
+
+          rounded-[28px]
+
+          border
+          border-white/70
+
+          sm:rounded-[32px]
+
+          lg:rounded-[36px]
         "
       >
+        {/* ===================================================
+            MAIN FOOTER
+        ==================================================== */}
+
         <div
           className="
-            clay-inset
-            overflow-hidden
-            rounded-[31px]
-            lg:rounded-[38px]
+            grid
+            gap-8
+
+            bg-[#FFFDF8]/55
+
+            px-5
+            py-7
+
+            sm:grid-cols-2
+            sm:px-7
+            sm:py-8
+
+            lg:grid-cols-[1.4fr_0.8fr_0.8fr_0.7fr_1fr]
+            lg:gap-8
+            lg:px-9
+            lg:py-10
+
+            xl:gap-10
           "
         >
-          {/* UPPER SECTION — brand + columns + CTA */}
+          <BrandColumn />
+
+          {columns.map((column) => (
+            <LinkColumn key={column.title} column={column} />
+          ))}
+
+          <GetInTouchColumn />
+        </div>
+
+        {/* ===================================================
+            TRUST STRIP
+        ==================================================== */}
+
+        <div
+          className="
+            border-t
+            border-[var(--brand-navy)]/[0.06]
+
+            px-5
+            py-5
+
+            sm:px-7
+
+            lg:px-9
+          "
+        >
+          <FooterTrustDock />
+        </div>
+
+        {/* ===================================================
+            BOTTOM
+        ==================================================== */}
+
+        <div
+          className="
+            flex
+            flex-col
+
+            items-center
+            justify-between
+
+            gap-4
+
+            border-t
+            border-[var(--brand-navy)]/[0.07]
+
+            bg-[#F2E9DD]/55
+
+            px-5
+            py-4
+
+            sm:flex-row
+            sm:px-7
+
+            lg:px-9
+          "
+        >
           <div
             className="
-              relative
-              grid grid-cols-1 gap-8
-              px-6 py-8
-              sm:grid-cols-2
-              md:grid-cols-3
-              lg:grid-cols-[1.35fr_1fr_1fr_1fr_1.15fr]
-              lg:gap-6
-              lg:px-10 lg:py-11
-              xl:gap-8
-            "
-          >
-            {/* Brand column */}
-            <BrandColumn />
+              flex
+              flex-col
 
-            {/* Link columns */}
-            {columns.map((column) => (
-              <LinkColumn key={column.title} column={column} />
-            ))}
+              items-center
+              gap-1
 
-            {/* Get in Touch CTA */}
-            <GetInTouchColumn />
-          </div>
-
-          {/* Decorative divider dot */}
-          <div className="relative flex justify-center">
-            <span
-              aria-hidden
-              className="
-                h-1.5 w-1.5 -translate-y-[3px]
-                rounded-full
-                bg-[var(--brand-gold)]
-                shadow-[0_0_10px_rgba(215,160,74,0.5)]
-              "
-            />
-          </div>
-
-          {/* MIDDLE SECTION — trust dock */}
-          <div
-            className="
-              relative
-              border-t border-[var(--brand-cream-dark)]/20
-              px-6 py-6
-              lg:px-10 lg:py-7
-            "
-          >
-            <FooterTrustDock />
-          </div>
-
-          {/* BOTTOM SECTION — copyright + socials */}
-          <div
-            className="
-              relative
-              flex flex-col
-              items-center justify-between
-              gap-4
-              border-t border-[var(--brand-cream-dark)]/20
-              px-6 py-5
-              sm:flex-row
-              lg:px-10 lg:py-6
+              sm:items-start
             "
           >
             <p
               className="
-                font-brand-sans text-[11px] font-medium
+                font-brand-sans
+
+                text-[9px]
+                font-medium
+
                 text-[var(--brand-text-muted)]
+
+                sm:text-[10px]
               "
             >
               © {new Date().getFullYear()} Sofa N More. All rights reserved.
             </p>
 
-            <SocialLinks />
+            <p
+              className="
+                font-brand-sans
+
+                text-[7px]
+                font-semibold
+
+                text-[var(--brand-text-muted)]/70
+
+                sm:text-[8px]
+              "
+            >
+              Bespoke sofas, interiors and restoration in London.
+            </p>
           </div>
+
+          <SocialLinks />
         </div>
       </div>
     </footer>
@@ -224,46 +332,64 @@ export default function Footer() {
 }
 
 /* =========================================================
-   BRAND COLUMN
+   BRAND
 ========================================================= */
 
 function BrandColumn() {
   return (
-    <div className="flex flex-col">
-      {/* Logo */}
+    <div>
+      {/* LOGO */}
+
       <Link
         href="/"
         aria-label="Sofa N More — Home"
         className="
-          group inline-flex flex-col
-          transition-transform duration-300
-          hover:scale-[1.02]
+          inline-flex
+          flex-col
+
+          focus-visible:outline-2
+          focus-visible:outline-offset-4
+          focus-visible:outline-[var(--brand-gold)]
         "
       >
         <Crown
-          size={22}
+          size={20}
           strokeWidth={1.4}
           className="
-            mb-[-2px] self-start
+            mb-[-1px]
+
             text-[var(--brand-gold)]
-            transition-transform duration-500
-            group-hover:-translate-y-[2px]
           "
         />
+
         <span
           className="
-            font-brand-display text-[26px]
-            font-semibold leading-tight
+            font-brand-display
+
+            text-[25px]
+            font-semibold
+            leading-tight
+
             text-[var(--brand-navy)]
-            lg:text-[28px]
+
+            lg:text-[27px]
           "
         >
           Sofa N More
         </span>
+
         <span
           className="
-            mt-1 font-brand-sans text-[9px]
-            font-bold uppercase tracking-[0.35em]
+            mt-1
+
+            font-brand-sans
+
+            text-[7px]
+            font-bold
+            uppercase
+
+            tracking-[0.32em]
+
             text-[var(--brand-gold-700)]
           "
         >
@@ -271,39 +397,68 @@ function BrandColumn() {
         </span>
       </Link>
 
-      {/* Description */}
+      {/* DESCRIPTION */}
+
       <p
         className="
-          mt-5 max-w-[240px]
-          font-brand-sans text-[12px] font-medium
-          leading-[1.7] text-[var(--brand-text-muted)]
+          mt-4
+
+          max-w-[290px]
+
+          font-brand-sans
+
+          text-[10px]
+          font-medium
+          leading-[1.7]
+
+          text-[var(--brand-text-muted)]
+
+          sm:text-[11px]
         "
       >
-        Bespoke sofa and interior solutions, handcrafted in London for
-        exceptional spaces.
+        Bespoke sofas, commercial seating, interior design and professional sofa
+        repair from our North West London workshop.
       </p>
 
-      {/* Contact card */}
-      <div
+      {/* =================================================
+          CONTACT DETAILS
+
+          No clay shadow here.
+      ================================================== */}
+
+      <address
         className="
-          clay-surface-soft
-          mt-6
-          rounded-[22px] p-4
-          lg:mt-7
+          mt-5
+
+          max-w-[310px]
+
+          not-italic
+
+          rounded-[17px]
+
+          border
+          border-[var(--brand-navy)]/[0.07]
+
+          bg-[#F3EADF]/70
+
+          px-3.5
+          py-3
         "
       >
-        <ContactRow icon={MapPin} text="London, United Kingdom" />
+        <ContactRow icon={MapPin} text="London NW2 7HJ" />
+
         <ContactRow
           icon={Phone}
-          text="+44 20 7946 0880"
-          href="tel:+442079460880"
+          text="+44 7400 577844"
+          href="tel:+447400577844"
         />
+
         <ContactRow
           icon={Mail}
-          text="hello@sofanmore.co.uk"
-          href="mailto:hello@sofanmore.co.uk"
+          text="info@sofanmore.co.uk"
+          href="mailto:info@sofanmore.co.uk"
         />
-      </div>
+      </address>
     </div>
   );
 }
@@ -325,21 +480,36 @@ function ContactRow({
     <>
       <span
         className="
-          clay-icon-inset
-          flex h-7 w-7 shrink-0 items-center justify-center
+          flex
+          h-7
+          w-7
+
+          shrink-0
+
+          items-center
+          justify-center
+
           rounded-[9px]
+
+          bg-[var(--brand-navy)]
+
+          text-[var(--brand-gold)]
         "
       >
-        <Icon
-          size={12}
-          strokeWidth={1.8}
-          className="text-[var(--brand-gold)]"
-        />
+        <Icon size={11} strokeWidth={1.6} />
       </span>
+
       <span
         className="
-          font-brand-sans text-[11px] font-medium
+          font-brand-sans
+
+          text-[9px]
+          font-semibold
+          leading-[1.4]
+
           text-[var(--brand-navy)]
+
+          sm:text-[10px]
         "
       >
         {text}
@@ -347,22 +517,47 @@ function ContactRow({
     </>
   );
 
-  if (href) {
+  if (!href) {
     return (
-      <a
-        href={href}
+      <div
         className="
-          group flex items-center gap-2.5
-          py-1.5 transition-colors duration-200
-          hover:text-[var(--brand-gold-700)]
+          flex
+          items-center
+
+          gap-2.5
+
+          py-1.5
         "
       >
         {content}
-      </a>
+      </div>
     );
   }
 
-  return <div className="flex items-center gap-2.5 py-1.5">{content}</div>;
+  return (
+    <a
+      href={href}
+      className="
+        flex
+        items-center
+
+        gap-2.5
+
+        py-1.5
+
+        transition-colors
+        duration-150
+
+        hover:text-[var(--brand-gold-700)]
+
+        focus-visible:outline-2
+        focus-visible:outline-offset-2
+        focus-visible:outline-[var(--brand-gold)]
+      "
+    >
+      {content}
+    </a>
+  );
 }
 
 /* =========================================================
@@ -371,60 +566,52 @@ function ContactRow({
 
 function LinkColumn({ column }: { column: FooterColumn }) {
   return (
-    <div className="flex flex-col">
-      {/* Title with bullet */}
-      <div className="mb-5 flex items-center gap-2">
+    <div>
+      {/* TITLE */}
+
+      <div
+        className="
+          mb-4
+
+          flex
+          items-center
+
+          gap-2
+        "
+      >
         <span
           aria-hidden
           className="
-            h-1.5 w-1.5 rounded-full
+            h-1.5
+            w-1.5
+
+            rounded-full
+
             bg-[var(--brand-gold)]
-            shadow-[0_0_6px_rgba(215,160,74,0.4)]
           "
         />
+
         <h3
           className="
-            font-brand-display text-[15px]
-            font-semibold text-[var(--brand-navy)]
+            font-brand-display
+
+            text-[14px]
+            font-semibold
+
+            text-[var(--brand-navy)]
           "
         >
           {column.title}
         </h3>
       </div>
 
-      {/* Links */}
+      {/* LINKS */}
+
       <nav aria-label={column.title}>
-        <ul className="space-y-3">
+        <ul className="space-y-2.5">
           {column.links.map((link) => (
             <li key={link.label}>
-              <Link
-                href={link.href}
-                className="
-                  group inline-flex items-center
-                  font-brand-sans text-[12px] font-medium
-                  text-[var(--brand-navy)]/85
-                  transition-all duration-200
-                  hover:text-[var(--brand-gold-700)]
-                  focus-visible:outline-2
-                  focus-visible:outline-offset-2
-                  focus-visible:outline-[var(--brand-gold)]
-                "
-              >
-                <span
-                  aria-hidden
-                  className="
-                    -translate-x-1 opacity-0
-                    text-[var(--brand-gold)]
-                    transition-all duration-200
-                    group-hover:mr-1.5
-                    group-hover:translate-x-0
-                    group-hover:opacity-100
-                  "
-                >
-                  →
-                </span>
-                {link.label}
-              </Link>
+              <FooterLinkItem href={link.href}>{link.label}</FooterLinkItem>
             </li>
           ))}
         </ul>
@@ -434,60 +621,186 @@ function LinkColumn({ column }: { column: FooterColumn }) {
 }
 
 /* =========================================================
-   GET IN TOUCH COLUMN
+   FOOTER LINK
+========================================================= */
+
+function FooterLinkItem({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className="
+        group
+
+        inline-flex
+        items-center
+
+        gap-1.5
+
+        font-brand-sans
+
+        text-[10px]
+        font-medium
+
+        text-[var(--brand-navy)]/75
+
+        transition-colors
+        duration-150
+
+        hover:text-[var(--brand-gold-700)]
+
+        focus-visible:outline-2
+        focus-visible:outline-offset-2
+        focus-visible:outline-[var(--brand-gold)]
+      "
+    >
+      <span
+        aria-hidden
+        className="
+          h-1
+          w-1
+
+          rounded-full
+
+          bg-[var(--brand-gold)]
+
+          opacity-0
+
+          transition-opacity
+          duration-150
+
+          group-hover:opacity-100
+        "
+      />
+
+      {children}
+    </Link>
+  );
+}
+
+/* =========================================================
+   CONTACT CTA
 ========================================================= */
 
 function GetInTouchColumn() {
   return (
-    <div className="flex flex-col">
-      {/* Title */}
-      <div className="mb-5 flex items-center gap-2">
+    <div>
+      <div
+        className="
+          mb-4
+
+          flex
+          items-center
+
+          gap-2
+        "
+      >
         <span
           aria-hidden
           className="
-            h-1.5 w-1.5 rounded-full
+            h-1.5
+            w-1.5
+
+            rounded-full
+
             bg-[var(--brand-gold)]
-            shadow-[0_0_6px_rgba(215,160,74,0.4)]
           "
         />
+
         <h3
           className="
-            font-brand-display text-[15px]
-            font-semibold text-[var(--brand-navy)]
+            font-brand-display
+
+            text-[14px]
+            font-semibold
+
+            text-[var(--brand-navy)]
           "
         >
-          Get in Touch
+          Start a Project
         </h3>
       </div>
 
       <p
         className="
-          mb-6 max-w-[220px]
-          font-brand-sans text-[12px] font-medium
-          leading-[1.65] text-[var(--brand-text-muted)]
+          max-w-[230px]
+
+          font-brand-sans
+
+          text-[10px]
+          font-medium
+          leading-[1.65]
+
+          text-[var(--brand-text-muted)]
+
+          sm:text-[11px]
         "
       >
-        Let&apos;s create something extraordinary together.
+        Tell us about your sofa, repair, commercial seating or interior project.
       </p>
 
-      {/* CTA Button */}
-      <ClayButton
-        href="/contact-us"
-        ariaLabel="Start your project"
-        variant="gold"
-        size="lg"
-        fullWidth
-        showArrow
-        className="max-w-[220px] !justify-between"
+      <div className="mt-5">
+        <ClayButton
+          href="/contact-us"
+          ariaLabel="Start your project with Sofa N More"
+          variant="gold"
+          size="md"
+          fullWidth
+          showArrow
+          className="max-w-[220px]"
+        >
+          Start Your Project
+        </ClayButton>
+      </div>
+
+      {/* DIRECT CALL */}
+
+      <a
+        href="tel:+447400577844"
+        className="
+          mt-3
+
+          inline-flex
+          items-center
+
+          gap-2
+
+          font-brand-sans
+
+          text-[8px]
+          font-bold
+          uppercase
+
+          tracking-[0.08em]
+
+          text-[var(--brand-navy)]/65
+
+          transition-colors
+          duration-150
+
+          hover:text-[var(--brand-gold-700)]
+        "
       >
-        Start Your Project
-      </ClayButton>
+        <Phone
+          size={11}
+          strokeWidth={1.6}
+          className="
+            text-[var(--brand-gold)]
+          "
+        />
+        Call +44 7400 577844
+      </a>
     </div>
   );
 }
 
 /* =========================================================
-   TRUST DOCK
+   TRUST STRIP
 ========================================================= */
 
 function FooterTrustDock() {
@@ -496,48 +809,93 @@ function FooterTrustDock() {
       role="region"
       aria-label="Our credentials"
       className="
-        clay-surface-soft
-        mx-auto max-w-[560px]
-        rounded-[999px]
-        px-4 py-4
-        sm:px-8
+        mx-auto
+
+        max-w-[680px]
+
+        overflow-hidden
+
+        rounded-[18px]
+
+        bg-[var(--brand-navy)]
       "
     >
-      <div className="grid grid-cols-3 gap-2">
+      <div
+        className="
+          grid
+          grid-cols-3
+        "
+      >
         {trustItems.map((item, index) => {
           const Icon = item.icon;
+
           return (
             <div
               key={item.title}
               className={`
-                flex flex-col items-center justify-center gap-2 px-2
-                text-center
-                ${index ? "border-l border-[var(--brand-cream-dark)]/25" : ""}
-              `}
+                  flex
+                  min-h-[76px]
+
+                  items-center
+                  justify-center
+
+                  gap-2.5
+
+                  px-2
+                  py-3
+
+                  text-center
+
+                  sm:px-4
+
+                  ${index ? "border-l border-white/10" : ""}
+                `}
             >
               <Icon
-                size={22}
+                size={17}
                 strokeWidth={1.35}
-                className="text-[var(--brand-gold)]"
+                className="
+                    hidden
+
+                    shrink-0
+
+                    text-[var(--brand-gold)]
+
+                    sm:block
+                  "
                 aria-hidden
               />
+
               <div>
                 <div
                   className="
-                    font-brand-display text-[11px]
-                    font-semibold leading-tight
-                    text-[var(--brand-navy)]
-                    sm:text-[12px]
-                  "
+                      font-brand-display
+
+                      text-[10px]
+                      font-semibold
+                      leading-tight
+
+                      text-white
+
+                      sm:text-[12px]
+                    "
                 >
                   {item.title}
                 </div>
+
                 <div
                   className="
-                    font-brand-sans text-[9px]
-                    font-medium text-[var(--brand-text-muted)]
-                    sm:text-[10px]
-                  "
+                      mt-0.5
+
+                      font-brand-sans
+
+                      text-[7px]
+                      font-medium
+
+                      text-white/50
+
+                      sm:text-[9px]
+                    "
                 >
                   {item.subtitle}
                 </div>
@@ -551,101 +909,121 @@ function FooterTrustDock() {
 }
 
 /* =========================================================
-   SOCIAL LINKS
+   SOCIALS
 ========================================================= */
 
 function SocialLinks() {
   return (
-    <div className="flex items-center gap-2.5">
-      {socialLinks.map((social) => {
-        const Icon = social.icon;
-        return (
-          <a
-            key={social.label}
-            href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={social.label}
-            className="
-              clay-social-icon
-              group
-              flex h-10 w-10
-              items-center justify-center
-              rounded-full
-              transition-all duration-300
-              hover:-translate-y-[2px]
-              focus-visible:outline-2
-              focus-visible:outline-offset-3
-              focus-visible:outline-[var(--brand-gold)]
-            "
-          >
-            <Icon
-              size={15}
-              strokeWidth={1.6}
-              className="
-                text-[var(--brand-text-muted)]
-                transition-colors duration-300
-                group-hover:text-[var(--brand-gold)]
-              "
-            />
-          </a>
-        );
-      })}
+    <div
+      className="
+        flex
+        items-center
+
+        gap-2
+      "
+    >
+      <SocialLink
+        href="https://www.instagram.com/sofa_n_more_london/"
+        label="Instagram"
+      >
+        <InstagramIcon />
+      </SocialLink>
+
+      <SocialLink
+        href="https://www.facebook.com/people/sofa_n_more_/100091997793795/"
+        label="Facebook"
+      >
+        <FacebookIcon />
+      </SocialLink>
     </div>
   );
 }
 
+function SocialLink({
+  href,
+  label,
+  children,
+}: {
+  href: string;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="
+        flex
+        h-9
+        w-9
+
+        items-center
+        justify-center
+
+        rounded-full
+
+        border
+        border-[var(--brand-navy)]/[0.08]
+
+        bg-[#FFFDF8]/75
+
+        text-[var(--brand-text-muted)]
+
+        transition-[color,transform,background-color]
+        duration-150
+
+        hover:-translate-y-[1px]
+        hover:bg-white
+        hover:text-[var(--brand-gold-700)]
+
+        focus-visible:outline-2
+        focus-visible:outline-offset-2
+        focus-visible:outline-[var(--brand-gold)]
+      "
+    >
+      {children}
+    </a>
+  );
+}
+
 /* =========================================================
-   DECORATIVE CLAY SPHERES
+   LIGHTWEIGHT SOCIAL SVG
 ========================================================= */
 
-function ClayDecorations() {
+function InstagramIcon() {
   return (
-    <>
-      {/* Top-left sphere */}
-      <div
-        aria-hidden
-        className="
-          clay-sphere
-          absolute -left-6 top-6
-          h-24 w-24
-          lg:-left-2 lg:top-12
-          lg:h-32 lg:w-32
-        "
-      >
-        <div className="clay-sphere-shadow" />
-        <div className="clay-sphere-ball" />
-      </div>
+    <svg
+      aria-hidden
+      viewBox="0 0 24 24"
+      width="15"
+      height="15"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
 
-      {/* Bottom-left sphere with ring */}
-      <div
-        aria-hidden
-        className="
-          clay-sphere z-9999999999
-          absolute -left-8 bottom-16
-          h-32 w-32
-          lg:left-4 lg:bottom-24
-          lg:h-44 lg:w-44
-        "
-      >
-        <div className="clay-sphere-ring" />
-        <div className="clay-sphere-ball" />
-      </div>
+      <circle cx="12" cy="12" r="4" />
 
-      {/* Right sphere */}
-      <div
-        aria-hidden
-        className="
-          clay-sphere z-9999999999
-          absolute -right-6 bottom-20
-          h-24 w-24
-          lg:-right-4 lg:bottom-28
-          lg:h-32 lg:w-32
-        "
-      >
-        <div className="clay-sphere-shadow" />
-        <div className="clay-sphere-ball clay-sphere-ball--gold" />
-      </div>
-    </>
+      <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 24 24"
+      width="15"
+      height="15"
+      fill="currentColor"
+    >
+      <path d="M13.6 22v-8.7h2.9l.45-3.4H13.6V7.72c0-.98.27-1.65 1.68-1.65h1.8V3.03c-.31-.04-1.38-.13-2.63-.13-2.6 0-4.38 1.59-4.38 4.5v2.5H7.12v3.4h2.95V22h3.53Z" />
+    </svg>
   );
 }

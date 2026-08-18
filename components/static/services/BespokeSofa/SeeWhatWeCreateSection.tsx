@@ -65,8 +65,7 @@ export default function SeeWhatWeCreateSection() {
         lg:py-16
       "
     >
-      <SectionBackground />
-
+ 
       <div
         className="
           relative

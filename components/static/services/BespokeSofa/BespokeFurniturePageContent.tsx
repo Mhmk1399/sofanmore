@@ -1,4 +1,5 @@
 import BespokeSofaLeadForm from "@/components/lead-capture/BespokeSofaLeadForm";
+import ServiceStickyCta from "@/components/static/services/ServiceStickyCta";
 import FAQSection from "../../FAQSection";
 import BespokesofaHero from "./bespoke-sofaHero";
 import BespokeProcessSection from "./BespokeProcessSection";
@@ -106,6 +107,10 @@ export default function BespokesofaPageContent() {
         bg-[var(--brand-ivory)]
       "
     >
+      <ServiceStickyCta
+        href="#bespoke-sofa-enquiry"
+        label="Request Bespoke Sofa"
+      />
       <BespokesofaHero id="service" />
       <CustomsofaForYourSpaceSection id="made-to-measure-sofas" />
       <BespokeSofasWeCanCreateSection />

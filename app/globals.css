@@ -62,3 +62,12 @@ html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+
+
+@supports (content-visibility: auto) {
+  .home-deferred-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 650px;
+  }
+}

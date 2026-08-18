@@ -542,11 +542,7 @@ function GalleryTile({
           alt={item.alt}
           fill
           draggable={false}
-          sizes="
-            (max-width: 767px) 50vw,
-            (max-width: 1023px) 33vw,
-            25vw
-          "
+          sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw"
           className="
             object-cover
             object-center

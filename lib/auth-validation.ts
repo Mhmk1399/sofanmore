@@ -21,6 +21,14 @@ export type ValidatedUserPatchInput = {
   isActive?: boolean;
 };
 
+export type ValidatedProfilePatchInput = {
+  name?: string;
+  phone?: string;
+  phoneNormalized?: string;
+  currentPassword?: string;
+  newPassword?: string;
+};
+
 function isRecord(value: unknown): value is UnknownRecord {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
@@ -114,6 +122,32 @@ function validatePassword(value: unknown, errors: FieldErrors, strong = true) {
   return value;
 }
 
+function validateOptionalPassword(
+  value: unknown,
+  field: string,
+  errors: FieldErrors,
+  strong = true,
+) {
+  if (value === null || value === undefined || value === "") {
+    return undefined;
+  }
+
+  if (typeof value !== "string") {
+    errors[field] = "Enter a password.";
+    return undefined;
+  }
+
+  if (strong) {
+    const issues = passwordStrengthErrors(value);
+
+    if (issues.length > 0) {
+      errors[field] = issues.join(" ");
+    }
+  }
+
+  return value;
+}
+
 export function validateSignupInput(input: unknown): ValidatedSignupInput {
   const errors: FieldErrors = {};
 
@@ -193,6 +227,79 @@ export function validateUserPatchInput(input: unknown): ValidatedUserPatchInput 
   }
 
   if (!patch.role && patch.isActive == null && Object.keys(errors).length === 0) {
+    errors.body = "Choose something to update.";
+  }
+
+  if (Object.keys(errors).length > 0) {
+    throw validationError(errors);
+  }
+
+  return patch;
+}
+
+export function validateProfilePatchInput(
+  input: unknown,
+): ValidatedProfilePatchInput {
+  const errors: FieldErrors = {};
+
+  if (!isRecord(input)) {
+    throw validationError({ body: "Use a valid JSON object." });
+  }
+
+  const patch: ValidatedProfilePatchInput = {};
+
+  if (input.name != null) {
+    const name = cleanText(input.name, "name", errors, 120);
+
+    if (!name) {
+      errors.name = "Enter your name.";
+    } else if (name.length < 2) {
+      errors.name = "Use at least 2 characters.";
+    } else {
+      patch.name = name;
+    }
+  }
+
+  if (input.phone != null) {
+    const { phone, phoneNormalized } = validatePhone(input.phone, errors);
+
+    if (!errors.phone) {
+      patch.phone = phone;
+      patch.phoneNormalized = phoneNormalized;
+    }
+  }
+
+  const wantsPasswordChange =
+    typeof input.newPassword === "string" && input.newPassword.trim() !== "";
+
+  if (wantsPasswordChange) {
+    const currentPassword = validateOptionalPassword(
+      input.currentPassword,
+      "currentPassword",
+      errors,
+      false,
+    );
+    const newPassword = validateOptionalPassword(
+      input.newPassword,
+      "newPassword",
+      errors,
+      true,
+    );
+
+    if (newPassword && !currentPassword) {
+      errors.currentPassword = "Enter your current password.";
+    }
+
+    if (currentPassword) patch.currentPassword = currentPassword;
+    if (newPassword) patch.newPassword = newPassword;
+  }
+
+  if (
+    !patch.name &&
+    !patch.phone &&
+    !patch.newPassword &&
+    Object.keys(errors).length === 0
+  ) {
     errors.body = "Choose something to update.";
   }
 

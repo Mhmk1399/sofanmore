@@ -1,8 +1,8 @@
-import CommercialSofasPageContent, { commercialSofasFaqs } from "@/components/static/services/commercial-sofas/CommercialSofasPageContent";
+import CommercialSofasPageContent, {
+  commercialSofasFaqs,
+} from "@/components/static/services/commercial-sofas/CommercialSofasPageContent";
 import type { Metadata } from "next";
 
- 
- 
 /* =========================================================
    SEO
 ========================================================= */

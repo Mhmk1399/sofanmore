@@ -140,32 +140,11 @@ function DesktopWhyChoose({ imageSrc }: { imageSrc: string }) {
         </div>
 
         {/* left podium */}
-        <div
-          className="
-            clay-surface-soft
-            absolute bottom-[38px] left-[12px]
-            h-[52px] w-[260px]
-            rounded-[50%]
-          "
-        />
-        <div
-          className="
-            clay-surface-soft
-            absolute bottom-[0px] left-[54px]
-            h-[42px] w-[210px]
-            rounded-[50%]
-          "
-        />
+       
+      
 
         {/* ring */}
-        <div
-          className="
-            absolute bottom-[34px] left-[74px]
-            h-[86px] w-[86px]
-          "
-        >
-          <div className="clay-sphere-ring" />
-        </div>
+       
 
         {/* right sphere */}
         <div
@@ -361,16 +340,16 @@ function DesktopContent() {
 
           <div className="grid grid-cols-2 gap-4">
             <ClayButton
-              href="/contact-us"
+              href="/workshop"
               variant="navy"
               size="lg"
               fullWidth
               showArrow
               startIcon={<Sofa size={18} strokeWidth={1.6} />}
-              ariaLabel="Visit our showroom"
+              ariaLabel="Visit our workshop"
               className="!min-h-[66px]"
             >
-              Visit Our Showroom
+              Visit Our Workshop
             </ClayButton>
 
             <ClayButton
@@ -582,16 +561,16 @@ function MobileWhyChoose({ imageSrc }: { imageSrc: string }) {
 
         <div className="mt-5 space-y-3">
           <ClayButton
-            href="/contact-us"
+            href="/workshop"
             variant="navy"
             size="lg"
             fullWidth
             showArrow
             startIcon={<Sofa size={16} strokeWidth={1.6} />}
-            ariaLabel="Visit our showroom"
+            ariaLabel="Visit our workshop"
             className="!min-h-[58px] !justify-between"
           >
-            Visit Our Showroom
+            Visit Our Workshop
           </ClayButton>
 
           <ClayButton

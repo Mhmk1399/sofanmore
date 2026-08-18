@@ -59,6 +59,7 @@ type FieldChromeProps = {
   error?: string;
   hint?: string;
   children: ReactNode;
+  variant?: "default" | "admin";
 };
 
 function describedBy(id: string, error?: string, hint?: string) {
@@ -74,12 +75,17 @@ function FieldChrome({
   error,
   hint,
   children,
+  variant = "default",
 }: FieldChromeProps) {
+  const isAdmin = variant === "admin";
+
   return (
     <div className="min-w-0">
       <label
         htmlFor={id}
-        className="block font-brand-sans text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]"
+        className={`block font-brand-sans font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)] ${
+          isAdmin ? "text-[10px] text-[var(--brand-navy)]/70" : "text-[11px]"
+        }`}
       >
         {label}
         {required && (
@@ -87,7 +93,7 @@ function FieldChrome({
         )}
       </label>
 
-      <div className="mt-2">{children}</div>
+      <div className={isAdmin ? "mt-1.5" : "mt-2"}>{children}</div>
 
       {hint && !error && (
         <p
@@ -464,6 +470,7 @@ type ClayDatePickerProps = {
   required?: boolean;
   disabled?: boolean;
   placeholder?: string;
+  variant?: "default" | "admin";
 };
 
 const monthFormatter = new Intl.DateTimeFormat("en-GB", {
@@ -539,6 +546,7 @@ export function ClayDatePicker({
   required,
   disabled,
   placeholder = "Select date",
+  variant = "default",
 }: ClayDatePickerProps) {
   const calendarId = `${id}-calendar`;
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -548,6 +556,7 @@ export function ClayDatePicker({
   const [displayMonth, setDisplayMonth] = useState(
     () => selectedDate || new Date(),
   );
+  const isAdmin = variant === "admin";
   const days = getCalendarDays(displayMonth);
 
   useEffect(() => {
@@ -598,12 +607,17 @@ export function ClayDatePicker({
       required={required}
       error={error}
       hint={hint}
+      variant={variant}
     >
       <div ref={rootRef} className={`relative ${open ? "z-[80]" : "z-0"}`}>
         <div
-          className={`${fieldShellClass} ${
-            error ? "ring-2 ring-[#9b2c2c]/20" : ""
-          }`}
+          className={
+            isAdmin
+              ? `rounded-xl border border-white/60 bg-white/50 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_0_0_1px_rgba(255,255,255,0.5)_inset] transition-all focus-within:bg-white/70 ${
+                  error ? "ring-2 ring-[#9b2c2c]/20" : ""
+                }`
+              : `${fieldShellClass} ${error ? "ring-2 ring-[#9b2c2c]/20" : ""}`
+          }
         >
           <button
             ref={buttonRef}
@@ -627,7 +641,11 @@ export function ClayDatePicker({
                 setOpen(false);
               }
             }}
-            className={`${fieldClass} flex h-[52px] items-center justify-between gap-3 px-4 text-left sm:h-[54px] sm:px-5`}
+            className={
+              isAdmin
+                ? "flex h-[40px] w-full items-center justify-between gap-2 rounded-xl border-0 bg-transparent px-3 text-left font-brand-sans text-[12px] font-semibold text-[var(--brand-navy)] outline-none transition-colors placeholder:text-[var(--brand-text-muted)]/50 disabled:cursor-not-allowed disabled:opacity-55"
+                : `${fieldClass} flex h-[52px] items-center justify-between gap-3 px-4 text-left sm:h-[54px] sm:px-5`
+            }
           >
             <span
               className={
@@ -640,9 +658,13 @@ export function ClayDatePicker({
             </span>
             <CalendarDays
               aria-hidden
-              size={17}
+              size={isAdmin ? 14 : 17}
               strokeWidth={1.8}
-              className="shrink-0 text-[var(--brand-gold-700)]"
+              className={
+                isAdmin
+                  ? "shrink-0 text-[var(--brand-text-muted)]"
+                  : "shrink-0 text-[var(--brand-gold-700)]"
+              }
             />
           </button>
         </div>
@@ -655,35 +677,47 @@ export function ClayDatePicker({
             data-lenis-prevent
             onWheel={(event) => event.stopPropagation()}
             onTouchMove={(event) => event.stopPropagation()}
-            className="absolute left-0 top-[calc(100%+8px)] z-[95] w-full min-w-[286px] overflow-hidden rounded-[22px] border border-white/80 bg-[linear-gradient(145deg,#fffefa,#eadccb)] p-3 shadow-[var(--shadow-clay-lg)] sm:min-w-[318px]"
+            className={`absolute left-0 top-[calc(100%+8px)] z-[95] w-full overflow-hidden border ${
+              isAdmin
+                ? "min-w-[270px] rounded-xl border-gray-200 bg-white p-2.5 shadow-[0_12px_40px_rgba(0,0,0,0.15)] sm:min-w-[286px]"
+                : "min-w-[286px] rounded-[22px] border-white/80 bg-[linear-gradient(145deg,#fffefa,#eadccb)] p-3 shadow-[var(--shadow-clay-lg)] sm:min-w-[318px]"
+            }`}
           >
             <div className="flex items-center justify-between gap-3">
               <button
                 type="button"
                 aria-label="Previous month"
                 onClick={() => changeMonth(-1)}
-                className="clay-inset flex h-9 w-9 items-center justify-center rounded-full text-[var(--brand-navy)] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-gold)]"
+                className={
+                  isAdmin
+                    ? "flex h-8 w-8 items-center justify-center rounded-lg border border-black/[0.06] bg-white/55 text-[var(--brand-navy)] transition-colors hover:bg-white/80"
+                    : "clay-inset flex h-9 w-9 items-center justify-center rounded-full text-[var(--brand-navy)] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-gold)]"
+                }
               >
                 <ChevronLeft size={16} strokeWidth={1.9} />
               </button>
-              <p className="font-brand-sans text-[12px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]">
+              <p className="font-brand-sans text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]">
                 {monthFormatter.format(displayMonth)}
               </p>
               <button
                 type="button"
                 aria-label="Next month"
                 onClick={() => changeMonth(1)}
-                className="clay-inset flex h-9 w-9 items-center justify-center rounded-full text-[var(--brand-navy)] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-gold)]"
+                className={
+                  isAdmin
+                    ? "flex h-8 w-8 items-center justify-center rounded-lg border border-black/[0.06] bg-white/55 text-[var(--brand-navy)] transition-colors hover:bg-white/80"
+                    : "clay-inset flex h-9 w-9 items-center justify-center rounded-full text-[var(--brand-navy)] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-gold)]"
+                }
               >
                 <ChevronRight size={16} strokeWidth={1.9} />
               </button>
             </div>
 
-            <div className="mt-3 grid grid-cols-7 gap-1">
+            <div className={`${isAdmin ? "mt-2" : "mt-3"} grid grid-cols-7 gap-1`}>
               {weekdayLabels.map((day) => (
                 <span
                   key={day}
-                  className="flex h-7 items-center justify-center font-brand-sans text-[9px] font-bold uppercase tracking-[0.08em] text-[var(--brand-text-muted)]"
+                  className="flex h-6 items-center justify-center font-brand-sans text-[8.5px] font-bold uppercase tracking-[0.08em] text-[var(--brand-text-muted)]"
                 >
                   {day}
                 </span>
@@ -697,12 +731,16 @@ export function ClayDatePicker({
                     key={formatIsoDate(date)}
                     type="button"
                     onClick={() => chooseDate(date)}
-                    className={`flex aspect-square min-h-9 items-center justify-center rounded-[12px] font-brand-sans text-[12px] font-bold transition-colors ${
+                    className={`flex aspect-square items-center justify-center font-brand-sans font-bold transition-colors ${
                       selected
                         ? "bg-[var(--brand-navy)] text-white"
                         : inDisplayMonth
                           ? "bg-white/24 text-[var(--brand-navy)] hover:bg-[var(--brand-gold)]/14"
                           : "text-[var(--brand-text-muted)]/38 hover:bg-white/18"
+                    } ${
+                      isAdmin
+                        ? "min-h-8 rounded-lg text-[11px]"
+                        : "min-h-9 rounded-[12px] text-[12px]"
                     } ${today && !selected ? "ring-1 ring-[var(--brand-gold)]/55" : ""}`}
                   >
                     {date.getDate()}
@@ -711,7 +749,9 @@ export function ClayDatePicker({
               })}
             </div>
 
-            <div className="mt-3 flex items-center justify-between border-t border-[var(--brand-navy)]/8 pt-3">
+            <div
+              className={`${isAdmin ? "mt-2 pt-2" : "mt-3 pt-3"} flex items-center justify-between border-t border-[var(--brand-navy)]/8`}
+            >
               <button
                 type="button"
                 onClick={() => {
@@ -726,7 +766,11 @@ export function ClayDatePicker({
               <button
                 type="button"
                 onClick={() => chooseDate(new Date())}
-                className="rounded-full bg-[var(--brand-gold)]/18 px-3 py-2 font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)] transition-colors hover:bg-[var(--brand-gold)]/28"
+                className={
+                  isAdmin
+                    ? "rounded-lg bg-[var(--brand-navy)] px-3 py-1.5 font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[var(--brand-navy)]/90"
+                    : "rounded-full bg-[var(--brand-gold)]/18 px-3 py-2 font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)] transition-colors hover:bg-[var(--brand-gold)]/28"
+                }
               >
                 Today
               </button>

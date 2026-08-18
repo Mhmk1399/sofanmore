@@ -510,8 +510,7 @@ export default function WorkingWorkshopSection() {
                       mt-1
 
                       max-w-[1000px]
-
-                      font-brand-display
+ 
 
                       text-[18px]
                       font-semibold
@@ -519,9 +518,8 @@ export default function WorkingWorkshopSection() {
 
                       text-white
 
-                      sm:text-[21px]
-
-                      lg:text-[23px]
+ 
+                      lg:text-[16px]
                     "
                   >
                     Not to choose the closest available sofa from stock — but to

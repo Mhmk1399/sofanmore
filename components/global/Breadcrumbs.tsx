@@ -110,7 +110,7 @@ export default function Breadcrumbs() {
               font-brand-sans text-[7px] font-bold
               text-[var(--brand-text-muted)]
               shadow-[0_10px_24px_rgba(18,37,62,0.10)]
-              backdrop-blur-md
+              
               origin-top
               min-[380px]:text-[8px]
               lg:origin-top-left lg:px-4 lg:py-2.5 lg:text-[11px]

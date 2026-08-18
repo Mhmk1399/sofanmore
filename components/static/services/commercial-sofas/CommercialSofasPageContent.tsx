@@ -1,4 +1,5 @@
 import CommercialSofaLeadForm from "@/components/lead-capture/CommercialSofaLeadForm";
+import ServiceStickyCta from "@/components/static/services/ServiceStickyCta";
 
 import FAQSection from "../../FAQSection";
 import CommercialProjectsGallerySection from "./CommercialProjectsGallerySection";
@@ -113,6 +114,11 @@ export default function CommercialSofasPageContent() {
         bg-[var(--brand-ivory)]
       "
     >
+      <ServiceStickyCta
+        href="#commercial-sofa-enquiry"
+        label="Send Commercial Brief"
+        note="Business project"
+      />
       <CommercialSofasHero id="service" />
       <CommercialSofasRealBusinessSpacesSection />
       <CommercialSofaSolutionsSection />

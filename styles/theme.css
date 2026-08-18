@@ -952,17 +952,16 @@
 
 .navbar-bar {
   transition:
-    height 400ms var(--ease-clay),
-    box-shadow 400ms var(--ease-clay),
-    background 400ms var(--ease-clay);
+    height 180ms var(--ease-clay),
+    background-color 180ms var(--ease-clay);
+
+  will-change: auto;
 }
 
 .navbar-scrolled {
   box-shadow:
-    0 12px 40px rgba(85, 61, 35, 0.12),
-    0 4px 12px rgba(85, 61, 35, 0.08),
-    inset 2px 2px 3px rgba(255, 255, 255, 0.96),
-    inset -3px -3px 6px rgba(120, 86, 48, 0.08) !important;
+    0 8px 20px rgba(85, 61, 35, 0.11),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7) !important;
 }
 
 /* ---------------------------------------------------------
@@ -974,16 +973,7 @@
 }
 
 .navbar-link::after {
-  content: "";
-  position: absolute;
-  bottom: 6px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  border-radius: 999px;
-  background: var(--brand-gold);
-  transform: translateX(-50%);
-  transition: width 300ms var(--ease-clay);
+  transition: width 160ms var(--ease-clay);
 }
 
 .navbar-link:hover::after {
@@ -1106,11 +1096,8 @@
 
 .island-bar {
   box-shadow:
-    0 -6px 28px rgba(85, 61, 35, 0.12),
-    0 -2px 8px rgba(85, 61, 35, 0.06),
-    0 12px 32px rgba(85, 61, 35, 0.18),
-    inset 2px 2px 3px rgba(255, 255, 255, 0.96),
-    inset -2px -2px 5px rgba(120, 86, 48, 0.07) !important;
+    0 7px 18px rgba(63, 45, 27, 0.13),
+    inset 0 1px 1px rgba(255, 255, 255, 0.72) !important;
 }
 
 /* ---------------------------------------------------------
@@ -1124,15 +1111,15 @@
 }
 
 .island-tab-active {
-  background: linear-gradient(
-    145deg,
-    rgba(255, 253, 248, 0.6),
-    rgba(234, 220, 197, 0.4)
-  );
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 253, 248, 0.72),
+      rgba(237, 226, 210, 0.58)
+    );
+
   box-shadow:
-    inset 3px 3px 7px rgba(115, 84, 50, 0.09),
-    inset -3px -3px 7px rgba(255, 255, 255, 0.85);
-  border-radius: 16px;
+    inset 2px 2px 4px rgba(115, 84, 50, 0.07) !important;
 }
 
 /* ---------------------------------------------------------
@@ -1149,8 +1136,7 @@
 
 .island-panel {
   box-shadow:
-    0 -8px 40px rgba(60, 40, 20, 0.15),
-    0 20px 60px rgba(60, 40, 20, 0.12);
+    0 12px 28px rgba(34, 25, 17, 0.16) !important;
 }
 
 /* ---------------------------------------------------------
@@ -1158,17 +1144,22 @@
 --------------------------------------------------------- */
 
 .island-panel-enter {
-  animation: islandPanelIn 400ms var(--ease-clay) both;
+  animation:
+    island-panel-light-in
+    220ms
+    var(--ease-clay)
+    both;
 }
 
-@keyframes islandPanelIn {
+@keyframes island-panel-light-in {
   from {
     opacity: 0;
-    transform: translateY(12px) scale(0.98);
+    transform: translate3d(0, 10px, 0);
   }
+
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -1177,13 +1168,18 @@
 --------------------------------------------------------- */
 
 .animate-fadeIn {
-  animation: fadeIn 300ms ease both;
+  animation:
+    navbar-fade-in
+    160ms
+    ease-out
+    both;
 }
 
-@keyframes fadeIn {
+@keyframes navbar-fade-in {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -1192,13 +1188,6 @@
 /* ---------------------------------------------------------
    Navbar desktop enhancements
 --------------------------------------------------------- */
-
-.navbar-bar {
-  transition:
-    height 400ms var(--ease-clay),
-    box-shadow 400ms var(--ease-clay),
-    background 400ms var(--ease-clay);
-}
 
 .navbar-scrolled {
   box-shadow:
@@ -1260,14 +1249,32 @@
    Haptic feedback for touch
 --------------------------------------------------------- */
 
+/* =========================================================
+   TOUCH FEEDBACK — INTERACTIVE ELEMENTS ONLY
+========================================================= */
+
 @media (hover: none) and (pointer: coarse) {
+  /* Dynamic island tabs are genuinely interactive */
   .island-tab:active {
-    transform: scale(0.88);
+    transform: scale(0.94);
     transition: transform 80ms ease;
   }
 
-  .clay-surface-soft:active,
+  /* Actual buttons */
   .snm-button:active {
+    transform: scale(0.97);
+    transition: transform 80ms ease;
+  }
+
+  /*
+    A clay surface should only press when the element
+    itself is actually interactive.
+
+    Normal cards, sections, footer shells, etc. stay static.
+  */
+  button.clay-surface-soft:active,
+  a.clay-surface-soft:active,
+  [role="button"].clay-surface-soft:active {
     transform: scale(0.97);
     transition: transform 80ms ease;
   }
@@ -1441,7 +1448,7 @@
 .clay-sphere {
   position: absolute;
   pointer-events: none;
- }
+}
 
 .clay-sphere-ball {
   position: absolute;
@@ -1479,13 +1486,16 @@
 .clay-sphere-shadow {
   position: absolute;
   inset: 15%;
+
   border-radius: 999px;
+
   background: radial-gradient(
     circle at 50% 50%,
     rgba(200, 165, 110, 0.14),
-    transparent 70%
+    rgba(200, 165, 110, 0.08) 32%,
+    rgba(200, 165, 110, 0.03) 52%,
+    transparent 72%
   );
-  filter: blur(8px);
 }
 
 .clay-sphere-ring {
@@ -1620,4 +1630,473 @@
 
 .services-scroll > div > article {
   scroll-snap-align: center;
+}
+/* =========================================================
+   SOFA N MORE
+   AGGRESSIVE SCROLL PERFORMANCE MODE
+
+   Goal:
+   - keep layout
+   - keep palette
+   - keep claymorphism
+   - remove expensive continuous painting
+========================================================= */
+
+/* =========================================================
+   1. REMOVE CONTINUOUS DECORATIVE ANIMATIONS
+========================================================= */
+
+/*
+  Continuous animation during scrolling is unnecessary.
+
+  The spheres remain visible in exactly the same positions,
+  they simply stop floating.
+*/
+
+.clay-sphere-ball {
+  animation: none !important;
+  will-change: auto !important;
+}
+
+/*
+  Decorative scroll indicator animation is also continuous.
+*/
+
+.scroll-indicator-line {
+  animation: none !important;
+  opacity: 0.65;
+}
+
+/* =========================================================
+   2. REMOVE THE EXPENSIVE EXTRA SPHERE LAYER
+========================================================= */
+
+/*
+  The sphere itself already has depth and shadow.
+
+  This extra transparent shadow layer adds another painted
+  surface for almost no visual benefit.
+*/
+
+.clay-sphere-shadow {
+  display: none !important;
+}
+
+/*
+  Keep the ring, remove only its glow.
+*/
+
+.clay-sphere-ring {
+  box-shadow: none !important;
+}
+
+/* =========================================================
+   3. LIGHTER SPHERE SHADOWS
+========================================================= */
+
+.clay-sphere-ball {
+  box-shadow:
+    5px 8px 16px rgba(120, 82, 40, 0.22),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.72),
+    inset -2px -3px 6px rgba(140, 100, 55, 0.16) !important;
+}
+
+.clay-sphere-ball--gold {
+  box-shadow:
+    5px 8px 16px rgba(120, 74, 21, 0.26),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.48),
+    inset -2px -3px 6px rgba(120, 60, 10, 0.22) !important;
+}
+
+/* =========================================================
+   4. GLOBAL CLAY SHADOW SYSTEM
+========================================================= */
+
+/*
+  Current clay surfaces use up to four simultaneous shadows.
+
+  These replacements preserve depth with fewer paint layers.
+*/
+
+:root {
+  --shadow-clay-xs:
+    0 4px 9px rgba(91, 65, 38, 0.11), inset 0 1px 1px rgba(255, 255, 255, 0.76);
+
+  --shadow-clay-sm:
+    0 7px 15px rgba(91, 65, 38, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+
+  --shadow-clay-md:
+    0 10px 21px rgba(91, 65, 38, 0.14),
+    inset 0 1px 2px rgba(255, 255, 255, 0.84);
+
+  --shadow-clay-lg:
+    0 14px 28px rgba(85, 61, 35, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.88);
+
+  --shadow-clay-inset:
+    inset 4px 5px 10px rgba(115, 84, 50, 0.11),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.78);
+
+  --shadow-clay-dark:
+    0 12px 25px rgba(3, 13, 24, 0.27), inset 0 1px 2px rgba(255, 255, 255, 0.07);
+}
+
+/* =========================================================
+   5. REMOVE DUPLICATED INNER SHADOW PSEUDO ELEMENT
+========================================================= */
+
+/*
+  Every clay card currently generates another absolutely
+  positioned pseudo element with two more inset shadows.
+
+  On a long page this can mean dozens of extra painted layers.
+
+  The actual clay surface already has border + gradient +
+  shadow, so the visual difference is extremely small.
+*/
+
+.clay-surface::after,
+.clay-surface-soft::after,
+.clay-surface-strong::after {
+  display: none !important;
+}
+
+/* =========================================================
+   6. SIMPLIFY CLAY ICONS
+========================================================= */
+
+.clay-icon {
+  box-shadow:
+    0 5px 12px rgba(87, 62, 36, 0.12),
+    inset 0 1px 2px rgba(255, 255, 255, 0.82) !important;
+}
+
+.clay-icon-inset {
+  box-shadow:
+    inset 3px 3px 7px rgba(101, 72, 40, 0.1),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.72) !important;
+}
+
+/* =========================================================
+   7. SERVICES CARDS
+========================================================= */
+
+.service-card-frame {
+  box-shadow:
+    0 12px 24px rgba(91, 65, 38, 0.14),
+    inset 0 1px 2px rgba(255, 255, 255, 0.86) !important;
+}
+
+.service-card-image-frame {
+  box-shadow:
+    inset 4px 4px 9px rgba(115, 84, 50, 0.12),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.78) !important;
+}
+
+.service-card-frame::after {
+  display: none !important;
+}
+
+/* =========================================================
+   8. REMOVE PERMANENT WILL-CHANGE FROM CAROUSEL
+========================================================= */
+
+/*
+  will-change is useful only right before an animation.
+  Leaving several large cards permanently promoted costs
+  memory and can hurt scrolling.
+*/
+
+.services-carousel-slot {
+  will-change: auto !important;
+}
+
+/* =========================================================
+   9. BUTTONS
+========================================================= */
+
+/*
+  Buttons are small, but there can be many on a page.
+  Keep their clay look with fewer shadow layers.
+*/
+
+.snm-button {
+  transition:
+    transform 180ms var(--ease-clay),
+    color 180ms var(--ease-clay),
+    background 180ms var(--ease-clay),
+    border-color 180ms var(--ease-clay) !important;
+}
+
+.snm-button--gold {
+  box-shadow:
+    0 7px 14px rgba(150, 93, 19, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+}
+
+.snm-button--gold:hover {
+  box-shadow:
+    0 9px 17px rgba(150, 93, 19, 0.24),
+    inset 0 1px 2px rgba(255, 255, 255, 0.34) !important;
+}
+
+.snm-button--navy {
+  box-shadow:
+    0 7px 15px rgba(4, 17, 30, 0.24),
+    inset 0 1px 2px rgba(255, 255, 255, 0.07) !important;
+}
+
+.snm-button--navy:hover {
+  box-shadow:
+    0 9px 18px rgba(4, 17, 30, 0.27),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08) !important;
+}
+
+/* =========================================================
+   10. CLAY BUTTON LEGACY CLASSES
+========================================================= */
+
+.clay-button-gold {
+  box-shadow:
+    0 7px 14px rgba(130, 80, 22, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.28) !important;
+
+  transition: transform 180ms var(--ease-clay) !important;
+}
+
+.clay-button-dark {
+  box-shadow:
+    0 7px 15px rgba(3, 12, 22, 0.24),
+    inset 0 1px 2px rgba(255, 255, 255, 0.06) !important;
+
+  transition: transform 180ms var(--ease-clay) !important;
+}
+
+.clay-button-outline-dark {
+  box-shadow:
+    0 6px 13px rgba(2, 12, 23, 0.22),
+    inset 0 1px 2px rgba(255, 255, 255, 0.05) !important;
+
+  transition:
+    transform 180ms var(--ease-clay),
+    border-color 180ms var(--ease-clay),
+    color 180ms var(--ease-clay) !important;
+}
+
+/* =========================================================
+   11. CLAY LIFT
+========================================================= */
+
+.clay-lift {
+  transition: transform 180ms var(--ease-clay) !important;
+}
+
+/* =========================================================
+   12. NAVBAR
+========================================================= */
+
+/*
+  Animating box-shadow on a fixed / sticky header while
+  scrolling is particularly expensive.
+
+  Only height/background need transition.
+*/
+
+.navbar-bar {
+  transition:
+    height 220ms var(--ease-clay),
+    background 220ms var(--ease-clay) !important;
+
+  will-change: auto !important;
+  transform: none !important;
+}
+
+.navbar-scrolled {
+  box-shadow:
+    0 7px 18px rgba(85, 61, 35, 0.11),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+}
+
+/* =========================================================
+   13. MOBILE DYNAMIC ISLAND
+========================================================= */
+
+.island-bar {
+  box-shadow:
+    0 8px 20px rgba(85, 61, 35, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.84) !important;
+
+  will-change: auto !important;
+  transform: none;
+}
+
+.island-panel {
+  box-shadow: 0 12px 26px rgba(60, 40, 20, 0.16) !important;
+}
+
+.island-tab-active {
+  box-shadow:
+    inset 2px 2px 5px rgba(115, 84, 50, 0.08),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.66) !important;
+}
+
+/* =========================================================
+   14. MEGA MENU
+========================================================= */
+
+.mega-tab-active {
+  box-shadow:
+    0 5px 12px rgba(91, 65, 38, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.78) !important;
+}
+
+.mega-subcategory-link {
+  transition:
+    color 160ms var(--ease-clay),
+    background 160ms var(--ease-clay),
+    transform 160ms var(--ease-clay) !important;
+}
+
+.mega-subcategory-link:hover,
+.mega-subcategory-link:focus-visible {
+  box-shadow: inset 3px 3px 7px rgba(118, 82, 42, 0.1) !important;
+}
+
+/* =========================================================
+   15. FOOTER
+========================================================= */
+
+.clay-cta-dark {
+  box-shadow:
+    0 8px 17px rgba(4, 17, 30, 0.24),
+    inset 0 1px 2px rgba(255, 255, 255, 0.07) !important;
+
+  transition: transform 180ms var(--ease-clay) !important;
+}
+
+.clay-social-icon {
+  box-shadow:
+    inset 2px 2px 5px rgba(115, 84, 50, 0.09),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.72) !important;
+}
+
+/* =========================================================
+   16. MOST IMPORTANT:
+   DO NOT PAINT OFF-SCREEN SECTIONS
+========================================================= */
+
+/*
+  This is often the biggest win on long landing pages.
+
+  The browser skips layout/paint work for sections far
+  outside the viewport and renders them as they approach.
+*/
+
+@supports (content-visibility: auto) {
+  main > section:not(:first-child) {
+    content-visibility: auto;
+
+    /*
+      Prevent scrollbar jumping before the real section
+      height is known.
+    */
+    contain-intrinsic-size: auto 720px;
+  }
+
+  footer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 700px;
+  }
+}
+
+/* =========================================================
+   17. MOBILE / TOUCH:
+   REMOVE DECORATIVE MOTION COMPLETELY
+========================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+  .clay-sphere-ball,
+  .scroll-indicator-line,
+  .hero-card-stagger-0,
+  .hero-card-stagger-1,
+  .hero-card-stagger-2,
+  .hero-card-stagger-3 {
+    animation: none !important;
+  }
+
+  .clay-lift:hover,
+  .snm-button:hover {
+    transform: none;
+  }
+
+  .clay-surface-soft:active {
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   18. MOBILE:
+   EVEN CHEAPER SHADOWS
+========================================================= */
+
+@media (max-width: 767px) {
+  :root {
+    --shadow-clay-xs: 0 3px 7px rgba(91, 65, 38, 0.1);
+
+    --shadow-clay-sm: 0 5px 11px rgba(91, 65, 38, 0.11);
+
+    --shadow-clay-md: 0 7px 15px rgba(91, 65, 38, 0.12);
+
+    --shadow-clay-lg: 0 9px 19px rgba(85, 61, 35, 0.13);
+
+    --shadow-clay-inset:
+      inset 3px 3px 7px rgba(115, 84, 50, 0.1),
+      inset -2px -2px 6px rgba(255, 255, 255, 0.66);
+
+    --shadow-clay-dark: 0 8px 18px rgba(3, 13, 24, 0.24);
+  }
+
+  /*
+    Decorative spheres keep their actual sphere,
+    but remove non-essential extra effects.
+  */
+
+  .clay-sphere {
+    opacity: 0.52;
+  }
+
+  .clay-sphere-ring,
+  .clay-sphere-shadow {
+    display: none !important;
+  }
+
+  .clay-sphere-ball {
+    box-shadow:
+      0 5px 10px rgba(120, 82, 40, 0.18),
+      inset 1px 1px 3px rgba(255, 255, 255, 0.52) !important;
+  }
+}
+
+/* =========================================================
+   19. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+
+  .clay-sphere-ball,
+  .scroll-indicator-line {
+    animation: none !important;
+  }
+}
+/* =========================================================
+   DISABLE ALL DECORATIVE CLAY SPHERES
+========================================================= */
+
+.clay-sphere {
+  display: none !important;
 }

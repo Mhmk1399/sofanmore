@@ -1,5 +1,6 @@
 import FAQSection from "../../FAQSection";
 import InteriorDesignLeadForm from "@/components/lead-capture/InteriorDesignLeadForm";
+import ServiceStickyCta from "@/components/static/services/ServiceStickyCta";
 import BespokeInteriorDesignPhilosophySection from "./BespokeInteriorDesignPhilosophySection";
 import BespokeSofasInteriorIntegrationSection from "./BespokeSofasInteriorIntegrationSection";
 import CommercialInteriorDesignSection from "./CommercialInteriorDesignSection";
@@ -106,6 +107,11 @@ export default function InteriorDesignPageContent() {
         bg-[var(--brand-ivory)]
       "
     >
+      <ServiceStickyCta
+        href="#interior-design-enquiry"
+        label="Start Interior Brief"
+        note="Design enquiry"
+      />
       <InteriorDesignHero id="service" />
       <BespokeInteriorDesignPhilosophySection />
       <InteriorDesignServicesSection residentialId="residential" />

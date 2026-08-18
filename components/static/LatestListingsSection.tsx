@@ -32,10 +32,9 @@ const listings: Listing[] = [
     badge: "Bespoke",
     date: "08 AUG 2026",
     title: "Bespoke sofa Opportunity",
-    description:
-      "Discover our latest handcrafted sofa opportunity in London.",
+    description: "Discover our latest handcrafted sofa opportunity in London.",
     image: "/assets/images/1.webp",
-    href: "/listings/bespoke-sofas-opportunity",
+    href: "/blog/bespoke-sofas-opportunity",
   },
 
   {
@@ -46,7 +45,7 @@ const listings: Listing[] = [
     description:
       "A new bespoke interior project combining craftsmanship, comfort and refined materials.",
     image: "/assets/images/7.webp",
-    href: "/listings/london-interior-project",
+    href: "/blog/london-interior-project",
     featured: true,
   },
 
@@ -58,7 +57,7 @@ const listings: Listing[] = [
     description:
       "Explore the latest from our London workshop and bespoke design studio.",
     image: "/assets/images/5.webp",
-    href: "/listings/workshop-update",
+    href: "/blog/workshop-update",
   },
 ];
 
@@ -167,8 +166,6 @@ function DesktopLayout() {
           ARCH BACKGROUND
       ============================================== */}
 
-      <DesktopArch />
-
       {/* =============================================
           HEADER
       ============================================== */}
@@ -185,7 +182,7 @@ function DesktopLayout() {
         <SectionHeading />
 
         <Link
-          href="/listings"
+          href="/blog"
           className="
             group
             mt-6
@@ -460,10 +457,7 @@ function DesktopCard({ listing }: { listing: Listing }) {
                 src={listing.image}
                 alt={listing.title}
                 fill
-                sizes="
-                  (max-width: 1279px) 32vw,
-                  390px
-                "
+                sizes="(max-width: 1279px) 32vw, 390px"
                 className="
                   object-cover
                   object-center
@@ -742,7 +736,7 @@ function DesktopArch() {
               h-[36%]
               rounded-[50%]
               bg-white/25
-              blur-2xl
+               
             "
           />
         </div>
@@ -1257,98 +1251,6 @@ function SectionBackground() {
       />
 
       {/* vertical embossed lines */}
-
-      <div
-        className="
-          absolute
-          left-[23%]
-          top-0
-          hidden
-          h-full
-          w-[3px]
-          bg-[linear-gradient(90deg,rgba(180,160,130,0.08),rgba(255,255,255,0.55),rgba(180,160,130,0.08))]
-
-          lg:block
-        "
-      />
-
-      <div
-        className="
-          absolute
-          right-[8%]
-          top-0
-          hidden
-          h-[38%]
-          w-[3px]
-          bg-[linear-gradient(90deg,rgba(180,160,130,0.08),rgba(255,255,255,0.55),rgba(180,160,130,0.08))]
-
-          lg:block
-        "
-      />
-
-      {/* big ivory sphere */}
-
-      <div
-        className="
-          clay-sphere
-          absolute
-          -bottom-[36px]
-          -left-[34px]
-          hidden
-          h-[150px]
-          w-[150px]
-
-          lg:block
-        "
-      >
-        <div className="clay-sphere-shadow" />
-        <div className="clay-sphere-ball" />
-      </div>
-
-      {/* small gold sphere */}
-
-      <div
-        className="
-          clay-sphere
-          absolute
-          bottom-[18px]
-          left-[11%]
-          hidden
-          h-[30px]
-          w-[30px]
-
-          lg:block
-        "
-      >
-        <div className="clay-sphere-ball clay-sphere-ball--gold" />
-      </div>
-
-      {/* gold ring */}
-
-      <div
-        className="
-          absolute
-          bottom-[20px]
-          right-[10%]
-          hidden
-          h-[100px]
-          w-[175px]
-          rotate-[-6deg]
-
-          lg:block
-        "
-      >
-        <div
-          className="
-            absolute
-            inset-0
-            rounded-[50%]
-            border-[3px]
-            border-[var(--brand-gold)]/70
-            shadow-[inset_1px_1px_1px_rgba(255,255,255,0.45),0_3px_6px_rgba(114,78,26,0.12)]
-          "
-        />
-      </div>
     </div>
   );
 }

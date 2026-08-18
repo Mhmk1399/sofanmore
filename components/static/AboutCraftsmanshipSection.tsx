@@ -423,8 +423,6 @@ function DesktopComposition() {
             حس قاب معماری ایجاد می‌کند.
         ================================================== */}
 
-       
-
         {/* =================================================
             GOLD ORBIT
         ================================================== */}
@@ -544,25 +542,6 @@ function DesktopComposition() {
         </svg>
 
         {/* =================================================
-            EXPERIENCE CARD
-        ================================================== */}
-
-        <div
-          className="
-            absolute
-            bottom-[5.5%]
-            left-[36%]
-            z-[35]
-            w-[245px]
-
-            xl:left-[37%]
-            xl:w-[270px]
-          "
-        >
-          <ExperienceCard />
-        </div>
-
-        {/* =================================================
             IVORY SPHERE
         ================================================== */}
 
@@ -597,102 +576,6 @@ function DesktopComposition() {
             bg-[linear-gradient(90deg,transparent,#D7A04A_20%,#D7A04A_80%,transparent)]
           "
         />
-      </div>
-    </div>
-  );
-}
-
-/* =========================================================
-   EXPERIENCE CARD
-========================================================= */
-
-function ExperienceCard() {
-  return (
-    <div
-      className="
-        clay-surface-strong
-        rounded-[27px]
-        p-[6px]
-      "
-    >
-      <div
-        className="
-          clay-inset
-          relative
-          rounded-[21px]
-          px-5
-          py-5
-        "
-      >
-        <Landmark
-          size={45}
-          strokeWidth={1.15}
-          className="
-            absolute
-            bottom-5
-            left-5
-            text-[var(--brand-gold-700)]/55
-          "
-        />
-
-        <div className="pl-[68px]">
-          <span
-            className="
-              font-brand-sans
-              text-[7px]
-              font-bold
-              uppercase
-              tracking-[0.2em]
-              text-[var(--brand-gold-700)]
-            "
-          >
-            Family-Owned
-          </span>
-
-          <div
-            className="
-              mt-2
-              font-brand-display
-              text-[45px]
-              leading-none
-              tracking-[-0.04em]
-              text-[var(--brand-navy)]
-            "
-          >
-            12+
-          </div>
-
-          <div
-            className="
-              mt-1
-              font-brand-display
-              text-[17px]
-              uppercase
-              tracking-[0.08em]
-              text-[var(--brand-navy)]
-            "
-          >
-            Years
-          </div>
-
-          <p
-            className="
-              mt-3
-              max-w-[115px]
-              font-brand-sans
-              text-[6px]
-              font-bold
-              uppercase
-              leading-[1.6]
-              tracking-[0.12em]
-              text-[var(--brand-text-muted)]
-            "
-          >
-            Of craftsmanship
-            <br />
-            and trust
-          </p>
-        </div>
       </div>
     </div>
   );
@@ -783,8 +666,6 @@ function MobileComposition() {
                 Sofa N More · London
               </p>
             </div>
-
-         
           </div>
 
           {/* content */}

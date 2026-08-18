@@ -385,7 +385,7 @@ function ClayDecoration() {
 
           bg-white/30
 
-          blur-3xl
+           
         "
       />
     </div>

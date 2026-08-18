@@ -1,11 +1,5 @@
 import Image from "next/image";
- import {
-   Armchair,
-  Crown,
-  Hammer,
-  Landmark,
-  ShieldCheck,
-} from "lucide-react";
+import { Armchair, Crown, Hammer, Landmark, ShieldCheck } from "lucide-react";
 import ClayButton from "../ui/ClayButton";
 
 /* =========================================================
@@ -130,13 +124,13 @@ function DesktopAboutUsCard() {
 
             <div className="mt-7">
               <ClayButton
-                href="/about-us"
+                href="/services"
                 variant="gold"
                 size="lg"
                 showArrow
                 ariaLabel="Discover our story"
               >
-                Discover Our Story
+                Discover Our Services
               </ClayButton>
             </div>
           </div>
@@ -302,14 +296,14 @@ function MobileAboutUsCard() {
         {/* CTA */}
         <div className="mt-5">
           <ClayButton
-            href="/about-us"
+            href="/services"
             variant="gold"
             size="lg"
             fullWidth
             showArrow
             ariaLabel="Discover our story"
           >
-            Discover Our Story
+            Discover Our Services
           </ClayButton>
         </div>
 

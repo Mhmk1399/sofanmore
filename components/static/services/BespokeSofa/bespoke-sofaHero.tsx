@@ -232,20 +232,7 @@ function HeroPageBackground() {
     <div
       aria-hidden
       className="pointer-events-none absolute inset-0 overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,#FFFDF8_0%,#F5F2EA_55%,#EEE2D3_100%)]" />
-
-      {/* LEFT ARCH */}
-      <div className="clay-surface-soft absolute -left-[150px] top-[240px] hidden h-[430px] w-[250px] rounded-r-[50%] p-[8px] opacity-70 lg:block">
-        <div className="clay-inset h-full rounded-r-[50%]" />
-      </div>
-
-      {/* RIGHT IVORY SPHERE */}
-      <div className="clay-sphere absolute -right-[45px] bottom-[70px] hidden h-[150px] w-[150px] lg:block">
-        <div className="clay-sphere-shadow" />
-        <div className="clay-sphere-ball" />
-      </div>
-    </div>
+    ></div>
   );
 }
 

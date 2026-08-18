@@ -74,19 +74,52 @@ function servicePath(service: LeadService) {
   return service.toLowerCase().replaceAll("_", "-");
 }
 
+function datedRandomKey(prefix: string, extension: string) {
+  const now = new Date();
+  const year = now.getUTCFullYear();
+  const month = String(now.getUTCMonth() + 1).padStart(2, "0");
+  const randomPart = randomBytes(24).toString("hex");
+
+  return `${prefix}/${year}/${month}/${randomPart}.${extension}`;
+}
+
 export function createStorageKey(input: {
   service: LeadService;
   safeName: string;
   mimeType: string;
 }) {
-  const now = new Date();
-  const year = now.getUTCFullYear();
-  const month = String(now.getUTCMonth() + 1).padStart(2, "0");
   const extension =
     getFileExtension(input.safeName) || defaultExtensionForMime(input.mimeType);
-  const randomPart = randomBytes(24).toString("hex");
 
-  return `lead-uploads/${servicePath(input.service)}/${year}/${month}/${randomPart}.${extension}`;
+  return datedRandomKey(`lead-uploads/${servicePath(input.service)}`, extension);
+}
+
+export function createProductImageStorageKey(input: {
+  safeName: string;
+  mimeType: string;
+}) {
+  const extension =
+    getFileExtension(input.safeName) || defaultExtensionForMime(input.mimeType);
+
+  return datedRandomKey("product-uploads", extension);
+}
+
+export async function uploadObject(input: {
+  storageKey: string;
+  mimeType: string;
+  body: Buffer | Uint8Array;
+}) {
+  const config = getUploadStorageConfig();
+  const client = getUploadStorageClient();
+
+  await client.send(
+    new PutObjectCommand({
+      Bucket: config.bucket,
+      Key: input.storageKey,
+      ContentType: input.mimeType,
+      Body: input.body,
+    }),
+  );
 }
 
 export async function signUploadUrl(input: {

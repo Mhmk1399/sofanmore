@@ -82,7 +82,7 @@ export default function LeadFormShell({
     <section
       id={id}
       aria-labelledby={`${id}-heading`}
-      className="relative overflow-hidden bg-[var(--brand-ivory)] px-3 py-8 sm:px-5 sm:py-10 lg:px-7 lg:py-12"
+      className="relative scroll-mt-[calc(104px+env(safe-area-inset-top))] overflow-hidden bg-[var(--brand-ivory)] px-3 py-8 sm:px-5 sm:py-10 lg:scroll-mt-[118px] lg:px-7 lg:py-12"
     >
       <div
         aria-hidden

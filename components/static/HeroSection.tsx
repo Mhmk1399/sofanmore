@@ -151,7 +151,7 @@ export default function HeroSection() {
             relative z-10
             mx-auto w-full
             max-w-[var(--site-width)]
-            px-4 pb-8 pt-[100px]
+            px-4 pb-8 pt-[90px]
             sm:px-6
             md:px-8
             lg:flex lg:h-full lg:items-center
@@ -197,6 +197,8 @@ function HeroBackground() {
           alt=""
           fill
           quality={75}
+          loading="eager"
+          fetchPriority="high"
           sizes="100vw"
           className="
             object-cover object-center
@@ -218,6 +220,8 @@ function HeroBackground() {
           alt=""
           fill
           quality={70}
+          loading="eager"
+          fetchPriority="high"
           sizes="100vw"
           className="
             object-cover object-center
@@ -450,7 +454,7 @@ function HeroCopy() {
             showArrow
             aria-label="View our sofa gallery"
           >
-              Our Work
+            Our Work
           </ClayButton>
         </div>
 
@@ -494,6 +498,7 @@ function HeroImage() {
           src="/assets/images/7.webp"
           alt="Luxury bespoke sofa handcrafted in our London workshop, featuring premium Italian leather upholstery"
           fill
+          loading="eager"
           fetchPriority="high"
           sizes="(min-width: 1280px) 38vw, (min-width: 1024px) 32vw, 100vw"
           className="object-cover object-center"
@@ -507,39 +512,6 @@ function HeroImage() {
             bg-[linear-gradient(135deg,rgba(18,37,62,0.1),transparent_40%)]
           "
         />
-
-        {/* Badge */}
-        <div
-          className="
-            clay-surface-soft
-            absolute  top-4 z-20
-            flex items-center gap-2.5
-            rounded-[16px]
-            border border-white/80
-            px-3.5 py-3
-          "
-        >
-          <span
-            className="
-              flex h-8 w-8 items-center justify-center
-              rounded-[11px]
-              bg-[var(--brand-gold)]
-              text-white
-              shadow-[3px_4px_8px_rgba(120,74,21,0.22)]
-            "
-          >
-            <Crown size={14} strokeWidth={1.8} />
-          </span>
-
-          <div className="flex flex-col">
-            <span className="font-brand-sans text-[10px] font-extrabold uppercase tracking-[0.06em] text-[var(--brand-navy)]">
-              Bespoke
-            </span>
-            <span className="font-brand-sans text-[8.5px] font-semibold text-[var(--brand-text-muted)]">
-              Made to Measure
-            </span>
-          </div>
-        </div>
       </div>
     </div>
   );
@@ -612,15 +584,16 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         "
       >
         <div className="min-w-0 pb-1">
-          <h3
+          <span
             className="
+              block
               font-brand-display text-[13px] font-semibold
               leading-[1.14] text-[var(--brand-navy)]
               xl:text-[14px]
             "
           >
             {service.title}
-          </h3>
+          </span>
 
           <p
             className="
@@ -832,8 +805,8 @@ function TabletMainHero() {
               />
 
               <p className="max-w-[280px] font-brand-sans text-[11px] font-medium leading-[1.65] text-white/65">
-                Bespoke sofa, commercial interiors &amp; expert
-                restoration, handcrafted in London.
+                Bespoke sofa, commercial interiors &amp; expert restoration,
+                handcrafted in London.
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2.5">
@@ -845,12 +818,7 @@ function TabletMainHero() {
                 >
                   Start Your Project
                 </ClayButton>
-                <ClayButton
-                  href="/gallery"
-                  variant="navy"
-                  size="sm"
-                  showArrow
-                >
+                <ClayButton href="/gallery" variant="navy" size="sm" showArrow>
                   View Our Work
                 </ClayButton>
               </div>
@@ -882,6 +850,7 @@ function TabletMainHero() {
                 src="/assets/images/7.webp"
                 alt="Luxury handcrafted sofa by Sofa N More London"
                 fill
+                loading="eager"
                 fetchPriority="high"
                 sizes="(min-width: 640px) 55vw, 100vw"
                 className="object-cover object-center"
@@ -954,9 +923,9 @@ function TabletServiceCard({ service }: { service: Service }) {
 
       <div className="mt-3 grid flex-1 grid-cols-[1fr_60px] items-end gap-3">
         <div>
-          <h3 className="font-brand-display text-[14px] font-semibold leading-tight text-[var(--brand-navy)]">
+          <span className="block font-brand-display text-[14px] font-semibold leading-tight text-[var(--brand-navy)]">
             {service.title}
-          </h3>
+          </span>
           <p className="mt-1.5 font-brand-sans text-[9px] font-semibold leading-[1.4] text-[var(--brand-text-muted)]">
             {service.subtitle}
           </p>
@@ -1105,6 +1074,7 @@ function MobileHeroMain() {
             src="/assets/images/2.webp"
             alt="Bespoke luxury sofa by Sofa N More, handcrafted in London"
             fill
+            loading="eager"
             fetchPriority="high"
             sizes="100vw"
             className="object-cover object-center"
@@ -1291,9 +1261,9 @@ function MobileServiceCard({ service }: { service: Service }) {
             />
           </span>
           <div>
-            <h3 className="font-brand-display text-[12px] font-semibold leading-tight">
+            <span className="block font-brand-display text-[12px] font-semibold leading-tight">
               {service.title}
-            </h3>
+            </span>
             <p className="mt-1 font-brand-sans text-[7.5px] font-semibold text-[var(--brand-text-muted)]">
               {service.subtitle}
             </p>
@@ -1362,7 +1332,7 @@ function MobileStickyBar() {
         border-t border-white/50
         bg-[var(--brand-ivory)]/95
         px-4 py-3
-        backdrop-blur-lg
+         
         transition-transform duration-500
         sm:hidden
       "

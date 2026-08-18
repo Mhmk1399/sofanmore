@@ -1,4 +1,4 @@
-import GallerySection from "@/components/static/gallery";
+ import GallerySection from "@/components/static/gallery";
 import GalleryHero from "@/components/static/GalleryHero";
 import type { Metadata } from "next";
 
@@ -421,6 +421,7 @@ export default function GalleryPage() {
         "
       >
         <GalleryHero />
+        
 
         <GallerySection />
       </main>

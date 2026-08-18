@@ -155,7 +155,7 @@ export default function FloatingContactMenu({
       className={`
         fixed
         pointer-events-none
-        z-[1300]
+        z-[130]
         flex
         flex-col
         items-end
@@ -165,7 +165,7 @@ export default function FloatingContactMenu({
             ? `
               right-4
               sm:right-5
-              lg:right-7
+              lg:right-2
             `
             : `
               left-4
@@ -178,7 +178,7 @@ export default function FloatingContactMenu({
         ${
           mobileAboveBottomNav
             ? `
-              bottom-[calc(88px+env(safe-area-inset-bottom))]
+              bottom-[calc(68px+env(safe-area-inset-bottom))]
               md:bottom-6
             `
             : `
@@ -253,7 +253,7 @@ export default function FloatingContactMenu({
             inset-[-10px]
             rounded-full
             bg-[var(--brand-gold)]/10
-            blur-xl
+            
             transition-opacity
             duration-500
 
@@ -310,20 +310,7 @@ export default function FloatingContactMenu({
           >
             {/* subtle highlight */}
 
-            <span
-              aria-hidden
-              className="
-                pointer-events-none
-                absolute
-                left-[18%]
-                right-[18%]
-                top-[8%]
-                h-[28%]
-                rounded-full
-                bg-white/[0.06]
-                blur-[5px]
-              "
-            />
+         
 
             {/* icon */}
 
@@ -349,25 +336,7 @@ export default function FloatingContactMenu({
           </button>
         </div>
 
-        {/* gold notification dot */}
-
-        <span
-          aria-hidden
-          className="
-            pointer-events-none
-            absolute
-            right-[1px]
-            top-[1px]
-            z-30
-            h-[11px]
-            w-[11px]
-            rounded-full
-            border-2
-            border-[var(--brand-ivory-50)]
-            bg-[var(--brand-gold)]
-            shadow-[0_3px_8px_rgba(168,109,31,0.35)]
-          "
-        />
+       
       </div>
     </div>
   );

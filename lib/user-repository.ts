@@ -8,6 +8,7 @@ import {
 } from "@/lib/auth-session";
 import type {
   ValidatedLoginInput,
+  ValidatedProfilePatchInput,
   ValidatedSignupInput,
   ValidatedUserPatchInput,
 } from "@/lib/auth-validation";
@@ -222,6 +223,80 @@ export async function updateUser(userId: ObjectId, patch: ValidatedUserPatchInpu
   }
 
   return { user: serializeUser(result) };
+}
+
+export async function updateOwnProfile(
+  userId: ObjectId,
+  patch: ValidatedProfilePatchInput,
+) {
+  await ensureUserIndexes();
+
+  const { users } = await getUserCollections();
+  const currentUser = await users.findOne({ _id: userId });
+
+  if (!currentUser) {
+    throw new ApiProblem("NOT_FOUND", "User was not found.", 404);
+  }
+
+  if (!currentUser.isActive) {
+    throw new ApiProblem("FORBIDDEN", "This account is disabled.", 403);
+  }
+
+  const now = new Date();
+  const setPatch: Partial<UserDocument> = {
+    updatedAt: now,
+  };
+
+  if (patch.name) setPatch.name = patch.name;
+  if (patch.phone && patch.phoneNormalized) {
+    setPatch.phone = patch.phone;
+    setPatch.phoneNormalized = patch.phoneNormalized;
+  }
+
+  if (patch.newPassword) {
+    if (
+      !patch.currentPassword ||
+      !(await verifyPassword(patch.currentPassword, currentUser.passwordHash))
+    ) {
+      throw new ApiProblem(
+        "UNAUTHORIZED",
+        "Current password is incorrect.",
+        401,
+        {
+          currentPassword: "Current password is incorrect.",
+        },
+      );
+    }
+
+    setPatch.passwordHash = await hashPassword(patch.newPassword);
+  }
+
+  try {
+    const result = await users.findOneAndUpdate(
+      { _id: userId },
+      { $set: setPatch },
+      { returnDocument: "after" },
+    );
+
+    if (!result) {
+      throw new ApiProblem("NOT_FOUND", "User was not found.", 404);
+    }
+
+    return { user: serializeUser(result) };
+  } catch (error) {
+    if (isDuplicateKeyError(error)) {
+      throw new ApiProblem(
+        "CONFLICT",
+        "This phone number is already registered.",
+        409,
+        {
+          phone: "This phone number is already registered.",
+        },
+      );
+    }
+
+    throw error;
+  }
 }
 
 export async function deleteUser(userId: ObjectId) {

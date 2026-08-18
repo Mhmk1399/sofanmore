@@ -97,8 +97,7 @@ export default function WhyChooseBespokeSofasSection() {
         lg:py-16
       "
     >
-      <SectionBackground />
-
+ 
       <div
         className="
           relative

@@ -1268,3 +1268,342 @@ npm run test
 - فرم ها باید مقدارهای کاربر و uploadهای موفق را بعد از خطای submit حفظ کنند.
 - طراحی فرم ها باید از claymorphism مشترک استفاده کند و کنترل ها تا جای ممکن reusable باشند.
 
+## 18. Recent Admin, Product, Upload and Profile Updates
+
+This section documents the latest backend/frontend additions around products and admin account management.
+
+### 18.1 Product Model
+
+File: `models/product.ts`
+
+Collection: `products`
+
+The product model stores admin-managed product cards/catalogue entries.
+
+Main fields:
+
+- `productCode`: required unique integer code for each product.
+- `name`: product name.
+- `imageUrl`: public image URL/path used by the frontend and admin preview.
+- `imageStorageKey`: optional storage key when the image was uploaded through the admin product uploader.
+- `description`: product description.
+- `createdAt`
+- `updatedAt`
+
+Product code rules:
+
+- `productCode` is required.
+- It must be a whole number.
+- It must be `1000` or higher.
+- It must be unique across all products.
+
+Important indexes:
+
+- `{ productCode: 1 }` with `unique` and `sparse`
+- `{ productCode: -1, createdAt: -1 }`
+- `{ name: 1, createdAt: -1 }`
+- `{ createdAt: -1 }`
+
+The unique product code index is sparse so older product documents without `productCode` do not break index creation, while all new/updated products are still validated by the API.
+
+### 18.2 Product Backend Libraries
+
+Files:
+
+- `lib/product-validation.ts`
+- `lib/product-repository.ts`
+- `lib/mongodb.ts`
+
+`lib/product-validation.ts` validates product create/update payloads:
+
+- `validateProductInput(input)`
+- `validateProductObjectId(value)`
+- `validateProductImageUpload(input)`
+
+It checks:
+
+- product code is present, integer, `>= 1000`, and not too long
+- product name length
+- image URL or local path safety
+- optional uploaded `imageStorageKey`
+- description minimum length
+- uploaded product image type and size
+
+`lib/product-repository.ts` owns product database operations:
+
+- `listProducts(query)`: returns products, `total`, and `latestCode`
+- `createProduct(input)`
+- `getProductById(productId)`
+- `updateProduct(productId, input)`
+- `deleteProduct(productId)`
+
+Repository behavior:
+
+- Duplicate product codes are converted to `ApiProblem("CONFLICT", ...)`.
+- Search works across name, description, image URL, and numeric product code.
+- `latestCode` is the highest stored product code and is used by the admin UI while creating products.
+- If a product image was uploaded through storage and later replaced by another uploaded image or manual URL, the old stored object is deleted.
+- If a product is deleted and has `imageStorageKey`, the storage object is deleted as well.
+
+`lib/mongodb.ts` now includes:
+
+- `getProductCollections()`
+- `ensureProductIndexes()`
+
+### 18.3 Product Admin API
+
+Routes:
+
+- `GET /api/admin/products`
+- `POST /api/admin/products`
+- `GET /api/admin/products/[productId]`
+- `PATCH /api/admin/products/[productId]`
+- `DELETE /api/admin/products/[productId]`
+- `POST /api/admin/products/upload`
+
+All product routes require an active `ADMIN` session. Mutation routes also require same-origin checks.
+
+`GET /api/admin/products` query:
+
+- `search`
+
+Response includes:
+
+```json
+{
+  "ok": true,
+  "products": [],
+  "total": 0,
+  "latestCode": null
+}
+```
+
+Create/update body:
+
+```json
+{
+  "productCode": 1001,
+  "name": "Curved Velvet Sofa",
+  "imageUrl": "/assets/images/example.webp",
+  "imageStorageKey": "product-uploads/2026/08/...",
+  "description": "Product description..."
+}
+```
+
+`POST /api/admin/products/upload`:
+
+- Accepts `multipart/form-data` with field `file`.
+- Allows `image/jpeg`, `image/png`, `image/webp`.
+- Allows extensions `jpg`, `jpeg`, `png`, `webp`.
+- Maximum file size is `10MB`.
+- Uploads through the shared S3-compatible storage client.
+- Returns `imageUrl` and `imageStorageKey`.
+- Requires `UPLOAD_PUBLIC_BASE_URL` so the admin preview and product record can use a public URL.
+
+### 18.4 Upload Storage Updates
+
+File: `lib/upload-storage.ts`
+
+Existing lead upload behavior remains unchanged:
+
+- lead uploads still use signed PUT URLs
+- lead uploads still create `lead_uploads` records
+- lead uploads still use temporary upload tokens and orphan cleanup
+
+Product image upload uses the same storage configuration and client, but does not use the lead attachment model.
+
+New product upload helpers:
+
+- `createProductImageStorageKey(input)`: creates keys under `product-uploads/<year>/<month>/<random>.<ext>`
+- `uploadObject(input)`: server-side object upload with `PutObjectCommand`
+
+Shared helpers still used:
+
+- `getUploadStorageConfig()`
+- `getUploadStorageClient()`
+- `deleteUploadedObject(storageKey)`
+- `getPublicUploadUrl(storageKey)`
+
+### 18.5 Admin Dashboard Structure
+
+Admin UI has been split into smaller components:
+
+- `components/admin/LeadAdminDashboard.tsx`: state, data loading, auth/session behavior, mutation handlers
+- `components/admin/AdminSidebar.tsx`: sidebar navigation
+- `components/admin/AdminOverview.tsx`: metrics, charts and recent records
+- `components/admin/AdminLeads.tsx`: lead filters, lead table, lead detail drawer
+- `components/admin/AdminUsers.tsx`: user management
+- `components/admin/AdminProducts.tsx`: product CRUD and product image upload
+- `components/admin/AdminProfile.tsx`: current admin profile form
+- `components/admin/adminShared.tsx`: shared admin types, helpers, common UI controls
+
+Admin sections:
+
+- `overview`
+- `leads`
+- `products`
+- `users`
+- `profile`
+
+Admin UX behavior:
+
+- `/admin` is protected server-side by session cookie and database role.
+- No manual admin token is used.
+- Smooth scroll is disabled on `/admin`.
+- Admin page hides public navbar/footer/decorative UI while open.
+- Toast root is preserved with `data-toast-root` so admin actions can show toast messages.
+- Header includes a custom `View site` link that opens `/` in a new tab.
+- Logout opens a confirmation modal before clearing the session.
+
+### 18.6 Admin Products UI
+
+File: `components/admin/AdminProducts.tsx`
+
+Capabilities:
+
+- Create product
+- Edit product
+- Delete product
+- Search products by name, description, image URL or product code
+- See latest product code while creating/editing
+- Enter custom product code manually
+- Upload product image with progress
+- Preview uploaded/manual image
+- Show success/error/info messages through Toast
+
+Product image upload UI:
+
+- Uses `POST /api/admin/products/upload`.
+- Sends `multipart/form-data`.
+- Shows progress percentage.
+- Fills `imageUrl` and `imageStorageKey` automatically after upload.
+- Supports manual image URL/path entry as a fallback.
+
+### 18.7 Admin User and Lead Select Controls
+
+Native `select` controls are used for action controls inside tables and drawers:
+
+- user role changes in `AdminUsers`
+- lead status changes in `AdminLeads`
+
+Reason:
+
+- Native select popups are not clipped by table overflow.
+- They do not expand table height.
+- They avoid custom dropdown stacking issues inside scroll containers.
+
+Custom dropdowns remain in filter panels where they are not inside a table layout.
+
+### 18.8 Admin Profile
+
+Files:
+
+- `components/admin/AdminProfile.tsx`
+- `app/api/auth/me/route.ts`
+- `lib/auth-validation.ts`
+- `lib/user-repository.ts`
+
+Route:
+
+- `PATCH /api/auth/me`
+
+The profile section lets the current admin update:
+
+- `name`
+- `phone`
+- password
+
+Password behavior:
+
+- Name and phone can be updated without changing password.
+- Current password is required only when `newPassword` is provided.
+- If the browser autofills current password but new password is empty, the backend ignores password fields and allows name/phone changes.
+- New password must pass the same strong password rules used by signup.
+
+Profile update behavior:
+
+- Requires an authenticated active user.
+- Uses same-origin checks.
+- Rejects duplicate phone numbers with `409 CONFLICT`.
+- Updates `currentUser` in the admin dashboard after success.
+- Uses Toast for success/error/info messages.
+
+### 18.9 Auth Validation Updates
+
+File: `lib/auth-validation.ts`
+
+New type/function:
+
+- `ValidatedProfilePatchInput`
+- `validateProfilePatchInput(input)`
+
+Rules:
+
+- `name` is optional, but if present must be at least 2 characters.
+- `phone` is optional, but if present must normalize to a valid phone.
+- `newPassword` is optional.
+- `currentPassword` is required only when `newPassword` is present.
+- empty/no-change payloads are rejected by the backend.
+
+### 18.10 Toast Behavior in Admin
+
+File: `components/ui/ToastProvider.tsx`
+
+Toast root now has:
+
+```tsx
+data-toast-root
+```
+
+This prevents the admin global style from hiding toast notifications.
+
+Admin actions that use Toast:
+
+- dashboard data load errors
+- product create/update/delete/upload success and failure
+- lead detail/status/delete success and failure
+- user role/active/delete success and failure
+- profile update success and failure
+- logout confirmation result
+
+### 18.11 Additional Tests
+
+Current added tests:
+
+- `tests/product-validation.test.ts`
+- `tests/auth-profile-validation.test.ts`
+
+`tests/product-validation.test.ts` covers:
+
+- valid product codes
+- product code lower bound
+- whole-number requirement
+- image URL/path validation
+- product object id validation
+- product image upload validation
+
+`tests/auth-profile-validation.test.ts` covers:
+
+- profile name/phone updates
+- phone normalization
+- current password required when changing password
+- strong new password requirements
+- name/phone updates do not require password changes
+
+Recommended verification commands:
+
+```bash
+npx eslint components/admin components/ui lib models app/api tests
+npx vitest run tests/product-validation.test.ts tests/auth-profile-validation.test.ts
+npx tsc --noEmit --pretty false
+```
+
+### 18.12 Product Operational Notes
+
+- `productCode` must be unique and `>= 1000`.
+- Admin can see `latestCode` before creating the next product.
+- Product image upload requires all upload storage env vars plus `UPLOAD_PUBLIC_BASE_URL`.
+- Product images uploaded through admin live under `product-uploads/`.
+- Lead attachments continue to live under `lead-uploads/`.
+- Deleting a product also attempts to delete its uploaded product image.
+- A product can still use a manually entered image URL/path; in that case no `imageStorageKey` is stored.

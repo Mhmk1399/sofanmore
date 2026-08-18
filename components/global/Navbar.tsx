@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import {
   Armchair,
   Building2,
@@ -12,20 +13,23 @@ import {
   FolderOpen,
   Hammer,
   Home,
+  Images,
   Layers,
   Mail,
   Menu,
   MoveRight,
   Palette,
   Phone,
-  Sparkles,
   Wrench,
   X,
 } from "lucide-react";
 
+import type { LucideIcon } from "lucide-react";
+import type { Dispatch, ReactNode, SetStateAction } from "react";
+
 import { useCallback, useEffect, useRef, useState } from "react";
+
 import ClayButton from "../ui/ClayButton";
-import { FaPhotoFilm } from "react-icons/fa6";
 
 /* =========================================================
    TYPES
@@ -34,10 +38,21 @@ import { FaPhotoFilm } from "react-icons/fa6";
 type ServiceGroup = {
   title: string;
   subtitle: string;
-  icon: typeof Armchair;
+  icon: LucideIcon;
   href: string;
   image: string;
-  links: { label: string; href: string }[];
+  links: {
+    label: string;
+    href: string;
+  }[];
+};
+
+type MobilePanel = "main" | "services" | "service-detail";
+
+type MobileTab = {
+  label: string;
+  icon: LucideIcon;
+  href: string;
 };
 
 /* =========================================================
@@ -59,7 +74,7 @@ const serviceGroups: ServiceGroup[] = [
       },
       {
         label: "Corner & Modular Sofas",
-        href: "/services/bespoke-sofa#corner-modular-sofas",
+        href: "/services/bespoke-sofas#corner-modular-sofas",
       },
       {
         label: "Chairs & Armchairs",
@@ -67,7 +82,7 @@ const serviceGroups: ServiceGroup[] = [
       },
       {
         label: "Beds & Headboards",
-        href: "/services/bespoke-sofa#beds-headboards",
+        href: "/services/bespoke-sofas#beds-headboards",
       },
       {
         label: "Benches & Ottomans",
@@ -163,44 +178,105 @@ const serviceGroups: ServiceGroup[] = [
 ];
 
 const navLinks = [
-  { label: "Gallery", href: "/gallery" },
-  { label: "Workshop", href: "/workshop" },
-  { label: "Blog", href: "/blog" },
-  { label: "About Us", href: "/about-us" },
-
-  { label: "Contact", href: "/contact-us" },
-  { label: "Faq", href: "/faqs" },
+  {
+    label: "Gallery",
+    href: "/gallery",
+  },
+  {
+    label: "Workshop",
+    href: "/workshop",
+  },
+  {
+    label: "Blog",
+    href: "/blog",
+  },
+  {
+    label: "About Us",
+    href: "/about-us",
+  },
+  {
+    label: "Contact",
+    href: "/contact-us",
+  },
+  {
+    label: "FAQ",
+    href: "/faqs",
+  },
 ];
 
-// Mobile bottom bar quick tabs
-const mobileTabs = [
-  { label: "Menu", icon: Menu, href: "#menu" },
-  { label: "Home", icon: Home, href: "/" },
-  { label: "Workshop", icon: Wrench, href: "/workshop" },
-
-  { label: "Gallery", href: "/gallery", icon: FaPhotoFilm },
-  { label: "Services", icon: Layers, href: "/services" },
-  { label: "Contact", icon: FolderOpen, href: "/contact-us" },
-  // { label: "About", icon: Info, href: "/about-us" },
-  // { label: "Blog", icon: Menu, href: "/blog" },
+const mobileTabs: MobileTab[] = [
+  {
+    label: "Menu",
+    icon: Menu,
+    href: "#menu",
+  },
+  {
+    label: "Home",
+    icon: Home,
+    href: "/",
+  },
+  {
+    label: "Workshop",
+    icon: Wrench,
+    href: "/workshop",
+  },
+  {
+    label: "Gallery",
+    icon: Images,
+    href: "/gallery",
+  },
+  {
+    label: "Services",
+    icon: Layers,
+    href: "/services",
+  },
+  {
+    label: "Contact",
+    icon: FolderOpen,
+    href: "/contact-us",
+  },
 ];
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function isPathActive(pathname: string, href: string) {
+  if (href === "/") {
+    return pathname === "/";
+  }
+
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 /* =========================================================
    ROOT
 ========================================================= */
 
 export default function Navbar() {
-  const [megaOpen, setMegaOpen] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobilePanel, setMobilePanel] = useState<
-    "main" | "services" | "service-detail"
-  >("main");
-  const [activeServiceIdx, setActiveServiceIdx] = useState(0);
-  const [scrolled, setScrolled] = useState(false);
-  const [activeGroup, setActiveGroup] = useState(0);
-  const navbarRef = useRef<HTMLElement>(null);
-  const megaTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
+
+  const [megaOpen, setMegaOpen] = useState(false);
+
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const [mobilePanel, setMobilePanel] = useState<MobilePanel>("main");
+
+  const [activeServiceIdx, setActiveServiceIdx] = useState(0);
+
+  const [activeGroup, setActiveGroup] = useState(0);
+
+  const [scrolled, setScrolled] = useState(false);
+
+  const navbarRef = useRef<HTMLElement>(null);
+
+  const megaTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const scrolledRef = useRef(false);
+
+  /* =======================================================
+     CLOSE
+  ======================================================= */
 
   const closeNavigation = useCallback(() => {
     setMegaOpen(false);
@@ -208,94 +284,261 @@ export default function Navbar() {
     setMobilePanel("main");
   }, []);
 
-  // Close on route change
-  useEffect(() => {
-    const frameId = window.requestAnimationFrame(closeNavigation);
+  /* =======================================================
+     CLOSE AFTER ROUTE CHANGE
+  ======================================================= */
 
-    return () => window.cancelAnimationFrame(frameId);
+  useEffect(() => {
+    closeNavigation();
   }, [pathname, closeNavigation]);
 
-  // Scroll
+  /* =======================================================
+     DESKTOP SCROLL STATE
+  ======================================================= */
+
   useEffect(() => {
-    function onScroll() {
-      setScrolled(window.scrollY > 20);
-    }
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    let frameId = 0;
+
+    const update = () => {
+      frameId = 0;
+
+      const next = window.scrollY > 24;
+
+      if (next === scrolledRef.current) {
+        return;
+      }
+
+      scrolledRef.current = next;
+      setScrolled(next);
+    };
+
+    const handleScroll = () => {
+      if (frameId) return;
+
+      frameId = window.requestAnimationFrame(update);
+    };
+
+    update();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
   }, []);
 
-  // ESC
-  useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") closeNavigation();
-    }
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [closeNavigation]);
+  /* =======================================================
+     ESC
+  ======================================================= */
 
-  // Outside click desktop
   useEffect(() => {
-    function handlePointerDown(e: PointerEvent) {
-      if (navbarRef.current && !navbarRef.current.contains(e.target as Node)) {
+    if (!megaOpen && !mobileOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeNavigation();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [megaOpen, mobileOpen, closeNavigation]);
+
+  /* =======================================================
+     DESKTOP OUTSIDE CLICK
+  ======================================================= */
+
+  useEffect(() => {
+    if (!megaOpen) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const navbar = navbarRef.current;
+
+      if (navbar && !navbar.contains(event.target as Node)) {
         setMegaOpen(false);
       }
-    }
-    document.addEventListener("pointerdown", handlePointerDown);
-    return () => document.removeEventListener("pointerdown", handlePointerDown);
-  }, []);
+    };
 
-  // Mobile scroll lock
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [megaOpen]);
+
+  /* =======================================================
+     ROBUST MOBILE SCROLL LOCK
+
+     Important for:
+     iOS Safari
+     Android Chrome
+     Lenis-style smooth scrolling
+  ======================================================= */
+
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    if (!mobileOpen) return;
+
+    const body = document.body;
+    const html = document.documentElement;
+
+    const scrollY = window.scrollY;
+
+    const previous = {
+      bodyPosition: body.style.position,
+
+      bodyTop: body.style.top,
+
+      bodyLeft: body.style.left,
+
+      bodyRight: body.style.right,
+
+      bodyWidth: body.style.width,
+
+      bodyOverflow: body.style.overflow,
+
+      htmlOverflow: html.style.overflow,
+
+      htmlOverscroll: html.style.overscrollBehavior,
+    };
+
+    /*
+      position: fixed is much more
+      reliable than overflow:hidden alone
+      on iOS Safari.
+    */
+
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+
+    html.style.overflow = "hidden";
+    html.style.overscrollBehavior = "none";
+
     return () => {
-      document.body.style.overflow = "";
+      body.style.position = previous.bodyPosition;
+
+      body.style.top = previous.bodyTop;
+
+      body.style.left = previous.bodyLeft;
+
+      body.style.right = previous.bodyRight;
+
+      body.style.width = previous.bodyWidth;
+
+      body.style.overflow = previous.bodyOverflow;
+
+      html.style.overflow = previous.htmlOverflow;
+
+      html.style.overscrollBehavior = previous.htmlOverscroll;
+
+      window.scrollTo(0, scrollY);
     };
   }, [mobileOpen]);
 
-  // Mega hover intent
+  /* =======================================================
+     CLEAN TIMER
+  ======================================================= */
+
+  useEffect(() => {
+    return () => {
+      if (megaTimeout.current) {
+        clearTimeout(megaTimeout.current);
+      }
+    };
+  }, []);
+
+  /* =======================================================
+     DESKTOP MEGA MENU
+  ======================================================= */
+
   function handleMegaEnter() {
-    if (megaTimeout.current) clearTimeout(megaTimeout.current);
+    if (megaTimeout.current) {
+      clearTimeout(megaTimeout.current);
+    }
+
     setMegaOpen(true);
   }
+
   function handleMegaLeave() {
-    megaTimeout.current = setTimeout(() => setMegaOpen(false), 280);
+    if (megaTimeout.current) {
+      clearTimeout(megaTimeout.current);
+    }
+
+    megaTimeout.current = setTimeout(() => {
+      setMegaOpen(false);
+    }, 200);
   }
 
-  // Mobile tab handler
-  function handleMobileTab(tab: (typeof mobileTabs)[number]) {
-    if (tab.label === "Menu") {
-      setMobileOpen(true);
-      setMobilePanel("main");
+  /* =======================================================
+     MOBILE PANEL TRIGGERS
+  ======================================================= */
+
+  function handleMobileMenu() {
+    if (mobileOpen && mobilePanel === "main") {
+      closeNavigation();
       return;
     }
-    if (tab.label === "Services") {
-      setMobileOpen(true);
-      setMobilePanel("services");
-      return;
-    }
-    closeNavigation();
+
+    setMobilePanel("main");
+    setMobileOpen(true);
   }
+
+  function handleMobileServices() {
+    if (
+      mobileOpen &&
+      (mobilePanel === "services" || mobilePanel === "service-detail")
+    ) {
+      closeNavigation();
+      return;
+    }
+
+    setMobilePanel("services");
+    setMobileOpen(true);
+  }
+
   if (pathname === "/login") {
     return null;
   }
+
   return (
     <>
-      {/* =====================================================
-          DESKTOP NAVBAR (top fixed)
-      ====================================================== */}
+      {/* ===============================================
+          DESKTOP
+      ================================================ */}
+
       <header
         ref={navbarRef}
         className="
-          fixed inset-x-0 top-0
+          fixed
+          inset-x-0
+          top-0
+
           z-[200]
+
           hidden
-          px-3 pt-3
+
+          px-3
+          pt-3
+
           sm:px-5
-          lg:block lg:px-8 lg:pt-4
+
+          lg:block
+          lg:px-8
+          lg:pt-4
         "
       >
         <DesktopBar
+          pathname={pathname}
           scrolled={scrolled}
           megaOpen={megaOpen}
           setMegaOpen={setMegaOpen}
@@ -304,29 +547,31 @@ export default function Navbar() {
           handleMegaLeave={handleMegaLeave}
         />
 
-        <DesktopMegaMenu
-          open={megaOpen}
-          close={closeNavigation}
-          activeGroup={activeGroup}
-          setActiveGroup={setActiveGroup}
-          onMouseEnter={handleMegaEnter}
-          onMouseLeave={handleMegaLeave}
-        />
+        {megaOpen && (
+          <DesktopMegaMenu
+            close={closeNavigation}
+            activeGroup={activeGroup}
+            setActiveGroup={setActiveGroup}
+            onMouseEnter={handleMegaEnter}
+            onMouseLeave={handleMegaLeave}
+          />
+        )}
       </header>
 
-      {/* =====================================================
-          MOBILE DYNAMIC ISLAND (bottom fixed)
-      ====================================================== */}
+      {/* ===============================================
+          MOBILE
+      ================================================ */}
+
       <MobileDynamicIsland
-        tabs={mobileTabs}
+        pathname={pathname}
         mobileOpen={mobileOpen}
         mobilePanel={mobilePanel}
         setMobilePanel={setMobilePanel}
         activeServiceIdx={activeServiceIdx}
         setActiveServiceIdx={setActiveServiceIdx}
-        onTabPress={handleMobileTab}
         close={closeNavigation}
-        pathname={pathname}
+        openMenu={handleMobileMenu}
+        openServices={handleMobileServices}
       />
     </>
   );
@@ -337,6 +582,7 @@ export default function Navbar() {
 ========================================================= */
 
 function DesktopBar({
+  pathname,
   scrolled,
   megaOpen,
   setMegaOpen,
@@ -344,75 +590,172 @@ function DesktopBar({
   handleMegaEnter,
   handleMegaLeave,
 }: {
+  pathname: string;
   scrolled: boolean;
   megaOpen: boolean;
-  setMegaOpen: React.Dispatch<React.SetStateAction<boolean>>;
+
+  setMegaOpen: Dispatch<SetStateAction<boolean>>;
+
   closeNavigation: () => void;
+
   handleMegaEnter: () => void;
   handleMegaLeave: () => void;
 }) {
+  const servicesActive = pathname.startsWith("/services");
+
   return (
     <div
       className={`
         navbar-bar
-        relative z-30 mx-auto
-        flex items-center justify-between
+        clay-surface-soft
+
+        relative
+        z-30
+
+        mx-auto
+
+        flex
         max-w-[var(--site-width)]
-        rounded-[29px] px-7
-        transition-all duration-500
-        ${
-          scrolled
-            ? "h-[72px] clay-surface-strong navbar-scrolled"
-            : "h-[82px] clay-surface-strong"
-        }
+
+        items-center
+        justify-between
+
+        rounded-[27px]
+
+        border
+        border-white/70
+
+        px-7
+
+        ${scrolled ? "h-[70px]" : "h-[78px]"}
       `}
     >
       <Logo close={closeNavigation} />
 
       <nav
         aria-label="Main navigation"
-        className="flex items-center gap-1 xl:gap-2"
-      >
-        <DesktopLink href={navLinks[0].href}>{navLinks[0].label}</DesktopLink>
+        className="
+          flex
+          items-center
 
-        <div onMouseEnter={handleMegaEnter} onMouseLeave={handleMegaLeave}>
-          <button
-            type="button"
-            aria-expanded={megaOpen}
-            aria-haspopup="true"
-            onClick={() => setMegaOpen((v) => !v)}
+          gap-0.5
+
+          xl:gap-1
+        "
+      >
+        <DesktopLink href="/gallery" active={pathname === "/gallery"}>
+          Gallery
+        </DesktopLink>
+
+        {/* SERVICES */}
+
+        <div
+          onMouseEnter={handleMegaEnter}
+          onMouseLeave={handleMegaLeave}
+          className="
+            flex
+            items-center
+          "
+        >
+          <Link
+            href="/services"
+            onClick={closeNavigation}
             className={`
-              navbar-link group
-              flex h-10 items-center gap-1.5
-              rounded-[13px] px-3.5
-              font-brand-sans   font-semibold
-              uppercase tracking-[0.07em]
-              transition-all duration-300
+              navbar-link
+
+              flex
+              h-10
+              items-center
+
+              rounded-l-[13px]
+
+              px-3.5
+
+              font-brand-sans
+
+              text-[11px]
+              font-semibold
+
+              uppercase
+              tracking-[0.07em]
+
+              transition-colors
+              duration-150
+
               ${
-                megaOpen
-                  ? "bg-white/30 text-[var(--brand-gold-700)] shadow-[inset_2px_2px_5px_rgba(0,0,0,0.04)]"
-                  : "text-[var(--brand-navy)] hover:text-[var(--brand-gold-700)]"
+                servicesActive || megaOpen
+                  ? `
+                    bg-white/35
+                    text-[var(--brand-gold-700)]
+                  `
+                  : `
+                    text-[var(--brand-navy)]
+                    hover:text-[var(--brand-gold-700)]
+                  `
               }
             `}
           >
             Services
+          </Link>
+
+          <button
+            type="button"
+            aria-haspopup="true"
+            aria-expanded={megaOpen}
+            aria-label={megaOpen ? "Close services menu" : "Open services menu"}
+            onClick={() => setMegaOpen((current) => !current)}
+            className={`
+              flex
+              h-10
+              w-8
+
+              items-center
+              justify-center
+
+              rounded-r-[13px]
+
+              transition-colors
+              duration-150
+
+              ${
+                servicesActive || megaOpen
+                  ? `
+                    bg-white/35
+                    text-[var(--brand-gold-700)]
+                  `
+                  : `
+                    text-[var(--brand-navy)]/60
+                    hover:text-[var(--brand-gold-700)]
+                  `
+              }
+            `}
+          >
             <ChevronDown
-              size={14}
+              size={13}
               strokeWidth={1.8}
-              className={`transition-transform duration-300 ${megaOpen ? "rotate-180" : ""}`}
+              className={`
+                transition-transform
+                duration-150
+
+                ${megaOpen ? "rotate-180" : ""}
+              `}
             />
           </button>
         </div>
 
         {navLinks.slice(1).map((link) => (
-          <DesktopLink key={link.label} href={link.href}>
+          <DesktopLink
+            key={link.label}
+            href={link.href}
+            active={pathname === link.href}
+          >
             {link.label}
           </DesktopLink>
         ))}
       </nav>
 
-      <ClayButton href="tel:+4407400577844" variant="navy" size="lg">
-        Call +44 074005 77844
+      <ClayButton href="tel:+447400577844" variant="navy" size="md">
+        Call +44 7400 577844
       </ClayButton>
     </div>
   );
@@ -427,28 +770,62 @@ function Logo({ close }: { close: () => void }) {
     <Link
       href="/"
       onClick={close}
-      className="group shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand-gold)]"
       aria-label="Sofa N More — Home"
+      className="
+        shrink-0
+
+        focus-visible:outline-2
+        focus-visible:outline-offset-4
+        focus-visible:outline-[var(--brand-gold)]
+      "
     >
-      <div className="flex flex-col items-center">
+      <div
+        className="
+          flex
+          flex-col
+          items-center
+        "
+      >
         <Crown
-          size={21}
-          strokeWidth={1.4}
-          className="mb-[-2px] text-[var(--brand-gold)] transition-transform duration-500 group-hover:-translate-y-[1px] group-hover:scale-110"
+          size={19}
+          strokeWidth={1.35}
+          className="
+            mb-[-1px]
+            text-[var(--brand-gold)]
+          "
         />
-        <span className="font-brand-display text-[22px] font-semibold tracking-[0.035em]">
+
+        <span
+          className="
+            font-brand-display
+
+            text-[21px]
+            font-semibold
+
+            tracking-[0.035em]
+
+            text-[var(--brand-navy)]
+          "
+        >
           SOFA N MORE
         </span>
-        <span className="mt-[1px] flex items-center gap-1.5 font-brand-sans text-[6px] font-bold uppercase tracking-[0.31em] text-[var(--brand-gold-700)]">
-          <span
-            aria-hidden
-            className="h-px w-4 bg-gradient-to-r from-transparent to-[var(--brand-gold)]"
-          />
+
+        <span
+          className="
+            mt-[1px]
+
+            font-brand-sans
+
+            text-[6px]
+            font-bold
+            uppercase
+
+            tracking-[0.31em]
+
+            text-[var(--brand-gold-700)]
+          "
+        >
           London
-          <span
-            aria-hidden
-            className="h-px w-4 bg-gradient-to-l from-transparent to-[var(--brand-gold)]"
-          />
         </span>
       </div>
     </Link>
@@ -461,22 +838,56 @@ function Logo({ close }: { close: () => void }) {
 
 function DesktopLink({
   href,
+  active,
   children,
 }: {
   href: string;
-  children: React.ReactNode;
+  active: boolean;
+  children: ReactNode;
 }) {
   return (
     <Link
       href={href}
-      className="
-        navbar-link relative flex h-10 items-center
-        rounded-[13px] px-3.5
-        font-brand-sans text-[11px] font-semibold uppercase tracking-[0.07em]
-        text-[var(--brand-navy)] transition-all duration-300
-        hover:bg-white/25 hover:text-[var(--brand-gold-700)]
-        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-gold)]
-      "
+      className={`
+        navbar-link
+
+        flex
+        h-10
+        items-center
+
+        rounded-[13px]
+
+        px-3.5
+
+        font-brand-sans
+
+        text-[11px]
+        font-semibold
+
+        uppercase
+        tracking-[0.07em]
+
+        transition-colors
+        duration-150
+
+        ${
+          active
+            ? `
+              bg-white/35
+              text-[var(--brand-gold-700)]
+            `
+            : `
+              text-[var(--brand-navy)]
+
+              hover:bg-white/20
+              hover:text-[var(--brand-gold-700)]
+            `
+        }
+
+        focus-visible:outline-2
+        focus-visible:outline-offset-2
+        focus-visible:outline-[var(--brand-gold)]
+      `}
     >
       {children}
     </Link>
@@ -488,17 +899,17 @@ function DesktopLink({
 ========================================================= */
 
 function DesktopMegaMenu({
-  open,
   close,
   activeGroup,
   setActiveGroup,
   onMouseEnter,
   onMouseLeave,
 }: {
-  open: boolean;
   close: () => void;
   activeGroup: number;
-  setActiveGroup: (i: number) => void;
+
+  setActiveGroup: (index: number) => void;
+
   onMouseEnter: () => void;
   onMouseLeave: () => void;
 }) {
@@ -508,152 +919,528 @@ function DesktopMegaMenu({
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`
-        absolute left-1/2 top-[calc(100%-2px)]
-        w-[calc(100%-4rem)] max-w-[1340px]
-        -translate-x-1/2 pt-3
-        ${open ? "pointer-events-auto" : "pointer-events-none"}
-      `}
+      className="
+        absolute
+
+        left-1/2
+        top-[calc(100%-2px)]
+
+        w-[calc(100%-4rem)]
+        max-w-[1320px]
+
+        -translate-x-1/2
+
+        pt-2
+      "
     >
       <div
-        className={`
-          clay-surface-strong rounded-[34px] p-[8px]
-          transition-all duration-400
-          ${open ? "translate-y-0 scale-100 opacity-100" : "-translate-y-4 scale-[0.97] opacity-0"}
-        `}
         role="region"
         aria-label="Services menu"
+        className="
+          clay-surface-soft
+
+          overflow-hidden
+
+          rounded-[30px]
+
+          border
+          border-white/75
+
+          p-2
+
+          animate-fadeIn
+        "
       >
-        <div className="clay-inset rounded-[27px] p-3">
-          <div className="grid grid-cols-[280px_1fr] gap-3">
-            <div className="flex flex-col gap-1.5">
-              {serviceGroups.map((group, idx) => {
+        <div
+          className="
+            rounded-[24px]
+
+            border
+            border-white/60
+
+            bg-[#FFFDF8]/95
+
+            p-3
+          "
+        >
+          <div
+            className="
+              grid
+              grid-cols-[265px_1fr]
+              gap-3
+            "
+          >
+            {/* LEFT SERVICE GROUPS */}
+
+            <div
+              className="
+                flex
+                flex-col
+                gap-1
+              "
+            >
+              {serviceGroups.map((group, index) => {
                 const Icon = group.icon;
-                const isActive = idx === activeGroup;
+
+                const isActive = index === activeGroup;
+
                 return (
                   <button
                     key={group.title}
                     type="button"
-                    onPointerEnter={() => setActiveGroup(idx)}
-                    onFocus={() => setActiveGroup(idx)}
-                    onClick={() => setActiveGroup(idx)}
+                    onMouseEnter={() => setActiveGroup(index)}
+                    onFocus={() => setActiveGroup(index)}
+                    onClick={() => setActiveGroup(index)}
                     className={`
-                      group flex items-center gap-3
-                      rounded-[18px] px-3.5 py-3 text-left
-                      transition-colors duration-100
-                      ${isActive ? "clay-surface mega-tab-active" : "hover:bg-white/30"}
-                    `}
+                        flex
+                        items-center
+
+                        gap-3
+
+                        rounded-[16px]
+
+                        border
+
+                        px-3
+                        py-2.5
+
+                        text-left
+
+                        transition-colors
+                        duration-100
+
+                        ${
+                          isActive
+                            ? `
+                              border-[var(--brand-gold)]/15
+                              bg-[#F3E9DC]
+                            `
+                            : `
+                              border-transparent
+                              hover:bg-[#F7F0E7]
+                            `
+                        }
+                      `}
                   >
                     <span
-                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] transition-colors duration-100 ${isActive ? "clay-icon-inset" : "bg-white/20"}`}
+                      className={`
+                          flex
+                          h-9
+                          w-9
+
+                          shrink-0
+
+                          items-center
+                          justify-center
+
+                          rounded-[11px]
+
+                          ${
+                            isActive
+                              ? `
+                                bg-[var(--brand-navy)]
+                                text-[var(--brand-gold)]
+                              `
+                              : `
+                                bg-[var(--brand-navy)]/[0.05]
+                                text-[var(--brand-text-muted)]
+                              `
+                          }
+                        `}
                     >
-                      <Icon
-                        size={20}
-                        strokeWidth={1.5}
-                        className={`transition-colors duration-100 ${isActive ? "text-[var(--brand-gold)]" : "text-[var(--brand-text-muted)] group-hover:text-[var(--brand-gold)]"}`}
-                      />
+                      <Icon size={16} strokeWidth={1.5} />
                     </span>
+
                     <div className="min-w-0">
                       <div
-                        className={`font-brand-display text-[14px] font-semibold leading-tight transition-colors duration-100 ${isActive ? "text-[var(--brand-navy)]" : "text-[var(--brand-navy)]/80"}`}
+                        className="
+                            font-brand-display
+
+                            text-[13px]
+                            font-semibold
+                            leading-tight
+
+                            text-[var(--brand-navy)]
+                          "
                       >
                         {group.title}
                       </div>
-                      <div className="mt-0.5 font-brand-sans text-[9px] font-semibold text-[var(--brand-text-muted)]">
+
+                      <div
+                        className="
+                            mt-0.5
+
+                            font-brand-sans
+
+                            text-[8px]
+                            font-semibold
+
+                            text-[var(--brand-text-muted)]
+                          "
+                      >
                         {group.subtitle}
                       </div>
                     </div>
-                    <MoveRight
-                      size={14}
-                      className={`ml-auto shrink-0 text-[var(--brand-gold)] transition-[opacity,transform] duration-100 ${isActive ? "translate-x-0 opacity-100" : "-translate-x-1 opacity-0"}`}
+
+                    <ChevronRight
+                      size={13}
+                      className={`
+                          ml-auto
+
+                          ${
+                            isActive
+                              ? `
+                                text-[var(--brand-gold)]
+                                opacity-100
+                              `
+                              : `
+                                opacity-0
+                              `
+                          }
+                        `}
                     />
                   </button>
                 );
               })}
             </div>
 
-            <div className="clay-surface-soft grid grid-cols-[1fr_200px] gap-4 rounded-[23px] p-5">
+            {/* ACTIVE SERVICE */}
+
+            <div
+              className="
+                grid
+                grid-cols-[1fr_210px]
+
+                gap-5
+
+                rounded-[20px]
+
+                border
+                border-[var(--brand-navy)]/[0.06]
+
+                bg-white/45
+
+                p-5
+              "
+            >
               <div>
-                <div className="mb-4 flex items-center gap-2.5">
-                  <Sparkles size={14} className="text-[var(--brand-gold)]" />
-                  <span className="font-brand-sans text-[9px] font-bold uppercase tracking-[0.1em] text-[var(--brand-gold-700)]">
-                    {active.title}
-                  </span>
+                <div
+                  className="
+                    flex
+                    items-start
+                    justify-between
+
+                    gap-4
+                  "
+                >
+                  <div>
+                    <span
+                      className="
+                        font-brand-sans
+
+                        text-[7px]
+                        font-bold
+                        uppercase
+
+                        tracking-[0.15em]
+
+                        text-[var(--brand-gold-700)]
+                      "
+                    >
+                      Explore Service
+                    </span>
+
+                    <h3
+                      className="
+                        mt-1.5
+
+                        font-brand-display
+
+                        text-[21px]
+                        font-semibold
+
+                        text-[var(--brand-navy)]
+                      "
+                    >
+                      {active.title}
+                    </h3>
+
+                    <p
+                      className="
+                        mt-1
+
+                        font-brand-sans
+
+                        text-[9px]
+                        font-medium
+
+                        text-[var(--brand-text-muted)]
+                      "
+                    >
+                      {active.subtitle}
+                    </p>
+                  </div>
+
+                  <Link
+                    href={active.href}
+                    onClick={close}
+                    prefetch={false}
+                    className="
+                      flex
+                      items-center
+
+                      gap-1.5
+
+                      rounded-full
+
+                      px-3
+                      py-2
+
+                      font-brand-sans
+
+                      text-[8px]
+                      font-bold
+                      uppercase
+
+                      tracking-[0.07em]
+
+                      text-[var(--brand-gold-700)]
+
+                      transition-colors
+                      duration-150
+
+                      hover:bg-[var(--brand-gold)]/[0.08]
+                    "
+                  >
+                    View Service
+                    <MoveRight size={11} />
+                  </Link>
                 </div>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-0.5">
+
+                <div
+                  className="
+                    mt-4
+
+                    grid
+                    grid-cols-2
+
+                    gap-x-3
+                    gap-y-1
+                  "
+                >
                   {active.links.map((link) => (
                     <Link
                       key={link.label}
                       href={link.href}
+                      prefetch={false}
                       onClick={close}
-                      className="mega-subcategory-link group/link flex items-center justify-between rounded-[12px] border border-transparent px-3 py-2.5 font-brand-sans text-[12px] font-medium text-[var(--brand-text-muted)] hover:text-[var(--brand-navy)]"
+                      className="
+                          flex
+                          min-h-[42px]
+
+                          items-center
+                          justify-between
+
+                          rounded-[11px]
+
+                          border
+                          border-transparent
+
+                          px-3
+
+                          font-brand-sans
+
+                          text-[11px]
+                          font-medium
+
+                          text-[var(--brand-text-muted)]
+
+                          transition-colors
+                          duration-150
+
+                          hover:border-[var(--brand-navy)]/[0.05]
+                          hover:bg-[#F6EFE6]
+                          hover:text-[var(--brand-navy)]
+                        "
                     >
-                      {link.label}
+                      <span>{link.label}</span>
+
                       <MoveRight
-                        size={12}
-                        className="text-[var(--brand-gold)] opacity-0 transition-all duration-200 group-hover/link:translate-x-1 group-hover/link:opacity-100"
+                        size={11}
+                        className="
+                            shrink-0
+                            text-[var(--brand-gold)]
+                          "
                       />
                     </Link>
                   ))}
                 </div>
-                <Link
-                  href={active.href}
-                  onClick={close}
-                  className="mt-4 inline-flex items-center gap-2 rounded-[12px] px-3 py-2 font-brand-sans text-[10px] font-bold uppercase tracking-[0.06em] text-[var(--brand-gold-700)] transition-all duration-300 hover:bg-[var(--brand-gold)]/10"
+              </div>
+
+              {/* IMAGE ALSO LINKS */}
+
+              <Link
+                href={active.href}
+                onClick={close}
+                prefetch={false}
+                className="
+                  relative
+
+                  min-h-[205px]
+
+                  overflow-hidden
+
+                  rounded-[17px]
+
+                  border
+                  border-white/80
+
+                  bg-[#EEE5D8]
+                "
+              >
+                <Image
+                  src={active.image}
+                  alt={`${active.title} preview`}
+                  fill
+                  sizes="210px"
+                  className="
+                    object-cover
+                    object-center
+                  "
+                />
+
+                <div
+                  aria-hidden
+                  className="
+                    absolute
+                    inset-x-0
+                    bottom-0
+
+                    h-1/2
+
+                    bg-gradient-to-t
+                    from-[var(--brand-navy)]/35
+                    to-transparent
+                  "
+                />
+
+                <span
+                  className="
+                    absolute
+                    bottom-3
+                    left-3
+
+                    font-brand-sans
+
+                    text-[8px]
+                    font-bold
+                    uppercase
+
+                    tracking-[0.1em]
+
+                    text-white
+                  "
                 >
-                  View all {active.title}
-                  <MoveRight size={13} />
-                </Link>
-              </div>
-              <div className="clay-inset relative overflow-hidden rounded-[20px] p-[5px]">
-                <div className="relative h-full min-h-[200px] overflow-hidden rounded-[16px]">
-                  <Image
-                    src={active.image}
-                    alt={`${active.title} preview`}
-                    fill
-                    sizes="200px"
-                    className="object-cover object-center transition-transform duration-700 hover:scale-105"
-                  />
-                </div>
-              </div>
+                  Explore
+                </span>
+              </Link>
             </div>
           </div>
 
-          <div className="mt-3 flex items-center justify-between gap-5 rounded-[18px] bg-white/20 px-5 py-3">
-            <div className="flex items-center gap-3">
-              <span className="clay-icon flex h-9 w-9 items-center justify-center rounded-[12px]">
-                <Phone
-                  size={15}
-                  strokeWidth={1.5}
-                  className="text-[var(--brand-gold)]"
-                />
+          {/* BOTTOM */}
+
+          <div
+            className="
+              mt-3
+
+              flex
+              items-center
+              justify-between
+
+              gap-5
+
+              border-t
+              border-[var(--brand-navy)]/[0.07]
+
+              px-2
+              pt-3
+            "
+          >
+            <div
+              className="
+                flex
+                items-center
+                gap-3
+              "
+            >
+              <span
+                className="
+                  flex
+                  h-8
+                  w-8
+
+                  items-center
+                  justify-center
+
+                  rounded-[10px]
+
+                  bg-[var(--brand-navy)]
+                  text-[var(--brand-gold)]
+                "
+              >
+                <Phone size={13} strokeWidth={1.5} />
               </span>
+
               <div>
-                <div className="font-brand-sans text-[10px] font-bold text-[var(--brand-navy)]">
+                <p
+                  className="
+                    font-brand-sans
+
+                    text-[9px]
+                    font-bold
+
+                    text-[var(--brand-navy)]
+                  "
+                >
                   Need help choosing?
-                </div>
-                <div className="font-brand-sans text-[9px] font-medium text-[var(--brand-text-muted)]">
-                  Our team is ready to assist
-                </div>
+                </p>
+
+                <p
+                  className="
+                    mt-0.5
+
+                    font-brand-sans
+
+                    text-[8px]
+                    font-medium
+
+                    text-[var(--brand-text-muted)]
+                  "
+                >
+                  Speak directly with our team.
+                </p>
               </div>
             </div>
-            <div className="flex items-center gap-2.5">
-              <Link
+
+            <div
+              className="
+                flex
+                items-center
+                gap-2
+              "
+            >
+              <ClayButton
                 href="tel:+447400577844"
-                onClick={close}
-                className="snm-button snm-button--ivory snm-button--sm gap-2"
+                variant="ivory"
+                size="sm"
+                startIcon={<Phone size={12} />}
               >
-                <Phone size={13} />
-                <span className="snm-button__label">Call Us</span>
-              </Link>
-              <Link
-                href="/contact-us"
-                onClick={close}
-                className="snm-button snm-button--gold snm-button--sm"
-              >
-                <span className="snm-button__label">Start Your Project</span>
-                <MoveRight size={13} className="snm-button__arrow" />
-              </Link>
+                Call Us
+              </ClayButton>
+
+              <ClayButton href="/contact-us" variant="gold" size="sm" showArrow>
+                Start Your Project
+              </ClayButton>
             </div>
           </div>
         </div>
@@ -667,81 +1454,137 @@ function DesktopMegaMenu({
 ========================================================= */
 
 function MobileDynamicIsland({
-  tabs,
+  pathname,
   mobileOpen,
   mobilePanel,
   setMobilePanel,
   activeServiceIdx,
   setActiveServiceIdx,
-  onTabPress,
   close,
-  pathname,
+  openMenu,
+  openServices,
 }: {
-  tabs: typeof mobileTabs;
-  mobileOpen: boolean;
-  mobilePanel: "main" | "services" | "service-detail";
-  setMobilePanel: React.Dispatch<
-    React.SetStateAction<"main" | "services" | "service-detail">
-  >;
-  activeServiceIdx: number;
-  setActiveServiceIdx: React.Dispatch<React.SetStateAction<number>>;
-  onTabPress: (tab: (typeof mobileTabs)[number]) => void;
-  close: () => void;
   pathname: string;
+
+  mobileOpen: boolean;
+
+  mobilePanel: MobilePanel;
+
+  setMobilePanel: Dispatch<SetStateAction<MobilePanel>>;
+
+  activeServiceIdx: number;
+
+  setActiveServiceIdx: Dispatch<SetStateAction<number>>;
+
+  close: () => void;
+
+  openMenu: () => void;
+
+  openServices: () => void;
 }) {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[300] lg:hidden">
-      {/* ===================================================
-          BACKDROP (when expanded)
-      ==================================================== */}
-      {mobileOpen && (
-        <button
-          type="button"
-          aria-label="Close menu"
-          onClick={close}
-          className="
-            fixed inset-0 z-[298]
-            bg-[rgba(7,18,30,0.45)]
-            backdrop-blur-[8px]
-            animate-fadeIn
-          "
-        />
-      )}
+    /*
+      VERY IMPORTANT:
 
-      {/* ===================================================
-          EXPANDED PANEL (slides up from island)
-      ==================================================== */}
-      <div
-        className={`
-          fixed inset-x-0 bottom-0 z-[299]
-          transition-all duration-500
-          ${
-            mobileOpen
-              ? "pointer-events-auto translate-y-0 opacity-100"
-              : "pointer-events-none translate-y-full opacity-0"
-          }
-        `}
-      >
-        <div
-          className="
-            island-panel
-            mx-3 mb-[88px]
-            max-h-[calc(100dvh-140px)]
-            overflow-hidden
-            rounded-[32px]
-          "
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation"
-        >
-          {/* Outer clay shell */}
-          <div className="clay-surface-strong rounded-[32px] p-[7px]">
-            <div className="clay-inset overflow-hidden rounded-[26px]">
-              {/* Panel content — slides between views */}
+      The wrapper itself cannot receive
+      touches. Only actual children can.
+
+      This prevents an invisible fixed layer
+      from blocking links/content on mobile.
+    */
+    <div
+      className="
+        pointer-events-none
+
+        fixed
+        inset-x-0
+        bottom-0
+
+        z-[300]
+
+        lg:hidden
+      "
+    >
+      {/* ===============================================
+          OPEN STATE
+      ================================================ */}
+
+      {mobileOpen && (
+        <>
+          {/* BACKDROP */}
+
+          <button
+            type="button"
+            aria-label="Close navigation menu"
+            onClick={close}
+            className="
+              pointer-events-auto
+
+              fixed
+              inset-0
+
+              z-[298]
+
+              cursor-default
+
+              touch-none
+
+              bg-[rgba(7,18,30,0.48)]
+
+              animate-fadeIn
+            "
+          />
+
+          {/* PANEL */}
+
+          <div
+            className="
+              pointer-events-auto
+
+              fixed
+              inset-x-0
+              bottom-0
+
+              z-[299]
+
+              island-panel-enter
+            "
+          >
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-label="Sofa N More navigation"
+              className="
+                island-panel
+
+                mx-3
+                mb-[82px]
+
+                max-h-[calc(100dvh-112px)]
+
+                overflow-hidden
+
+                rounded-[25px]
+
+                border
+                border-white/70
+
+                bg-[#FFFDF8]
+              "
+            >
               <div
                 data-lenis-prevent
-                className="relative overflow-y-auto overscroll-contain"
-                style={{ maxHeight: "calc(100dvh - 200px)" }}
+                className="
+                  relative
+
+                  overflow-y-auto
+                  overscroll-contain
+
+                  [-webkit-overflow-scrolling:touch]
+                "
+                style={{
+                  maxHeight: "calc(100dvh - 130px)",
+                }}
               >
                 {mobilePanel === "main" && (
                   <IslandMainPanel
@@ -768,48 +1611,105 @@ function MobileDynamicIsland({
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
 
-      {/* ===================================================
-          DYNAMIC ISLAND BAR (always visible)
-      ==================================================== */}
-      <div className="island-safe-area relative z-[301] px-3 pb-2">
+      {/* ===============================================
+          ALWAYS VISIBLE ISLAND
+      ================================================ */}
+
+      <div
+        className="
+          pointer-events-auto
+
+          island-safe-area
+
+          relative
+          z-[301]
+
+          px-2.5
+          pb-2
+        "
+      >
         <div
-          className={`
+          className="
             island-bar
-            clay-surface-strong
-            mx-auto flex max-w-[420px]
-            items-center justify-around
-            transition-all duration-500
-            ${
-              mobileOpen
-                ? "rounded-[22px] px-2 py-2"
-                : "rounded-[28px] px-3 py-2.5"
-            }
-          `}
+
+            clay-surface-soft
+
+            mx-auto
+
+            grid
+            max-w-[430px]
+            grid-cols-6
+
+            items-stretch
+
+            rounded-[24px]
+
+            border
+            border-white/70
+
+            p-1.5
+          "
         >
-          {tabs.map((tab) => {
-            const isActive =
-              tab.label === "Menu"
-                ? mobileOpen
-                : tab.label === "Services"
-                  ? mobileOpen && mobilePanel === "services"
-                  : pathname === tab.href;
+          {mobileTabs.map((tab) => {
+            const serviceTab = tab.label === "Services";
+
+            const menuTab = tab.label === "Menu";
+
+            const active = menuTab
+              ? mobileOpen && mobilePanel === "main"
+              : serviceTab
+                ? pathname.startsWith("/services") ||
+                  (mobileOpen &&
+                    (mobilePanel === "services" ||
+                      mobilePanel === "service-detail"))
+                : isPathActive(pathname, tab.href);
+
+            if (menuTab) {
+              return (
+                <IslandActionTab
+                  key={tab.label}
+                  label={
+                    mobileOpen && mobilePanel === "main" ? "Close" : "Menu"
+                  }
+                  icon={mobileOpen && mobilePanel === "main" ? X : Menu}
+                  active={active}
+                  onClick={openMenu}
+                  expanded={mobileOpen && mobilePanel === "main"}
+                />
+              );
+            }
+
+            if (serviceTab) {
+              return (
+                <IslandActionTab
+                  key={tab.label}
+                  label="Services"
+                  icon={Layers}
+                  active={active}
+                  onClick={openServices}
+                  expanded={
+                    mobileOpen &&
+                    (mobilePanel === "services" ||
+                      mobilePanel === "service-detail")
+                  }
+                />
+              );
+            }
+
+            /*
+                Real destinations are REAL LINKS.
+              */
 
             return (
-              <IslandTab
+              <IslandLinkTab
                 key={tab.label}
                 tab={tab}
-                isActive={isActive}
-                onPress={() => {
-                  if (tab.label === "Menu" && mobileOpen) {
-                    close();
-                  } else {
-                    onTabPress(tab);
-                  }
-                }}
-                isMobileOpen={mobileOpen}
+                active={active}
+                close={close}
+                mobileOpen={mobileOpen}
               />
             );
           })}
@@ -820,98 +1720,256 @@ function MobileDynamicIsland({
 }
 
 /* =========================================================
-   ISLAND TAB BUTTON
+   REAL MOBILE LINK TAB
 ========================================================= */
 
-function IslandTab({
+function IslandLinkTab({
   tab,
-  isActive,
-  onPress,
-  isMobileOpen,
+  active,
+  close,
+  mobileOpen,
 }: {
-  tab: (typeof mobileTabs)[number];
-  isActive: boolean;
-  onPress: () => void;
-  isMobileOpen: boolean;
+  tab: MobileTab;
+  active: boolean;
+  close: () => void;
+  mobileOpen: boolean;
 }) {
   const Icon = tab.icon;
-  const isMenu = tab.label === "Menu";
 
   return (
-    <button
-      type="button"
-      onClick={onPress}
+    <Link
+      href={tab.href}
+      prefetch
       aria-label={tab.label}
-      aria-expanded={isMenu ? isMobileOpen : undefined}
+      aria-current={active ? "page" : undefined}
+      /*
+        Only close manually when the user
+        is already on the same destination.
+
+        For a different route, let Next.js
+        navigate first. The pathname effect
+        closes the menu automatically.
+
+        This avoids unmounting the Link
+        before navigation.
+      */
+      onClick={active && mobileOpen ? close : undefined}
       className={`
         island-tab
-        group relative
-        flex flex-col items-center justify-center
-        gap-[3px]
-        rounded-[16px]
-        px-3 py-2
-        transition-all duration-300
-        active:scale-90
 
-        ${isActive ? "island-tab-active" : ""}
+        relative
+
+        flex
+        min-h-[52px]
+        min-w-0
+
+        flex-col
+
+        items-center
+        justify-center
+
+        gap-[1px]
+
+        rounded-[14px]
+
+        px-1
+        py-1.5
+
+        transition-transform
+        duration-100
+
+        active:scale-[0.95]
+
+        ${active ? "island-tab-active" : ""}
       `}
     >
-      {/* Active indicator dot */}
-      <span
-        className={`
-          absolute -top-[2px] left-1/2
-          h-[3px] w-[3px] -translate-x-1/2
-          rounded-full bg-[var(--brand-gold)]
-          transition-all duration-300
-          ${isActive ? "scale-100 opacity-100" : "scale-0 opacity-0"}
-        `}
+      {active && (
+        <span
+          aria-hidden
+          className="
+            absolute
+
+            left-1/2
+            top-[3px]
+
+            h-[2px]
+            w-[14px]
+
+            -translate-x-1/2
+
+            rounded-full
+
+            bg-[var(--brand-gold)]
+          "
+        />
+      )}
+
+      <Icon
+        size={18}
+        strokeWidth={1.5}
+        className={
+          active
+            ? `
+              text-[var(--brand-gold)]
+            `
+            : `
+              text-[var(--brand-navy)]/60
+            `
+        }
       />
 
-      {/* Icon */}
-      <span className="relative">
-        {isMenu && isMobileOpen ? (
-          <X
-            size={20}
-            strokeWidth={1.7}
-            className="text-[var(--brand-gold)] transition-transform duration-300"
-          />
-        ) : (
-          <Icon
-            size={20}
-            strokeWidth={1.5}
-            className={`
-              transition-all duration-300
-              ${
-                isActive
-                  ? "text-[var(--brand-gold)] scale-110"
-                  : "text-[var(--brand-navy)]/60 group-hover:text-[var(--brand-navy)]"
-              }
-            `}
-          />
-        )}
-      </span>
-
-      {/* Label */}
       <span
         className={`
-          font-brand-sans text-[8px] font-bold
-          uppercase tracking-[0.06em]
-          transition-colors duration-300
+          max-w-full
+
+          truncate
+
+          font-brand-sans
+
+          text-[6.5px]
+          font-bold
+          uppercase
+
+          tracking-[0.035em]
+
           ${
-            isActive
-              ? "text-[var(--brand-gold-700)]"
-              : "text-[var(--brand-text-muted)]"
+            active
+              ? `
+                text-[var(--brand-gold-700)]
+              `
+              : `
+                text-[var(--brand-text-muted)]
+              `
           }
         `}
       >
-        {isMenu && isMobileOpen ? "Close" : tab.label}
+        {tab.label}
+      </span>
+    </Link>
+  );
+}
+
+/* =========================================================
+   MENU / SERVICES ACTION TAB
+========================================================= */
+
+function IslandActionTab({
+  label,
+  icon: Icon,
+  active,
+  expanded,
+  onClick,
+}: {
+  label: string;
+  icon: LucideIcon;
+  active: boolean;
+  expanded: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      aria-haspopup="dialog"
+      aria-expanded={expanded}
+      className={`
+        island-tab
+
+        relative
+
+        flex
+        min-h-[52px]
+        min-w-0
+
+        flex-col
+
+        items-center
+        justify-center
+
+        gap-[1px]
+
+        rounded-[14px]
+
+        px-1
+        py-1.5
+
+        transition-transform
+        duration-100
+
+        active:scale-[0.95]
+
+        ${active ? "island-tab-active" : ""}
+      `}
+    >
+      {active && (
+        <span
+          aria-hidden
+          className="
+            absolute
+
+            left-1/2
+            top-[3px]
+
+            h-[2px]
+            w-[14px]
+
+            -translate-x-1/2
+
+            rounded-full
+
+            bg-[var(--brand-gold)]
+          "
+        />
+      )}
+
+      <Icon
+        size={18}
+        strokeWidth={1.5}
+        className={
+          active
+            ? `
+              text-[var(--brand-gold)]
+            `
+            : `
+              text-[var(--brand-navy)]/60
+            `
+        }
+      />
+
+      <span
+        className={`
+          max-w-full
+
+          truncate
+
+          font-brand-sans
+
+          text-[6.5px]
+          font-bold
+          uppercase
+
+          tracking-[0.035em]
+
+          ${
+            active
+              ? `
+                text-[var(--brand-gold-700)]
+              `
+              : `
+                text-[var(--brand-text-muted)]
+              `
+          }
+        `}
+      >
+        {label}
       </span>
     </button>
   );
 }
 
 /* =========================================================
-   ISLAND — MAIN PANEL
+   MOBILE MAIN MENU
 ========================================================= */
 
 function IslandMainPanel({
@@ -919,108 +1977,245 @@ function IslandMainPanel({
   setMobilePanel,
 }: {
   close: () => void;
-  setMobilePanel: React.Dispatch<
-    React.SetStateAction<"main" | "services" | "service-detail">
-  >;
+
+  setMobilePanel: Dispatch<SetStateAction<MobilePanel>>;
 }) {
   return (
-    <div className="island-panel-enter p-3">
-      {/* Header */}
-      <div className="mb-3 flex items-center gap-3 px-2 pt-1">
-        <Crown size={16} className="text-[var(--brand-gold)]" />
-        <span className="font-brand-display text-[16px] font-semibold text-[var(--brand-navy)]">
-          Menu
-        </span>
-      </div>
+    <div className="p-3">
+      {/* HEADER */}
 
-      {/* Navigation links */}
-      <div className="space-y-0.5">
-        {navLinks.map((link) => (
-          <IslandNavLink key={link.label} href={link.href} close={close}>
+      <MobilePanelHeader title="Menu" close={close} />
+
+      {/* LINKS */}
+
+      <nav
+        aria-label="Mobile navigation"
+        className="
+          overflow-hidden
+
+          rounded-[17px]
+
+          border
+          border-[var(--brand-navy)]/[0.06]
+
+          bg-[#F8F2EA]
+        "
+      >
+        {navLinks.map((link, index) => (
+          <IslandNavLink
+            key={link.label}
+            href={link.href}
+            close={close}
+            bordered={index > 0}
+          >
             {link.label}
           </IslandNavLink>
         ))}
+      </nav>
 
-        {/* Services row — opens services panel */}
-        <button
-          type="button"
-          onClick={() => setMobilePanel("services")}
+      {/* SERVICES */}
+
+      <button
+        type="button"
+        onClick={() => setMobilePanel("services")}
+        className="
+          mt-2
+
+          flex
+          min-h-[58px]
+          w-full
+
+          items-center
+          justify-between
+
+          rounded-[17px]
+
+          border
+          border-[var(--brand-gold)]/15
+
+          bg-[#F1E7DA]
+
+          px-3.5
+
+          text-left
+
+          transition-transform
+          duration-100
+
+          active:scale-[0.985]
+        "
+      >
+        <div
           className="
-            clay-surface-soft
-            group flex w-full min-h-[56px]
-            items-center justify-between
-            rounded-[18px] px-4
-            transition-all duration-300
-            active:scale-[0.98]
+            flex
+            items-center
+
+            gap-3
           "
         >
-          <div className="flex items-center gap-3">
-            <span className="clay-icon-inset flex h-9 w-9 items-center justify-center rounded-[11px]">
-              <Layers size={16} className="text-[var(--brand-gold)]" />
+          <span
+            className="
+              flex
+              h-9
+              w-9
+
+              items-center
+              justify-center
+
+              rounded-[10px]
+
+              bg-[var(--brand-navy)]
+
+              text-[var(--brand-gold)]
+            "
+          >
+            <Layers size={15} strokeWidth={1.5} />
+          </span>
+
+          <div>
+            <span
+              className="
+                block
+
+                font-brand-sans
+
+                text-[12px]
+                font-bold
+
+                text-[var(--brand-navy)]
+              "
+            >
+              Explore Services
             </span>
-            <div className="text-left">
-              <span className="font-brand-sans text-[13px] font-bold text-[var(--brand-navy)]">
-                All Services
-              </span>
-              <span className="block font-brand-sans text-[8px] font-semibold text-[var(--brand-text-muted)]">
-                4 categories · 20 services
-              </span>
-            </div>
+
+            <span
+              className="
+                mt-0.5
+                block
+
+                font-brand-sans
+
+                text-[7.5px]
+                font-semibold
+
+                text-[var(--brand-text-muted)]
+              "
+            >
+              Bespoke, commercial, interiors and restoration
+            </span>
           </div>
-          <ChevronRight
-            size={16}
-            className="text-[var(--brand-gold)] transition-transform duration-300 group-hover:translate-x-1"
-          />
-        </button>
-      </div>
+        </div>
 
-      {/* Divider */}
+        <ChevronRight
+          size={15}
+          className="
+            text-[var(--brand-gold)]
+          "
+        />
+      </button>
+
+      {/* CONTACT */}
+
       <div
-        aria-hidden
-        className="mx-3 my-3 h-px bg-gradient-to-r from-transparent via-[var(--brand-cream-dark)]/30 to-transparent"
-      />
+        className="
+          mt-3
 
-      {/* Contact strip */}
-      <div className="flex items-center justify-center gap-4 px-2 py-1">
-        <Link
+          grid
+          grid-cols-2
+
+          gap-2
+        "
+      >
+        <a
           href="tel:+447400577844"
           onClick={close}
-          className="flex items-center gap-1.5 font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]"
+          className="
+            flex
+            min-h-[42px]
+
+            items-center
+            justify-center
+
+            gap-1.5
+
+            rounded-[12px]
+
+            border
+            border-[var(--brand-navy)]/[0.06]
+
+            bg-white/55
+
+            font-brand-sans
+
+            text-[8px]
+            font-bold
+
+            text-[var(--brand-navy)]
+          "
         >
-          <Phone size={11} className="text-[var(--brand-gold)]" />
-          +44 7400 577844
-        </Link>
-        <span
-          aria-hidden
-          className="h-3 w-px bg-[var(--brand-cream-dark)]/40"
-        />
-        <Link
+          <Phone
+            size={11}
+            className="
+              text-[var(--brand-gold)]
+            "
+          />
+          Call Us
+        </a>
+
+        <a
           href="mailto:info@sofanmore.co.uk"
           onClick={close}
-          className="flex items-center gap-1.5 font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]"
+          className="
+            flex
+            min-h-[42px]
+
+            items-center
+            justify-center
+
+            gap-1.5
+
+            rounded-[12px]
+
+            border
+            border-[var(--brand-navy)]/[0.06]
+
+            bg-white/55
+
+            font-brand-sans
+
+            text-[8px]
+            font-bold
+
+            text-[var(--brand-navy)]
+          "
         >
-          <Mail size={11} className="text-[var(--brand-gold)]" />
-          info@sofanmore.co.uk
-        </Link>
+          <Mail
+            size={11}
+            className="
+              text-[var(--brand-gold)]
+            "
+          />
+          Email Us
+        </a>
       </div>
 
-      {/* CTA */}
-      <div className="mt-2  ">
-        <Link
-          href="tel:+4407400577844"
-          onClick={close}
-          className="snm-button snm-button--gold snm-button--md snm-button--full justify-center"
+      <div className="mt-2">
+        <ClayButton
+          href="/contact-us"
+          variant="gold"
+          size="sm"
+          fullWidth
+          showArrow
         >
-          <span className="snm-button__label">Call Us</span>
-          <MoveRight size={14} className="snm-button__arrow" />
-        </Link>
+          Start Your Project
+        </ClayButton>
       </div>
     </div>
   );
 }
 
 /* =========================================================
-   ISLAND — SERVICES PANEL
+   MOBILE SERVICES
 ========================================================= */
 
 function IslandServicesPanel({
@@ -1028,115 +2223,192 @@ function IslandServicesPanel({
   setActiveServiceIdx,
   close,
 }: {
-  setMobilePanel: React.Dispatch<
-    React.SetStateAction<"main" | "services" | "service-detail">
-  >;
-  setActiveServiceIdx: React.Dispatch<React.SetStateAction<number>>;
+  setMobilePanel: Dispatch<SetStateAction<MobilePanel>>;
+
+  setActiveServiceIdx: Dispatch<SetStateAction<number>>;
+
   close: () => void;
 }) {
   return (
-    <div className="island-panel-enter p-3">
-      {/* Back + header */}
-      <div className="mb-3 flex items-center gap-2 px-1">
-        <button
-          type="button"
-          onClick={() => setMobilePanel("main")}
-          className="
-            clay-icon
-            flex h-8 w-8 items-center justify-center
-            rounded-[10px]
-            transition-transform duration-300
-            active:scale-90
-          "
-          aria-label="Back to menu"
-        >
-          <ChevronDown size={14} className="rotate-90" />
-        </button>
-        <span className="font-brand-display text-[15px] font-semibold text-[var(--brand-navy)]">
-          Our Services
-        </span>
-      </div>
+    <div className="p-3">
+      <PanelBackHeader
+        title="Our Services"
+        onBack={() => setMobilePanel("main")}
+        close={close}
+      />
 
-      {/* Service cards — 2x2 grid */}
-      <div className="grid grid-cols-2 gap-2.5">
-        {serviceGroups.map((group, idx) => {
+      <div
+        className="
+          grid
+          grid-cols-2
+
+          gap-2
+        "
+      >
+        {serviceGroups.map((group, index) => {
           const Icon = group.icon;
+
           return (
             <button
               key={group.title}
               type="button"
               onClick={() => {
-                setActiveServiceIdx(idx);
+                setActiveServiceIdx(index);
+
                 setMobilePanel("service-detail");
               }}
               className="
-                clay-surface-soft
-                group relative flex flex-col
-                rounded-[22px] p-3.5
-                text-left
-                transition-all duration-300
-                active:scale-[0.96]
-              "
+                  flex
+                  flex-col
+
+                  rounded-[17px]
+
+                  border
+                  border-[var(--brand-navy)]/[0.06]
+
+                  bg-[#F7F0E7]
+
+                  p-2.5
+
+                  text-left
+
+                  transition-transform
+                  duration-100
+
+                  active:scale-[0.975]
+                "
             >
-              {/* Image preview */}
-              <div className="clay-inset relative mb-3 h-[70px] overflow-hidden rounded-[16px] p-[3px]">
-                <div className="relative h-full overflow-hidden rounded-[13px]">
-                  <Image
-                    src={group.image}
-                    alt={group.title}
-                    fill
-                    sizes="45vw"
-                    className="object-cover transition-transform duration-500 group-active:scale-105"
-                  />
-                </div>
+              <div
+                className="
+                    relative
+
+                    mb-2.5
+
+                    h-[66px]
+
+                    overflow-hidden
+
+                    rounded-[12px]
+
+                    bg-[#EDE4D7]
+                  "
+              >
+                <Image
+                  src={group.image}
+                  alt={group.title}
+                  fill
+                  sizes="45vw"
+                  className="
+                      object-cover
+                    "
+                />
               </div>
 
-              {/* Icon */}
-              <span className="clay-icon-inset flex h-9 w-9 items-center justify-center rounded-[11px]">
-                <Icon
-                  size={16}
-                  strokeWidth={1.5}
-                  className="text-[var(--brand-gold)]"
-                />
+              <span
+                className="
+                    flex
+                    h-8
+                    w-8
+
+                    items-center
+                    justify-center
+
+                    rounded-[9px]
+
+                    bg-[var(--brand-navy)]
+
+                    text-[var(--brand-gold)]
+                  "
+              >
+                <Icon size={14} strokeWidth={1.5} />
               </span>
 
-              {/* Text */}
-              <div className="mt-2.5">
-                <div className="font-brand-display text-[12px] font-semibold leading-tight">
+              <div className="mt-2">
+                <div
+                  className="
+                      font-brand-display
+
+                      text-[11px]
+                      font-semibold
+                      leading-tight
+
+                      text-[var(--brand-navy)]
+                    "
+                >
                   {group.title}
                 </div>
-                <div className="mt-1 font-brand-sans text-[7.5px] font-semibold text-[var(--brand-text-muted)]">
+
+                <div
+                  className="
+                      mt-1
+
+                      font-brand-sans
+
+                      text-[7px]
+                      font-semibold
+
+                      text-[var(--brand-text-muted)]
+                    "
+                >
                   {group.subtitle}
                 </div>
               </div>
 
-              {/* Count */}
-              <div className="mt-2 font-brand-sans text-[7px] font-bold uppercase tracking-[0.08em] text-[var(--brand-gold)]">
-                {group.links.length} services
-                <ChevronRight size={9} className="ml-0.5 inline" />
+              <div
+                className="
+                    mt-2
+
+                    flex
+                    items-center
+
+                    font-brand-sans
+
+                    text-[6.5px]
+                    font-bold
+                    uppercase
+
+                    tracking-[0.08em]
+
+                    text-[var(--brand-gold-700)]
+                  "
+              >
+                Explore
+                <ChevronRight size={9} />
               </div>
             </button>
           );
         })}
       </div>
 
-      {/* Quick CTA */}
       <div className="mt-3">
-        <Link
-          href="/contact-us"
-          onClick={close}
-          className="snm-button snm-button--gold snm-button--sm snm-button--full justify-center"
+        <ClayButton
+          href="/services"
+          variant="ivory"
+          size="sm"
+          fullWidth
+          showArrow
         >
-          <span className="snm-button__label">Start Your Project</span>
-          <MoveRight size={12} className="snm-button__arrow" />
-        </Link>
+          View All Services
+        </ClayButton>
+      </div>
+
+      <div className="mt-2">
+        <ClayButton
+          href="/contact-us"
+          variant="gold"
+          size="sm"
+          fullWidth
+          showArrow
+        >
+          Start Your Project
+        </ClayButton>
       </div>
     </div>
   );
 }
 
 /* =========================================================
-   ISLAND — SERVICE DETAIL PANEL
+   SERVICE DETAIL
 ========================================================= */
 
 function IslandServiceDetail({
@@ -1145,145 +2417,506 @@ function IslandServiceDetail({
   close,
 }: {
   group: ServiceGroup;
-  setMobilePanel: React.Dispatch<
-    React.SetStateAction<"main" | "services" | "service-detail">
-  >;
+
+  setMobilePanel: Dispatch<SetStateAction<MobilePanel>>;
+
   close: () => void;
 }) {
   const Icon = group.icon;
 
   return (
-    <div className="island-panel-enter p-3">
-      {/* Back + header */}
-      <div className="mb-3 flex items-center gap-2 px-1">
-        <button
-          type="button"
-          onClick={() => setMobilePanel("services")}
-          className="
-            clay-icon
-            flex h-8 w-8 items-center justify-center
-            rounded-[10px]
-            transition-transform duration-300
-            active:scale-90
-          "
-          aria-label="Back to services"
-        >
-          <ChevronDown size={14} className="rotate-90" />
-        </button>
-        <span className="font-brand-display text-[15px] font-semibold text-[var(--brand-navy)]">
-          {group.title}
-        </span>
-      </div>
+    <div className="p-3">
+      <PanelBackHeader
+        title={group.title}
+        onBack={() => setMobilePanel("services")}
+        close={close}
+      />
 
-      {/* Hero image */}
-      <div className="clay-inset relative mb-4 overflow-hidden rounded-[20px] p-[5px]">
-        <div className="relative h-[140px] overflow-hidden rounded-[16px]">
-          <Image
-            src={group.image}
-            alt={group.title}
-            fill
-            sizes="90vw"
-            className="object-cover object-center"
-          />
-          {/* Overlay */}
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-gradient-to-t from-[var(--brand-navy)]/40 to-transparent"
-          />
-          {/* Badge */}
-          <div className="absolute bottom-3 left-3 flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-[var(--brand-gold)] text-white shadow-lg">
-              <Icon size={15} strokeWidth={1.6} />
-            </span>
-            <div>
-              <div className="font-brand-sans text-[11px] font-bold text-white">
-                {group.title}
-              </div>
-              <div className="font-brand-sans text-[8px] font-semibold text-white/70">
-                {group.subtitle}
-              </div>
+      {/* IMAGE */}
+
+      <Link
+        href={group.href}
+        prefetch={false}
+        className="
+          relative
+
+          mb-3
+
+          block
+          h-[125px]
+
+          overflow-hidden
+
+          rounded-[16px]
+
+          bg-[#EDE4D7]
+        "
+      >
+        <Image
+          src={group.image}
+          alt={group.title}
+          fill
+          sizes="90vw"
+          className="
+            object-cover
+            object-center
+          "
+        />
+
+        <div
+          aria-hidden
+          className="
+            absolute
+            inset-0
+
+            bg-gradient-to-t
+
+            from-[var(--brand-navy)]/45
+            via-transparent
+            to-transparent
+          "
+        />
+
+        <div
+          className="
+            absolute
+            bottom-3
+            left-3
+
+            flex
+            items-center
+
+            gap-2
+          "
+        >
+          <span
+            className="
+              flex
+              h-8
+              w-8
+
+              items-center
+              justify-center
+
+              rounded-[9px]
+
+              bg-[var(--brand-gold)]
+
+              text-[var(--brand-navy)]
+            "
+          >
+            <Icon size={14} strokeWidth={1.6} />
+          </span>
+
+          <div>
+            <div
+              className="
+                font-brand-sans
+
+                text-[10px]
+                font-bold
+
+                text-white
+              "
+            >
+              {group.title}
+            </div>
+
+            <div
+              className="
+                font-brand-sans
+
+                text-[7px]
+                font-semibold
+
+                text-white/70
+              "
+            >
+              {group.subtitle}
             </div>
           </div>
         </div>
-      </div>
+      </Link>
 
-      {/* Service links */}
-      <div className="space-y-1">
-        {group.links.map((link) => (
+      {/* LINKS */}
+
+      <div
+        className="
+          overflow-hidden
+
+          rounded-[16px]
+
+          border
+          border-[var(--brand-navy)]/[0.06]
+
+          bg-[#F7F0E7]
+        "
+      >
+        {group.links.map((link, index) => (
           <Link
             key={link.label}
             href={link.href}
-            onClick={close}
-            className="
-              group/link
-              clay-surface-soft
-              flex min-h-[48px] items-center
-              justify-between
-              rounded-[15px] px-4
-              font-brand-sans text-[12px] font-semibold
-              text-[var(--brand-navy)]
-              transition-all duration-200
-              active:scale-[0.98]
-            "
+            prefetch={false}
+            onClick={() => {
+              /*
+                  Defer closing by one task so
+                  Next Link processes the click
+                  before the panel unmounts.
+                */
+
+              window.setTimeout(close, 0);
+            }}
+            className={`
+                flex
+                min-h-[47px]
+
+                items-center
+                justify-between
+
+                px-3.5
+
+                font-brand-sans
+
+                text-[10.5px]
+                font-semibold
+
+                text-[var(--brand-navy)]
+
+                ${
+                  index
+                    ? `
+                      border-t
+                      border-[var(--brand-navy)]/[0.06]
+                    `
+                    : ""
+                }
+              `}
           >
             {link.label}
+
             <MoveRight
-              size={14}
+              size={12}
               className="
-                text-[var(--brand-gold)]
-                transition-transform duration-200
-                group-active/link:translate-x-1
-              "
+                  shrink-0
+
+                  text-[var(--brand-gold)]
+                "
             />
           </Link>
         ))}
       </div>
 
-      {/* View all CTA */}
       <div className="mt-3">
-        <Link
+        <ClayButton
           href={group.href}
-          onClick={close}
-          className="snm-button snm-button--gold snm-button--sm snm-button--full justify-center"
+          variant="gold"
+          size="sm"
+          fullWidth
+          showArrow
         >
-          <span className="snm-button__label">View All {group.title}</span>
-          <MoveRight size={12} className="snm-button__arrow" />
-        </Link>
+          View All {group.title}
+        </ClayButton>
       </div>
     </div>
   );
 }
 
 /* =========================================================
-   ISLAND NAV LINK
+   MOBILE PANEL HEADER
+========================================================= */
+
+function MobilePanelHeader({
+  title,
+  close,
+}: {
+  title: string;
+  close: () => void;
+}) {
+  return (
+    <div
+      className="
+        mb-3
+
+        flex
+        items-center
+        justify-between
+
+        border-b
+        border-[var(--brand-navy)]/[0.07]
+
+        px-1
+        pb-3
+      "
+    >
+      <div
+        className="
+          flex
+          items-center
+
+          gap-2.5
+        "
+      >
+        <span
+          className="
+            flex
+            h-8
+            w-8
+
+            items-center
+            justify-center
+
+            rounded-[9px]
+
+            bg-[var(--brand-navy)]
+
+            text-[var(--brand-gold)]
+          "
+        >
+          <Crown size={14} strokeWidth={1.5} />
+        </span>
+
+        <div>
+          <span
+            className="
+              block
+
+              font-brand-display
+
+              text-[14px]
+              font-semibold
+              leading-tight
+
+              text-[var(--brand-navy)]
+            "
+          >
+            Sofa N More
+          </span>
+
+          <span
+            className="
+              mt-0.5
+              block
+
+              font-brand-sans
+
+              text-[6px]
+              font-bold
+              uppercase
+
+              tracking-[0.15em]
+
+              text-[var(--brand-gold-700)]
+            "
+          >
+            {title}
+          </span>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        onClick={close}
+        aria-label="Close navigation"
+        className="
+          flex
+          h-9
+          w-9
+
+          items-center
+          justify-center
+
+          rounded-[10px]
+
+          bg-[var(--brand-navy)]/[0.06]
+
+          text-[var(--brand-navy)]
+
+          transition-transform
+          duration-100
+
+          active:scale-90
+        "
+      >
+        <X size={16} strokeWidth={1.6} />
+      </button>
+    </div>
+  );
+}
+
+/* =========================================================
+   BACK HEADER
+========================================================= */
+
+function PanelBackHeader({
+  title,
+  onBack,
+  close,
+}: {
+  title: string;
+  onBack: () => void;
+  close: () => void;
+}) {
+  return (
+    <div
+      className="
+        mb-3
+
+        flex
+        items-center
+        justify-between
+      "
+    >
+      <div
+        className="
+          flex
+          items-center
+          gap-2
+        "
+      >
+        <button
+          type="button"
+          onClick={onBack}
+          aria-label="Go back"
+          className="
+            flex
+            h-9
+            w-9
+
+            items-center
+            justify-center
+
+            rounded-[10px]
+
+            border
+            border-[var(--brand-navy)]/[0.07]
+
+            bg-[#F3E9DC]
+
+            text-[var(--brand-navy)]
+
+            transition-transform
+            duration-100
+
+            active:scale-90
+          "
+        >
+          <ChevronDown size={13} className="rotate-90" />
+        </button>
+
+        <span
+          className="
+            font-brand-display
+
+            text-[14px]
+            font-semibold
+
+            text-[var(--brand-navy)]
+          "
+        >
+          {title}
+        </span>
+      </div>
+
+      <button
+        type="button"
+        onClick={close}
+        aria-label="Close navigation"
+        className="
+          flex
+          h-9
+          w-9
+
+          items-center
+          justify-center
+
+          rounded-[10px]
+
+          bg-[var(--brand-navy)]/[0.06]
+
+          text-[var(--brand-navy)]
+
+          transition-transform
+          duration-100
+
+          active:scale-90
+        "
+      >
+        <X size={15} />
+      </button>
+    </div>
+  );
+}
+
+/* =========================================================
+   MOBILE NAV LINK
 ========================================================= */
 
 function IslandNavLink({
   href,
   children,
   close,
+  bordered = false,
 }: {
   href: string;
-  children: React.ReactNode;
+  children: ReactNode;
   close: () => void;
+  bordered?: boolean;
 }) {
   return (
     <Link
       href={href}
-      onClick={close}
-      className="
-        flex min-h-[50px] items-center
-        rounded-[16px] px-4
-        font-brand-sans text-[13px] font-bold
+      prefetch={false}
+      onClick={() => {
+        /*
+          Don't synchronously unmount
+          the Link before Next handles
+          its own click.
+        */
+
+        window.setTimeout(close, 0);
+      }}
+      className={`
+        flex
+        min-h-[47px]
+
+        items-center
+        justify-between
+
+        px-3.5
+
+        font-brand-sans
+
+        text-[11px]
+        font-bold
+
         text-[var(--brand-navy)]
-        transition-all duration-200
-        active:bg-white/25
-        hover:bg-white/30
+
+        transition-colors
+        duration-100
+
+        active:bg-[#F1E7DA]
+
+        ${
+          bordered
+            ? `
+              border-t
+              border-[var(--brand-navy)]/[0.06]
+            `
+            : ""
+        }
+
         focus-visible:outline-2
         focus-visible:outline-[var(--brand-gold)]
-      "
+      `}
     >
-      {children}
+      <span>{children}</span>
+
+      <ChevronRight
+        size={12}
+        className="
+          text-[var(--brand-gold)]
+        "
+      />
     </Link>
   );
 }

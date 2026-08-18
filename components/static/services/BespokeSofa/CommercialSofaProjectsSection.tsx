@@ -91,8 +91,7 @@ export default function CommercialSofaProjectsSection() {
         lg:py-16
       "
     >
-      <SectionBackground />
-
+ 
       <div
         className="
           relative

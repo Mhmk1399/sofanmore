@@ -987,10 +987,7 @@ function RepairVisual() {
             src="/assets/images/Repair.webp"
             alt="Sofa repair and restoration by Sofa N More in North West London"
             fill
-            sizes="
-              (max-width: 1023px) 100vw,
-              52vw
-            "
+            sizes="(max-width: 1023px) 100vw, 52vw"
             className="
               object-contain
               object-center

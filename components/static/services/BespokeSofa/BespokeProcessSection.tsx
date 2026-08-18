@@ -75,8 +75,7 @@ export default function BespokeProcessSection() {
       aria-labelledby="bespoke-process-heading"
       className="relative overflow-hidden bg-[var(--brand-ivory)] px-3 py-10 sm:px-5 sm:py-12 lg:px-7 lg:py-16"
     >
-      <SectionBackground />
-
+ 
       <div className="relative z-10 mx-auto max-w-[var(--site-width)]">
         <div className="clay-surface-strong relative rounded-[34px] p-[7px] sm:rounded-[42px] lg:rounded-[50px] lg:p-[9px]">
           <div className="clay-inset relative overflow-hidden rounded-[28px] bg-[linear-gradient(145deg,#FFFDF8_0%,#F5EEE4_52%,#EDE0CF_100%)] px-4 py-6 sm:rounded-[35px] sm:px-6 sm:py-8 lg:rounded-[41px] lg:px-10 lg:py-11 xl:px-12 xl:py-12">

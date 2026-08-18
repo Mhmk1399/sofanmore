@@ -333,14 +333,14 @@ function DesktopCopy() {
         "
       >
         <ClayButton
-          href="/contact-us"
+          href="/services"
           variant="gold"
           size="md"
           fullWidth
           showArrow
           ariaLabel="Get a quote"
         >
-          Get a Quote
+          Our Services
         </ClayButton>
       </div>
     </div>
@@ -485,19 +485,7 @@ function DesktopChairScene({ chairSrc }: { chairSrc: string }) {
           GOLD RING
       ============================================== */}
 
-      <div
-        aria-hidden
-        className="
-          absolute
-          bottom-[11%]
-          right-[3%]
-          z-20
-          h-[105px]
-          w-[105px]
-        "
-      >
-        <div className="clay-sphere-ring" />
-      </div>
+  
 
       {/* =============================================
           IVORY SPHERE
@@ -555,19 +543,7 @@ function DesktopOuterDecor() {
     <>
       {/* top right ring */}
 
-      <div
-        aria-hidden
-        className="
-          absolute
-          -right-[12px]
-          -top-[30px]
-          z-10
-          h-[145px]
-          w-[145px]
-        "
-      >
-        <div className="clay-sphere-ring" />
-      </div>
+   
 
       {/* gold sphere */}
 

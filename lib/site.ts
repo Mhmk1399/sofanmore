@@ -127,6 +127,16 @@ export const siteRoutes: SiteRoute[] = [
     changeFrequency: "monthly",
     images: ["/assets/images/Craftsmanship close-up.webp"],
   },
+  {
+    path: "/privacy-policy",
+    priority: 0.35,
+    changeFrequency: "yearly",
+  },
+  {
+    path: "/terms-and-conditions",
+    priority: 0.4,
+    changeFrequency: "yearly",
+  },
 ];
 
 export function absoluteUrl(path = "/") {
