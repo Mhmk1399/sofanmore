@@ -94,14 +94,14 @@ export function createStorageKey(input: {
   return datedRandomKey(`lead-uploads/${servicePath(input.service)}`, extension);
 }
 
-export function createProductImageStorageKey(input: {
+export function createProjectImageStorageKey(input: {
   safeName: string;
   mimeType: string;
 }) {
   const extension =
     getFileExtension(input.safeName) || defaultExtensionForMime(input.mimeType);
 
-  return datedRandomKey("product-uploads", extension);
+  return datedRandomKey("project-uploads", extension);
 }
 
 export async function uploadObject(input: {

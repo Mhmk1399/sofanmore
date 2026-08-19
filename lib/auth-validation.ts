@@ -74,19 +74,19 @@ export function passwordStrengthErrors(password: string) {
   const issues: string[] = [];
 
   if (password.length < 10) {
-    issues.push("Use at least 10 characters.");
+    issues.push("Use at least 10 characters for the password.");
   }
 
   if (password.length > 128) {
-    issues.push("Use 128 characters or fewer.");
+    issues.push("Use 128 characters or fewer for the password.");
   }
 
   if (!/[a-z]/.test(password)) {
-    issues.push("Add a lowercase letter.");
+    issues.push("Add a lowercase letter for the password.");
   }
 
   if (!/[A-Z]/.test(password)) {
-    issues.push("Add an uppercase letter.");
+    issues.push("Add an uppercase letter for the password.");
   }
 
   if (!/[0-9]/.test(password)) {

@@ -73,13 +73,10 @@ const columns: FooterColumn[] = [
     title: "Explore",
     links: [
       {
-        label: "About Us",
-        href: "/about-us",
+        label: "Projects",
+        href: "/projects",
       },
-      {
-        label: "Contact Us",
-        href: "/contact-us",
-      },
+
       {
         label: "Workshop",
         href: "/workshop",
@@ -87,6 +84,14 @@ const columns: FooterColumn[] = [
       {
         label: "Gallery",
         href: "/gallery",
+      },
+      {
+        label: "About Us",
+        href: "/about-us",
+      },
+      {
+        label: "Contact Us",
+        href: "/contact-us",
       },
       {
         label: "Blog",

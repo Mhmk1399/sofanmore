@@ -1,12 +1,13 @@
 # Sofa N More
 
-## Latest admin/product additions
+## Latest admin/project additions
 
-- Product model and admin CRUD are available from `/admin`.
-- Each product has a required unique `productCode` that must be `1000` or higher.
-- The products API returns `latestCode` so the admin can see the latest used product code before creating the next product.
-- Admin product image upload uses the shared S3-compatible upload storage and stores optional `imageStorageKey`.
-- Product uploads are stored under `product-uploads/`; lead uploads remain under `lead-uploads/`.
+- Project model and admin CRUD are available from `/admin`.
+- Each project has a required unique `projectCode` that must be `1000` or higher.
+- The projects API returns `latestCode` so the admin can see the latest used project code before creating the next project.
+- Admin project image upload uses the shared S3-compatible upload storage and stores optional storage keys.
+- Project uploads are stored under `project-uploads/`; lead uploads remain under `lead-uploads/`.
+- Public project pages are available at `/projects` and `/projects/[slug]` for published projects.
 - Admin profile management is available from the sidebar. Admins can update their own name, phone and password.
 - Changing name/phone does not require a password change. Current password is required only when setting a new password.
 - Admin action feedback uses the shared Toast system, including success, error and info messages.

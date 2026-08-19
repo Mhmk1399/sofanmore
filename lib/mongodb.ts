@@ -4,13 +4,13 @@ import type {
   LeadAttachmentDocument,
   LeadDocument,
 } from "@/models/lead";
-import type { ProductDocument } from "@/models/product";
+import type { ProjectDocument } from "@/models/project";
 import type { UserDocument } from "@/models/user";
 
 const globalForMongo = globalThis as typeof globalThis & {
   mongoClientPromise?: Promise<MongoClient>;
   leadIndexesPromise?: Promise<void>;
-  productIndexesPromise?: Promise<void>;
+  projectIndexesPromise?: Promise<void>;
   userIndexesPromise?: Promise<void>;
 };
 
@@ -63,11 +63,11 @@ export async function getUserCollections() {
   };
 }
 
-export async function getProductCollections() {
+export async function getProjectCollections() {
   const db = await getDb();
 
   return {
-    products: db.collection<ProductDocument>("products"),
+    projects: db.collection<ProjectDocument>("projects"),
   };
 }
 
@@ -135,31 +135,43 @@ export function ensureUserIndexes() {
   return globalForMongo.userIndexesPromise;
 }
 
-export function ensureProductIndexes() {
-  if (!globalForMongo.productIndexesPromise) {
-    globalForMongo.productIndexesPromise = (async () => {
-      const { products } = await getProductCollections();
+export function ensureProjectIndexes() {
+  if (!globalForMongo.projectIndexesPromise) {
+    globalForMongo.projectIndexesPromise = (async () => {
+      const { projects } = await getProjectCollections();
 
       await Promise.all([
-        products.createIndex(
-          { productCode: 1 },
-          { name: "unique_product_code", unique: true, sparse: true },
+        projects.createIndex(
+          { projectCode: 1 },
+          { name: "unique_project_code", unique: true },
         ),
-        products.createIndex(
-          { productCode: -1, createdAt: -1 },
-          { name: "admin_product_code_created" },
+        projects.createIndex(
+          { slug: 1 },
+          { name: "unique_project_slug", unique: true },
         ),
-        products.createIndex(
-          { name: 1, createdAt: -1 },
-          { name: "admin_product_name_created" },
+        projects.createIndex(
+          { service: 1, createdAt: -1 },
+          { name: "admin_project_service_created" },
         ),
-        products.createIndex(
+        projects.createIndex(
+          { featured: 1, published: 1, createdAt: -1 },
+          { name: "public_featured_project_created" },
+        ),
+        projects.createIndex(
+          { published: 1, createdAt: -1 },
+          { name: "public_project_created" },
+        ),
+        projects.createIndex(
+          { title: 1, createdAt: -1 },
+          { name: "admin_project_title_created" },
+        ),
+        projects.createIndex(
           { createdAt: -1 },
-          { name: "product_created_at_desc" },
+          { name: "project_created_at_desc" },
         ),
       ]);
     })();
   }
 
-  return globalForMongo.productIndexesPromise;
+  return globalForMongo.projectIndexesPromise;
 }

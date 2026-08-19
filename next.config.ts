@@ -2,13 +2,21 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: [
-    "192.168.1.111",
+    "192.168.70.122",
   ],
   poweredByHeader: false,
 
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "storadge.arziplus.com",
+        port: "",
+        pathname: "/project-uploads/**",
+      },
+    ],
   },
 
   async redirects() {

@@ -10,6 +10,7 @@ import {
   ChevronDown,
   ChevronRight,
   Crown,
+  Folder,
   FolderOpen,
   Hammer,
   Home,
@@ -183,13 +184,14 @@ const navLinks = [
     href: "/gallery",
   },
   {
+    label: "Projects",
+    href: "/projects",
+  },
+  {
     label: "Workshop",
     href: "/workshop",
   },
-  {
-    label: "Blog",
-    href: "/blog",
-  },
+
   {
     label: "About Us",
     href: "/about-us",
@@ -197,6 +199,10 @@ const navLinks = [
   {
     label: "Contact",
     href: "/contact-us",
+  },
+  {
+    label: "Blog",
+    href: "/blog",
   },
   {
     label: "FAQ",
@@ -214,6 +220,11 @@ const mobileTabs: MobileTab[] = [
     label: "Home",
     icon: Home,
     href: "/",
+  },
+  {
+    label: "Projects",
+    icon: Folder,
+    href: "/projects",
   },
   {
     label: "Workshop",
@@ -635,65 +646,63 @@ function DesktopBar({
       <nav
         aria-label="Main navigation"
         className="
-          flex
-          items-center
+    flex
+    items-center
 
-          gap-0.5
+    gap-0.5
 
-          xl:gap-1
-        "
+    xl:gap-1
+  "
       >
-        <DesktopLink href="/gallery" active={pathname === "/gallery"}>
-          Gallery
-        </DesktopLink>
-
-        {/* SERVICES */}
+        {/* =====================================================
+      SERVICES — FIRST ITEM
+  ====================================================== */}
 
         <div
           onMouseEnter={handleMegaEnter}
           onMouseLeave={handleMegaLeave}
           className="
-            flex
-            items-center
-          "
+      flex
+      items-center
+    "
         >
           <Link
             href="/services"
             onClick={closeNavigation}
             className={`
-              navbar-link
+        navbar-link
 
-              flex
-              h-10
-              items-center
+        flex
+        h-10
+        items-center
 
-              rounded-l-[13px]
+        rounded-l-[13px]
 
-              px-3.5
+        px-3.5
 
-              font-brand-sans
+        font-brand-sans
 
-              text-[11px]
-              font-semibold
+        text-[11px]
+        font-semibold
 
-              uppercase
-              tracking-[0.07em]
+        uppercase
+        tracking-[0.07em]
 
-              transition-colors
-              duration-150
+        transition-colors
+        duration-150
 
-              ${
-                servicesActive || megaOpen
-                  ? `
-                    bg-white/35
-                    text-[var(--brand-gold-700)]
-                  `
-                  : `
-                    text-[var(--brand-navy)]
-                    hover:text-[var(--brand-gold-700)]
-                  `
-              }
-            `}
+        ${
+          servicesActive || megaOpen
+            ? `
+              bg-white/35
+              text-[var(--brand-gold-700)]
+            `
+            : `
+              text-[var(--brand-navy)]
+              hover:text-[var(--brand-gold-700)]
+            `
+        }
+      `}
           >
             Services
           </Link>
@@ -705,43 +714,55 @@ function DesktopBar({
             aria-label={megaOpen ? "Close services menu" : "Open services menu"}
             onClick={() => setMegaOpen((current) => !current)}
             className={`
-              flex
-              h-10
-              w-8
+        flex
+        h-10
+        w-8
 
-              items-center
-              justify-center
+        items-center
+        justify-center
 
-              rounded-r-[13px]
+        rounded-r-[13px]
 
-              transition-colors
-              duration-150
+        transition-colors
+        duration-150
 
-              ${
-                servicesActive || megaOpen
-                  ? `
-                    bg-white/35
-                    text-[var(--brand-gold-700)]
-                  `
-                  : `
-                    text-[var(--brand-navy)]/60
-                    hover:text-[var(--brand-gold-700)]
-                  `
-              }
-            `}
+        ${
+          servicesActive || megaOpen
+            ? `
+              bg-white/35
+              text-[var(--brand-gold-700)]
+            `
+            : `
+              text-[var(--brand-navy)]/60
+              hover:text-[var(--brand-gold-700)]
+            `
+        }
+      `}
           >
             <ChevronDown
               size={13}
               strokeWidth={1.8}
               className={`
-                transition-transform
-                duration-150
+          transition-transform
+          duration-150
 
-                ${megaOpen ? "rotate-180" : ""}
-              `}
+          ${megaOpen ? "rotate-180" : ""}
+        `}
             />
           </button>
         </div>
+
+        {/* =====================================================
+      GALLERY
+  ====================================================== */}
+
+        <DesktopLink href="/gallery" active={pathname === "/gallery"}>
+          Gallery
+        </DesktopLink>
+
+        {/* =====================================================
+      REST
+  ====================================================== */}
 
         {navLinks.slice(1).map((link) => (
           <DesktopLink
@@ -1482,6 +1503,7 @@ function MobileDynamicIsland({
 
   openServices: () => void;
 }) {
+  const [islandTouched, setIslandTouched] = useState(false);
   return (
     /*
       VERY IMPORTANT:
@@ -1620,99 +1642,151 @@ function MobileDynamicIsland({
 
       <div
         className="
-          pointer-events-auto
+    pointer-events-auto
 
-          island-safe-area
+    island-safe-area
 
-          relative
-          z-[301]
+    relative
+    z-[301]
 
-          px-2.5
-          pb-2
-        "
+    px-2.5
+    pb-2
+  "
       >
+        {/* =====================================================
+      DYNAMIC ISLAND SHELL
+
+      Slightly grows while touched.
+      No blur / no heavy animation.
+  ====================================================== */}
+
         <div
-          className="
-            island-bar
+          onTouchStart={() => setIslandTouched(true)}
+          onTouchEnd={() => setIslandTouched(false)}
+          onTouchCancel={() => setIslandTouched(false)}
+          className={`
+      island-bar
+      clay-surface-soft
 
-            clay-surface-soft
+      mx-auto
+      max-w-[430px]
 
-            mx-auto
+      rounded-[24px]
 
-            grid
-            max-w-[430px]
-            grid-cols-6
+      border
+      border-white/70
 
-            items-stretch
+      p-1.5
 
-            rounded-[24px]
+      transition-transform
+      duration-150
 
-            border
-            border-white/70
+      ease-[var(--ease-clay)]
 
-            p-1.5
-          "
+      ${
+        islandTouched
+          ? `
+            scale-[1.018]
+          `
+          : `
+            scale-100
+          `
+      }
+    `}
         >
-          {mobileTabs.map((tab) => {
-            const serviceTab = tab.label === "Services";
+          {/* ===================================================
+        HORIZONTAL TAB TRACK
 
-            const menuTab = tab.label === "Menu";
+        Important:
+        - never wraps
+        - native finger scrolling
+        - no visible scrollbar
+        - smooth momentum on iOS
+    ==================================================== */}
 
-            const active = menuTab
-              ? mobileOpen && mobilePanel === "main"
-              : serviceTab
-                ? pathname.startsWith("/services") ||
-                  (mobileOpen &&
-                    (mobilePanel === "services" ||
-                      mobilePanel === "service-detail"))
-                : isPathActive(pathname, tab.href);
+          <div
+            className="
+        flex
+        w-full
 
-            if (menuTab) {
+        items-stretch
+
+        gap-0.5
+
+        overflow-x-auto
+        overflow-y-hidden
+
+        overscroll-x-contain
+
+        scroll-smooth
+
+        snap-x
+        snap-proximity
+
+        [-webkit-overflow-scrolling:touch]
+
+        [scrollbar-width:none]
+
+        [&::-webkit-scrollbar]:hidden
+      "
+          >
+            {mobileTabs.map((tab) => {
+              const serviceTab = tab.label === "Services";
+
+              const menuTab = tab.label === "Menu";
+
+              const active = menuTab
+                ? mobileOpen && mobilePanel === "main"
+                : serviceTab
+                  ? pathname.startsWith("/services") ||
+                    (mobileOpen &&
+                      (mobilePanel === "services" ||
+                        mobilePanel === "service-detail"))
+                  : isPathActive(pathname, tab.href);
+
+              if (menuTab) {
+                return (
+                  <IslandActionTab
+                    key={tab.label}
+                    label={
+                      mobileOpen && mobilePanel === "main" ? "Close" : "Menu"
+                    }
+                    icon={mobileOpen && mobilePanel === "main" ? X : Menu}
+                    active={active}
+                    onClick={openMenu}
+                    expanded={mobileOpen && mobilePanel === "main"}
+                  />
+                );
+              }
+
+              if (serviceTab) {
+                return (
+                  <IslandActionTab
+                    key={tab.label}
+                    label="Services"
+                    icon={Layers}
+                    active={active}
+                    onClick={openServices}
+                    expanded={
+                      mobileOpen &&
+                      (mobilePanel === "services" ||
+                        mobilePanel === "service-detail")
+                    }
+                  />
+                );
+              }
+
               return (
-                <IslandActionTab
+                <IslandLinkTab
                   key={tab.label}
-                  label={
-                    mobileOpen && mobilePanel === "main" ? "Close" : "Menu"
-                  }
-                  icon={mobileOpen && mobilePanel === "main" ? X : Menu}
+                  tab={tab}
                   active={active}
-                  onClick={openMenu}
-                  expanded={mobileOpen && mobilePanel === "main"}
+                  close={close}
+                  mobileOpen={mobileOpen}
                 />
               );
-            }
-
-            if (serviceTab) {
-              return (
-                <IslandActionTab
-                  key={tab.label}
-                  label="Services"
-                  icon={Layers}
-                  active={active}
-                  onClick={openServices}
-                  expanded={
-                    mobileOpen &&
-                    (mobilePanel === "services" ||
-                      mobilePanel === "service-detail")
-                  }
-                />
-              );
-            }
-
-            /*
-                Real destinations are REAL LINKS.
-              */
-
-            return (
-              <IslandLinkTab
-                key={tab.label}
-                tab={tab}
-                active={active}
-                close={close}
-                mobileOpen={mobileOpen}
-              />
-            );
-          })}
+            })}
+          </div>
         </div>
       </div>
     </div>
@@ -1758,11 +1832,11 @@ function IslandLinkTab({
         island-tab
 
         relative
-
+  shrink-0
         flex
         min-h-[52px]
-        min-w-0
-
+        
+snap-center
         flex-col
 
         items-center
@@ -1880,7 +1954,9 @@ function IslandActionTab({
 
         flex
         min-h-[52px]
-        min-w-0
+         shrink-0
+
+  snap-center
 
         flex-col
 

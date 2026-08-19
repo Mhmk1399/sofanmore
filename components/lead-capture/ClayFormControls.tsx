@@ -1148,6 +1148,12 @@ export function UploadProgressItem({
     item.status === "signing" ||
     item.status === "uploading" ||
     item.status === "completing";
+  const progressBarColor =
+    item.status === "complete"
+      ? "bg-emerald-500"
+      : item.status === "failed"
+        ? "bg-[#9b2c2c]"
+        : "bg-[var(--brand-gold)]";
 
   return (
     <div className="clay-surface-soft rounded-[20px] p-[5px]">
@@ -1210,11 +1216,7 @@ export function UploadProgressItem({
 
           <div className="mt-3 h-2 overflow-hidden rounded-full bg-[var(--brand-navy)]/8">
             <div
-              className={`h-full rounded-full transition-all duration-300 ${
-                item.status === "failed"
-                  ? "bg-[#9b2c2c]"
-                  : "bg-[var(--brand-gold)]"
-              }`}
+              className={`h-full rounded-full transition-all duration-300 ${progressBarColor}`}
               style={{ width: `${Math.max(Math.min(item.progress, 100), 4)}%` }}
             />
           </div>

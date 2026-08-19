@@ -1,82 +1,158 @@
 import ProjectsSliderClient from "./ProjectsSliderClient";
 
+import { listPublishedProjects } from "@/lib/project-repository";
+import { projectServiceLabels } from "@/lib/project-service";
+import ClayButton from "../ui/ClayButton";
+
 /* =========================================================
    TYPES
 ========================================================= */
-export type ProjectProduct = {
+
+export type ProjectSliderItem = {
   id: string;
-  productCode: number;
-  name: string;
-  imageUrl: string;
-  description: string;
+
+  projectCode: number;
+
+  title: string;
+
+  slug?: string;
+
+  coverImageUrl: string;
+
+  excerpt: string;
+
+  serviceLabel?: string;
+
+  locationLabel?: string;
 };
 
-export const demoProjects: ProjectProduct[] = [
+/* =========================================================
+   DEMO FALLBACK
+
+   Used ONLY when there are no real published projects
+   or when the repository cannot be reached.
+========================================================= */
+
+export const demoProjects: ProjectSliderItem[] = [
   {
     id: "demo-project-1",
-    productCode: 1001,
-    name: "Sculptural Navy Sofa",
-    imageUrl: "/assets/images/1.webp",
-    description:
-      "A made-to-measure sofa shaped around a contemporary London living space, combining deep navy upholstery with generous proportions and a refined architectural silhouette.",
+
+    projectCode: 1001,
+
+    title: "Bespoke Sofa Project",
+
+    coverImageUrl: "/assets/images/site/8.webp",
+
+    excerpt:
+      "A made-to-measure sofa developed around the proportions, layout and character of the space.",
+
+    serviceLabel: "Bespoke Sofas",
   },
 
   {
     id: "demo-project-2",
-    productCode: 1002,
-    name: "Curved Hospitality Seating",
-    imageUrl: "/assets/images/2.webp",
-    description:
-      "Bespoke seating developed for a hospitality interior, balancing comfort, durability and a clean visual rhythm throughout the space.",
+
+    projectCode: 1002,
+
+    title: "Commercial Seating Project",
+
+    coverImageUrl: "/assets/images/site/12.webp",
+
+    excerpt:
+      "Bespoke seating created for a commercial interior with comfort, durability and visual balance in mind.",
+
+    serviceLabel: "Commercial Sofas",
   },
 
   {
     id: "demo-project-3",
-    productCode: 1003,
-    name: "Warm Contemporary Interior",
-    imageUrl: "/assets/images/3.webp",
-    description:
-      "A layered interior concept built around warm neutrals, considered proportions and bespoke pieces designed to feel naturally connected to the architecture.",
+
+    projectCode: 1003,
+
+    title: "Interior Design Project",
+
+    coverImageUrl: "/assets/images/site/13.webp",
+
+    excerpt:
+      "A considered interior developed around the way the space needs to look, feel and function.",
+
+    serviceLabel: "Interior Design",
   },
 
   {
     id: "demo-project-4",
-    productCode: 1004,
-    name: "Restored Statement Sofa",
-    imageUrl: "/assets/images/4.webp",
-    description:
-      "A carefully restored sofa given a renewed structure, refreshed upholstery and a cleaner finish while preserving the character of the original piece.",
+
+    projectCode: 1004,
+
+    title: "Sofa Restoration Project",
+
+    coverImageUrl: "/assets/images/site/1.webp",
+
+    excerpt:
+      "A sofa carefully renewed through professional repair, upholstery and finishing work.",
+
+    serviceLabel: "Sofa Repair & Restoration",
   },
 ];
-type ProjectsSliderSectionProps = {
-  products?: ProjectProduct[];
-};
+
+/* =========================================================
+   LOAD SLIDER PROJECTS
+
+   Priority:
+
+   1. Featured + published real projects
+   2. Published real projects
+   3. Demo fallback
+
+   Maximum 6 items keeps the homepage slider lightweight.
+========================================================= */
+
+async function getSliderProjects(): Promise<ProjectSliderItem[]> {
+  try {
+    const projects = await listPublishedProjects();
+
+    if (!projects.length) {
+      return demoProjects;
+    }
+
+    const featuredProjects = projects.filter(
+      (project) => project.featured === true,
+    );
+
+    const source = featuredProjects.length > 0 ? featuredProjects : projects;
+
+    return source.slice(0, 6).map((project) => ({
+      id: project.id,
+
+      projectCode: project.projectCode,
+
+      title: project.title,
+
+      slug: project.slug,
+
+      coverImageUrl: project.coverImageUrl,
+
+      excerpt: project.excerpt,
+
+      serviceLabel: projectServiceLabels[project.service],
+
+      locationLabel: project.locationLabel ?? undefined,
+    }));
+  } catch (error) {
+    console.warn("Could not load homepage projects", error);
+
+    return demoProjects;
+  }
+}
 
 /* =========================================================
    SERVER COMPONENT
 ========================================================= */
 
-export default function ProjectsSliderSection({
-  products = [],
-}: ProjectsSliderSectionProps) {
-  /*
-    Later:
+export default async function ProjectsSliderSection() {
+  const sliderProjects = await getSliderProjects();
 
-    const products = await db.product.findMany(...)
-    
-    or
-
-    const products = await getProducts();
-
-    Then simply pass them to this component.
-
-    Fake data is only used while there are
-    no real products.
-  */
-
-  const projects = products.length > 0 ? products : demoProjects;
-
-  if (projects.length === 0) {
+  if (!sliderProjects.length) {
     return null;
   }
 
@@ -95,7 +171,7 @@ export default function ProjectsSliderSection({
         sm:py-12
 
         lg:px-8
-        lg:py-16
+        lg:py-14
       "
     >
       <div
@@ -108,25 +184,23 @@ export default function ProjectsSliderSection({
             HEADER
         ================================================== */}
 
-        <div
+        <header
           className="
             mb-7
 
-            flex
-            flex-col
+            flex justify-between items-center
+            gap-1
 
-            gap-5
+            sm:mb-8
 
-            sm:mb-9
-
-            lg:flex-row
-            lg:items-end
-            lg:justify-between
+             
+            
+            lg:gap-10
           "
         >
           <div
             className="
-              max-w-[720px]
+              max-w-[760px]
             "
           >
             {/* EYEBROW */}
@@ -142,7 +216,7 @@ export default function ProjectsSliderSection({
               <span
                 aria-hidden
                 className="
-                  h-[1px]
+                  h-px
                   w-8
 
                   bg-[var(--brand-gold)]
@@ -164,7 +238,7 @@ export default function ProjectsSliderSection({
                   sm:text-[9px]
                 "
               >
-                Selected Work
+                Selected Projects
               </p>
             </div>
 
@@ -173,15 +247,15 @@ export default function ProjectsSliderSection({
             <h2
               id="projects-slider-title"
               className="
-                mt-4
+                mt-3.5
 
-                max-w-[660px]
+                max-w-[700px]
 
                 font-brand-display
 
-                text-[34px]
+                text-[25px]
                 font-medium
-                leading-[1.02]
+                leading-[0.98]
 
                 tracking-[-0.04em]
 
@@ -189,43 +263,30 @@ export default function ProjectsSliderSection({
 
                 sm:text-[44px]
 
-                lg:text-[52px]
+                lg:text-[50px]
               "
             >
-              Projects Made
-              <br className="hidden sm:block" />
-              Around Real Spaces.
+              Made for real spaces. Built around people.
             </h2>
           </div>
 
-          {/* SMALL INTRO */}
+          {/* DESCRIPTION */}
 
-          <p
-            className="
-              max-w-[430px]
-
-              font-brand-sans
-
-              text-[11px]
-              font-medium
-              leading-[1.75]
-
-              text-[var(--brand-text-muted)]
-
-              sm:text-[12px]
-            "
+          <ClayButton
+            href="/projects"
+            variant="gold"
+            target="_blank"
+            ariaLabel="View all projects"
           >
-            A closer look at bespoke sofas, commercial seating, interiors and
-            restoration work developed around individual spaces and
-            requirements.
-          </p>
-        </div>
+            View all
+          </ClayButton>
+        </header>
 
         {/* =================================================
             SLIDER CLIENT ISLAND
         ================================================== */}
 
-        <ProjectsSliderClient projects={projects} />
+        <ProjectsSliderClient projects={sliderProjects} />
       </div>
     </section>
   );

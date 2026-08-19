@@ -8,48 +8,9 @@ import HomeSeoDescriptionSection from "@/components/static/HomeSeoDescriptionSec
 import LatestListingsSection from "@/components/static/LatestListingsSection";
 import ServicesSection from "@/components/static/servicesSection";
 import WhyChooseSection from "@/components/static/WhyChooseSection";
-
-export const demoProjects: ProjectProduct[] = [
-  {
-    id: "demo-project-1",
-    productCode: 1001,
-    name: "Sculptural Navy Sofa",
-    imageUrl: "/assets/images/1.webp",
-    description:
-      "A made-to-measure sofa shaped around a contemporary London living space, combining deep navy upholstery with generous proportions and a refined architectural silhouette.",
-  },
-
-  {
-    id: "demo-project-2",
-    productCode: 1002,
-    name: "Curved Hospitality Seating",
-    imageUrl: "/assets/images/2.webp",
-    description:
-      "Bespoke seating developed for a hospitality interior, balancing comfort, durability and a clean visual rhythm throughout the space.",
-  },
-
-  {
-    id: "demo-project-3",
-    productCode: 1003,
-    name: "Warm Contemporary Interior",
-    imageUrl: "/assets/images/3.webp",
-    description:
-      "A layered interior concept built around warm neutrals, considered proportions and bespoke pieces designed to feel naturally connected to the architecture.",
-  },
-
-  {
-    id: "demo-project-4",
-    productCode: 1004,
-    name: "Restored Statement Sofa",
-    imageUrl: "/assets/images/4.webp",
-    description:
-      "A carefully restored sofa given a renewed structure, refreshed upholstery and a cleaner finish while preserving the character of the original piece.",
-  },
-];
 import { defaultOgImage, siteConfig } from "@/lib/site";
-import ProjectsSliderSection, {
-  ProjectProduct,
-} from "@/components/global/ProjectsSliderSection";
+import ProjectsSliderSection from "@/components/global/ProjectsSliderSection";
+import { listFeaturedProjects } from "@/lib/project-repository";
 
 export const metadata: Metadata = {
   title: "Bespoke Sofas, Sofa Repair & Interior Design London",
@@ -88,14 +49,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+async function getHomeProjects() {
+  try {
+    return await listFeaturedProjects(8);
+  } catch (error) {
+    console.warn("Could not load featured projects for homepage", error);
+    return [];
+  }
+}
+
+export default async function HomePage() {
+  const projects = await getHomeProjects();
+
   return (
     <main>
       {/* ABOVE THE FOLD — render immediately */}
       <HeroSection />
 
       <AboutSection />
-      <ProjectsSliderSection products={demoProjects}  />
+      <ProjectsSliderSection   />
       {/* Keep Server shell.
           Client carousel should be isolated internally. */}
       <ServicesSection />

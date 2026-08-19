@@ -2,11 +2,11 @@ import { ApiProblem, handleApiError, ok } from "@/lib/api-response";
 import { assertLeadAdmin } from "@/lib/lead-admin";
 import { sanitizeFileName } from "@/lib/lead-config";
 import {
-  createProductImageStorageKey,
+  createProjectImageStorageKey,
   getPublicUploadUrl,
   uploadObject,
 } from "@/lib/upload-storage";
-import { validateProductImageUpload } from "@/lib/product-validation";
+import { validateProjectImageUpload } from "@/lib/project-validation";
 import { assertSameOrigin } from "@/lib/security";
 
 const noStoreHeaders = {
@@ -22,17 +22,17 @@ export async function POST(request: Request) {
     const file = formData.get("file");
 
     if (!(file instanceof File)) {
-      throw new ApiProblem("VALIDATION_ERROR", "Choose a product image.", 400, {
-        file: "Choose a product image.",
+      throw new ApiProblem("VALIDATION_ERROR", "Choose a project image.", 400, {
+        file: "Choose a project image.",
       });
     }
 
-    const input = validateProductImageUpload({
+    const input = validateProjectImageUpload({
       fileName: file.name,
       mimeType: file.type,
       sizeBytes: file.size,
     });
-    const storageKey = createProductImageStorageKey({
+    const storageKey = createProjectImageStorageKey({
       safeName: sanitizeFileName(input.safeName),
       mimeType: input.mimeType,
     });
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     if (!imageUrl) {
       throw new ApiProblem(
         "UPLOAD_FAILED",
-        "UPLOAD_PUBLIC_BASE_URL is required for product image uploads.",
+        "UPLOAD_PUBLIC_BASE_URL is required for project image uploads.",
         500,
       );
     }

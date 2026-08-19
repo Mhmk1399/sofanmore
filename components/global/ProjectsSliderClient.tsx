@@ -1,8 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, GripHorizontal, Hash } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  GripHorizontal,
+  Hash,
+  MapPin,
+} from "lucide-react";
+
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import type {
   KeyboardEvent,
@@ -10,23 +25,71 @@ import type {
   ReactNode,
 } from "react";
 
-import { ProjectProduct } from "./ProjectsSliderSection";
+import type {
+  ProjectSliderItem,
+} from "./ProjectsSliderSection";
 
 /* =========================================================
    TYPES
 ========================================================= */
 
 type ProjectsSliderClientProps = {
-  projects: ProjectProduct[];
+  projects: ProjectSliderItem[];
 };
 
 type DragState = {
   active: boolean;
-  pointerId: number | null;
-  startX: number;
-  lastX: number;
   moved: boolean;
+
+  pointerId: number | null;
+
+  startX: number;
+  currentX: number;
+
+  startScrollLeft: number;
+  targetScrollLeft: number;
+
+  startIndex: number;
 };
+
+/* =========================================================
+   CONSTANTS
+========================================================= */
+
+const NAVIGATION_DURATION = 480;
+
+const DRAG_START_THRESHOLD = 5;
+
+const DRAG_NAVIGATION_THRESHOLD = 50;
+
+const DRAG_FOLLOW_FACTOR = 0.27;
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function clamp(
+  value: number,
+  min: number,
+  max: number,
+) {
+  return Math.min(
+    Math.max(value, min),
+    max,
+  );
+}
+
+function easeOutQuint(
+  progress: number,
+) {
+  return (
+    1 -
+    Math.pow(
+      1 - progress,
+      5,
+    )
+  );
+}
 
 /* =========================================================
    ROOT
@@ -35,289 +98,748 @@ type DragState = {
 export default function ProjectsSliderClient({
   projects,
 }: ProjectsSliderClientProps) {
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const frameRef = useRef<number | null>(null);
+  const sliderRef =
+    useRef<HTMLDivElement>(null);
 
-  const dragRef = useRef<DragState>({
-    active: false,
-    pointerId: null,
-    startX: 0,
-    lastX: 0,
-    moved: false,
-  });
+  const navigationFrameRef =
+    useRef<number | null>(
+      null,
+    );
 
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
+  const dragFrameRef =
+    useRef<number | null>(
+      null,
+    );
+
+  const scrollFrameRef =
+    useRef<number | null>(
+      null,
+    );
+
+  const dragRef =
+    useRef<DragState>({
+      active: false,
+      moved: false,
+
+      pointerId: null,
+
+      startX: 0,
+      currentX: 0,
+
+      startScrollLeft: 0,
+      targetScrollLeft: 0,
+
+      startIndex: 0,
+    });
+
+  const [activeIndex, setActiveIndex] =
+    useState(0);
+
+  const [isDragging, setIsDragging] =
+    useState(false);
+
+  const [isAnimating, setIsAnimating] =
+    useState(false);
 
   /* =======================================================
      GET SLIDES
   ======================================================= */
 
-  const getSlides = useCallback(() => {
-    const container = sliderRef.current;
-
-    if (!container) {
-      return [];
-    }
-
-    return Array.from(
-      container.querySelectorAll<HTMLElement>("[data-project-slide]"),
-    );
-  }, []);
-
-  /* =======================================================
-     SCROLL TO INDEX
-  ======================================================= */
-
-  const scrollToIndex = useCallback(
-    (index: number, behavior: ScrollBehavior = "smooth") => {
-      const container = sliderRef.current;
+  const getSlides =
+    useCallback(() => {
+      const container =
+        sliderRef.current;
 
       if (!container) {
+        return [];
+      }
+
+      return Array.from(
+        container.querySelectorAll<HTMLElement>(
+          "[data-project-slide]",
+        ),
+      );
+    }, []);
+
+  /* =======================================================
+     CANCEL NAVIGATION
+  ======================================================= */
+
+  const cancelNavigation =
+    useCallback(() => {
+      if (
+        navigationFrameRef.current ===
+        null
+      ) {
         return;
       }
 
-      const slides = getSlides();
-      const target = slides[index];
+      window.cancelAnimationFrame(
+        navigationFrameRef.current,
+      );
 
-      if (!target) {
+      navigationFrameRef.current =
+        null;
+
+      setIsAnimating(false);
+    }, []);
+
+  /* =======================================================
+     CANCEL DRAG
+  ======================================================= */
+
+  const cancelDragFrame =
+    useCallback(() => {
+      if (
+        dragFrameRef.current ===
+        null
+      ) {
         return;
       }
 
-      container.scrollTo({
-        left: target.offsetLeft,
-        behavior,
-      });
-    },
-    [getSlides],
-  );
+      window.cancelAnimationFrame(
+        dragFrameRef.current,
+      );
+
+      dragFrameRef.current =
+        null;
+    }, []);
 
   /* =======================================================
-     FIND NEAREST SLIDE
+     FIND NEAREST
   ======================================================= */
 
-  const findNearestIndex = useCallback(() => {
-    const container = sliderRef.current;
+  const findNearestIndex =
+    useCallback(() => {
+      const container =
+        sliderRef.current;
 
-    if (!container) {
-      return 0;
-    }
+      const slides =
+        getSlides();
 
-    const slides = getSlides();
-
-    if (!slides.length) {
-      return 0;
-    }
-
-    const scrollLeft = container.scrollLeft;
-
-    let closestIndex = 0;
-    let closestDistance = Number.POSITIVE_INFINITY;
-
-    slides.forEach((slide, index) => {
-      const distance = Math.abs(slide.offsetLeft - scrollLeft);
-
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestIndex = index;
+      if (
+        !container ||
+        !slides.length
+      ) {
+        return 0;
       }
-    });
 
-    return closestIndex;
-  }, [getSlides]);
+      let closestIndex = 0;
+
+      let closestDistance =
+        Number.POSITIVE_INFINITY;
+
+      slides.forEach(
+        (slide, index) => {
+          const distance =
+            Math.abs(
+              slide.offsetLeft -
+                container.scrollLeft,
+            );
+
+          if (
+            distance <
+            closestDistance
+          ) {
+            closestDistance =
+              distance;
+
+            closestIndex =
+              index;
+          }
+        },
+      );
+
+      return closestIndex;
+    }, [getSlides]);
 
   /* =======================================================
-     PREVIOUS / NEXT
+     ONE ANIMATION ENGINE
+
+     Used by:
+     - arrows
+     - keyboard
+     - dots
+     - mouse release
   ======================================================= */
 
-  const goPrevious = useCallback(() => {
-    const currentIndex = findNearestIndex();
-    const nextIndex =
-      currentIndex <= 0 ? projects.length - 1 : currentIndex - 1;
+  const animateToIndex =
+    useCallback(
+      (
+        index: number,
+        duration =
+          NAVIGATION_DURATION,
+      ) => {
+        const container =
+          sliderRef.current;
 
-    scrollToIndex(nextIndex);
-  }, [findNearestIndex, projects.length, scrollToIndex]);
+        const slides =
+          getSlides();
 
-  const goNext = useCallback(() => {
-    const currentIndex = findNearestIndex();
-    const nextIndex =
-      currentIndex >= projects.length - 1 ? 0 : currentIndex + 1;
+        const target =
+          slides[index];
 
-    scrollToIndex(nextIndex);
-  }, [findNearestIndex, projects.length, scrollToIndex]);
+        if (
+          !container ||
+          !target
+        ) {
+          return;
+        }
+
+        cancelNavigation();
+        cancelDragFrame();
+
+        const startLeft =
+          container.scrollLeft;
+
+        const targetLeft =
+          target.offsetLeft;
+
+        const distance =
+          targetLeft -
+          startLeft;
+
+        if (
+          Math.abs(distance) < 1
+        ) {
+          container.scrollLeft =
+            targetLeft;
+
+          setActiveIndex(index);
+
+          return;
+        }
+
+        setIsAnimating(true);
+
+        const startTime =
+          performance.now();
+
+        function frame(
+          currentTime: number,
+        ) {
+          const currentContainer =
+            sliderRef.current;
+
+          if (!currentContainer) {
+            navigationFrameRef.current =
+              null;
+
+            setIsAnimating(false);
+
+            return;
+          }
+
+          const progress =
+            Math.min(
+              (currentTime -
+                startTime) /
+                duration,
+              1,
+            );
+
+          const eased =
+            easeOutQuint(
+              progress,
+            );
+
+          currentContainer.scrollLeft =
+            startLeft +
+            distance * eased;
+
+          if (progress < 1) {
+            navigationFrameRef.current =
+              window.requestAnimationFrame(
+                frame,
+              );
+
+            return;
+          }
+
+          currentContainer.scrollLeft =
+            targetLeft;
+
+          navigationFrameRef.current =
+            null;
+
+          setActiveIndex(index);
+          setIsAnimating(false);
+        }
+
+        navigationFrameRef.current =
+          window.requestAnimationFrame(
+            frame,
+          );
+      },
+      [
+        cancelDragFrame,
+        cancelNavigation,
+        getSlides,
+      ],
+    );
 
   /* =======================================================
-     SCROLL ACTIVE STATE
+     NAVIGATION
+  ======================================================= */
+
+  const goPrevious =
+    useCallback(() => {
+      if (
+        activeIndex <= 0
+      ) {
+        return;
+      }
+
+      animateToIndex(
+        activeIndex - 1,
+      );
+    }, [
+      activeIndex,
+      animateToIndex,
+    ]);
+
+  const goNext =
+    useCallback(() => {
+      if (
+        activeIndex >=
+        projects.length - 1
+      ) {
+        return;
+      }
+
+      animateToIndex(
+        activeIndex + 1,
+      );
+    }, [
+      activeIndex,
+      animateToIndex,
+      projects.length,
+    ]);
+
+  /* =======================================================
+     SCROLL STATE
+
+     Primarily for native mobile swipe.
   ======================================================= */
 
   useEffect(() => {
-    const container = sliderRef.current;
+    const container =
+      sliderRef.current;
 
     if (!container) {
       return;
     }
 
-    function updateActiveSlide() {
-      frameRef.current = null;
+    function update() {
+      scrollFrameRef.current =
+        null;
 
-      const closestIndex = findNearestIndex();
+      const nextIndex =
+        findNearestIndex();
 
-      setActiveIndex((current) =>
-        current === closestIndex ? current : closestIndex,
+      setActiveIndex(
+        (current) =>
+          current === nextIndex
+            ? current
+            : nextIndex,
       );
     }
 
     function handleScroll() {
-      if (frameRef.current !== null) {
+      if (
+        scrollFrameRef.current !==
+        null
+      ) {
         return;
       }
 
-      frameRef.current = window.requestAnimationFrame(updateActiveSlide);
+      scrollFrameRef.current =
+        window.requestAnimationFrame(
+          update,
+        );
     }
 
-    container.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
+    container.addEventListener(
+      "scroll",
+      handleScroll,
+      {
+        passive: true,
+      },
+    );
 
     return () => {
-      container.removeEventListener("scroll", handleScroll);
+      container.removeEventListener(
+        "scroll",
+        handleScroll,
+      );
 
-      if (frameRef.current !== null) {
-        window.cancelAnimationFrame(frameRef.current);
-        frameRef.current = null;
+      if (
+        scrollFrameRef.current !==
+        null
+      ) {
+        window.cancelAnimationFrame(
+          scrollFrameRef.current,
+        );
       }
     };
   }, [findNearestIndex]);
 
   /* =======================================================
-     DESKTOP MOUSE DRAG
-
-     Mouse only.
-     Touch remains native for mobile horizontal swipe.
+     SMOOTH MOUSE FOLLOW
   ======================================================= */
 
-  function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
-    if (event.pointerType !== "mouse") {
+  const startDragFrame =
+    useCallback(() => {
+      if (
+        dragFrameRef.current !==
+        null
+      ) {
+        return;
+      }
+
+      function frame() {
+        const container =
+          sliderRef.current;
+
+        const drag =
+          dragRef.current;
+
+        if (!container) {
+          dragFrameRef.current =
+            null;
+
+          return;
+        }
+
+        const difference =
+          drag.targetScrollLeft -
+          container.scrollLeft;
+
+        container.scrollLeft +=
+          difference *
+          DRAG_FOLLOW_FACTOR;
+
+        if (
+          drag.active &&
+          Math.abs(difference) >
+            0.35
+        ) {
+          dragFrameRef.current =
+            window.requestAnimationFrame(
+              frame,
+            );
+
+          return;
+        }
+
+        dragFrameRef.current =
+          null;
+      }
+
+      dragFrameRef.current =
+        window.requestAnimationFrame(
+          frame,
+        );
+    }, []);
+
+  /* =======================================================
+     MOUSE DOWN
+
+     Mouse only.
+     Touch keeps native browser swipe.
+  ======================================================= */
+
+  function handlePointerDown(
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) {
+    if (
+      event.pointerType !==
+        "mouse" ||
+      event.button !== 0
+    ) {
       return;
     }
 
-    if (event.button !== 0) {
-      return;
-    }
-
-    const container = sliderRef.current;
+    const container =
+      sliderRef.current;
 
     if (!container) {
       return;
     }
 
+    cancelNavigation();
+    cancelDragFrame();
+
     dragRef.current = {
       active: true,
-      pointerId: event.pointerId,
-      startX: event.clientX,
-      lastX: event.clientX,
       moved: false,
+
+      pointerId:
+        event.pointerId,
+
+      startX:
+        event.clientX,
+
+      currentX:
+        event.clientX,
+
+      startScrollLeft:
+        container.scrollLeft,
+
+      targetScrollLeft:
+        container.scrollLeft,
+
+      startIndex:
+        findNearestIndex(),
     };
 
-    container.setPointerCapture(event.pointerId);
+    container.setPointerCapture(
+      event.pointerId,
+    );
   }
 
-  function handlePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
-    const drag = dragRef.current;
+  /* =======================================================
+     MOUSE MOVE
+  ======================================================= */
 
-    if (!drag.active || event.pointerType !== "mouse") {
+  function handlePointerMove(
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) {
+    const container =
+      sliderRef.current;
+
+    const drag =
+      dragRef.current;
+
+    if (
+      !container ||
+      !drag.active ||
+      event.pointerType !==
+        "mouse"
+    ) {
       return;
     }
 
-    const deltaX = event.clientX - drag.startX;
+    drag.currentX =
+      event.clientX;
 
-    drag.lastX = event.clientX;
+    const deltaX =
+      event.clientX -
+      drag.startX;
 
-    if (!drag.moved && Math.abs(deltaX) < 6) {
+    if (
+      !drag.moved &&
+      Math.abs(deltaX) <
+        DRAG_START_THRESHOLD
+    ) {
       return;
     }
 
-    drag.moved = true;
+    if (!drag.moved) {
+      drag.moved = true;
 
-    if (!isDragging) {
       setIsDragging(true);
     }
 
     event.preventDefault();
+
+    const maxScroll =
+      Math.max(
+        0,
+        container.scrollWidth -
+          container.clientWidth,
+      );
+
+    drag.targetScrollLeft =
+      clamp(
+        drag.startScrollLeft -
+          deltaX * 0.9,
+
+        0,
+        maxScroll,
+      );
+
+    startDragFrame();
   }
 
-  function finishPointerDrag(event: ReactPointerEvent<HTMLDivElement>) {
-    const drag = dragRef.current;
-    const container = sliderRef.current;
+  /* =======================================================
+     MOUSE RELEASE
+  ======================================================= */
 
-    if (!drag.active || event.pointerType !== "mouse") {
+  function finishPointerDrag(
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) {
+    const container =
+      sliderRef.current;
+
+    const drag =
+      dragRef.current;
+
+    if (
+      !drag.active ||
+      event.pointerType !==
+        "mouse"
+    ) {
       return;
     }
 
-    const deltaX = drag.lastX - drag.startX;
+    const deltaX =
+      drag.currentX -
+      drag.startX;
 
-    dragRef.current.active = false;
+    const startIndex =
+      drag.startIndex;
+
+    const moved =
+      drag.moved;
+
+    drag.active = false;
 
     if (
       container &&
       drag.pointerId !== null &&
-      container.hasPointerCapture(drag.pointerId)
+      container.hasPointerCapture(
+        drag.pointerId,
+      )
     ) {
-      container.releasePointerCapture(drag.pointerId);
+      container.releasePointerCapture(
+        drag.pointerId,
+      );
     }
 
-    if (drag.moved) {
-      const threshold = container
-        ? Math.max(48, container.clientWidth * 0.1)
-        : 56;
+    cancelDragFrame();
 
-      if (Math.abs(deltaX) >= threshold) {
-        if (deltaX < 0) {
-          goNext();
-        } else {
-          goPrevious();
-        }
-      } else {
-        const closestIndex = findNearestIndex();
-        scrollToIndex(closestIndex, "smooth");
-      }
-    }
+    setIsDragging(false);
 
     dragRef.current = {
       active: false,
-      pointerId: null,
-      startX: 0,
-      lastX: 0,
       moved: false,
+
+      pointerId: null,
+
+      startX: 0,
+      currentX: 0,
+
+      startScrollLeft:
+        container?.scrollLeft ??
+        0,
+
+      targetScrollLeft:
+        container?.scrollLeft ??
+        0,
+
+      startIndex,
     };
 
-    setIsDragging(false);
+    if (!moved) {
+      return;
+    }
+
+    let targetIndex =
+      startIndex;
+
+    if (
+      deltaX <
+      -DRAG_NAVIGATION_THRESHOLD
+    ) {
+      targetIndex =
+        Math.min(
+          startIndex + 1,
+          projects.length - 1,
+        );
+    }
+
+    if (
+      deltaX >
+      DRAG_NAVIGATION_THRESHOLD
+    ) {
+      targetIndex =
+        Math.max(
+          startIndex - 1,
+          0,
+        );
+    }
+
+    animateToIndex(
+      targetIndex,
+    );
   }
 
   /* =======================================================
      KEYBOARD
   ======================================================= */
 
-  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    if (event.key === "ArrowRight") {
+  function handleKeyDown(
+    event:
+      KeyboardEvent<HTMLDivElement>,
+  ) {
+    if (
+      event.key ===
+      "ArrowRight"
+    ) {
       event.preventDefault();
+
       goNext();
+
+      return;
     }
 
-    if (event.key === "ArrowLeft") {
+    if (
+      event.key ===
+      "ArrowLeft"
+    ) {
       event.preventDefault();
+
       goPrevious();
     }
   }
+
+  /* =======================================================
+     CLEANUP
+  ======================================================= */
+
+  useEffect(() => {
+    return () => {
+      cancelNavigation();
+      cancelDragFrame();
+
+      if (
+        scrollFrameRef.current !==
+        null
+      ) {
+        window.cancelAnimationFrame(
+          scrollFrameRef.current,
+        );
+      }
+    };
+  }, [
+    cancelDragFrame,
+    cancelNavigation,
+  ]);
 
   if (!projects.length) {
     return null;
   }
 
+  const hasMultiple =
+    projects.length > 1;
+
+  /* =======================================================
+     UI
+  ======================================================= */
+
   return (
-    <div className="relative">
+    <div
+      className="
+        relative
+      "
+    >
       {/* ===================================================
-          LIGHT CLAY FRAME
+          LIGHT CLAY OUTER SHELL
+
+          NO black container.
+          NO blur.
+          NO backdrop-filter.
       ==================================================== */}
 
       <div
@@ -329,52 +851,43 @@ export default function ProjectsSliderClient({
           border
           border-white/80
 
-          bg-[#EEE6DA]
+          bg-[#EDE4D8]
 
-          p-[6px]
+          p-[5px]
 
-          shadow-[
-            0_12px_28px_rgba(82,58,33,0.10),
-            inset_1px_1px_2px_rgba(255,255,255,0.90),
-            inset_-1px_-1px_2px_rgba(98,70,40,0.05)
-          ]
+          shadow-[0_9px_24px_rgba(73,52,30,0.075),inset_1px_1px_2px_rgba(255,255,255,0.88)]
 
-          sm:rounded-[34px]
-          sm:p-[7px]
+          sm:rounded-[33px]
+          sm:p-[6px]
 
-          lg:rounded-[40px]
+          lg:rounded-[36px]
         "
       >
-        {/* ===============================================
-            INNER RECESSED SURFACE
-        ================================================ */}
+        {/* =================================================
+            RECESSED TRACK
+        ================================================== */}
 
         <div
           className="
             overflow-hidden
 
-            rounded-[22px]
+            rounded-[23px]
 
             border
-            border-[var(--brand-navy)]/[0.055]
+            border-[var(--brand-navy)]/[0.045]
 
-            bg-[#E6DCCF]
+            bg-[#E5DACD]
 
             p-[4px]
 
-            shadow-[
-              inset_2px_2px_5px_rgba(93,66,38,0.07),
-              inset_-2px_-2px_5px_rgba(255,255,255,0.65)
-            ]
+            shadow-[inset_1px_1px_4px_rgba(83,59,34,0.06),inset_-1px_-1px_3px_rgba(255,255,255,0.55)]
 
             sm:rounded-[28px]
-
-            lg:rounded-[34px]
           "
         >
-          {/* =============================================
+          {/* ===============================================
               SLIDER
-          ============================================== */}
+          ================================================ */}
 
           <div
             ref={sliderRef}
@@ -382,148 +895,187 @@ export default function ProjectsSliderClient({
             aria-roledescription="carousel"
             aria-label="Selected Sofa N More projects"
             tabIndex={0}
-            onKeyDown={handleKeyDown}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={finishPointerDrag}
-            onPointerCancel={finishPointerDrag}
+            onKeyDown={
+              handleKeyDown
+            }
+            onPointerDown={
+              handlePointerDown
+            }
+            onPointerMove={
+              handlePointerMove
+            }
+            onPointerUp={
+              finishPointerDrag
+            }
+            onPointerCancel={
+              finishPointerDrag
+            }
             className={`
               flex
 
-              snap-x
-              snap-mandatory
-
-              gap-2.5
-              sm:gap-3
+              gap-2
 
               overflow-x-auto
               overflow-y-hidden
 
-              rounded-[19px]
-
-              overscroll-x-contain
-              scroll-smooth
+              rounded-[20px]
 
               [scrollbar-width:none]
+
               [&::-webkit-scrollbar]:hidden
 
               ${
                 isDragging
                   ? `
+                    cursor-grabbing
                     select-none
-                    lg:cursor-grabbing
                   `
                   : `
-                    lg:cursor-grab
+                    cursor-grab
+                  `
+              }
+
+              ${
+                isDragging ||
+                isAnimating
+                  ? `
+                    snap-none
+                  `
+                  : `
+                    snap-x
+                    snap-mandatory
                   `
               }
             `}
           >
-            {projects.map((project, index) => (
-              <ProjectSlide
-                key={project.id}
-                project={project}
-                index={index}
-                total={projects.length}
-                priority={index === 0}
-                active={index === activeIndex}
-                dragging={isDragging}
+            {projects.map(
+              (
+                project,
+                index,
+              ) => (
+                <ProjectSlide
+                  key={
+                    project.id
+                  }
+                  project={
+                    project
+                  }
+                  index={index}
+                  priority={
+                    index === 0
+                  }
+                  active={
+                    index ===
+                    activeIndex
+                  }
+                  dragging={
+                    isDragging
+                  }
+                />
+              ),
+            )}
+          </div>
+        </div>
+
+        {/* =================================================
+            FLOATING NAVIGATION
+
+            Inside image area visually,
+            but independent from slides.
+        ================================================== */}
+
+        {hasMultiple && (
+          <div
+            className="
+              absolute
+
+              right-3
+              top-3
+
+              z-20
+
+              sm:right-4
+              sm:top-4
+            "
+          >
+            <div
+              className="
+                flex
+                items-center
+
+                gap-1
+
+                rounded-[15px]
+
+                border
+                border-white/80
+
+                bg-[#F1E8DC]
+
+                p-[4px]
+
+                shadow-[0_5px_14px_rgba(55,39,24,0.12),inset_1px_1px_1px_rgba(255,255,255,0.9)]
+              "
+            >
+              <SliderControl
+                label="Previous project"
+                onClick={
+                  goPrevious
+                }
+                disabled={
+                  activeIndex ===
+                  0
+                }
+              >
+                <ArrowLeft
+                  size={14}
+                  strokeWidth={
+                    1.7
+                  }
+                />
+              </SliderControl>
+
+              <span
+                aria-hidden
+                className="
+                  h-5
+                  w-px
+
+                  bg-[var(--brand-navy)]/10
+                "
               />
-            ))}
+
+              <SliderControl
+                label="Next project"
+                onClick={
+                  goNext
+                }
+                disabled={
+                  activeIndex ===
+                  projects.length -
+                    1
+                }
+                featured
+              >
+                <ArrowRight
+                  size={14}
+                  strokeWidth={
+                    1.7
+                  }
+                />
+              </SliderControl>
+            </div>
           </div>
-        </div>
-
-        {/* ===============================================
-            DESKTOP FLOATING NAV ONLY
-        ================================================ */}
-
-        <div
-          className="
-            pointer-events-none
-
-            absolute
-            inset-y-0
-            left-0
-            right-0
-
-            z-20
-
-            hidden
-            items-center
-            justify-between
-
-            px-4
-
-            lg:flex
-            lg:px-5
-            xl:px-6
-          "
-        >
-          <div className="pointer-events-auto">
-            <SliderControl label="Previous project" onClick={goPrevious}>
-              <ArrowLeft size={15} strokeWidth={1.6} />
-            </SliderControl>
-          </div>
-
-          <div className="pointer-events-auto">
-            <SliderControl label="Next project" onClick={goNext} featured>
-              <ArrowRight size={15} strokeWidth={1.6} />
-            </SliderControl>
-          </div>
-        </div>
-
-        {/* ===============================================
-            SMALL CLAY GRIP
-        ================================================ */}
-
-        <div
-          aria-hidden
-          className="
-            pointer-events-none
-
-            absolute
-
-            bottom-[-13px]
-            left-1/2
-
-            hidden
-
-            h-[27px]
-            min-w-[74px]
-
-            -translate-x-1/2
-
-            items-center
-            justify-center
-
-            rounded-full
-
-            border
-            border-white/80
-
-            bg-[#EEE5D8]
-
-            text-[var(--brand-navy)]/35
-
-            shadow-[
-              0_5px_12px_rgba(78,55,31,0.10),
-              inset_1px_1px_2px_rgba(255,255,255,0.85)
-            ]
-
-            lg:flex
-          "
-        >
-          <GripHorizontal size={17} strokeWidth={1.4} />
-        </div>
+        )}
       </div>
 
       {/* ===================================================
-          PROGRESS / HINT
+          BOTTOM STATUS
       ==================================================== */}
 
       <div
         className="
-          mt-6
+          mt-5
 
           flex
           items-center
@@ -533,10 +1085,14 @@ export default function ProjectsSliderClient({
 
           px-1
 
-          sm:mt-7
+          sm:mt-6
           sm:px-2
         "
       >
+        {/* ===============================================
+            COUNTER + PROGRESS
+        ================================================ */}
+
         <div
           className="
             flex
@@ -546,8 +1102,6 @@ export default function ProjectsSliderClient({
             items-center
 
             gap-3
-
-            sm:gap-4
           "
         >
           <span
@@ -556,15 +1110,20 @@ export default function ProjectsSliderClient({
 
               font-brand-sans
 
-              text-[9px]
+              text-[8px]
               font-bold
 
-              tracking-[0.08em]
+              tracking-[0.09em]
 
               text-[var(--brand-navy)]
             "
           >
-            {String(activeIndex + 1).padStart(2, "0")}
+            {String(
+              activeIndex + 1,
+            ).padStart(
+              2,
+              "0",
+            )}
 
             <span
               className="
@@ -581,7 +1140,12 @@ export default function ProjectsSliderClient({
                 text-[var(--brand-text-muted)]/55
               "
             >
-              {String(projects.length).padStart(2, "0")}
+              {String(
+                projects.length,
+              ).padStart(
+                2,
+                "0",
+              )}
             </span>
           </span>
 
@@ -589,20 +1153,17 @@ export default function ProjectsSliderClient({
             className="
               relative
 
-              h-[5px]
-              max-w-[280px]
+              h-[4px]
+              max-w-[250px]
               flex-1
 
               overflow-hidden
 
               rounded-full
 
-              bg-[#E1D7CA]
+              bg-[#DDD3C6]
 
-              shadow-[
-                inset_1px_1px_3px_rgba(79,57,33,0.10),
-                inset_-1px_-1px_2px_rgba(255,255,255,0.75)
-              ]
+              shadow-[inset_1px_1px_2px_rgba(76,54,31,0.09)]
             "
           >
             <span
@@ -620,98 +1181,127 @@ export default function ProjectsSliderClient({
                 duration-300
               "
               style={{
-                width: `${((activeIndex + 1) / projects.length) * 100}%`,
+                width: `${
+                  ((activeIndex +
+                    1) /
+                    projects.length) *
+                  100
+                }%`,
               }}
             />
           </div>
         </div>
 
-        <span
-          className="
-            hidden
+        {/* ===============================================
+            DESKTOP DRAG HINT
+        ================================================ */}
 
-            items-center
-            gap-1.5
+        {hasMultiple && (
+          <div
+            className="
+              hidden
 
-            font-brand-sans
+              shrink-0
 
-            text-[7px]
-            font-bold
-            uppercase
+              items-center
 
-            tracking-[0.12em]
+              gap-1.5
 
-            text-[var(--brand-text-muted)]/60
+              font-brand-sans
 
-            lg:flex
-          "
-        >
-          <GripHorizontal size={12} />
-          Drag to explore
-        </span>
+              text-[7px]
+              font-bold
+              uppercase
+
+              tracking-[0.11em]
+
+              text-[var(--brand-text-muted)]/60
+
+              lg:flex
+            "
+          >
+            <GripHorizontal
+              size={12}
+              strokeWidth={1.5}
+            />
+
+            
+          </div>
+        )}
       </div>
 
       {/* ===================================================
           MOBILE DOTS
       ==================================================== */}
 
-      <div
-        className="
-          mt-4
+      {hasMultiple && (
+        <div
+          className="
+            mt-4
 
-          flex
-          items-center
-          justify-center
+            flex
+            items-center
+            justify-center
 
-          gap-1.5
+            gap-1.5
 
-          lg:hidden
-        "
-      >
-        {projects.map((project, index) => {
-          const active = index === activeIndex;
+            lg:hidden
+          "
+        >
+          {projects.map(
+            (
+              project,
+              index,
+            ) => {
+              const active =
+                index ===
+                activeIndex;
 
-          return (
-            <button
-              key={project.id}
-              type="button"
-              aria-label={`Go to project ${index + 1}`}
-              aria-current={active ? "true" : undefined}
-              onClick={() => scrollToIndex(index)}
-              className={`
-                h-[6px]
+              return (
+                <button
+                  key={
+                    project.id
+                  }
+                  type="button"
+                  aria-label={`Go to project ${
+                    index + 1
+                  }`}
+                  aria-current={
+                    active
+                      ? "true"
+                      : undefined
+                  }
+                  onClick={() =>
+                    animateToIndex(
+                      index,
+                    )
+                  }
+                  className={`
+                    h-[6px]
 
-                rounded-full
+                    rounded-full
 
-                border
-                border-white/60
+                    transition-[width,background-color]
+                    duration-200
 
-                shadow-[
-                  inset_1px_1px_2px_rgba(75,52,30,0.09),
-                  inset_-1px_-1px_2px_rgba(255,255,255,0.70)
-                ]
-
-                transition-[width,background-color]
-                duration-200
-
-                ${
-                  active
-                    ? `
-                      w-6
-
-                      bg-[var(--brand-gold)]
-                    `
-                    : `
-                      w-[6px]
-
-                      bg-[#DED4C7]
-                    `
-                }
-              `}
-            />
-          );
-        })}
-      </div>
+                    ${
+                      active
+                        ? `
+                          w-6
+                          bg-[var(--brand-gold)]
+                        `
+                        : `
+                          w-[6px]
+                          bg-[var(--brand-navy)]/12
+                        `
+                    }
+                  `}
+                />
+              );
+            },
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -723,90 +1313,74 @@ export default function ProjectsSliderClient({
 function ProjectSlide({
   project,
   index,
-  total,
   priority,
   active,
   dragging,
 }: {
-  project: ProjectProduct;
+  project: ProjectSliderItem;
+
   index: number;
-  total: number;
+
   priority: boolean;
+
   active: boolean;
+
   dragging: boolean;
 }) {
   return (
     <article
       data-project-slide
-      aria-label={`${project.name}, project ${index + 1} of ${total}`}
-      className={`
+      aria-label={`Project ${project.projectCode}: ${project.title}`}
+      className="
         group
+
         relative
+
+        flex
 
         min-w-[88%]
 
         snap-start
 
+        flex-col
+
         overflow-hidden
 
-        rounded-[17px]
+        rounded-[18px]
 
         border
+        border-white/80
 
-        bg-[var(--brand-navy)]
+        bg-[#F7F1E8]
 
-        transition-[transform,opacity,box-shadow,border-color]
-        duration-500
-        ease-[cubic-bezier(0.22,1,0.36,1)]
+        shadow-[0_4px_12px_rgba(75,53,30,0.055)]
 
         sm:min-w-[74%]
-        sm:rounded-[23px]
+        sm:rounded-[22px]
 
-        lg:min-w-[58%]
+        lg:min-w-[56%]
 
-        xl:min-w-[52%]
-
-        ${
-          active
-            ? `
-              border-white/24
-
-              opacity-100
-
-              shadow-[
-                0_18px_42px_rgba(9,23,37,0.18),
-                0_3px_10px_rgba(9,23,37,0.10)
-              ]
-
-              lg:-translate-y-[2px]
-              lg:scale-[1]
-            `
-            : `
-              border-white/14
-
-              opacity-[0.92]
-
-              shadow-[
-                0_10px_24px_rgba(9,23,37,0.10)
-              ]
-
-              lg:translate-y-[4px]
-              lg:scale-[0.982]
-            `
-        }
-      `}
+        xl:min-w-[48%]
+      "
     >
       {/* =================================================
           IMAGE
+
+          NO black background.
+          NO dark full-card overlay.
       ================================================== */}
 
       <div
         className="
           relative
 
-          aspect-[4/5]
+          aspect-[4/3]
+
+          shrink-0
 
           overflow-hidden
+
+          bg-[#DED4C7]
 
           sm:aspect-[16/11]
 
@@ -814,218 +1388,75 @@ function ProjectSlide({
         "
       >
         <Image
-          src={project.imageUrl}
-          alt={project.name}
+          src={project.coverImageUrl}
+          alt={project.title}
           fill
           priority={priority}
           draggable={false}
-          sizes="(max-width: 640px) 88vw, (max-width: 1024px) 74vw, (max-width: 1280px) 58vw, 52vw"
+          quality={78}
+          sizes="(max-width: 639px) 88vw, (max-width: 1023px) 74vw, (max-width: 1279px) 56vw, 48vw"
           className={`
             pointer-events-none
+
             select-none
 
             object-cover
             object-center
 
-            [will-change:transform]
-
             transition-[transform,opacity]
-            duration-700
-            ease-[cubic-bezier(0.22,1,0.36,1)]
+            duration-500
+            ease-out
 
             ${
               active
-                ? `
-                  scale-[1.015]
-                  opacity-100
-                `
-                : `
-                  scale-[1.002]
-                  opacity-[0.92]
-                `
+                ? "opacity-100"
+                : "opacity-[0.96]"
             }
 
             ${
               !dragging
-                ? active
-                  ? `
-                    lg:group-hover:scale-[1.04]
-                  `
-                  : `
-                    lg:group-hover:scale-[1.022]
-                  `
+                ? `
+                  lg:group-hover:scale-[1.012]
+                `
                 : ""
             }
           `}
         />
 
         {/* ===============================================
-            BASE OVERLAY
+            PROJECT CODE
+
+            Light clay chip instead of dark overlay.
         ================================================ */}
 
         <div
-          aria-hidden
           className="
-            pointer-events-none
-
             absolute
-            inset-0
 
-            bg-gradient-to-t
+            left-3
+            top-3
 
-            from-[#091725]/95
-            via-[#091725]/18
-            to-transparent
+            sm:left-4
+            sm:top-4
           "
-        />
-
-        {/* ===============================================
-            INACTIVE DARKENING
-        ================================================ */}
-
-        <div
-          aria-hidden
-          className={`
-            pointer-events-none
-
-            absolute
-            inset-0
-
-            bg-[#091725]/20
-
-            transition-opacity
-            duration-500
-            ease-[cubic-bezier(0.22,1,0.36,1)]
-
-            ${
-              active
-                ? `
-                  opacity-0
-                `
-                : `
-                  opacity-100
-                `
-            }
-          `}
-        />
-
-        {/* ===============================================
-            TOP LIGHT SHEEN
-        ================================================ */}
-
-        <div
-          aria-hidden
-          className={`
-            pointer-events-none
-
-            absolute
-            inset-x-0
-            top-0
-
-            h-[32%]
-
-            bg-gradient-to-b
-            from-white/[0.12]
-            to-transparent
-
-            transition-opacity
-            duration-500
-
-            ${
-              active
-                ? `
-                  opacity-100
-                `
-                : `
-                  opacity-50
-                `
-            }
-          `}
-        />
-
-        {/* ===============================================
-            TOP META
-        ================================================ */}
-
-        <div
-          className={`
-            pointer-events-none
-
-            absolute
-
-            inset-x-0
-            top-0
-
-            flex
-            items-start
-            justify-between
-
-            gap-4
-
-            p-4
-
-            transition-[opacity,transform]
-            duration-500
-            ease-[cubic-bezier(0.22,1,0.36,1)]
-
-            sm:p-5
-
-            lg:p-6
-
-            ${
-              active
-                ? `
-                  translate-y-0
-                  opacity-100
-                `
-                : `
-                  translate-y-[3px]
-                  opacity-[0.9]
-                `
-            }
-          `}
         >
           <span
             className="
-              font-brand-sans
-
-              text-[8px]
-              font-bold
-              uppercase
-
-              tracking-[0.16em]
-
-              text-white/65
-            "
-          >
-            Project {String(index + 1).padStart(2, "0")}
-            <span
-              className="
-                mx-1.5
-                text-white/25
-              "
-            >
-              /
-            </span>
-            {String(total).padStart(2, "0")}
-          </span>
-
-          <span
-            className="
               inline-flex
+              h-8
+
               items-center
 
               gap-1.5
 
-              rounded-full
+              rounded-[11px]
 
               border
-              border-white/25
+              border-white/80
 
-              bg-[#F1E7D9]/90
+              bg-[#F3EADF]/95
 
               px-2.5
-              py-1.5
 
               font-brand-sans
 
@@ -1037,188 +1468,278 @@ function ProjectSlide({
 
               text-[var(--brand-navy)]
 
-              shadow-[
-                0_4px_10px_rgba(0,0,0,0.10),
-                inset_1px_1px_1px_rgba(255,255,255,0.80)
-              ]
+              shadow-[0_3px_9px_rgba(0,0,0,0.09),inset_1px_1px_1px_rgba(255,255,255,0.85)]
             "
           >
             <Hash
               size={9}
-              strokeWidth={1.8}
-              className="text-[var(--brand-gold-700)]"
+              strokeWidth={1.7}
+              className="
+                text-[var(--brand-gold-700)]
+              "
             />
 
-            {project.productCode}
+            {
+              project.projectCode
+            }
           </span>
         </div>
+      </div>
 
+      {/* =================================================
+          CONTENT SURFACE
+      ================================================== */}
+
+      <div
+        className="
+          flex
+          flex-1
+          flex-col
+
+          px-4
+          pb-4
+          pt-4
+
+          sm:px-5
+          sm:pb-5
+
+          lg:px-6
+          lg:pb-6
+          lg:pt-5
+        "
+      >
         {/* ===============================================
-            CONTENT
+            SERVICE + LOCATION
         ================================================ */}
 
         <div
-          className={`
-            pointer-events-none
+          className="
+            flex
+            flex-wrap
 
-            absolute
+            items-center
 
-            inset-x-0
-            bottom-0
-
-            p-4
-
-            transition-[opacity,transform]
-            duration-500
-            ease-[cubic-bezier(0.22,1,0.36,1)]
-
-            sm:p-6
-
-            lg:p-7
-
-            ${
-              active
-                ? `
-                  translate-y-0
-                  opacity-100
-                `
-                : `
-                  translate-y-[5px]
-                  opacity-[0.9]
-                `
-            }
-          `}
+            gap-x-3
+            gap-y-1.5
+          "
         >
-          <div
-            className="
-              max-w-[620px]
-            "
-          >
-            <div
+          {project.serviceLabel && (
+            <span
               className="
-                mb-3
+                font-brand-sans
 
-                flex
-                items-center
+                text-[7px]
+                font-bold
+                uppercase
 
-                gap-2
+                tracking-[0.13em]
+
+                text-[var(--brand-gold-700)]
               "
             >
+              {
+                project.serviceLabel
+              }
+            </span>
+          )}
+
+          {project.locationLabel && (
+            <>
               <span
                 aria-hidden
-                className={`
-                  h-px
-                  w-6
+                className="
+                  h-1
+                  w-1
 
-                  bg-[var(--brand-gold)]
+                  rounded-full
 
-                  transition-[opacity,width]
-                  duration-500
-                  ease-[cubic-bezier(0.22,1,0.36,1)]
-
-                  ${
-                    active
-                      ? `
-                        opacity-100
-                      `
-                      : `
-                        opacity-70
-                      `
-                  }
-                `}
+                  bg-[var(--brand-navy)]/15
+                "
               />
 
               <span
                 className="
+                  inline-flex
+                  items-center
+
+                  gap-1
+
                   font-brand-sans
 
                   text-[7px]
-                  font-bold
-                  uppercase
+                  font-semibold
 
-                  tracking-[0.16em]
-
-                  text-[var(--brand-gold)]
+                  text-[var(--brand-text-muted)]
                 "
               >
-                Sofa N More Project
-              </span>
-            </div>
+                <MapPin
+                  size={9}
+                  strokeWidth={1.5}
+                  className="
+                    text-[var(--brand-gold-700)]
+                  "
+                />
 
-            <h3
-              className={`
-                max-w-[560px]
-
-                font-brand-display
-
-                text-[27px]
-                font-medium
-                leading-[1.02]
-
-                tracking-[-0.035em]
-
-                text-white
-
-                transition-[opacity,transform]
-                duration-500
-                ease-[cubic-bezier(0.22,1,0.36,1)]
-
-                sm:text-[34px]
-
-                lg:text-[40px]
-
-                ${
-                  active
-                    ? `
-                      opacity-100
-                    `
-                    : `
-                      opacity-[0.94]
-                    `
+                {
+                  project.locationLabel
                 }
-              `}
-            >
-              {project.name}
-            </h3>
+              </span>
+            </>
+          )}
+        </div>
 
-            <p
-              className={`
-                mt-3
+        {/* TITLE */}
 
-                line-clamp-3
+        <h3
+          className="
+            mt-2.5
 
-                max-w-[560px]
+            line-clamp-2
+
+            font-brand-display
+
+            text-[25px]
+            font-medium
+            leading-[1.04]
+
+            tracking-[-0.03em]
+
+            text-[var(--brand-navy)]
+
+            sm:text-[29px]
+
+            lg:text-[32px]
+          "
+        >
+          {project.title}
+        </h3>
+
+        {/* EXCERPT */}
+
+        <p
+          className="
+            mt-3
+
+            line-clamp-3
+
+            max-w-[590px]
+
+            font-brand-sans
+
+            text-[9px]
+            font-medium
+            leading-[1.75]
+
+            text-[var(--brand-text-muted)]
+
+            sm:text-[10px]
+
+            lg:text-[11px]
+          "
+        >
+          {project.excerpt}
+        </p>
+
+        {/* ===============================================
+            CARD FOOTER
+        ================================================ */}
+
+        <div
+          className="
+            mt-auto
+
+            flex
+            min-h-[42px]
+
+            items-end
+            justify-between
+
+            gap-3
+
+            border-t
+            border-[var(--brand-navy)]/[0.065]
+
+            pt-4
+          "
+        >
+          <span
+            className="
+              font-brand-sans
+
+              text-[7px]
+              font-bold
+              uppercase
+
+              tracking-[0.11em]
+
+              text-[var(--brand-text-muted)]/70
+            "
+          >
+            Project{" "}
+            {String(
+              index + 1,
+            ).padStart(
+              2,
+              "0",
+            )}
+          </span>
+
+          {project.slug ? (
+            <Link
+              href={`/projects/${project.slug}`}
+              className="
+                inline-flex
+                items-center
+
+                gap-1.5
 
                 font-brand-sans
 
-                text-[9px]
-                font-medium
-                leading-[1.65]
+                text-[7px]
+                font-bold
+                uppercase
 
-                text-white/65
+                tracking-[0.11em]
 
-                transition-[opacity]
-                duration-500
-                ease-[cubic-bezier(0.22,1,0.36,1)]
+                text-[var(--brand-navy)]
 
-                sm:text-[10px]
+                transition-colors
+                duration-150
 
-                lg:text-[11px]
+                hover:text-[var(--brand-gold-700)]
 
-                ${
-                  active
-                    ? `
-                      opacity-100
-                    `
-                    : `
-                      opacity-[0.82]
-                    `
-                }
-              `}
+                focus-visible:outline-2
+                focus-visible:outline-offset-2
+                focus-visible:outline-[var(--brand-gold)]
+              "
             >
-              {project.description}
-            </p>
-          </div>
+              View Project
+
+              <ArrowUpRight
+                size={11}
+                strokeWidth={1.7}
+                className="
+                  text-[var(--brand-gold-700)]
+                "
+              />
+            </Link>
+          ) : (
+            <span
+              className="
+                font-brand-sans
+
+                text-[7px]
+                font-bold
+                uppercase
+
+                tracking-[0.1em]
+
+                text-[var(--brand-gold-700)]
+              "
+            >
+              Selected Work
+            </span>
+          )}
         </div>
       </div>
     </article>
@@ -1226,74 +1747,68 @@ function ProjectSlide({
 }
 
 /* =========================================================
-   SLIDER CONTROL — DESKTOP FLOATING
+   NAVIGATION CONTROL
 ========================================================= */
 
 function SliderControl({
   label,
   onClick,
   children,
+  disabled = false,
   featured = false,
 }: {
   label: string;
+
   onClick: () => void;
+
   children: ReactNode;
+
+  disabled?: boolean;
+
   featured?: boolean;
 }) {
   return (
     <button
       type="button"
       aria-label={label}
+      disabled={disabled}
       onClick={onClick}
       className={`
         flex
 
-        h-11
-        w-11
+        h-9
+        w-9
 
         items-center
         justify-center
 
-        rounded-[15px]
+        rounded-[11px]
 
         border
 
-        transition-[transform,background-color,color,box-shadow]
-        duration-200
+        transition-[transform,background-color,color,opacity]
+        duration-100
 
-        hover:-translate-y-[1px]
-        active:scale-[0.95]
+        active:scale-[0.93]
+
+        disabled:cursor-default
+        disabled:opacity-30
 
         ${
           featured
             ? `
-              border-[var(--brand-navy)]/85
+              border-[var(--brand-navy)]/80
 
               bg-[var(--brand-navy)]
+
               text-[var(--brand-gold)]
-
-              shadow-[
-                0_12px_24px_rgba(18,37,62,0.16),
-                0_2px_8px_rgba(18,37,62,0.10),
-                inset_1px_1px_1px_rgba(255,255,255,0.09)
-              ]
-
-              hover:bg-[#0B1929]
             `
             : `
               border-white/80
 
-              bg-[#F2E9DD]
+              bg-[#F7F0E6]
+
               text-[var(--brand-navy)]
-
-              shadow-[
-                0_10px_22px_rgba(77,55,32,0.12),
-                0_2px_6px_rgba(77,55,32,0.08),
-                inset_1px_1px_2px_rgba(255,255,255,0.90),
-                inset_-1px_-1px_2px_rgba(90,64,36,0.05)
-              ]
-
-              hover:bg-[#F7EFE5]
             `
         }
       `}

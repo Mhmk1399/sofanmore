@@ -4,7 +4,7 @@ import {
   Inbox,
   LayoutDashboard,
   LogOut,
-  Package,
+  FolderOpen,
   RefreshCw,
   ShieldCheck,
   UserCircle,
@@ -99,10 +99,10 @@ export default function Sidebar({
           onClick={() => onNavigate("profile")}
         />
         <NavItem
-          active={activeSection === "products"}
-          icon={<Package size={15} />}
-          label="Products"
-          onClick={() => onNavigate("products")}
+          active={activeSection === "projects"}
+          icon={<FolderOpen size={15} />}
+          label="Projects"
+          onClick={() => onNavigate("projects")}
         />
         <NavItem
           active={activeSection === "users"}

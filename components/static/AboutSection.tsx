@@ -327,7 +327,7 @@ function DesktopImage() {
           "
         >
           <Image
-            src="/assets/images/2.webp"
+            src="/assets/site/1.webp"
             alt="Sofa N More bespoke sofa interior"
             fill
             sizes="(min-width: 1024px) 55vw, 100vw"
@@ -673,7 +673,7 @@ function MobileImage() {
           "
         >
           <Image
-            src="/assets/images/7.webp"
+            src="/assets/site/6.webp"
             alt="Sofa N More bespoke sofa interior"
             fill
             sizes="100vw"

@@ -16,7 +16,7 @@ import { useToast } from "@/components/ui/ToastProvider";
 
 import AdminOverview from "./AdminOverview";
 import { LeadDetailDrawer, LeadFilters, LeadTable } from "./AdminLeads";
-import AdminProducts from "./AdminProducts";
+import AdminProjects from "./AdminProjects";
 import AdminProfile, {
   createProfileFormState,
   type ProfileFormState,
@@ -27,22 +27,22 @@ import AdminUsers from "./AdminUsers";
 import {
   ConfirmModal,
   buildAnalyticsQuery,
-  buildProductsQuery,
+  buildProjectsQuery,
   buildQuery,
   buildUsersQuery,
   emptyFilters,
-  emptyProductForm,
+  emptyProjectForm,
   fetchAdminJson,
   getAdminRedirectPath,
   statusLabel,
-  uploadProductImageWithProgress,
+  uploadProjectImageWithProgress,
   type ActiveSection,
   type AdminUser,
   type AnalyticsResponse,
   type ApiError,
   type CurrentUserResponse,
   type DeleteLeadResponse,
-  type DeleteProductResponse,
+  type DeleteProjectResponse,
   type DeleteUserResponse,
   type FilterState,
   type Lead,
@@ -52,11 +52,11 @@ import {
   type LeadService,
   type LeadsResponse,
   type LeadStatus,
-  type Product,
-  type ProductDetailResponse,
-  type ProductFormState,
-  type ProductImageUploadState,
-  type ProductsResponse,
+  type Project,
+  type ProjectDetailResponse,
+  type ProjectFormState,
+  type ProjectImageUploadState,
+  type ProjectsResponse,
   type UserDetailResponse,
   type UserRole,
   type UsersResponse,
@@ -95,19 +95,19 @@ export default function LeadAdminDashboard({
     createProfileFormState(initialUser),
   );
   const [savingProfile, setSavingProfile] = useState(false);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [productTotal, setProductTotal] = useState(0);
-  const [productLatestCode, setProductLatestCode] = useState<number | null>(
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [projectTotal, setProjectTotal] = useState(0);
+  const [projectLatestCode, setProjectLatestCode] = useState<number | null>(
     null,
   );
-  const [productsLoading, setProductsLoading] = useState(false);
-  const [productSearch, setProductSearch] = useState("");
-  const [productForm, setProductForm] =
-    useState<ProductFormState>(emptyProductForm);
-  const [productImageUpload, setProductImageUpload] =
-    useState<ProductImageUploadState | null>(null);
-  const [savingProduct, setSavingProduct] = useState(false);
-  const [deletingProductId, setDeletingProductId] = useState("");
+  const [projectsLoading, setProjectsLoading] = useState(false);
+  const [projectSearch, setProjectSearch] = useState("");
+  const [projectForm, setProjectForm] =
+    useState<ProjectFormState>(emptyProjectForm);
+  const [projectImageUpload, setProjectImageUpload] =
+    useState<ProjectImageUploadState | null>(null);
+  const [savingProject, setSavingProject] = useState(false);
+  const [deletingProjectId, setDeletingProjectId] = useState("");
   const [refreshKey, setRefreshKey] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -141,9 +141,9 @@ export default function LeadAdminDashboard({
     () => buildUsersQuery(userSearch, userRoleFilter),
     [userRoleFilter, userSearch],
   );
-  const productsQuery = useMemo(
-    () => buildProductsQuery(productSearch),
-    [productSearch],
+  const projectsQuery = useMemo(
+    () => buildProjectsQuery(projectSearch),
+    [projectSearch],
   );
 
   // 🔒 Lock body scroll while dashboard is open (removes the second scrollbar & hides parent decorations)
@@ -225,10 +225,10 @@ export default function LeadAdminDashboard({
     setError("");
     setTableLoading(true);
     setUsersLoading(true);
-    setProductsLoading(true);
+    setProjectsLoading(true);
     setLoading((current) => current || !hasLoadedDashboardRef.current);
     try {
-      const [nextAnalytics, nextLeads, nextUsers, nextProducts] =
+      const [nextAnalytics, nextLeads, nextUsers, nextProjects] =
         await Promise.all([
           fetchAdminJson<AnalyticsResponse>(
             `/api/leads/analytics${analyticsQuery ? `?${analyticsQuery}` : ""}`,
@@ -237,8 +237,8 @@ export default function LeadAdminDashboard({
           fetchAdminJson<UsersResponse>(
             `/api/admin/users${usersQuery ? `?${usersQuery}` : ""}`,
           ),
-          fetchAdminJson<ProductsResponse>(
-            `/api/admin/products${productsQuery ? `?${productsQuery}` : ""}`,
+          fetchAdminJson<ProjectsResponse>(
+            `/api/admin/projects${projectsQuery ? `?${projectsQuery}` : ""}`,
           ),
         ]);
       setAnalytics(nextAnalytics);
@@ -246,9 +246,9 @@ export default function LeadAdminDashboard({
       setPagination(nextLeads.pagination);
       setUsers(nextUsers.users);
       setUserTotal(nextUsers.total);
-      setProducts(nextProducts.products);
-      setProductTotal(nextProducts.total);
-      setProductLatestCode(nextProducts.latestCode);
+      setProjects(nextProjects.projects);
+      setProjectTotal(nextProjects.total);
+      setProjectLatestCode(nextProjects.latestCode);
       hasLoadedDashboardRef.current = true;
     } catch (caught) {
       const apiError = caught as ApiError;
@@ -265,13 +265,13 @@ export default function LeadAdminDashboard({
       setLoading(false);
       setTableLoading(false);
       setUsersLoading(false);
-      setProductsLoading(false);
+      setProjectsLoading(false);
     }
   }, [
     analyticsQuery,
     canAccessAdmin,
     filteredQuery,
-    productsQuery,
+    projectsQuery,
     router,
     toast,
     usersQuery,
@@ -283,6 +283,17 @@ export default function LeadAdminDashboard({
     }, 0);
     return () => window.clearTimeout(timeoutId);
   }, [loadDashboard, refreshKey]);
+
+  useEffect(() => {
+    if (projectForm.id || projectForm.projectCode || projectsLoading) return;
+    setProjectForm((current) => {
+      if (current.id || current.projectCode) return current;
+      return {
+        ...current,
+        projectCode: projectLatestCode ? String(projectLatestCode + 1) : "1000",
+      };
+    });
+  }, [projectForm.id, projectForm.projectCode, projectLatestCode, projectsLoading]);
 
   function logout() {
     void fetch("/api/auth/logout", {
@@ -296,9 +307,9 @@ export default function LeadAdminDashboard({
     setPagination(null);
     setUsers([]);
     setUserTotal(0);
-    setProducts([]);
-    setProductTotal(0);
-    setProductLatestCode(null);
+    setProjects([]);
+    setProjectTotal(0);
+    setProjectLatestCode(null);
     setSelectedLead(null);
     toast.info("Logged out.");
     router.replace("/login");
@@ -340,144 +351,240 @@ export default function LeadAdminDashboard({
     mainScrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function editProduct(product: Product) {
-    setProductForm({
-      id: product.id,
-      productCode: String(product.productCode),
-      name: product.name,
-      imageUrl: product.imageUrl,
-      imageStorageKey: product.imageStorageKey || "",
-      description: product.description,
+  function editProject(project: Project) {
+    setProjectForm({
+      id: project.id,
+      projectCode: String(project.projectCode),
+      title: project.title,
+      service: project.service,
+      coverImageUrl: project.coverImageUrl,
+      coverImageStorageKey: project.coverImageStorageKey || "",
+      images: project.images || [],
+      excerpt: project.excerpt,
+      brief: project.brief || "",
+      approach: project.approach || "",
+      details: project.details || "",
+      result: project.result || "",
+      locationLabel: project.locationLabel || "",
+      featured: project.featured,
+      published: project.published,
     });
-    setProductImageUpload(null);
-    setActiveSection("products");
+    setProjectImageUpload(null);
+    setActiveSection("projects");
     mainScrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function resetProductForm() {
-    setProductForm(emptyProductForm);
-    setProductImageUpload(null);
+  function resetProjectForm() {
+    setProjectForm({
+      ...emptyProjectForm,
+      projectCode: projectLatestCode ? String(projectLatestCode + 1) : "1000",
+    });
+    setProjectImageUpload(null);
   }
 
-  async function uploadProductImage(file: File) {
+  async function uploadProjectImage(file: File) {
     if (!canAccessAdmin) return;
-    setProductImageUpload({
+    setProjectImageUpload({
       fileName: file.name,
       fileSize: file.size,
       progress: 1,
       status: "uploading",
     });
-    toast.info("Uploading product image.", file.name);
+    toast.info("Uploading project image.", file.name);
 
     try {
-      const result = await uploadProductImageWithProgress({
+      const result = await uploadProjectImageWithProgress({
         file,
         onProgress: (progress) =>
-          setProductImageUpload((current) =>
+          setProjectImageUpload((current) =>
             current ? { ...current, progress, status: "uploading" } : current,
           ),
       });
-      setProductForm((current) => ({
+      setProjectForm((current) => ({
         ...current,
-        imageUrl: result.imageUrl,
-        imageStorageKey: result.imageStorageKey,
+        coverImageUrl: result.imageUrl,
+        coverImageStorageKey: result.imageStorageKey,
       }));
-      setProductImageUpload({
+      setProjectImageUpload({
         fileName: file.name,
         fileSize: file.size,
         progress: 100,
         status: "complete",
       });
-      toast.success("Product image uploaded.", "The image is ready to use.");
+      toast.success("Project image uploaded.", "The image is ready to use.");
     } catch (caught) {
       const apiError = caught as ApiError;
-      setProductImageUpload({
+      setProjectImageUpload({
         fileName: file.name,
         fileSize: file.size,
         progress: 100,
         status: "failed",
       });
       toast.error(
-        "Product image could not be uploaded.",
+        "Project image could not be uploaded.",
         apiError.message || "Please try another image.",
       );
     }
   }
 
-  async function saveProduct() {
-    if (!canAccessAdmin || savingProduct) return;
-    setSavingProduct(true);
-
-    try {
-      const path = productForm.id
-        ? `/api/admin/products/${productForm.id}`
-        : "/api/admin/products";
-      const result = await fetchAdminJson<ProductDetailResponse>(path, {
-        method: productForm.id ? "PATCH" : "POST",
-        body: JSON.stringify({
-          productCode: productForm.productCode,
-          name: productForm.name,
-          imageUrl: productForm.imageUrl,
-          imageStorageKey: productForm.imageStorageKey,
-          description: productForm.description,
-        }),
+  async function uploadProjectGalleryImages(files: File[]) {
+    for (const file of files) {
+      if (!canAccessAdmin) return;
+      setProjectImageUpload({
+        fileName: file.name,
+        fileSize: file.size,
+        progress: 1,
+        status: "uploading",
       });
+      toast.info("Uploading gallery image.", file.name);
 
-      setProducts((current) => {
-        if (productForm.id) {
-          return current.map((item) =>
-            item.id === result.product.id ? result.product : item,
-          );
-        }
+      try {
+        const result = await uploadProjectImageWithProgress({
+          file,
+          onProgress: (progress) =>
+            setProjectImageUpload((current) =>
+              current
+                ? { ...current, progress, status: "uploading" }
+                : current,
+            ),
+        });
 
-        return [result.product, ...current];
-      });
-      if (!productForm.id) {
-        setProductTotal((current) => current + 1);
+        setProjectForm((current) => ({
+          ...current,
+          images: [
+            ...current.images,
+            {
+              id:
+                typeof crypto !== "undefined" && "randomUUID" in crypto
+                  ? crypto.randomUUID()
+                  : `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+              url: result.imageUrl,
+              storageKey: result.imageStorageKey,
+              alt: current.title || file.name.replace(/\.[^.]+$/, ""),
+              sortOrder: current.images.length,
+            },
+          ],
+        }));
+        setProjectImageUpload({
+          fileName: file.name,
+          fileSize: file.size,
+          progress: 100,
+          status: "complete",
+        });
+        toast.success("Gallery image uploaded.", "The image was added.");
+      } catch (caught) {
+        const apiError = caught as ApiError;
+        setProjectImageUpload({
+          fileName: file.name,
+          fileSize: file.size,
+          progress: 100,
+          status: "failed",
+        });
+        toast.error(
+          "Gallery image could not be uploaded.",
+          apiError.message || "Please try another image.",
+        );
+        break;
       }
-      setProductLatestCode((current) =>
-        Math.max(current ?? 0, result.product.productCode),
-      );
-      setRefreshKey((current) => current + 1);
-      resetProductForm();
-      toast.success(
-        productForm.id ? "Product updated." : "Product created.",
-        `${result.product.name} is ready in the product list.`,
-      );
-    } catch (caught) {
-      const apiError = caught as ApiError;
-      toast.error("Product could not be saved.", apiError.message || "");
-    } finally {
-      setSavingProduct(false);
     }
   }
 
-  function deleteProductRecord(product: Product) {
+  async function saveProject() {
+    if (!canAccessAdmin || savingProject) return;
+    setSavingProject(true);
+
+    try {
+      const fallbackProjectCode = projectLatestCode
+        ? String(projectLatestCode + 1)
+        : "1000";
+      const projectCode =
+        projectForm.projectCode.trim() || fallbackProjectCode;
+      const path = projectForm.id
+        ? `/api/admin/projects/${projectForm.id}`
+        : "/api/admin/projects";
+      const result = await fetchAdminJson<ProjectDetailResponse>(path, {
+        method: projectForm.id ? "PATCH" : "POST",
+        body: JSON.stringify({
+          projectCode,
+          title: projectForm.title,
+          service: projectForm.service,
+          coverImageUrl: projectForm.coverImageUrl,
+          coverImageStorageKey: projectForm.coverImageStorageKey,
+          images: projectForm.images,
+          excerpt: projectForm.excerpt,
+          brief: projectForm.brief,
+          approach: projectForm.approach,
+          details: projectForm.details,
+          result: projectForm.result,
+          locationLabel: projectForm.locationLabel,
+          featured: projectForm.featured,
+          published: projectForm.published,
+        }),
+      });
+
+      setProjects((current) => {
+        if (projectForm.id) {
+          return current.map((item) =>
+            item.id === result.project.id ? result.project : item,
+          );
+        }
+
+        return [result.project, ...current];
+      });
+      if (!projectForm.id) {
+        setProjectTotal((current) => current + 1);
+      }
+      setProjectLatestCode((current) =>
+        Math.max(current ?? 0, result.project.projectCode),
+      );
+      setRefreshKey((current) => current + 1);
+      resetProjectForm();
+      mainScrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+      toast.success(
+        projectForm.id ? "Project updated." : "Project created.",
+        `${result.project.title} is ready in the project list.`,
+      );
+    } catch (caught) {
+      const apiError = caught as ApiError;
+      const fieldMessage = apiError.fieldErrors
+        ? Object.values(apiError.fieldErrors).join(" ")
+        : "";
+
+      toast.error(
+        "Project could not be saved.",
+        fieldMessage || apiError.message || "",
+      );
+    } finally {
+      setSavingProject(false);
+    }
+  }
+
+  function deleteProjectRecord(project: Project) {
     showConfirm({
-      title: "Delete product",
-      message: `Delete ${product.name} permanently?`,
+      title: "Delete project",
+      message: `Delete ${project.title} permanently?`,
       confirmLabel: "Delete",
       danger: true,
       onConfirm: async () => {
-        setDeletingProductId(product.id);
+        setDeletingProjectId(project.id);
         try {
-          await fetchAdminJson<DeleteProductResponse>(
-            `/api/admin/products/${product.id}`,
+          await fetchAdminJson<DeleteProjectResponse>(
+            `/api/admin/projects/${project.id}`,
             { method: "DELETE" },
           );
-          setProducts((current) =>
-            current.filter((item) => item.id !== product.id),
+          setProjects((current) =>
+            current.filter((item) => item.id !== project.id),
           );
-          setProductTotal((current) => Math.max(current - 1, 0));
-          if (productForm.id === product.id) {
-            resetProductForm();
+          setProjectTotal((current) => Math.max(current - 1, 0));
+          if (projectForm.id === project.id) {
+            resetProjectForm();
           }
-          toast.success("Product deleted.", `${product.name} was removed.`);
+          toast.success("Project deleted.", `${project.title} was removed.`);
         } catch (caught) {
           const apiError = caught as ApiError;
-          toast.error("Product could not be deleted.", apiError.message || "");
+          toast.error("Project could not be deleted.", apiError.message || "");
         } finally {
-          setDeletingProductId("");
+          setDeletingProjectId("");
         }
       },
     });
@@ -752,7 +859,7 @@ export default function LeadAdminDashboard({
                 <h1 className="truncate font-brand-sans text-[14px] font-bold text-[var(--brand-navy)] sm:text-[15px]">
                   {activeSection === "overview" && "Overview"}
                   {activeSection === "leads" && "Leads"}
-                  {activeSection === "products" && "Products"}
+                  {activeSection === "projects" && "Projects"}
                   {activeSection === "users" && "Users"}
                   {activeSection === "profile" && "Profile"}
                 </h1>
@@ -856,24 +963,25 @@ export default function LeadAdminDashboard({
                 />
               )}
 
-              {activeSection === "products" && (
-                <AdminProducts
-                  products={products}
-                  total={productTotal}
-                  latestCode={productLatestCode}
-                  loading={productsLoading}
-                  search={productSearch}
-                  form={productForm}
-                  imageUpload={productImageUpload}
-                  saving={savingProduct}
-                  deletingProductId={deletingProductId}
-                  onSearchChange={setProductSearch}
-                  onFormChange={setProductForm}
-                  onUploadImage={uploadProductImage}
-                  onSave={saveProduct}
-                  onEdit={editProduct}
-                  onReset={resetProductForm}
-                  onDelete={deleteProductRecord}
+              {activeSection === "projects" && (
+                <AdminProjects
+                  projects={projects}
+                  total={projectTotal}
+                  latestCode={projectLatestCode}
+                  loading={projectsLoading}
+                  search={projectSearch}
+                  form={projectForm}
+                  imageUpload={projectImageUpload}
+                  saving={savingProject}
+                  deletingProjectId={deletingProjectId}
+                  onSearchChange={setProjectSearch}
+                  onFormChange={setProjectForm}
+                  onUploadCoverImage={uploadProjectImage}
+                  onUploadGalleryImages={uploadProjectGalleryImages}
+                  onSave={saveProject}
+                  onEdit={editProject}
+                  onReset={resetProjectForm}
+                  onDelete={deleteProjectRecord}
                   onRefresh={() => setRefreshKey((c) => c + 1)}
                 />
               )}

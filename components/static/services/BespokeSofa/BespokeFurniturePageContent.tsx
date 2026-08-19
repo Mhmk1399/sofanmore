@@ -103,7 +103,7 @@ export default function BespokesofaPageContent() {
     <main
       id="webpage"
       className="
-        overflow-hidden
+        overflow-hidden mt-6
         bg-[var(--brand-ivory)]
       "
     >

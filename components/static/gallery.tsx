@@ -1,9 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
+import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
+
 import { createPortal } from "react-dom";
+
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import type {
   MouseEvent as ReactMouseEvent,
@@ -11,123 +14,183 @@ import type {
   ReactNode,
 } from "react";
 
-import ClayButton from "../ui/ClayButton";
-
 /* =========================================================
    TYPES
 ========================================================= */
 
-type GalleryCategory =
-  | "All"
-  | "Bespoke sofa"
-  | "Interiors"
-  | "Restoration"
-  | "Commercial";
-
 type GalleryItem = {
   id: number;
-  title: string;
-  category: Exclude<GalleryCategory, "All">;
+  code: number;
   image: string;
   alt: string;
 };
 
 /* =========================================================
    DATA
-========================================================= */
 
-const categories: GalleryCategory[] = [
-  "All",
-  "Bespoke sofa",
-  "Interiors",
-  "Restoration",
-  "Commercial",
-];
+   These filenames are based on the files visible
+   in the supplied screenshot.
+
+   Missing from screenshot:
+   16.webp
+========================================================= */
 
 const galleryItems: GalleryItem[] = [
   {
     id: 1,
-    title: "Mayfair Residence",
-    category: "Bespoke sofa",
-    image: "/assets/images/1.webp",
-    alt: "Luxury bespoke navy sofa in London interior",
+    code: 1000,
+    image: "/assets/site/1.webp",
+    alt: "Sofa N More completed project 100",
   },
   {
     id: 2,
-    title: "Chelsea Curved Sofa",
-    category: "Interiors",
-    image: "/assets/images/2.webp",
-    alt: "Curved ivory bespoke sofa interior",
+    code: 1001,
+    image: "/assets/site/2 (2).webp",
+    alt: "Sofa N More completed project 101",
   },
   {
     id: 3,
-    title: "Fine Upholstery Detail",
-    category: "Restoration",
-    image: "/assets/images/3.webp",
-    alt: "Close-up upholstery craftsmanship",
+    code: 1002,
+    image: "/assets/site/3.webp",
+    alt: "Sofa N More completed project 102",
   },
   {
     id: 4,
-    title: "Blue Curve Collection",
-    category: "Bespoke sofa",
-    image: "/assets/images/4.webp",
-    alt: "Deep navy bespoke curved sofa",
+    code: 1003,
+    image: "/assets/site/4.webp",
+    alt: "Sofa N More completed project 103",
   },
   {
     id: 5,
-    title: "Hand Restoration",
-    category: "Restoration",
-    image: "/assets/images/5.webp",
-    alt: "Sofa restoration craftsmanship",
+    code: 1004,
+    image: "/assets/site/5.webp",
+    alt: "Sofa N More completed project 104",
   },
   {
     id: 6,
-    title: "Dining Composition",
-    category: "Interiors",
-    image: "/assets/images/6.webp",
-    alt: "Luxury bespoke dining interior",
+    code: 1005,
+    image: "/assets/site/6.webp",
+    alt: "Sofa N More completed project 105",
   },
   {
     id: 7,
-    title: "Kensington Living Room",
-    category: "Interiors",
-    image: "/assets/images/7.webp",
-    alt: "Elegant London living room",
+    code: 1006,
+    image: "/assets/site/7.webp",
+    alt: "Sofa N More completed project 106",
   },
   {
     id: 8,
-    title: "Hospitality Lounge",
-    category: "Commercial",
-    image: "/assets/images/4.webp",
-    alt: "Luxury hospitality interior",
+    code: 1007,
+    image: "/assets/site/8.webp",
+    alt: "Sofa N More completed project 107",
   },
   {
     id: 9,
-    title: "Executive Office",
-    category: "Commercial",
-    image: "/assets/images/2.webp",
-    alt: "Executive office sofa",
+    code: 1008,
+    image: "/assets/site/9.webp",
+    alt: "Sofa N More completed project 108",
   },
   {
     id: 10,
-    title: "Premium Texture",
-    category: "Restoration",
-    image: "/assets/images/7.webp",
-    alt: "Premium upholstery texture",
+    code: 1009,
+    image: "/assets/site/10.webp",
+    alt: "Sofa N More completed project 109",
   },
   {
     id: 11,
-    title: "Sculpted Armchair",
-    category: "Bespoke sofa",
-    image: "/assets/images/3.webp",
-    alt: "Luxury sculptural armchair",
+    code: 1010,
+    image: "/assets/site/11.webp",
+    alt: "Sofa N More completed project 110",
   },
   {
     id: 12,
-    title: "Belgravia Project",
-    category: "Interiors",
-    image: "/assets/images/6.webp",
-    alt: "Completed luxury London interior",
+    code: 1011,
+    image: "/assets/site/12.webp",
+    alt: "Sofa N More completed project 111",
+  },
+  {
+    id: 13,
+    code: 1012,
+    image: "/assets/site/13.webp",
+    alt: "Sofa N More completed project 112",
+  },
+  {
+    id: 14,
+    code: 1013,
+    image: "/assets/site/14.webp",
+    alt: "Sofa N More completed project 113",
+  },
+  {
+    id: 15,
+    code: 1014,
+    image: "/assets/site/15.webp",
+    alt: "Sofa N More completed project 114",
+  },
+
+  /*
+    16.webp was not visible
+    in the supplied screenshot.
+  */
+
+  {
+    id: 17,
+    code: 1015,
+    image: "/assets/site/17.webp",
+    alt: "Sofa N More completed project 115",
+  },
+  {
+    id: 18,
+    code: 1016,
+    image: "/assets/site/18.webp",
+    alt: "Sofa N More completed project 116",
+  },
+  {
+    id: 19,
+    code: 1017,
+    image: "/assets/site/19.webp",
+    alt: "Sofa N More completed project 117",
+  },
+  {
+    id: 20,
+    code: 1018,
+    image: "/assets/site/20.webp",
+    alt: "Sofa N More completed project 118",
+  },
+  {
+    id: 21,
+    code: 1019,
+    image: "/assets/site/21.webp",
+    alt: "Sofa N More completed project 119",
+  },
+  {
+    id: 22,
+    code: 1020,
+    image: "/assets/site/22.webp",
+    alt: "Sofa N More completed project 120",
+  },
+  {
+    id: 23,
+    code: 1021,
+    image: "/assets/site/23.webp",
+    alt: "Sofa N More completed project 121",
+  },
+  {
+    id: 24,
+    code: 122,
+    image: "/assets/site/24.webp",
+    alt: "Sofa N More completed project 122",
+  },
+  {
+    id: 25,
+    code: 1023,
+    image: "/assets/site/25.webp",
+    alt: "Sofa N More completed project 123",
+  },
+  {
+    id: 26,
+    code: 1024,
+    image: "/assets/site/26.webp",
+    alt: "Sofa N More completed project 124",
   },
 ];
 
@@ -136,64 +199,78 @@ const galleryItems: GalleryItem[] = [
 ========================================================= */
 
 export default function GallerySection() {
-  const [activeCategory, setActiveCategory] = useState<GalleryCategory>("All");
-
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const filteredItems = useMemo(() => {
-    if (activeCategory === "All") {
-      return galleryItems;
-    }
-
-    return galleryItems.filter((item) => item.category === activeCategory);
-  }, [activeCategory]);
+  /* =======================================================
+     OPEN
+  ======================================================= */
 
   const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);
   }, []);
 
+  /* =======================================================
+     CLOSE
+  ======================================================= */
+
   const closeLightbox = useCallback(() => {
     setLightboxIndex(null);
   }, []);
 
+  /* =======================================================
+     NEXT
+  ======================================================= */
+
   const nextImage = useCallback(() => {
     setLightboxIndex((current) => {
-      if (current === null || filteredItems.length === 0) {
+      if (current === null) {
         return null;
       }
 
-      return (current + 1) % filteredItems.length;
+      return (current + 1) % galleryItems.length;
     });
-  }, [filteredItems.length]);
+  }, []);
+
+  /* =======================================================
+     PREVIOUS
+  ======================================================= */
 
   const previousImage = useCallback(() => {
     setLightboxIndex((current) => {
-      if (current === null || filteredItems.length === 0) {
+      if (current === null) {
         return null;
       }
 
-      return (current - 1 + filteredItems.length) % filteredItems.length;
+      return (current - 1 + galleryItems.length) % galleryItems.length;
     });
-  }, [filteredItems.length]);
+  }, []);
+
+  /* =======================================================
+     KEYBOARD + BODY LOCK
+  ======================================================= */
 
   useEffect(() => {
-    if (lightboxIndex === null) return;
+    if (lightboxIndex === null) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         closeLightbox();
+        return;
       }
 
       if (event.key === "ArrowRight") {
         nextImage();
+        return;
       }
 
       if (event.key === "ArrowLeft") {
         previousImage();
       }
     }
-
-    const previousOverflow = document.body.style.overflow;
 
     document.body.style.overflow = "hidden";
 
@@ -206,40 +283,48 @@ export default function GallerySection() {
     };
   }, [lightboxIndex, closeLightbox, nextImage, previousImage]);
 
-  function handleCategoryChange(category: GalleryCategory) {
-    setActiveCategory(category);
-    setLightboxIndex(null);
-  }
-
   return (
     <>
       <section
         id="gallery"
-        aria-label="Sofa N More gallery"
+        aria-labelledby="gallery-heading"
         className="
           bg-[var(--brand-ivory)]
+
           px-3
-          py-9
+          py-10
 
           sm:px-5
-          sm:py-11
+          sm:py-12
 
           lg:px-8
           lg:py-14
         "
       >
-        <div className="mx-auto max-w-[var(--site-width)]">
-          {/* ===============================================
-              ONE CLAY SHELL ONLY
-          ================================================ */}
+        <div
+          className="
+            mx-auto
+            max-w-[var(--site-width)]
+          "
+        >
+          {/* =================================================
+              LIGHT CLAY SHELL
+
+              Only one outer shadow.
+          ================================================== */}
 
           <div
             className="
-              clay-surface-soft
-
               rounded-[28px]
 
+              border
+              border-white/75
+
+              bg-[#EEE6DA]
+
               p-4
+
+              shadow-[0_10px_26px_rgba(70,50,30,0.07),inset_1px_1px_2px_rgba(255,255,255,0.82)]
 
               sm:rounded-[32px]
               sm:p-5
@@ -248,35 +333,16 @@ export default function GallerySection() {
               lg:p-6
             "
           >
-            {/* ===============================================
-                HEADER
-            ================================================ */}
-
             <GalleryHeader />
 
-            {/* ===============================================
-                FILTERS
-            ================================================ */}
-
-            <div className="mt-6">
-              <GalleryFilters
-                activeCategory={activeCategory}
-                onChange={handleCategoryChange}
-              />
-            </div>
-
-            {/* ===============================================
-                GRID
-            ================================================ */}
-
-            <GalleryGrid items={filteredItems} onOpen={openLightbox} />
+            <GalleryGrid items={galleryItems} onOpen={openLightbox} />
           </div>
         </div>
       </section>
 
-      {lightboxIndex !== null && filteredItems[lightboxIndex] && (
+      {lightboxIndex !== null && galleryItems[lightboxIndex] && (
         <GalleryLightbox
-          items={filteredItems}
+          items={galleryItems}
           currentIndex={lightboxIndex}
           onClose={closeLightbox}
           onNext={nextImage}
@@ -295,65 +361,100 @@ function GalleryHeader() {
   return (
     <header
       className="
-        flex
-        flex-col
-        gap-5
+        grid
 
-        lg:flex-row
+        gap-4
+
+        border-b
+        border-[var(--brand-navy)]/[0.07]
+
+        pb-5
+
+        lg:grid-cols-[1fr_430px]
         lg:items-end
-        lg:justify-between
         lg:gap-10
+        lg:pb-6
       "
     >
       <div>
-        <span
+        {/* EYEBROW */}
+
+        <div
           className="
-            font-brand-sans
+            flex
+            items-center
 
-            text-[8px]
-            font-bold
-            uppercase
-
-            tracking-[0.24em]
-
-            text-[var(--brand-gold-700)]
-
-            sm:text-[9px]
+            gap-2.5
           "
         >
-          Our Work
-        </span>
+          <span
+            aria-hidden
+            className="
+              h-px
+              w-7
+
+              bg-[var(--brand-gold)]
+            "
+          />
+
+          <p
+            className="
+              font-brand-sans
+
+              text-[8px]
+              font-bold
+              uppercase
+
+              tracking-[0.2em]
+
+              text-[var(--brand-gold-700)]
+
+              sm:text-[9px]
+            "
+          >
+            Our Work
+          </p>
+        </div>
+
+        {/* TITLE */}
 
         <h2
+          id="gallery-heading"
           className="
-            mt-2.5
+            mt-3
+
+            max-w-[620px]
 
             font-brand-display
 
             text-[34px]
-            font-semibold
+            font-medium
             leading-[0.98]
 
-            tracking-[-0.035em]
+            tracking-[-0.04em]
 
             text-[var(--brand-navy)]
 
-            sm:text-[40px]
+            sm:text-[41px]
 
-            lg:text-[46px]
+            lg:text-[47px]
           "
         >
           Crafted Spaces.
           <br />
           Made to Inspire
-          <span className="text-[var(--brand-gold)]">.</span>
+          <span
+            className="
+              text-[var(--brand-gold)]
+            "
+          >
+            .
+          </span>
         </h2>
       </div>
 
       <div
         className="
-          max-w-[480px]
-
           lg:text-right
         "
       >
@@ -361,81 +462,38 @@ function GalleryHeader() {
           className="
             font-brand-sans
 
-            text-[11px]
+            text-[10px]
             font-medium
-            leading-[1.7]
+            leading-[1.75]
 
             text-[var(--brand-text-muted)]
 
-            sm:text-[12px]
+            sm:text-[11px]
           "
         >
-          Explore bespoke sofas, restored pieces and considered interiors
-          created by Sofa N More.
+          Explore a selection of real Sofa N More work. Select any image to see
+          the complete detail in full screen.
         </p>
 
-      
+        <p
+          className="
+            mt-2
+
+            font-brand-sans
+
+            text-[7px]
+            font-bold
+            uppercase
+
+            tracking-[0.13em]
+
+            text-[var(--brand-gold-700)]
+          "
+        >
+          {galleryItems.length} project images
+        </p>
       </div>
     </header>
-  );
-}
-
-/* =========================================================
-   FILTERS
-========================================================= */
-
-function GalleryFilters({
-  activeCategory,
-  onChange,
-}: {
-  activeCategory: GalleryCategory;
-  onChange: (category: GalleryCategory) => void;
-}) {
-  return (
-    <div
-      className="
-        -mx-1
-        overflow-x-auto
-
-        pb-1
-
-        [scrollbar-width:none]
-
-        [&::-webkit-scrollbar]:hidden
-      "
-    >
-      <div
-        className="
-          flex
-          min-w-max
-          items-center
-          gap-2
-
-          px-1
-        "
-      >
-        {categories.map((category) => {
-          const active = activeCategory === category;
-
-          return (
-            <ClayButton
-              key={category}
-              type="button"
-              size="sm"
-              variant={active ? "navy" : "ivory"}
-              onClick={() => onChange(category)}
-              ariaLabel={`Show ${category} projects`}
-              className="
-                whitespace-nowrap
-                !shadow-none
-              "
-            >
-              {category}
-            </ClayButton>
-          );
-        })}
-      </div>
-    </div>
   );
 }
 
@@ -448,6 +506,7 @@ function GalleryGrid({
   onOpen,
 }: {
   items: GalleryItem[];
+
   onOpen: (index: number) => void;
 }) {
   return (
@@ -457,12 +516,17 @@ function GalleryGrid({
 
         grid
         grid-cols-2
+
         gap-2.5
+
+        sm:gap-3
 
         md:grid-cols-3
 
+        lg:mt-6
         lg:grid-cols-4
-        lg:gap-3
+
+        xl:grid-cols-5
       "
     >
       {items.map((item, index) => (
@@ -482,49 +546,61 @@ function GalleryTile({
   onOpen,
 }: {
   item: GalleryItem;
+
   index: number;
+
   onOpen: (index: number) => void;
 }) {
   return (
     <button
       type="button"
-      aria-label={`Open ${item.title}`}
+      aria-label={`Open project image ${item.code}`}
       onClick={() => onOpen(index)}
       className="
         group
 
         relative
-        overflow-hidden
+
+        min-w-0
 
         rounded-[18px]
 
         border
-        border-white/55
+        border-white/75
 
-        bg-[var(--brand-ivory-50)]
+        bg-[#F2E9DD]
 
         p-[4px]
 
         text-left
 
-        shadow-[0_7px_18px_rgba(70,50,30,0.07)]
+        shadow-[0_5px_13px_rgba(73,51,29,0.055),inset_1px_1px_1px_rgba(255,255,255,0.82)]
 
         transition-transform
-        duration-200
+        duration-150
 
-        hover:-translate-y-[1px]
+        lg:hover:-translate-y-[1px]
 
         focus-visible:outline-none
         focus-visible:ring-2
         focus-visible:ring-[var(--brand-gold)]
         focus-visible:ring-offset-2
 
+        [content-visibility:auto]
+        [contain-intrinsic-size:240px]
+
         sm:rounded-[20px]
       "
     >
-      <div
+      {/* =================================================
+          IMAGE
+      ================================================== */}
+
+      <span
         className="
           relative
+
+          block
 
           aspect-[4/3]
 
@@ -532,7 +608,7 @@ function GalleryTile({
 
           rounded-[14px]
 
-          bg-[#E8E0D4]
+          bg-[#DDD3C6]
 
           sm:rounded-[16px]
         "
@@ -542,76 +618,167 @@ function GalleryTile({
           alt={item.alt}
           fill
           draggable={false}
-          sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw"
+          quality={76}
+          sizes="(max-width: 639px) 48vw, (max-width: 767px) 32vw, (max-width: 1279px) 24vw, 19vw"
           className="
             object-cover
             object-center
-
-            transition-transform
-            duration-500
-            ease-out
-
-            group-hover:scale-[1.025]
           "
         />
 
-        {/* single, lightweight overlay */}
+        {/* =================================================
+            VERY LIGHT SINGLE OVERLAY
+        ================================================== */}
 
-        <div
-          className="
-            absolute
-            inset-0
-
-            bg-[linear-gradient(180deg,transparent_55%,rgba(8,20,35,0.58)_100%)]
-          "
-        />
-
-        <div
+        <span
+          aria-hidden
           className="
             absolute
             inset-x-0
             bottom-0
 
-            p-3
+            h-[38%]
+
+            bg-gradient-to-t
+
+            from-[#081725]/60
+
+            to-transparent
+          "
+        />
+
+        {/* =================================================
+            IMAGE CODE
+        ================================================== */}
+
+        <span
+          className="
+            absolute
+
+            bottom-2
+            left-2
+
+            inline-flex
+            h-7
+
+            items-center
+            justify-center
+
+            rounded-[9px]
+
+            border
+            border-white/65
+
+            bg-[#F3EADF]
+
+            px-2.5
+
+            font-brand-sans
+
+            text-[7px]
+            font-bold
+            uppercase
+
+            tracking-[0.1em]
+
+            text-[var(--brand-navy)]
+
+            shadow-[0_3px_8px_rgba(0,0,0,0.10)]
           "
         >
           <span
             className="
-              font-brand-sans
+              mr-1
 
-              text-[6px]
-              font-bold
-              uppercase
-
-              tracking-[0.15em]
-
-              text-[var(--brand-gold)]
-
-              sm:text-[7px]
+              text-[var(--brand-gold-700)]
             "
           >
-            {item.category}
+            #
           </span>
 
-          <h3
-            className="
-              mt-0.5
+          {item.code}
+        </span>
 
-              font-brand-display
+        {/* EXPAND */}
 
-              text-[13px]
-              font-semibold
-              leading-[1.1]
+        <span
+          aria-hidden
+          className="
+            absolute
 
-              text-white
+            bottom-2
+            right-2
 
-              sm:text-[15px]
-            "
-          >
-            {item.title}
-          </h3>
-        </div>
-      </div>
+            flex
+            h-7
+            w-7
+
+            items-center
+            justify-center
+
+            rounded-[9px]
+
+            border
+            border-white/60
+
+            bg-[#F3EADF]
+
+            text-[var(--brand-navy)]
+
+            shadow-[0_3px_8px_rgba(0,0,0,0.10)]
+          "
+        >
+          <Expand size={11} strokeWidth={1.6} />
+        </span>
+      </span>
+
+      {/* =================================================
+          SMALL CODE FOOTER
+
+          Keeps every card visually aligned.
+      ================================================== */}
+
+      <span
+        className="
+          flex
+          h-[32px]
+
+          items-center
+          justify-between
+
+          px-2
+          pt-1
+        "
+      >
+        <span
+          className="
+            font-brand-sans
+
+            text-[7px]
+            font-bold
+            uppercase
+
+            tracking-[0.1em]
+
+            text-[var(--brand-text-muted)]
+          "
+        >
+          Sofa N More
+        </span>
+
+        <span
+          className="
+            font-brand-sans
+
+            text-[7px]
+            font-bold
+
+            text-[var(--brand-gold-700)]
+          "
+        >
+          {item.code}
+        </span>
+      </span>
     </button>
   );
 }
@@ -628,15 +795,15 @@ function GalleryLightbox({
   onPrevious,
 }: {
   items: GalleryItem[];
+
   currentIndex: number;
+
   onClose: () => void;
+
   onNext: () => void;
+
   onPrevious: () => void;
 }) {
-  const [visible, setVisible] = useState(false);
-
-  const imageRef = useRef<HTMLDivElement>(null);
-
   const backdropRef = useRef<HTMLDivElement>(null);
 
   const pointerRef = useRef<{
@@ -646,45 +813,18 @@ function GalleryLightbox({
 
   const current = items[currentIndex];
 
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => {
-      setVisible(true);
-    });
-
-    return () => cancelAnimationFrame(frame);
-  }, []);
-
-  const close = useCallback(() => {
-    setVisible(false);
-
-    window.setTimeout(() => {
-      onClose();
-    }, 160);
-  }, [onClose]);
-
-  useEffect(() => {
-    function handleEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        close();
-      }
-    }
-
-    window.addEventListener("keydown", handleEscape, { capture: true });
-
-    return () => {
-      window.removeEventListener("keydown", handleEscape, { capture: true });
-    };
-  }, [close]);
+  /* =======================================================
+     BACKDROP
+  ======================================================= */
 
   function handleBackdropClick(event: ReactMouseEvent<HTMLDivElement>) {
     if (event.target === backdropRef.current) {
-      close();
+      onClose();
     }
   }
 
   /* =======================================================
-     SIMPLE SWIPE
+     LIGHTBOX SWIPE
   ======================================================= */
 
   function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
@@ -721,6 +861,7 @@ function GalleryLightbox({
 
     if (delta < -55) {
       onNext();
+      return;
     }
 
     if (delta > 55) {
@@ -734,54 +875,51 @@ function GalleryLightbox({
       data-lenis-prevent
       role="dialog"
       aria-modal="true"
-      aria-label="Gallery image viewer"
+      aria-label={`Project image ${current.code}`}
       onClick={handleBackdropClick}
-      className={`
+      className="
         fixed
         inset-0
+
         z-[1800]
 
         flex
         items-center
         justify-center
 
-        bg-[rgba(7,15,25,0.86)]
+        bg-[#07111C]/95
 
         px-3
-        py-16
+        py-[72px]
 
-        transition-opacity
-        duration-150
-
-        ${visible ? "opacity-100" : "opacity-0"}
-      `}
+        sm:px-5
+      "
     >
-      {/* ===============================================
-          TOP INFO
-      ================================================ */}
+      {/* =================================================
+          TOP BAR
+      ================================================== */}
 
       <div
         className="
           absolute
-          left-4
-          right-4
+
+          inset-x-4
           top-4
 
           z-20
 
           flex
-          items-start
+          items-center
           justify-between
 
           gap-4
 
-          sm:left-6
-          sm:right-6
+          sm:inset-x-6
           sm:top-5
         "
       >
         <div>
-          <span
+          <p
             className="
               font-brand-sans
 
@@ -794,74 +932,75 @@ function GalleryLightbox({
               text-[var(--brand-gold)]
             "
           >
-            {current.category}
-          </span>
+            Sofa N More
+          </p>
 
-          <h3
+          <p
             className="
               mt-1
 
               font-brand-display
 
-              text-[17px]
+              text-[16px]
               font-semibold
 
               text-white
 
-              sm:text-[20px]
+              sm:text-[19px]
             "
           >
-            {current.title}
-          </h3>
+            Project #{current.code}
+          </p>
         </div>
 
-        <LightboxControlButton label="Close gallery" onClick={close}>
+        <LightboxControlButton label="Close gallery" onClick={onClose}>
           <X size={17} strokeWidth={1.7} />
         </LightboxControlButton>
       </div>
 
-      {/* ===============================================
+      {/* =================================================
           IMAGE
-      ================================================ */}
+
+          No animation,
+          no backdrop blur,
+          one small clay frame.
+      ================================================== */}
 
       <div
-        ref={imageRef}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         onPointerCancel={() => {
           pointerRef.current = null;
         }}
         onClick={(event) => event.stopPropagation()}
-        className={`
+        className="
           relative
 
+          h-full
+          max-h-[calc(100dvh-150px)]
+
           w-full
-          max-w-[1100px]
+          max-w-[1180px]
 
           select-none
+
           touch-pan-y
-
-          transition-[opacity,transform]
-          duration-200
-          ease-out
-
-          ${visible ? "scale-100 opacity-100" : "scale-[0.985] opacity-0"}
-        `}
+        "
       >
-        {/* one lightweight clay frame */}
-
         <div
           className="
+            h-full
+
             rounded-[22px]
 
             border
-            border-white/45
+            border-white/35
 
-            bg-[#F4EDE3]
+            bg-[#EEE5D8]
 
             p-[5px]
 
-            shadow-[0_12px_34px_rgba(0,0,0,0.18)]
+            shadow-[0_12px_30px_rgba(0,0,0,0.18)]
 
             sm:rounded-[26px]
             sm:p-[6px]
@@ -871,13 +1010,14 @@ function GalleryLightbox({
             className="
               relative
 
-              aspect-[16/10]
+              h-full
+              w-full
 
               overflow-hidden
 
               rounded-[17px]
 
-              bg-[#DED5C8]
+              bg-[#0B1929]
 
               sm:rounded-[21px]
             "
@@ -887,8 +1027,8 @@ function GalleryLightbox({
               src={current.image}
               alt={current.alt}
               fill
-              preload
               draggable={false}
+              quality={88}
               sizes="100vw"
               className="
                 pointer-events-none
@@ -901,15 +1041,16 @@ function GalleryLightbox({
         </div>
       </div>
 
-      {/* ===============================================
+      {/* =================================================
           DESKTOP NAV
-      ================================================ */}
+      ================================================== */}
 
       <div
         className="
           pointer-events-none
 
           absolute
+
           inset-x-5
           top-1/2
 
@@ -926,7 +1067,9 @@ function GalleryLightbox({
         <LightboxControlButton
           label="Previous image"
           onClick={onPrevious}
-          className="pointer-events-auto"
+          className="
+            pointer-events-auto
+          "
         >
           <ChevronLeft size={21} strokeWidth={1.5} />
         </LightboxControlButton>
@@ -934,28 +1077,33 @@ function GalleryLightbox({
         <LightboxControlButton
           label="Next image"
           onClick={onNext}
-          className="pointer-events-auto"
+          className="
+            pointer-events-auto
+          "
         >
           <ChevronRight size={21} strokeWidth={1.5} />
         </LightboxControlButton>
       </div>
 
-      {/* ===============================================
-          MOBILE NAV + COUNTER
-      ================================================ */}
+      {/* =================================================
+          MOBILE CONTROLS
+      ================================================== */}
 
       <div
         className="
           absolute
+
           bottom-4
           left-1/2
 
           z-20
 
           flex
+
           -translate-x-1/2
 
           items-center
+
           gap-3
 
           lg:hidden
@@ -965,61 +1113,81 @@ function GalleryLightbox({
           <ChevronLeft size={17} strokeWidth={1.6} />
         </LightboxControlButton>
 
-        <span
-          aria-live="polite"
-          className="
-            min-w-[64px]
-
-            text-center
-
-            font-brand-sans
-
-            text-[10px]
-            font-bold
-
-            text-white/70
-          "
-        >
-          {String(currentIndex + 1).padStart(2, "0")}
-          {" / "}
-          {String(items.length).padStart(2, "0")}
-        </span>
+        <GalleryCounter current={currentIndex + 1} total={items.length} />
 
         <LightboxControlButton label="Next image" onClick={onNext}>
           <ChevronRight size={17} strokeWidth={1.6} />
         </LightboxControlButton>
       </div>
 
-      {/* desktop counter */}
+      {/* DESKTOP COUNTER */}
 
       <div
         className="
           absolute
+
           bottom-5
           left-1/2
 
           hidden
+
           -translate-x-1/2
-
-          font-brand-sans
-
-          text-[10px]
-          font-bold
-          tracking-[0.08em]
-
-          text-white/55
 
           lg:block
         "
       >
-        {String(currentIndex + 1).padStart(2, "0")}
-        {" / "}
-        {String(items.length).padStart(2, "0")}
+        <GalleryCounter current={currentIndex + 1} total={items.length} />
       </div>
     </div>
   );
 
   return createPortal(lightbox, document.body);
+}
+
+/* =========================================================
+   COUNTER
+========================================================= */
+
+function GalleryCounter({
+  current,
+  total,
+}: {
+  current: number;
+  total: number;
+}) {
+  return (
+    <span
+      aria-live="polite"
+      className="
+        min-w-[70px]
+
+        text-center
+
+        font-brand-sans
+
+        text-[9px]
+        font-bold
+
+        tracking-[0.08em]
+
+        text-white/65
+      "
+    >
+      {String(current).padStart(2, "0")}
+
+      <span
+        className="
+          mx-1.5
+
+          text-white/25
+        "
+      >
+        /
+      </span>
+
+      {String(total).padStart(2, "0")}
+    </span>
+  );
 }
 
 /* =========================================================
@@ -1033,8 +1201,11 @@ function LightboxControlButton({
   className = "",
 }: {
   label: string;
+
   onClick: () => void;
+
   children: ReactNode;
+
   className?: string;
 }) {
   return (
@@ -1044,6 +1215,7 @@ function LightboxControlButton({
       aria-label={label}
       onClick={(event) => {
         event.stopPropagation();
+
         onClick();
       }}
       onPointerDown={(event) => event.stopPropagation()}
@@ -1055,22 +1227,21 @@ function LightboxControlButton({
         items-center
         justify-center
 
-        rounded-full
+        rounded-[13px]
 
         border
-        border-white/20
+        border-white/60
 
-        bg-[rgba(245,242,234,0.92)]
+        bg-[#F1E8DC]
 
         text-[var(--brand-navy)]
 
-        shadow-[0_5px_14px_rgba(0,0,0,0.12)]
+        shadow-[0_4px_10px_rgba(0,0,0,0.12)]
 
         transition-transform
-        duration-150
+        duration-100
 
-        hover:scale-[1.04]
-        active:scale-[0.96]
+        active:scale-[0.94]
 
         focus-visible:outline-none
         focus-visible:ring-2

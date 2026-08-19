@@ -161,7 +161,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
               </div>
 
               {/* VISUAL */}
-              <div className="relative mt-8 min-h-[360px] min-[390px]:min-h-[420px] sm:mt-10 sm:min-h-[500px] lg:mt-0 lg:min-h-[650px]">
+              <div className="relative mt-8 min-h-[360px] sm:mt-10 sm:min-h-[500px] lg:mt-0 lg:min-h-[650px]">
                 {/* SCULPTURAL ARCH */}
                 <div className="clay-surface-strong absolute bottom-[52px] left-1/2 -mt-20 md:-mt-0 top-0 w-[99%] -translate-x-1/2 rounded-t-[29%] rounded-b-[24px] p-[6px] sm:w-[86%] sm:bottom-[60px] sm:p-[8px] sm:rounded-b-[28px] lg:bottom-[45px] lg:w-[96%] lg:p-[9px] lg:rounded-b-[30px] xl:w-[91%]">
                   <div className="clay-inset relative h-100 lg:h-150 overflow-hidden rounded-t-[29%] rounded-b-[19px] bg-[#DCD0BE] sm:rounded-b-[23px] lg:rounded-b-[24px]">
@@ -184,38 +184,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
               </div>
             </div>
 
-            {/* FEATURE STRIP */}
-            <div className="relative   z-30 mx-4 mb-4 grid md:hidden gap-2 sm:mx-6 sm:grid-cols-3 sm:gap-2.5 lg:absolute lg:bottom-7 lg:left-[3%] lg:mx-0 lg:w-[50%] lg:grid-cols-3 lg:gap-3 xl:left-[4%] xl:w-[48%]">
-              {features.map(({ icon: Icon, label, description }) => (
-                <div
-                  key={label}
-                  className="clay-surface-soft rounded-[16px] p-[4px] sm:rounded-[20px] sm:p-[5px]"
-                >
-                  <div className="clay-inset flex h-full items-center gap-2.5 rounded-[13px] px-2.5 py-2.5 sm:gap-3 sm:rounded-[16px] sm:px-3 sm:py-3">
-                    <div className="clay-surface-strong flex h-8 w-8 shrink-0 items-center justify-center rounded-full sm:h-9 sm:w-9">
-                      <Icon
-                        size={14}
-                        strokeWidth={1.5}
-                        className="text-[var(--brand-gold-700)] sm:hidden"
-                      />
-                      <Icon
-                        size={16}
-                        strokeWidth={1.5}
-                        className="hidden text-[var(--brand-gold-700)] sm:block"
-                      />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-brand-sans text-[7px] font-bold uppercase leading-[1.2] tracking-[0.1em] text-[var(--brand-navy)] sm:text-[8px]">
-                        {label}
-                      </p>
-                      <p className="mt-1 hidden font-brand-sans text-[7px] leading-[1.4] text-[var(--brand-text-muted)] xl:block">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+           
           </div>
         </div>
       </div>

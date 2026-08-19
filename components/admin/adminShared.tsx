@@ -175,47 +175,80 @@ export type DeleteUserResponse = {
   deletedUserId: string;
 };
 
-export type Product = {
+export type ProjectService =
+  | "BESPOKE_SOFA"
+  | "COMMERCIAL_SOFA"
+  | "INTERIOR_DESIGN"
+  | "SOFA_REPAIR_RESTORATION";
+
+export type ProjectImage = {
   id: string;
-  productCode: number;
-  name: string;
-  imageUrl: string;
-  imageStorageKey?: string;
-  description: string;
+  url: string;
+  storageKey?: string;
+  alt: string;
+  sortOrder: number;
+};
+
+export type Project = {
+  id: string;
+  projectCode: number;
+  title: string;
+  slug: string;
+  service: ProjectService;
+  coverImageUrl: string;
+  coverImageStorageKey?: string;
+  images: ProjectImage[];
+  excerpt: string;
+  brief?: string;
+  approach?: string;
+  details?: string;
+  result?: string;
+  locationLabel?: string;
+  featured: boolean;
+  published: boolean;
   createdAt: string;
   updatedAt: string;
 };
 
-export type ProductsResponse = {
+export type ProjectsResponse = {
   ok: true;
-  products: Product[];
+  projects: Project[];
   total: number;
   latestCode: number | null;
 };
 
-export type ProductDetailResponse = {
+export type ProjectDetailResponse = {
   ok: true;
-  product: Product;
+  project: Project;
 };
 
-export type ProductUploadResponse = {
+export type ProjectUploadResponse = {
   ok: true;
   imageUrl: string;
   imageStorageKey: string;
 };
 
-export type DeleteProductResponse = {
+export type DeleteProjectResponse = {
   ok: true;
-  deletedProductId: string;
+  deletedProjectId: string;
 };
 
-export type ProductFormState = {
+export type ProjectFormState = {
   id: string;
-  productCode: string;
-  name: string;
-  imageUrl: string;
-  imageStorageKey: string;
-  description: string;
+  projectCode: string;
+  title: string;
+  service: ProjectService;
+  coverImageUrl: string;
+  coverImageStorageKey: string;
+  images: ProjectImage[];
+  excerpt: string;
+  brief: string;
+  approach: string;
+  details: string;
+  result: string;
+  locationLabel: string;
+  featured: boolean;
+  published: boolean;
 };
 
 export type FilterState = {
@@ -232,7 +265,7 @@ export type ApiError = Error & {
   fieldErrors?: Record<string, string>;
 };
 
-export type ProductImageUploadState = {
+export type ProjectImageUploadState = {
   fileName: string;
   fileSize: number;
   progress: number;
@@ -249,13 +282,22 @@ export const emptyFilters: FilterState = {
   dateTo: "",
 };
 
-export const emptyProductForm: ProductFormState = {
+export const emptyProjectForm: ProjectFormState = {
   id: "",
-  productCode: "",
-  name: "",
-  imageUrl: "",
-  imageStorageKey: "",
-  description: "",
+  projectCode: "",
+  title: "",
+  service: "BESPOKE_SOFA",
+  coverImageUrl: "",
+  coverImageStorageKey: "",
+  images: [],
+  excerpt: "",
+  brief: "",
+  approach: "",
+  details: "",
+  result: "",
+  locationLabel: "",
+  featured: false,
+  published: false,
 };
 
 export const services: {
@@ -300,6 +342,23 @@ export const userRoles: { value: UserRole; label: string }[] = [
   { value: "USER", label: "User" },
   { value: "ADMIN", label: "Admin" },
 ];
+
+export const projectServices: { value: ProjectService; label: string }[] = [
+  { value: "BESPOKE_SOFA", label: "Bespoke sofa" },
+  { value: "COMMERCIAL_SOFA", label: "Commercial sofa" },
+  { value: "INTERIOR_DESIGN", label: "Interior design" },
+  {
+    value: "SOFA_REPAIR_RESTORATION",
+    label: "Repair and restoration",
+  },
+];
+
+export const projectServiceRoutes: Record<ProjectService, string> = {
+  BESPOKE_SOFA: "/services/bespoke-sofas",
+  COMMERCIAL_SOFA: "/services/commercial-sofas",
+  INTERIOR_DESIGN: "/services/interior-design",
+  SOFA_REPAIR_RESTORATION: "/services/sofa-repair-restoration",
+};
 
 export const statusColor: Record<
   LeadStatus,
@@ -435,7 +494,7 @@ export function buildUsersQuery(search: string, role: "" | UserRole) {
   return params.toString();
 }
 
-export function buildProductsQuery(search: string) {
+export function buildProjectsQuery(search: string) {
   const params = new URLSearchParams();
   if (search.trim()) params.set("search", search.trim());
   return params.toString();
@@ -463,16 +522,16 @@ export function makeApiError(
   return error;
 }
 
-export function uploadProductImageWithProgress(input: {
+export function uploadProjectImageWithProgress(input: {
   file: File;
   onProgress: (progress: number) => void;
 }) {
-  return new Promise<ProductUploadResponse>((resolve, reject) => {
+  return new Promise<ProjectUploadResponse>((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
 
     formData.append("file", input.file);
-    xhr.open("POST", "/api/admin/products/upload");
+    xhr.open("POST", "/api/admin/projects/upload");
     xhr.withCredentials = true;
 
     xhr.upload.onprogress = (event) => {
@@ -492,7 +551,7 @@ export function uploadProductImageWithProgress(input: {
       }
 
       if (xhr.status >= 200 && xhr.status < 300 && body) {
-        resolve(body as ProductUploadResponse);
+        resolve(body as ProjectUploadResponse);
         return;
       }
 
@@ -502,15 +561,15 @@ export function uploadProductImageWithProgress(input: {
       };
       reject(
         makeApiError(
-          apiBody?.message || "Product image could not be uploaded.",
+          apiBody?.message || "Project image could not be uploaded.",
           undefined,
           apiBody,
         ),
       );
     };
 
-    xhr.onerror = () => reject(makeApiError("Product image upload failed."));
-    xhr.onabort = () => reject(makeApiError("Product image upload cancelled."));
+    xhr.onerror = () => reject(makeApiError("Project image upload failed."));
+    xhr.onabort = () => reject(makeApiError("Project image upload cancelled."));
 
     xhr.send(formData);
   });
@@ -575,7 +634,7 @@ export type LeadAdminDashboardProps = { initialUser?: AdminUser | null };
 export type ActiveSection =
   | "overview"
   | "leads"
-  | "products"
+  | "projects"
   | "users"
   | "profile";
 

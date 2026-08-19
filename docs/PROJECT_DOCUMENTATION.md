@@ -1,46 +1,39 @@
-# مستندات فنی پروژه Sofa N More
+# Sofa N More Technical Documentation
 
-آخرین به روزرسانی: 2026-08-17
+Last updated: 2026-08-19
 
-این سند نمای کلی پروژه، معماری بک اند و فرانت اند، مدل های دیتابیس، APIها، سیستم فرم های لید، آپلود فایل، احراز هویت، پنل ادمین و مخصوصا فایل های `lib` را توضیح می دهد.
+This document describes the Sofa N More Next.js application, including the public website, lead capture platform, file upload flow, authentication, admin dashboard, project portfolio system, MongoDB models, API routes, and the important `lib` modules.
 
-## 1. نمای کلی
+## 1. Overview
 
-پروژه یک اپلیکیشن Next.js برای سایت Sofa N More است که علاوه بر صفحات محتوایی و سرویس ها، یک پلتفرم lead capture قابل استفاده مجدد دارد. لیدها از فرم های مختلف وارد یک مدل مشترک می شوند و تفاوت هر سرویس داخل `Lead.serviceData` ذخیره می شود.
+Sofa N More is a Next.js, TypeScript and MongoDB application for a London furniture and interiors business.
 
-سرویس های اصلی لید:
+The application has three main responsibilities:
 
-- `CONTACT_ENQUIRY`: پیام صفحه تماس
-- `BESPOKE_SOFA`: فرم سفارش مبل سفارشی
-- `COMMERCIAL_SOFA`: فرم مبل/نشستن تجاری
-- `INTERIOR_DESIGN`: فرم طراحی داخلی
-- `SOFA_REPAIR_RESTORATION`: فرم تعمیر و بازسازی مبل
+- Public marketing pages for services, workshop, gallery, contact, policy and terms content.
+- A reusable lead capture platform for contact enquiries and service-specific lead forms.
+- An admin dashboard for managing leads, users, admin profile data and published portfolio projects.
 
-بخش های مهم سیستم:
+The lead system uses a shared `Lead` model. Common lead fields live at the root of the lead document, while service-specific fields are stored in `Lead.serviceData`.
 
-- MongoDB برای ذخیره لیدها، آپلودها و کاربران
-- S3-compatible storage برای آپلود فایل های فرم
-- Cookie based authentication برای ورود کاربر
-- Role based access برای ادمین
-- داشبورد `/admin` برای مشاهده، فیلتر، تحلیل، آپدیت وضعیت و حذف لیدها و مدیریت کاربران
-- Toast system مشترک برای نمایش خطا، موفقیت و پیام های اطلاعاتی
+The project system stores completed client work and portfolio/case-study records. These are not retail products.
 
-## 2. تکنولوژی ها
+## 2. Technology Stack
 
-فایل مرجع: `package.json`
+Reference file: `package.json`
 
 - Next.js `16.3.0`
 - React `19.2.8`
 - TypeScript
-- MongoDB native driver `mongodb`
-- Mongoose برای تعریف schema/modelهای typed
-- AWS S3 SDK برای signed upload URL
-- Lenis برای smooth scroll در صفحات عمومی
-- Lucide React برای آیکن ها
-- Vitest برای تست
-- Tailwind style classes و CSS variables برای دیزاین claymorphism
+- MongoDB native driver
+- Mongoose schemas/models for typed database shape definitions
+- AWS S3 SDK for S3-compatible object storage
+- Lenis for smooth scrolling on public pages
+- Lucide React for icons
+- Vitest for tests
+- CSS variables and utility classes for the Sofa N More claymorphism design system
 
-اسکریپت ها:
+Common scripts:
 
 ```bash
 npm run dev
@@ -50,19 +43,23 @@ npm run lint
 npm run test
 ```
 
-## 3. ساختار کلی فولدرها
+## 3. Folder Structure
 
 ```text
 app/
   api/
+    admin/projects/
     admin/users/
     auth/
     leads/
     uploads/
   admin/
-  login/
-  services/
   contact-us/
+  login/
+  projects/
+  services/
+  sitemap.ts
+  robots.ts
 
 components/
   admin/
@@ -87,6 +84,9 @@ lib/
   lead-repository.ts
   lead-validation.ts
   mongodb.ts
+  project-repository.ts
+  project-service.ts
+  project-validation.ts
   security.ts
   site.ts
   upload-storage.ts
@@ -94,70 +94,54 @@ lib/
 
 models/
   lead.ts
+  project.ts
   user.ts
 
 tests/
-  auth.test.ts
-  lead-admin.test.ts
-  lead-validation.test.ts
+  auth-profile-validation.test.ts
+  project-api.test.ts
+  project-validation.test.ts
 ```
 
-## 4. متغیرهای محیطی
+## 4. Environment Variables
 
-مقادیر واقعی نباید داخل داکیومنت یا git ذخیره شوند.
+Real secrets must never be committed to git or copied into documentation.
 
-متغیرهای استفاده شده در کد:
+The application uses these environment variables:
 
-- `DATABASE_URL`: آدرس اتصال MongoDB. اگر username/password کاراکتر خاص مثل `@`, `#`, `:` یا `/` دارد باید URL-encoded شود.
-- `MONGODB_DB` یا `MONGO_DB`: نام دیتابیس MongoDB.
-- `AUTH_SESSION_SECRET`: secret برای امضای session cookie. در production باید حداقل 32 کاراکتر باشد.
-- `IP_HASH_SECRET`: secret برای hash کردن IP و upload session. در production باید تنظیم شود.
-- `NEXT_PUBLIC_SITE_URL`: آدرس اصلی سایت برای canonical URL، origin check و metadata.
-- `ALLOWED_FORM_ORIGINS`: originهای مجاز اضافه برای submit فرم ها، جدا شده با comma.
-- `UPLOAD_BUCKET`: bucket فایل ها.
-- `UPLOAD_REGION`: region استوریج.
-- `UPLOAD_ENDPOINT`: endpoint اختیاری برای S3-compatible provider.
-- `UPLOAD_ACCESS_KEY_ID`: access key استوریج.
-- `UPLOAD_SECRET_ACCESS_KEY`: secret key استوریج.
-- `UPLOAD_PUBLIC_BASE_URL`: base URL عمومی برای نمایش لینک فایل در ادمین.
-- `UPLOAD_FORCE_PATH_STYLE`: اگر provider نیاز دارد مقدار `true`.
+- `DATABASE_URL`: MongoDB connection string. If the username or password contains special characters such as `@`, `#`, `:` or `/`, those characters must be URL-encoded.
+- `MONGODB_DB` or `MONGO_DB`: optional database name override.
+- `AUTH_SESSION_SECRET`: secret used to sign the auth session cookie. In production it must be strong and at least 32 characters.
+- `IP_HASH_SECRET`: secret used for IP hashing and upload session hashing. It should be set in production.
+- `NEXT_PUBLIC_SITE_URL`: public site origin used for canonical URLs, metadata and same-origin checks.
+- `ALLOWED_FORM_ORIGINS`: optional comma-separated list of extra origins allowed to submit forms.
+- `UPLOAD_BUCKET`: S3-compatible upload bucket.
+- `UPLOAD_REGION`: upload storage region.
+- `UPLOAD_ENDPOINT`: optional S3-compatible provider endpoint.
+- `UPLOAD_ACCESS_KEY_ID`: upload storage access key.
+- `UPLOAD_SECRET_ACCESS_KEY`: upload storage secret key.
+- `UPLOAD_PUBLIC_BASE_URL`: public base URL used to render uploaded lead and project files.
+- `UPLOAD_FORCE_PATH_STYLE`: set to `true` if the storage provider requires path-style requests.
 
-نکته عملیاتی: در حال حاضر `.env.example` در ریشه پروژه دیده نشد. بهتر است بعدا یک نسخه امن بدون مقدار محرمانه ساخته شود.
-
-## 5. مدل های دیتابیس
+## 5. Database Models
 
 ### 5.1 Lead
 
-فایل: `models/lead.ts`
+File: `models/lead.ts`
 
-کالکشن: `leads`
+Collection: `leads`
 
-این مدل رکورد اصلی هر درخواست/لید را نگه می دارد.
+The `Lead` document stores every customer request submitted through contact and service forms.
 
-فیلدهای اصلی:
+Lead services:
 
-- `service`: یکی از سرویس های تعریف شده در `LEAD_SERVICES`
-- `status`: وضعیت لید
-- `name`
-- `email`
-- `phone`
-- `postcode`
-- `message`
-- `sourcePage`
-- `referrer`
-- `utmSource`, `utmMedium`, `utmCampaign`, `utmTerm`, `utmContent`
-- `serviceData`: اطلاعات اختصاصی هر فرم
-- `consentPrivacy`
-- `consentMarketing`
-- `idempotencyKey`: جلوگیری از ثبت تکراری فرم
-- `ipHash`
-- `userAgent`
-- `attachmentCount`
-- `statusUpdatedAt`
-- `createdAt`
-- `updatedAt`
+- `CONTACT_ENQUIRY`
+- `BESPOKE_SOFA`
+- `COMMERCIAL_SOFA`
+- `INTERIOR_DESIGN`
+- `SOFA_REPAIR_RESTORATION`
 
-وضعیت های لید:
+Lead statuses:
 
 - `NEW`
 - `CONTACTED`
@@ -167,71 +151,78 @@ tests/
 - `LOST`
 - `SPAM`
 
-ایندکس های مهم:
+Main fields:
 
-- `{ service: 1, status: 1, createdAt: -1 }`
-- `{ postcode: 1, createdAt: -1 }` با `sparse`
-- `{ createdAt: -1 }`
-- `{ idempotencyKey: 1 }` با `unique`
+- `service`: lead service/category.
+- `status`: current admin status.
+- `name`, `email`, `phone`, `postcode`, `message`.
+- `sourcePage`, `referrer`.
+- UTM fields: `utmSource`, `utmMedium`, `utmCampaign`, `utmTerm`, `utmContent`.
+- `serviceData`: flexible record for form-specific fields.
+- `consentPrivacy` and `consentMarketing`.
+- `idempotencyKey`: prevents duplicate form submissions.
+- `ipHash`, `userAgent`.
+- `attachmentCount`.
+- `statusUpdatedAt`, `createdAt`, `updatedAt`.
+
+Important indexes are created in `lib/mongodb.ts`:
+
+- `idempotencyKey` unique.
+- `service + status + createdAt`.
+- `postcode + createdAt`.
+- `createdAt`.
 
 ### 5.2 LeadAttachment
 
-فایل: `models/lead.ts`
+File: `models/lead.ts`
 
-کالکشن: `lead_uploads`
+Collection: `lead_uploads`
 
-این مدل فایل های آپلود شده برای فرم های لید را نگه می دارد. فایل ابتدا به شکل موقت ذخیره می شود و بعد از ثبت موفق lead به همان lead وصل می شود.
+`LeadAttachment` stores metadata for files uploaded through lead forms. Binary file data is never stored in MongoDB.
 
-فیلدهای اصلی:
+Attachment statuses:
+
+- `PENDING`: signed upload has been created, but the object has not been confirmed.
+- `COMPLETE`: object exists in storage and is ready to attach to a lead.
+- `ATTACHED`: upload has been attached to a lead.
+- `FAILED`: upload failed validation or completion.
+
+Main fields:
 
 - `uploadToken`
 - `uploadSessionHash`
 - `leadId`
-- `originalName`
-- `safeName`
+- `originalName`, `safeName`
 - `storageKey`
-- `mimeType`
-- `sizeBytes`
-- `width`
-- `height`
+- `mimeType`, `sizeBytes`, optional dimensions
 - `service`
 - `status`
-- `ipHash`
-- `userAgent`
+- `ipHash`, `userAgent`
 - `etag`
-- `expiresAt`
-- `completedAt`
-- `attachedAt`
-- `createdAt`
-- `updatedAt`
+- `expiresAt`, `completedAt`, `attachedAt`
+- `createdAt`, `updatedAt`
 
-وضعیت های attachment:
+Important indexes:
 
-- `PENDING`: رکورد ساخته شده، فایل هنوز تایید نشده
-- `COMPLETE`: فایل در storage تایید شده، هنوز به lead وصل نشده
-- `ATTACHED`: فایل به lead وصل شده
-- `FAILED`: آپلود نامعتبر یا شکست خورده
-
-ایندکس های مهم:
-
-- `{ uploadSessionHash: 1, status: 1, createdAt: -1 }`
-- `{ leadId: 1, createdAt: -1 }` با `sparse`
-- `{ expiresAt: 1 }` با `sparse`
+- `uploadToken` unique.
+- `uploadSessionHash + status + createdAt`.
+- `leadId + createdAt`.
+- `expiresAt` for orphan upload cleanup.
 
 ### 5.3 User
 
-فایل: `models/user.ts`
+File: `models/user.ts`
 
-کالکشن: `users`
+Collection: `users`
 
-برای ثبت نام، ورود و مدیریت سطح دسترسی استفاده می شود.
+The user model supports phone/password authentication and role-based access.
 
-نقش ها:
+Roles:
 
 - `USER`
 - `ADMIN`
 
-فیلدهای اصلی:
+Main fields:
 
 - `name`
 - `phone`
@@ -243,420 +234,385 @@ tests/
 - `createdAt`
 - `updatedAt`
 
-ایندکس های مهم:
+Important indexes:
 
-- `{ phoneNormalized: 1 }` با `unique`
-- `{ role: 1, createdAt: -1 }`
-- `{ createdAt: -1 }`
+- `phoneNormalized` unique.
+- `role + createdAt`.
+- `createdAt`.
 
-## 6. فایل های lib
+### 5.4 Project
+
+File: `models/project.ts`
+
+Collection: `projects`
+
+The `Project` model stores completed Sofa N More client projects and portfolio case studies. A project is not a retail product.
+
+Project services:
+
+- `BESPOKE_SOFA`
+- `COMMERCIAL_SOFA`
+- `INTERIOR_DESIGN`
+- `SOFA_REPAIR_RESTORATION`
+
+Main fields:
+
+- `projectCode`: required unique integer, `1000` or higher.
+- `title`: required project title, max 160 characters.
+- `slug`: required unique URL-safe slug.
+- `service`: required project service.
+- `coverImageUrl`: required public cover image URL/path.
+- `coverImageStorageKey`: optional storage key for uploaded cover image.
+- `images`: ordered gallery images.
+- `excerpt`: required short project introduction, max 500 characters.
+- `brief`, `approach`, `details`, `result`: optional long-form story fields.
+- `locationLabel`: optional broad location label such as `North West London`.
+- `featured`: controls homepage Selected Projects visibility.
+- `published`: controls public visibility.
+- `createdAt`, `updatedAt`.
+
+Project image shape:
+
+```ts
+type ProjectImage = {
+  id: string;
+  url: string;
+  storageKey?: string;
+  alt: string;
+  sortOrder: number;
+};
+```
+
+Important indexes:
+
+- `projectCode` unique.
+- `slug` unique.
+- `service + createdAt`.
+- `featured + published + createdAt`.
+- `published + createdAt`.
+- `title + createdAt`.
+- `createdAt`.
+
+## 6. Backend Library Modules
 
 ### 6.1 `lib/mongodb.ts`
 
-مسئول اتصال MongoDB و ساخت collection/indexهاست.
+Owns MongoDB connection reuse, database selection, collection access and index creation.
 
-خروجی های اصلی:
+Exports:
 
-- `getDatabaseUrl()`: مقدار `DATABASE_URL` را می خواند و protocol را چک می کند.
-- `getMongoClient()`: اتصال MongoDB را در `globalThis` cache می کند.
-- `getDb()`: دیتابیس را بر اساس `MONGODB_DB` یا `MONGO_DB` برمی گرداند.
-- `getLeadCollections()`: کالکشن های `leads` و `lead_uploads`
-- `getUserCollections()`: کالکشن `users`
-- `ensureLeadIndexes()`: ایندکس های lead و upload
-- `ensureUserIndexes()`: ایندکس های user
+- `getMongoClient()`
+- `getDb()`
+- `getLeadCollections()`
+- `getUserCollections()`
+- `getProjectCollections()`
+- `ensureLeadIndexes()`
+- `ensureUserIndexes()`
+- `ensureProjectIndexes()`
 
-نکته: سیستم rate limit قبلی حذف شده و دیگر collection مربوط به rate limit در این فایل استفاده نمی شود.
+Notes:
+
+- The database URL must begin with `mongodb://` or `mongodb+srv://`.
+- The Mongo client is cached on `globalThis` to avoid reconnecting during development.
+- Index creation is also memoized with promises on `globalThis`.
 
 ### 6.2 `lib/api-response.ts`
 
-قرارداد پاسخ API را یکپارچه می کند.
+Defines the shared API response contract.
 
-کدهای خطا:
+Exports:
 
-- `VALIDATION_ERROR`
-- `UPLOAD_INVALID`
-- `UPLOAD_INCOMPLETE`
-- `UPLOAD_FAILED`
-- `DUPLICATE_SUBMISSION`
-- `UNAUTHORIZED`
-- `FORBIDDEN`
-- `CONFLICT`
-- `NOT_FOUND`
-- `SERVER_ERROR`
+- `ApiProblem`
+- `ok(body, init?)`
+- `emptyOk(init?)`
+- `errorResponse(problem)`
+- `validationError(fieldErrors, message?)`
+- `handleApiError(error)`
 
-خروجی ها:
+Error shape:
 
-- `ok(data, init)`: پاسخ موفق JSON
-- `emptyOk(init)`: پاسخ موفق بدون data
-- `errorResponse(problem)`: ساخت پاسخ خطا
-- `validationError(fieldErrors)`: ساخت خطای validation
-- `handleApiError(error)`: تبدیل exception به response استاندارد
-- `ApiProblem`: کلاس خطای اپلیکیشن
+```json
+{
+  "ok": false,
+  "code": "VALIDATION_ERROR",
+  "message": "Please check the highlighted fields.",
+  "fieldErrors": {}
+}
+```
+
+Success shape:
+
+```json
+{
+  "ok": true
+}
+```
+
+Backend code should throw `ApiProblem` for expected application errors. Unexpected errors are logged and returned as `SERVER_ERROR`.
 
 ### 6.3 `lib/http.ts`
 
-خواندن امن body درخواست JSON.
+Small HTTP helpers.
 
-رفتار:
+Current responsibility:
 
-- فقط `application/json` را قبول می کند.
-- content length را بررسی می کند.
-- body را با limit پیش فرض `64KB` می خواند.
-- JSON نامعتبر را به `VALIDATION_ERROR` تبدیل می کند.
+- Read and validate JSON request bodies for API routes.
+
+Routes that accept JSON mutation payloads should use this helper.
 
 ### 6.4 `lib/security.ts`
 
-ابزارهای امنیتی عمومی.
+Security helpers for same-origin validation.
 
-وظایف:
+Mutation routes use `assertSameOrigin(request)` to reject unexpected cross-origin requests.
 
-- گرفتن IP از headerها
-- hash کردن IP با `IP_HASH_SECRET`
-- hash کردن `uploadSessionId`
-- کوتاه/نرمال کردن user agent
-- `assertSameOrigin(request)` برای جلوگیری از submit از origin غیرمجاز
+Origin checks use:
 
-originهای مجاز از این منابع می آیند:
-
-- `NEXT_PUBLIC_SITE_URL`
-- origin خود request
-- `ALLOWED_FORM_ORIGINS`
+- The request `Origin` header.
+- `NEXT_PUBLIC_SITE_URL`.
+- Optional `ALLOWED_FORM_ORIGINS`.
 
 ### 6.5 `lib/auth-password.ts`
 
-هش و بررسی رمز عبور.
+Owns password hashing and password verification.
 
-رفتار:
+Responsibilities:
 
-- از `crypto.scrypt` استفاده می کند.
-- salt تصادفی 16 بایتی می سازد.
-- فرمت ذخیره شده: `scrypt:v1:<salt>:<hash>`
-- بررسی password با `timingSafeEqual` انجام می شود.
+- Generate password salts.
+- Hash passwords using Node crypto.
+- Verify submitted passwords against stored password hashes.
 
 ### 6.6 `lib/auth-session.ts`
 
-مدیریت session cookie.
+Owns cookie-based session management.
 
-مشخصات:
+Responsibilities:
 
-- نام کوکی: `snm_session`
-- مدت اعتبار: 7 روز
-- token شامل payload امضا شده با HMAC SHA-256 است.
-- کوکی `HttpOnly`, `SameSite=Lax`, `Path=/` است.
-- در production کوکی `Secure` می شود.
-- اگر `AUTH_SESSION_SECRET` در production کوتاه یا خالی باشد خطا می دهد.
+- Sign session payloads.
+- Verify session cookies.
+- Create session cookie headers.
+- Clear session cookies.
+- Enforce stronger secret requirements in production.
 
-خروجی ها:
+Important behavior:
 
-- `createAuthSessionToken(userId)`
-- `readAuthSessionToken(request)`
-- `verifyAuthSessionToken(token)`
-- `createAuthSessionCookie(userId)`
-- `clearAuthSessionCookie()`
+- Admin access does not use a manual admin token.
+- Auth state comes from signed cookies and database user role.
 
 ### 6.7 `lib/auth-validation.ts`
 
-اعتبارسنجی فرم ثبت نام، ورود و patch کاربر.
+Validates signup, login, user updates and current-profile updates.
 
-ثبت نام:
+Main rules:
 
-- `name` اجباری، حداقل 2 کاراکتر
-- `phone` اجباری و normalize شده
-- `password` اجباری و قوی
-
-قانون password قوی:
-
-- حداقل 10 کاراکتر
-- حداکثر 128 کاراکتر
-- حروف کوچک
-- حروف بزرگ
-- عدد
-- symbol
-
-ورود:
-
-- `phone`
-- `password`
-
-برای login قدرت password دوباره چک نمی شود تا کاربرهای قدیمی با رمز موجود هم بتوانند وارد شوند.
-
-patch کاربر:
-
-- `role`: فقط `USER` یا `ADMIN`
-- `isActive`: boolean
+- Signup requires name, phone and strong password.
+- Login requires phone and password.
+- Phone numbers are normalized before lookup.
+- New users sign up as `USER`.
+- Admins can promote/demote users.
+- Profile name/phone changes do not require password changes.
+- Current password is required only when setting a new password.
 
 ### 6.8 `lib/user-repository.ts`
 
-لایه دیتابیس کاربران.
+Owns user database operations.
 
-وظایف:
+Responsibilities:
 
-- `createUserAccount(input)`: ساخت کاربر جدید با role پیش فرض `USER`
-- `authenticateUser(input)`: login با phone/password و آپدیت `lastLoginAt`
-- `getUserById(userId)`
-- `getAuthenticatedUser(request)`: خواندن session cookie و گرفتن کاربر فعال
-- `listUsers(query)`: لیست کاربران با search و role filter
-- `updateUser(userId, patch)`: آپدیت role یا active state
-- `deleteUser(userId)`: حذف کاربر
+- Create users.
+- Find users by phone.
+- Find users by ID.
+- List users for admin.
+- Update user role and active state.
+- Update current profile data.
+- Delete users.
+- Update `lastLoginAt` on successful login.
 
-قانون مهم:
-
-- سیستم اجازه نمی دهد آخرین admin فعال حذف شود یا سطح دسترسی/active بودنش طوری تغییر کند که هیچ admin فعالی باقی نماند.
+Duplicate phone numbers are returned as `409 CONFLICT`.
 
 ### 6.9 `lib/lead-config.ts`
 
-مرکز تنظیمات فرم های لید و آپلود.
+Defines lead capture configuration.
 
-تنظیمات عمومی:
+Responsibilities:
 
-- `MAX_UPLOAD_COUNT = 8`
-- `MAX_UPLOAD_SIZE_BYTES = 10MB`
-- `COMMERCIAL_UPLOAD_COUNT = 10`
-- `COMMERCIAL_UPLOAD_SIZE_BYTES = 15MB`
-- `INTERIOR_UPLOAD_COUNT = 10`
-- `INTERIOR_UPLOAD_SIZE_BYTES = 15MB`
-- `UPLOAD_SIGNED_URL_TTL_SECONDS = 15 دقیقه`
-- `PENDING_UPLOAD_TTL_HOURS = 24`
-- `COMPLETE_UPLOAD_TTL_HOURS = 48`
-- `MIN_LEAD_COMPLETION_MS = 3000`
-- `MAX_SERVICE_DATA_FIELDS = 24`
-
-تعریف سرویس ها و فیلدها:
-
-- `leadServiceDefinitions`: schema اختصاصی هر سرویس برای `serviceData`
-- `leadUploadPolicies`: policy آپلود برای هر سرویس
-
-فیلدهای مهم serviceData:
-
-`CONTACT_ENQUIRY`
-
-- `enquiryType`
-
-`BESPOKE_SOFA`
-
-- `projectType`
-- `spaceType`
-- `dimensionsKnown`
-- `widthCm`
-- `depthCm`
-- `heightCm`
-- `configuration`
-- `upholsteryPreference`
-- `comfortPreference`
-- `accessRestrictions`
-
-`COMMERCIAL_SOFA`
-
-- `companyName`
-- `venueType`
-- `projectType`
-- `projectStage`
-- `approximateQuantity`
-- `hasFloorPlan`
-- `dimensionsKnown`
-- `widthCm`
-- `depthCm`
-- `heightCm`
-- `targetInstallationDate`
-
-`INTERIOR_DESIGN`
-
-- `projectType`
-- `needs`
-- `projectStage`
-- `approximateSpaceSize`
-- `styleDirection`
-- `preferredContactMethod`
-
-`SOFA_REPAIR_RESTORATION`
-
-- `itemType`
-- `issues`
-- `approximateAge`
-- `transportPreference`
-
-ابزارهای فایل:
-
-- `getLeadUploadPolicy(service)`
-- `getFileExtension(fileName)`
-- `sanitizeFileName(fileName)`
-- `uploadValidationError(input)`
-- `defaultExtensionForMime(mimeType)`
-
-پسوندهای خطرناک مثل `exe`, `js`, `svg`, `php`, `sh`, `ps1` reject می شوند.
+- Service labels and allowed file types.
+- Per-service upload limits.
+- Upload token TTL and signed URL TTL.
+- File name sanitization.
+- File extension helpers.
+- Service-specific upload rules.
 
 ### 6.10 `lib/lead-validation.ts`
 
-اعتبارسنجی اصلی submit لید و آپلود.
+Validates all lead form submissions on the backend.
 
-خروجی ها:
+Responsibilities:
 
-- `validateUploadSignInput(input)`
-- `validateUploadCompleteInput(input)`
-- `validateLeadSubmissionInput(input)`
-- `getCompletedUploadExpiry()`
+- Validate common lead fields.
+- Validate service-specific fields.
+- Validate consent fields.
+- Validate attachment tokens.
+- Preserve flexible `serviceData` while preventing unsafe data shape.
 
-رفتارهای مهم:
+Service-specific validation includes:
 
-- body باید object معتبر باشد.
-- honeypot اگر پر باشد reject می شود.
-- `formStartedAt` اجباری است و ارسال خیلی سریع تر از `MIN_LEAD_COMPLETION_MS` reject می شود.
-- `service` باید یکی از `LEAD_SERVICES` باشد.
-- `contact.name` و `contact.phone` پایه هستند.
-- `email` normalize و lowercase می شود.
-- `postcode` با الگوی UK postcode validate می شود.
-- `privacyConsent` حتما باید `true` باشد.
-- `marketingConsent` باید boolean باشد.
-- `idempotencyKey` اجباری و با فرمت امن است.
-- `sourcePage`, `referrer`, `utm` پاکسازی و محدود می شوند.
-- `serviceData` بر اساس `leadServiceDefinitions` همان سرویس validate می شود.
-
-قوانین اختصاصی:
-
-- `CONTACT_ENQUIRY`: ایمیل و پیام حداقل 10 کاراکتر اجباری است، upload ندارد.
-- `COMMERCIAL_SOFA`: ایمیل کاری و پیام حداقل 20 کاراکتر اجباری است. اگر `dimensionsKnown=true` باشد `widthCm` و `depthCm` اجباری می شوند.
-- `INTERIOR_DESIGN`: ایمیل و پیام حداقل 20 کاراکتر اجباری است.
-- `SOFA_REPAIR_RESTORATION`: postcode معتبر و حداقل یک عکس آپلود شده اجباری است؛ ایمیل و message اختیاری هستند.
+- Bespoke sofa project details.
+- Commercial seating venue and project requirements.
+- Interior design needs and project stage.
+- Sofa repair/restoration photo requirement.
+- Contact enquiry payload.
 
 ### 6.11 `lib/lead-repository.ts`
 
-لایه دیتابیس برای ثبت lead و مدیریت uploadهای موقت.
+Owns lead creation and lead attachment finalization.
 
-توابع:
+Responsibilities:
 
-- `createPendingUpload(input)`: ساخت رکورد upload با status `PENDING`
-- `completeUpload(input)`: تایید اینکه فایل واقعا در storage وجود دارد و metadata درست است
-- `createLeadWithAttachments(input)`: ساخت lead و attach کردن uploadها در transaction
+- Insert leads.
+- Enforce idempotency keys.
+- Attach completed uploads to created leads.
+- Count attachments.
+- Preserve uploaded files on final lead creation retry where possible.
 
-رفتارهای مهم:
+### 6.12 `lib/lead-admin.ts`
 
-- `uploadToken` تصادفی ساخته می شود.
-- مالکیت upload با `ipHash`, `userAgent` و `uploadSessionHash` چک می شود.
-- upload باید `COMPLETE` باشد تا به lead وصل شود.
-- upload نمی تواند قبلا به lead دیگری attach شده باشد.
-- `idempotencyKey` جلوی submit تکراری را می گیرد.
-- lead و attach شدن فایل ها داخل transaction انجام می شوند.
+Admin authorization guard for lead/admin routes.
 
-### 6.12 `lib/upload-storage.ts`
+Responsibilities:
 
-ارتباط با S3-compatible object storage.
+- Read the current session cookie.
+- Load the user from MongoDB.
+- Require active user status.
+- Require `ADMIN` role.
+- Return `401` or `403` using the shared `ApiProblem` pattern.
 
-توابع:
+### 6.13 `lib/lead-admin-repository.ts`
 
-- `getUploadStorageConfig()`: خواندن envهای استوریج
-- `getUploadStorageClient()`: ساخت و cache کردن `S3Client`
-- `createStorageKey(input)`: ساخت مسیر فایل مثل `lead-uploads/<service>/<year>/<month>/<random>.<ext>`
-- `signUploadUrl(input)`: ساخت signed PUT URL
-- `headUploadedObject(storageKey)`: گرفتن metadata فایل بعد از آپلود
-- `deleteUploadedObject(storageKey)`: حذف فایل از storage
-- `getPublicUploadUrl(storageKey)`: ساخت URL عمومی برای پنل ادمین، اگر `UPLOAD_PUBLIC_BASE_URL` تنظیم شده باشد
+Admin repository for reading, updating and deleting leads.
 
-### 6.13 `lib/lead-cleanup.ts`
+Responsibilities:
 
-پاکسازی uploadهای orphan.
+- List leads with pagination.
+- Filter by search, service, status and date range.
+- Fetch lead details with attachments.
+- Patch lead status.
+- Delete leads.
+- Delete associated uploaded objects during lead deletion.
 
-رفتار:
+### 6.14 `lib/lead-analytics.ts`
 
-- uploadهایی که `leadId` ندارند و `expiresAt` آنها گذشته، پیدا می شوند.
-- فایل از storage حذف می شود.
-- رکورد مربوط از `lead_uploads` حذف می شود.
-- cleanup حداکثر هر یک ساعت یک بار schedule می شود.
+Builds real dashboard analytics from MongoDB lead data.
 
-این cleanup در routeهای leads/uploads صدا زده می شود تا uploadهای موقت باقی مانده خودکار جمع شوند.
+Dashboard metrics include:
 
-### 6.14 `lib/lead-admin.ts`
+- Total lead count.
+- New, active, won, lost and spam counts.
+- Attachment counts.
+- Leads grouped by status.
+- Leads grouped by service.
+- Daily trend data.
+- Recent leads.
 
-اعتبارسنجی و guardهای پنل admin برای leadها.
+No fake analytics data is used.
 
-توابع:
+### 6.15 `lib/lead-cleanup.ts`
 
-- `assertLeadAdmin(request)`: فقط کاربر `ADMIN` فعال اجازه دسترسی دارد.
-- `parseLeadListQuery(searchParams)`: page, limit, service, status, search, date range
-- `parseLeadAnalyticsQuery(searchParams)`
-- `validateLeadObjectId(value)`
-- `validateLeadStatusPatch(value)`
+Deletes orphan lead uploads that were never attached to a lead after the retention period.
 
-محدودیت pagination:
+Responsibilities:
 
-- page size پیش فرض `25`
-- page size حداکثر `100`
+- Find expired non-attached uploads.
+- Delete matching objects from storage.
+- Remove or mark upload records according to repository behavior.
 
-### 6.15 `lib/lead-admin-repository.ts`
+### 6.16 `lib/upload-storage.ts`
 
-لایه دیتابیس پنل ادمین برای leadها.
+Owns S3-compatible upload storage operations.
 
-توابع:
+Exports:
 
-- `listLeads(query)`: لیست leadها با pagination، فیلتر و attachmentها
-- `getLeadAnalytics(query)`: آمار واقعی از دیتابیس
-- `getLeadById(leadId)`: جزئیات lead و attachmentها
-- `updateLeadStatus(leadId, status)`: تغییر status
-- `deleteLead(leadId)`: حذف lead، رکورد attachmentها و فایل های storage
+- `getUploadStorageConfig()`
+- `getUploadStorageClient()`
+- `createStorageKey(input)` for lead uploads.
+- `createProjectImageStorageKey(input)` for project images.
+- `uploadObject(input)`
+- `signUploadUrl(input)`
+- `headUploadedObject(storageKey)`
+- `deleteUploadedObject(storageKey)`
+- `getPublicUploadUrl(storageKey)`
 
-فیلتر search روی این فیلدها اعمال می شود:
+Storage prefixes:
 
-- `name`
-- `email`
-- `phone`
-- `postcode`
-- `message`
-- `sourcePage`
-- `referrer`
-- `serviceData.companyName`
-- `serviceData.projectType`
-- `serviceData.venueType`
-- `serviceData.itemType`
+- Lead uploads: `lead-uploads/<service>/<year>/<month>/...`
+- Project uploads: `project-uploads/<year>/<month>/...`
 
-analytics شامل:
+### 6.17 `lib/project-validation.ts`
 
-- summary کلی
-- شمارش بر اساس status
-- شمارش بر اساس service
-- مجموع attachmentها
-- daily trend
-- recent leads
+Validates project create/update payloads and project image uploads.
 
-### 6.16 `lib/lead-analytics.ts`
+Responsibilities:
 
-فعلا analytics adapter ساده است.
+- Validate `projectCode` as an integer >= 1000.
+- Validate title, slug, service and cover image URL.
+- Generate safe slugs from titles.
+- Validate gallery image objects.
+- Validate optional text fields.
+- Allow partial PATCH payloads.
+- Validate publish/featured booleans.
+- Validate upload MIME type, extension and file size.
 
-eventهای تعریف شده:
+### 6.18 `lib/project-repository.ts`
 
-- `UPLOAD_SIGNED`
-- `UPLOAD_COMPLETED`
-- `LEAD_SUBMITTED`
+Owns all project database operations.
 
-در development eventها را با `console.info` لاگ می کند. برای اتصال به ابزار واقعی مثل PostHog یا GA، همین فایل محل مناسب توسعه است.
+Exports:
 
-### 6.17 `lib/lead-notifications.ts`
+- `serializeProject(project)`
+- `listProjects(query)`
+- `createProject(input)`
+- `getProjectById(projectId)`
+- `getPublishedProjectBySlug(slug)`
+- `listPublishedProjects(limit?)`
+- `listFeaturedProjects(limit?)`
+- `updateProject(projectId, input)`
+- `deleteProject(projectId)`
 
-adapter ارسال notification برای lead جدید.
+Important behavior:
 
-فعلا در development فقط log می کند:
+- Create resolves slug collisions safely.
+- Update does not change slug unless a slug is explicitly submitted.
+- Duplicate project code and slug errors become `409 CONFLICT`.
+- Replaced uploaded images are deleted from storage.
+- Deleting a project deletes uploaded cover/gallery objects by stored storage keys.
+- Manual public image URLs are allowed and do not create storage keys.
 
-- `leadId`
-- `service`
-- `sourcePage`
-- `attachmentCount`
+### 6.19 `lib/project-service.ts`
 
-برای ایمیل، Slack یا CRM باید implementation همین notifier عوض شود.
+Shared project service mapping.
 
-### 6.18 `lib/site.ts`
+Exports:
 
-تنظیمات عمومی سایت و SEO.
+- `projectServiceLabels`
+- `projectServiceRoutes`
 
-شامل:
+Maps project services to public service pages:
 
-- نام سایت
-- URL
-- description
-- locale/language
-- ایمیل و تلفن
-- آدرس
-- area served
-- routeهای sitemap
-- `absoluteUrl(path)`
-- `defaultOgImage`
+- `BESPOKE_SOFA` -> `/services/bespoke-sofas`
+- `COMMERCIAL_SOFA` -> `/services/commercial-sofas`
+- `INTERIOR_DESIGN` -> `/services/interior-design`
+- `SOFA_REPAIR_RESTORATION` -> `/services/sofa-repair-restoration`
+
+### 6.20 `lib/site.ts`
+
+Central site configuration.
+
+Responsibilities:
+
+- Site name, URL, locale, contact details and address.
+- Static sitemap route list.
+- `absoluteUrl(path)` helper.
+- Default OpenGraph image.
 
 ## 7. API Routes
 
@@ -664,525 +620,577 @@ adapter ارسال notification برای lead جدید.
 
 #### `POST /api/leads`
 
-مسیر ثبت همه لیدها، شامل فرم تماس و 4 فرم سرویس.
+Creates a lead from public/contact/service forms.
 
-جریان:
+Behavior:
 
-1. بررسی same-origin
-2. schedule cleanup آپلودهای orphan
-3. خواندن JSON body
-4. اعتبارسنجی با `validateLeadSubmissionInput`
-5. ساخت lead و attach کردن فایل ها با `createLeadWithAttachments`
-6. ثبت analytics event
-7. ارسال notification اگر duplicate نبود
-8. پاسخ `{ leadId }`
+- Validates JSON body.
+- Validates common and service-specific fields.
+- Validates attachment tokens.
+- Creates lead record.
+- Attaches completed uploads.
+- Returns structured success or API errors.
 
 #### `GET /api/leads`
 
-فقط admin.
+Admin-only route for paginated lead listing.
 
-queryهای پشتیبانی شده:
+Query parameters:
 
 - `page`
 - `limit`
+- `search`
 - `service`
 - `status`
-- `q` یا `search`
-- `dateFrom` یا `from`
-- `dateTo` یا `to`
-
-پاسخ شامل:
-
-- `leads`
-- `pagination`
+- `dateFrom`
+- `dateTo`
 
 #### `GET /api/leads/[leadId]`
 
-فقط admin. جزئیات یک lead همراه attachmentها.
+Admin-only route for lead details and attachments.
 
 #### `PATCH /api/leads/[leadId]`
 
-فقط admin.
-
-body:
-
-```json
-{
-  "status": "CONTACTED"
-}
-```
+Admin-only route for updating lead status.
 
 #### `DELETE /api/leads/[leadId]`
 
-فقط admin.
-
-lead، رکورد attachmentها و فایل های storage را حذف می کند.
+Admin-only route for deleting a lead and its associated uploaded objects.
 
 #### `GET /api/leads/analytics`
 
-فقط admin.
-
-همان فیلترهای lead list را می گیرد و summary/dashboard data واقعی از دیتابیس می سازد.
+Admin-only route for real dashboard analytics.
 
 ### 7.2 Upload API
 
 #### `POST /api/uploads/sign`
 
-برای شروع upload.
+Creates a lead upload record and returns a signed upload URL.
 
-body:
-
-```json
-{
-  "service": "COMMERCIAL_SOFA",
-  "fileName": "floor-plan.pdf",
-  "mimeType": "application/pdf",
-  "sizeBytes": 123456,
-  "uploadSessionId": "upload:client-generated-id"
-}
-```
-
-پاسخ:
-
-```json
-{
-  "uploadToken": "...",
-  "uploadUrl": "...",
-  "storageKey": "...",
-  "expiresIn": 900,
-  "requiredHeaders": {
-    "Content-Type": "application/pdf"
-  }
-}
-```
+The client uploads the binary file directly to storage using the signed URL.
 
 #### `POST /api/uploads/complete`
 
-بعد از PUT فایل روی signed URL صدا زده می شود.
-
-body:
-
-```json
-{
-  "uploadToken": "..."
-}
-```
-
-این route با `HeadObject` چک می کند فایل واقعا در storage هست و metadata آن با policy سرویس سازگار است.
+Confirms that the uploaded object exists in storage, validates the object metadata and marks the upload as complete.
 
 ### 7.3 Auth API
 
 #### `POST /api/auth/signup`
 
-ثبت نام کاربر.
-
-body:
-
-```json
-{
-  "name": "User Name",
-  "phone": "07123456789",
-  "password": "StrongPassword!2026"
-}
-```
-
-کاربر جدید همیشه با role `USER` ساخته می شود. بعد از signup کوکی session ست می شود.
+Creates a normal `USER` account using name, phone and password.
 
 #### `POST /api/auth/login`
 
-ورود با شماره و پسورد.
-
-body:
-
-```json
-{
-  "phone": "07123456789",
-  "password": "StrongPassword!2026"
-}
-```
-
-بعد از login کوکی session ست می شود.
+Authenticates by phone and password and creates a signed session cookie.
 
 #### `POST /api/auth/logout`
 
-کوکی session را پاک می کند.
+Clears the session cookie.
 
 #### `GET /api/auth/me`
 
-کاربر فعلی را از روی session cookie برمی گرداند.
+Returns the current authenticated user or `null`.
+
+#### `PATCH /api/auth/me`
+
+Updates the current user's name, phone and optionally password.
 
 ### 7.4 Admin Users API
 
 #### `GET /api/admin/users`
 
-فقط admin.
+Admin-only user list.
 
-queryها:
+Query parameters:
 
 - `search`
 - `role`
 
 #### `PATCH /api/admin/users/[userId]`
 
-فقط admin و same-origin.
-
-body:
-
-```json
-{
-  "role": "ADMIN",
-  "isActive": true
-}
-```
-
-هر دو فیلد اختیاری هستند، اما حداقل یکی باید ارسال شود.
+Admin-only user update. Supports role and active-state changes.
 
 #### `DELETE /api/admin/users/[userId]`
 
-فقط admin و same-origin.
+Admin-only user deletion.
 
-حذف آخرین admin فعال مجاز نیست.
+### 7.5 Admin Projects API
 
-## 8. فرانت اند
+#### `GET /api/admin/projects`
+
+Admin-only project list.
+
+Query parameters:
+
+- `search`
+- `service`
+- `published`
+- `featured`
+
+Response:
+
+```json
+{
+  "ok": true,
+  "projects": [],
+  "total": 0,
+  "latestCode": null
+}
+```
+
+#### `POST /api/admin/projects`
+
+Admin-only project creation.
+
+Required fields:
+
+- `projectCode`
+- `title`
+- `service`
+- `coverImageUrl`
+- `excerpt`
+
+Optional fields:
+
+- `slug`
+- `coverImageStorageKey`
+- `images`
+- `brief`
+- `approach`
+- `details`
+- `result`
+- `locationLabel`
+- `featured`
+- `published`
+
+#### `GET /api/admin/projects/[projectId]`
+
+Admin-only project detail.
+
+#### `PATCH /api/admin/projects/[projectId]`
+
+Admin-only project update. Partial updates are supported.
+
+#### `DELETE /api/admin/projects/[projectId]`
+
+Admin-only project deletion. Uploaded cover and gallery objects are deleted when storage keys are present.
+
+#### `POST /api/admin/projects/upload`
+
+Admin-only image upload endpoint for project cover/gallery images.
+
+Rules:
+
+- Field name: `file`.
+- MIME types: `image/jpeg`, `image/png`, `image/webp`.
+- Extensions: `jpg`, `jpeg`, `png`, `webp`.
+- Maximum size: 10MB.
+- Returns `imageUrl` and `imageStorageKey`.
+
+## 8. Frontend Architecture
 
 ### 8.1 Root Layout
 
-فایل: `app/layout.tsx`
+File: `app/layout.tsx`
 
-layout اصلی اینها را در تمام سایت mount می کند:
+Root layout includes:
 
-- `PwaRegister`
-- `ToastProvider`
-- JSON-LD سایت
-- `SmoothScrollProvider`
-- `Navbar`
-- `MobileFloatingLogo`
-- `Breadcrumbs`
-- `FloatingContactMenu`
-- محتوای صفحه
-- `Footer`
+- PWA registration.
+- Toast provider.
+- JSON-LD site structured data.
+- Smooth scroll provider.
+- Global navbar.
+- Mobile floating logo.
+- Breadcrumbs.
+- Floating contact menu.
+- Footer.
 
-نکته admin:
-
-- `SmoothScrollProvider` روی مسیرهای `/admin` غیرفعال می شود.
-- `Breadcrumbs`, `FloatingContactMenu`, `MobileFloatingLogo` روی `/admin` نمایش داده نمی شوند.
+The admin dashboard hides public chrome while open and preserves the toast root.
 
 ### 8.2 Toast System
 
-فایل: `components/ui/ToastProvider.tsx`
+File: `components/ui/ToastProvider.tsx`
 
-Toastها از event سراسری `sofanmore-toast` می آیند.
+Shared UI feedback system for:
 
-hook:
+- Success messages.
+- Error messages.
+- Info messages.
 
-```ts
-const toast = useToast();
-toast.success("Saved");
-toast.error("Failed");
-toast.info("Loading");
-```
-
-این سیستم در فرم های lead، فرم تماس، login و admin استفاده شده است.
+Admin actions and lead forms should show request feedback through Toast rather than inline custom notification systems.
 
 ### 8.3 Login Page
 
-فایل ها:
+Files:
 
 - `app/login/page.tsx`
 - `components/auth/LoginPageContent.tsx`
 
-قابلیت ها:
+Supports:
 
-- login با شماره و password
-- signup با نام، شماره و password
-- validation سمت کلاینت
-- ارسال به `/api/auth/login` یا `/api/auth/signup`
-- نمایش toast برای خطا/موفقیت
-- redirect به `next` اگر query امن باشد
+- Signup with name, phone and password.
+- Login with phone and password.
+- Strong password validation.
+- Redirect to requested admin path when appropriate.
 
 ### 8.4 Admin Dashboard
 
-فایل ها:
+Files:
 
 - `app/admin/page.tsx`
 - `components/admin/LeadAdminDashboard.tsx`
+- `components/admin/AdminSidebar.tsx`
+- `components/admin/AdminOverview.tsx`
+- `components/admin/AdminLeads.tsx`
+- `components/admin/AdminUsers.tsx`
+- `components/admin/AdminProjects.tsx`
+- `components/admin/AdminProfile.tsx`
+- `components/admin/adminShared.tsx`
 
-محافظت سمت سرور:
+Dashboard sections:
 
-- صفحه `/admin` ابتدا cookie `snm_session` را می خواند.
-- اگر session وجود نداشته باشد redirect می کند به `/login?next=%2Fadmin`.
-- اگر کاربر فعال نباشد یا role او `ADMIN` نباشد redirect می کند به login.
-- admin token دستی وجود ندارد.
+- `overview`
+- `leads`
+- `projects`
+- `users`
+- `profile`
 
-قابلیت های داشبورد:
+Dashboard behavior:
 
-- overview با metrics واقعی از دیتابیس
-- trend chart روزانه
-- breakdown بر اساس service
-- breakdown بر اساس status
-- recent leads
-- جدول leadها
-- filter با service, status, search, dateFrom, dateTo
-- pagination
-- باز کردن جزئیات lead
-- مشاهده contact, message, source, UTM, serviceData, attachments
-- تغییر status lead
-- حذف lead
-- مدیریت کاربران
-- فیلتر کاربران با search و role
-- تغییر role کاربر
-- active/disabled کردن کاربر
-- حذف کاربر
-- logout
+- Requires an active `ADMIN` session.
+- Redirects unauthenticated users to `/login?next=%2Fadmin`.
+- Redirects non-admin users away from admin.
+- Uses real database data.
+- Uses Toast for CRUD success/error/info messages.
+- Uses confirmation modal for logout and destructive deletes.
+- Uses native selects inside tables to avoid dropdown clipping.
+- Uses custom dropdowns in filters and compact forms where safe.
 
-### 8.5 Shared Lead Form System
+### 8.5 Admin Projects
 
-فایل ها:
+File: `components/admin/AdminProjects.tsx`
+
+Capabilities:
+
+- Create projects.
+- Edit projects.
+- Delete projects.
+- Search by title, slug, location label or project code.
+- View latest project code.
+- Enter custom project code.
+- Set service.
+- Upload cover image with progress.
+- Upload multiple gallery images with progress compatibility.
+- Preview uploaded/manual images.
+- Edit gallery image alt text.
+- Reorder gallery images with move-left/move-right controls.
+- Remove gallery images before save.
+- Toggle `published` and `featured`.
+
+### 8.6 Shared Lead Form System
+
+Files:
 
 - `components/lead-capture/LeadFormShell.tsx`
 - `components/lead-capture/ClayFormControls.tsx`
+- Service-specific form components.
 
-`LeadFormShell` قاب مشترک فرم هاست:
+Shared features:
 
-- عنوان و توضیح فرم
-- container claymorphism
-- submit button sticky در mobile
-- ارسال toast موفقیت/خطا
-- دریافت `submitLabel`, `loadingLabel`, `successTitle`, `errorTitle`
+- Claymorphism inputs.
+- Custom dropdowns and date picker.
+- Multi-file upload controls.
+- Per-file upload progress.
+- Toast-based success/error feedback.
+- Server-side validation through `/api/leads`.
+- Preservation of entered values and completed uploads after submission errors.
 
-`ClayFormControls` کنترل های مشترک فرم را می سازد:
+### 8.7 Service Sticky CTA
 
-- `ClayInput`
-- `ClayTextarea`
-- `ClaySelect`
-- `ClayDatePicker`
-- `ClayRadioGroup`
-- `ClayCheckbox`
-- `ClayCheckboxGroup`
-- `FormSection`
-- `ClayFileDropzone`
-- `UploadProgressItem`
-- `FormErrorState`
-- `FormSuccessState`
-- `Spinner`
+File: `components/static/services/ServiceStickyCta.tsx`
 
-نکته UX:
+Service pages include a subtle fixed CTA that links to the lead form anchor on the same page.
 
-- dropdownها absolute هستند و نباید layout زیر خود را هل بدهند.
-- برای scroll داخلی dropdown/upload باید از `data-lenis-prevent` استفاده شود تا Lenis دخالت نکند.
-- PDFها در upload card با file icon نمایش داده می شوند، نه thumbnail تصویری.
+Anchors:
 
-## 9. فرم های لید
+- Bespoke sofa: `#bespoke-sofa-enquiry`
+- Commercial sofas: `#commercial-sofa-enquiry`
+- Interior design: `#interior-design-enquiry`
+- Sofa repair/restoration: `#sofa-repair-enquiry`
+
+The CTA is CSS-only and positioned to avoid the mobile bottom navigation and floating contact button.
+
+## 9. Lead Forms
 
 ### 9.1 Bespoke Sofa
 
-فایل: `components/lead-capture/BespokeSofaLeadForm.tsx`
+File: `components/lead-capture/BespokeSofaLeadForm.tsx`
 
-مسیر: `/services/bespoke-sofas`
+Service: `BESPOKE_SOFA`
 
-anchor: `#bespoke-sofa-enquiry`
-
-service: `BESPOKE_SOFA`
-
-بخش ها:
-
-- Contact / Your details
-- Project / Sofa brief
-- Access / Delivery notes
-- Finish / Images and notes
-- Consent / Privacy
-
-آپلود:
-
-- فقط image: `jpg`, `jpeg`, `png`, `webp`
-- حداکثر 8 فایل
-- حداکثر 10MB برای هر فایل
-- progress جدا برای هر فایل
-- retry/remove
+Purpose: Capture bespoke sofa enquiries with contact details, sofa configuration, approximate dimensions, references and project message.
 
 ### 9.2 Commercial Sofas
 
-فایل: `components/lead-capture/CommercialSofaLeadForm.tsx`
+File: `components/lead-capture/CommercialSofaLeadForm.tsx`
 
-مسیر: `/services/commercial-sofas`
+Service: `COMMERCIAL_SOFA`
 
-anchor: `#commercial-sofa-enquiry`
+Purpose: Capture commercial seating enquiries for restaurants, cafes, hotels, hospitality, offices, retail and other venues.
 
-service: `COMMERCIAL_SOFA`
-
-بخش ها:
-
-- `01 Your Details`
-- `02 About the Venue`
-- `03 Project Requirements`
-- `04 Plans & References`
-- `05 Final Notes`
-
-فیلد اختصاصی مهم:
-
-- `companyName` داخل `serviceData` ذخیره می شود، نه روی root مدل Lead.
-
-آپلود:
-
-- `jpg`, `jpeg`, `png`, `webp`, `pdf`
-- حداکثر 10 فایل
-- حداکثر 15MB
-- floor plan PDF مجاز است
+Commercial-specific data is stored in `Lead.serviceData`, including `companyName`.
 
 ### 9.3 Interior Design
 
-فایل: `components/lead-capture/InteriorDesignLeadForm.tsx`
+File: `components/lead-capture/InteriorDesignLeadForm.tsx`
 
-مسیر: `/services/interior-design`
+Service: `INTERIOR_DESIGN`
 
-anchor: `#interior-design-enquiry`
-
-service: `INTERIOR_DESIGN`
-
-بخش ها:
-
-- `01 Your Details`
-- `02 Your Space`
-- `03 What You Need`
-- `04 Images & Plans`
-- `05 Anything Else?`
-
-آپلود:
-
-- `jpg`, `jpeg`, `png`, `webp`, `pdf`
-- حداکثر 10 فایل
-- حداکثر 15MB
+Purpose: Capture residential and commercial interior design enquiries, including project type, needs, stage, space size, style direction and references.
 
 ### 9.4 Sofa Repair & Restoration
 
-فایل: `components/lead-capture/SofaRepairLeadForm.tsx`
+File: `components/lead-capture/SofaRepairLeadForm.tsx`
 
-مسیر: `/services/sofa-repair-restoration`
+Service: `SOFA_REPAIR_RESTORATION`
 
-anchor: `#sofa-repair-enquiry`
+Purpose: Capture repair/restoration enquiries with photo upload prioritized.
 
-service: `SOFA_REPAIR_RESTORATION`
+Important behavior:
 
-اولویت UX:
+- At least one image is required.
+- Accepted files are images only.
+- Existing temporary uploads can be reused if final lead creation fails.
 
-- upload عکس در بالای فرم قرار دارد.
-- فرم نسبت به بقیه کوتاه تر و موبایل محورتر است.
-- حداقل یک عکس الزامی است.
+### 9.5 Contact Enquiry
 
-بخش ها:
+File: `components/static/ContactFormSection.tsx`
 
-- `01 Photos First`
-- `02 Your Details`
-- `03 Sofa Details`
-- `04 Anything Else?`
+Service: `CONTACT_ENQUIRY`
 
-آپلود:
+Purpose: Capture general contact messages from the contact page.
 
-- فقط image: `jpg`, `jpeg`, `png`, `webp`
-- حداکثر 8 عکس
-- حداکثر 10MB
-- progress جدا برای هر فایل
-- thumbnail
-- file name
-- file size
-- percent
-- status
-- retry
-- remove
+## 10. File Upload Flow
 
-### 9.5 Contact Form
+### 10.1 Lead Uploads
 
-فایل: `components/static/ContactFormSection.tsx`
+Lead uploads are a two-step flow:
 
-مسیر: `/contact-us`
+1. Client calls `POST /api/uploads/sign`.
+2. Client uploads the file directly to storage with the signed URL.
+3. Client calls `POST /api/uploads/complete`.
+4. Final lead submission references completed upload tokens.
+5. Backend attaches completed uploads to the created lead.
 
-service: `CONTACT_ENQUIRY`
+This keeps binary file uploads out of the final lead JSON payload.
 
-فیلدها:
+### 10.2 Project Uploads
 
-- نام
-- ایمیل
-- تلفن
-- پیام
-- privacy consent
-- marketing consent
+Admin project image uploads use:
 
-فرم تماس هم به جای مدل جدا، داخل همان `Lead` ذخیره می شود و `serviceData.enquiryType = "general"` دارد.
-
-## 10. جریان آپلود فایل
-
-فرم هایی که فایل دارند از این جریان استفاده می کنند:
-
-1. کاربر فایل را drag/drop یا select می کند.
-2. فرم client-side نوع و سایز فایل را چک می کند.
-3. فرم به `/api/uploads/sign` درخواست می دهد.
-4. بک اند رکورد `LeadAttachment` با status `PENDING` می سازد.
-5. بک اند signed PUT URL برمی گرداند.
-6. کلاینت فایل را با `XMLHttpRequest` آپلود می کند تا progress واقعی داشته باشد.
-7. بعد از upload، کلاینت `/api/uploads/complete` را صدا می زند.
-8. بک اند با `HeadObject` فایل را روی storage چک می کند.
-9. اگر درست بود status فایل `COMPLETE` می شود.
-10. هنگام submit فرم، uploadTokenها همراه payload ارسال می شوند.
-11. `createLeadWithAttachments` lead را می سازد و uploadها را به `ATTACHED` تبدیل می کند.
-
-اگر آپلود موفق باشد ولی ثبت lead شکست بخورد، فایل ها `COMPLETE` می مانند و در retry دوباره از همان tokenها استفاده می شود؛ کاربر مجبور به آپلود دوباره نیست.
-
-## 11. جریان ثبت Lead
-
-payload استاندارد فرم:
-
-```json
-{
-  "service": "INTERIOR_DESIGN",
-  "contact": {
-    "name": "Client Name",
-    "email": "client@example.com",
-    "phone": "+44 7400 577844",
-    "postcode": "NW2 7HJ"
-  },
-  "serviceData": {
-    "projectType": "residential"
-  },
-  "message": "Project details...",
-  "uploadTokens": [],
-  "uploadSessionId": "upload:client-id",
-  "privacyConsent": true,
-  "marketingConsent": false,
-  "idempotencyKey": "lead:client-id",
-  "sourcePage": "/services/interior-design",
-  "referrer": "https://example.com",
-  "utm": {
-    "source": "google",
-    "medium": "cpc",
-    "campaign": "campaign-name"
-  },
-  "formStartedAt": 1786900000000
-}
+```text
+POST /api/admin/projects/upload
 ```
 
-بک اند این payload را تمیز و validate می کند و فقط داده معتبر وارد دیتابیس می شود.
+The admin frontend uses XMLHttpRequest so upload progress remains available. The route uploads the file server-side to the same S3-compatible storage provider and returns a public URL plus storage key.
 
-## 12. احراز هویت و دسترسی ادمین
+## 11. Public Project Pages
 
-ثبت نام:
+### 11.1 `/projects`
 
-- فقط نام، شماره و پسورد لازم است.
-- role پیش فرض `USER` است.
+File: `app/projects/page.tsx`
 
-ورود:
+Server Component that lists published projects only.
 
-- فقط شماره و پسورد لازم است.
+Each card includes:
 
-دسترسی admin:
+- Cover image.
+- Project code.
+- Title.
+- Service label.
+- Excerpt.
+- Optional location label.
 
-- فقط کاربری که در دیتابیس role `ADMIN` و `isActive=true` دارد.
-- هیچ admin token دستی در UI یا API استفاده نمی شود.
-- اگر کاربر session ندارد، به `/login?next=%2Fadmin` redirect می شود.
-- اگر کاربر admin نیست یا inactive است، به login redirect می شود.
+Cards link to `/projects/[slug]`.
 
-## 13. صفحات مهم
+### 11.2 `/projects/[slug]`
 
-صفحات عمومی:
+File: `app/projects/[slug]/page.tsx`
+
+Server Component that renders published projects only. Unpublished or missing projects return `notFound()`.
+
+The page can render:
+
+- Project hero.
+- Project code.
+- Service label.
+- Location label.
+- Cover image.
+- Excerpt.
+- Brief.
+- Approach.
+- Materials/details.
+- Result.
+- Gallery.
+- Related service CTA.
+
+Metadata uses the real project title, excerpt and cover image. It does not invent reviews, ratings, prices or customer names.
+
+### 11.3 Homepage Selected Projects
+
+Files:
+
+- `app/page.tsx`
+- `components/global/ProjectsSliderSection.tsx`
+- `components/global/ProjectsSliderClient.tsx`
+
+The homepage reads real featured projects where:
+
+```ts
+published === true && featured === true
+```
+
+If no real featured projects exist, it uses the existing demo fallback. Real and demo projects are not mixed.
+
+## 12. SEO and Routing
+
+Files:
+
+- `app/sitemap.ts`
+- `app/robots.ts`
+- `lib/site.ts`
+
+SEO behavior:
+
+- Static public routes are listed in `siteRoutes`.
+- `/projects` is included in the static sitemap routes.
+- Published project detail URLs are added to the sitemap when MongoDB is available.
+- Project detail pages generate metadata from real project data.
+- Canonical, OpenGraph and Twitter metadata are set for project index/detail pages.
+
+## 13. Authentication and Admin Access
+
+Authentication is phone/password based.
+
+Rules:
+
+- Signup creates a normal `USER`.
+- Admin role can be assigned by an existing admin.
+- Admin routes require an active session and `ADMIN` role.
+- No manual admin token is used anywhere.
+- Inactive users cannot access protected areas.
+- Logout clears the session cookie after confirmation in the admin UI.
+
+## 14. Admin Data Management
+
+The admin dashboard supports:
+
+- Lead analytics.
+- Lead filtering by search, service, status and date range.
+- Lead details and attachments.
+- Lead status update.
+- Lead deletion.
+- User search and role filtering.
+- User role update.
+- User active/inactive toggle.
+- User deletion.
+- Current admin profile update.
+- Project CRUD.
+- Project publishing and featured state management.
+
+All mutation feedback should go through Toast.
+
+## 15. Error Handling Contract
+
+Expected API failures should use `ApiProblem`.
+
+Status code guide:
+
+- `400`: validation issue.
+- `401`: unauthenticated.
+- `403`: authenticated but unauthorized.
+- `404`: missing record.
+- `409`: uniqueness/conflict issue.
+- `500`: unexpected server error.
+
+Frontend behavior:
+
+- Preserve useful API messages.
+- Do not replace specific backend validation messages with generic messages.
+- Show mutation success/error/info through Toast.
+
+## 16. Testing
+
+Current tests:
+
+- `tests/project-validation.test.ts`
+- `tests/project-api.test.ts`
+- `tests/auth-profile-validation.test.ts`
+
+Covered areas:
+
+- Project validation success and failure.
+- Project code rules.
+- Slug generation.
+- Partial project update validation.
+- Project upload validation.
+- Project admin API create/update/delete/upload contract.
+- API error messages preserved for Toast display.
+- Profile update validation.
+- Password-change rules.
+
+Recommended checks:
+
+```bash
+npx tsc --noEmit --pretty false
+npx vitest run
+npx eslint components/admin components/global lib models app/api app/projects app/page.tsx app/sitemap.ts tests
+npm run build
+```
+
+Known note:
+
+- A broad lint over the whole repository may report an existing `react-hooks/set-state-in-effect` issue in `components/global/Navbar.tsx`. That issue is unrelated to the Project refactor unless changed separately.
+
+## 17. Operational Notes
+
+- MongoDB stores metadata only; binary files live in object storage.
+- Lead uploads live under `lead-uploads/`.
+- Project uploads live under `project-uploads/`.
+- Project `projectCode` must be unique and `>= 1000`.
+- Project `slug` must be unique.
+- Existing old `products` collection data is not dropped automatically.
+- If old product data ever needs to be preserved, write a safe one-time migration from `products` to `projects`.
+- Do not store precise customer addresses in project records; use broad `locationLabel` values only.
+- Do not use fake admin/dashboard metrics.
+- Do not mix demo projects with real featured projects on the homepage.
+
+## 18. Adding a New Lead Service
+
+To add a new lead service:
+
+1. Add the service value to the lead service model/config.
+2. Add backend validation in `lib/lead-validation.ts`.
+3. Add service upload rules in `lib/lead-config.ts` if uploads are needed.
+4. Build the client form using `LeadFormShell` and `ClayFormControls`.
+5. Submit to `POST /api/leads`.
+6. Store service-specific fields in `Lead.serviceData`.
+7. Add admin display labels where needed.
+8. Add focused validation tests.
+
+## 19. Adding a New Project Service
+
+To add a new project service:
+
+1. Add the service enum value in `models/project.ts`.
+2. Add the label and route in `lib/project-service.ts`.
+3. Add the option in `components/admin/adminShared.tsx`.
+4. Confirm project validation accepts the new service.
+5. Add or update public service pages if needed.
+
+## 20. Current Public Pages
+
+Important public routes:
 
 - `/`
 - `/services`
@@ -1190,420 +1198,26 @@ payload استاندارد فرم:
 - `/services/commercial-sofas`
 - `/services/interior-design`
 - `/services/sofa-repair-restoration`
-- `/contact-us`
+- `/projects`
+- `/projects/[slug]`
 - `/gallery`
 - `/workshop`
 - `/about-us`
+- `/contact-us`
 - `/faqs`
+- `/blog`
 - `/privacy-policy`
+- `/terms-and-conditions`
 
-صفحات سیستمی:
+Important app routes:
 
 - `/login`
 - `/admin`
 
-هر صفحه سرویس metadata و JSON-LD اختصاصی دارد.
-
-## 14. تست ها
-
-فایل ها:
-
-- `tests/auth.test.ts`
-- `tests/lead-admin.test.ts`
-- `tests/lead-validation.test.ts`
-
-پوشش تست:
-
-- validation ثبت نام و ورود
-- قدرت password
-- hash/verify password
-- session token و cookie
-- validation patch کاربران
-- parse/filter queryهای admin
-- validation وضعیت lead
-- reject کردن admin request بدون session
-- validation همه فرم های lead
-- قوانین اختصاصی هر service
-- upload policy برای contact/commercial/interior/repair
-
-اجرای تست:
-
-```bash
-npm run test
-```
-
-## 15. نکات عملیاتی
-
-- MongoDB باید replica set یا cluster مناسب transaction داشته باشد، چون ساخت lead و attach فایل ها با transaction انجام می شود.
-- اگر در `DATABASE_URL` پسورد کاراکتر خاص دارد، باید URL encode شود. مثلا `@` داخل پسورد باید `%40` شود.
-- فایل های آپلود شده orphan با `lead-cleanup.ts` حذف می شوند.
-- اگر `UPLOAD_PUBLIC_BASE_URL` تنظیم نباشد، پنل ادمین `publicUrl` برای فایل نمی گیرد، اما `storageKey` را همچنان می بیند.
-- rate limit از کد حذف شده و دیگر در routeها استفاده نمی شود.
-- پیام های success/error/info در UI از `ToastProvider` می آیند.
-- برای اضافه کردن provider واقعی notification یا analytics، باید `lead-notifications.ts` و `lead-analytics.ts` توسعه داده شوند.
-
-## 16. اضافه کردن فرم یا سرویس جدید
-
-برای اضافه کردن یک سرویس lead جدید:
-
-1. مقدار service را به `LEAD_SERVICES` در `models/lead.ts` اضافه کنید.
-2. تعریف fieldهای service را در `leadServiceDefinitions` داخل `lib/lead-config.ts` اضافه کنید.
-3. upload policy سرویس را در `leadUploadPolicies` تعریف کنید.
-4. قوانین اختصاصی validation را در `validateLeadSubmissionInput` اضافه کنید.
-5. فرم client را با `LeadFormShell` و `ClayFormControls` بسازید.
-6. فرم را در صفحه service mount کنید.
-7. anchor دکمه hero را به id فرم وصل کنید.
-8. تست های validation و upload policy را در `tests/lead-validation.test.ts` اضافه کنید.
-9. اگر لازم است dashboard label/search mapping را در admin توسعه دهید.
-
-## 17. قراردادهای مهم کدنویسی فعلی
-
-- داده های مشترک لید روی root مدل `Lead` ذخیره می شوند.
-- داده های اختصاصی هر سرویس داخل `Lead.serviceData` می روند.
-- فایل ها هیچ وقت مستقیم با submit فرم ارسال نمی شوند؛ همیشه upload دو مرحله ای دارند.
-- خطای API باید از `ApiProblem` یا `handleApiError` عبور کند.
-- هر route که body دارد از `readJsonBody` استفاده می کند.
-- routeهای mutation حساس از `assertSameOrigin` استفاده می کنند.
-- admin access فقط از session cookie و role دیتابیس می آید.
-- فرم ها باید مقدارهای کاربر و uploadهای موفق را بعد از خطای submit حفظ کنند.
-- طراحی فرم ها باید از claymorphism مشترک استفاده کند و کنترل ها تا جای ممکن reusable باشند.
-
-## 18. Recent Admin, Product, Upload and Profile Updates
-
-This section documents the latest backend/frontend additions around products and admin account management.
-
-### 18.1 Product Model
-
-File: `models/product.ts`
-
-Collection: `products`
-
-The product model stores admin-managed product cards/catalogue entries.
-
-Main fields:
-
-- `productCode`: required unique integer code for each product.
-- `name`: product name.
-- `imageUrl`: public image URL/path used by the frontend and admin preview.
-- `imageStorageKey`: optional storage key when the image was uploaded through the admin product uploader.
-- `description`: product description.
-- `createdAt`
-- `updatedAt`
-
-Product code rules:
-
-- `productCode` is required.
-- It must be a whole number.
-- It must be `1000` or higher.
-- It must be unique across all products.
-
-Important indexes:
-
-- `{ productCode: 1 }` with `unique` and `sparse`
-- `{ productCode: -1, createdAt: -1 }`
-- `{ name: 1, createdAt: -1 }`
-- `{ createdAt: -1 }`
-
-The unique product code index is sparse so older product documents without `productCode` do not break index creation, while all new/updated products are still validated by the API.
-
-### 18.2 Product Backend Libraries
-
-Files:
-
-- `lib/product-validation.ts`
-- `lib/product-repository.ts`
-- `lib/mongodb.ts`
-
-`lib/product-validation.ts` validates product create/update payloads:
-
-- `validateProductInput(input)`
-- `validateProductObjectId(value)`
-- `validateProductImageUpload(input)`
-
-It checks:
-
-- product code is present, integer, `>= 1000`, and not too long
-- product name length
-- image URL or local path safety
-- optional uploaded `imageStorageKey`
-- description minimum length
-- uploaded product image type and size
-
-`lib/product-repository.ts` owns product database operations:
-
-- `listProducts(query)`: returns products, `total`, and `latestCode`
-- `createProduct(input)`
-- `getProductById(productId)`
-- `updateProduct(productId, input)`
-- `deleteProduct(productId)`
-
-Repository behavior:
-
-- Duplicate product codes are converted to `ApiProblem("CONFLICT", ...)`.
-- Search works across name, description, image URL, and numeric product code.
-- `latestCode` is the highest stored product code and is used by the admin UI while creating products.
-- If a product image was uploaded through storage and later replaced by another uploaded image or manual URL, the old stored object is deleted.
-- If a product is deleted and has `imageStorageKey`, the storage object is deleted as well.
-
-`lib/mongodb.ts` now includes:
-
-- `getProductCollections()`
-- `ensureProductIndexes()`
-
-### 18.3 Product Admin API
-
-Routes:
-
-- `GET /api/admin/products`
-- `POST /api/admin/products`
-- `GET /api/admin/products/[productId]`
-- `PATCH /api/admin/products/[productId]`
-- `DELETE /api/admin/products/[productId]`
-- `POST /api/admin/products/upload`
-
-All product routes require an active `ADMIN` session. Mutation routes also require same-origin checks.
-
-`GET /api/admin/products` query:
-
-- `search`
-
-Response includes:
-
-```json
-{
-  "ok": true,
-  "products": [],
-  "total": 0,
-  "latestCode": null
-}
-```
-
-Create/update body:
-
-```json
-{
-  "productCode": 1001,
-  "name": "Curved Velvet Sofa",
-  "imageUrl": "/assets/images/example.webp",
-  "imageStorageKey": "product-uploads/2026/08/...",
-  "description": "Product description..."
-}
-```
-
-`POST /api/admin/products/upload`:
-
-- Accepts `multipart/form-data` with field `file`.
-- Allows `image/jpeg`, `image/png`, `image/webp`.
-- Allows extensions `jpg`, `jpeg`, `png`, `webp`.
-- Maximum file size is `10MB`.
-- Uploads through the shared S3-compatible storage client.
-- Returns `imageUrl` and `imageStorageKey`.
-- Requires `UPLOAD_PUBLIC_BASE_URL` so the admin preview and product record can use a public URL.
-
-### 18.4 Upload Storage Updates
-
-File: `lib/upload-storage.ts`
-
-Existing lead upload behavior remains unchanged:
-
-- lead uploads still use signed PUT URLs
-- lead uploads still create `lead_uploads` records
-- lead uploads still use temporary upload tokens and orphan cleanup
-
-Product image upload uses the same storage configuration and client, but does not use the lead attachment model.
-
-New product upload helpers:
-
-- `createProductImageStorageKey(input)`: creates keys under `product-uploads/<year>/<month>/<random>.<ext>`
-- `uploadObject(input)`: server-side object upload with `PutObjectCommand`
-
-Shared helpers still used:
-
-- `getUploadStorageConfig()`
-- `getUploadStorageClient()`
-- `deleteUploadedObject(storageKey)`
-- `getPublicUploadUrl(storageKey)`
-
-### 18.5 Admin Dashboard Structure
-
-Admin UI has been split into smaller components:
-
-- `components/admin/LeadAdminDashboard.tsx`: state, data loading, auth/session behavior, mutation handlers
-- `components/admin/AdminSidebar.tsx`: sidebar navigation
-- `components/admin/AdminOverview.tsx`: metrics, charts and recent records
-- `components/admin/AdminLeads.tsx`: lead filters, lead table, lead detail drawer
-- `components/admin/AdminUsers.tsx`: user management
-- `components/admin/AdminProducts.tsx`: product CRUD and product image upload
-- `components/admin/AdminProfile.tsx`: current admin profile form
-- `components/admin/adminShared.tsx`: shared admin types, helpers, common UI controls
-
-Admin sections:
-
-- `overview`
-- `leads`
-- `products`
-- `users`
-- `profile`
-
-Admin UX behavior:
-
-- `/admin` is protected server-side by session cookie and database role.
-- No manual admin token is used.
-- Smooth scroll is disabled on `/admin`.
-- Admin page hides public navbar/footer/decorative UI while open.
-- Toast root is preserved with `data-toast-root` so admin actions can show toast messages.
-- Header includes a custom `View site` link that opens `/` in a new tab.
-- Logout opens a confirmation modal before clearing the session.
-
-### 18.6 Admin Products UI
-
-File: `components/admin/AdminProducts.tsx`
-
-Capabilities:
-
-- Create product
-- Edit product
-- Delete product
-- Search products by name, description, image URL or product code
-- See latest product code while creating/editing
-- Enter custom product code manually
-- Upload product image with progress
-- Preview uploaded/manual image
-- Show success/error/info messages through Toast
-
-Product image upload UI:
-
-- Uses `POST /api/admin/products/upload`.
-- Sends `multipart/form-data`.
-- Shows progress percentage.
-- Fills `imageUrl` and `imageStorageKey` automatically after upload.
-- Supports manual image URL/path entry as a fallback.
-
-### 18.7 Admin User and Lead Select Controls
-
-Native `select` controls are used for action controls inside tables and drawers:
-
-- user role changes in `AdminUsers`
-- lead status changes in `AdminLeads`
-
-Reason:
-
-- Native select popups are not clipped by table overflow.
-- They do not expand table height.
-- They avoid custom dropdown stacking issues inside scroll containers.
-
-Custom dropdowns remain in filter panels where they are not inside a table layout.
-
-### 18.8 Admin Profile
-
-Files:
-
-- `components/admin/AdminProfile.tsx`
-- `app/api/auth/me/route.ts`
-- `lib/auth-validation.ts`
-- `lib/user-repository.ts`
-
-Route:
-
-- `PATCH /api/auth/me`
-
-The profile section lets the current admin update:
-
-- `name`
-- `phone`
-- password
-
-Password behavior:
-
-- Name and phone can be updated without changing password.
-- Current password is required only when `newPassword` is provided.
-- If the browser autofills current password but new password is empty, the backend ignores password fields and allows name/phone changes.
-- New password must pass the same strong password rules used by signup.
-
-Profile update behavior:
-
-- Requires an authenticated active user.
-- Uses same-origin checks.
-- Rejects duplicate phone numbers with `409 CONFLICT`.
-- Updates `currentUser` in the admin dashboard after success.
-- Uses Toast for success/error/info messages.
-
-### 18.9 Auth Validation Updates
-
-File: `lib/auth-validation.ts`
-
-New type/function:
-
-- `ValidatedProfilePatchInput`
-- `validateProfilePatchInput(input)`
-
-Rules:
-
-- `name` is optional, but if present must be at least 2 characters.
-- `phone` is optional, but if present must normalize to a valid phone.
-- `newPassword` is optional.
-- `currentPassword` is required only when `newPassword` is present.
-- empty/no-change payloads are rejected by the backend.
-
-### 18.10 Toast Behavior in Admin
-
-File: `components/ui/ToastProvider.tsx`
-
-Toast root now has:
-
-```tsx
-data-toast-root
-```
-
-This prevents the admin global style from hiding toast notifications.
-
-Admin actions that use Toast:
-
-- dashboard data load errors
-- product create/update/delete/upload success and failure
-- lead detail/status/delete success and failure
-- user role/active/delete success and failure
-- profile update success and failure
-- logout confirmation result
-
-### 18.11 Additional Tests
-
-Current added tests:
-
-- `tests/product-validation.test.ts`
-- `tests/auth-profile-validation.test.ts`
-
-`tests/product-validation.test.ts` covers:
-
-- valid product codes
-- product code lower bound
-- whole-number requirement
-- image URL/path validation
-- product object id validation
-- product image upload validation
-
-`tests/auth-profile-validation.test.ts` covers:
-
-- profile name/phone updates
-- phone normalization
-- current password required when changing password
-- strong new password requirements
-- name/phone updates do not require password changes
-
-Recommended verification commands:
-
-```bash
-npx eslint components/admin components/ui lib models app/api tests
-npx vitest run tests/product-validation.test.ts tests/auth-profile-validation.test.ts
-npx tsc --noEmit --pretty false
-```
-
-### 18.12 Product Operational Notes
-
-- `productCode` must be unique and `>= 1000`.
-- Admin can see `latestCode` before creating the next product.
-- Product image upload requires all upload storage env vars plus `UPLOAD_PUBLIC_BASE_URL`.
-- Product images uploaded through admin live under `product-uploads/`.
-- Lead attachments continue to live under `lead-uploads/`.
-- Deleting a product also attempts to delete its uploaded product image.
-- A product can still use a manually entered image URL/path; in that case no `imageStorageKey` is stored.
+Important API route groups:
+
+- `/api/leads`
+- `/api/uploads`
+- `/api/auth`
+- `/api/admin/users`
+- `/api/admin/projects`

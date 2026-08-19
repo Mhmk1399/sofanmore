@@ -95,6 +95,12 @@ export const siteRoutes: SiteRoute[] = [
     ],
   },
   {
+    path: "/projects",
+    priority: 0.82,
+    changeFrequency: "monthly",
+    images: ["/assets/images/1.webp", "/assets/images/2.webp"],
+  },
+  {
     path: "/workshop",
     priority: 0.82,
     changeFrequency: "monthly",

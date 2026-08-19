@@ -33,8 +33,7 @@ const features: FeatureItem[] = [
   },
   {
     title: "Bespoke\nby Design",
-    description:
-      "sofa tailored around your space, requirements and lifestyle.",
+    description: "sofa tailored around your space, requirements and lifestyle.",
     icon: Compass,
   },
   {
@@ -52,8 +51,8 @@ const features: FeatureItem[] = [
 ];
 
 export default function WhyChooseSection({
-  desktopImageSrc = "/assets/images/7.webp",
-  mobileImageSrc = "/assets/images/2.webp",
+  desktopImageSrc = "/assets/site/24.webp",
+  mobileImageSrc = "/assets/site/1.webp",
 }: WhyChooseSectionProps) {
   return (
     <section
@@ -102,79 +101,17 @@ function DesktopWhyChoose({ imageSrc }: { imageSrc: string }) {
     <div
       className="
         clay-surface-strong
-        relative mx-auto max-w-[1320px]
+        relative mx-auto max-w-[1620px]
         rounded-[48px] p-[10px]
       "
     >
       {/* background decoration */}
-      <div
-        aria-hidden
-        className="
-          absolute inset-0 overflow-hidden rounded-[48px]
-        "
-      >
-        {/* left arch */}
-        <div
-          className="
-            absolute left-[18px] top-[58px]
-            h-[370px] w-[250px]
-            rounded-t-[130px]
-            border-[24px]
-            border-[var(--brand-ivory-50)]
-            border-b-0
-            opacity-90
-            shadow-[var(--shadow-clay-inset)]
-          "
-        />
-
-        {/* left sphere */}
-        <div
-          className="
-            clay-sphere
-            absolute left-[42px] bottom-[110px]
-            h-[115px] w-[115px]
-          "
-        >
-          <div className="clay-sphere-shadow" />
-          <div className="clay-sphere-ball" />
-        </div>
-
-        {/* left podium */}
-       
-      
-
-        {/* ring */}
-       
-
-        {/* right sphere */}
-        <div
-          className="
-            clay-sphere
-            absolute right-[12px] bottom-[76px]
-            h-[120px] w-[120px]
-          "
-        >
-          <div className="clay-sphere-shadow" />
-          <div className="clay-sphere-ball" />
-        </div>
-
-        {/* gold sphere */}
-        <div
-          className="
-            clay-sphere
-            absolute bottom-[18px] right-[86px]
-            h-[44px] w-[44px]
-          "
-        >
-          <div className="clay-sphere-ball clay-sphere-ball--gold" />
-        </div>
-      </div>
 
       <div
         className="
           relative z-10
           grid grid-cols-[0.9fr_1.1fr]
-          gap-10
+          gap-2
           px-10 py-8
 
           xl:px-14 xl:py-10
@@ -195,7 +132,7 @@ function DesktopVisual({ imageSrc }: { imageSrc: string }) {
         className="
           clay-surface-strong
           relative ml-8 mt-10
-          w-full max-w-[520px]
+          w-full max-w-[820px]
           rounded-[42px] p-[9px]
         "
       >
@@ -607,7 +544,7 @@ function WhyFeatureCard({
     <div
       className={`
         clay-surface
-        flex items-start gap-3
+        flex flex-col items-start gap-3
         rounded-[22px]
 
         ${compact ? "min-h-[112px] px-3 py-3" : "min-h-[150px] px-5 py-4"}
@@ -619,11 +556,11 @@ function WhyFeatureCard({
           flex shrink-0 items-center justify-center
           rounded-full
 
-          ${compact ? "h-[48px] w-[48px]" : "h-[58px] w-[58px]"}
+          ${compact ? "h-[48px] w-[48px]" : "h-[28px] w-[28px]"}
         `}
       >
         <Icon
-          size={compact ? 21 : 25}
+          size={compact ? 21 : 16}
           strokeWidth={1.5}
           className="text-[var(--brand-gold)]"
         />

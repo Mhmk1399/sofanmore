@@ -6,15 +6,11 @@ import {
   ArrowRight,
   LockKeyhole,
   Phone,
-  ShieldCheck,
   UserRound,
   UserPlus,
 } from "lucide-react";
 
-import {
-  ClayInput,
-  Spinner,
-} from "@/components/lead-capture/ClayFormControls";
+import { ClayInput, Spinner } from "@/components/lead-capture/ClayFormControls";
 import { useToast } from "@/components/ui/ToastProvider";
 import type { UserRole } from "@/models/user";
 
@@ -39,7 +35,9 @@ type AuthResponse =
       fieldErrors?: Record<string, string>;
     };
 
-type AuthErrors = Partial<Record<"name" | "phone" | "password" | "form", string>>;
+type AuthErrors = Partial<
+  Record<"name" | "phone" | "password" | "form", string>
+>;
 
 const initialValues = {
   name: "",
@@ -209,7 +207,9 @@ export default function LoginPageContent() {
     } catch (error) {
       const apiError = error as Error & { fieldErrors?: AuthErrors };
       const message =
-        error instanceof Error ? error.message : "Authentication request failed.";
+        error instanceof Error
+          ? error.message
+          : "Authentication request failed.";
 
       if (apiError.fieldErrors) {
         setErrors(apiError.fieldErrors);
@@ -233,24 +233,6 @@ export default function LoginPageContent() {
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(145deg,#fffdf8_0%,#f4ecdf_50%,#e2d0b8_100%)]"
       />
       <div className="relative z-10 mx-auto grid max-w-[var(--site-width)] gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <section className="clay-surface-strong rounded-[32px] p-[7px] lg:rounded-[42px]">
-          <div className="clay-inset overflow-hidden rounded-[26px] bg-[#f5ede1] p-6 sm:p-8 lg:rounded-[34px] lg:p-10">
-            <div className="flex h-12 w-12 items-center justify-center rounded-[17px] bg-[var(--brand-navy)] text-[var(--brand-gold)] shadow-[var(--shadow-clay-sm)]">
-              <ShieldCheck size={23} strokeWidth={1.7} />
-            </div>
-            <p className="mt-7 font-brand-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-gold-700)]">
-              Sofa N More Account
-            </p>
-            <h1 className="mt-3 max-w-[540px] font-brand-display text-[42px] font-semibold leading-[1.02] text-[var(--brand-navy)] sm:text-[55px]">
-              Access your Sofa N More workspace
-            </h1>
-            <p className="mt-5 max-w-[560px] font-brand-sans text-[13px] font-semibold leading-[1.75] text-[var(--brand-text-muted)]">
-              Sign in with your phone number and password. New accounts are
-              created as standard users and can be upgraded by an admin.
-            </p>
-          </div>
-        </section>
-
         <section className="clay-surface-strong rounded-[32px] p-[7px] lg:rounded-[38px]">
           <form
             onSubmit={handleSubmit}
@@ -392,7 +374,10 @@ export default function LoginPageContent() {
                 icon={<LockKeyhole size={15} />}
                 label="Strong password"
               />
-              <AuthHint icon={<UserRound size={15} />} label="User by default" />
+              <AuthHint
+                icon={<UserRound size={15} />}
+                label="User by default"
+              />
             </div>
           </form>
         </section>

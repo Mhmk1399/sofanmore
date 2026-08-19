@@ -495,13 +495,13 @@ function HeroImage() {
     >
       <div className="relative h-full overflow-hidden rounded-[22px]">
         <Image
-          src="/assets/images/7.webp"
+          src="/assets/site/4.webp"
           alt="Luxury bespoke sofa handcrafted in our London workshop, featuring premium Italian leather upholstery"
           fill
           loading="eager"
           fetchPriority="high"
           sizes="(min-width: 1280px) 38vw, (min-width: 1024px) 32vw, 100vw"
-          className="object-cover object-center"
+          className="object-cover object-left"
         />
 
         {/* Image overlay */}
@@ -847,7 +847,7 @@ function TabletMainHero() {
           <div className="clay-inset relative overflow-hidden rounded-[23px] p-[5px]">
             <div className="relative h-full min-h-[380px] overflow-hidden rounded-[19px]">
               <Image
-                src="/assets/images/7.webp"
+                src="/assets/site/5.webp"
                 alt="Luxury handcrafted sofa by Sofa N More London"
                 fill
                 loading="eager"
@@ -1071,7 +1071,7 @@ function MobileHeroMain() {
         >
           {/* Image background */}
           <Image
-            src="/assets/images/2.webp"
+            src="/assets/site/5.webp"
             alt="Bespoke luxury sofa by Sofa N More, handcrafted in London"
             fill
             loading="eager"
