@@ -66,7 +66,7 @@ const serviceGroups: ServiceGroup[] = [
     subtitle: "Made for your space",
     icon: Armchair,
     href: "/services/bespoke-sofas",
-    image: "/assets/images/1.webp",
+    image: "/assets/images/bespoke-sofa-london-sofa-n-more.webp",
 
     links: [
       {
@@ -97,7 +97,7 @@ const serviceGroups: ServiceGroup[] = [
     subtitle: "Built for business",
     icon: Building2,
     href: "/services/commercial-sofas",
-    image: "/assets/images/2.webp",
+    image: "/assets/site/25.webp",
 
     links: [
       {
@@ -124,7 +124,7 @@ const serviceGroups: ServiceGroup[] = [
     subtitle: "Complete environments",
     icon: Palette,
     href: "/services/interior-design",
-    image: "/assets/images/3.webp",
+    image: "/assets/site/48.webp",
 
     links: [
       {
@@ -151,7 +151,7 @@ const serviceGroups: ServiceGroup[] = [
     subtitle: "Expert craftsmanship",
     icon: Hammer,
     href: "/services/sofa-repair-restoration",
-    image: "/assets/images/4.webp",
+    image: "/assets/images/Repair.webp",
 
     links: [
       {
@@ -206,7 +206,7 @@ const navLinks = [
   },
   {
     label: "FAQ",
-    href: "/faq",
+    href: "/faqs",
   },
 ];
 
@@ -816,38 +816,12 @@ function Logo({ close }: { close: () => void }) {
           "
         />
 
-        <span
-          className="
-            font-brand-display
-
-            text-[21px]
-            font-semibold
-
-            tracking-[0.035em]
-
-            text-[var(--brand-navy)]
-          "
-        >
-          SOFA N MORE
-        </span>
-
-        <span
-          className="
-            mt-[1px]
-
-            font-brand-sans
-
-            text-[6px]
-            font-bold
-            uppercase
-
-            tracking-[0.31em]
-
-            text-[var(--brand-gold-700)]
-          "
-        >
-          London
-        </span>
+        <Image
+          src={"/assets/images/Sofa_Logo.webp"}
+          height={100}
+          width={100}
+          alt="logo"
+        />
       </div>
     </Link>
   );

@@ -52,6 +52,8 @@ const CAROUSEL_RESIZE_DURATION = 340;
 
 const CAROUSEL_RESIZE_EASING = "cubic-bezier(0.22, 1, 0.36, 1)";
 
+const AUTO_ROTATE_INTERVAL = 3000;
+
 /* =========================================================
    DATA
 ========================================================= */
@@ -62,7 +64,7 @@ const services: Service[] = [
     shortDescription:
       "Made-to-measure sofa handcrafted in London, tailored to your space and style.",
     cta: "Explore Bespoke",
-    image: "/assets/site/73.webp",
+    image: "/assets/images/bespoke-sofa-london-sofa-n-more.webp",
     href: "/services/bespoke-sofas",
   },
 
@@ -71,16 +73,16 @@ const services: Service[] = [
     shortDescription:
       "Expert care and reupholstery that gives treasured sofa new life while preserving its character.",
     cta: "Explore Restoration",
-    image: "/assets/site/54.webp",
+    image: "/assets/images/Repair.webp",
     href: "/services/sofa-repair-restoration",
   },
 
   {
     title: "All Services",
     shortDescription:
-      "",
+      "Explore bespoke sofas, commercial seating, interiors and careful restoration from one London workshop.",
     cta: "Explore Our Services",
-    image: "/assets/site/69.webp",
+    image: "/assets/site/30.webp",
     href: "/services",
   },
 
@@ -89,7 +91,7 @@ const services: Service[] = [
     shortDescription:
       "Tailored residential and commercial interiors combining elegant design, functionality and craftsmanship.",
     cta: "Explore Interiors",
-    image: "/assets/site/63.webp",
+    image: "/assets/site/48.webp",
     href: "/services/interior-design",
   },
 
@@ -98,7 +100,7 @@ const services: Service[] = [
     shortDescription:
       "Premium ergonomic sofa solutions designed for stylish, functional and productive workspaces.",
     cta: "Explore Office sofa",
-    image: "/assets/site/48.webp",
+    image: "/assets/site/25.webp",
     href: "/services/commercial-sofas",
   },
 ];
@@ -137,6 +139,8 @@ export default function ServicesSection() {
   const [activeIndex, setActiveIndex] = useState(2);
 
   const [isDragging, setIsDragging] = useState(false);
+
+  const [isInteractionPaused, setIsInteractionPaused] = useState(false);
 
   const [motionRevision, setMotionRevision] = useState(0);
 
@@ -451,6 +455,19 @@ export default function ServicesSection() {
     }
   }
 
+  useEffect(() => {
+    if (isDragging || isInteractionPaused) return;
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const intervalId = window.setInterval(() => {
+      if (document.hidden) return;
+      animateTo(activeIndex + 1);
+    }, AUTO_ROTATE_INTERVAL);
+
+    return () => window.clearInterval(intervalId);
+  }, [activeIndex, isDragging, isInteractionPaused]);
+
   /* =======================================================
      DRAG ENGINE
   ======================================================== */
@@ -587,6 +604,14 @@ export default function ServicesSection() {
 
         <div
           ref={stageRef}
+          onPointerEnter={() => setIsInteractionPaused(true)}
+          onPointerLeave={() => setIsInteractionPaused(false)}
+          onFocusCapture={() => setIsInteractionPaused(true)}
+          onBlurCapture={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget)) {
+              setIsInteractionPaused(false);
+            }
+          }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={(event) => finishDrag(event)}
@@ -1262,6 +1287,8 @@ function ServiceCard({
           >
             <Link
               href={service.href}
+              data-no-drag
+              onPointerDown={(event) => event.stopPropagation()}
               className={`
                 font-brand-display
                 font-semibold
@@ -1284,6 +1311,8 @@ function ServiceCard({
             <Link
               href={service.href}
               aria-label={service.cta}
+              data-no-drag
+              onPointerDown={(event) => event.stopPropagation()}
               className={`
                 clay-icon
                 flex

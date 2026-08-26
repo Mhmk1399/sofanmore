@@ -800,7 +800,6 @@ Root layout includes:
 - JSON-LD site structured data.
 - Smooth scroll provider.
 - Global navbar.
-- Mobile floating logo.
 - Breadcrumbs.
 - Floating contact menu.
 - Footer.
@@ -1204,7 +1203,7 @@ Important public routes:
 - `/workshop`
 - `/about-us`
 - `/contact-us`
-- `/faq`
+- `/faqs`
 - `/blog`
 - `/privacy-policy`
 - `/terms-and-conditions`

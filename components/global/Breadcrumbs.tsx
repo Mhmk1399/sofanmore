@@ -82,7 +82,7 @@ export default function Breadcrumbs() {
     <div
       className={`
         pointer-events-none absolute inset-x-0
-        top-[calc(env(safe-area-inset-top)+72px)]
+        top-[calc(env(safe-area-inset-top)+22px)]
         z-[950] px-3
         sm:px-5
         lg:top-[100px] lg:z-[195] lg:px-8

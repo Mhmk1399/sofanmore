@@ -4,7 +4,7 @@ import FaqHero from "@/components/static/FaqHero";
 import FAQSection from "@/components/static/FAQSection";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
-const CANONICAL_PATH = "/faq";
+const CANONICAL_PATH = "/faqs";
 const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
 const SEO_TITLE = "FAQs | Bespoke Sofa & Sofa Restoration London";
 const META_DESCRIPTION =

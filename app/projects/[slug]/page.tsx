@@ -513,10 +513,10 @@ export default async function ProjectDetailPage({
 
           bg-[var(--brand-ivory)]
 
-          px-3 mt-10 md:-mt-6
+          px-3 md:mt-20  
 
           pb-16
-          pt-[96px]
+          pt-[66px]
 
           sm:px-5
           sm:pb-20

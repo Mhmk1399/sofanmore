@@ -225,17 +225,26 @@ export default async function ProjectsSliderSection() {
 
               <p
                 className="
+                  inline-flex
+                  min-h-7
+                  items-center
+                  rounded-full
+                  bg-[#fff8ec]
+                  px-3
+
                   font-brand-sans
 
-                  text-[8px]
+                  text-[10px]
                   font-bold
                   uppercase
 
-                  tracking-[0.2em]
+                  tracking-[0.1em]
 
-                  text-[var(--brand-gold-700)]
+                  text-[var(--brand-navy)]
 
-                  sm:text-[9px]
+                  shadow-[inset_1px_1px_1px_rgba(255,255,255,0.9),0_2px_8px_rgba(75,53,30,0.08)]
+
+                  sm:text-[11px]
                 "
               >
                 Selected Projects

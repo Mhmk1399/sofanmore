@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -105,7 +106,7 @@ const columns: FooterColumn[] = [
     links: [
       {
         label: "FAQ",
-        href: "/faq",
+        href: "/faqs",
       },
       {
         label: "Service Area",
@@ -367,39 +368,12 @@ function BrandColumn() {
           "
         />
 
-        <span
-          className="
-            font-brand-display
-
-            text-[25px]
-            font-semibold
-            leading-tight
-
-            text-[var(--brand-navy)]
-
-            lg:text-[27px]
-          "
-        >
-          Sofa N More
-        </span>
-
-        <span
-          className="
-            mt-1
-
-            font-brand-sans
-
-            text-[7px]
-            font-bold
-            uppercase
-
-            tracking-[0.32em]
-
-            text-[var(--brand-gold-700)]
-          "
-        >
-          London
-        </span>
+        <Image
+          src={"/assets/images/Sofa_Logo.webp"}
+          height={200}
+          width={200}
+          alt="logo"
+        />
       </Link>
 
       {/* DESCRIPTION */}

@@ -9,7 +9,6 @@ import Breadcrumbs from "@/components/global/Breadcrumbs";
 import SmoothScrollProvider from "@/components/global/SmoothScrollProvider";
 import FloatingContactMenu from "@/components/ui/FloatingContactMenu";
 import ToastProvider from "@/components/ui/ToastProvider";
-import MobileFloatingLogo from "@/components/static/MobileFloatingLogo";
 import PwaRegister from "@/components/global/PwaRegister";
 import { defaultOgImage, siteConfig } from "@/lib/site";
 
@@ -160,7 +159,6 @@ export default function RootLayout({
         <JsonLd data={siteStructuredData} />
         <SmoothScrollProvider />
         <Navbar />
-        <MobileFloatingLogo />
         <Breadcrumbs />
         <FloatingContactMenu
           phone={siteConfig.phoneDisplay}

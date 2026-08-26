@@ -101,36 +101,8 @@ const trustItems: TrustItem[] = [
 ========================================================= */
 
 export default function HeroSection() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "@id": "https://sofanmore.co.uk/#home-services",
-    name: "Sofa N More service highlights",
-    numberOfItems: services.length,
-    itemListElement: services.map((service, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "Service",
-        name: service.title,
-        description: service.description,
-        url: `https://sofanmore.co.uk${service.href}`,
-        provider: {
-          "@id": "https://sofanmore.co.uk/#organization",
-        },
-      },
-    })),
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-        }}
-      />
-
       <section
         aria-labelledby="hero-heading"
         className="
@@ -151,7 +123,7 @@ export default function HeroSection() {
             relative z-10
             mx-auto w-full
             max-w-[var(--site-width)]
-            px-4 pb-8 pt-[90px]
+            px-4 pb-8  
             sm:px-6
             md:px-8
             lg:flex lg:h-full lg:items-center
@@ -457,24 +429,6 @@ function HeroCopy() {
             Our Work
           </ClayButton>
         </div>
-
-        {/* Social proof micro-element */}
-        <div className="mt-[clamp(14px,2vh,22px)] flex items-center gap-2.5">
-          <div className="flex -space-x-1.5">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <Star
-                key={i}
-                size={11}
-                fill="var(--brand-gold)"
-                strokeWidth={0}
-                className="text-[var(--brand-gold)]"
-              />
-            ))}
-          </div>
-          <span className="font-brand-sans text-[9px] font-semibold text-white/50 xl:text-[10px]">
-            Trusted by 200+ London clients
-          </span>
-        </div>
       </div>
     </div>
   );
@@ -532,11 +486,11 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         clay-surface
         group relative
         flex w-50 flex-col
-        rounded-[28px]
+        rounded-[28px]  
         p-4
 
         min-h-[360px]
-         lg:min-h-[280px]
+         lg:min-h-[250px]
 
         transition-all duration-300
         hover:-translate-y-[3px]
@@ -641,13 +595,13 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 
         <p
           className="
-            mt-2
+            mt-1
             font-brand-sans
             text-[12px]
-            font-medium
+            
             leading-[1.5]
             text-[var(--brand-text-muted)]
-            lg:text-[13px]
+            lg:text-[11px]
           "
         >
           {service.subtitle}
@@ -1023,9 +977,8 @@ function TabletTrust() {
 
 function MobileHero() {
   return (
-    <div className="space-y-5 -mt-16 sm:hidden">
-      <MobileHeroLogo />
-      <MobileHeroMain />
+    <div className="space-y-5 mt-16 sm:hidden">
+       <MobileHeroMain />
 
       <nav aria-label="Our services" className="grid grid-cols-2 gap-3.5">
         {services.map((service) => (
@@ -1039,46 +992,7 @@ function MobileHero() {
   );
 }
 
-function MobileHeroLogo() {
-  return (
-    <div className="relative flex justify-center pb-2" aria-label="Sofa N More">
-      <div
-        className="
-          clay-surface-strong
-          relative rounded-[30px] p-[7px]
-        "
-      >
-        <div
-          className="
-            clay-inset
-            relative flex h-[68px] w-[228px]
-            items-center justify-center
-            overflow-hidden rounded-[24px]
-          "
-        >
-          <div
-            aria-hidden
-            className="
-              pointer-events-none absolute inset-0
-              bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.64),transparent_58%)]
-            "
-          />
-
-          <div className="relative h-[54px] w-[190px]">
-            <Image
-              src="/assets/images/Sofa_Logo.webp"
-              alt="Sofa N More"
-              fill
-              loading="eager"
-              sizes="190px"
-              className="object-contain drop-shadow-[0_4px_10px_rgba(18,37,62,0.12)]"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+ 
 
 /* =========================================================
    MOBILE HERO MAIN
@@ -1184,24 +1098,6 @@ function MobileHeroMain() {
             >
               Bespoke sofa, commercial interiors &amp; expert restoration.
             </p>
-
-            {/* Stars */}
-            <div className="mt-3.5 flex items-center gap-1.5">
-              <div className="flex">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <Star
-                    key={i}
-                    size={9}
-                    fill="var(--brand-gold)"
-                    strokeWidth={0}
-                    className="text-[var(--brand-gold)]"
-                  />
-                ))}
-              </div>
-              <span className="font-brand-sans text-[7px] font-semibold text-white/68">
-                200+ clients
-              </span>
-            </div>
 
             {/* CTAs */}
             <div className="mt-5 space-y-3">

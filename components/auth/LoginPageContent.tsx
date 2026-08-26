@@ -232,7 +232,7 @@ export default function LoginPageContent() {
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(145deg,#fffdf8_0%,#f4ecdf_50%,#e2d0b8_100%)]"
       />
-      <div className="relative z-10 mx-auto grid max-w-[var(--site-width)] gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div className="relative z-10 mx-auto max-w-4xl grid   gap-6   lg:items-center">
         <section className="clay-surface-strong rounded-[32px] p-[7px] lg:rounded-[38px]">
           <form
             onSubmit={handleSubmit}
