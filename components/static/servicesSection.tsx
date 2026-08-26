@@ -62,7 +62,7 @@ const services: Service[] = [
     shortDescription:
       "Made-to-measure sofa handcrafted in London, tailored to your space and style.",
     cta: "Explore Bespoke",
-    image: "/assets/images/bespokesofa.webp",
+    image: "/assets/site/73.webp",
     href: "/services/bespoke-sofas",
   },
 
@@ -71,7 +71,7 @@ const services: Service[] = [
     shortDescription:
       "Expert care and reupholstery that gives treasured sofa new life while preserving its character.",
     cta: "Explore Restoration",
-    image: "/assets/images/Repair.webp",
+    image: "/assets/site/54.webp",
     href: "/services/sofa-repair-restoration",
   },
 
@@ -80,7 +80,7 @@ const services: Service[] = [
     shortDescription:
       "",
     cta: "Explore Our Services",
-    image: "/assets/images/Staging.webp",
+    image: "/assets/site/69.webp",
     href: "/services",
   },
 
@@ -89,7 +89,7 @@ const services: Service[] = [
     shortDescription:
       "Tailored residential and commercial interiors combining elegant design, functionality and craftsmanship.",
     cta: "Explore Interiors",
-    image: "/assets/images/Interior.webp",
+    image: "/assets/site/63.webp",
     href: "/services/interior-design",
   },
 
@@ -98,7 +98,7 @@ const services: Service[] = [
     shortDescription:
       "Premium ergonomic sofa solutions designed for stylish, functional and productive workspaces.",
     cta: "Explore Office sofa",
-    image: "/assets/images/Office.webp",
+    image: "/assets/site/48.webp",
     href: "/services/commercial-sofas",
   },
 ];

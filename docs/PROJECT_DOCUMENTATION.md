@@ -1204,7 +1204,7 @@ Important public routes:
 - `/workshop`
 - `/about-us`
 - `/contact-us`
-- `/faqs`
+- `/faq`
 - `/blog`
 - `/privacy-policy`
 - `/terms-and-conditions`

@@ -46,7 +46,7 @@ const services: Service[] = [
     description:
       "Custom-designed sofa tailored to your exact specifications and style.",
     icon: Armchair,
-    image: "/assets/images/1.webp",
+    image: "/assets/site/27.webp",
     href: "/services/bespoke-sofas",
   },
   {
@@ -55,7 +55,7 @@ const services: Service[] = [
     description:
       "Durable, elegant sofa solutions for offices, hotels, and restaurants.",
     icon: Building2,
-    image: "/assets/images/2.webp",
+    image: "/assets/site/34.webp",
     href: "/services/commercial-sofas",
   },
   {
@@ -64,16 +64,16 @@ const services: Service[] = [
     description:
       "Full interior design services to transform your space from concept to completion.",
     icon: Palette,
-    image: "/assets/images/3.webp",
+    image: "/assets/site/62.webp",
     href: "/services/interior-design",
   },
   {
-    title: "Repair & Restoration",
+    title: "Repair & Restore",
     subtitle: "Expert craftsmanship",
     description:
       "Professional restoration of antique and damaged sofa to its former glory.",
     icon: Hammer,
-    image: "/assets/images/4.webp",
+    image: "/assets/site/46.webp",
     href: "/services/sofa-repair-restoration",
   },
 ];
@@ -495,7 +495,7 @@ function HeroImage() {
     >
       <div className="relative h-full overflow-hidden rounded-[22px]">
         <Image
-          src="/assets/site/4.webp"
+          src="/assets/site/57.webp"
           alt="Luxury bespoke sofa handcrafted in our London workshop, featuring premium Italian leather upholstery"
           fill
           loading="eager"
@@ -531,29 +531,36 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       className={`
         clay-surface
         group relative
-        flex min-h-[180px] w-full flex-col
-        rounded-[28px] p-3.5
+        flex w-50 flex-col
+        rounded-[28px]
+        p-4
+
+        min-h-[360px]
+         lg:min-h-[280px]
+
         transition-all duration-300
         hover:-translate-y-[3px]
         hover:shadow-[var(--shadow-clay-lg)]
-        focus-visible:outline-2 focus-visible:outline-offset-4
+
+        focus-visible:outline-2
+        focus-visible:outline-offset-4
         focus-visible:outline-[var(--brand-gold)]
-          
+
         hero-card-stagger-${index}
       `}
     >
-      {/* Top row */}
+      {/* Top */}
       <div className="flex items-center justify-between">
         <span
           className="
             clay-icon-inset
-            flex h-[44px] w-[44px] shrink-0
-            items-center justify-center
+            flex h-[34px] w-[34px]
+            shrink-0 items-center justify-center
             rounded-[15px]
           "
         >
           <Icon
-            size={20}
+            size={16}
             strokeWidth={1.5}
             className="text-[var(--brand-gold)]"
             aria-hidden
@@ -563,7 +570,8 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         <span
           className="
             clay-icon
-            flex h-8 w-8 items-center justify-center
+            flex h-9 w-9
+            items-center justify-center
             rounded-full
             text-[var(--brand-gold-700)]
             transition-transform duration-300
@@ -575,58 +583,75 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         </span>
       </div>
 
-      {/* Bottom */}
+      {/* Image */}
       <div
         className="
-          mt-3 grid min-h-0 flex-1
-          grid-cols-[1fr_56px] items-end gap-2
-          xl:grid-cols-[1fr_66px]
+          clay-inset
+          relative
+          mt-5
+          w-full
+          overflow-hidden
+          rounded-[22px]
+     
         "
       >
-        <div className="min-w-0 pb-1">
-          <span
-            className="
-              block
-              font-brand-display text-[13px] font-semibold
-              leading-[1.14] text-[var(--brand-navy)]
-              xl:text-[14px]
-            "
-          >
-            {service.title}
-          </span>
-
-          <p
-            className="
-              mt-1.5 font-brand-sans text-[8px]
-              font-semibold leading-[1.4]
-              text-[var(--brand-text-muted)]
-              xl:text-[9px]
-            "
-          >
-            {service.subtitle}
-          </p>
-        </div>
-
-        {/* Thumbnail */}
         <div
           className="
-            clay-inset
-            relative h-[62px] w-20 overflow-hidden
-            rounded-[18px] p-[4px]
-            xl:h-[90px]
+            relative
+            aspect-[16/9]
+            w-full
+            overflow-hidden
+            rounded-[18px]
           "
         >
-          <div className="relative h-full overflow-hidden rounded-[14px]">
-            <Image
-              src={service.image}
-              alt={`${service.title} example`}
-              fill
-              sizes="70px"
-              loading="lazy"
-              className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-            />
-          </div>
+          <Image
+            src={service.image}
+            alt={`${service.title} example`}
+            fill
+            sizes="
+              (max-width: 640px) 90vw,
+              (max-width: 1024px) 45vw,
+              320px
+            "
+            loading="lazy"
+            className="
+               object-center
+              transition-transform
+              duration-500
+              group-hover:scale-[1.02]
+            "
+          />
         </div>
+      </div>
+
+      {/* Text */}
+      <div className="mt-4">
+        <h3
+          className="
+            font-brand-display
+            text-[18px]
+            font-semibold
+            leading-[1.15]
+            text-[var(--brand-navy)]
+            lg:text-[20px]
+          "
+        >
+          {service.title}
+        </h3>
+
+        <p
+          className="
+            mt-2
+            font-brand-sans
+            text-[12px]
+            font-medium
+            leading-[1.5]
+            text-[var(--brand-text-muted)]
+            lg:text-[13px]
+          "
+        >
+          {service.subtitle}
+        </p>
       </div>
     </Link>
   );
@@ -1071,7 +1096,7 @@ function MobileHeroMain() {
         >
           {/* Image background */}
           <Image
-            src="/assets/site/5.webp"
+            src="/assets/site/67.webp"
             alt="Bespoke luxury sofa by Sofa N More, handcrafted in London"
             fill
             loading="eager"

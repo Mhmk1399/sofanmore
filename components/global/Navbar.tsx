@@ -206,7 +206,7 @@ const navLinks = [
   },
   {
     label: "FAQ",
-    href: "/faqs",
+    href: "/faq",
   },
 ];
 

@@ -105,7 +105,7 @@ const columns: FooterColumn[] = [
     links: [
       {
         label: "FAQ",
-        href: "/faqs",
+        href: "/faq",
       },
       {
         label: "Service Area",

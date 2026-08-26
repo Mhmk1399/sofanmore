@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
+import FaqHero from "@/components/static/FaqHero";
 import FAQSection from "@/components/static/FAQSection";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
-const CANONICAL_PATH = "/faqs";
+const CANONICAL_PATH = "/faq";
 const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
 const SEO_TITLE = "FAQs | Bespoke Sofa & Sofa Restoration London";
 const META_DESCRIPTION =
@@ -163,8 +164,9 @@ function JsonLd({ data }: { data: unknown }) {
 
 export default function FaqsPage() {
   return (
-    <main className="mt-20">
+    <main>
       <JsonLd data={structuredData} />
+      <FaqHero />
       <FAQSection id="faq" items={faqItems} />
     </main>
   );

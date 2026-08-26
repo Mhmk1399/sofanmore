@@ -128,8 +128,7 @@ export default function CommercialSofasPageContent() {
       <HotelHospitalityCommercialSofasSection id="hotel-hospitality-seating" />
       <OfficeWorkspaceCommercialSofasSection id="office-seating" />
       <CommercialSofasMadeInLondonSection />
-      <CommercialProjectsGallerySection />
-      <CommercialSofaLeadForm />
+       <CommercialSofaLeadForm />
       <FAQSection id="faq" items={commercialSofasFaqs} />
       <CommercialSofasFinalCTASection />
     </main>

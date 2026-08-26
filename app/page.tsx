@@ -82,7 +82,7 @@ export default async function HomePage() {
       </div>
 
       <div className="home-deferred-section">
-        <LatestListingsSection />
+        {/* <LatestListingsSection /> */}
       </div>
 
       <div className="home-deferred-section">

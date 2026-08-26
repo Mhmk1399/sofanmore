@@ -2,16 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 import {
-  Building2,
   CalendarDays,
-  Camera,
   Car,
   Clock3,
   Hammer,
   MapPin,
   MoveUpRight,
-  Palette,
-  Sofa,
   Sparkles,
 } from "lucide-react";
 
@@ -67,37 +63,6 @@ const workshopFacts: WorkshopFact[] = [
     label: "Access",
     value: "Customer Parking",
     icon: Car,
-  },
-];
-
-const workshopServices: WorkshopServiceLink[] = [
-  {
-    title: "Bespoke Sofas",
-    description:
-      "Discuss dimensions, comfort, upholstery and made-to-measure seating.",
-    href: "/services/bespoke-sofas",
-    icon: Sofa,
-  },
-  {
-    title: "Commercial Sofas",
-    description:
-      "Plan seating for restaurants, cafés, hotels, offices and hospitality spaces.",
-    href: "/services/commercial-sofas",
-    icon: Building2,
-  },
-  {
-    title: "Interior Design",
-    description:
-      "Explore how layout, materials, colour and bespoke seating can work together.",
-    href: "/services/interior-design",
-    icon: Palette,
-  },
-  {
-    title: "Repair & Restoration",
-    description:
-      "Bring an existing sofa for assessment, repair or professional restoration.",
-    href: "/services/sofa-repair-restoration",
-    icon: Hammer,
   },
 ];
 
@@ -526,12 +491,12 @@ function WorkshopVisitPanel() {
             "
           >
             <Image
-              src="/assets/images/sofa-n-more-workshop-north-west-london.webp"
+              src="/assets/site/30.webp"
               alt="Sofa N More working sofa and upholstery workshop in North West London"
               fill
               preload
               sizes="(max-width: 1023px) 100vw, 42vw"
-              className="object-cover object-center"
+              className="object-cover object-top"
             />
 
             <div
@@ -543,45 +508,7 @@ function WorkshopVisitPanel() {
               "
             />
 
-            <div
-              className="
-                absolute
-                inset-x-3
-                bottom-3
-                rounded-[15px]
-                bg-[var(--brand-navy)]/82
-                px-3
-                py-2.5
-                backdrop-blur-md
-              "
-            >
-              <span
-                className="
-                  font-brand-sans
-                  text-[6px]
-                  font-bold
-                  uppercase
-                  tracking-[0.17em]
-                  text-[var(--brand-gold)]
-                "
-              >
-                Sofa N More Workshop
-              </span>
-
-              <p
-                className="
-                  mt-1
-                  font-brand-display
-                  text-[17px]
-                  font-semibold
-                  leading-[1.15]
-                  text-white
-                  sm:text-[19px]
-                "
-              >
-                Our working sofa and upholstery space in North West London.
-              </p>
-            </div>
+          
           </div>
         </div>
 
@@ -706,10 +633,6 @@ function WorkshopVisitPanel() {
             />
           ))}
         </div>
-
-      
-
-       
       </div>
     </aside>
   );
