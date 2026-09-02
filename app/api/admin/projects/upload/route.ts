@@ -38,14 +38,6 @@ export async function POST(request: Request) {
     });
     const imageUrl = getPublicUploadUrl(storageKey);
 
-    if (!imageUrl) {
-      throw new ApiProblem(
-        "UPLOAD_FAILED",
-        "UPLOAD_PUBLIC_BASE_URL is required for project image uploads.",
-        500,
-      );
-    }
-
     await uploadObject({
       storageKey,
       mimeType: input.mimeType,

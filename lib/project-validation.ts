@@ -171,7 +171,7 @@ function validateStorageKey(
 
   if (
     storageKey &&
-    !/^project-uploads\/[0-9]{4}\/[0-9]{2}\/[A-Fa-f0-9]{48}\.[A-Za-z0-9]+$/.test(
+    !/^(?:[A-Za-z0-9][A-Za-z0-9._-]*\/)*project-uploads\/[0-9]{4}\/[0-9]{2}\/[A-Fa-f0-9]{48}\.[A-Za-z0-9]+$/.test(
       storageKey,
     )
   ) {

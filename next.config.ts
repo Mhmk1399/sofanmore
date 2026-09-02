@@ -1,5 +1,21 @@
 import type { NextConfig } from "next";
 
+const s3Bucket = (
+  process.env.S3_BUCKET ||
+  process.env.AWS_S3_BUCKET ||
+  process.env.UPLOAD_BUCKET
+)?.trim();
+const s3Region = (
+  process.env.S3_REGION ||
+  process.env.AWS_REGION ||
+  process.env.NEXT_PUBLIC_S3_REGION ||
+  process.env.UPLOAD_REGION
+)?.trim();
+const s3Prefix = (process.env.S3_PREFIX?.trim() || "Image").replace(
+  /^\/+|\/+$/g,
+  "",
+);
+
 const nextConfig: NextConfig = {
   allowedDevOrigins: [
     "192.168.70.122",
@@ -16,6 +32,16 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/project-uploads/**",
       },
+      ...(s3Bucket && s3Region
+        ? [
+            {
+              protocol: "https" as const,
+              hostname: `${s3Bucket}.s3.${s3Region}.amazonaws.com`,
+              port: "",
+              pathname: `/${s3Prefix}/**`,
+            },
+          ]
+        : []),
     ],
   },
 
