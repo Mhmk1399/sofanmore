@@ -72,7 +72,7 @@ export type WorkshopFaqItem = {
   id: number;
 };
 
-export const workshopFaqs: WorkshopFaqItem[] = [
+const workshopFaqs: WorkshopFaqItem[] = [
   {
     id: 1,
     question: "Is Sofa N More a showroom or a working workshop?",

@@ -17,7 +17,7 @@ export type GalleryItem = {
   alt: string;
 };
 
-export const galleryItems: GalleryItem[] = [
+const galleryItems: GalleryItem[] = [
   {
     id: 1,
     title: "Mayfair Residence",
@@ -104,7 +104,7 @@ export const galleryItems: GalleryItem[] = [
   },
 ];
 
-export const galleryCategories: GalleryCategory[] = [
+const galleryCategories: GalleryCategory[] = [
   "All",
   "Bespoke sofa",
   "Interiors",
