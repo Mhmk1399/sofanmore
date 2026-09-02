@@ -17,19 +17,27 @@ import type { LeadService } from "@/models/lead";
 type UploadStorageConfig = {
   bucket: string;
   region: string;
-  endpoint?: string;
   accessKeyId: string;
   secretAccessKey: string;
-  publicBaseUrl?: string;
-  forcePathStyle: boolean;
+  prefix: string;
 };
 
 const globalForS3 = globalThis as typeof globalThis & {
   uploadStorageClient?: S3Client;
 };
 
-function requiredEnv(name: string) {
-  const value = process.env[name];
+function firstEnv(names: string[]) {
+  for (const name of names) {
+    const value = process.env[name]?.trim();
+
+    if (value) return value;
+  }
+
+  return undefined;
+}
+
+function requiredEnv(name: string, aliases: string[] = []) {
+  const value = firstEnv([name, ...aliases]);
 
   if (!value) {
     throw new Error(`${name} is required for uploads.`);
@@ -39,16 +47,44 @@ function requiredEnv(name: string) {
 }
 
 export function getUploadStorageConfig(): UploadStorageConfig {
-  const endpoint = process.env.UPLOAD_ENDPOINT || undefined;
+  const bucket = requiredEnv("S3_BUCKET", ["AWS_S3_BUCKET", "UPLOAD_BUCKET"]);
+  const region = requiredEnv("S3_REGION", [
+    "AWS_REGION",
+    "NEXT_PUBLIC_S3_REGION",
+    "UPLOAD_REGION",
+  ]);
+  const prefix = (process.env.S3_PREFIX?.trim() || "Image").replace(
+    /^\/+|\/+$/g,
+    "",
+  );
+
+  if (
+    !/^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$/.test(bucket) ||
+    bucket.includes("..")
+  ) {
+    throw new Error("S3_BUCKET must be a valid Amazon S3 bucket name.");
+  }
+
+  if (!/^[a-z0-9-]+$/.test(region)) {
+    throw new Error("S3_REGION must be a valid AWS region.");
+  }
+
+  if (!prefix || !/^[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(prefix)) {
+    throw new Error("S3_PREFIX must be a valid S3 key prefix.");
+  }
 
   return {
-    bucket: requiredEnv("UPLOAD_BUCKET"),
-    region: requiredEnv("UPLOAD_REGION"),
-    endpoint,
-    accessKeyId: requiredEnv("UPLOAD_ACCESS_KEY_ID"),
-    secretAccessKey: requiredEnv("UPLOAD_SECRET_ACCESS_KEY"),
-    publicBaseUrl: process.env.UPLOAD_PUBLIC_BASE_URL,
-    forcePathStyle: process.env.UPLOAD_FORCE_PATH_STYLE === "true",
+    bucket,
+    region,
+    accessKeyId: requiredEnv("ACCESS_KEY_ID", [
+      "AWS_ACCESS_KEY_ID",
+      "UPLOAD_ACCESS_KEY_ID",
+    ]),
+    secretAccessKey: requiredEnv("SECRET_ACCESS_KEY", [
+      "AWS_SECRET_ACCESS_KEY",
+      "UPLOAD_SECRET_ACCESS_KEY",
+    ]),
+    prefix,
   };
 }
 
@@ -58,8 +94,6 @@ export function getUploadStorageClient() {
 
     globalForS3.uploadStorageClient = new S3Client({
       region: config.region,
-      endpoint: config.endpoint,
-      forcePathStyle: config.forcePathStyle,
       credentials: {
         accessKeyId: config.accessKeyId,
         secretAccessKey: config.secretAccessKey,
@@ -83,6 +117,15 @@ function datedRandomKey(prefix: string, extension: string) {
   return `${prefix}/${year}/${month}/${randomPart}.${extension}`;
 }
 
+function withStoragePrefix(storageKey: string) {
+  const prefix = (process.env.S3_PREFIX?.trim() || "Image").replace(
+    /^\/+|\/+$/g,
+    "",
+  );
+
+  return `${prefix}/${storageKey}`;
+}
+
 export function createStorageKey(input: {
   service: LeadService;
   safeName: string;
@@ -91,7 +134,9 @@ export function createStorageKey(input: {
   const extension =
     getFileExtension(input.safeName) || defaultExtensionForMime(input.mimeType);
 
-  return datedRandomKey(`lead-uploads/${servicePath(input.service)}`, extension);
+  return withStoragePrefix(
+    datedRandomKey(`lead-uploads/${servicePath(input.service)}`, extension),
+  );
 }
 
 export function createProjectImageStorageKey(input: {
@@ -101,7 +146,7 @@ export function createProjectImageStorageKey(input: {
   const extension =
     getFileExtension(input.safeName) || defaultExtensionForMime(input.mimeType);
 
-  return datedRandomKey("project-uploads", extension);
+  return withStoragePrefix(datedRandomKey("project-uploads", extension));
 }
 
 export async function uploadObject(input: {
@@ -176,14 +221,11 @@ export async function deleteUploadedObject(storageKey: string) {
 }
 
 export function getPublicUploadUrl(storageKey: string) {
-  const baseUrl = process.env.UPLOAD_PUBLIC_BASE_URL?.replace(/\/$/, "");
-
-  if (!baseUrl) {
-    return undefined;
-  }
-
-  return `${baseUrl}/${storageKey
+  const config = getUploadStorageConfig();
+  const encodedStorageKey = storageKey
     .split("/")
     .map((part) => encodeURIComponent(part))
-    .join("/")}`;
+    .join("/");
+
+  return `https://${config.bucket}.s3.${config.region}.amazonaws.com/${encodedStorageKey}`;
 }

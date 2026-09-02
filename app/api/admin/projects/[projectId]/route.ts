@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb";
+import { revalidatePath } from "next/cache";
 
 import { handleApiError, ok } from "@/lib/api-response";
 import { readJsonBody } from "@/lib/http";
@@ -51,6 +52,10 @@ export async function PATCH(request: Request, context: ProjectRouteContext) {
     const input = validateProjectInput(body, "update");
     const result = await updateProject(toProjectObjectId(projectId), input);
 
+    revalidatePath("/projects");
+    revalidatePath(`/projects/${result.project.slug}`);
+    revalidatePath("/sitemap.xml");
+
     return ok(result, { headers: noStoreHeaders });
   } catch (error) {
     return handleApiError(error);
@@ -64,6 +69,10 @@ export async function DELETE(request: Request, context: ProjectRouteContext) {
 
     const { projectId } = await context.params;
     const result = await deleteProject(toProjectObjectId(projectId));
+
+    revalidatePath("/projects");
+    revalidatePath("/projects/[slug]", "page");
+    revalidatePath("/sitemap.xml");
 
     return ok(result, { headers: noStoreHeaders });
   } catch (error) {

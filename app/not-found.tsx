@@ -7,7 +7,7 @@ export default function NotFound() {
     <main
       className="
         relative
-            mt-20
+            md:mt-20 mt-8
         flex
         min-h-[calc(100svh-80px)]
         items-center
@@ -17,7 +17,7 @@ export default function NotFound() {
         bg-[var(--brand-ivory)]
 
         px-3
-        py-8
+        
 
         sm:px-5
         sm:py-10

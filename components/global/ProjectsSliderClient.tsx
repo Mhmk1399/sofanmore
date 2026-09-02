@@ -913,7 +913,7 @@ export default function ProjectsSliderClient({
             className={`
               flex
 
-              gap-2
+              gap-2.5
 
               overflow-x-auto
               overflow-y-hidden
@@ -1110,7 +1110,7 @@ export default function ProjectsSliderClient({
 
               font-brand-sans
 
-              text-[8px]
+              text-[10px]
               font-bold
 
               tracking-[0.09em]
@@ -1209,13 +1209,13 @@ export default function ProjectsSliderClient({
 
               font-brand-sans
 
-              text-[7px]
+              text-[10px]
               font-bold
               uppercase
 
-              tracking-[0.11em]
+              tracking-[0.08em]
 
-              text-[var(--brand-text-muted)]/60
+              text-[var(--brand-navy)]/70
 
               lg:flex
             "
@@ -1277,26 +1277,42 @@ export default function ProjectsSliderClient({
                     )
                   }
                   className={`
-                    h-[6px]
+                    flex
+                    h-11
+                    w-11
+                    items-center
+                    justify-center
 
                     rounded-full
 
-                    transition-[width,background-color]
+                    transition-colors
                     duration-200
-
-                    ${
-                      active
-                        ? `
-                          w-6
-                          bg-[var(--brand-gold)]
-                        `
-                        : `
-                          w-[6px]
-                          bg-[var(--brand-navy)]/12
-                        `
-                    }
                   `}
-                />
+                >
+                  <span
+                    aria-hidden
+                    className={`
+                      rounded-full
+
+                      transition-[width,background-color]
+                      duration-200
+
+                      ${
+                        active
+                          ? `
+                            h-[6px]
+                            w-7
+                            bg-[var(--brand-gold)]
+                          `
+                          : `
+                            h-[7px]
+                            w-[7px]
+                            bg-[var(--brand-navy)]/28
+                          `
+                      }
+                    `}
+                  />
+                </button>
               );
             },
           )}
@@ -1338,7 +1354,7 @@ function ProjectSlide({
 
         flex
 
-        min-w-[88%]
+        min-w-[82%]
 
         snap-start
 
@@ -1355,12 +1371,12 @@ function ProjectSlide({
 
         shadow-[0_4px_12px_rgba(75,53,30,0.055)]
 
-        sm:min-w-[74%]
+        sm:min-w-[58%]
         sm:rounded-[22px]
 
-        lg:min-w-[56%]
+        lg:min-w-[42%]
 
-        xl:min-w-[48%]
+        xl:min-w-[36%]
       "
     >
       {/* =================================================
@@ -1374,7 +1390,7 @@ function ProjectSlide({
         className="
           relative
 
-          aspect-[4/3]
+          aspect-[16/11]
 
           shrink-0
 
@@ -1382,9 +1398,9 @@ function ProjectSlide({
 
           bg-[#DED4C7]
 
-          sm:aspect-[16/11]
+          sm:aspect-[16/10]
 
-          lg:aspect-[16/10]
+          lg:aspect-[6/4]
         "
       >
         <Image
@@ -1394,13 +1410,13 @@ function ProjectSlide({
           priority={priority}
           draggable={false}
           quality={78}
-          sizes="(max-width: 639px) 88vw, (max-width: 1023px) 74vw, (max-width: 1279px) 56vw, 48vw"
+          sizes="(max-width: 639px) 82vw, (max-width: 1023px) 58vw, (max-width: 1279px) 42vw, 36vw"
           className={`
             pointer-events-none
 
             select-none
 
-            object-cover
+            object-contain
             object-center
 
             transition-[transform,opacity]
@@ -1416,7 +1432,7 @@ function ProjectSlide({
             ${
               !dragging
                 ? `
-                  lg:group-hover:scale-[1.012]
+                  lg:group-hover:scale-[1.01]
                 `
                 : ""
             }
@@ -1454,21 +1470,21 @@ function ProjectSlide({
               border
               border-white/80
 
-              bg-[#F3EADF]/95
+              bg-[#FFF8EC]
 
-              px-2.5
+              px-3
 
               font-brand-sans
 
-              text-[7px]
+              text-[9px]
               font-bold
               uppercase
 
-              tracking-[0.1em]
+              tracking-[0.08em]
 
               text-[var(--brand-navy)]
 
-              shadow-[0_3px_9px_rgba(0,0,0,0.09),inset_1px_1px_1px_rgba(255,255,255,0.85)]
+              shadow-[0_4px_12px_rgba(0,0,0,0.16),inset_1px_1px_1px_rgba(255,255,255,0.9)]
             "
           >
             <Hash
@@ -1496,16 +1512,16 @@ function ProjectSlide({
           flex-1
           flex-col
 
-          px-4
-          pb-4
-          pt-4
+          px-3.5
+          pb-3.5
+          pt-3.5
 
           sm:px-5
-          sm:pb-5
+          sm:pb-4
 
-          lg:px-6
-          lg:pb-6
-          lg:pt-5
+          lg:px-5
+          lg:pb-5
+          lg:pt-4
         "
       >
         {/* ===============================================
@@ -1528,13 +1544,13 @@ function ProjectSlide({
               className="
                 font-brand-sans
 
-                text-[7px]
+                text-[10px]
                 font-bold
                 uppercase
 
-                tracking-[0.13em]
+                tracking-[0.09em]
 
-                text-[var(--brand-gold-700)]
+                text-[#7a4b08]
               "
             >
               {
@@ -1566,10 +1582,10 @@ function ProjectSlide({
 
                   font-brand-sans
 
-                  text-[7px]
-                  font-semibold
+                  text-[10px]
+                  font-bold
 
-                  text-[var(--brand-text-muted)]
+                  text-[var(--brand-navy)]
                 "
               >
                 <MapPin
@@ -1592,23 +1608,23 @@ function ProjectSlide({
 
         <h3
           className="
-            mt-2.5
+            mt-2
 
             line-clamp-2
 
             font-brand-display
 
-            text-[25px]
+            text-[21px]
             font-medium
-            leading-[1.04]
+            leading-[1.08]
 
             tracking-[-0.03em]
 
             text-[var(--brand-navy)]
 
-            sm:text-[29px]
+            sm:text-[24px]
 
-            lg:text-[32px]
+            lg:text-[26px]
           "
         >
           {project.title}
@@ -1618,15 +1634,15 @@ function ProjectSlide({
 
         <p
           className="
-            mt-3
+            mt-2.5
 
-            line-clamp-3
+            line-clamp-2
 
             max-w-[590px]
 
             font-brand-sans
 
-            text-[9px]
+            text-[11px]
             font-medium
             leading-[1.75]
 
@@ -1634,7 +1650,7 @@ function ProjectSlide({
 
             sm:text-[10px]
 
-            lg:text-[11px]
+            lg:text-[12px]
           "
         >
           {project.excerpt}
@@ -1666,13 +1682,13 @@ function ProjectSlide({
             className="
               font-brand-sans
 
-              text-[7px]
+              text-[10px]
               font-bold
               uppercase
 
-              tracking-[0.11em]
+              tracking-[0.08em]
 
-              text-[var(--brand-text-muted)]/70
+              text-[var(--brand-navy)]/72
             "
           >
             Project{" "}
@@ -1687,19 +1703,31 @@ function ProjectSlide({
           {project.slug ? (
             <Link
               href={`/projects/${project.slug}`}
+              draggable={false}
+              onPointerDown={(event) => {
+                event.stopPropagation();
+              }}
+              onClick={(event) => {
+                event.stopPropagation();
+              }}
               className="
                 inline-flex
+                min-h-11
                 items-center
 
                 gap-1.5
 
+                rounded-full
+
+                px-1.5
+
                 font-brand-sans
 
-                text-[7px]
+                text-[10px]
                 font-bold
                 uppercase
 
-                tracking-[0.11em]
+                tracking-[0.08em]
 
                 text-[var(--brand-navy)]
 
@@ -1728,11 +1756,11 @@ function ProjectSlide({
               className="
                 font-brand-sans
 
-                text-[7px]
+                text-[10px]
                 font-bold
                 uppercase
 
-                tracking-[0.1em]
+                tracking-[0.08em]
 
                 text-[var(--brand-gold-700)]
               "

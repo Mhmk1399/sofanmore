@@ -417,7 +417,7 @@ export default function GalleryPage() {
         className="
           overflow-hidden
 
-          bg-[var(--brand-ivory)] mt-20
+          bg-[var(--brand-ivory)] md:mt-20 mt-8
         "
       >
         <GalleryHero />

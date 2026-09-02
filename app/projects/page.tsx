@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
+import { connection } from "next/server";
 
 import {
   ArrowUpRight,
@@ -137,6 +138,8 @@ function serializeJsonLd(value: unknown) {
 ========================================================= */
 
 export default async function ProjectsPage() {
+  await connection();
+
   const projects = await getProjects();
 
   /* =======================================================

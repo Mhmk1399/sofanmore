@@ -984,13 +984,12 @@ function RepairVisual() {
           "
         >
           <Image
-            src="/assets/images/Repair.webp"
+            src="/assets/site/32.webp"
             alt="Sofa repair and restoration by Sofa N More in North West London"
             fill
             sizes="(max-width: 1023px) 100vw, 52vw"
             className="
-              object-contain
-              object-center
+               object-center
             "
           />
         </div>

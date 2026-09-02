@@ -8,7 +8,7 @@ import ClayButton from "@/components/ui/ClayButton";
    CONFIG
 ========================================================= */
 
-const HERO_IMAGE = "/assets/images/Office.webp";
+const HERO_IMAGE = "/assets/site/44.webp";
 
 const PHONE_NUMBER = "+447400577844";
 
@@ -464,7 +464,7 @@ function HeroImage() {
           className="
             relative
 
-            aspect-square
+            aspect-[5/3]
 
             w-full
 

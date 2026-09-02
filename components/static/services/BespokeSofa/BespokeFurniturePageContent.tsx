@@ -6,8 +6,7 @@ import BespokeProcessSection from "./BespokeProcessSection";
 import BespokeSofasWeCanCreateSection from "./BespokeSofasWeCanCreateSection";
 import CommercialSofaProjectsSection from "./CommercialSofaProjectsSection";
 import CustomsofaForYourSpaceSection from "./CustomFurnitureForYourSpaceSection";
-import SeeWhatWeCreateSection from "./SeeWhatWeCreateSection";
-import WhyChooseBespokeSofasSection from "./WhyChooseBespokeSofasSection";
+ import WhyChooseBespokeSofasSection from "./WhyChooseBespokeSofasSection";
 
 export type BespokesofaFaqItem = {
   id: number;
@@ -118,8 +117,7 @@ export default function BespokesofaPageContent() {
       <BespokeProcessSection />
 
       <CommercialSofaProjectsSection />
-      <SeeWhatWeCreateSection />
-      <FAQSection id="faq" items={bespokesofaFaqs} />
+       <FAQSection id="faq" items={bespokesofaFaqs} />
       <BespokeSofaLeadForm />
     </main>
   );

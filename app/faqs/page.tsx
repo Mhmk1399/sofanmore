@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import FaqHero from "@/components/static/FaqHero";
 import FAQSection from "@/components/static/FAQSection";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
@@ -163,8 +164,9 @@ function JsonLd({ data }: { data: unknown }) {
 
 export default function FaqsPage() {
   return (
-    <main className="mt-20">
+    <main>
       <JsonLd data={structuredData} />
+      <FaqHero />
       <FAQSection id="faq" items={faqItems} />
     </main>
   );

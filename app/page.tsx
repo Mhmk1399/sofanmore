@@ -5,13 +5,11 @@ import LuxuryCtaBanner from "@/components/static/Cta";
 import FAQSection from "@/components/static/FAQSection";
 import HeroSection from "@/components/static/HeroSection";
 import HomeSeoDescriptionSection from "@/components/static/HomeSeoDescriptionSection";
-import LatestListingsSection from "@/components/static/LatestListingsSection";
-import ServicesSection from "@/components/static/servicesSection";
+ import ServicesSection from "@/components/static/servicesSection";
 import WhyChooseSection from "@/components/static/WhyChooseSection";
 import { defaultOgImage, siteConfig } from "@/lib/site";
 import ProjectsSliderSection from "@/components/global/ProjectsSliderSection";
-import { listFeaturedProjects } from "@/lib/project-repository";
-
+ 
 export const metadata: Metadata = {
   title: "Bespoke Sofas, Sofa Repair & Interior Design London",
 
@@ -49,18 +47,10 @@ export const metadata: Metadata = {
   },
 };
 
-async function getHomeProjects() {
-  try {
-    return await listFeaturedProjects(8);
-  } catch (error) {
-    console.warn("Could not load featured projects for homepage", error);
-    return [];
-  }
-}
+ 
 
 export default async function HomePage() {
-  const projects = await getHomeProjects();
-
+ 
   return (
     <main>
       {/* ABOVE THE FOLD — render immediately */}
@@ -82,7 +72,7 @@ export default async function HomePage() {
       </div>
 
       <div className="home-deferred-section">
-        <LatestListingsSection />
+        {/* <LatestListingsSection /> */}
       </div>
 
       <div className="home-deferred-section">

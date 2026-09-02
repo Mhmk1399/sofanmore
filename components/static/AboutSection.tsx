@@ -176,7 +176,7 @@ function DesktopAbout() {
         <div
           className="
             absolute
-            bottom-6
+            bottom-1
             left-1/2
             z-20
             grid
@@ -345,63 +345,8 @@ function DesktopImage() {
         </div>
       </div>
 
-      {/* EST badge */}
-
-      <div
-        className="
-          clay-surface-strong
-          absolute
-          -right-7
-          top-[33%]
-          z-30
-          flex
-          h-[94px]
-          w-[94px]
-          items-center
-          justify-center
-          rounded-full
-          p-[6px]
-        "
-      >
-        <div
-          className="
-            clay-dark
-            flex
-            h-full
-            w-full
-            flex-col
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-[var(--brand-gold)]
-            text-center
-          "
-        >
-          <Crown
-            size={17}
-            strokeWidth={1.5}
-            className="
-              mb-1
-              text-[var(--brand-gold)]
-            "
-          />
-
-          <span
-            className="
-              font-brand-display
-              text-[11px]
-              font-semibold
-              leading-[1.05]
-              text-[var(--brand-gold-300)]
-            "
-          >
-            EST.
-            <br />
-            2010
-          </span>
-        </div>
-      </div>
+ 
+      
     </div>
   );
 }
@@ -417,7 +362,7 @@ function DesktopFeatureCard({ card }: { card: FeatureCard }) {
     <div
       className="
         clay-surface
-        flex
+        flex 
         min-h-[118px]
         items-center
         gap-4
@@ -682,62 +627,8 @@ function MobileImage() {
         </div>
       </div>
 
-      {/* badge */}
-
-      <div
-        className="
-          clay-surface-strong
-          absolute
-          -right-4
-          -top-7
-          z-30
-          flex
-          h-[78px]
-          w-[78px]
-          items-center
-          justify-center
-          rounded-full
-          p-[5px]
-        "
-      >
-        <div
-          className="
-            clay-dark
-            flex
-            h-full
-            w-full
-            flex-col
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-[var(--brand-gold)]
-          "
-        >
-          <Crown
-            size={14}
-            className="
-              mb-1
-              text-[var(--brand-gold)]
-            "
-          />
-
-          <span
-            className="
-              text-center
-              font-brand-display
-              text-[9px]
-              font-semibold
-              leading-[1.05]
-              text-[var(--brand-gold-300)]
-            "
-          >
-            EST.
-            <br />
-            2010
-          </span>
-        </div>
-      </div>
+ 
+      
     </div>
   );
 }

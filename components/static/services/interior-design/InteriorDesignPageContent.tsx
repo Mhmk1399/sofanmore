@@ -121,8 +121,7 @@ export default function InteriorDesignPageContent() {
       <CommercialInteriorDesignSection id="commercial" />
       <RestaurantCafeInteriorsSection id="restaurant-cafe" />
       <InteriorDesignLondonBaseSection />
-      <InteriorDesignProjectsGallerySection />
-      <InteriorDesignLeadForm />
+       <InteriorDesignLeadForm />
       <FAQSection id="faq" items={interiorDesignFaqs} />
       <InteriorDesignFinalCTASection />
     </main>

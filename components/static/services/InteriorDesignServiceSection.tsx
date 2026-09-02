@@ -751,7 +751,7 @@ function InteriorDesignVisual() {
           "
         >
           <Image
-            src="/assets/images/Interior.webp"
+            src="/assets/site/64.webp"
             alt="Interior design project by Sofa N More in London"
             fill
             sizes="(max-width: 1023px) 100vw, 52vw"

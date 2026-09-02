@@ -27,7 +27,7 @@ Reference file: `package.json`
 - TypeScript
 - MongoDB native driver
 - Mongoose schemas/models for typed database shape definitions
-- AWS S3 SDK for S3-compatible object storage
+- AWS S3 SDK for Amazon S3 object storage
 - Lenis for smooth scrolling on public pages
 - Lucide React for icons
 - Vitest for tests
@@ -115,13 +115,13 @@ The application uses these environment variables:
 - `IP_HASH_SECRET`: secret used for IP hashing and upload session hashing. It should be set in production.
 - `NEXT_PUBLIC_SITE_URL`: public site origin used for canonical URLs, metadata and same-origin checks.
 - `ALLOWED_FORM_ORIGINS`: optional comma-separated list of extra origins allowed to submit forms.
-- `UPLOAD_BUCKET`: S3-compatible upload bucket.
-- `UPLOAD_REGION`: upload storage region.
-- `UPLOAD_ENDPOINT`: optional S3-compatible provider endpoint.
-- `UPLOAD_ACCESS_KEY_ID`: upload storage access key.
-- `UPLOAD_SECRET_ACCESS_KEY`: upload storage secret key.
-- `UPLOAD_PUBLIC_BASE_URL`: public base URL used to render uploaded lead and project files.
-- `UPLOAD_FORCE_PATH_STYLE`: set to `true` if the storage provider requires path-style requests.
+- `S3_BUCKET`: Amazon S3 bucket name, for example `sofanmore`.
+- `S3_REGION`: AWS region containing the bucket.
+- `S3_PREFIX`: optional root key prefix. It defaults to `Image`.
+- `ACCESS_KEY_ID`: AWS access key used by the server to sign and manage uploads.
+- `SECRET_ACCESS_KEY`: AWS secret access key. It must remain server-only.
+
+`UPLOAD_ENDPOINT` and `UPLOAD_PUBLIC_BASE_URL` are not required. Public object URLs are derived as `https://<bucket>.s3.<region>.amazonaws.com/<key>`.
 
 ## 5. Database Models
 
@@ -528,7 +528,7 @@ Responsibilities:
 
 ### 6.16 `lib/upload-storage.ts`
 
-Owns S3-compatible upload storage operations.
+Owns Amazon S3 upload storage operations.
 
 Exports:
 
@@ -544,8 +544,8 @@ Exports:
 
 Storage prefixes:
 
-- Lead uploads: `lead-uploads/<service>/<year>/<month>/...`
-- Project uploads: `project-uploads/<year>/<month>/...`
+- Lead uploads: `Image/lead-uploads/<service>/<year>/<month>/...`
+- Project uploads: `Image/project-uploads/<year>/<month>/...`
 
 ### 6.17 `lib/project-validation.ts`
 
@@ -800,7 +800,6 @@ Root layout includes:
 - JSON-LD site structured data.
 - Smooth scroll provider.
 - Global navbar.
-- Mobile floating logo.
 - Breadcrumbs.
 - Floating contact menu.
 - Footer.
@@ -992,7 +991,7 @@ Admin project image uploads use:
 POST /api/admin/projects/upload
 ```
 
-The admin frontend uses XMLHttpRequest so upload progress remains available. The route uploads the file server-side to the same S3-compatible storage provider and returns a public URL plus storage key.
+The admin frontend uses XMLHttpRequest so upload progress remains available. The route uploads the file server-side to Amazon S3 and returns the derived S3 object URL plus its storage key.
 
 ## 11. Public Project Pages
 
@@ -1155,8 +1154,8 @@ Known note:
 ## 17. Operational Notes
 
 - MongoDB stores metadata only; binary files live in object storage.
-- Lead uploads live under `lead-uploads/`.
-- Project uploads live under `project-uploads/`.
+- Lead uploads live under `Image/lead-uploads/` by default.
+- Project uploads live under `Image/project-uploads/` by default.
 - Project `projectCode` must be unique and `>= 1000`.
 - Project `slug` must be unique.
 - Existing old `products` collection data is not dropped automatically.

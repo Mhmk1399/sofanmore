@@ -82,8 +82,8 @@ function DesktopAboutUsCard() {
       >
         <div
           className="
-            grid items-start gap-8
-            lg:grid-cols-[1.08fr_0.92fr]
+            grid items-center justify-center  
+            lg:grid-cols-2
           "
         >
           {/* LEFT CONTENT */}
@@ -147,15 +147,15 @@ function DesktopAboutUsCard() {
                 className="
                   clay-inset
                   relative overflow-hidden rounded-[30px]
-                  aspect-[0.82/1]
+                  h-140
                 "
               >
                 <Image
-                  src="/assets/images/7.webp"
+                  src="/assets/site/53.webp"
                   alt="Craftsman handcrafting bespoke sofa in the Sofa N More London workshop"
                   fill
                   preload
-                  className="object-cover object-center"
+                  className=" object-center"
                   sizes="(max-width: 1279px) 42vw, 560px"
                 />
 
@@ -267,7 +267,7 @@ function MobileAboutUsCard() {
               "
             >
               <Image
-                src="/assets/images/3.webp"
+                src="/assets/site/3.webp"
                 alt="Craftsman handcrafting bespoke sofa in the Sofa N More London workshop"
                 fill
                 className="object-cover object-center"

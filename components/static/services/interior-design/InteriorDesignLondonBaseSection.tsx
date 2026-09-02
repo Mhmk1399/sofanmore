@@ -466,7 +466,7 @@ function LondonBaseVisual() {
           "
         >
           <Image
-            src="/assets/images/Repair.webp"
+            src="/assets/site/69.webp"
             alt="Sofa N More London workshop"
             fill
             sizes="(max-width: 1023px) 100vw, 46vw"

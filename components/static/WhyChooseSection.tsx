@@ -158,46 +158,7 @@ function DesktopVisual({ imageSrc }: { imageSrc: string }) {
           </div>
         </div>
 
-        {/* navy badge */}
-        <div
-          className="
-            clay-surface-strong
-            absolute -left-[38px] top-[36px]
-            z-20 flex h-[128px] w-[128px]
-            items-center justify-center
-            rounded-full p-[6px]
-          "
-        >
-          <div
-            className="
-              clay-dark
-              flex h-full w-full flex-col
-              items-center justify-center
-              rounded-full border
-              border-[var(--brand-gold)]
-              text-center
-            "
-          >
-            <Crown
-              size={19}
-              strokeWidth={1.5}
-              className="mb-2 text-[var(--brand-gold)]"
-            />
-            <span
-              className="
-                font-brand-display
-                text-[18px]
-                leading-[1.05]
-                text-[var(--brand-ivory-50)]
-              "
-            >
-              London
-              <br />
-              Crafted
-            </span>
-            <span className="mt-2 h-px w-7 bg-[var(--brand-gold)]" />
-          </div>
-        </div>
+       
       </div>
     </div>
   );
@@ -452,42 +413,7 @@ function MobileWhyChoose({ imageSrc }: { imageSrc: string }) {
             </div>
           </div>
 
-          <div
-            className="
-              clay-surface-strong
-              absolute -bottom-[14px] right-[14px]
-              z-20 flex h-[88px] w-[88px]
-              items-center justify-center rounded-full p-[5px]
-            "
-          >
-            <div
-              className="
-                clay-dark
-                flex h-full w-full flex-col
-                items-center justify-center
-                rounded-full border border-[var(--brand-gold)]
-                text-center
-              "
-            >
-              <Crown
-                size={14}
-                strokeWidth={1.5}
-                className="mb-1 text-[var(--brand-gold)]"
-              />
-              <span
-                className="
-                  font-brand-display
-                  text-[14px]
-                  leading-[1.03]
-                  text-[var(--brand-ivory-50)]
-                "
-              >
-                London
-                <br />
-                Crafted
-              </span>
-            </div>
-          </div>
+          
         </div>
 
         <div className="mt-5 grid grid-cols-1 gap-3">

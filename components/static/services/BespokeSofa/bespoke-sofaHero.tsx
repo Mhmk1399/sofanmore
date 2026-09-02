@@ -166,7 +166,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
                 <div className="clay-surface-strong absolute bottom-[52px] left-1/2 -mt-20 md:-mt-0 top-0 w-[99%] -translate-x-1/2 rounded-t-[29%] rounded-b-[24px] p-[6px] sm:w-[86%] sm:bottom-[60px] sm:p-[8px] sm:rounded-b-[28px] lg:bottom-[45px] lg:w-[96%] lg:p-[9px] lg:rounded-b-[30px] xl:w-[91%]">
                   <div className="clay-inset relative h-100 lg:h-150 overflow-hidden rounded-t-[29%] rounded-b-[19px] bg-[#DCD0BE] sm:rounded-b-[23px] lg:rounded-b-[24px]">
                     <Image
-                      src="/assets/images/bespoke-sofa-london-sofa-n-more.webp"
+                  src="/assets/site/49.webp"
                       alt="Bespoke sofa handcrafted for a luxury London living room"
                       fill
                       preload

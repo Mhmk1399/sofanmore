@@ -709,13 +709,12 @@ function BespokeVisual() {
           "
         >
           <Image
-            src="/assets/images/bespokesofa.webp"
+            src="/assets/site/71.webp"
             alt="Bespoke sofa designed around a London interior"
             fill
             sizes="(max-width: 1023px) 100vw, 52vw"
             className="
-              object-contain
-              object-center
+               object-center
             "
           />
         </div>

@@ -153,58 +153,6 @@ function DesktopCTA({ chairSrc }: { chairSrc: string }) {
           <DesktopChairScene chairSrc={chairSrc} />
         </div>
       </div>
-
-      {/* SNM badge */}
-
-      <div
-        className="
-          clay-surface-strong
-          absolute
-          -left-2
-          -top-5
-          z-40
-          flex
-          h-[76px]
-          w-[76px]
-          items-center
-          justify-center
-          rounded-[23px]
-          p-[5px]
-        "
-      >
-        <div
-          className="
-            flex
-            h-full
-            w-full
-            flex-col
-            items-center
-            justify-center
-            rounded-[19px]
-          "
-        >
-          <Crown
-            size={17}
-            strokeWidth={1.4}
-            className="
-              text-[var(--brand-gold)]
-            "
-          />
-
-          <span
-            className="
-              mt-1
-              font-brand-sans
-              text-[7px]
-              font-bold
-              tracking-[0.22em]
-              text-[var(--brand-gold-700)]
-            "
-          >
-            SNM
-          </span>
-        </div>
-      </div>
     </div>
   );
 }
@@ -485,8 +433,6 @@ function DesktopChairScene({ chairSrc }: { chairSrc: string }) {
           GOLD RING
       ============================================== */}
 
-  
-
       {/* =============================================
           IVORY SPHERE
       ============================================== */}
@@ -542,8 +488,6 @@ function DesktopOuterDecor() {
   return (
     <>
       {/* top right ring */}
-
-   
 
       {/* gold sphere */}
 
