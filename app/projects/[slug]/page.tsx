@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { cache } from "react";
 
 import Link from "next/link";
+import { connection } from "next/server";
 
 import {
   ChevronRight,
@@ -67,6 +68,8 @@ const WEBSITE_ID = `${SITE_URL}/#website`;
 ========================================================= */
 
 const loadProject = cache(async (slug: string) => {
+  await connection();
+
   return getPublishedProjectBySlug(slug);
 });
 

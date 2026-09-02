@@ -1,3 +1,5 @@
+import { revalidatePath } from "next/cache";
+
 import { handleApiError, ok } from "@/lib/api-response";
 import { readJsonBody } from "@/lib/http";
 import { assertLeadAdmin } from "@/lib/lead-admin";
@@ -55,6 +57,10 @@ export async function POST(request: Request) {
     const body = await readJsonBody(request);
     const input = validateProjectInput(body, "create");
     const result = await createProject(input);
+
+    revalidatePath("/projects");
+    revalidatePath(`/projects/${result.project.slug}`);
+    revalidatePath("/sitemap.xml");
 
     return ok(result, {
       headers: {
