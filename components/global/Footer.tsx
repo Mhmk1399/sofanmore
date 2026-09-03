@@ -369,7 +369,7 @@ function BrandColumn() {
         />
 
         <Image
-          src={"/assets/images/Sofa_Logo.webp"}
+          src={"https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Sofa_Logo.webp"}
           height={200}
           width={200}
           alt="logo"

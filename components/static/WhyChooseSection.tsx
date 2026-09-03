@@ -51,8 +51,8 @@ const features: FeatureItem[] = [
 ];
 
 export default function WhyChooseSection({
-  desktopImageSrc = "/assets/site/24.webp",
-  mobileImageSrc = "/assets/site/1.webp",
+  desktopImageSrc = "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/24.webp",
+  mobileImageSrc = "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/1.webp",
 }: WhyChooseSectionProps) {
   return (
     <section

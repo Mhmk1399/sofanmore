@@ -466,7 +466,7 @@ function LondonBaseVisual() {
           "
         >
           <Image
-            src="/assets/site/69.webp"
+            src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/69.webp"
             alt="Sofa N More London workshop"
             fill
             sizes="(max-width: 1023px) 100vw, 46vw"

@@ -8,7 +8,7 @@ import ClayButton from "@/components/ui/ClayButton";
    CONFIG
 ========================================================= */
 
-const HERO_IMAGE = "/assets/images/Repair.webp";
+const HERO_IMAGE = "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Repair.webp";
 
 const heroPoints = [
   "Professional Repair",

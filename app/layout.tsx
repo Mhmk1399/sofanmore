@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 
-import { Manrope, Playfair_Display } from "next/font/google";
+import { Manrope, Playfair_Display,Geist } from "next/font/google";
 
 import "./globals.css";
 import Navbar from "@/components/global/Navbar";
@@ -18,12 +18,12 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const playfair = Geist({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["500", "600", "700"],
-});
+  weight:["400"]
+ });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

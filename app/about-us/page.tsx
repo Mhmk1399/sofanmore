@@ -10,7 +10,9 @@ const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
 const SEO_TITLE = "About Sofa N More | London Bespoke Sofa Makers";
 const META_DESCRIPTION =
   "Learn about Sofa N More, a North West London studio creating bespoke sofas, commercial seating, interiors, and sofa restoration work.";
-const PRIMARY_IMAGE = absoluteUrl("/assets/images/6.webp");
+const PRIMARY_IMAGE = absoluteUrl(
+  "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/6.webp",
+);
 
 export const metadata: Metadata = {
   title: SEO_TITLE,

@@ -11,7 +11,7 @@ import ClayButton from "@/components/ui/ClayButton";
 const galleryItems = [
   {
     id: 1,
-    image: "/assets/images/7.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/7.webp",
     eyebrow: "Residential",
     title: "Bespoke Living",
     icon: Home,
@@ -19,7 +19,7 @@ const galleryItems = [
 
   {
     id: 2,
-    image: "/assets/images/bespokesofa.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/bespokesofa.webp",
     eyebrow: "Made to Measure",
     title: "Signature Sofas",
     icon: Armchair,
@@ -27,7 +27,7 @@ const galleryItems = [
 
   {
     id: 3,
-    image: "/assets/images/Interior.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Interior.webp",
     eyebrow: "Interior",
     title: "Complete Spaces",
     icon: Sparkles,
@@ -35,7 +35,7 @@ const galleryItems = [
 
   {
     id: 4,
-    image: "/assets/images/Office.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Office.webp",
     eyebrow: "Commercial",
     title: "Business & Hospitality",
     icon: Building2,

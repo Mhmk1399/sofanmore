@@ -1,5 +1,10 @@
 import Image from "next/image";
-import { HelpCircle, MessageSquareText, PhoneCall, Sparkles } from "lucide-react";
+import {
+  HelpCircle,
+  MessageSquareText,
+  PhoneCall,
+  Sparkles,
+} from "lucide-react";
 
 import ClayButton from "@/components/ui/ClayButton";
 import { siteConfig } from "@/lib/site";
@@ -44,7 +49,12 @@ export default function FaqHero() {
             <ClayButton href="#faq" variant="gold" size="md" showArrow>
               Browse Questions
             </ClayButton>
-            <ClayButton href="/contact-us" variant="outline" size="md" showArrow>
+            <ClayButton
+              href="/contact-us"
+              variant="outline"
+              size="md"
+              showArrow
+            >
               Ask Our Team
             </ClayButton>
           </div>
@@ -73,7 +83,7 @@ export default function FaqHero() {
           <div className="clay-surface-strong rounded-[30px] p-[7px] sm:rounded-[36px]">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[24px] bg-[#ded4c7] sm:rounded-[30px] lg:aspect-[16/11]">
               <Image
-                src="/assets/site/52.webp"
+                src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/52.webp"
                 alt="Sofa N More North West London workshop"
                 fill
                 loading="eager"

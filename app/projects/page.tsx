@@ -293,10 +293,10 @@ export default async function ProjectsPage() {
 
           bg-[var(--brand-ivory)]
 
-          px-3 mt-10
+          px-3 
 
           pb-16
-          pt-[96px]
+          pt-[66px]
 
           sm:px-5
           sm:pb-20
@@ -313,21 +313,17 @@ export default async function ProjectsPage() {
             max-w-[var(--site-width)]
           "
         >
-       
-
           {/* =================================================
               HERO
           ================================================== */}
 
           <header
             className="
-              grid
-
-              gap-8
-
-              lg:grid-cols-[minmax(0,1fr)_320px]
-              lg:items-end
-              lg:gap-12
+              
+ 
+             
+             
+              
             "
           >
             {/* ===============================================
@@ -336,55 +332,16 @@ export default async function ProjectsPage() {
 
             <div
               className="
-                max-w-[850px]
+                flex flex-col justify-center items-center text-center
               "
             >
-              {/* EYEBROW */}
-
-              <div
-                className="
-                  flex
-                  items-center
-
-                  gap-3
-                "
-              >
-                <span
-                  aria-hidden
-                  className="
-                    h-px
-                    w-8
-
-                    bg-[var(--brand-gold)]
-                  "
-                />
-
-                <p
-                  className="
-                    font-brand-sans
-
-                    text-[8px]
-                    font-bold
-                    uppercase
-
-                    tracking-[0.2em]
-
-                    text-[var(--brand-gold-700)]
-
-                    sm:text-[9px]
-                  "
-                >
-                  Selected Projects
-                </p>
-              </div>
-
               {/* TITLE */}
 
               <h1
                 className="
                   mt-5
 
-                  max-w-[820px]
+                  
 
                   font-brand-display
 
@@ -418,7 +375,7 @@ export default async function ProjectsPage() {
 
                   font-brand-sans
 
-                  text-[12px]
+                  text-[13px]
                   font-medium
                   leading-[1.85]
 
@@ -426,7 +383,7 @@ export default async function ProjectsPage() {
 
                   sm:text-[13px]
 
-                  lg:text-[14px]
+                  lg:text-[16px]
                 "
               >
                 Explore completed Sofa N More work across bespoke sofas,
@@ -434,58 +391,6 @@ export default async function ProjectsPage() {
                 restoration.
               </p>
             </div>
-
-            {/* ===============================================
-                SUMMARY PANEL
-            ================================================ */}
-
-            {projects.length > 0 && (
-              <div
-                className="
-                  rounded-[24px]
-
-                  border
-                  border-white/80
-
-                  bg-[#EEE5D9]
-
-                  p-[5px]
-
-                  shadow-[0_10px_24px_rgba(78,56,33,0.08),inset_1px_1px_2px_rgba(255,255,255,0.85)]
-
-                  lg:rounded-[28px]
-                "
-              >
-                <div
-                  className="
-                    grid
-                    grid-cols-2
-
-                    divide-x
-                    divide-[var(--brand-navy)]/[0.07]
-
-                    overflow-hidden
-
-                    rounded-[19px]
-
-                    border
-                    border-[var(--brand-navy)]/[0.045]
-
-                    bg-[#F5EEE5]
-                  "
-                >
-                  <HeroMetric
-                    value={String(projects.length).padStart(2, "0")}
-                    label="Projects"
-                  />
-
-                  <HeroMetric
-                    value={String(representedServices).padStart(2, "0")}
-                    label="Services"
-                  />
-                </div>
-              </div>
-            )}
           </header>
 
           {/* =================================================
@@ -502,8 +407,6 @@ export default async function ProjectsPage() {
               lg:mt-18
             "
           >
-         
-
             {/* ===============================================
                 PROJECT GRID
             ================================================ */}
@@ -686,8 +589,8 @@ function HeroMetric({ value, label }: { value: string; label: string }) {
   return (
     <div
       className="
-        px-4
-        py-4
+        px-2
+        py-2
 
         sm:px-5
       "
@@ -1036,13 +939,13 @@ function ProjectCard({
 
               font-brand-sans
 
-              text-[10px]
+              text-[12px]
               font-medium
               leading-[1.7]
 
               text-[var(--brand-text-muted)]
 
-              sm:text-[11px]
+              sm:text-[13px]
             "
           >
             {project.excerpt}
@@ -1086,7 +989,7 @@ function ProjectCard({
 
                 font-brand-sans
 
-                text-[8px]
+                text-[10px]
                 font-semibold
 
                 text-[var(--brand-text-muted)]
@@ -1136,7 +1039,7 @@ function ProjectCard({
 
                 font-brand-sans
 
-                text-[7px]
+                text-[9px]
                 font-bold
                 uppercase
 

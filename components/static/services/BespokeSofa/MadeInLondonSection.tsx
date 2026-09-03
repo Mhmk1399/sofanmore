@@ -421,7 +421,7 @@ function WorkshopVisual() {
           "
         >
           <Image
-            src="/assets/images/Repair.webp"
+            src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Repair.webp"
             alt="Sofa N More London workshop craftsmanship"
             fill
             sizes="(max-width: 1023px) 100vw, 54vw"

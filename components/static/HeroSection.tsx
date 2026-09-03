@@ -46,7 +46,7 @@ const services: Service[] = [
     description:
       "Custom-designed sofa tailored to your exact specifications and style.",
     icon: Armchair,
-    image: "/assets/site/27.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/27.webp",
     href: "/services/bespoke-sofas",
   },
   {
@@ -55,7 +55,7 @@ const services: Service[] = [
     description:
       "Durable, elegant sofa solutions for offices, hotels, and restaurants.",
     icon: Building2,
-    image: "/assets/site/34.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/34.webp",
     href: "/services/commercial-sofas",
   },
   {
@@ -64,7 +64,7 @@ const services: Service[] = [
     description:
       "Full interior design services to transform your space from concept to completion.",
     icon: Palette,
-    image: "/assets/site/62.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/62.webp",
     href: "/services/interior-design",
   },
   {
@@ -73,7 +73,7 @@ const services: Service[] = [
     description:
       "Professional restoration of antique and damaged sofa to its former glory.",
     icon: Hammer,
-    image: "/assets/site/46.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/46.webp",
     href: "/services/sofa-repair-restoration",
   },
 ];
@@ -165,7 +165,7 @@ function HeroBackground() {
         "
       >
         <Image
-          src="/assets/images/herodesktop.webp"
+          src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/herodesktop.webp"
           alt=""
           fill
           quality={75}
@@ -188,7 +188,7 @@ function HeroBackground() {
         "
       >
         <Image
-          src="/assets/images/heromobile.webp"
+          src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/heromobile.webp"
           alt=""
           fill
           quality={70}
@@ -449,7 +449,7 @@ function HeroImage() {
     >
       <div className="relative h-full overflow-hidden rounded-[22px]">
         <Image
-          src="/assets/site/57.webp"
+          src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/57.webp"
           alt="Luxury bespoke sofa handcrafted in our London workshop, featuring premium Italian leather upholstery"
           fill
           loading="eager"
@@ -664,15 +664,15 @@ function TrustDock() {
                 <div
                   className="
                     font-brand-display text-[11px]
-                    font-semibold leading-tight
-                    xl:text-[12px]
+                    font-semibold  
+                    xl:text-[16px]
                   "
                 >
                   {item.title}
                 </div>
                 <div
                   className="
-                    mt-0.5 font-brand-sans text-[8px]
+                    mt-0.5 font-brand-sans text-[10px]
                     font-semibold text-[var(--brand-text-muted)]
                   "
                 >
@@ -826,7 +826,7 @@ function TabletMainHero() {
           <div className="clay-inset relative overflow-hidden rounded-[23px] p-[5px]">
             <div className="relative h-full min-h-[380px] overflow-hidden rounded-[19px]">
               <Image
-                src="/assets/site/5.webp"
+                src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/5.webp"
                 alt="Luxury handcrafted sofa by Sofa N More London"
                 fill
                 loading="eager"
@@ -1010,7 +1010,7 @@ function MobileHeroMain() {
         >
           {/* Image background */}
           <Image
-            src="/assets/site/67.webp"
+            src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/67.webp"
             alt="Bespoke luxury sofa by Sofa N More, handcrafted in London"
             fill
             loading="eager"

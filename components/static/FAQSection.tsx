@@ -182,7 +182,7 @@ const DesktopFAQ = memo(function DesktopFAQ({ items }: { items: FAQItem[] }) {
                       className="text-[var(--brand-gold)]"
                     />
                   </span>
-                  <span className="mt-2.5 whitespace-pre-line font-brand-sans text-[8px] font-semibold leading-[1.3] text-[var(--brand-navy)]">
+                  <span className="mt-2.5 whitespace-pre-line font-brand-sans text-[12px] font-semibold leading-[1.3] text-[var(--brand-navy)]">
                     {item.title}
                   </span>
                 </div>

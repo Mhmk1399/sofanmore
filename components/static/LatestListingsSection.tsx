@@ -33,7 +33,7 @@ const listings: Listing[] = [
     date: "08 AUG 2026",
     title: "Bespoke sofa Opportunity",
     description: "Discover our latest handcrafted sofa opportunity in London.",
-    image: "/assets/images/1.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/1.webp",
     href: "/blog/bespoke-sofas-opportunity",
   },
 
@@ -44,7 +44,7 @@ const listings: Listing[] = [
     title: "New London Interior Project",
     description:
       "A new bespoke interior project combining craftsmanship, comfort and refined materials.",
-    image: "/assets/images/7.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/7.webp",
     href: "/blog/london-interior-project",
     featured: true,
   },
@@ -56,7 +56,7 @@ const listings: Listing[] = [
     title: "Latest Sofa N More Update",
     description:
       "Explore the latest from our London workshop and bespoke design studio.",
-    image: "/assets/images/5.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/5.webp",
     href: "/blog/workshop-update",
   },
 ];

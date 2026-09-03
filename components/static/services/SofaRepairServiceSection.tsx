@@ -984,7 +984,7 @@ function RepairVisual() {
           "
         >
           <Image
-            src="/assets/site/32.webp"
+            src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/32.webp"
             alt="Sofa repair and restoration by Sofa N More in North West London"
             fill
             sizes="(max-width: 1023px) 100vw, 52vw"

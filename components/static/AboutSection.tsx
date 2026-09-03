@@ -327,7 +327,7 @@ function DesktopImage() {
           "
         >
           <Image
-            src="/assets/site/1.webp"
+            src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/1.webp"
             alt="Sofa N More bespoke sofa interior"
             fill
             sizes="(min-width: 1024px) 55vw, 100vw"
@@ -419,7 +419,7 @@ function DesktopFeatureCard({ card }: { card: FeatureCard }) {
             leading-[1.45]
             text-[var(--brand-text-muted)]
 
-            xl:text-[10px]
+            xl:text-[12px]
           "
         >
           {card.description}
@@ -618,7 +618,7 @@ function MobileImage() {
           "
         >
           <Image
-            src="/assets/site/6.webp"
+            src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/6.webp"
             alt="Sofa N More bespoke sofa interior"
             fill
             sizes="100vw"

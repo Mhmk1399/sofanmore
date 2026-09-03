@@ -182,7 +182,7 @@ export default function ProjectManagement({
                   coverImageStorageKey: "",
                 })
               }
-              placeholder="/assets/images/1.webp"
+              placeholder="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/1.webp"
             />
             <div className="rounded-xl border border-white/60 bg-white/45 p-2.5 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_0_0_1px_rgba(255,255,255,0.5)_inset]">
               <div className="flex flex-wrap items-center justify-between gap-2">

@@ -491,7 +491,7 @@ function WorkshopVisitPanel() {
             "
           >
             <Image
-              src="/assets/site/30.webp"
+              src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/30.webp"
               alt="Sofa N More working sofa and upholstery workshop in North West London"
               fill
               preload
@@ -507,8 +507,6 @@ function WorkshopVisitPanel() {
                 bg-[linear-gradient(180deg,rgba(18,37,62,0.02)_0%,rgba(18,37,62,0.08)_48%,rgba(18,37,62,0.56)_100%)]
               "
             />
-
-          
           </div>
         </div>
 

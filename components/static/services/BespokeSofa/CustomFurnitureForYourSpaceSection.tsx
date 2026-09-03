@@ -307,7 +307,7 @@ function ImageStage() {
         >
           {/* IMAGE */}
           <Image
-                  src="/assets/site/19.webp"
+                  src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/19.webp"
             alt="Craftsperson finishing bespoke sofa upholstery in a London workshop"
             fill
             sizes="(max-width: 1024px) 90vw, 55vw"

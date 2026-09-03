@@ -41,7 +41,7 @@ export const demoProjects: ProjectSliderItem[] = [
 
     title: "Bespoke Sofa Project",
 
-    coverImageUrl: "/assets/images/site/8.webp",
+    coverImageUrl: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/8.webp",
 
     excerpt:
       "A made-to-measure sofa developed around the proportions, layout and character of the space.",
@@ -56,7 +56,7 @@ export const demoProjects: ProjectSliderItem[] = [
 
     title: "Commercial Seating Project",
 
-    coverImageUrl: "/assets/images/site/12.webp",
+    coverImageUrl: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/12.webp",
 
     excerpt:
       "Bespoke seating created for a commercial interior with comfort, durability and visual balance in mind.",
@@ -71,7 +71,7 @@ export const demoProjects: ProjectSliderItem[] = [
 
     title: "Interior Design Project",
 
-    coverImageUrl: "/assets/images/site/13.webp",
+    coverImageUrl: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/13.webp",
 
     excerpt:
       "A considered interior developed around the way the space needs to look, feel and function.",
@@ -86,7 +86,7 @@ export const demoProjects: ProjectSliderItem[] = [
 
     title: "Sofa Restoration Project",
 
-    coverImageUrl: "/assets/images/site/1.webp",
+    coverImageUrl: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/1.webp",
 
     excerpt:
       "A sofa carefully renewed through professional repair, upholstery and finishing work.",

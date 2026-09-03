@@ -8,7 +8,7 @@ import ClayButton from "@/components/ui/ClayButton";
    CONFIG
 ========================================================= */
 
-const HERO_IMAGE = "/assets/site/44.webp";
+const HERO_IMAGE = "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/44.webp";
 
 const PHONE_NUMBER = "+447400577844";
 

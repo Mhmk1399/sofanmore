@@ -66,7 +66,7 @@ const serviceGroups: ServiceGroup[] = [
     subtitle: "Made for your space",
     icon: Armchair,
     href: "/services/bespoke-sofas",
-    image: "/assets/images/bespoke-sofa-london-sofa-n-more.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/bespoke-sofa-london-sofa-n-more.webp",
 
     links: [
       {
@@ -97,7 +97,7 @@ const serviceGroups: ServiceGroup[] = [
     subtitle: "Built for business",
     icon: Building2,
     href: "/services/commercial-sofas",
-    image: "/assets/site/25.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/25.webp",
 
     links: [
       {
@@ -124,7 +124,7 @@ const serviceGroups: ServiceGroup[] = [
     subtitle: "Complete environments",
     icon: Palette,
     href: "/services/interior-design",
-    image: "/assets/site/48.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/48.webp",
 
     links: [
       {
@@ -151,7 +151,7 @@ const serviceGroups: ServiceGroup[] = [
     subtitle: "Expert craftsmanship",
     icon: Hammer,
     href: "/services/sofa-repair-restoration",
-    image: "/assets/images/Repair.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Repair.webp",
 
     links: [
       {
@@ -817,7 +817,7 @@ function Logo({ close }: { close: () => void }) {
         />
 
         <Image
-          src={"/assets/images/Sofa_Logo.webp"}
+          src={"https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Sofa_Logo.webp"}
           height={100}
           width={100}
           alt="logo"

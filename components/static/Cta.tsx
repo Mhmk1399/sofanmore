@@ -16,7 +16,7 @@ type LuxuryClayCtaBannerProps = {
 ========================================================= */
 
 export default function LuxuryClayCtaBanner({
-  chairSrc = "/assets/images/cta.png",
+  chairSrc = "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/cta.png",
 }: LuxuryClayCtaBannerProps) {
   return (
     <section

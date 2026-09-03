@@ -716,7 +716,7 @@ function WorkshopImage() {
           "
         >
           <Image
-            src="/assets/site/65.webp"
+            src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/65.webp"
             alt="Sofa N More bespoke sofa workshop in London"
             fill
             sizes="(max-width: 1023px) 100vw, 45vw"

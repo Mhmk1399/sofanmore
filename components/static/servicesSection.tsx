@@ -64,7 +64,7 @@ const services: Service[] = [
     shortDescription:
       "Made-to-measure sofa handcrafted in London, tailored to your space and style.",
     cta: "Explore Bespoke",
-    image: "/assets/images/bespoke-sofa-london-sofa-n-more.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/bespoke-sofa-london-sofa-n-more.webp",
     href: "/services/bespoke-sofas",
   },
 
@@ -73,7 +73,7 @@ const services: Service[] = [
     shortDescription:
       "Expert care and reupholstery that gives treasured sofa new life while preserving its character.",
     cta: "Explore Restoration",
-    image: "/assets/images/Repair.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Repair.webp",
     href: "/services/sofa-repair-restoration",
   },
 
@@ -82,7 +82,7 @@ const services: Service[] = [
     shortDescription:
       "Explore bespoke sofas, commercial seating, interiors and careful restoration from one London workshop.",
     cta: "Explore Our Services",
-    image: "/assets/site/30.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/30.webp",
     href: "/services",
   },
 
@@ -91,7 +91,7 @@ const services: Service[] = [
     shortDescription:
       "Tailored residential and commercial interiors combining elegant design, functionality and craftsmanship.",
     cta: "Explore Interiors",
-    image: "/assets/site/48.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/48.webp",
     href: "/services/interior-design",
   },
 
@@ -100,7 +100,7 @@ const services: Service[] = [
     shortDescription:
       "Premium ergonomic sofa solutions designed for stylish, functional and productive workspaces.",
     cta: "Explore Office sofa",
-    image: "/assets/site/25.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/25.webp",
     href: "/services/commercial-sofas",
   },
 ];
@@ -1252,9 +1252,9 @@ function ServiceCard({
 
             ${
               isActive
-                ? "lg:text-[11px]"
+                ? "lg:text-[13px]"
                 : isSide
-                  ? "lg:text-[9px]"
+                  ? "lg:text-[10px]"
                   : "lg:line-clamp-3 lg:text-[7px]"
             }
           `}

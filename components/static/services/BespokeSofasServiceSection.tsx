@@ -709,7 +709,7 @@ function BespokeVisual() {
           "
         >
           <Image
-            src="/assets/site/71.webp"
+            src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/71.webp"
             alt="Bespoke sofa designed around a London interior"
             fill
             sizes="(max-width: 1023px) 100vw, 52vw"

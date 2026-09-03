@@ -119,7 +119,7 @@ function DesktopComposition() {
               "
             >
               <Image
-                src="/assets/images/6.webp"
+                src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/6.webp"
                 alt="Sofa N More bespoke sofa craftsmanship in London"
                 fill
                 preload
@@ -921,7 +921,7 @@ function MobileComposition() {
               "
             >
               <Image
-                src="/assets/images/5.webp"
+                src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/5.webp"
                 alt="Sofa N More London bespoke craftsmanship"
                 fill
                 sizes="100vw"

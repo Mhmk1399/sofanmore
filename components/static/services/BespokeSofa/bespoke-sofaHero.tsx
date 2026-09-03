@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Armchair, Crown, Phone, Ruler, Sparkles } from "lucide-react";
+import { Armchair, Phone, Ruler, Sparkles } from "lucide-react";
 import ClayButton from "@/components/ui/ClayButton";
 
 /* =========================================================
@@ -54,21 +54,6 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
             <div className="relative z-20 grid px-4 pb-5 pt-5 sm:px-6 sm:pb-7 sm:pt-7 lg:min-h-[760px] lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-8 lg:px-10 lg:py-10 xl:gap-12 xl:px-14 xl:py-12">
               {/* COPY */}
               <div className="relative z-30 lg:pl-4 xl:pl-8 mb-20">
-                {/* BRAND MARK — desktop only */}
-                <div className="hidden items-center gap-2 lg:flex">
-                  <Crown
-                    size={16}
-                    strokeWidth={1.5}
-                    className="text-[var(--brand-gold-700)]"
-                  />
-                  <span className="font-brand-display text-[17px] tracking-[0.16em] text-[var(--brand-navy)]">
-                    SNM
-                  </span>
-                  <span className="ml-1 font-brand-sans text-[7px] font-bold uppercase tracking-[0.22em] text-[var(--brand-text-muted)]">
-                    London
-                  </span>
-                </div>
-
                 {/* EYEBROW */}
                 <div className="flex items-center gap-3 lg:mt-10">
                   <span className="h-px w-8 bg-[var(--brand-gold)]" />
@@ -166,7 +151,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
                 <div className="clay-surface-strong absolute bottom-[52px] left-1/2 -mt-20 md:-mt-0 top-0 w-[99%] -translate-x-1/2 rounded-t-[29%] rounded-b-[24px] p-[6px] sm:w-[86%] sm:bottom-[60px] sm:p-[8px] sm:rounded-b-[28px] lg:bottom-[45px] lg:w-[96%] lg:p-[9px] lg:rounded-b-[30px] xl:w-[91%]">
                   <div className="clay-inset relative h-100 lg:h-150 overflow-hidden rounded-t-[29%] rounded-b-[19px] bg-[#DCD0BE] sm:rounded-b-[23px] lg:rounded-b-[24px]">
                     <Image
-                  src="/assets/site/49.webp"
+                      src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/49.webp"
                       alt="Bespoke sofa handcrafted for a luxury London living room"
                       fill
                       preload
@@ -183,8 +168,6 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
                 </div>
               </div>
             </div>
-
-           
           </div>
         </div>
       </div>

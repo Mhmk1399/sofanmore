@@ -1,26 +1,32 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import type { LucideIcon } from "lucide-react";
 
 import { cache } from "react";
 
+import Image from "next/image";
 import Link from "next/link";
 import { connection } from "next/server";
+import { notFound } from "next/navigation";
 
 import {
+  ArrowDown,
+  ArrowRight,
+  CheckCircle2,
   ChevronRight,
-  FolderOpen,
+  FileText,
   Hash,
   Images,
+  Layers3,
   MapPin,
   Sofa,
+  Wrench,
 } from "lucide-react";
-
-import { notFound } from "next/navigation";
 
 import BespokeSofaLeadForm from "@/components/lead-capture/BespokeSofaLeadForm";
 import CommercialSofaLeadForm from "@/components/lead-capture/CommercialSofaLeadForm";
 import InteriorDesignLeadForm from "@/components/lead-capture/InteriorDesignLeadForm";
 import SofaRepairLeadForm from "@/components/lead-capture/SofaRepairLeadForm";
+
 import ClayButton from "@/components/ui/ClayButton";
 
 import { getPublishedProjectBySlug } from "@/lib/project-repository";
@@ -32,11 +38,7 @@ import {
 
 import { siteConfig } from "@/lib/site";
 
-import {
-  ProjectGallery,
-  ProjectHeroMedia,
-  type ProjectMediaItem,
-} from "./ProjectMedia";
+import { ProjectGallery, type ProjectMediaItem } from "./ProjectMedia";
 
 /* =========================================================
    TYPES
@@ -46,6 +48,15 @@ type ProjectDetailPageProps = {
   params: Promise<{
     slug: string;
   }>;
+};
+
+type StorySection = {
+  id: string;
+  number: string;
+  navLabel: string;
+  title: string;
+  body: string;
+  icon: LucideIcon;
 };
 
 /* =========================================================
@@ -59,12 +70,6 @@ const WEBSITE_ID = `${SITE_URL}/#website`;
 
 /* =========================================================
    PROJECT LOADER
-
-   Important:
-   Do not convert unexpected DB/API errors into a false 404.
-
-   A missing project should return null from the repository.
-   A real database error should remain a server error.
 ========================================================= */
 
 const loadProject = cache(async (slug: string) => {
@@ -74,7 +79,7 @@ const loadProject = cache(async (slug: string) => {
 });
 
 /* =========================================================
-   URL HELPER
+   HELPERS
 ========================================================= */
 
 function absoluteUrl(value: string) {
@@ -87,10 +92,6 @@ function absoluteUrl(value: string) {
     SITE_URL,
   ).toString();
 }
-
-/* =========================================================
-   META DESCRIPTION
-========================================================= */
 
 function createMetaDescription(value: string, maxLength = 160) {
   const normalized = value.replace(/\s+/g, " ").trim();
@@ -107,29 +108,65 @@ function createMetaDescription(value: string, maxLength = 160) {
   return `${shortened}…`;
 }
 
-/* =========================================================
-   SAFE JSON-LD
-========================================================= */
+function createPreview(value: string, maxLength = 235) {
+  const normalized = value.replace(/\s+/g, " ").trim();
+
+  if (normalized.length <= maxLength) {
+    return normalized;
+  }
+
+  const shortened = normalized
+    .slice(0, maxLength)
+    .replace(/\s+\S*$/, "")
+    .trim();
+
+  return `${shortened}…`;
+}
 
 function serializeJsonLd(value: unknown) {
   return JSON.stringify(value).replace(/</g, "\\u003c");
 }
 
 function getProjectEnquiryAnchor(service: keyof typeof projectServiceLabels) {
-  if (service === "COMMERCIAL_SOFA") return "commercial-sofa-enquiry";
-  if (service === "INTERIOR_DESIGN") return "interior-design-enquiry";
-  if (service === "SOFA_REPAIR_RESTORATION") return "sofa-repair-enquiry";
+  if (service === "COMMERCIAL_SOFA") {
+    return "commercial-sofa-enquiry";
+  }
+
+  if (service === "INTERIOR_DESIGN") {
+    return "interior-design-enquiry";
+  }
+
+  if (service === "SOFA_REPAIR_RESTORATION") {
+    return "sofa-repair-enquiry";
+  }
+
   return "bespoke-sofa-enquiry";
 }
+
+/* =========================================================
+   LEAD FORM
+
+   IMPORTANT:
+   Existing forms remain unchanged.
+========================================================= */
 
 function ProjectServiceLeadForm({
   service,
 }: {
   service: keyof typeof projectServiceLabels;
 }) {
-  if (service === "COMMERCIAL_SOFA") return <CommercialSofaLeadForm />;
-  if (service === "INTERIOR_DESIGN") return <InteriorDesignLeadForm />;
-  if (service === "SOFA_REPAIR_RESTORATION") return <SofaRepairLeadForm />;
+  if (service === "COMMERCIAL_SOFA") {
+    return <CommercialSofaLeadForm />;
+  }
+
+  if (service === "INTERIOR_DESIGN") {
+    return <InteriorDesignLeadForm />;
+  }
+
+  if (service === "SOFA_REPAIR_RESTORATION") {
+    return <SofaRepairLeadForm />;
+  }
+
   return <BespokeSofaLeadForm />;
 }
 
@@ -155,9 +192,7 @@ export async function generateMetadata({
     };
   }
 
-  const pagePath = `/projects/${project.slug}`;
-
-  const pageUrl = `${SITE_URL}${pagePath}`;
+  const pageUrl = `${SITE_URL}/projects/${project.slug}`;
 
   const description = createMetaDescription(project.excerpt);
 
@@ -183,9 +218,7 @@ export async function generateMetadata({
         follow: true,
 
         "max-image-preview": "large",
-
         "max-snippet": -1,
-
         "max-video-preview": -1,
       },
     },
@@ -247,70 +280,116 @@ export default async function ProjectDetailPage({
   const pageUrl = `${SITE_URL}/projects/${project.slug}`;
 
   /* =======================================================
-     ALL PROJECT MEDIA
-
-     First image is always the cover.
+     MEDIA
   ======================================================= */
 
   const media: ProjectMediaItem[] = [
     {
       id: `cover-${project.slug}`,
-
       url: project.coverImageUrl,
-
       alt: project.title,
-
       label: "Project cover",
     },
 
-    ...project.images.map((image, index) => ({
-      id: image.id,
+    ...project.images
+      .slice()
+      .sort((a, b) => a.sortOrder - b.sortOrder)
+      .map((image, index) => ({
+        id: image.id,
 
-      url: image.url,
+        url: image.url,
 
-      alt: image.alt?.trim() || `${project.title} — project image ${index + 1}`,
+        alt:
+          image.alt?.trim() || `${project.title} — project image ${index + 1}`,
 
-      label: `Project image ${index + 1}`,
-    })),
+        label: `Project image ${index + 1}`,
+      })),
   ];
 
   /* =======================================================
      STORY
+
+     Only sections backed by actual Project data render.
   ======================================================= */
 
-  const storySections = [
+  const rawStorySections = [
     {
+      id: "brief",
       number: "01",
+      navLabel: "The Brief",
       title: "The Brief",
       body: project.brief,
+      icon: FileText,
     },
 
     {
+      id: "approach",
       number: "02",
+      navLabel: "The Approach",
       title: "The Approach",
       body: project.approach,
+      icon: Wrench,
     },
 
     {
+      id: "materials",
       number: "03",
+      navLabel: "Materials",
       title: "Materials & Details",
       body: project.details,
+      icon: Layers3,
     },
 
     {
+      id: "result",
       number: "04",
+      navLabel: "The Result",
       title: "The Result",
       body: project.result,
+      icon: CheckCircle2,
     },
-  ].filter(
-    (
-      section,
-    ): section is {
-      number: string;
-      title: string;
-      body: string;
-    } => Boolean(section.body?.trim()),
+  ];
+
+  const storySections = rawStorySections.filter(
+    (section): section is StorySection => Boolean(section.body?.trim()),
   );
+
+  const showcaseImages = media.slice(0, 4);
+
+  /* =======================================================
+     PAGE NAVIGATION
+  ======================================================= */
+
+  const pageNavigation = [
+    ...(storySections.length
+      ? [
+          {
+            label: "Overview",
+            href: "#overview",
+          },
+        ]
+      : []),
+
+    ...storySections.map((section) => ({
+      label: section.navLabel,
+
+      href: `#${section.id}`,
+    })),
+
+    ...(project.images.length
+      ? [
+          {
+            label: "Gallery",
+            href: "#project-gallery",
+          },
+        ]
+      : []),
+
+    {
+      label: "Next Steps",
+      href: `#${enquiryAnchor}`,
+    },
+  ];
 
   /* =======================================================
      JSON-LD IMAGES
@@ -334,10 +413,6 @@ export default async function ProjectDetailPage({
     "@context": "https://schema.org",
 
     "@graph": [
-      /* ---------------------------------------------------
-         WEBSITE
-      --------------------------------------------------- */
-
       {
         "@type": "WebSite",
 
@@ -347,10 +422,6 @@ export default async function ProjectDetailPage({
 
         name: siteConfig.name,
       },
-
-      /* ---------------------------------------------------
-         BUSINESS
-      --------------------------------------------------- */
 
       {
         "@type": "Organization",
@@ -379,10 +450,6 @@ export default async function ProjectDetailPage({
         },
       },
 
-      /* ---------------------------------------------------
-         PROJECT / CREATIVE WORK
-      --------------------------------------------------- */
-
       {
         "@type": "CreativeWork",
 
@@ -391,6 +458,8 @@ export default async function ProjectDetailPage({
         url: pageUrl,
 
         name: project.title,
+
+        headline: project.title,
 
         description: project.excerpt,
 
@@ -423,10 +492,6 @@ export default async function ProjectDetailPage({
         image: schemaImages,
       },
 
-      /* ---------------------------------------------------
-         WEB PAGE
-      --------------------------------------------------- */
-
       {
         "@type": "WebPage",
 
@@ -456,10 +521,6 @@ export default async function ProjectDetailPage({
           "@id": `${pageUrl}#breadcrumb`,
         },
       },
-
-      /* ---------------------------------------------------
-         BREADCRUMB
-      --------------------------------------------------- */
 
       {
         "@type": "BreadcrumbList",
@@ -503,6 +564,10 @@ export default async function ProjectDetailPage({
 
   return (
     <>
+      {/* ===================================================
+          SEO SCHEMA
+      ==================================================== */}
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -516,353 +581,845 @@ export default async function ProjectDetailPage({
 
           bg-[var(--brand-ivory)]
 
-          px-3 md:mt-20  
-
           pb-16
-          pt-[66px]
+          pt-[82px]
 
-          sm:px-5
           sm:pb-20
-          sm:pt-[108px]
+          sm:pt-[96px]
 
-          lg:px-8
-          lg:pb-24
-          lg:pt-[126px]
+          lg:pb-24 lg:mt-8
+          lg:pt-[110px]
         "
       >
-        <article
-          className="
-            mx-auto
-
-            max-w-[var(--site-width)]
-          "
-        >
-      
-
+        <article>
           {/* =================================================
-              HERO
+              CINEMATIC HERO
           ================================================== */}
 
-          <header
+          <section
+            aria-labelledby="project-title"
             className="
-              grid
+              px-3
 
-              gap-8
+              sm:px-5
 
-              lg:grid-cols-[0.88fr_1.12fr]
-              lg:items-center
-
-              xl:gap-14
+              lg:px-8
             "
           >
-            {/* ===============================================
-                HERO COPY
-            ================================================ */}
-
             <div
               className="
-                max-w-[680px]
+                relative
+
+                mx-auto
+
+                min-h-[610px]
+                max-w-[var(--site-width)]
+
+                overflow-hidden
+
+                rounded-[26px]
+
+                bg-[var(--brand-navy)]
+
+                shadow-[0_18px_45px_rgba(18,37,62,0.15)]
+
+                sm:min-h-[650px]
+                sm:rounded-[30px]
+
+                lg:min-h-[690px]
+                lg:rounded-[34px]
               "
             >
-              {/* EYEBROW */}
+              {/* =============================================
+                  COVER
+              ============================================== */}
+
+              <Image
+                src={project.coverImageUrl}
+                alt={project.title}
+                fill
+                priority
+                draggable={false}
+                sizes="100vw"
+                className="
+                  object-cover
+                  object-center
+                "
+              />
+
+              {/* =============================================
+                  CINEMATIC GRADIENT
+
+                  No blur / backdrop-filter.
+              ============================================== */}
+
+              <div
+                aria-hidden
+                className="
+                  absolute
+                  inset-0
+
+                  bg-[linear-gradient(90deg,rgba(7,15,24,0.82)_0%,rgba(7,15,24,0.56)_38%,rgba(7,15,24,0.16)_68%,rgba(7,15,24,0.28)_100%)]
+                "
+              />
+
+              <div
+                aria-hidden
+                className="
+                  absolute
+                  inset-0
+
+                  bg-[linear-gradient(180deg,rgba(5,12,20,0.18)_0%,transparent_38%,rgba(5,12,20,0.42)_100%)]
+                "
+              />
+
+              {/* =============================================
+                  HERO CONTENT
+              ============================================== */}
 
               <div
                 className="
-                  flex
-                  items-center
+                  relative
+                  z-10
 
-                  gap-3
+                  flex
+                  min-h-[610px]
+
+                  flex-col
+                  justify-between
+
+                  p-5
+
+                  sm:min-h-[650px]
+                  sm:p-7
+
+                  lg:min-h-[690px]
+                  lg:p-10
                 "
               >
-                <span
+                {/* ===========================================
+                    TOP
+                ============================================ */}
+
+                <div
                   className="
                     flex
-                    h-8
 
                     items-center
+                    justify-between
 
-                    gap-1.5
-
-                    rounded-full
-
-                    border
-                    border-[var(--brand-navy)]/[0.06]
-
-                    bg-[#EEE5D9]
-
-                    px-3
-
-                    font-brand-sans
-
-                    text-[8px]
-                    font-bold
-                    uppercase
-
-                    tracking-[0.14em]
-
-                    text-[var(--brand-navy)]
-
-                    shadow-[inset_1px_1px_2px_rgba(101,73,43,0.06),inset_-1px_-1px_2px_rgba(255,255,255,0.75)]
+                    gap-4
                   "
                 >
-                  <Hash
-                    size={10}
-                    aria-hidden
+                  <Link
+                    href="/projects"
                     className="
-                      text-[var(--brand-gold-700)]
+                      inline-flex
+
+                      items-center
+
+                      gap-2
+
+                      font-brand-sans
+
+                      text-[8px]
+                      font-bold
+                      uppercase
+
+                      tracking-[0.12em]
+
+                      text-white/75
+
+                      transition-colors
+
+                      hover:text-[var(--brand-gold)]
                     "
-                  />
-                  Project {project.projectCode}
-                </span>
-
-                <span
-                  aria-hidden
-                  className="
-                    h-px
-                    w-9
-
-                    bg-[var(--brand-gold)]
-                  "
-                />
-              </div>
-
-              {/* H1 */}
-
-              <h1
-                className="
-                  mt-5
-
-                  font-brand-display
-
-                  text-[42px]
-                  font-medium
-                  leading-[0.98]
-
-                  tracking-[-0.045em]
-
-                  text-[var(--brand-navy)]
-
-                  sm:text-[58px]
-
-                  lg:text-[64px]
-
-                  xl:text-[72px]
-                "
-              >
-                {project.title}
-              </h1>
-
-              {/* DESCRIPTION */}
-
-              <p
-                className="
-                  mt-6
-
-                  max-w-[620px]
-
-                  font-brand-sans
-
-                  text-[12px]
-                  font-medium
-                  leading-[1.85]
-
-                  text-[var(--brand-text-muted)]
-
-                  sm:text-[13px]
-
-                  lg:text-[14px]
-                "
-              >
-                {project.excerpt}
-              </p>
-
-              {/* META */}
-
-              <div
-                className="
-                  mt-7
-
-                  grid
-                  gap-2
-
-                  sm:grid-cols-2
-                "
-              >
-                <MetaItem
-                  icon={<Sofa size={13} />}
-                  label="Service"
-                  value={serviceLabel}
-                />
-
-                {project.locationLabel && (
-                  <MetaItem
-                    icon={<MapPin size={13} />}
-                    label="Location"
-                    value={project.locationLabel}
-                  />
-                )}
-
-                <MetaItem
-                  icon={<Images size={13} />}
-                  label="Project Images"
-                  value={`${media.length} ${
-                    media.length === 1 ? "image" : "images"
-                  }`}
-                />
-
-                <MetaItem
-                  icon={<FolderOpen size={13} />}
-                  label="Project"
-                  value={`#${project.projectCode}`}
-                />
-              </div>
-
-              {/* ACTIONS */}
-
-              <div
-                className="
-                  mt-7
-
-                  flex
-                  flex-wrap
-
-                  gap-2.5
-                "
-              >
-                {project.images.length > 0 && (
-                  <ClayButton
-                    href="#project-gallery"
-                    variant="gold"
-                    size="md"
-                    showArrow
                   >
-                    Explore Images
-                  </ClayButton>
-                )}
+                    <ChevronRight
+                      size={13}
+                      strokeWidth={1.6}
+                      className="
+                        rotate-180
+                      "
+                    />
+                    Back to Projects
+                  </Link>
 
-                <ClayButton
-                  href={`#${enquiryAnchor}`}
-                  variant="outline"
-                  size="md"
-                  showArrow
+                  <span
+                    className="
+                      hidden
+
+                      rounded-full
+
+                      border
+                      border-white/15
+
+                      bg-[#111820]/75
+
+                      px-3
+                      py-2
+
+                      font-brand-sans
+
+                      text-[7px]
+                      font-bold
+                      uppercase
+
+                      tracking-[0.12em]
+
+                      text-white/80
+
+                      sm:block
+                    "
+                  >
+                    {serviceLabel}
+                  </span>
+                </div>
+
+                {/* ===========================================
+                    BOTTOM GRID
+                ============================================ */}
+
+                <div
+                  className="
+                    grid
+
+                    gap-8
+
+                    lg:grid-cols-[minmax(0,1fr)_330px]
+                    lg:items-end
+
+                    xl:gap-14
+                  "
                 >
-                  Request This Service
-                </ClayButton>
+                  {/* =========================================
+                      MAIN COPY
+                  ========================================== */}
+
+                  <div
+                    className="
+                      max-w-[790px]
+                    "
+                  >
+                    <p
+                      className="
+                        font-brand-sans
+
+                        text-[8px]
+                        font-bold
+                        uppercase
+
+                        tracking-[0.2em]
+
+                        text-[var(--brand-gold)]
+
+                        sm:text-[9px]
+                      "
+                    >
+                      Sofa N More Project
+                    </p>
+
+                    <h1
+                      id="project-title"
+                      className="
+                        mt-4
+
+                        max-w-[800px]
+
+                        font-brand-display
+
+                        text-[43px]
+                        font-medium
+                        leading-[0.98]
+
+                        tracking-[-0.045em]
+
+                        text-white
+
+                        sm:text-[58px]
+
+                        lg:text-[68px]
+
+                        xl:text-[76px]
+                      "
+                    >
+                      {project.title}
+                    </h1>
+
+                    <p
+                      className="
+                        mt-5
+
+                        max-w-[590px]
+
+                        font-brand-sans
+
+                        text-[11px]
+                        font-medium
+                        leading-[1.75]
+
+                        text-white/75
+
+                        sm:text-[12px]
+
+                        lg:text-[13px]
+                      "
+                    >
+                      {project.excerpt}
+                    </p>
+
+                    {/* ACTIONS */}
+
+                    <div
+                      className="
+                        mt-7
+
+                        flex
+                        flex-wrap
+
+                        gap-2.5
+                      "
+                    >
+                      <ClayButton
+                        href={`#${enquiryAnchor}`}
+                        variant="gold"
+                        size="md"
+                        showArrow
+                      >
+                        Start a Similar Project
+                      </ClayButton>
+
+                      {project.images.length > 0 && (
+                        <ClayButton
+                          href="#project-gallery"
+                          variant="ivory"
+                          size="md"
+                          showArrow
+                        >
+                          Explore Gallery
+                        </ClayButton>
+                      )}
+                    </div>
+
+                    {/* SCROLL */}
+
+                    <Link
+                      href="#overview"
+                      className="
+                        mt-8
+
+                        inline-flex
+
+                        items-center
+
+                        gap-2
+
+                        font-brand-sans
+
+                        text-[7px]
+                        font-bold
+                        uppercase
+
+                        tracking-[0.1em]
+
+                        text-white/60
+
+                        transition-colors
+
+                        hover:text-white
+                      "
+                    >
+                      Scroll to explore
+                      <span
+                        className="
+                          flex
+                          h-7
+                          w-7
+
+                          items-center
+                          justify-center
+
+                          rounded-full
+
+                          border
+                          border-[var(--brand-gold)]/45
+
+                          text-[var(--brand-gold)]
+                        "
+                      >
+                        <ArrowDown size={11} strokeWidth={1.6} />
+                      </span>
+                    </Link>
+                  </div>
+
+                  {/* =========================================
+                      PROJECT SUMMARY
+                  ========================================== */}
+
+                  <aside
+                    aria-label="Project summary"
+                    className="
+                      rounded-[22px]
+
+                      border
+                      border-white/10
+
+                      bg-[rgba(16,18,19,0.88)]
+
+                      p-4
+
+                      shadow-[0_12px_28px_rgba(0,0,0,0.20)]
+
+                      sm:p-5
+                    "
+                  >
+                    <p
+                      className="
+                        font-brand-sans
+
+                        text-[7px]
+                        font-bold
+                        uppercase
+
+                        tracking-[0.17em]
+
+                        text-[var(--brand-gold)]
+                      "
+                    >
+                      Project Summary
+                    </p>
+
+                    <div
+                      className="
+                        mt-3
+
+                        divide-y
+                        divide-white/10
+                      "
+                    >
+                      <ProjectSummaryItem
+                        icon={Hash}
+                        label="Project Code"
+                        value={`#${project.projectCode}`}
+                      />
+
+                      <ProjectSummaryItem
+                        icon={Sofa}
+                        label="Service"
+                        value={serviceLabel}
+                      />
+
+                      {project.locationLabel && (
+                        <ProjectSummaryItem
+                          icon={MapPin}
+                          label="Location"
+                          value={project.locationLabel}
+                        />
+                      )}
+
+                      <ProjectSummaryItem
+                        icon={Images}
+                        label="Project Images"
+                        value={`${media.length} ${
+                          media.length === 1 ? "image" : "images"
+                        }`}
+                      />
+                    </div>
+
+                    <div
+                      className="
+                        mt-4
+                      "
+                    >
+                      <ClayButton
+                        href={`#${enquiryAnchor}`}
+                        variant="gold"
+                        size="md"
+                        fullWidth
+                        showArrow
+                      >
+                        Request This Service
+                      </ClayButton>
+                    </div>
+                  </aside>
+                </div>
               </div>
             </div>
-
-            {/* ===============================================
-                HERO IMAGE — CLIENT
-            ================================================ */}
-
-            <ProjectHeroMedia images={media} projectTitle={project.title} />
-          </header>
+          </section>
 
           {/* =================================================
-              PROJECT STORY
+              PROJECT NAV
+          ================================================== */}
+
+          {pageNavigation.length > 0 && (
+            <nav
+              aria-label="Project sections"
+              className="
+                relative
+                z-20
+
+                -mt-[18px]
+
+                px-3
+
+                sm:px-5
+
+                lg:px-8
+              "
+            >
+              <div
+                className="
+                  mx-auto
+                  max-w-[calc(var(--site-width)-48px)]
+
+                  overflow-hidden
+
+                  rounded-[17px]
+
+                  border
+                  border-[var(--brand-navy)]/[0.07]
+
+                  bg-[#FFFDF8]
+
+                  shadow-[0_8px_20px_rgba(70,50,30,0.08)]
+                "
+              >
+                <div
+                  className="
+                    flex
+
+                    overflow-x-auto
+
+                    [scrollbar-width:none]
+
+                    [&::-webkit-scrollbar]:hidden
+                  "
+                >
+                  {pageNavigation.map((item, index) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`
+                          relative
+
+                          flex
+                          h-[54px]
+
+                          shrink-0
+
+                          items-center
+                          justify-center
+
+                          px-5
+
+                          font-brand-sans
+
+                          text-[8px]
+                          font-semibold
+
+                          text-[var(--brand-navy)]
+
+                          transition-colors
+
+                          hover:text-[var(--brand-gold-700)]
+
+                          sm:px-6
+                          sm:text-[9px]
+
+                          ${
+                            index === 0
+                              ? `
+                                after:absolute
+                                after:bottom-0
+                                after:left-1/2
+                                after:h-[2px]
+                                after:w-10
+                                after:-translate-x-1/2
+                                after:bg-[var(--brand-gold)]
+                              `
+                              : ""
+                          }
+                        `}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </nav>
+          )}
+
+          {/* =================================================
+              STORY OVERVIEW
           ================================================== */}
 
           {storySections.length > 0 && (
             <section
-              aria-labelledby="project-story-heading"
+              id="overview"
+              aria-labelledby="overview-heading"
               className="
-                mt-14
+                scroll-mt-[120px]
 
-                sm:mt-16
+                px-3
 
-                lg:mt-20
+                sm:px-5
+
+                lg:px-8
               "
             >
-              {/* HEADER */}
-
               <div
                 className="
-                  grid
-                  gap-4
+                  mx-auto
+                  max-w-[calc(var(--site-width)-48px)]
 
+                  border-x
                   border-b
-                  border-[var(--brand-navy)]/[0.08]
+                  border-[var(--brand-navy)]/[0.06]
 
-                  pb-6
+                  bg-[#FFFDF8]
 
-                  lg:grid-cols-[220px_1fr]
-                  lg:items-end
+                  px-4
+                  pb-7
+                  pt-10
+
+                  sm:px-6
+                  sm:pt-12
+
+                  lg:px-7
                 "
               >
-                <p
-                  className="
-                    font-brand-sans
-
-                    text-[8px]
-                    font-bold
-                    uppercase
-
-                    tracking-[0.18em]
-
-                    text-[var(--brand-gold-700)]
-                  "
-                >
-                  Project Story
-                </p>
-
-                <h2
-                  id="project-story-heading"
-                  className="
-                    max-w-[760px]
-
-                    font-brand-display
-
-                    text-[31px]
-                    font-medium
-                    leading-[1.08]
-
-                    tracking-[-0.03em]
-
-                    text-[var(--brand-navy)]
-
-                    sm:text-[40px]
-
-                    lg:text-[46px]
-                  "
-                >
-                  From brief to finished space.
+                <h2 id="overview-heading" className="sr-only">
+                  Project Overview
                 </h2>
+
+                <div
+                  className="
+                    grid
+
+                    gap-0
+
+                    md:grid-cols-2
+
+                    xl:grid-cols-4
+                  "
+                >
+                  {storySections.map((section) => (
+                    <StoryOverviewCard key={section.id} section={section} />
+                  ))}
+                </div>
               </div>
+            </section>
+          )}
 
-              {/* STORY SHELL */}
+          {/* =================================================
+              DARK PROJECT IMAGE STRIP
 
+              Replaces the reference's fake "journey"
+              because our model has no stage-specific
+              journey data.
+          ================================================== */}
+
+          {showcaseImages.length > 1 && (
+            <section
+              aria-labelledby="inside-project-heading"
+              className="
+                px-3
+                pt-8
+
+                sm:px-5
+                sm:pt-10
+
+                lg:px-8
+              "
+            >
               <div
                 className="
-                  mt-6
+                  mx-auto
+
+                  max-w-[calc(var(--site-width)-48px)]
 
                   overflow-hidden
 
-                  rounded-[28px]
+                  rounded-[24px]
 
                   border
-                  border-white/75
+                  border-white/[0.07]
 
-                  bg-[#FFFDF8]/65
+                  bg-[#171818]
 
-                  px-5
+                  p-5
 
-                  shadow-[0_12px_30px_rgba(79,57,34,0.07),inset_1px_1px_1px_rgba(255,255,255,0.85)]
+                  shadow-[0_12px_28px_rgba(18,20,22,0.16)]
 
-                  sm:px-7
+                  sm:p-6
 
-                  lg:rounded-[34px]
-                  lg:px-9
+                  lg:grid
+                  lg:grid-cols-[210px_minmax(0,1fr)]
+                  lg:gap-6
+                  lg:p-7
                 "
               >
-                {storySections.map((section, index) => (
-                  <StorySection
-                    key={section.title}
-                    number={section.number}
-                    title={section.title}
-                    body={section.body}
-                    last={index === storySections.length - 1}
-                  />
-                ))}
+                {/* LEFT */}
+
+                <div
+                  className="
+                    mb-5
+
+                    lg:mb-0
+                  "
+                >
+                  <p
+                    className="
+                      font-brand-sans
+
+                      text-[7px]
+                      font-bold
+                      uppercase
+
+                      tracking-[0.18em]
+
+                      text-[var(--brand-gold)]
+                    "
+                  >
+                    Inside the Project
+                  </p>
+
+                  <h2
+                    id="inside-project-heading"
+                    className="
+                      mt-3
+
+                      font-brand-display
+
+                      text-[26px]
+                      font-medium
+                      leading-[1.05]
+
+                      tracking-[-0.03em]
+
+                      text-white
+
+                      sm:text-[31px]
+                    "
+                  >
+                    A closer look at the work.
+                  </h2>
+
+                  <p
+                    className="
+                      mt-3
+
+                      max-w-[190px]
+
+                      font-brand-sans
+
+                      text-[9px]
+                      font-medium
+                      leading-[1.7]
+
+                      text-white/55
+                    "
+                  >
+                    Selected views from this Sofa N More project.
+                  </p>
+
+                  <Link
+                    href="#project-gallery"
+                    className="
+                      mt-5
+
+                      inline-flex
+
+                      items-center
+
+                      gap-1.5
+
+                      font-brand-sans
+
+                      text-[7px]
+                      font-bold
+                      uppercase
+
+                      tracking-[0.1em]
+
+                      text-[var(--brand-gold)]
+                    "
+                  >
+                    View Gallery
+                    <ArrowRight size={11} />
+                  </Link>
+                </div>
+
+                {/* IMAGES */}
+
+                <div
+                  className="
+                    grid
+
+                    grid-cols-2
+
+                    gap-2
+
+                    sm:grid-cols-4
+                  "
+                >
+                  {showcaseImages.map((image, index) => (
+                    <div
+                      key={image.id}
+                      className="
+                          min-w-0
+                        "
+                    >
+                      <div
+                        className="
+                            relative
+
+                            aspect-[4/3]
+
+                            overflow-hidden
+
+                            rounded-[13px]
+
+                            border
+                            border-white/10
+
+                            bg-[#272827]
+                          "
+                      >
+                        <Image
+                          src={image.url}
+                          alt={image.alt}
+                          fill
+                          draggable={false}
+                          quality={76}
+                          sizes="
+                              (max-width: 639px) 45vw,
+                              (max-width: 1023px) 24vw,
+                              18vw
+                            "
+                          className="
+                              object-cover
+                            "
+                        />
+                      </div>
+
+                      <p
+                        className="
+                            mt-2
+
+                            font-brand-sans
+
+                            text-[7px]
+                            font-semibold
+
+                            text-white/55
+                          "
+                      >
+                        Project image {String(index + 1).padStart(2, "0")}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </section>
           )}
@@ -876,27 +1433,281 @@ export default async function ProjectDetailPage({
               id="project-gallery"
               aria-labelledby="project-gallery-heading"
               className="
-                scroll-mt-[110px]
+                scroll-mt-[120px]
 
-                mt-14
+                px-3
+                pt-12
 
-                sm:mt-16
+                sm:px-5
+                sm:pt-14
 
-                lg:mt-20
+                lg:px-8
+                lg:pt-16
               "
             >
               <div
                 className="
-                  mb-7
+                  mx-auto
+                  max-w-[calc(var(--site-width)-48px)]
+                "
+              >
+                <div
+                  className="
+                    mb-6
 
-                  flex
-                  flex-col
+                    flex
+                    flex-col
 
-                  gap-4
+                    gap-4
 
-                  sm:flex-row
-                  sm:items-end
-                  sm:justify-between
+                    sm:flex-row
+                    sm:items-end
+                    sm:justify-between
+                  "
+                >
+                  <div>
+                    <p
+                      className="
+                        font-brand-sans
+
+                        text-[7px]
+                        font-bold
+                        uppercase
+
+                        tracking-[0.18em]
+
+                        text-[var(--brand-gold-700)]
+                      "
+                    >
+                      The Finished Piece
+                    </p>
+
+                    <h2
+                      id="project-gallery-heading"
+                      className="
+                        mt-2
+
+                        font-brand-display
+
+                        text-[34px]
+                        font-medium
+                        leading-none
+
+                        tracking-[-0.035em]
+
+                        text-[var(--brand-navy)]
+
+                        sm:text-[41px]
+                      "
+                    >
+                      Gallery
+                    </h2>
+                  </div>
+
+                  <p
+                    className="
+                      max-w-[360px]
+
+                      font-brand-sans
+
+                      text-[9px]
+                      font-medium
+                      leading-[1.7]
+
+                      text-[var(--brand-text-muted)]
+
+                      sm:text-[10px]
+                    "
+                  >
+                    Open any image to explore the project in full screen.
+                  </p>
+                </div>
+
+                {/* Existing lightbox/gallery behaviour remains */}
+
+                <ProjectGallery images={media} projectTitle={project.title} />
+              </div>
+            </section>
+          )}
+
+          {/* =================================================
+              NEXT STEPS
+          ================================================== */}
+
+          <section
+            className="
+              px-3
+              pt-12
+
+              sm:px-5
+              sm:pt-14
+
+              lg:px-8
+              lg:pt-16
+            "
+          >
+            <div
+              className="
+                mx-auto
+
+                grid
+                max-w-[calc(var(--site-width)-48px)]
+
+                overflow-hidden
+
+                rounded-[25px]
+
+                border
+                border-[var(--brand-navy)]/[0.07]
+
+                bg-[#FFFDF8]
+
+                shadow-[0_10px_26px_rgba(70,50,30,0.08)]
+
+                lg:grid-cols-[0.88fr_1.12fr]
+              "
+            >
+              {/* ===========================================
+                  DARK CTA
+              ============================================ */}
+
+              <div
+                className="
+                  relative
+
+                  overflow-hidden
+
+                  bg-[#171818]
+
+                  px-5
+                  py-7
+
+                  sm:px-7
+                  sm:py-8
+
+                  lg:px-8
+                  lg:py-9
+                "
+              >
+                <div
+                  aria-hidden
+                  className="
+                    absolute
+
+                    -bottom-20
+                    -right-12
+
+                    h-48
+                    w-48
+
+                    rounded-full
+
+                    border
+                    border-white/[0.05]
+                  "
+                />
+
+                <div
+                  className="
+                    relative
+                    z-10
+                  "
+                >
+                  <p
+                    className="
+                      font-brand-sans
+
+                      text-[7px]
+                      font-bold
+                      uppercase
+
+                      tracking-[0.17em]
+
+                      text-[var(--brand-gold)]
+                    "
+                  >
+                    Your Project
+                  </p>
+
+                  <h2
+                    className="
+                      mt-3
+
+                      max-w-[430px]
+
+                      font-brand-display
+
+                      text-[31px]
+                      font-medium
+                      leading-[1.02]
+
+                      tracking-[-0.035em]
+
+                      text-white
+
+                      sm:text-[37px]
+                    "
+                  >
+                    Let’s create something extraordinary.
+                  </h2>
+
+                  <p
+                    className="
+                      mt-4
+
+                      max-w-[430px]
+
+                      font-brand-sans
+
+                      text-[9px]
+                      font-medium
+                      leading-[1.75]
+
+                      text-white/60
+
+                      sm:text-[10px]
+                    "
+                  >
+                    Have a similar sofa, interior or restoration project in
+                    mind? Tell our team what you’re planning.
+                  </p>
+
+                  <div
+                    className="
+                      mt-6
+                    "
+                  >
+                    <ClayButton
+                      href={`#${enquiryAnchor}`}
+                      variant="gold"
+                      size="md"
+                      showArrow
+                    >
+                      Start Your Project
+                    </ClayButton>
+                  </div>
+                </div>
+              </div>
+
+              {/* ===========================================
+                  SERVICE
+              ============================================ */}
+
+              <div
+                className="
+                  grid
+
+                  gap-5
+
+                  px-5
+                  py-7
+
+                  sm:px-7
+                  sm:py-8
+
+                  lg:grid-cols-[1fr_auto]
+                  lg:items-center
+                  lg:px-8
                 "
               >
                 <div>
@@ -904,169 +1715,96 @@ export default async function ProjectDetailPage({
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[7px]
                       font-bold
                       uppercase
 
-                      tracking-[0.2em]
+                      tracking-[0.16em]
 
                       text-[var(--brand-gold-700)]
                     "
                   >
-                    Project Gallery
+                    Related Service
                   </p>
 
-                  <h2
-                    id="project-gallery-heading"
+                  <h3
                     className="
-                      mt-3
+                      mt-2
 
                       font-brand-display
 
-                      text-[34px]
+                      text-[27px]
                       font-medium
-                      leading-none
 
-                      tracking-[-0.035em]
+                      tracking-[-0.025em]
 
                       text-[var(--brand-navy)]
-
-                      sm:text-[44px]
                     "
                   >
-                    Explore the details.
-                  </h2>
+                    {serviceLabel}
+                  </h3>
+
+                  <p
+                    className="
+                      mt-3
+
+                      max-w-[480px]
+
+                      font-brand-sans
+
+                      text-[9px]
+                      font-medium
+                      leading-[1.7]
+
+                      text-[var(--brand-text-muted)]
+
+                      sm:text-[10px]
+                    "
+                  >
+                    Explore the service behind this project or speak with the
+                    Sofa N More team about your own requirements.
+                  </p>
                 </div>
 
-                <p
-                  className="
-                    max-w-[360px]
-
-                    font-brand-sans
-
-                    text-[10px]
-                    font-medium
-                    leading-[1.7]
-
-                    text-[var(--brand-text-muted)]
-
-                    sm:text-[11px]
-                  "
+                <ClayButton
+                  href={serviceRoute}
+                  variant="ivory"
+                  size="md"
+                  showArrow
                 >
-                  Select any image to open the full-screen project viewer.
-                </p>
+                  View Service
+                </ClayButton>
               </div>
-
-              <ProjectGallery images={media} projectTitle={project.title} />
-            </section>
-          )}
+            </div>
+          </section>
 
           {/* =================================================
-              RELATED SERVICE
+              EXISTING FORM
+
+              DO NOT MOVE / REMOVE SERVICE FORM LOGIC.
           ================================================== */}
 
-          <section
+          <div
             className="
-              mt-14
+              px-3
+              pt-10
 
-              overflow-hidden
+              sm:px-5
+              sm:pt-12
 
-              rounded-[28px]
-
-              border
-              border-white/10
-
-              bg-[var(--brand-navy)]
-
-              px-5
-              py-7
-
-              shadow-[0_14px_32px_rgba(18,37,62,0.14),inset_1px_1px_1px_rgba(255,255,255,0.05)]
-
-              sm:px-7
-              sm:py-8
-
-              lg:mt-20
-              lg:rounded-[34px]
-              lg:px-9
+              lg:px-8
+              lg:pt-14
             "
           >
             <div
               className="
-                grid
-                gap-6
-
-                sm:grid-cols-[1fr_auto]
-                sm:items-center
+                mx-auto
+                max-w-[var(--site-width)]
               "
             >
-              <div>
-                <p
-                  className="
-                    font-brand-sans
-
-                    text-[8px]
-                    font-bold
-                    uppercase
-
-                    tracking-[0.18em]
-
-                    text-[var(--brand-gold)]
-                  "
-                >
-                  Related Service
-                </p>
-
-                <h2
-                  className="
-                    mt-2
-
-                    font-brand-display
-
-                    text-[27px]
-                    font-medium
-
-                    text-white
-
-                    sm:text-[32px]
-                  "
-                >
-                  {serviceLabel}
-                </h2>
-
-                <p
-                  className="
-                    mt-2
-
-                    max-w-[600px]
-
-                    font-brand-sans
-
-                    text-[10px]
-                    font-medium
-                    leading-[1.7]
-
-                    text-white/55
-
-                    sm:text-[11px]
-                  "
-                >
-                  Discover the service behind this Sofa N More project.
-                </p>
-              </div>
-
-              <ClayButton
-                href={serviceRoute}
-                variant="ivory"
-                size="md"
-                showArrow
-              >
-                View Service
-              </ClayButton>
+              <ProjectServiceLeadForm service={project.service} />
             </div>
-          </section>
-
-          <ProjectServiceLeadForm service={project.service} />
+          </div>
         </article>
       </main>
     </>
@@ -1074,15 +1812,15 @@ export default async function ProjectDetailPage({
 }
 
 /* =========================================================
-   META ITEM
+   PROJECT SUMMARY ITEM
 ========================================================= */
 
-function MetaItem({
-  icon,
+function ProjectSummaryItem({
+  icon: Icon,
   label,
   value,
 }: {
-  icon: ReactNode;
+  icon: LucideIcon;
   label: string;
   value: string;
 }) {
@@ -1090,22 +1828,11 @@ function MetaItem({
     <div
       className="
         flex
-        min-h-[62px]
-
-        items-center
+        items-start
 
         gap-3
 
-        rounded-[16px]
-
-        border
-        border-[var(--brand-navy)]/[0.055]
-
-        bg-[#F0E7DB]
-
-        px-3.5
-
-        shadow-[inset_1px_1px_3px_rgba(91,65,38,0.055),inset_-1px_-1px_2px_rgba(255,255,255,0.72)]
+        py-3
       "
     >
       <span
@@ -1119,30 +1846,37 @@ function MetaItem({
           items-center
           justify-center
 
-          rounded-[10px]
+          rounded-[9px]
 
-          bg-[var(--brand-navy)]
+          border
+          border-white/10
+
+          bg-white/[0.05]
 
           text-[var(--brand-gold)]
         "
       >
-        {icon}
+        <Icon size={13} strokeWidth={1.5} />
       </span>
 
-      <span className="min-w-0">
+      <span
+        className="
+          min-w-0
+        "
+      >
         <span
           className="
             block
 
             font-brand-sans
 
-            text-[6.5px]
+            text-[6px]
             font-bold
             uppercase
 
-            tracking-[0.12em]
+            tracking-[0.11em]
 
-            text-[var(--brand-text-muted)]
+            text-white/45
           "
         >
           {label}
@@ -1150,19 +1884,18 @@ function MetaItem({
 
         <span
           className="
-            mt-0.5
+            mt-1
             block
-
-            truncate
 
             font-brand-sans
 
-            text-[10px]
-            font-bold
+            text-[9px]
+            font-semibold
+            leading-[1.4]
 
-            text-[var(--brand-navy)]
+            text-white
 
-            sm:text-[11px]
+            sm:text-[10px]
           "
         >
           {value}
@@ -1173,108 +1906,198 @@ function MetaItem({
 }
 
 /* =========================================================
-   STORY SECTION
+   STORY OVERVIEW CARD
 ========================================================= */
 
-function StorySection({
-  number,
-  title,
-  body,
-  last,
-}: {
-  number: string;
-  title: string;
-  body: string;
-  last: boolean;
-}) {
+function StoryOverviewCard({ section }: { section: StorySection }) {
+  const Icon = section.icon;
+
   return (
-    <section
-      className={`
-        grid
-        gap-4
+    <div
+      id={section.id}
+      className="
+        scroll-mt-[120px]
 
-        py-7
+        border-b
+        border-[var(--brand-navy)]/[0.07]
 
-        lg:grid-cols-[220px_minmax(0,1fr)]
-        lg:gap-10
-        lg:py-9
+        px-3
+        py-6
 
-        ${
-          !last
-            ? `
-              border-b
-              border-[var(--brand-navy)]/[0.07]
-            `
-            : ""
-        }
-      `}
+        last:border-b-0
+
+        md:border-r
+
+        md:odd:border-r
+        md:even:border-r-0
+
+        xl:border-b-0
+        xl:border-r
+
+        xl:last:border-r-0
+
+        sm:px-5
+
+        lg:px-6
+      "
     >
-      <div>
+      {/* ICON + NUMBER */}
+
+      <div
+        className="
+          flex
+          items-center
+
+          gap-3
+        "
+      >
         <span
           className="
             flex
-            h-8
-            w-8
+            h-9
+            w-9
 
             items-center
             justify-center
 
-            rounded-[10px]
+            rounded-[11px]
 
-            bg-[#EEE4D7]
+            border
+            border-[var(--brand-gold)]/20
 
+            bg-[#F3EBDF]
+
+            text-[var(--brand-gold-700)]
+          "
+        >
+          <Icon size={14} strokeWidth={1.45} />
+        </span>
+
+        <span
+          className="
             font-brand-sans
 
             text-[7px]
             font-bold
 
-            text-[var(--brand-gold-700)]
-
-            shadow-[inset_1px_1px_3px_rgba(91,65,38,0.07),inset_-1px_-1px_2px_rgba(255,255,255,0.8)]
+            text-[var(--brand-text-muted)]
           "
         >
-          {number}
+          {section.number}
         </span>
-
-        <h3
-          className="
-            mt-3
-
-            font-brand-display
-
-            text-[22px]
-            font-medium
-
-            text-[var(--brand-navy)]
-
-            lg:text-[24px]
-          "
-        >
-          {title}
-        </h3>
       </div>
+
+      {/* TITLE */}
+
+      <h3
+        className="
+          mt-5
+
+          font-brand-display
+
+          text-[24px]
+          font-medium
+          leading-none
+
+          tracking-[-0.025em]
+
+          text-[var(--brand-navy)]
+        "
+      >
+        {section.title}
+      </h3>
+
+      {/* PREVIEW */}
 
       <p
         className="
-          max-w-[840px]
+          mt-3
 
-          whitespace-pre-line
+          min-h-[92px]
 
           font-brand-sans
 
-          text-[11px]
+          text-[9px]
           font-medium
-          leading-[1.9]
+          leading-[1.75]
 
           text-[var(--brand-text-muted)]
 
-          sm:text-[12px]
-
-          lg:text-[13px]
+          sm:text-[10px]
         "
       >
-        {body}
+        {createPreview(section.body)}
       </p>
-    </section>
+
+      {/* FULL CONTENT — NATIVE / NO JS */}
+
+      {section.body.length > 235 && (
+        <details
+          className="
+            group/details
+
+            mt-4
+          "
+        >
+          <summary
+            className="
+              flex
+              cursor-pointer
+
+              list-none
+
+              items-center
+
+              gap-1.5
+
+              font-brand-sans
+
+              text-[7px]
+              font-bold
+              uppercase
+
+              tracking-[0.08em]
+
+              text-[var(--brand-gold-700)]
+
+              [&::-webkit-details-marker]:hidden
+            "
+          >
+            Read full {section.navLabel.toLowerCase()}
+            <ArrowRight
+              size={10}
+              className="
+                transition-transform
+
+                group-open/details:rotate-90
+              "
+            />
+          </summary>
+
+          <p
+            className="
+              mt-4
+
+              whitespace-pre-line
+
+              border-t
+              border-[var(--brand-navy)]/[0.06]
+
+              pt-4
+
+              font-brand-sans
+
+              text-[9px]
+              font-medium
+              leading-[1.8]
+
+              text-[var(--brand-text-muted)]
+            "
+          >
+            {section.body}
+          </p>
+        </details>
+      )}
+    </div>
   );
 }

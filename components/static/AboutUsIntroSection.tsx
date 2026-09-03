@@ -151,7 +151,7 @@ function DesktopAboutUsCard() {
                 "
               >
                 <Image
-                  src="/assets/site/53.webp"
+                src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/53.webp"
                   alt="Craftsman handcrafting bespoke sofa in the Sofa N More London workshop"
                   fill
                   preload
@@ -267,7 +267,7 @@ function MobileAboutUsCard() {
               "
             >
               <Image
-                src="/assets/site/3.webp"
+                src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/3.webp"
                 alt="Craftsman handcrafting bespoke sofa in the Sofa N More London workshop"
                 fill
                 className="object-cover object-center"

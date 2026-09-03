@@ -23,7 +23,7 @@ export const journalPosts: JournalPost[] = [
     title: "How Bespoke sofa Transforms a Space",
     excerpt:
       "Thoughtful design, expert craftsmanship and the finest materials come together to create spaces with soul.",
-    image: "/assets/images/1.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/1.webp",
     featured: true,
   },
   {
@@ -34,7 +34,7 @@ export const journalPosts: JournalPost[] = [
     title: "Inside Our London Workshop",
     excerpt:
       "A behind-the-scenes look at where craftsmanship and passion meet.",
-    image: "/assets/images/2.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/2.webp",
   },
   {
     id: 3,
@@ -44,7 +44,7 @@ export const journalPosts: JournalPost[] = [
     title: "Choosing the Right Upholstery Fabric",
     excerpt:
       "Explore fabric types, textures and finishes to find the perfect match.",
-    image: "/assets/images/3.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/3.webp",
   },
   {
     id: 4,
@@ -54,7 +54,7 @@ export const journalPosts: JournalPost[] = [
     title: "Interior Styling for Modern London Homes",
     excerpt:
       "Timeless styling ideas to elevate your home with elegance and character.",
-    image: "/assets/images/4.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/4.webp",
   },
   {
     id: 5,
@@ -64,7 +64,7 @@ export const journalPosts: JournalPost[] = [
     title: "Restoration Secrets for Timeless Pieces",
     excerpt:
       "Preserving heritage through traditional techniques and meticulous care.",
-    image: "/assets/images/5.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/5.webp",
   },
   {
     id: 6,
@@ -73,7 +73,7 @@ export const journalPosts: JournalPost[] = [
     datePublished: "2024-03-17",
     title: "Designing a Signature Sofa from Scratch",
     excerpt: "From concept to creation – the journey of a bespoke masterpiece.",
-    image: "/assets/images/6.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/6.webp",
   },
 ];
 

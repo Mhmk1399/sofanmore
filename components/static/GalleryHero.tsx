@@ -7,7 +7,7 @@ export default function GalleryHero() {
     <section
       aria-labelledby="gallery-hero-heading"
       className="
-        relative
+        relative mt-6
         overflow-hidden
 
         bg-[var(--brand-ivory)]
@@ -84,62 +84,7 @@ export default function GalleryHero() {
                 text-center
               "
             >
-              {/* EYEBROW */}
-
-              <div
-                className="
-                  clay-surface-soft
-
-                  mx-auto
-
-                  flex
-                  w-fit
-                  items-center
-                  gap-2.5
-
-                  rounded-full
-
-                  px-3.5
-                  py-2
-                "
-              >
-                <span
-                  className="
-                    flex
-                    h-6
-                    w-6
-
-                    items-center
-                    justify-center
-
-                    rounded-full
-
-                    bg-[var(--brand-navy)]
-
-                    text-[var(--brand-gold)]
-                  "
-                >
-                  <Images size={11} strokeWidth={1.5} />
-                </span>
-
-                <span
-                  className="
-                    font-brand-sans
-
-                    text-[7px]
-                    font-bold
-                    uppercase
-
-                    tracking-[0.21em]
-
-                    text-[var(--brand-navy)]
-
-                    sm:text-[8px]
-                  "
-                >
-                  Sofa N More Gallery
-                </span>
-              </div>
+              
 
               {/* =================================================
                   H1

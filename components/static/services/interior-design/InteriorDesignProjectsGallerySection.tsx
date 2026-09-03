@@ -28,28 +28,28 @@ type GalleryItem = {
 const galleryItems: GalleryItem[] = [
   {
     id: 1,
-    image: "/assets/images/Interior.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Interior.webp",
     eyebrow: "Residential",
     title: "London Interior",
     icon: Home,
   },
   {
     id: 2,
-    image: "/assets/images/Staging.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Staging.webp",
     eyebrow: "Hospitality",
     title: "Guest-Focused Interior",
     icon: Hotel,
   },
   {
     id: 3,
-    image: "/assets/images/Office.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Office.webp",
     eyebrow: "Workspace",
     title: "Commercial Interior",
     icon: Building2,
   },
   {
     id: 4,
-    image: "/assets/images/bespokesofa.webp",
+    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/bespokesofa.webp",
     eyebrow: "Bespoke",
     title: "Sofa-Led Interior",
     icon: Sofa,

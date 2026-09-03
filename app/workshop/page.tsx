@@ -22,7 +22,7 @@ const SEO_TITLE = "Sofa Workshop North West London | Sofa N More";
 const META_DESCRIPTION =
   "Visit Sofa N More's sofa workshop in North West London near Cricklewood for bespoke sofa consultations, upholstery, sofa repair and restoration.";
 const PRIMARY_IMAGE = absoluteUrl(
-  "/assets/images/sofa-n-more-workshop-north-west-london.webp",
+  "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/sofa-n-more-workshop-north-west-london.webp",
 );
 const GOOGLE_MAPS_URL =
   "https://maps.google.com/maps?ll=51.552156,-0.19232&z=12&t=m&hl=en-US&gl=US&mapclient=embed&cid=11170879595232670801";
@@ -306,22 +306,22 @@ export default function WorkshopPage() {
         <WorkshopPhotographySection
           images={[
             {
-              src: "/assets/images/sofa-n-more-workshop-north-west-london.webp",
+              src: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/sofa-n-more-workshop-north-west-london.webp",
               alt: "Sofa N More sofa and upholstery workshop in North West London",
               label: "Workshop photography",
             },
             {
-              src: "/assets/images/inside-sofa-upholstery-workshop-london.webp",
+              src: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/inside-sofa-upholstery-workshop-london.webp",
               alt: "Inside the Sofa N More upholstery workshop in London",
               label: "Inside the upholstery workshop",
             },
             {
-              src: "/assets/images/sofa-repair-workshop-north-west-london.webp",
+              src: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/sofa-repair-workshop-north-west-london.webp",
               alt: "Sofa N More repair workshop in North West London",
               label: "Repair workshop",
             },
             {
-              src: "/assets/images/commercial-seating-workshop-london.webp",
+              src: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/commercial-seating-workshop-london.webp",
               alt: "Sofa N More commercial seating workshop in London",
               label: "Commercial seating workshop",
             },

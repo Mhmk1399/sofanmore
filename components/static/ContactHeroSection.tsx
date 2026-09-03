@@ -416,7 +416,7 @@ function DesktopVisualAndMap() {
           "
         >
           <Image
-                  src="/assets/site/42.webp"
+            src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/42.webp"
             alt="Luxury Sofa N More showroom interior in London"
             fill
             preload
@@ -1185,7 +1185,7 @@ function MobileContactHero() {
                 "
               >
                 <Image
-                  src="/assets/site/46.webp"
+                  src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/46.webp"
                   alt="Luxury Sofa N More showroom in London"
                   fill
                   sizes="100vw"
