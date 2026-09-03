@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { absoluteUrl, siteConfig } from "@/lib/site";
+import { absoluteUrl, defaultOgImage, siteConfig } from "@/lib/site";
 import WorkshopHero from "@/components/static/workshop/WorkshopHero";
 import WorkshopHighlightsSection from "@/components/static/workshop/WorkshopHighlightsSection";
 import WorkingWorkshopSection from "@/components/static/workshop/WorkingWorkshopSection";
@@ -49,20 +49,13 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     title: SEO_TITLE,
     description: META_DESCRIPTION,
-    images: [
-      {
-        url: PRIMARY_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: "Sofa N More sofa workshop in North West London",
-      },
-    ],
+    images: [defaultOgImage],
   },
   twitter: {
     card: "summary_large_image",
     title: SEO_TITLE,
     description: META_DESCRIPTION,
-    images: [PRIMARY_IMAGE],
+    images: [defaultOgImage.url],
   },
 };
 

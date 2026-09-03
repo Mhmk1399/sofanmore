@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import AboutClosingSection from "@/components/static/AboutClosingSection";
 import AboutCraftsmanshipSection from "@/components/static/AboutCraftsmanshipSection";
 import AboutUsIntroSection from "@/components/static/AboutUsIntroSection";
-import { absoluteUrl, siteConfig } from "@/lib/site";
+import { absoluteUrl, defaultOgImage, siteConfig } from "@/lib/site";
 
 const CANONICAL_PATH = "/about-us";
 const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
@@ -26,6 +26,15 @@ export const metadata: Metadata = {
     title: SEO_TITLE,
     description:
       "Discover the craft, workshop, and approach behind Sofa N More's bespoke sofas and interior services in London.",
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SEO_TITLE,
+    description: META_DESCRIPTION,
+    images: [defaultOgImage.url],
   },
 };
 

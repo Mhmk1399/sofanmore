@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
-
 import Image from "next/image";
 import Link from "next/link";
 import { connection } from "next/server";
 
 import {
   ArrowUpRight,
-  ChevronRight,
   FolderOpen,
   Hash,
   MapPin,
@@ -141,14 +138,6 @@ export default async function ProjectsPage() {
   await connection();
 
   const projects = await getProjects();
-
-  /* =======================================================
-     SERVICES REPRESENTED IN PROJECTS
-  ======================================================= */
-
-  const representedServices = new Set(
-    projects.map((project) => project.service),
-  ).size;
 
   /* =======================================================
      STRUCTURED DATA
@@ -429,11 +418,10 @@ export default async function ProjectsPage() {
                   2xl:gap-6
                 "
               >
-                {projects.map((project, index) => (
+                {projects.map((project) => (
                   <ProjectCard
                     key={project.id}
                     project={project}
-                    index={index}
                   />
                 ))}
               </div>
@@ -581,71 +569,10 @@ export default async function ProjectsPage() {
   );
 }
 
-/* =========================================================
-   HERO METRIC
-========================================================= */
-
-function HeroMetric({ value, label }: { value: string; label: string }) {
-  return (
-    <div
-      className="
-        px-2
-        py-2
-
-        sm:px-5
-      "
-    >
-      <span
-        className="
-          block
-
-          font-brand-display
-
-          text-[25px]
-          font-semibold
-          leading-none
-
-          text-[var(--brand-navy)]
-
-          sm:text-[29px]
-        "
-      >
-        {value}
-      </span>
-
-      <span
-        className="
-          mt-1.5
-          block
-
-          font-brand-sans
-
-          text-[7px]
-          font-bold
-          uppercase
-
-          tracking-[0.14em]
-
-          text-[var(--brand-text-muted)]
-        "
-      >
-        {label}
-      </span>
-    </div>
-  );
-}
-
-/* =========================================================
-   PROJECT CARD
-========================================================= */
-
 function ProjectCard({
   project,
-  index,
 }: {
   project: Awaited<ReturnType<typeof listPublishedProjects>>[number];
-
-  index: number;
 }) {
   const serviceLabel = projectServiceLabels[project.service];
 

@@ -1,6 +1,7 @@
 import SofaRepairPageContent, {
   sofaRepairFaqs,
 } from "@/components/static/services/sofa-repair-restoration/SofaRepairPageContent";
+import { defaultOgImage } from "@/lib/site";
 import type { Metadata } from "next";
 
 /* =========================================================
@@ -66,6 +67,8 @@ export const metadata: Metadata = {
     title: OG_TITLE,
 
     description: OG_DESCRIPTION,
+
+    images: [defaultOgImage],
   },
 
   twitter: {
@@ -74,6 +77,8 @@ export const metadata: Metadata = {
     title: OG_TITLE,
 
     description: OG_DESCRIPTION,
+
+    images: [defaultOgImage.url],
   },
 };
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import ContactFormSection from "@/components/static/ContactFormSection";
 import ContactHeroSection from "@/components/static/ContactHeroSection";
-import { absoluteUrl, siteConfig } from "@/lib/site";
+import { absoluteUrl, defaultOgImage, siteConfig } from "@/lib/site";
 
 const CANONICAL_PATH = "/contact-us";
 const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
@@ -22,6 +22,15 @@ export const metadata: Metadata = {
     title: SEO_TITLE,
     description:
       "Start a bespoke sofa, commercial seating, interior design, or sofa restoration project with Sofa N More.",
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SEO_TITLE,
+    description: META_DESCRIPTION,
+    images: [defaultOgImage.url],
   },
 };
 

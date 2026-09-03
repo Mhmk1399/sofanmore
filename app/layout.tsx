@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 
-import { Manrope, Playfair_Display,Geist } from "next/font/google";
+import { Manrope, Geist } from "next/font/google";
 
 import "./globals.css";
 import Navbar from "@/components/global/Navbar";
@@ -10,7 +10,7 @@ import SmoothScrollProvider from "@/components/global/SmoothScrollProvider";
 import FloatingContactMenu from "@/components/ui/FloatingContactMenu";
 import ToastProvider from "@/components/ui/ToastProvider";
 import PwaRegister from "@/components/global/PwaRegister";
-import { defaultOgImage, siteConfig } from "@/lib/site";
+import { absoluteUrl, defaultOgImage, siteConfig } from "@/lib/site";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -107,7 +107,7 @@ const siteStructuredData = {
       "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
       url: siteConfig.url,
-      image: `${siteConfig.url}${defaultOgImage.url}`,
+      image: absoluteUrl(defaultOgImage.url),
       description: siteConfig.description,
       telephone: siteConfig.phoneInternational,
       email: siteConfig.email,

@@ -154,7 +154,7 @@ export function absoluteUrl(path = "/") {
 }
 
 export const defaultOgImage = {
-  url: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/herodesktop.webp",
+  url: "/og-image.png",
   width: 1200,
   height: 630,
   alt: "Sofa N More bespoke sofa and interior craftsmanship in London",

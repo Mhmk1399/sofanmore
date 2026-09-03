@@ -1,5 +1,5 @@
 import JournalSection, { journalPosts } from "@/components/static/JournalSection";
-import { absoluteUrl, siteConfig } from "@/lib/site";
+import { absoluteUrl, defaultOgImage, siteConfig } from "@/lib/site";
 import type { Metadata } from "next";
 
 const CANONICAL_PATH = "/blog";
@@ -21,6 +21,15 @@ export const metadata: Metadata = {
     title: SEO_TITLE,
     description:
       "Explore bespoke sofa inspiration, London craftsmanship, interior design ideas, upholstery advice and sofa restoration stories.",
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SEO_TITLE,
+    description: META_DESCRIPTION,
+    images: [defaultOgImage.url],
   },
 };
 

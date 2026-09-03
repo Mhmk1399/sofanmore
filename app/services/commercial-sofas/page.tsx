@@ -1,6 +1,7 @@
 import CommercialSofasPageContent, {
   commercialSofasFaqs,
 } from "@/components/static/services/commercial-sofas/CommercialSofasPageContent";
+import { defaultOgImage, siteConfig } from "@/lib/site";
 import type { Metadata } from "next";
 
 /* =========================================================
@@ -52,13 +53,15 @@ export const metadata: Metadata = {
 
     url: CANONICAL_URL,
 
-    siteName: "Sofa N More",
+    siteName: siteConfig.name,
 
-    locale: "en_GB",
+    locale: siteConfig.locale,
 
     title: SEO_TITLE,
 
     description: META_DESCRIPTION,
+
+    images: [defaultOgImage],
   },
 
   twitter: {
@@ -67,6 +70,8 @@ export const metadata: Metadata = {
     title: SEO_TITLE,
 
     description: META_DESCRIPTION,
+
+    images: [defaultOgImage.url],
   },
 };
 

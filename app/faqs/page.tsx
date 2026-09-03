@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import FaqHero from "@/components/static/FaqHero";
 import FAQSection from "@/components/static/FAQSection";
-import { absoluteUrl, siteConfig } from "@/lib/site";
+import { absoluteUrl, defaultOgImage, siteConfig } from "@/lib/site";
 
 const CANONICAL_PATH = "/faqs";
 const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
@@ -22,6 +22,15 @@ export const metadata: Metadata = {
     title: SEO_TITLE,
     description:
       "Answers to common questions about Sofa N More bespoke sofas, water-resistant and fire-retardant upholstery, interior design, delivery, and sofa restoration.",
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SEO_TITLE,
+    description: META_DESCRIPTION,
+    images: [defaultOgImage.url],
   },
 };
 

@@ -36,7 +36,7 @@ import {
   projectServiceRoutes,
 } from "@/lib/project-service";
 
-import { siteConfig } from "@/lib/site";
+import { defaultOgImage, siteConfig } from "@/lib/site";
 
 import { ProjectGallery, type ProjectMediaItem } from "./ProjectMedia";
 
@@ -241,6 +241,7 @@ export async function generateMetadata({
           url: coverImage,
           alt: project.title,
         },
+        defaultOgImage,
       ],
     },
 
@@ -251,7 +252,7 @@ export async function generateMetadata({
 
       description,
 
-      images: [coverImage],
+      images: [coverImage, absoluteUrl(defaultOgImage.url)],
     },
   };
 }

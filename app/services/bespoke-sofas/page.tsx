@@ -1,4 +1,5 @@
 import BespokesofaPageContent, { bespokesofaFaqs } from "@/components/static/services/BespokeSofa/BespokeFurniturePageContent";
+import { defaultOgImage, siteConfig } from "@/lib/site";
 import type { Metadata } from "next";
 
  
@@ -49,13 +50,15 @@ export const metadata: Metadata = {
 
     url: CANONICAL_URL,
 
-    siteName: "Sofa N More",
+    siteName: siteConfig.name,
 
-    locale: "en_GB",
+    locale: siteConfig.locale,
 
     title: OG_TITLE,
 
     description: OG_DESCRIPTION,
+
+    images: [defaultOgImage],
   },
 
   twitter: {
@@ -64,6 +67,8 @@ export const metadata: Metadata = {
     title: OG_TITLE,
 
     description: OG_DESCRIPTION,
+
+    images: [defaultOgImage.url],
   },
 };
 

@@ -1,13 +1,32 @@
 import type { Metadata } from "next";
 
-import { siteConfig } from "@/lib/site";
+import { defaultOgImage, siteConfig } from "@/lib/site";
+
+const PAGE_TITLE = "Privacy Policy | Sofa N More";
+const PAGE_DESCRIPTION =
+  "How Sofa N More handles enquiry information and project details.";
+const PAGE_PATH = "/privacy-policy";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description:
-    "How Sofa N More handles enquiry information and project details.",
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
   alternates: {
-    canonical: "/privacy-policy",
+    canonical: PAGE_PATH,
+  },
+  openGraph: {
+    type: "website",
+    url: PAGE_PATH,
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    images: [defaultOgImage.url],
   },
 };
 
