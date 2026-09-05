@@ -1544,7 +1544,7 @@ function ProjectSlide({
               className="
                 font-brand-sans
 
-                text-[13px]
+                text-[11px]
                 font-bold
                 uppercase
 
@@ -1582,7 +1582,7 @@ function ProjectSlide({
 
                   font-brand-sans
 
-                  text-[13px]
+                  text-[11px]
                   font-bold
 
                   text-[var(--brand-navy)]
@@ -1610,7 +1610,7 @@ function ProjectSlide({
           className="
             mt-2
 
-            line-clamp-2
+            line-clamp-1
 
             font-brand-display
 
@@ -1622,9 +1622,8 @@ function ProjectSlide({
 
             text-[var(--brand-navy)]
 
-            sm:text-[24px]
-
-            lg:text-[26px]
+ 
+            lg:text-[22px]
           "
         >
           {project.title}

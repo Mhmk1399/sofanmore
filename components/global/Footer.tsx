@@ -741,8 +741,9 @@ function GetInTouchColumn() {
 
       {/* DIRECT CALL */}
 
-      <a
+      <ClayButton
         href="tel:+447400577844"
+        variant="gold"
         className="
           mt-3
 
@@ -775,7 +776,7 @@ function GetInTouchColumn() {
           "
         />
         Call +44 7400 577844
-      </a>
+      </ClayButton>
     </div>
   );
 }

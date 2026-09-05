@@ -2,7 +2,6 @@ import Image from "next/image";
 import {
   Building2,
   Compass,
-  Crown,
   Landmark,
   ShieldCheck,
   Sofa,
@@ -470,48 +469,49 @@ function WhyFeatureCard({
     <div
       className={`
         clay-surface
-        flex flex-col items-start gap-3
+        flex flex-col justify-start
         rounded-[22px]
 
-        ${compact ? "min-h-[112px] px-3 py-3" : "min-h-[150px] px-5 py-4"}
+        ${compact ? "min-h-[96px] px-3.5 py-3" : "min-h-[126px] px-4 py-4 xl:px-5"}
       `}
     >
-      <div
-        className={`
-          clay-icon
-          flex shrink-0 items-center justify-center
-          rounded-full
+      <div className="flex min-w-0 items-center gap-3">
+        <div
+          className={`
+            clay-icon
+            flex shrink-0 items-center justify-center
+            rounded-full
 
-          ${compact ? "h-[48px] w-[48px]" : "h-[28px] w-[28px]"}
-        `}
-      >
-        <Icon
-          size={compact ? 21 : 16}
-          strokeWidth={1.5}
-          className="text-[var(--brand-gold)]"
-        />
-      </div>
+            ${compact ? "h-[40px] w-[40px]" : "h-[38px] w-[38px]"}
+          `}
+        >
+          <Icon
+            size={compact ? 19 : 18}
+            strokeWidth={1.5}
+            className="text-[var(--brand-gold)]"
+          />
+        </div>
 
-      <div className="min-w-0">
         <h3
           className={`
-            font-brand-display
-            font-semibold leading-[1.04]
+            font-brand-display  text-nowrap
+            font-semibold 
             text-[var(--brand-navy)]
 
-            ${compact ? "text-[14px]" : "text-[19px]"}
+            ${compact ? "text-[15px]" : "text-[16px] "}
           `}
-          style={{ whiteSpace: "pre-line" }}
         >
           {item.title}
         </h3>
+      </div>
 
+      <div className="min-w-0">
         <p
           className={`
-            mt-2 font-brand-sans font-medium
+            mt-2.5 font-brand-sans font-medium
             leading-[1.42] text-[var(--brand-text-muted)]
 
-            ${compact ? "text-[13px]" : "text-[13px]"}
+            ${compact ? "text-[12px]" : "text-[12px] xl:text-[13px]"}
           `}
         >
           {item.description}

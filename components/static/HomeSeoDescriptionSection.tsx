@@ -163,11 +163,11 @@ export default function HomeSeoDescriptionSection() {
                 <h2
                   id="home-seo-description-heading"
                   className="
-    font-brand-sans
+     
     text-[12px]
     font-bold
-    uppercase
-    tracking-[0.22em]
+     
+     
     text-[var(--brand-navy)]
   "
                 >

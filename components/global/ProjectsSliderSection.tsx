@@ -263,7 +263,7 @@ export default async function ProjectsSliderSection() {
                 font-brand-display
 
                 text-[25px]
-                font-medium
+                font-bold
                 leading-[0.98]
 
                 tracking-[-0.04em]

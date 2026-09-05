@@ -719,7 +719,7 @@ function GalleryHeader() {
             font-brand-display
 
             text-[34px]
-            font-medium
+            font-bold
             leading-[0.98]
 
             tracking-[-0.04em]
@@ -751,7 +751,7 @@ function GalleryHeader() {
       >
         <p
           className="
-            font-brand-sans
+            text-left
 
             text-[13px]
             font-medium
@@ -759,7 +759,7 @@ function GalleryHeader() {
 
             text-[var(--brand-text-muted)]
 
-            sm:text-[11px]
+            sm:text-[13px]
           "
         >
           Explore a selection of real Sofa N More work. Select any image to see
