@@ -272,10 +272,19 @@ function uploadFileWithProgress(input: {
         return;
       }
 
-      reject(new Error("Upload failed."));
+      reject(
+        new Error(
+          xhr.status
+            ? `Upload failed (${xhr.status}).`
+            : "Upload failed. Check the storage bucket CORS configuration.",
+        ),
+      );
     };
 
-    xhr.onerror = () => reject(new Error("Upload failed."));
+    xhr.onerror = () =>
+      reject(
+        new Error("Upload could not reach storage. Check the bucket CORS configuration."),
+      );
     xhr.ontimeout = () => reject(new Error("Upload timed out."));
     xhr.timeout = 120000;
     xhr.send(input.file);

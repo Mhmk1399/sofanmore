@@ -741,9 +741,9 @@ export default function CommercialSofaLeadForm() {
         aria-hidden="true"
       />
 
-      <FormSection title="01 Your Details">
+      <FormSection title="Your Details">
         <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <ClayInput
               id="commercial-full-name"
               label="Full name"
@@ -754,18 +754,8 @@ export default function CommercialSofaLeadForm() {
               error={errors.fullName}
             />
           </div>
-          <div className="lg:col-span-4">
-            <ClayInput
-              id="commercial-company-name"
-              label="Company name"
-              value={values.companyName}
-              onChange={(value) => updateValue("companyName", value)}
-              autoComplete="organization"
-              required
-              error={errors.companyName}
-            />
-          </div>
-          <div className="lg:col-span-4">
+
+          <div className="lg:col-span-3">
             <ClayInput
               id="commercial-work-email"
               label="Work email"
@@ -774,11 +764,10 @@ export default function CommercialSofaLeadForm() {
               value={values.workEmail}
               onChange={(value) => updateValue("workEmail", value)}
               autoComplete="email"
-              required
               error={errors.workEmail}
             />
           </div>
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-3">
             <ClayInput
               id="commercial-phone"
               label="Phone"
@@ -791,23 +780,7 @@ export default function CommercialSofaLeadForm() {
               error={errors.phone}
             />
           </div>
-          <div className="lg:col-span-6">
-            <ClayInput
-              id="commercial-postcode"
-              label="Postcode"
-              value={values.postcode}
-              onChange={(value) => updateValue("postcode", value.toUpperCase())}
-              autoComplete="postal-code"
-              required
-              error={errors.postcode}
-            />
-          </div>
-        </div>
-      </FormSection>
-
-      <FormSection title="02 About the Venue">
-        <div className="grid gap-3.5 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <ClaySelect
               id="commercial-venue-type"
               label="Venue type"
@@ -818,128 +791,13 @@ export default function CommercialSofaLeadForm() {
               error={errors.venueType}
             />
           </div>
-          <div className="lg:col-span-4">
-            <ClayRadioGroup
-              name="commercial-has-floor-plan"
-              label="Floor plan"
-              value={values.hasFloorPlan}
-              onChange={(value) =>
-                updateValue("hasFloorPlan", value === "yes" ? "yes" : "no")
-              }
-              options={[
-                { label: "Not yet", value: "no" },
-                { label: "Yes", value: "yes" },
-              ]}
-              error={errors.hasFloorPlan}
-            />
-          </div>
-          <div className="lg:col-span-4">
-            <ClayRadioGroup
-              name="commercial-dimensions-known"
-              label="Space dimensions"
-              value={values.dimensionsKnown}
-              onChange={(value) =>
-                updateValue("dimensionsKnown", value === "yes" ? "yes" : "no")
-              }
-              options={[
-                { label: "Not yet", value: "no" },
-                { label: "Yes", value: "yes" },
-              ]}
-              error={errors.dimensionsKnown}
-            />
-          </div>
-
-          {values.dimensionsKnown === "yes" && (
-            <div className="grid gap-3.5 lg:col-span-12 lg:grid-cols-3">
-              <ClayInput
-                id="commercial-width"
-                label="Area width cm"
-                type="number"
-                inputMode="numeric"
-                min={1}
-                max={100000}
-                value={values.widthCm}
-                onChange={(value) => updateValue("widthCm", value)}
-                required
-                error={errors.widthCm}
-              />
-              <ClayInput
-                id="commercial-depth"
-                label="Area depth cm"
-                type="number"
-                inputMode="numeric"
-                min={1}
-                max={100000}
-                value={values.depthCm}
-                onChange={(value) => updateValue("depthCm", value)}
-                required
-                error={errors.depthCm}
-              />
-              <ClayInput
-                id="commercial-height"
-                label="Ceiling height cm"
-                type="number"
-                inputMode="numeric"
-                min={1}
-                max={100000}
-                value={values.heightCm}
-                onChange={(value) => updateValue("heightCm", value)}
-                error={errors.heightCm}
-              />
-            </div>
-          )}
         </div>
       </FormSection>
 
-      <FormSection title="03 Project Requirements">
-        <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-12">
-          <div className="lg:col-span-3">
-            <ClaySelect
-              id="commercial-project-type"
-              label="Project type"
-              value={values.projectType}
-              onChange={(value) => updateValue("projectType", value)}
-              options={projectTypeOptions}
-              required
-              error={errors.projectType}
-            />
-          </div>
-          <div className="lg:col-span-3">
-            <ClaySelect
-              id="commercial-project-stage"
-              label="Project stage"
-              value={values.projectStage}
-              onChange={(value) => updateValue("projectStage", value)}
-              options={projectStageOptions}
-              error={errors.projectStage}
-            />
-          </div>
-          <div className="lg:col-span-3">
-            <ClayInput
-              id="commercial-quantity"
-              label="Approx quantity"
-              type="number"
-              inputMode="numeric"
-              min={1}
-              max={10000}
-              value={values.approximateQuantity}
-              onChange={(value) => updateValue("approximateQuantity", value)}
-              error={errors.approximateQuantity}
-            />
-          </div>
-          <div className="lg:col-span-3">
-            <ClayDatePicker
-              id="commercial-target-date"
-              label="Install date"
-              value={values.targetInstallationDate}
-              onChange={(value) => updateValue("targetInstallationDate", value)}
-              error={errors.targetInstallationDate}
-            />
-          </div>
-        </div>
-      </FormSection>
+ 
 
-      <FormSection title="04 Plans & References">
+     
+      <FormSection title="Plans & References">
         <ClayFileDropzone
           id="commercial-plan-uploads"
           label="Plans, Photos & References"
@@ -957,7 +815,7 @@ export default function CommercialSofaLeadForm() {
         />
       </FormSection>
 
-      <FormSection title="05 Final Notes">
+      <FormSection title="Final Notes">
         <div className="grid gap-5  lg:items-start">
           <ClayTextarea
             id="commercial-message"

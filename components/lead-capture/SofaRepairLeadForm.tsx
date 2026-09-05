@@ -662,7 +662,7 @@ export default function SofaRepairLeadForm() {
         aria-hidden="true"
       />
 
-      <FormSection title="01 Photos First">
+      <FormSection title="Photos First">
         <div className="grid gap-4   lg:items-start">
           <div className="clay-surface-soft rounded-[22px] p-[5px]">
             <div className="rounded-[18px] bg-white/20 p-4">
@@ -705,7 +705,7 @@ export default function SofaRepairLeadForm() {
         </div>
       </FormSection>
 
-      <FormSection title="02 Your Details">
+      <FormSection title="Your Details">
         <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
           <ClayInput
             id="repair-full-name"
@@ -737,20 +737,6 @@ export default function SofaRepairLeadForm() {
             autoComplete="email"
             error={errors.email}
           />
-          <ClayInput
-            id="repair-postcode"
-            label="Postcode"
-            value={values.postcode}
-            onChange={(value) => updateValue("postcode", value.toUpperCase())}
-            autoComplete="postal-code"
-            required
-            error={errors.postcode}
-          />
-        </div>
-      </FormSection>
-
-      <FormSection title="03 Sofa Details">
-        <div className="grid gap-3.5 lg:grid-cols-3">
           <ClaySelect
             id="repair-item-type"
             label="Item type"
@@ -760,37 +746,10 @@ export default function SofaRepairLeadForm() {
             required
             error={errors.itemType}
           />
-          <ClaySelect
-            id="repair-approximate-age"
-            label="Approx age"
-            value={values.approximateAge}
-            onChange={(value) => updateValue("approximateAge", value)}
-            options={approximateAgeOptions}
-            error={errors.approximateAge}
-          />
-          <ClaySelect
-            id="repair-transport"
-            label="Transport"
-            value={values.transportPreference}
-            onChange={(value) => updateValue("transportPreference", value)}
-            options={transportPreferenceOptions}
-            error={errors.transportPreference}
-          />
-        </div>
-        <div className="mt-4">
-          <ClayCheckboxGroup
-            label="What needs attention"
-            values={values.issues}
-            onChange={(value) =>
-              updateValue("issues", normalizeIssues(value, values.issues))
-            }
-            options={issueOptions}
-            error={errors.issues}
-          />
         </div>
       </FormSection>
 
-      <FormSection title="04 Anything Else?">
+      <FormSection title="Anything Else?">
         <div className="grid gap-5   lg:items-start">
           <ClayTextarea
             id="repair-message"

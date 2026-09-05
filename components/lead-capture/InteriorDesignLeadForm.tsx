@@ -671,7 +671,7 @@ export default function InteriorDesignLeadForm() {
         aria-hidden="true"
       />
 
-      <FormSection title="01 Your Details">
+      <FormSection title="Your Details">
         <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-3">
             <ClayInput
@@ -693,7 +693,6 @@ export default function InteriorDesignLeadForm() {
               value={values.email}
               onChange={(value) => updateValue("email", value)}
               autoComplete="email"
-              required
               error={errors.email}
             />
           </div>
@@ -711,32 +710,6 @@ export default function InteriorDesignLeadForm() {
             />
           </div>
           <div className="lg:col-span-3">
-            <ClayInput
-              id="interior-postcode"
-              label="Postcode"
-              value={values.postcode}
-              onChange={(value) => updateValue("postcode", value.toUpperCase())}
-              autoComplete="postal-code"
-              required
-              error={errors.postcode}
-            />
-          </div>
-          <div className="lg:col-span-3">
-                <ClaySelect
-            id="interior-preferred-contact"
-            label="Preferred contact"
-            value={values.preferredContactMethod}
-            onChange={(value) => updateValue("preferredContactMethod", value)}
-            options={preferredContactOptions}
-            error={errors.preferredContactMethod}
-          />
-          </div>
-        </div>
-      </FormSection>
-
-      <FormSection title="02 Your Space">
-        <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-12">
-          <div className="lg:col-span-4">
             <ClaySelect
               id="interior-project-type"
               label="Project type"
@@ -747,51 +720,10 @@ export default function InteriorDesignLeadForm() {
               error={errors.projectType}
             />
           </div>
-          <div className="lg:col-span-4">
-            <ClaySelect
-              id="interior-project-stage"
-              label="Project stage"
-              value={values.projectStage}
-              onChange={(value) => updateValue("projectStage", value)}
-              options={projectStageOptions}
-              error={errors.projectStage}
-            />
-          </div>
-          <div className="lg:col-span-4">
-            <ClayInput
-              id="interior-space-size"
-              label="Approx space size"
-              value={values.approximateSpaceSize}
-              onChange={(value) => updateValue("approximateSpaceSize", value)}
-              error={errors.approximateSpaceSize}
-            />
-          </div>
-          <div className="sm:col-span-2 lg:col-span-12">
-            <ClayInput
-              id="interior-style-direction"
-              label="Style direction"
-              value={values.styleDirection}
-              onChange={(value) => updateValue("styleDirection", value)}
-              error={errors.styleDirection}
-            />
-          </div>
         </div>
       </FormSection>
 
-      <FormSection title="03 What You Need">
-        <div className="grid gap-4   lg:items-start">
-          <ClayCheckboxGroup
-            label="Needs"
-            values={values.needs}
-            onChange={(value) => updateValue("needs", value)}
-            options={needOptions}
-            error={errors.needs}
-          />
-       
-        </div>
-      </FormSection>
-
-      <FormSection title="04 Images & Plans">
+      <FormSection title="Images & Plans">
         <ClayFileDropzone
           id="interior-reference-uploads"
           label="Share Your Space"
@@ -809,7 +741,7 @@ export default function InteriorDesignLeadForm() {
         />
       </FormSection>
 
-      <FormSection title="05 Anything Else?">
+      <FormSection title="Anything Else?">
         <div className="grid gap-5   lg:items-start">
           <ClayTextarea
             id="interior-message"
@@ -831,7 +763,7 @@ export default function InteriorDesignLeadForm() {
                 <>
                   I agree that Sofa N More may use the information I provide to
                   respond to this enquiry.{" "}
-                   <Link
+                  <Link
                     href="/privacy-policy"
                     target="_blank"
                     className="font-extrabold text-xs   underline  underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2  "
