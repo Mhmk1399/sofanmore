@@ -1,13 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  type FormEvent,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { type FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 import {
   ClayCheckbox,
@@ -189,7 +183,9 @@ function trackLeadFormEvent(
   };
 
   if (typeof window !== "undefined") {
-    window.dispatchEvent(new CustomEvent("lead-form-event", { detail: payload }));
+    window.dispatchEvent(
+      new CustomEvent("lead-form-event", { detail: payload }),
+    );
 
     const analyticsWindow = window as typeof window & {
       dataLayer?: Record<string, unknown>[];
@@ -447,9 +443,8 @@ export default function BespokeSofaLeadForm() {
           uploadSessionId,
         }),
       });
-      const signedUpload = await readApiResponse<SignUploadResponse>(
-        signResponse,
-      );
+      const signedUpload =
+        await readApiResponse<SignUploadResponse>(signResponse);
 
       updateUploadItem(id, {
         status: "uploading",
@@ -735,30 +730,6 @@ export default function BespokeSofaLeadForm() {
             required
             error={errors.phone}
           />
-          <ClayInput
-            id="bespoke-email"
-            label="Email"
-            type="email"
-            inputMode="email"
-            value={values.email}
-            onChange={(value) => updateValue("email", value)}
-            autoComplete="email"
-            error={errors.email}
-          />
-          <ClayInput
-            id="bespoke-postcode"
-            label="Postcode"
-            value={values.postcode}
-            onChange={(value) => updateValue("postcode", value.toUpperCase())}
-            autoComplete="postal-code"
-            required
-            error={errors.postcode}
-          />
-        </div>
-      </FormSection>
-
-      <FormSection eyebrow="Project" title="Sofa brief">
-        <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
           <ClaySelect
             id="bespoke-project-type"
             label="Project type"
@@ -777,96 +748,12 @@ export default function BespokeSofaLeadForm() {
             required
             error={errors.spaceType}
           />
-          <ClaySelect
-            id="bespoke-configuration"
-            label="Configuration"
-            value={values.configuration}
-            onChange={(value) => updateValue("configuration", value)}
-            options={configurationOptions}
-            error={errors.configuration}
-          />
-          <ClaySelect
-            id="bespoke-upholstery"
-            label="Upholstery"
-            value={values.upholsteryPreference}
-            onChange={(value) => updateValue("upholsteryPreference", value)}
-            options={upholsteryOptions}
-            error={errors.upholsteryPreference}
-          />
-          <ClaySelect
-            id="bespoke-comfort"
-            label="Comfort"
-            value={values.comfortPreference}
-            onChange={(value) => updateValue("comfortPreference", value)}
-            options={comfortOptions}
-            error={errors.comfortPreference}
-          />
         </div>
-
-        <div className="mt-4">
-          <ClayRadioGroup
-            name="bespoke-dimensions-known"
-            label="Dimensions known"
-            value={values.dimensionsKnown}
-            onChange={(value) =>
-              updateValue("dimensionsKnown", value === "yes" ? "yes" : "no")
-            }
-            options={[
-              { label: "Not yet", value: "no" },
-              { label: "Yes", value: "yes" },
-            ]}
-            error={errors.dimensionsKnown}
-          />
-        </div>
-
-        {values.dimensionsKnown === "yes" && (
-          <div className="mt-4 grid gap-3.5 sm:grid-cols-3">
-            <ClayInput
-              id="bespoke-width"
-              label="Width cm"
-              type="number"
-              inputMode="numeric"
-              min={1}
-              max={2000}
-              value={values.widthCm}
-              onChange={(value) => updateValue("widthCm", value)}
-              error={errors.widthCm}
-            />
-            <ClayInput
-              id="bespoke-depth"
-              label="Depth cm"
-              type="number"
-              inputMode="numeric"
-              min={1}
-              max={2000}
-              value={values.depthCm}
-              onChange={(value) => updateValue("depthCm", value)}
-              error={errors.depthCm}
-            />
-            <ClayInput
-              id="bespoke-height"
-              label="Height cm"
-              type="number"
-              inputMode="numeric"
-              min={1}
-              max={2000}
-              value={values.heightCm}
-              onChange={(value) => updateValue("heightCm", value)}
-              error={errors.heightCm}
-            />
-          </div>
-        )}
       </FormSection>
 
-      <FormSection eyebrow="Access" title="Delivery notes">
-        <ClayCheckboxGroup
-          label="Access restrictions"
-          values={values.accessRestrictions}
-          onChange={(value) => updateValue("accessRestrictions", value)}
-          options={accessRestrictionOptions}
-          error={errors.accessRestrictions}
-        />
-      </FormSection>
+       
+
+   
 
       <FormSection eyebrow="Finish" title="Images and notes">
         <div className="grid gap-5   lg:items-start">
