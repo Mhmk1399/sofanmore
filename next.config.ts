@@ -5,28 +5,45 @@ const s3Bucket = (
   process.env.AWS_S3_BUCKET ||
   process.env.UPLOAD_BUCKET
 )?.trim();
+
 const s3Region = (
   process.env.S3_REGION ||
   process.env.AWS_REGION ||
   process.env.NEXT_PUBLIC_S3_REGION ||
   process.env.UPLOAD_REGION
 )?.trim();
+
 const s3Prefix = (process.env.S3_PREFIX?.trim() || "Image").replace(
   /^\/+|\/+$/g,
   "",
 );
 
 const nextConfig: NextConfig = {
-  // Emit the minimal Node.js server bundle used by the production container.
-  output: "standalone",
+  /**
+   * Vercel does not need standalone output.
+   *
+   * For Docker / VPS:
+   *   output = "standalone"
+   *
+   * For Vercel:
+   *   output = undefined
+   *
+   * This avoids the Vercel:
+   * .next/next-server.js.nft.json ENOENT error.
+   */
+  output: process.env.VERCEL ? undefined : "standalone",
+
   allowedDevOrigins: [
     "192.168.70.122",
   ],
+
   poweredByHeader: false,
 
   images: {
     formats: ["image/avif", "image/webp"],
+
     minimumCacheTTL: 31536000,
+
     remotePatterns: [
       {
         protocol: "https",
@@ -34,6 +51,7 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/project-uploads/**",
       },
+
       ...(s3Bucket && s3Region
         ? [
             {
@@ -54,7 +72,6 @@ const nextConfig: NextConfig = {
         destination: "/services",
         permanent: true,
       },
-      
     ];
   },
 
@@ -82,6 +99,7 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+
       {
         source: "/sw.js",
         headers: [
@@ -99,6 +117,7 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+
       {
         source: "/icons/:path*",
         headers: [
@@ -108,6 +127,7 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+
       {
         source: "/assets/:path*",
         headers: [
