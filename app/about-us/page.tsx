@@ -5,7 +5,7 @@ import AboutCraftsmanshipSection from "@/components/static/AboutCraftsmanshipSec
 import AboutUsIntroSection from "@/components/static/AboutUsIntroSection";
 import { absoluteUrl, defaultOgImage, siteConfig } from "@/lib/site";
 
-const CANONICAL_PATH = "/about-us";
+const CANONICAL_PATH = "/about-us"; 
 const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
 const SEO_TITLE = "About Sofa N More | London Bespoke Sofa Makers";
 const META_DESCRIPTION =
