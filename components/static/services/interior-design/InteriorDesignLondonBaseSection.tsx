@@ -129,7 +129,7 @@ export default function InteriorDesignLondonBaseSection() {
 
                         font-brand-sans
 
-                        text-[8px]
+                        text-[11px]
                         font-bold
                         uppercase
 
@@ -137,7 +137,7 @@ export default function InteriorDesignLondonBaseSection() {
 
                         text-[var(--brand-gold-700)]
 
-                        sm:text-[9px]
+                        sm:text-[12px]
                       "
                     >
                       Sofa N More · London
@@ -150,12 +150,12 @@ export default function InteriorDesignLondonBaseSection() {
 
                         font-brand-sans
 
-                        text-[8px]
+                        text-[11px]
                         font-medium
 
                         text-[var(--brand-text-muted)]
 
-                        sm:text-[9px]
+                        sm:text-[12px]
                       "
                     >
                       North West London
@@ -323,7 +323,7 @@ export default function InteriorDesignLondonBaseSection() {
                         className="
                           font-brand-sans
 
-                          text-[6px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -529,7 +529,7 @@ function LondonBaseVisual() {
 
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -566,7 +566,7 @@ function LondonBaseVisual() {
 
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 

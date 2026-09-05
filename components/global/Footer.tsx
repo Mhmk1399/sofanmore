@@ -303,12 +303,12 @@ export default function Footer() {
               className="
                 font-brand-sans
 
-                text-[9px]
+                text-[12px]
                 font-medium
 
                 text-[var(--brand-text-muted)]
 
-                sm:text-[10px]
+                sm:text-[13px]
               "
             >
               © {new Date().getFullYear()} Sofa N More. All rights reserved.
@@ -318,12 +318,12 @@ export default function Footer() {
               className="
                 font-brand-sans
 
-                text-[7px]
+                text-[13px]
                 font-semibold
 
                 text-[var(--brand-text-muted)]/70
 
-                sm:text-[8px]
+                sm:text-[11px]
               "
             >
               Bespoke sofas, interiors and restoration in London.
@@ -369,7 +369,9 @@ function BrandColumn() {
         />
 
         <Image
-          src={"https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Sofa_Logo.webp"}
+          src={
+            "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Sofa_Logo.webp"
+          }
           height={200}
           width={200}
           alt="logo"
@@ -386,13 +388,13 @@ function BrandColumn() {
 
           font-brand-sans
 
-          text-[10px]
+          text-[13px]
           font-medium
           leading-[1.7]
 
           text-[var(--brand-text-muted)]
 
-          sm:text-[11px]
+          sm:text-[13px]
         "
       >
         Bespoke sofas, commercial seating, interior design and professional sofa
@@ -482,13 +484,13 @@ function ContactRow({
         className="
           font-brand-sans
 
-          text-[9px]
+          text-[12px]
           font-semibold
           leading-[1.4]
 
           text-[var(--brand-navy)]
 
-          sm:text-[10px]
+          sm:text-[13px]
         "
       >
         {text}
@@ -623,7 +625,7 @@ function FooterLinkItem({
 
         font-brand-sans
 
-        text-[10px]
+        text-[13px]
         font-medium
 
         text-[var(--brand-navy)]/75
@@ -711,13 +713,13 @@ function GetInTouchColumn() {
 
           font-brand-sans
 
-          text-[10px]
+          text-[13px]
           font-medium
           leading-[1.65]
 
           text-[var(--brand-text-muted)]
 
-          sm:text-[11px]
+          sm:text-[13px]
         "
       >
         Tell us about your sofa, repair, commercial seating or interior project.
@@ -751,7 +753,7 @@ function GetInTouchColumn() {
 
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-bold
           uppercase
 
@@ -850,7 +852,7 @@ function FooterTrustDock() {
                   className="
                       font-brand-display
 
-                      text-[10px]
+                      text-[13px]
                       font-semibold
                       leading-tight
 
@@ -868,12 +870,12 @@ function FooterTrustDock() {
 
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-medium
 
                       text-white/50
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                 >
                   {item.subtitle}

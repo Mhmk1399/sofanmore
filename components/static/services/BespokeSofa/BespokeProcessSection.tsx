@@ -115,7 +115,7 @@ function SectionHeader() {
       <div>
         <div className="flex items-center gap-3">
           <span className="h-px w-9 bg-[var(--brand-gold)]" />
-          <span className="font-brand-sans text-[8px] font-bold uppercase tracking-[0.25em] text-[var(--brand-gold-700)] sm:text-[9px]">
+          <span className="font-brand-sans text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-gold-700)] sm:text-[12px]">
             The Bespoke Process
           </span>
         </div>
@@ -141,7 +141,7 @@ function SectionHeader() {
         <div className="mt-5 flex items-center gap-3">
           <span className="h-[2px] w-12 rounded-full bg-[var(--brand-gold)]" />
           <span className="h-[5px] w-[5px] rounded-full bg-[var(--brand-gold)]" />
-          <span className="font-brand-sans text-[7px] font-bold uppercase tracking-[0.16em] text-[var(--brand-text-muted)]">
+          <span className="font-brand-sans text-[13px] font-bold uppercase tracking-[0.16em] text-[var(--brand-text-muted)]">
             Idea · Design · Make · Deliver
           </span>
         </div>
@@ -188,7 +188,7 @@ function DesktopTimeline() {
                 </div>
               </div>
               {/* Duration badge */}
-              <span className="mt-3 rounded-full bg-white/60 px-2.5 py-1 font-brand-sans text-[7px] font-bold uppercase tracking-[0.14em] text-[var(--brand-navy)] shadow-[inset_1px_1px_2px_rgba(255,255,255,0.9),0_2px_4px_rgba(120,74,20,0.06)]">
+              <span className="mt-3 rounded-full bg-white/60 px-2.5 py-1 font-brand-sans text-[13px] font-bold uppercase tracking-[0.14em] text-[var(--brand-navy)] shadow-[inset_1px_1px_2px_rgba(255,255,255,0.9),0_2px_4px_rgba(120,74,20,0.06)]">
                 {step.duration}
               </span>
               {/* Arrow separator */}
@@ -254,7 +254,7 @@ function DesktopStepCard({ step }: { step: Step }) {
         {/* Copy */}
         <div className="relative z-10 mt-5 flex-1">
           <span
-            className={`font-brand-sans text-[7px] font-bold uppercase tracking-[0.18em] ${
+            className={`font-brand-sans text-[13px] font-bold uppercase tracking-[0.18em] ${
               dark ? "text-[var(--brand-gold)]" : "text-[var(--brand-gold-700)]"
             }`}
           >
@@ -279,7 +279,7 @@ function DesktopStepCard({ step }: { step: Step }) {
 
           {step.secondary && (
             <p
-              className={`mt-2 font-brand-sans text-[9.5px] leading-[1.55] xl:text-[10px] ${
+              className={`mt-2 font-brand-sans text-[9.5px] leading-[1.55] xl:text-[13px] ${
                 dark ? "text-white/44" : "text-[var(--brand-text-muted)]"
               }`}
             >
@@ -292,7 +292,7 @@ function DesktopStepCard({ step }: { step: Step }) {
         {dark && (
           <div className="relative z-10 mt-4 inline-flex items-center gap-1.5 self-start rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-gold)]" />
-            <span className="font-brand-sans text-[6px] font-bold uppercase tracking-[0.14em] text-white/70">
+            <span className="font-brand-sans text-[13px] font-bold uppercase tracking-[0.14em] text-white/70">
               London Workshop
             </span>
           </div>
@@ -377,7 +377,7 @@ function MobileStepCard({ step }: { step: Step }) {
             <div className="min-w-0 flex-1">
               <div className="flex items-center justify-between gap-2">
                 <span
-                  className={`font-brand-sans text-[6px] font-bold uppercase tracking-[0.16em] ${
+                  className={`font-brand-sans text-[13px] font-bold uppercase tracking-[0.16em] ${
                     dark
                       ? "text-[var(--brand-gold)]"
                       : "text-[var(--brand-gold-700)]"
@@ -386,7 +386,7 @@ function MobileStepCard({ step }: { step: Step }) {
                   {step.eyebrow}
                 </span>
                 <span
-                  className={`rounded-full px-2 py-0.5 font-brand-sans text-[6px] font-bold uppercase tracking-[0.12em] ${
+                  className={`rounded-full px-2 py-0.5 font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] ${
                     dark
                       ? "bg-white/10 text-[var(--brand-gold)]"
                       : "bg-[var(--brand-navy)]/8 text-[var(--brand-navy)]"
@@ -405,7 +405,7 @@ function MobileStepCard({ step }: { step: Step }) {
               </h3>
 
               <p
-                className={`mt-2 font-brand-sans text-[10px] leading-[1.6] ${
+                className={`mt-2 font-brand-sans text-[13px] leading-[1.6] ${
                   dark ? "text-white/64" : "text-[var(--brand-text-muted)]"
                 }`}
               >
@@ -414,7 +414,7 @@ function MobileStepCard({ step }: { step: Step }) {
 
               {step.secondary && (
                 <p
-                  className={`mt-1.5 font-brand-sans text-[9px] leading-[1.55] ${
+                  className={`mt-1.5 font-brand-sans text-[12px] leading-[1.55] ${
                     dark ? "text-white/44" : "text-[var(--brand-text-muted)]"
                   }`}
                 >
@@ -449,7 +449,7 @@ function CompletionStrip() {
             </div>
 
             <div>
-              <span className="font-brand-sans text-[7px] font-bold uppercase tracking-[0.18em] text-[var(--brand-gold-700)]">
+              <span className="font-brand-sans text-[13px] font-bold uppercase tracking-[0.18em] text-[var(--brand-gold-700)]">
                 One Considered Process
               </span>
               <p className="mt-1.5 font-brand-display text-[19px] font-semibold leading-[1.2] text-[var(--brand-navy)] sm:text-[21px]">
@@ -469,7 +469,7 @@ function CompletionStrip() {
                   strokeWidth={2.5}
                   className="text-[var(--brand-gold-700)]"
                 />
-                <span className="font-brand-sans text-[6px] font-bold uppercase tracking-[0.1em] text-[var(--brand-navy)]">
+                <span className="font-brand-sans text-[13px] font-bold uppercase tracking-[0.1em] text-[var(--brand-navy)]">
                   {item}
                 </span>
               </div>

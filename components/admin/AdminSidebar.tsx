@@ -47,13 +47,13 @@ export default function Sidebar({
           <p className="truncate font-brand-sans text-[13px] font-bold leading-tight">
             Admin
           </p>
-          <p className="truncate font-brand-sans text-[9px] font-semibold text-[var(--brand-text-muted)]">
+          <p className="truncate font-brand-sans text-[12px] font-semibold text-[var(--brand-text-muted)]">
             {currentUser?.name || "Lead system"}
           </p>
         </div>
       </div>
 
-      <p className="mb-1 px-2 font-brand-sans text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--brand-text-muted)]">
+      <p className="mb-1 px-2 font-brand-sans text-[12px] font-bold uppercase tracking-[0.15em] text-[var(--brand-text-muted)]">
         Dashboard
       </p>
       <nav className="space-y-0.5">
@@ -71,7 +71,7 @@ export default function Sidebar({
         />
       </nav>
 
-      <p className="mb-1 mt-4 px-2 font-brand-sans text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--brand-text-muted)]">
+      <p className="mb-1 mt-4 px-2 font-brand-sans text-[12px] font-bold uppercase tracking-[0.15em] text-[var(--brand-text-muted)]">
         Services
       </p>
       <nav className="space-y-0.5">
@@ -88,7 +88,7 @@ export default function Sidebar({
         ))}
       </nav>
 
-      <p className="mb-1 mt-4 px-2 font-brand-sans text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--brand-text-muted)]">
+      <p className="mb-1 mt-4 px-2 font-brand-sans text-[12px] font-bold uppercase tracking-[0.15em] text-[var(--brand-text-muted)]">
         System
       </p>
       <nav className="space-y-0.5">

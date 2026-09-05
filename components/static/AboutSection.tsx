@@ -123,34 +123,7 @@ function DesktopAbout() {
         "
       >
         {/* LEFT SIDE DECOR */}
-
-        <div
-          aria-hidden
-          className="
-            absolute
-            -left-[10px]
-            top-[150px]
-            h-[270px]
-            w-[72px]
-            rounded-r-[42px]
-            border
-            border-white/70
-            bg-[linear-gradient(145deg,#fffdf8,#eadfce)]
-            shadow-[var(--shadow-clay-md)]
-          "
-        >
-          <div
-            className="
-              absolute
-              left-1/2
-              top-10
-              h-[100px]
-              w-px
-              -translate-x-1/2
-              bg-[var(--brand-gold)]
-            "
-          />
-        </div>
+ 
 
      
 
@@ -213,7 +186,7 @@ function AboutCopy() {
         <span
           className="
             font-brand-sans
-            text-[10px]
+            text-[13px]
             font-bold
             uppercase
             tracking-[0.2em]
@@ -393,7 +366,7 @@ function DesktopFeatureCard({ card }: { card: FeatureCard }) {
       <div className="min-w-0">
         <h3
           className="
-            font-brand-display
+            font-brand-display text-nowrap
             text-[17px]
             font-semibold
             leading-[1.1]
@@ -414,7 +387,7 @@ function DesktopFeatureCard({ card }: { card: FeatureCard }) {
         <p
           className="
             font-brand-sans
-            text-[9px]
+            text-[12px]
             font-medium
             leading-[1.45]
             text-[var(--brand-text-muted)]
@@ -459,35 +432,7 @@ function MobileAbout() {
           pt-7
         "
       >
-        {/* side decorative rail */}
-
-        <div
-          aria-hidden
-          className="
-            absolute
-            -left-[7px]
-            top-[84px]
-            h-[220px]
-            w-[44px]
-            rounded-r-[28px]
-            border
-            border-white/70
-            bg-[linear-gradient(145deg,#fffdf8,#eadfce)]
-            shadow-[var(--shadow-clay-sm)]
-          "
-        >
-          <div
-            className="
-              absolute
-              left-1/2
-              top-8
-              h-[68px]
-              w-px
-              -translate-x-1/2
-              bg-[var(--brand-gold)]
-            "
-          />
-        </div>
+        
 
         <MobileCopy />
 
@@ -500,8 +445,7 @@ function MobileAbout() {
         </div>
       </div>
 
-      <MobileDecorations />
-    </div>
+     </div>
   );
 }
 
@@ -516,7 +460,7 @@ function MobileCopy() {
         <span
           className="
             font-brand-sans
-            text-[8px]
+            text-[11px]
             font-bold
             uppercase
             tracking-[0.17em]
@@ -560,7 +504,7 @@ function MobileCopy() {
           mt-5
           max-w-[330px]
           font-brand-sans
-          text-[10px]
+          text-[13px]
           font-medium
           leading-[1.6]
           text-[var(--brand-text-muted)]
@@ -690,7 +634,7 @@ function MobileFeatureCard({ card }: { card: FeatureCard }) {
           className="
             mt-1
             font-brand-sans
-            text-[8px]
+            text-[11px]
             font-medium
             leading-[1.4]
             text-[var(--brand-text-muted)]
@@ -712,21 +656,7 @@ function MobileDecorations() {
     <>
       {/* bottom left sphere */}
 
-      <div
-        aria-hidden
-        className="
-          clay-sphere
-          absolute
-          -bottom-[22px]
-          -left-[28px]
-          z-20
-          h-[100px]
-          w-[100px]
-        "
-      >
-        <div className="clay-sphere-shadow" />
-        <div className="clay-sphere-ball" />
-      </div>
+      
 
       {/* small gold sphere */}
 

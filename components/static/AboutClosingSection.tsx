@@ -221,7 +221,7 @@ function DesktopStoryPanel() {
           className="
             mt-1
             font-brand-sans
-            text-[7px]
+            text-[13px]
             font-bold
             uppercase
             tracking-[0.25em]
@@ -261,7 +261,7 @@ function DesktopStoryPanel() {
           <span
             className="
               font-brand-sans
-              text-[9px]
+              text-[12px]
               font-bold
               uppercase
               tracking-[0.25em]
@@ -354,7 +354,7 @@ function DesktopStoryPanel() {
             <div
               className="
                 font-brand-sans
-                text-[9px]
+                text-[12px]
                 font-bold
                 uppercase
                 tracking-[0.15em]
@@ -368,7 +368,7 @@ function DesktopStoryPanel() {
               className="
                 mt-1
                 font-brand-sans
-                text-[8px]
+                text-[11px]
                 text-white/45
               "
             >
@@ -401,7 +401,7 @@ function DesktopStoryPanel() {
             items-center
             gap-2
             font-brand-sans
-            text-[9px]
+            text-[12px]
             font-bold
             uppercase
             tracking-[0.14em]
@@ -460,7 +460,7 @@ function DesktopServices() {
           <p
             className="
               font-brand-sans
-              text-[8px]
+              text-[11px]
               font-bold
               uppercase
               tracking-[0.24em]
@@ -488,7 +488,7 @@ function DesktopServices() {
         <span
           className="
             font-brand-sans
-            text-[8px]
+            text-[11px]
             font-bold
             uppercase
             tracking-[0.17em]
@@ -623,7 +623,7 @@ function ServiceCard({
           className="
             mt-3
             font-brand-sans
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.6]
             text-[var(--brand-text-muted)]
@@ -646,7 +646,7 @@ function ServiceCard({
           <span
             className="
               font-brand-sans
-              text-[8px]
+              text-[11px]
               font-bold
               uppercase
               tracking-[0.15em]
@@ -745,7 +745,7 @@ function MobileLayout() {
             className="
               mt-8
               font-brand-sans
-              text-[8px]
+              text-[11px]
               font-bold
               uppercase
               tracking-[0.24em]
@@ -841,7 +841,7 @@ function MobileLayout() {
             <span
               className="
                 font-brand-sans
-                text-[8px]
+                text-[11px]
                 font-bold
                 uppercase
                 tracking-[0.13em]
@@ -878,7 +878,7 @@ function MobileLayout() {
         <p
           className="
             font-brand-sans
-            text-[8px]
+            text-[11px]
             font-bold
             uppercase
             tracking-[0.22em]
@@ -925,7 +925,7 @@ function MobileLayout() {
             justify-center
             gap-2
             font-brand-sans
-            text-[9px]
+            text-[12px]
             font-bold
             uppercase
             tracking-[0.14em]
@@ -1030,7 +1030,7 @@ function MobileServiceRow({
             <span
               className="
                 font-brand-display
-                text-[10px]
+                text-[13px]
                 text-[var(--brand-gold-700)]/50
               "
             >
@@ -1043,7 +1043,7 @@ function MobileServiceRow({
               mt-2
               line-clamp-2
               font-brand-sans
-              text-[8px]
+              text-[11px]
               leading-[1.5]
               text-[var(--brand-text-muted)]
             "

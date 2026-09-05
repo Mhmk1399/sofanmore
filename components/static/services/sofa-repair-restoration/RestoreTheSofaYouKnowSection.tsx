@@ -163,7 +163,7 @@ export default function RestoreTheSofaYouKnowSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -171,7 +171,7 @@ export default function RestoreTheSofaYouKnowSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Keep What Already Works
@@ -282,7 +282,7 @@ export default function RestoreTheSofaYouKnowSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -382,7 +382,7 @@ export default function RestoreTheSofaYouKnowSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -502,7 +502,7 @@ function KnownFitPanel() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -589,13 +589,13 @@ function KnownFitPanel() {
                   className="
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-semibold
                       leading-[1.4]
 
                       text-[var(--brand-navy)]
 
-                      sm:text-[10px]
+                      sm:text-[13px]
                     "
                 >
                   {text}
@@ -670,7 +670,7 @@ function KnownFitPanel() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -745,13 +745,13 @@ function KnownFitPanel() {
                   className="
                     font-brand-sans
 
-                    text-[9px]
+                    text-[12px]
                     font-medium
                     leading-[1.55]
 
                     text-white/70
 
-                    sm:text-[10px]
+                    sm:text-[13px]
                   "
                 >
                   {item}

@@ -148,7 +148,7 @@ export default function BespokeProjectCTASection() {
                     className="
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -156,7 +156,7 @@ export default function BespokeProjectCTASection() {
 
                       text-[var(--brand-gold)]
 
-                      sm:text-[8px]
+                      sm:text-[11px]
                     "
                   >
                     Start Your Bespoke Project
@@ -330,13 +330,13 @@ export default function BespokeProjectCTASection() {
 
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-medium
                       leading-[1.65]
 
                       text-white/45
 
-                      sm:text-[10px]
+                      sm:text-[13px]
                     "
                   >
                     Start with your room, measurements, inspiration or simply an
@@ -415,7 +415,7 @@ export default function BespokeProjectCTASection() {
 
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -434,7 +434,7 @@ export default function BespokeProjectCTASection() {
 
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-medium
 
                       text-white/45
@@ -449,7 +449,7 @@ export default function BespokeProjectCTASection() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -501,7 +501,7 @@ function ProjectPanel() {
           className="
             font-brand-sans
 
-            text-[6px]
+            text-[13px]
             font-bold
             uppercase
 
@@ -541,7 +541,7 @@ function ProjectPanel() {
 
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.7]
 
@@ -608,7 +608,7 @@ function ProjectPanel() {
                 className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -616,7 +616,7 @@ function ProjectPanel() {
 
                     text-white/80
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
               >
                 {label}
@@ -628,13 +628,13 @@ function ProjectPanel() {
 
                     font-brand-sans
 
-                    text-[9px]
+                    text-[12px]
                     font-medium
                     leading-[1.6]
 
                     text-white/42
 
-                    sm:text-[10px]
+                    sm:text-[13px]
                   "
               >
                 {text}

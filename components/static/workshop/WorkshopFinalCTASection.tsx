@@ -136,7 +136,7 @@ export default function WorkshopFinalCTASection() {
                     className="
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -144,7 +144,7 @@ export default function WorkshopFinalCTASection() {
 
                       text-[var(--brand-gold)]
 
-                      sm:text-[8px]
+                      sm:text-[11px]
                     "
                   >
                     Sofa N More · London NW2
@@ -331,7 +331,7 @@ export default function WorkshopFinalCTASection() {
                       className="
                         font-brand-sans
 
-                        text-[6px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -410,13 +410,13 @@ export default function WorkshopFinalCTASection() {
 
                         font-brand-sans
 
-                        text-[8px]
+                        text-[11px]
                         font-medium
                         leading-[1.65]
 
                         text-white/55
 
-                        sm:text-[9px]
+                        sm:text-[12px]
                       "
                     >
                       Sofa N More
@@ -442,12 +442,12 @@ export default function WorkshopFinalCTASection() {
 
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-semibold
 
                     text-white/45
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
                 >
                   <Ruler
@@ -513,13 +513,13 @@ function PreparationItem({ text }: { text: string }) {
         className="
           font-brand-sans
 
-          text-[9px]
+          text-[12px]
           font-medium
           leading-[1.55]
 
           text-white/70
 
-          sm:text-[10px]
+          sm:text-[13px]
         "
       >
         {text}

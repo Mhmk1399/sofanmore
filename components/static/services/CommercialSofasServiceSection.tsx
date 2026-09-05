@@ -232,7 +232,7 @@ export default function CommercialSofasServiceSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -240,7 +240,7 @@ export default function CommercialSofasServiceSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Commercial Sofas · Contract Seating
@@ -485,7 +485,7 @@ export default function CommercialSofasServiceSection() {
                         className="
                           font-brand-sans
 
-                          text-[6px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -595,7 +595,7 @@ export default function CommercialSofasServiceSection() {
                         className="
                           font-brand-sans
 
-                          text-[6px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -700,7 +700,7 @@ export default function CommercialSofasServiceSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -788,7 +788,7 @@ function CommercialProjectPanel() {
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -887,7 +887,7 @@ function CommercialProjectPanel() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -978,7 +978,7 @@ function ProjectExampleCard({ example }: { example: ProjectExample }) {
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -1014,13 +1014,13 @@ function ProjectExampleCard({ example }: { example: ProjectExample }) {
 
               font-brand-sans
 
-              text-[9px]
+              text-[12px]
               font-medium
               leading-[1.6]
 
               text-[var(--brand-text-muted)]
 
-              sm:text-[10px]
+              sm:text-[13px]
             "
           >
             {example.text}
@@ -1051,7 +1051,7 @@ function Principle({ title, text }: { title: string; text: string }) {
         className="
           font-brand-sans
 
-          text-[6px]
+          text-[13px]
           font-bold
           uppercase
 
@@ -1069,13 +1069,13 @@ function Principle({ title, text }: { title: string; text: string }) {
 
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.45]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {text}
@@ -1135,13 +1135,13 @@ function EnvironmentItem({
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.4]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {title}
@@ -1197,13 +1197,13 @@ function CheckItem({ text }: { text: string }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.45]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {text}

@@ -166,7 +166,7 @@ export default function RepairRestoreReplaceSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -174,7 +174,7 @@ export default function RepairRestoreReplaceSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Making the Right Decision
@@ -307,7 +307,7 @@ export default function RepairRestoreReplaceSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -406,7 +406,7 @@ export default function RepairRestoreReplaceSection() {
                   className="
                     font-brand-sans
 
-                    text-[6px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -563,7 +563,7 @@ function DecisionCard({ item }: { item: DecisionPoint }) {
 
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.7]
 
@@ -633,7 +633,7 @@ function AssessmentCard() {
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -673,7 +673,7 @@ function AssessmentCard() {
 
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-medium
               leading-[1.7]
 

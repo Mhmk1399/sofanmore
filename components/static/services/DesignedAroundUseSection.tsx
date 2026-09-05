@@ -136,7 +136,7 @@ export default function DesignedAroundUseSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -144,7 +144,7 @@ export default function DesignedAroundUseSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Practical Design Matters
@@ -246,7 +246,7 @@ export default function DesignedAroundUseSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -345,7 +345,7 @@ export default function DesignedAroundUseSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -408,7 +408,7 @@ export default function DesignedAroundUseSection() {
 
                   font-brand-sans
 
-                  text-[7px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -524,7 +524,7 @@ function PracticalQuestionsPanel() {
               className="
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -627,13 +627,13 @@ function QuestionRow({ question }: { question: string }) {
         className="
           font-brand-sans
 
-          text-[9px]
+          text-[12px]
           font-semibold
           leading-[1.55]
 
           text-[var(--brand-navy)]
 
-          sm:text-[10px]
+          sm:text-[13px]
 
           lg:text-[11px]
         "
@@ -655,7 +655,7 @@ function ServiceTextLink({ href, label }: { href: string; label: string }) {
       className="
         font-brand-sans
 
-        text-[8px]
+        text-[11px]
         font-semibold
 
         text-[var(--brand-navy)]
@@ -675,7 +675,7 @@ function ServiceTextLink({ href, label }: { href: string; label: string }) {
         focus-visible:ring-[var(--brand-gold)]
         focus-visible:ring-offset-2
 
-        sm:text-[9px]
+        sm:text-[12px]
       "
     >
       {label}
@@ -688,7 +688,7 @@ function Separator() {
     <span
       aria-hidden
       className="
-        text-[8px]
+        text-[11px]
         text-[var(--brand-navy)]/20
       "
     >

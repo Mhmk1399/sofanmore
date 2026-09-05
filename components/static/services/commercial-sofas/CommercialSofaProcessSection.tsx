@@ -207,7 +207,7 @@ export default function CommercialSofaProcessSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -215,7 +215,7 @@ export default function CommercialSofaProcessSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Our Commercial Process
@@ -409,7 +409,7 @@ export default function CommercialSofaProcessSection() {
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.65]
 
@@ -508,7 +508,7 @@ function DesktopProcessRail() {
 
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -529,12 +529,12 @@ function DesktopProcessRail() {
 
                 font-brand-sans
 
-                text-[8px]
+                text-[11px]
                 font-semibold
 
                 text-white/75
 
-                lg:text-[9px]
+                lg:text-[12px]
               "
             >
               {step.shortLabel}
@@ -628,7 +628,7 @@ function MobileProcessRail() {
                   className="
                     font-brand-sans
 
-                    text-[6px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -643,7 +643,7 @@ function MobileProcessRail() {
                 <span
                   aria-hidden
                   className="
-                    text-[10px]
+                    text-[13px]
 
                     text-[var(--brand-gold-700)]/55
                   "
@@ -750,7 +750,7 @@ function ProcessRow({ step }: { step: ProcessStep }) {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -822,7 +822,7 @@ function ProcessRow({ step }: { step: ProcessStep }) {
 
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-medium
               leading-[1.7]
 
@@ -845,7 +845,7 @@ function ProcessRow({ step }: { step: ProcessStep }) {
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-medium
                 leading-[1.7]
 
@@ -952,7 +952,7 @@ function HighlightedProcessRow({ step }: { step: ProcessStep }) {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -1024,7 +1024,7 @@ function HighlightedProcessRow({ step }: { step: ProcessStep }) {
 
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-medium
               leading-[1.7]
 
@@ -1047,7 +1047,7 @@ function HighlightedProcessRow({ step }: { step: ProcessStep }) {
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-medium
                 leading-[1.7]
 

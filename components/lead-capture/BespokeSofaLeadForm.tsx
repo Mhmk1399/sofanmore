@@ -5,10 +5,8 @@ import { type FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 import {
   ClayCheckbox,
-  ClayCheckboxGroup,
   ClayFileDropzone,
   ClayInput,
-  ClayRadioGroup,
   ClaySelect,
   ClayTextarea,
   FormSection,
@@ -97,39 +95,6 @@ const spaceTypeOptions = [
   { label: "Office", value: "office" },
   { label: "Hospitality", value: "hospitality" },
   { label: "Other", value: "other" },
-] satisfies SelectOption[];
-
-const configurationOptions = [
-  { label: "Straight", value: "straight" },
-  { label: "Corner", value: "corner" },
-  { label: "Chaise", value: "chaise" },
-  { label: "Modular", value: "modular" },
-  { label: "Curved", value: "curved" },
-  { label: "Not sure", value: "not-sure" },
-] satisfies SelectOption[];
-
-const upholsteryOptions = [
-  { label: "Fabric", value: "fabric" },
-  { label: "Velvet", value: "velvet" },
-  { label: "Leather", value: "leather" },
-  { label: "Not sure", value: "not-sure" },
-  { label: "Other", value: "other" },
-] satisfies SelectOption[];
-
-const comfortOptions = [
-  { label: "Soft", value: "soft" },
-  { label: "Medium", value: "medium" },
-  { label: "Firm", value: "firm" },
-  { label: "Not sure", value: "not-sure" },
-] satisfies SelectOption[];
-
-const accessRestrictionOptions = [
-  { label: "None", value: "none" },
-  { label: "Narrow doorway", value: "narrow-doorway" },
-  { label: "Stairs", value: "stairs" },
-  { label: "Lift", value: "lift" },
-  { label: "Tight hallway", value: "tight-hallway" },
-  { label: "Not sure", value: "not-sure" },
 ] satisfies SelectOption[];
 
 const acceptedUploadMimeTypes = new Set([
@@ -283,7 +248,9 @@ function uploadFileWithProgress(input: {
 
     xhr.onerror = () =>
       reject(
-        new Error("Upload could not reach storage. Check the bucket CORS configuration."),
+        new Error(
+          "Upload could not reach storage. Check the bucket CORS configuration.",
+        ),
       );
     xhr.ontimeout = () => reject(new Error("Upload timed out."));
     xhr.timeout = 120000;
@@ -322,10 +289,6 @@ function validateForm(values: BespokeFormValues, uploads: UploadItem[]) {
     !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email.trim())
   ) {
     errors.email = "Enter a valid email address.";
-  }
-
-  if (!/^[A-Za-z]{1,2}\d[A-Za-z\d]?\s*\d[A-Za-z]{2}$/.test(values.postcode)) {
-    errors.postcode = "Enter a valid UK postcode.";
   }
 
   if (!values.projectType) {
@@ -759,10 +722,6 @@ export default function BespokeSofaLeadForm() {
           />
         </div>
       </FormSection>
-
-       
-
-   
 
       <FormSection eyebrow="Finish" title="Images and notes">
         <div className="grid gap-5   lg:items-start">

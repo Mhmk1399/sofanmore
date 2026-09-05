@@ -388,7 +388,7 @@ export default function LoginPageContent() {
 
 function AuthHint({ icon, label }: { icon: ReactNode; label: string }) {
   return (
-    <span className="inline-flex min-h-[42px] items-center justify-center gap-2 rounded-[16px] border border-white/65 bg-white/22 px-3 font-brand-sans text-[10px] font-bold uppercase tracking-[0.08em] text-[var(--brand-text-muted)]">
+    <span className="inline-flex min-h-[42px] items-center justify-center gap-2 rounded-[16px] border border-white/65 bg-white/22 px-3 font-brand-sans text-[13px] font-bold uppercase tracking-[0.08em] text-[var(--brand-text-muted)]">
       <span className="text-[var(--brand-gold-700)]">{icon}</span>
       {label}
     </span>

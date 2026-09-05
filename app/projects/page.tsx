@@ -475,7 +475,7 @@ export default async function ProjectsPage() {
                   className="
                     font-brand-sans
 
-                    text-[8px]
+                    text-[11px]
                     font-bold
                     uppercase
 
@@ -517,7 +517,7 @@ export default async function ProjectsPage() {
 
                     font-brand-sans
 
-                    text-[10px]
+                    text-[13px]
                     font-medium
                     leading-[1.75]
 
@@ -718,7 +718,7 @@ function ProjectCard({
 
               font-brand-sans
 
-              text-[7px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -814,7 +814,7 @@ function ProjectCard({
 
               font-brand-sans
 
-              text-[7px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -916,7 +916,7 @@ function ProjectCard({
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-semibold
 
                 text-[var(--brand-text-muted)]
@@ -966,7 +966,7 @@ function ProjectCard({
 
                 font-brand-sans
 
-                text-[9px]
+                text-[12px]
                 font-bold
                 uppercase
 
@@ -1078,7 +1078,7 @@ function EmptyProjects() {
 
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.7]
 

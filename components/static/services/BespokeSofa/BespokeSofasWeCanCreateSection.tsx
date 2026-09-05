@@ -170,14 +170,14 @@ export default function BespokeSofasWeCanCreateSection() {
                   <span
                     className="
                       font-brand-sans
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
                       tracking-[0.25em]
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Made for Your Interior
@@ -268,7 +268,7 @@ export default function BespokeSofasWeCanCreateSection() {
                   <span
                     className="
                       font-brand-sans
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
                       tracking-[0.15em]
@@ -518,7 +518,7 @@ function FeaturedSofaCard({ item }: { item: (typeof bespokePieces)[number] }) {
           <span
             className="
               font-brand-sans
-              text-[8px]
+              text-[11px]
               font-bold
               uppercase
               tracking-[0.22em]
@@ -714,7 +714,7 @@ function SupportingCard({ item }: { item: (typeof bespokePieces)[number] }) {
           <span
             className="
               font-brand-sans
-              text-[7px]
+              text-[13px]
               font-bold
               uppercase
               tracking-[0.18em]
@@ -861,7 +861,7 @@ function WideSupportingCard({
               <span
                 className="
                   font-brand-sans
-                  text-[7px]
+                  text-[13px]
                   font-bold
                   uppercase
                   tracking-[0.18em]
@@ -922,7 +922,7 @@ function WideSupportingCard({
                   mt-3
 
                   font-brand-sans
-                  text-[10px]
+                  text-[13px]
                   leading-[1.65]
 
                   text-[var(--brand-text-muted)]
@@ -1017,7 +1017,7 @@ function MobileFeaturedCard({
             block
 
             font-brand-sans
-            text-[7px]
+            text-[13px]
             font-bold
             uppercase
             tracking-[0.18em]
@@ -1065,7 +1065,7 @@ function MobileFeaturedCard({
               mt-3
 
               font-brand-sans
-              text-[10px]
+              text-[13px]
               leading-[1.65]
 
               text-white/48
@@ -1157,7 +1157,7 @@ function MobilePieceCard({ item }: { item: (typeof bespokePieces)[number] }) {
             <span
               className="
                 font-brand-sans
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
                 tracking-[0.15em]
@@ -1200,7 +1200,7 @@ function MobilePieceCard({ item }: { item: (typeof bespokePieces)[number] }) {
               mt-2.5
 
               font-brand-sans
-              text-[10px]
+              text-[13px]
               leading-[1.65]
 
               text-[var(--brand-text-muted)]
@@ -1215,7 +1215,7 @@ function MobilePieceCard({ item }: { item: (typeof bespokePieces)[number] }) {
                 mt-2
 
                 font-brand-sans
-                text-[9px]
+                text-[12px]
                 leading-[1.6]
 
                 text-[var(--brand-text-muted)]
@@ -1298,7 +1298,7 @@ function CommercialProjectCallout() {
             <span
               className="
                 font-brand-sans
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
                 tracking-[0.18em]
@@ -1358,7 +1358,7 @@ function CommercialProjectCallout() {
             py-3.5
 
             font-brand-sans
-            text-[8px]
+            text-[11px]
             font-bold
             uppercase
             tracking-[0.13em]

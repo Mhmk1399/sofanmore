@@ -170,7 +170,7 @@ export default function BespokeSofasForLondonHomesSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -178,7 +178,7 @@ export default function BespokeSofasForLondonHomesSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Made for London Living
@@ -320,7 +320,7 @@ export default function BespokeSofasForLondonHomesSection() {
                         className="
                           font-brand-sans
 
-                          text-[7px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -414,7 +414,7 @@ export default function BespokeSofasForLondonHomesSection() {
 
                         font-brand-sans
 
-                        text-[7px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -891,7 +891,7 @@ function LondonRoomFitVisual() {
 
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -899,7 +899,7 @@ function LondonRoomFitVisual() {
 
                   text-[var(--brand-navy)]
 
-                  sm:text-[7px]
+                  sm:text-[13px]
                 "
               >
                 Developed Around the Room
@@ -971,7 +971,7 @@ function LondonRoomFitVisual() {
 
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -1062,7 +1062,7 @@ function LondonRoomFitVisual() {
 
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 

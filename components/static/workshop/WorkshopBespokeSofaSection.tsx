@@ -95,7 +95,7 @@ export default function WorkshopBespokeSofaSection() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -103,7 +103,7 @@ export default function WorkshopBespokeSofaSection() {
 
                     text-[var(--brand-gold-700)]
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
                 >
                   Start Your Project at the Workshop
@@ -244,7 +244,7 @@ export default function WorkshopBespokeSofaSection() {
                         className="
                           font-brand-sans
 
-                          text-[6px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -286,7 +286,7 @@ export default function WorkshopBespokeSofaSection() {
 
                       font-brand-sans
 
-                      text-[10px]
+                      text-[13px]
                       font-medium
                       leading-[1.7]
 
@@ -376,7 +376,7 @@ export default function WorkshopBespokeSofaSection() {
                           className="
                             font-brand-sans
 
-                            text-[6px]
+                            text-[13px]
                             font-bold
                             uppercase
 
@@ -417,13 +417,13 @@ export default function WorkshopBespokeSofaSection() {
 
                             font-brand-sans
 
-                            text-[8px]
+                            text-[11px]
                             font-medium
                             leading-[1.55]
 
                             text-white/55
 
-                            sm:text-[9px]
+                            sm:text-[12px]
                           "
                         >
                           An initial idea, room photograph or catalogue design
@@ -506,13 +506,13 @@ function BringItem({
 
           font-brand-sans
 
-          text-[7px]
+          text-[13px]
           font-bold
           leading-[1.3]
 
           text-[var(--brand-navy)]
 
-          sm:text-[8px]
+          sm:text-[11px]
         "
       >
         {label}

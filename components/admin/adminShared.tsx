@@ -751,7 +751,7 @@ export function CustomDropdown({
   return (
     <div ref={ref} className={`relative ${fullWidth ? "w-full" : ""}`}>
       {label && (
-        <span className="mb-1.5 block font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
+        <span className="mb-1.5 block font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
           {label}
         </span>
       )}
@@ -821,7 +821,7 @@ export function StatusBadge({ status }: { status: LeadStatus }) {
   const c = statusColor[status];
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 font-brand-sans text-[10px] font-bold ${c.bg} ${c.text} ${c.border}`}
+      className={`inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 font-brand-sans text-[13px] font-bold ${c.bg} ${c.text} ${c.border}`}
     >
       <span className={`h-1.5 w-1.5 rounded-full ${c.dot}`} />
       {statusLabel(status)}
@@ -831,7 +831,7 @@ export function StatusBadge({ status }: { status: LeadStatus }) {
 
 export function ServiceBadge({ service }: { service: LeadService }) {
   return (
-    <span className="inline-flex items-center gap-1 rounded-md border border-gray-200 bg-gray-50 px-1.5 py-0.5 font-brand-sans text-[10px] font-bold text-gray-700">
+    <span className="inline-flex items-center gap-1 rounded-md border border-gray-200 bg-gray-50 px-1.5 py-0.5 font-brand-sans text-[13px] font-bold text-gray-700">
       <ServiceIcon service={service} size={11} />
       {services.find((s) => s.value === service)?.shortLabel || service}
     </span>
@@ -890,7 +890,7 @@ export function AdminTextField({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
+      <span className="mb-1.5 block font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
         {label}
       </span>
       <input
@@ -918,7 +918,7 @@ export function AdminTextareaField({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
+      <span className="mb-1.5 block font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
         {label}
       </span>
       <textarea
@@ -941,7 +941,7 @@ export function DetailSection({
 }) {
   return (
     <section className="mb-4">
-      <h3 className="mb-2 font-brand-sans text-[10px] font-bold uppercase tracking-[0.13em] text-[var(--brand-text-muted)]">
+      <h3 className="mb-2 font-brand-sans text-[13px] font-bold uppercase tracking-[0.13em] text-[var(--brand-text-muted)]">
         {title}
       </h3>
       {children}
@@ -957,7 +957,7 @@ export function DetailGrid({ items }: { items: [string, string][] }) {
           key={`${label}-${value}`}
           className="min-w-0 rounded-lg border border-black/[0.05] bg-white/60 px-3 py-2"
         >
-          <dt className="font-brand-sans text-[9px] font-bold uppercase tracking-[0.1em] text-[var(--brand-text-muted)]">
+          <dt className="font-brand-sans text-[12px] font-bold uppercase tracking-[0.1em] text-[var(--brand-text-muted)]">
             {label}
           </dt>
           <dd className="mt-0.5 break-words font-brand-sans text-[12px] font-bold text-[var(--brand-navy)]">
@@ -981,7 +981,7 @@ export function AttachmentRow({ attachment }: { attachment: LeadAttachment }) {
         <span className="block truncate font-brand-sans text-[11px] font-bold text-[var(--brand-navy)]">
           {attachment.originalName}
         </span>
-        <span className="block truncate font-brand-sans text-[9px] font-semibold text-[var(--brand-text-muted)]">
+        <span className="block truncate font-brand-sans text-[12px] font-semibold text-[var(--brand-text-muted)]">
           {attachment.mimeType} · {formatFileSize(attachment.sizeBytes)}
         </span>
       </span>

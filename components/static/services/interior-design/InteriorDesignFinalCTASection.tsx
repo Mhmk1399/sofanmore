@@ -128,7 +128,7 @@ export default function InteriorDesignFinalCTASection() {
                     className="
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -136,7 +136,7 @@ export default function InteriorDesignFinalCTASection() {
 
                       text-[var(--brand-gold)]
 
-                      sm:text-[8px]
+                      sm:text-[11px]
                     "
                   >
                     Start Your Interior Project
@@ -336,7 +336,7 @@ export default function InteriorDesignFinalCTASection() {
                       className="
                         font-brand-sans
 
-                        text-[6px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -389,7 +389,7 @@ export default function InteriorDesignFinalCTASection() {
 
                     font-brand-sans
 
-                    text-[10px]
+                    text-[13px]
                     font-medium
                     leading-[1.7]
 

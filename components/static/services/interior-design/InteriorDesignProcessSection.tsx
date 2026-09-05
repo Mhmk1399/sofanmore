@@ -192,7 +192,7 @@ export default function InteriorDesignProcessSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -200,7 +200,7 @@ export default function InteriorDesignProcessSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Our Interior Design Process
@@ -388,7 +388,7 @@ export default function InteriorDesignProcessSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -528,12 +528,12 @@ function ProcessOverview() {
 
                 font-brand-sans
 
-                text-[7px]
+                text-[13px]
                 font-semibold
 
                 text-white/65
 
-                lg:text-[8px]
+                lg:text-[11px]
               "
             >
               {step.label}
@@ -673,7 +673,7 @@ function ProcessStepCard({ step }: { step: ProcessStep }) {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -726,7 +726,7 @@ function ProcessStepCard({ step }: { step: ProcessStep }) {
             className="
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-medium
               leading-[1.68]
 
@@ -747,7 +747,7 @@ function ProcessStepCard({ step }: { step: ProcessStep }) {
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-medium
                 leading-[1.68]
 

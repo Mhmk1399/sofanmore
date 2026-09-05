@@ -131,7 +131,7 @@ const DesktopFAQ = memo(function DesktopFAQ({ items }: { items: FAQItem[] }) {
         {/* Intro */}
         <div className="clay-surface-soft sticky top-6 flex h-[560px] flex-col justify-between rounded-[28px] px-8 py-9">
           <div>
-            <span className="font-brand-sans text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--brand-gold-700)]">
+            <span className="font-brand-sans text-[13px] font-bold uppercase tracking-[0.18em] text-[var(--brand-gold-700)]">
               FAQs
             </span>
             <div className="mt-2 h-[2px] w-10 rounded-full bg-[var(--brand-gold)]" />
@@ -224,7 +224,7 @@ const MobileFAQ = memo(function MobileFAQ({ items }: { items: FAQItem[] }) {
   return (
     <div className="clay-surface-strong mx-auto max-w-[430px] rounded-[32px] p-2">
       <div className="clay-surface-soft rounded-[26px] px-4 pb-5 pt-6">
-        <span className="font-brand-sans text-[8px] font-bold uppercase tracking-[0.18em] text-[var(--brand-gold-700)]">
+        <span className="font-brand-sans text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--brand-gold-700)]">
           FAQs
         </span>
         <div className="mt-1.5 h-[2px] w-7 bg-[var(--brand-gold)]" />
@@ -235,7 +235,7 @@ const MobileFAQ = memo(function MobileFAQ({ items }: { items: FAQItem[] }) {
           Asked Questions
         </h2>
 
-        <p className="mt-3 max-w-[280px] font-brand-sans text-[9px] font-medium leading-[1.5] text-[var(--brand-text-muted)]">
+        <p className="mt-3 max-w-[280px] font-brand-sans text-[12px] font-medium leading-[1.5] text-[var(--brand-text-muted)]">
           Find answers about our bespoke sofa, interiors and London
           craftsmanship.
         </p>
@@ -306,14 +306,14 @@ const FAQItem = memo(function FAQItem({
         <span className="flex min-w-0 items-start gap-2.5">
           <span
             className={`shrink-0 font-brand-display font-semibold text-[var(--brand-navy)] ${
-              desktop ? "text-[14px]" : "text-[10px]"
+              desktop ? "text-[14px]" : "text-[13px]"
             }`}
           >
             {faq.id}.
           </span>
           <span
             className={`font-brand-sans font-semibold leading-[1.35] text-[var(--brand-navy)] ${
-              desktop ? "text-[13px]" : "text-[10px]"
+              desktop ? "text-[13px]" : "text-[13px]"
             }`}
           >
             {faq.question}
@@ -362,7 +362,7 @@ const FAQItem = memo(function FAQItem({
               className={`font-brand-sans font-medium text-[var(--brand-text-muted)] ${
                 desktop
                   ? "text-[12px] leading-[1.7]"
-                  : "text-[9px] leading-[1.55]"
+                  : "text-[12px] leading-[1.55]"
               }`}
             >
               {faq.answer}

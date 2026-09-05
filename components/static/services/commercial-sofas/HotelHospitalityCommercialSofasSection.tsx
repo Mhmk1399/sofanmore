@@ -172,7 +172,7 @@ export default function HotelHospitalityCommercialSofasSection({
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -180,7 +180,7 @@ export default function HotelHospitalityCommercialSofasSection({
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Hotel & Hospitality
@@ -293,7 +293,7 @@ export default function HotelHospitalityCommercialSofasSection({
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -447,7 +447,7 @@ function HospitalityAreasPanel() {
               className="
                 font-brand-sans
 
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -515,7 +515,7 @@ function HospitalityAreasPanel() {
 
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.65]
 
@@ -596,7 +596,7 @@ function HospitalityAreasPanel() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -689,13 +689,13 @@ function HospitalityArea({ label, icon: Icon }: HospitalityArea) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.3]
 
           text-white/80
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {label}

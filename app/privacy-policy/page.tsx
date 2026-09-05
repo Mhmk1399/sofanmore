@@ -39,7 +39,7 @@ export default function PrivacyPolicyPage() {
       >
         <div className="clay-surface-strong rounded-[34px] p-[7px] sm:rounded-[42px] sm:p-[9px]">
           <div className="clay-inset rounded-[27px] px-5 py-8 sm:rounded-[34px] sm:px-8 sm:py-10 lg:px-11 lg:py-12">
-            <p className="font-brand-sans text-[8px] font-bold uppercase tracking-[0.22em] text-[var(--brand-gold-700)]">
+            <p className="font-brand-sans text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--brand-gold-700)]">
               Sofa N More
             </p>
             <h1

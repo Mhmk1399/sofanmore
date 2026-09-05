@@ -77,7 +77,7 @@ export default function UserManagement({
           <h2 className="font-brand-sans text-[13px] font-bold text-[var(--brand-navy)]">
             Users
           </h2>
-          <p className="font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+          <p className="font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
             {formatNumber(total)} accounts
           </p>
         </div>
@@ -93,7 +93,7 @@ export default function UserManagement({
       <div className="border-b border-black/[0.06] px-3 py-3 sm:px-4">
         <div className="grid gap-2.5 grid-cols-1 sm:grid-cols-[1fr_160px]">
           <div className="min-w-0">
-            <span className="mb-1.5 block font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
+            <span className="mb-1.5 block font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
               Search
             </span>
             <div className="flex h-[38px] items-center gap-2 rounded-xl border border-white/60 bg-white/50 px-3 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_0_0_1px_rgba(255,255,255,0.5)_inset]">
@@ -125,7 +125,7 @@ export default function UserManagement({
       <div className="hidden overflow-x-auto md:block" data-lenis-prevent>
         <table className="w-full min-w-[780px] text-left">
           <thead>
-            <tr className="border-b border-black/[0.06] font-brand-sans text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--brand-text-muted)]">
+            <tr className="border-b border-black/[0.06] font-brand-sans text-[13px] font-bold uppercase tracking-[0.1em] text-[var(--brand-text-muted)]">
               <th className="px-4 py-2.5">User</th>
               <th className="px-3 py-2.5">Phone</th>
               <th className="px-3 py-2.5">Role</th>
@@ -160,7 +160,7 @@ export default function UserManagement({
                         <p className="truncate font-brand-sans text-[12px] font-bold text-[var(--brand-navy)]">
                           {user.name}
                         </p>
-                        <p className="truncate font-brand-sans text-[9px] font-semibold text-[var(--brand-text-muted)]">
+                        <p className="truncate font-brand-sans text-[12px] font-semibold text-[var(--brand-text-muted)]">
                           {user.id.slice(0, 12)}…
                         </p>
                       </div>
@@ -178,7 +178,7 @@ export default function UserManagement({
                   </td>
                   <td className="px-3 py-2.5">
                     <span
-                      className={`inline-flex items-center gap-1 rounded-md border px-2 py-0.5 font-brand-sans text-[10px] font-bold ${
+                      className={`inline-flex items-center gap-1 rounded-md border px-2 py-0.5 font-brand-sans text-[13px] font-bold ${
                         user.isActive
                           ? "border-green-200 bg-green-50 text-green-700"
                           : "border-red-200 bg-red-50 text-red-700"
@@ -190,12 +190,12 @@ export default function UserManagement({
                       {user.isActive ? "Active" : "Disabled"}
                     </span>
                   </td>
-                  <td className="px-3 py-2.5 font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+                  <td className="px-3 py-2.5 font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                     {user.lastLoginAt
                       ? formatDateTime(user.lastLoginAt)
                       : "Never"}
                   </td>
-                  <td className="px-3 py-2.5 font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+                  <td className="px-3 py-2.5 font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                     {formatDateTime(user.createdAt)}
                   </td>
                   <td className="px-4 py-2.5">
@@ -204,7 +204,7 @@ export default function UserManagement({
                         type="button"
                         onClick={() => onToggleActive(user)}
                         disabled={updatingUserId === user.id}
-                        className="rounded-md px-2.5 py-1 font-brand-sans text-[10px] font-bold text-[var(--brand-navy)] transition-colors hover:bg-black/5 disabled:opacity-40"
+                        className="rounded-md px-2.5 py-1 font-brand-sans text-[13px] font-bold text-[var(--brand-navy)] transition-colors hover:bg-black/5 disabled:opacity-40"
                       >
                         {user.isActive ? "Disable" : "Activate"}
                       </button>
@@ -248,7 +248,7 @@ export default function UserManagement({
                   <p className="truncate font-brand-sans text-[13px] font-bold text-[var(--brand-navy)]">
                     {user.name}
                   </p>
-                  <p className="mt-0.5 truncate font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+                  <p className="mt-0.5 truncate font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                     {user.phone}
                   </p>
                 </div>
@@ -262,7 +262,7 @@ export default function UserManagement({
               </div>
               <div className="mt-2 flex flex-wrap items-center gap-1.5">
                 <span
-                  className={`inline-flex items-center gap-1 rounded-md border px-2 py-0.5 font-brand-sans text-[10px] font-bold ${
+                  className={`inline-flex items-center gap-1 rounded-md border px-2 py-0.5 font-brand-sans text-[13px] font-bold ${
                     user.isActive
                       ? "border-green-200 bg-green-50 text-green-700"
                       : "border-red-200 bg-red-50 text-red-700"
@@ -273,7 +273,7 @@ export default function UserManagement({
                   />
                   {user.isActive ? "Active" : "Disabled"}
                 </span>
-                <span className="font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+                <span className="font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                   Last:{" "}
                   {user.lastLoginAt
                     ? formatDateTime(user.lastLoginAt)

@@ -194,7 +194,7 @@ export default function WhyChooseBespokeSofasSection() {
                   className="
                     font-brand-sans
 
-                    text-[8px]
+                    text-[11px]
                     font-bold
                     uppercase
 
@@ -202,7 +202,7 @@ export default function WhyChooseBespokeSofasSection() {
 
                     text-[var(--brand-gold-700)]
 
-                    sm:text-[9px]
+                    sm:text-[12px]
                   "
                 >
                   Why Bespoke
@@ -559,7 +559,7 @@ function BenefitCard({
             className="
               font-brand-sans
 
-              text-[7px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -618,7 +618,7 @@ function BenefitCard({
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 leading-[1.65]
 
                 text-[var(--brand-text-muted)]
@@ -722,7 +722,7 @@ function CentralBespokeObject({ mobile = false }: { mobile?: boolean }) {
             className="
               font-brand-sans
 
-              text-[7px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -842,7 +842,7 @@ function CentralBespokeObject({ mobile = false }: { mobile?: boolean }) {
                 className="
                     font-brand-sans
 
-                    text-[6px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -958,7 +958,7 @@ function MobileBenefitCard({ item }: { item: (typeof benefits)[number] }) {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -1007,7 +1007,7 @@ function MobileBenefitCard({ item }: { item: (typeof benefits)[number] }) {
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 leading-[1.65]
 
                 text-[var(--brand-text-muted)]
@@ -1023,7 +1023,7 @@ function MobileBenefitCard({ item }: { item: (typeof benefits)[number] }) {
 
                   font-brand-sans
 
-                  text-[9px]
+                  text-[12px]
                   leading-[1.6]
 
                   text-[var(--brand-text-muted)]

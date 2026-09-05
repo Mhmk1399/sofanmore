@@ -6,7 +6,6 @@ import { type FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 import {
   ClayCheckbox,
-  ClayCheckboxGroup,
   ClayFileDropzone,
   ClayInput,
   ClaySelect,
@@ -83,31 +82,6 @@ const projectTypeOptions = [
   { label: "Hotel or hospitality", value: "hotel-hospitality" },
   { label: "Office", value: "office" },
   { label: "Other", value: "other" },
-] satisfies SelectOption[];
-
-const needOptions = [
-  { label: "Complete interior", value: "complete-interior" },
-  { label: "Single room", value: "single-room" },
-  { label: "Space planning", value: "space-planning" },
-  { label: "Colour and materials", value: "colour-materials" },
-  { label: "Bespoke sofa integration", value: "bespoke-sofa-integration" },
-  { label: "Commercial seating", value: "commercial-seating" },
-  { label: "Styling", value: "styling" },
-  { label: "Not sure", value: "not-sure" },
-] satisfies SelectOption[];
-
-const projectStageOptions = [
-  { label: "Just exploring", value: "just-exploring" },
-  { label: "Planning", value: "planning" },
-  { label: "Property secured", value: "property-secured" },
-  { label: "Renovation underway", value: "renovation-underway" },
-  { label: "Ready to start", value: "ready-to-start" },
-] satisfies SelectOption[];
-
-const preferredContactOptions = [
-  { label: "Phone", value: "phone" },
-  { label: "Email", value: "email" },
-  { label: "Either", value: "either" },
 ] satisfies SelectOption[];
 
 const acceptedUploadMimeTypes = new Set([
@@ -293,10 +267,6 @@ function validateForm(values: InteriorFormValues, uploads: UploadItem[]) {
 
   if (!/^\+?[0-9][0-9\s().-]{6,30}$/.test(values.phone.trim())) {
     errors.phone = "Enter a valid phone number.";
-  }
-
-  if (!/^[A-Za-z]{1,2}\d[A-Za-z\d]?\s*\d[A-Za-z]{2}$/.test(values.postcode)) {
-    errors.postcode = "Enter a valid UK postcode.";
   }
 
   if (!values.projectType) {
@@ -693,6 +663,7 @@ export default function InteriorDesignLeadForm() {
               value={values.email}
               onChange={(value) => updateValue("email", value)}
               autoComplete="email"
+              required
               error={errors.email}
             />
           </div>

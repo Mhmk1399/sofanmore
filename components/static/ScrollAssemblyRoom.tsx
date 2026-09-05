@@ -227,13 +227,13 @@ export default function ScrollAssemblyRoom() {
           <span
             className="
               font-brand-sans
-              text-[8px]
+              text-[11px]
               font-bold
               uppercase
               tracking-[0.32em]
               text-[var(--brand-gold-700)]
 
-              md:text-[10px]
+              md:text-[13px]
             "
           >
             Crafted Around You
@@ -1226,13 +1226,13 @@ export default function ScrollAssemblyRoom() {
           <span
             className="
               font-brand-sans
-              text-[7px]
+              text-[13px]
               font-bold
               uppercase
               tracking-[0.25em]
               text-[var(--brand-gold-700)]
 
-              md:text-[8px]
+              md:text-[11px]
             "
           >
             Scroll to compose

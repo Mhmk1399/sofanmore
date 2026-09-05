@@ -179,7 +179,7 @@ export default function GalleryHero() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -187,7 +187,7 @@ export default function GalleryHero() {
 
                     text-[var(--brand-gold-700)]
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
                 >
                   Bespoke · Commercial · Interiors · Restoration

@@ -57,7 +57,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
                 {/* EYEBROW */}
                 <div className="flex items-center gap-3 lg:mt-10">
                   <span className="h-px w-8 bg-[var(--brand-gold)]" />
-                  <span className="font-brand-sans text-[8px] font-bold uppercase tracking-[0.25em] text-[var(--brand-gold-700)] sm:text-[9px]">
+                  <span className="font-brand-sans text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-gold-700)] sm:text-[12px]">
                     Bespoke sofa · London
                   </span>
                 </div>
@@ -133,7 +133,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
                         <Phone size={14} strokeWidth={2} />
                       </span>
                       <span className="flex flex-col items-start leading-tight">
-                        <span className="font-brand-sans text-[7px] font-bold uppercase tracking-[0.18em] text-[var(--brand-gold)]">
+                        <span className="font-brand-sans text-[13px] font-bold uppercase tracking-[0.18em] text-[var(--brand-gold)]">
                           Call Us
                         </span>
                         <span className="  text-[14px] tracking-[-0.01em]">

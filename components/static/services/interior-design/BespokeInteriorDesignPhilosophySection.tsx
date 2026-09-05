@@ -133,7 +133,7 @@ export default function BespokeInteriorDesignPhilosophySection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -141,7 +141,7 @@ export default function BespokeInteriorDesignPhilosophySection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Our Design Approach
@@ -245,7 +245,7 @@ export default function BespokeInteriorDesignPhilosophySection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -407,7 +407,7 @@ function DesignPhilosophyPanel() {
               className="
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -487,7 +487,7 @@ function DesignPhilosophyPanel() {
               className="
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -563,7 +563,7 @@ function DesignPhilosophyPanel() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -623,7 +623,7 @@ function DesignPhilosophyPanel() {
 
                 font-brand-sans
 
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -631,7 +631,7 @@ function DesignPhilosophyPanel() {
 
                 text-[var(--brand-navy)]
 
-                sm:text-[8px]
+                sm:text-[11px]
               "
             >
               {item}
@@ -718,7 +718,7 @@ function SmallPrinciple({
 
           font-brand-sans
 
-          text-[6px]
+          text-[13px]
           font-bold
           uppercase
 
@@ -726,7 +726,7 @@ function SmallPrinciple({
 
           text-[var(--brand-text-muted)]
 
-          sm:text-[7px]
+          sm:text-[13px]
         "
       >
         {label}
@@ -796,12 +796,12 @@ function Outcome({ label, text }: { label: string; text: string }) {
 
               font-brand-sans
 
-              text-[9px]
+              text-[12px]
               font-medium
 
               text-[var(--brand-text-muted)]
 
-              sm:text-[10px]
+              sm:text-[13px]
             "
           >
             {text}

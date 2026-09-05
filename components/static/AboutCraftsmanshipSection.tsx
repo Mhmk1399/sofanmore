@@ -307,7 +307,7 @@ function DesktopComposition() {
               className="
                 mt-1
                 font-brand-sans
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
                 tracking-[0.26em]
@@ -339,7 +339,7 @@ function DesktopComposition() {
             <span
               className="
                 font-brand-sans
-                text-[9px]
+                text-[12px]
                 font-bold
                 uppercase
                 tracking-[0.27em]
@@ -657,7 +657,7 @@ function MobileComposition() {
                 className="
                   mt-1
                   font-brand-sans
-                  text-[6px]
+                  text-[13px]
                   uppercase
                   tracking-[0.2em]
                   text-white/60
@@ -674,7 +674,7 @@ function MobileComposition() {
             <p
               className="
                 font-brand-sans
-                text-[8px]
+                text-[11px]
                 font-bold
                 uppercase
                 tracking-[0.24em]
@@ -852,7 +852,7 @@ function MobileComposition() {
                 <p
                   className="
                     font-brand-sans
-                    text-[8px]
+                    text-[11px]
                     font-bold
                     uppercase
                     tracking-[0.17em]
@@ -874,7 +874,7 @@ function MobileComposition() {
                 <p
                   className="
                     font-brand-sans
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
                     tracking-[0.16em]

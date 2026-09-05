@@ -224,7 +224,7 @@ export default function InteriorDesignServiceSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -232,7 +232,7 @@ export default function InteriorDesignServiceSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Residential & Commercial Interior Design
@@ -365,7 +365,7 @@ export default function InteriorDesignServiceSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -472,7 +472,7 @@ export default function InteriorDesignServiceSection() {
                       className="
                         font-brand-sans
 
-                        text-[6px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -509,13 +509,13 @@ export default function InteriorDesignServiceSection() {
 
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-medium
                       leading-[1.6]
 
                       text-[var(--brand-text-muted)]
 
-                      sm:text-[10px]
+                      sm:text-[13px]
                       sm:text-right
                     "
                   >
@@ -623,7 +623,7 @@ export default function InteriorDesignServiceSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -664,13 +664,13 @@ export default function InteriorDesignServiceSection() {
 
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-medium
                       leading-[1.65]
 
                       text-white/55
 
-                      sm:text-[10px]
+                      sm:text-[13px]
                     "
                   >
                     Shape, position, dimensions and upholstery can respond to
@@ -775,7 +775,7 @@ function InteriorDesignVisual() {
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -866,13 +866,13 @@ function DesignElementItem({
         className="
           font-brand-sans
 
-          text-[7px]
+          text-[13px]
           font-bold
           leading-[1.35]
 
           text-[var(--brand-navy)]
 
-          sm:text-[8px]
+          sm:text-[11px]
         "
       >
         {title}
@@ -946,7 +946,7 @@ function InteriorTypeCard({ item }: { item: InteriorType }) {
               className="
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -984,7 +984,7 @@ function InteriorTypeCard({ item }: { item: InteriorType }) {
 
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.7]
 
@@ -1050,13 +1050,13 @@ function InteriorTypeCard({ item }: { item: InteriorType }) {
                   className="
                     font-brand-sans
 
-                    text-[8px]
+                    text-[11px]
                     font-semibold
                     leading-[1.45]
 
                     text-[var(--brand-navy)]
 
-                    sm:text-[9px]
+                    sm:text-[12px]
                   "
                 >
                   {space}

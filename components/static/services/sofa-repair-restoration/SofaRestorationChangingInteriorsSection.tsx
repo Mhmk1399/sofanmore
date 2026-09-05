@@ -141,7 +141,7 @@ export default function SofaRestorationChangingInteriorsSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -149,7 +149,7 @@ export default function SofaRestorationChangingInteriorsSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     When the Room Changes
@@ -256,7 +256,7 @@ export default function SofaRestorationChangingInteriorsSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -388,7 +388,7 @@ function ChangingInteriorPanel() {
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -537,7 +537,7 @@ function ChangingInteriorPanel() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -630,13 +630,13 @@ function ChangeReason({
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.35]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {title}

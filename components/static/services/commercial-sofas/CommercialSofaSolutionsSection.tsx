@@ -223,7 +223,7 @@ export default function CommercialSofaSolutionsSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -231,7 +231,7 @@ export default function CommercialSofaSolutionsSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Commercial Seating
@@ -372,7 +372,7 @@ export default function CommercialSofaSolutionsSection() {
 
                           font-brand-sans
 
-                          text-[7px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -454,7 +454,7 @@ export default function CommercialSofaSolutionsSection() {
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.65]
 
@@ -593,7 +593,7 @@ function CommercialSolutionRow({
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -647,7 +647,7 @@ function CommercialSolutionRow({
 
                 font-brand-sans
 
-                text-[9px]
+                text-[12px]
                 font-medium
                 leading-[1.5]
 
@@ -655,7 +655,7 @@ function CommercialSolutionRow({
 
                 sm:block
 
-                lg:text-[10px]
+                lg:text-[13px]
               "
             >
               {solution.shortDescription}
@@ -757,7 +757,7 @@ function CommercialSolutionRow({
               className="
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -813,7 +813,7 @@ function CommercialSolutionRow({
                 className="
                     font-brand-sans
 
-                    text-[10px]
+                    text-[13px]
                     font-medium
                     leading-[1.7]
 

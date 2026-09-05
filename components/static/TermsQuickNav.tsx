@@ -86,7 +86,7 @@ export default function TermsQuickNav({
 
                 font-brand-sans
 
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -171,7 +171,7 @@ export default function TermsQuickNav({
 
                     font-brand-sans
 
-                    text-[9px]
+                    text-[12px]
                     font-semibold
 
                     text-[var(--brand-text-muted)]
@@ -185,7 +185,7 @@ export default function TermsQuickNav({
 
                       shrink-0
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
 
                       text-[var(--brand-gold-700)]

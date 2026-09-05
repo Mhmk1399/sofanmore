@@ -136,7 +136,7 @@ export default function CommercialSofasFinalCTASection() {
                     className="
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -144,7 +144,7 @@ export default function CommercialSofasFinalCTASection() {
 
                       text-[var(--brand-gold)]
 
-                      sm:text-[8px]
+                      sm:text-[11px]
                     "
                   >
                     Start a Commercial Project
@@ -341,7 +341,7 @@ export default function CommercialSofasFinalCTASection() {
                       className="
                         font-brand-sans
 
-                        text-[6px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -426,12 +426,12 @@ export default function CommercialSofasFinalCTASection() {
                         className="
                           font-brand-sans
 
-                          text-[9px]
+                          text-[12px]
                           font-semibold
 
                           text-white/72
 
-                          sm:text-[10px]
+                          sm:text-[13px]
                         "
                       >
                         {item}
@@ -453,13 +453,13 @@ export default function CommercialSofasFinalCTASection() {
 
                     font-brand-sans
 
-                    text-[9px]
+                    text-[12px]
                     font-medium
                     leading-[1.65]
 
                     text-white/42
 
-                    sm:text-[10px]
+                    sm:text-[13px]
                   "
                 >
                   Share your venue details, dimensions, drawings, photographs or

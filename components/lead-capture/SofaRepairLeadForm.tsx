@@ -6,7 +6,6 @@ import { type FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 import {
   ClayCheckbox,
-  ClayCheckboxGroup,
   ClayFileDropzone,
   ClayInput,
   ClaySelect,
@@ -76,31 +75,6 @@ const itemTypeOptions = [
   { label: "Cushions", value: "cushions" },
   { label: "Banquette or commercial seating", value: "banquette-commercial" },
   { label: "Other", value: "other" },
-] satisfies SelectOption[];
-
-const issueOptions = [
-  { label: "Worn upholstery", value: "worn-upholstery" },
-  { label: "Tear or damage", value: "tear-damage" },
-  { label: "Sagging cushions", value: "sagging-cushions" },
-  { label: "Loss of comfort", value: "loss-of-comfort" },
-  { label: "Staining", value: "staining" },
-  { label: "General restoration", value: "general-restoration" },
-  { label: "Not sure", value: "not-sure" },
-  { label: "Other", value: "other" },
-] satisfies SelectOption[];
-
-const approximateAgeOptions = [
-  { label: "Under 5 years", value: "under-5-years" },
-  { label: "5-10 years", value: "5-10-years" },
-  { label: "10-20 years", value: "10-20-years" },
-  { label: "20+ years", value: "20-plus-years" },
-  { label: "Unknown", value: "unknown" },
-] satisfies SelectOption[];
-
-const transportPreferenceOptions = [
-  { label: "I can drop off", value: "can-drop-off" },
-  { label: "I need collection", value: "need-collection" },
-  { label: "Not sure", value: "not-sure" },
 ] satisfies SelectOption[];
 
 const acceptedUploadMimeTypes = new Set([
@@ -284,10 +258,6 @@ function validateForm(values: RepairFormValues, uploads: UploadItem[]) {
     errors.email = "Enter a valid email address.";
   }
 
-  if (!/^[A-Za-z]{1,2}\d[A-Za-z\d]?\s*\d[A-Za-z]{2}$/.test(values.postcode)) {
-    errors.postcode = "Enter a valid UK postcode.";
-  }
-
   if (!values.itemType) {
     errors.itemType = "Choose the item type.";
   }
@@ -310,18 +280,6 @@ function validateForm(values: RepairFormValues, uploads: UploadItem[]) {
   }
 
   return errors;
-}
-
-function normalizeIssues(nextIssues: string[], currentIssues: string[]) {
-  if (nextIssues.includes("not-sure") && !currentIssues.includes("not-sure")) {
-    return ["not-sure"];
-  }
-
-  if (nextIssues.length > 1 && nextIssues.includes("not-sure")) {
-    return nextIssues.filter((issue) => issue !== "not-sure");
-  }
-
-  return nextIssues;
 }
 
 export default function SofaRepairLeadForm() {

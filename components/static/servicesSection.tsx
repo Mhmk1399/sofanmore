@@ -777,13 +777,13 @@ function ServicesHeader() {
         <span
           className="
             font-brand-sans
-            text-[9px]
+            text-[12px]
             font-bold
             uppercase
             tracking-[0.30em]
             text-[var(--brand-gold-700)]
 
-            sm:text-[10px]
+            sm:text-[13px]
 
             lg:text-[11px]
           "
@@ -1196,7 +1196,7 @@ function ServiceCard({
                   ? "text-[17px]"
                   : isSide
                     ? "text-[14px]"
-                    : "text-[10px]"
+                    : "text-[13px]"
               }
             `}
           >
@@ -1248,14 +1248,14 @@ function ServiceCard({
             leading-[1.55]
             text-[var(--brand-text-muted)]
 
-            text-[10px]
+            text-[13px]
 
             ${
               isActive
                 ? "lg:text-[13px]"
                 : isSide
-                  ? "lg:text-[10px]"
-                  : "lg:line-clamp-3 lg:text-[7px]"
+                  ? "lg:text-[13px]"
+                  : "lg:line-clamp-3 lg:text-[13px]"
             }
           `}
         >
@@ -1300,8 +1300,8 @@ function ServiceCard({
                   isActive
                     ? "text-[11px]"
                     : isSide
-                      ? "text-[9px]"
-                      : "text-[7px]"
+                      ? "text-[12px]"
+                      : "text-[13px]"
                 }
               `}
             >

@@ -140,7 +140,7 @@ export default function InteriorDesignProjectsGallerySection() {
                 className="
                   font-brand-sans
 
-                  text-[8px]
+                  text-[11px]
                   font-bold
                   uppercase
 
@@ -148,7 +148,7 @@ export default function InteriorDesignProjectsGallerySection() {
 
                   text-[var(--brand-gold-700)]
 
-                  sm:text-[9px]
+                  sm:text-[12px]
                 "
               >
                 Selected Interior Work
@@ -528,7 +528,7 @@ function GalleryCard({
 
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -538,7 +538,7 @@ function GalleryCard({
 
                 backdrop-blur-md
 
-                sm:text-[7px]
+                sm:text-[13px]
               "
             >
               {item.eyebrow}
@@ -576,7 +576,7 @@ function GalleryCard({
 
                 text-[var(--brand-gold)]
 
-                sm:text-[6px]
+                sm:text-[13px]
               "
             >
               {item.eyebrow}
@@ -648,7 +648,7 @@ function GalleryCTA() {
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 

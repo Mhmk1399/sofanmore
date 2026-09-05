@@ -6,10 +6,8 @@ import { type FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 import {
   ClayCheckbox,
-  ClayDatePicker,
   ClayFileDropzone,
   ClayInput,
-  ClayRadioGroup,
   ClaySelect,
   ClayTextarea,
   FormSection,
@@ -95,24 +93,6 @@ const venueTypeOptions = [
   { label: "Hospitality", value: "hospitality" },
   { label: "Retail", value: "retail" },
   { label: "Other", value: "other" },
-] satisfies SelectOption[];
-
-const projectTypeOptions = [
-  { label: "Bespoke sofas", value: "bespoke-sofas" },
-  { label: "Banquette seating", value: "banquette-seating" },
-  { label: "Booth seating", value: "booth-seating" },
-  { label: "Reception seating", value: "reception-seating" },
-  { label: "Breakout seating", value: "breakout-seating" },
-  { label: "Reupholstery", value: "reupholstery" },
-  { label: "Not sure", value: "not-sure" },
-] satisfies SelectOption[];
-
-const projectStageOptions = [
-  { label: "Early idea", value: "early-idea" },
-  { label: "Design stage", value: "design-stage" },
-  { label: "Tender or quote", value: "tender-quote" },
-  { label: "Ready to proceed", value: "ready-to-proceed" },
-  { label: "Refurbishment", value: "refurbishment" },
 ] satisfies SelectOption[];
 
 const acceptedUploadMimeTypes = new Set([
@@ -298,10 +278,6 @@ function validateForm(values: CommercialFormValues, uploads: UploadItem[]) {
     errors.fullName = "Enter your full name.";
   }
 
-  if (!values.companyName.trim()) {
-    errors.companyName = "Enter the company or venue name.";
-  }
-
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.workEmail.trim())) {
     errors.workEmail = "Enter a valid work email address.";
   }
@@ -310,16 +286,8 @@ function validateForm(values: CommercialFormValues, uploads: UploadItem[]) {
     errors.phone = "Enter a valid phone number.";
   }
 
-  if (!/^[A-Za-z]{1,2}\d[A-Za-z\d]?\s*\d[A-Za-z]{2}$/.test(values.postcode)) {
-    errors.postcode = "Enter a valid UK postcode.";
-  }
-
   if (!values.venueType) {
     errors.venueType = "Choose a venue type.";
-  }
-
-  if (!values.projectType) {
-    errors.projectType = "Choose a project type.";
   }
 
   if (values.approximateQuantity) {
@@ -338,29 +306,6 @@ function validateForm(values: CommercialFormValues, uploads: UploadItem[]) {
       parsed.toISOString().slice(0, 10) !== values.targetInstallationDate
     ) {
       errors.targetInstallationDate = "Choose a valid date.";
-    }
-  }
-
-  if (values.dimensionsKnown === "yes") {
-    for (const key of ["widthCm", "depthCm"] as const) {
-      if (!values[key]) {
-        errors[key] = "Enter this measurement.";
-        continue;
-      }
-
-      const number = Number(values[key]);
-
-      if (!Number.isFinite(number) || number < 1 || number > 100000) {
-        errors[key] = "Enter a valid measurement.";
-      }
-    }
-
-    if (values.heightCm) {
-      const height = Number(values.heightCm);
-
-      if (!Number.isFinite(height) || height < 1 || height > 100000) {
-        errors.heightCm = "Enter a valid measurement.";
-      }
     }
   }
 
@@ -612,12 +557,24 @@ export default function CommercialSofaLeadForm() {
         ? `${window.location.pathname}${window.location.search}`
         : "/services/commercial-sofas";
     const serviceData: Record<string, string | number | boolean> = {
-      companyName: values.companyName,
       venueType: values.venueType,
-      projectType: values.projectType,
-      hasFloorPlan: values.hasFloorPlan === "yes",
-      dimensionsKnown: values.dimensionsKnown === "yes",
     };
+
+    if (values.companyName.trim()) {
+      serviceData.companyName = values.companyName;
+    }
+
+    if (values.projectType) {
+      serviceData.projectType = values.projectType;
+    }
+
+    if (values.hasFloorPlan === "yes") {
+      serviceData.hasFloorPlan = true;
+    }
+
+    if (values.dimensionsKnown === "yes") {
+      serviceData.dimensionsKnown = true;
+    }
 
     if (values.projectStage) {
       serviceData.projectStage = values.projectStage;
@@ -627,7 +584,7 @@ export default function CommercialSofaLeadForm() {
       serviceData.approximateQuantity = Number(values.approximateQuantity);
     }
 
-    if (values.dimensionsKnown === "yes") {
+    if (values.dimensionsKnown === "yes" && values.widthCm && values.depthCm) {
       serviceData.widthCm = Number(values.widthCm);
       serviceData.depthCm = Number(values.depthCm);
 
@@ -764,6 +721,7 @@ export default function CommercialSofaLeadForm() {
               value={values.workEmail}
               onChange={(value) => updateValue("workEmail", value)}
               autoComplete="email"
+              required
               error={errors.workEmail}
             />
           </div>

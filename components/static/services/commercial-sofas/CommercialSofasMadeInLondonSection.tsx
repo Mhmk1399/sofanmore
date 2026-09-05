@@ -137,7 +137,7 @@ export default function CommercialSofasMadeInLondonSection() {
 
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -156,7 +156,7 @@ export default function CommercialSofasMadeInLondonSection() {
 
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-semibold
 
                       text-[var(--brand-navy)]
@@ -186,7 +186,7 @@ export default function CommercialSofasMadeInLondonSection() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -263,7 +263,7 @@ export default function CommercialSofasMadeInLondonSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -271,7 +271,7 @@ export default function CommercialSofasMadeInLondonSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Our London Workshop
@@ -420,7 +420,7 @@ export default function CommercialSofasMadeInLondonSection() {
 
                           font-brand-sans
 
-                          text-[6px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -553,7 +553,7 @@ export default function CommercialSofasMadeInLondonSection() {
 
                         font-brand-sans
 
-                        text-[10px]
+                        text-[13px]
                         font-medium
                         leading-[1.65]
 
@@ -648,13 +648,13 @@ function ProjectQuestion({ children }: { children: React.ReactNode }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.4]
 
           text-white/80
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {children}
@@ -750,7 +750,7 @@ function WorkshopImage() {
 
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -786,7 +786,7 @@ function WorkshopImage() {
 
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 

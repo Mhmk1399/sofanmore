@@ -176,7 +176,7 @@ export default function BespokeSofasServiceSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -184,7 +184,7 @@ export default function BespokeSofasServiceSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Bespoke Sofas · Made to Measure
@@ -402,7 +402,7 @@ export default function BespokeSofasServiceSection() {
                         className="
                           font-brand-sans
 
-                          text-[6px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -510,7 +510,7 @@ export default function BespokeSofasServiceSection() {
                         className="
                           font-brand-sans
 
-                          text-[6px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -613,7 +613,7 @@ export default function BespokeSofasServiceSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -732,7 +732,7 @@ function BespokeVisual() {
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -804,7 +804,7 @@ function ApproachRow({
 
           font-brand-sans
 
-          text-[6px]
+          text-[13px]
           font-bold
           uppercase
 
@@ -831,11 +831,11 @@ function ApproachRow({
         className={`
           font-brand-sans
 
-          text-[9px]
+          text-[12px]
           font-medium
           leading-[1.5]
 
-          sm:text-[10px]
+          sm:text-[13px]
 
           ${muted ? "text-[var(--brand-text-muted)]" : "text-white/65"}
         `}
@@ -893,13 +893,13 @@ function CheckItem({ text }: { text: string }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.45]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {text}
@@ -953,13 +953,13 @@ function ReasonRow({ text, icon: Icon }: { text: string; icon: LucideIcon }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.45]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {text}

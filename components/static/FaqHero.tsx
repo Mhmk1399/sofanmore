@@ -30,7 +30,7 @@ export default function FaqHero() {
               className="text-[var(--brand-gold-700)]"
               aria-hidden
             />
-            <span className="font-brand-sans text-[8px] font-bold uppercase tracking-[0.18em] text-[var(--brand-navy)]">
+            <span className="font-brand-sans text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--brand-navy)]">
               Sofa N More FAQ
             </span>
           </div>
@@ -71,7 +71,7 @@ export default function FaqHero() {
                   className="text-[var(--brand-gold-700)]"
                   aria-hidden
                 />
-                <p className="mt-2 font-brand-sans text-[9px] font-bold leading-[1.35] text-[var(--brand-navy)]">
+                <p className="mt-2 font-brand-sans text-[12px] font-bold leading-[1.35] text-[var(--brand-navy)]">
                   {item}
                 </p>
               </div>
@@ -102,7 +102,7 @@ export default function FaqHero() {
                     <p className="font-brand-display text-[22px] font-semibold leading-tight text-[var(--brand-navy)]">
                       Still deciding?
                     </p>
-                    <p className="mt-1.5 font-brand-sans text-[10px] font-semibold leading-[1.55] text-[var(--brand-text-muted)]">
+                    <p className="mt-1.5 font-brand-sans text-[13px] font-semibold leading-[1.55] text-[var(--brand-text-muted)]">
                       Call {siteConfig.phoneDisplay} or send a quick message and
                       we can point you in the right direction.
                     </p>
@@ -114,7 +114,7 @@ export default function FaqHero() {
 
           <a
             href={siteConfig.phoneHref}
-            className="absolute -bottom-4 right-4 hidden min-h-[48px] items-center gap-2 rounded-full bg-[var(--brand-navy)] px-4 font-brand-sans text-[10px] font-bold uppercase tracking-[0.1em] text-white shadow-[0_14px_34px_rgba(18,37,62,0.2)] transition-transform hover:-translate-y-0.5 sm:inline-flex"
+            className="absolute -bottom-4 right-4 hidden min-h-[48px] items-center gap-2 rounded-full bg-[var(--brand-navy)] px-4 font-brand-sans text-[13px] font-bold uppercase tracking-[0.1em] text-white shadow-[0_14px_34px_rgba(18,37,62,0.2)] transition-transform hover:-translate-y-0.5 sm:inline-flex"
           >
             <PhoneCall size={14} strokeWidth={1.8} aria-hidden />
             Call the workshop

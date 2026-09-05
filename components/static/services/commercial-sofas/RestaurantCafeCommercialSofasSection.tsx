@@ -127,7 +127,7 @@ export default function RestaurantCafeCommercialSofasSection({
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -135,7 +135,7 @@ export default function RestaurantCafeCommercialSofasSection({
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Hospitality Seating
@@ -391,7 +391,7 @@ function VenueRequirements() {
               className="
                 font-brand-sans
 
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -492,7 +492,7 @@ function VenueRequirements() {
 
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.65]
 
@@ -579,7 +579,7 @@ function VenueRequirements() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -664,13 +664,13 @@ function VenueRequirement({ label }: { label: string }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.35]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {label}

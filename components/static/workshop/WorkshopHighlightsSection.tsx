@@ -113,7 +113,7 @@ export default function WorkshopHighlightsSection() {
                 className="
                   font-brand-sans
 
-                  text-[7px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -121,7 +121,7 @@ export default function WorkshopHighlightsSection() {
 
                   text-[var(--brand-gold-700)]
 
-                  sm:text-[8px]
+                  sm:text-[11px]
                 "
               >
                 Visiting Sofa N More
@@ -158,14 +158,14 @@ export default function WorkshopHighlightsSection() {
 
                 font-brand-sans
 
-                text-[9px]
+                text-[12px]
                 font-medium
                 leading-[1.65]
 
                 text-[var(--brand-text-muted)]
 
                 sm:text-right
-                sm:text-[10px]
+                sm:text-[13px]
               "
             >
               A practical place to discuss your project, compare options and
@@ -327,13 +327,13 @@ function HighlightCard({ item }: { item: WorkshopHighlight }) {
 
           font-brand-sans
 
-          text-[9px]
+          text-[12px]
           font-medium
           leading-[1.65]
 
           text-[var(--brand-text-muted)]
 
-          sm:text-[10px]
+          sm:text-[13px]
         "
       >
         {item.description}

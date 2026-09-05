@@ -107,12 +107,11 @@ export default function Breadcrumbs() {
               flex w-max items-center gap-1
               rounded-full border border-white/70
               px-2.5 py-1.5
-              font-brand-sans text-[7px] font-bold
+              font-brand-sans text-[13px] font-bold
               text-[var(--brand-text-muted)]
               shadow-[0_10px_24px_rgba(18,37,62,0.10)]
-              
               origin-top
-              min-[380px]:text-[8px]
+              min-[380px]:text-[11px]
               lg:origin-top-left lg:px-4 lg:py-2.5 lg:text-[11px]
             `}
           >

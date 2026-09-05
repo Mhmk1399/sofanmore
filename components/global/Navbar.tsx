@@ -1067,7 +1067,7 @@ function DesktopMegaMenu({
 
                             font-brand-sans
 
-                            text-[8px]
+                            text-[11px]
                             font-semibold
 
                             text-[var(--brand-text-muted)]
@@ -1133,7 +1133,7 @@ function DesktopMegaMenu({
                       className="
                         font-brand-sans
 
-                        text-[7px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -1166,7 +1166,7 @@ function DesktopMegaMenu({
 
                         font-brand-sans
 
-                        text-[9px]
+                        text-[12px]
                         font-medium
 
                         text-[var(--brand-text-muted)]
@@ -1193,7 +1193,7 @@ function DesktopMegaMenu({
 
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -1327,7 +1327,7 @@ function DesktopMegaMenu({
 
                     font-brand-sans
 
-                    text-[8px]
+                    text-[11px]
                     font-bold
                     uppercase
 
@@ -1391,7 +1391,7 @@ function DesktopMegaMenu({
                   className="
                     font-brand-sans
 
-                    text-[9px]
+                    text-[12px]
                     font-bold
 
                     text-[var(--brand-navy)]
@@ -1406,7 +1406,7 @@ function DesktopMegaMenu({
 
                     font-brand-sans
 
-                    text-[8px]
+                    text-[11px]
                     font-medium
 
                     text-[var(--brand-text-muted)]
@@ -2197,7 +2197,7 @@ function IslandMainPanel({
 
             font-brand-sans
 
-            text-[8px]
+            text-[11px]
             font-bold
 
             text-[var(--brand-navy)]
@@ -2233,7 +2233,7 @@ function IslandMainPanel({
 
             font-brand-sans
 
-            text-[8px]
+            text-[11px]
             font-bold
 
             text-[var(--brand-navy)]
@@ -2394,7 +2394,7 @@ function IslandServicesPanel({
 
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-semibold
 
                       text-[var(--brand-text-muted)]
@@ -2563,7 +2563,7 @@ function IslandServiceDetail({
               className="
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-bold
 
                 text-white
@@ -2576,7 +2576,7 @@ function IslandServiceDetail({
               className="
                 font-brand-sans
 
-                text-[7px]
+                text-[13px]
                 font-semibold
 
                 text-white/70
@@ -2749,7 +2749,7 @@ function MobilePanelHeader({
 
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 

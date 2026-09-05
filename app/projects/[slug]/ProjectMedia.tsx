@@ -157,7 +157,7 @@ export function ProjectHeroMedia({
 
               font-brand-sans
 
-              text-[8px]
+              text-[11px]
               font-bold
               uppercase
 
@@ -411,7 +411,7 @@ function GalleryTile({
 
             font-brand-sans
 
-            text-[7px]
+            text-[13px]
             font-bold
 
             tracking-[0.1em]
@@ -639,7 +639,7 @@ function ProjectLightbox({
             className="
               font-brand-sans
 
-              text-[7px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -659,7 +659,7 @@ function ProjectLightbox({
 
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-semibold
 
               text-white/70
@@ -697,7 +697,7 @@ function ProjectLightbox({
 
               font-brand-sans
 
-              text-[8px]
+              text-[11px]
               font-bold
 
               text-white/65
@@ -917,7 +917,7 @@ function ProjectLightbox({
             className="
               font-brand-sans
 
-              text-[9px]
+              text-[12px]
               font-semibold
               leading-[1.5]
 

@@ -1110,7 +1110,7 @@ export default function ProjectsSliderClient({
 
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-bold
 
               tracking-[0.09em]
@@ -1209,7 +1209,7 @@ export default function ProjectsSliderClient({
 
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -1476,7 +1476,7 @@ function ProjectSlide({
 
               font-brand-sans
 
-              text-[9px]
+              text-[12px]
               font-bold
               uppercase
 
@@ -1544,7 +1544,7 @@ function ProjectSlide({
               className="
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -1582,7 +1582,7 @@ function ProjectSlide({
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-bold
 
                   text-[var(--brand-navy)]
@@ -1648,7 +1648,7 @@ function ProjectSlide({
 
             text-[var(--brand-text-muted)]
 
-            sm:text-[10px]
+            sm:text-[13px]
 
             lg:text-[12px]
           "
@@ -1682,7 +1682,7 @@ function ProjectSlide({
             className="
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -1723,7 +1723,7 @@ function ProjectSlide({
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -1756,7 +1756,7 @@ function ProjectSlide({
               className="
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-bold
                 uppercase
 

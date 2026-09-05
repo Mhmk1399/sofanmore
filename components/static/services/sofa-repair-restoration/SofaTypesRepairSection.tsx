@@ -180,7 +180,7 @@ export default function SofaTypesRepairSection({
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -188,7 +188,7 @@ export default function SofaTypesRepairSection({
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Different Sofas · Different Stories
@@ -322,7 +322,7 @@ export default function SofaTypesRepairSection({
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -471,7 +471,7 @@ function SofaTypeCard({ item }: { item: SofaType }) {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -574,7 +574,7 @@ function SofaTypeCard({ item }: { item: SofaType }) {
               className="
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.7]
 

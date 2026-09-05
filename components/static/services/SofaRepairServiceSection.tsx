@@ -202,7 +202,7 @@ export default function SofaRepairServiceSection() {
 
                         font-brand-sans
 
-                        text-[8px]
+                        text-[11px]
                         font-bold
                         uppercase
 
@@ -210,7 +210,7 @@ export default function SofaRepairServiceSection() {
 
                         text-[var(--brand-gold-700)]
 
-                        sm:text-[9px]
+                        sm:text-[12px]
                       "
                     >
                       Sofa Repair & Restoration
@@ -237,12 +237,12 @@ export default function SofaRepairServiceSection() {
                         className="
                           font-brand-sans
 
-                          text-[8px]
+                          text-[11px]
                           font-medium
 
                           text-[var(--brand-text-muted)]
 
-                          sm:text-[9px]
+                          sm:text-[12px]
                         "
                       >
                         Cricklewood · North West London
@@ -377,7 +377,7 @@ export default function SofaRepairServiceSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -431,12 +431,12 @@ export default function SofaRepairServiceSection() {
 
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-semibold
 
                       text-[var(--brand-text-muted)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Cricklewood · Staples Corner · North West London
@@ -530,7 +530,7 @@ export default function SofaRepairServiceSection() {
                         className="
                           font-brand-sans
 
-                          text-[6px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -638,7 +638,7 @@ export default function SofaRepairServiceSection() {
                         className="
                           font-brand-sans
 
-                          text-[6px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -707,13 +707,13 @@ export default function SofaRepairServiceSection() {
 
                         font-brand-sans
 
-                        text-[9px]
+                        text-[12px]
                         font-medium
                         leading-[1.6]
 
                         text-[var(--brand-text-muted)]
 
-                        sm:text-[10px]
+                        sm:text-[13px]
                       "
                     >
                       If you are considering replacing an existing
@@ -795,7 +795,7 @@ export default function SofaRepairServiceSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -835,13 +835,13 @@ export default function SofaRepairServiceSection() {
 
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-medium
                       leading-[1.65]
 
                       text-white/55
 
-                      sm:text-[10px]
+                      sm:text-[13px]
                     "
                   >
                     Send clear photographs of the complete sofa and close-ups of
@@ -890,7 +890,7 @@ export default function SofaRepairServiceSection() {
                   className="
                     font-brand-sans
 
-                    text-[6px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -1022,7 +1022,7 @@ function RepairVisual() {
               className="
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -1112,13 +1112,13 @@ function AssessmentRow({
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.45]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {title}
@@ -1180,13 +1180,13 @@ function RestorationTypeItem({
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.45]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {title}

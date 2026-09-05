@@ -99,7 +99,7 @@ export default function WorkshopCataloguesSection() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -107,7 +107,7 @@ export default function WorkshopCataloguesSection() {
 
                     text-[var(--brand-gold-700)]
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
                 >
                   Catalogues · Fabrics · Finishes
@@ -177,7 +177,7 @@ export default function WorkshopCataloguesSection() {
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.75]
 
@@ -239,7 +239,7 @@ export default function WorkshopCataloguesSection() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -330,13 +330,13 @@ export default function WorkshopCataloguesSection() {
 
                     font-brand-sans
 
-                    text-[8px]
+                    text-[11px]
                     font-medium
                     leading-[1.6]
 
                     text-[var(--brand-text-muted)]
 
-                    sm:text-[9px]
+                    sm:text-[12px]
                   "
                 >
                   You do not need to know the exact fabric or finish before
@@ -465,11 +465,11 @@ function WorkshopStep({
 
             font-brand-sans
 
-            text-[8px]
+            text-[11px]
             font-medium
             leading-[1.55]
 
-            sm:text-[9px]
+            sm:text-[12px]
 
             ${dark ? "text-white/55" : "text-[var(--brand-text-muted)]"}
           `}

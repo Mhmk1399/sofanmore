@@ -186,7 +186,7 @@ export default function WhyChooseCommercialSofasSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -194,7 +194,7 @@ export default function WhyChooseCommercialSofasSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Why Bespoke
@@ -367,7 +367,7 @@ function BenefitRow({ benefit }: { benefit: Benefit }) {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -437,7 +437,7 @@ function BenefitRow({ benefit }: { benefit: Benefit }) {
             className="
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-semibold
               leading-[1.65]
 
@@ -460,7 +460,7 @@ function BenefitRow({ benefit }: { benefit: Benefit }) {
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-medium
                 leading-[1.68]
 

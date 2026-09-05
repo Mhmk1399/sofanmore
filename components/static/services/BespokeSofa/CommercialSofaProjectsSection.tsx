@@ -416,7 +416,7 @@ function CommercialStoryPanel() {
               className="
                 font-brand-sans
 
-                text-[8px]
+                text-[11px]
                 font-bold
                 uppercase
 
@@ -705,7 +705,7 @@ function CommercialSpaceCard({
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -837,7 +837,7 @@ function WideCommercialCard({ item }: { item: CommercialSpace }) {
                 className="
                   font-brand-sans
 
-                  text-[7px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -978,7 +978,7 @@ function CommercialCTA({ mobile = false }: { mobile?: boolean }) {
                 className="
                   font-brand-sans
 
-                  text-[7px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -1120,7 +1120,7 @@ function MobileHeader() {
               className="
                 font-brand-sans
 
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -1161,7 +1161,7 @@ function MobileHeader() {
 
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-medium
               leading-[1.7]
 
@@ -1178,7 +1178,7 @@ function MobileHeader() {
 
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               leading-[1.7]
 
               text-white/48
@@ -1297,7 +1297,7 @@ function MobileCommercialCard({
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 

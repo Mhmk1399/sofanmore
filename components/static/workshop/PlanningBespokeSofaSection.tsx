@@ -197,7 +197,7 @@ export default function PlanningBespokeSofaSection() {
                     className="
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -205,7 +205,7 @@ export default function PlanningBespokeSofaSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[8px]
+                      sm:text-[11px]
                     "
                   >
                     Bespoke Sofa Consultation
@@ -275,7 +275,7 @@ export default function PlanningBespokeSofaSection() {
 
                     font-brand-sans
 
-                    text-[10px]
+                    text-[13px]
                     font-medium
                     leading-[1.75]
 
@@ -357,7 +357,7 @@ export default function PlanningBespokeSofaSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -459,7 +459,7 @@ export default function PlanningBespokeSofaSection() {
                           className="
                             font-brand-sans
 
-                            text-[6px]
+                            text-[13px]
                             font-bold
                             uppercase
 
@@ -531,7 +531,7 @@ export default function PlanningBespokeSofaSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -570,13 +570,13 @@ export default function PlanningBespokeSofaSection() {
 
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-medium
                       leading-[1.6]
 
                       text-[var(--brand-text-muted)]
 
-                      sm:text-[10px]
+                      sm:text-[13px]
                     "
                   >
                     They do not need to be precise or professionally prepared.
@@ -657,13 +657,13 @@ function ConsultationPointItem({ point }: { point: ConsultationPoint }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.5]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {point.label}
@@ -719,13 +719,13 @@ function StartingPoint({
 
           font-brand-sans
 
-          text-[7px]
+          text-[13px]
           font-bold
           leading-[1.3]
 
           text-[var(--brand-navy)]
 
-          sm:text-[8px]
+          sm:text-[11px]
         "
       >
         {label}
@@ -779,13 +779,13 @@ function UsefulThing({ text }: { text: string }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.5]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {text}

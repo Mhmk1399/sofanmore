@@ -165,7 +165,7 @@ export default function WorkshopLocationSection() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -173,7 +173,7 @@ export default function WorkshopLocationSection() {
 
                     text-[var(--brand-gold-700)]
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
                 >
                   Sofa N More · London NW2
@@ -214,7 +214,7 @@ export default function WorkshopLocationSection() {
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.75]
 
@@ -306,7 +306,7 @@ export default function WorkshopLocationSection() {
                         className="
                           font-brand-sans
 
-                          text-[6px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -342,7 +342,7 @@ export default function WorkshopLocationSection() {
 
                             font-brand-sans
 
-                            text-[10px]
+                            text-[13px]
                             font-medium
                             leading-[1.7]
 
@@ -427,7 +427,7 @@ export default function WorkshopLocationSection() {
                           className="
                             font-brand-sans
 
-                            text-[6px]
+                            text-[13px]
                             font-bold
                             uppercase
 
@@ -447,13 +447,13 @@ export default function WorkshopLocationSection() {
 
                             font-brand-sans
 
-                            text-[9px]
+                            text-[12px]
                             font-medium
                             leading-[1.65]
 
                             text-[var(--brand-text-muted)]
 
-                            sm:text-[10px]
+                            sm:text-[13px]
                           "
                         >
                           Brent Cross West is the closest listed rail station to
@@ -567,7 +567,7 @@ export default function WorkshopLocationSection() {
                         className="
                           font-brand-sans
 
-                          text-[6px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -700,7 +700,7 @@ export default function WorkshopLocationSection() {
                           className="
                             font-brand-sans
 
-                            text-[6px]
+                            text-[13px]
                             font-bold
                             uppercase
 
@@ -739,13 +739,13 @@ export default function WorkshopLocationSection() {
 
                             font-brand-sans
 
-                            text-[8px]
+                            text-[11px]
                             font-medium
                             leading-[1.55]
 
                             text-white/55
 
-                            sm:text-[9px]
+                            sm:text-[12px]
                           "
                         >
                           This helps us prepare for the item and confirm the
@@ -790,12 +790,12 @@ function OpeningHoursRow({ day, hours }: { day: string; hours: string }) {
         className="
           font-brand-sans
 
-          text-[9px]
+          text-[12px]
           font-semibold
 
           text-[var(--brand-navy)]
 
-          sm:text-[10px]
+          sm:text-[13px]
         "
       >
         {day}
@@ -805,10 +805,10 @@ function OpeningHoursRow({ day, hours }: { day: string; hours: string }) {
         className={`
           font-brand-sans
 
-          text-[9px]
+          text-[12px]
           font-bold
 
-          sm:text-[10px]
+          sm:text-[13px]
 
           ${
             isClosed
@@ -896,7 +896,7 @@ function ContactRow({
 
             font-brand-sans
 
-            text-[6px]
+            text-[13px]
             font-bold
             uppercase
 
@@ -915,7 +915,7 @@ function ContactRow({
 
             font-brand-sans
 
-            text-[9px]
+            text-[12px]
             font-semibold
 
             text-[var(--brand-navy)]
@@ -925,7 +925,7 @@ function ContactRow({
 
             group-hover:text-[var(--brand-gold-700)]
 
-            sm:text-[10px]
+            sm:text-[13px]
           "
         >
           {value}
@@ -975,7 +975,7 @@ function VisitDetail({
 
           font-brand-sans
 
-          text-[6px]
+          text-[13px]
           font-bold
           uppercase
 
@@ -994,13 +994,13 @@ function VisitDetail({
 
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.4]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {value}

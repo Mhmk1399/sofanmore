@@ -30,7 +30,7 @@ export default function ServiceStickyCta({
           pointer-events-auto group inline-flex max-w-[calc(100vw-112px)]
           items-center gap-2 rounded-full border border-white/75
           bg-[#FFFDF8]/82 px-3.5 py-2.5
-          font-brand-sans text-[10px] font-bold uppercase
+          font-brand-sans text-[13px] font-bold uppercase
           tracking-[0.14em] text-[var(--brand-navy)]
           shadow-[0_16px_34px_rgba(18,37,62,0.13),inset_2px_2px_4px_rgba(255,255,255,0.72),inset_-2px_-2px_5px_rgba(118,82,38,0.08)]
           backdrop-blur-xl transition-transform duration-300
@@ -57,7 +57,7 @@ export default function ServiceStickyCta({
           />
         </span>
         <span className="min-w-0">
-          <span className="block truncate text-[8px] text-[var(--brand-gold-700)]">
+          <span className="block truncate text-[11px] text-[var(--brand-gold-700)]">
             {note}
           </span>
           <span className="block truncate">{label}</span>

@@ -80,7 +80,7 @@ function AdminStatusSelectField({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
+      <span className="mb-1.5 block font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
         {label}
       </span>
       <AdminStatusSelect value={value} onChange={onChange} />
@@ -124,7 +124,7 @@ export function LeadFilters({
             Filters
           </h2>
           {activeFiltersCount > 0 && (
-            <span className="rounded-md bg-[var(--brand-navy)] px-1.5 py-0.5 font-brand-sans text-[9px] font-bold text-white">
+            <span className="rounded-md bg-[var(--brand-navy)] px-1.5 py-0.5 font-brand-sans text-[12px] font-bold text-white">
               {activeFiltersCount}
             </span>
           )}
@@ -163,7 +163,7 @@ export function LeadFilters({
         className={`${mobileOpen ? "grid" : "hidden sm:grid"} mt-3 gap-2.5 grid-cols-1 sm:grid-cols-2 xl:grid-cols-5`}
       >
         <div className="min-w-0 xl:col-span-1">
-          <span className="mb-1.5 block font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
+          <span className="mb-1.5 block font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
             Search
           </span>
           <div className="flex h-[40px] items-center gap-2 rounded-xl border border-white/60 bg-white/50 px-3 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_0_0_1px_rgba(255,255,255,0.5)_inset]">
@@ -276,7 +276,7 @@ export function LeadTable({
           Leads
         </h2>
         {pagination && (
-          <span className="shrink-0 rounded-md bg-black/[0.05] px-2 py-0.5 font-brand-sans text-[10px] font-bold text-[var(--brand-text-muted)]">
+          <span className="shrink-0 rounded-md bg-black/[0.05] px-2 py-0.5 font-brand-sans text-[13px] font-bold text-[var(--brand-text-muted)]">
             {formatNumber(pagination.total)}
           </span>
         )}
@@ -286,7 +286,7 @@ export function LeadTable({
       <div className="hidden overflow-x-auto md:block" data-lenis-prevent>
         <table className="w-full min-w-[860px] text-left">
           <thead>
-            <tr className="border-b border-black/[0.06] font-brand-sans text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--brand-text-muted)]">
+            <tr className="border-b border-black/[0.06] font-brand-sans text-[13px] font-bold uppercase tracking-[0.1em] text-[var(--brand-text-muted)]">
               <th className="px-4 py-2.5">Lead</th>
               <th className="px-3 py-2.5">Service</th>
               <th className="px-3 py-2.5">Contact</th>
@@ -321,7 +321,7 @@ export function LeadTable({
                       <span className="block truncate font-brand-sans text-[12px] font-bold text-[var(--brand-navy)]">
                         {lead.name}
                       </span>
-                      <span className="mt-0.5 block truncate font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+                      <span className="mt-0.5 block truncate font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                         {lead.message
                           ? lead.message.length > 40
                             ? lead.message.slice(0, 40) + "…"
@@ -334,7 +334,7 @@ export function LeadTable({
                     <ServiceBadge service={lead.service} />
                   </td>
                   <td className="px-3 py-2.5">
-                    <div className="space-y-0.5 font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+                    <div className="space-y-0.5 font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                       {lead.email && (
                         <p className="flex items-center gap-1">
                           <Mail size={10} />
@@ -354,11 +354,11 @@ export function LeadTable({
                     />
                   </td>
                   <td className="px-3 py-2.5">
-                    <span className="inline-flex items-center gap-1 font-brand-sans text-[10px] font-bold text-[var(--brand-text-muted)]">
+                    <span className="inline-flex items-center gap-1 font-brand-sans text-[13px] font-bold text-[var(--brand-text-muted)]">
                       <Paperclip size={11} /> {lead.attachmentCount}
                     </span>
                   </td>
-                  <td className="px-3 py-2.5 font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+                  <td className="px-3 py-2.5 font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                     {formatDateTime(lead.createdAt)}
                   </td>
                   <td className="px-4 py-2.5">
@@ -409,7 +409,7 @@ export function LeadTable({
                   <p className="truncate font-brand-sans text-[13px] font-bold text-[var(--brand-navy)]">
                     {lead.name}
                   </p>
-                  <p className="mt-0.5 truncate font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+                  <p className="mt-0.5 truncate font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                     {lead.message
                       ? lead.message.length > 60
                         ? lead.message.slice(0, 60) + "…"
@@ -436,12 +436,12 @@ export function LeadTable({
                 <ServiceBadge service={lead.service} />
                 <StatusBadge status={lead.status} />
                 {lead.attachmentCount > 0 && (
-                  <span className="inline-flex items-center gap-1 font-brand-sans text-[10px] font-bold text-[var(--brand-text-muted)]">
+                  <span className="inline-flex items-center gap-1 font-brand-sans text-[13px] font-bold text-[var(--brand-text-muted)]">
                     <Paperclip size={10} /> {lead.attachmentCount}
                   </span>
                 )}
               </div>
-              <div className="mt-2 space-y-0.5 font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+              <div className="mt-2 space-y-0.5 font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                 {lead.email && (
                   <p className="flex items-center gap-1 truncate">
                     <Mail size={10} className="shrink-0" />
@@ -472,7 +472,7 @@ export function LeadTable({
 
       {pagination && pagination.totalPages > 1 && (
         <div className="flex items-center justify-between gap-2 border-t border-black/[0.06] px-3 py-2 sm:px-4 sm:py-2.5">
-          <p className="truncate font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+          <p className="truncate font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
             Page {pagination.page} of {pagination.totalPages}
           </p>
           <div className="flex shrink-0 gap-1">
@@ -480,7 +480,7 @@ export function LeadTable({
               type="button"
               onClick={() => onPageChange(Math.max(pagination.page - 1, 1))}
               disabled={pagination.page <= 1}
-              className="flex h-7 items-center gap-1 rounded-md px-2 font-brand-sans text-[10px] font-bold text-[var(--brand-navy)] transition-colors hover:bg-black/5 disabled:opacity-40"
+              className="flex h-7 items-center gap-1 rounded-md px-2 font-brand-sans text-[13px] font-bold text-[var(--brand-navy)] transition-colors hover:bg-black/5 disabled:opacity-40"
             >
               <ChevronLeft size={12} />{" "}
               <span className="hidden sm:inline">Prev</span>
@@ -493,7 +493,7 @@ export function LeadTable({
                 )
               }
               disabled={pagination.page >= pagination.totalPages}
-              className="flex h-7 items-center gap-1 rounded-md px-2 font-brand-sans text-[10px] font-bold text-[var(--brand-navy)] transition-colors hover:bg-black/5 disabled:opacity-40"
+              className="flex h-7 items-center gap-1 rounded-md px-2 font-brand-sans text-[13px] font-bold text-[var(--brand-navy)] transition-colors hover:bg-black/5 disabled:opacity-40"
             >
               <span className="hidden sm:inline">Next</span>{" "}
               <ChevronRight size={12} />
@@ -534,7 +534,7 @@ export function LeadDetailDrawer({
           <div className="shrink-0 border-b border-black/[0.06] px-4 py-3 sm:px-5 sm:py-4">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
-                <p className="font-brand-sans text-[9px] font-bold uppercase tracking-[0.14em] text-[var(--brand-text-muted)]">
+                <p className="font-brand-sans text-[12px] font-bold uppercase tracking-[0.14em] text-[var(--brand-text-muted)]">
                   Lead details
                 </p>
                 <h2 className="mt-1 truncate font-brand-sans text-[18px] font-bold text-[var(--brand-navy)] sm:text-[20px]">

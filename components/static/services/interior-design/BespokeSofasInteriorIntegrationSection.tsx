@@ -166,7 +166,7 @@ export default function BespokeSofasInteriorIntegrationSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -174,7 +174,7 @@ export default function BespokeSofasInteriorIntegrationSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Sofa & Interior
@@ -287,7 +287,7 @@ export default function BespokeSofasInteriorIntegrationSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -372,7 +372,7 @@ export default function BespokeSofasInteriorIntegrationSection() {
                     className="
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -481,7 +481,7 @@ export default function BespokeSofasInteriorIntegrationSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -635,7 +635,7 @@ function IntegratedSofaVisual() {
 
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -672,7 +672,7 @@ function IntegratedSofaVisual() {
 
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -766,13 +766,13 @@ function SofaApplication({
 
               font-brand-sans
 
-              text-[9px]
+              text-[12px]
               font-medium
               leading-[1.6]
 
               text-[var(--brand-text-muted)]
 
-              sm:text-[10px]
+              sm:text-[13px]
             "
           >
             {text}

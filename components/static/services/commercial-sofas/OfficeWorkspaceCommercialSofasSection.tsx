@@ -169,7 +169,7 @@ export default function OfficeWorkspaceCommercialSofasSection({
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -177,7 +177,7 @@ export default function OfficeWorkspaceCommercialSofasSection({
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Workplace Seating
@@ -291,7 +291,7 @@ export default function OfficeWorkspaceCommercialSofasSection({
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -444,7 +444,7 @@ function WorkspacePanel() {
               className="
                 font-brand-sans
 
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -576,7 +576,7 @@ function WorkspacePanel() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -662,13 +662,13 @@ function WorkspaceArea({ label, icon: Icon }: WorkspaceArea) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.35]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {label}

@@ -52,7 +52,7 @@ export default function AdminProfile({
               <h2 className="font-brand-sans text-[13px] font-bold text-[var(--brand-navy)]">
                 Profile settings
               </h2>
-              <p className="font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+              <p className="font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                 Update your admin account details
               </p>
             </div>
@@ -129,7 +129,7 @@ export default function AdminProfile({
             <p className="truncate font-brand-sans text-[14px] font-bold text-[var(--brand-navy)]">
               {user?.name || "Admin"}
             </p>
-            <p className="mt-0.5 font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-text-muted)]">
+            <p className="mt-0.5 font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--brand-text-muted)]">
               {user?.role || "ADMIN"}
             </p>
           </div>
@@ -170,7 +170,7 @@ function ProfileFact({
     <div className="flex min-w-0 items-center gap-2 rounded-lg border border-black/[0.05] bg-white/45 px-3 py-2">
       <span className="shrink-0 text-[var(--brand-text-muted)]">{icon}</span>
       <div className="min-w-0">
-        <p className="font-brand-sans text-[9px] font-bold uppercase tracking-[0.1em] text-[var(--brand-text-muted)]">
+        <p className="font-brand-sans text-[12px] font-bold uppercase tracking-[0.1em] text-[var(--brand-text-muted)]">
           {label}
         </p>
         <p className="truncate font-brand-sans text-[11px] font-bold text-[var(--brand-navy)]">

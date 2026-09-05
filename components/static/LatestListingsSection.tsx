@@ -190,7 +190,7 @@ function DesktopLayout() {
             items-center
             gap-3
             font-brand-sans
-            text-[10px]
+            text-[13px]
             font-bold
             uppercase
             tracking-[0.18em]
@@ -301,13 +301,13 @@ function SectionHeading() {
         <span
           className="
             font-brand-sans
-            text-[9px]
+            text-[12px]
             font-bold
             uppercase
             tracking-[0.25em]
             text-[var(--brand-gold-700)]
 
-            xl:text-[10px]
+            xl:text-[13px]
           "
         >
           Latest
@@ -496,7 +496,7 @@ function DesktopCard({ listing }: { listing: Listing }) {
                 px-3
                 py-1.5
                 font-brand-sans
-                text-[8px]
+                text-[11px]
                 font-bold
                 uppercase
                 tracking-[0.12em]
@@ -522,7 +522,7 @@ function DesktopCard({ listing }: { listing: Listing }) {
               className="
                 whitespace-nowrap
                 font-brand-sans
-                text-[8px]
+                text-[11px]
                 font-semibold
                 uppercase
                 tracking-[0.08em]
@@ -567,7 +567,7 @@ function DesktopCard({ listing }: { listing: Listing }) {
               mt-4
               min-h-[42px]
               font-brand-sans
-              text-[10px]
+              text-[13px]
               font-medium
               leading-[1.65]
               text-[var(--brand-text-muted)]
@@ -607,7 +607,7 @@ function DesktopCard({ listing }: { listing: Listing }) {
                 items-center
                 gap-3
                 font-brand-sans
-                text-[9px]
+                text-[12px]
                 font-bold
                 uppercase
                 tracking-[0.13em]
@@ -849,7 +849,7 @@ function MobileLayout() {
           <span
             className="
               font-brand-sans
-              text-[8px]
+              text-[11px]
               font-bold
               uppercase
               tracking-[0.24em]
@@ -897,7 +897,7 @@ function MobileLayout() {
             mt-4
             max-w-[300px]
             font-brand-sans
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.65]
             text-[var(--brand-text-muted)]
@@ -1103,7 +1103,7 @@ function MobileCard({
                 px-3
                 py-1.5
                 font-brand-sans
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
                 tracking-[0.12em]
@@ -1127,7 +1127,7 @@ function MobileCard({
             <time
               className="
                 font-brand-sans
-                text-[7px]
+                text-[13px]
                 font-semibold
                 uppercase
                 tracking-[0.07em]
@@ -1161,7 +1161,7 @@ function MobileCard({
               mt-3
               min-h-[34px]
               font-brand-sans
-              text-[9px]
+              text-[12px]
               font-medium
               leading-[1.6]
               text-[var(--brand-text-muted)]
@@ -1194,7 +1194,7 @@ function MobileCard({
             <span
               className="
                 font-brand-sans
-                text-[8px]
+                text-[11px]
                 font-bold
                 uppercase
                 tracking-[0.13em]

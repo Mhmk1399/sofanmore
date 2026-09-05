@@ -342,7 +342,7 @@ function MobileWhyChoose({ imageSrc }: { imageSrc: string }) {
             <span className="h-px w-8 bg-[var(--brand-gold)]/60" />
             <span
               className="
-                font-brand-sans text-[9px]
+                font-brand-sans text-[12px]
                 font-bold uppercase
                 tracking-[0.26em]
                 text-[var(--brand-gold-700)]
@@ -511,7 +511,7 @@ function WhyFeatureCard({
             mt-2 font-brand-sans font-medium
             leading-[1.42] text-[var(--brand-text-muted)]
 
-            ${compact ? "text-[10px]" : "text-[13px]"}
+            ${compact ? "text-[13px]" : "text-[13px]"}
           `}
         >
           {item.description}

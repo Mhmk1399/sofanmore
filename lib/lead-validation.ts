@@ -730,10 +730,6 @@ export function validateLeadSubmissionInput(
   }
 
   if (service === "SOFA_REPAIR_RESTORATION") {
-    if (!postcode && !errors.postcode) {
-      errors.postcode = "Enter a valid UK postcode.";
-    }
-
     if (uploadTokens.length < 1 && !errors.uploadTokens) {
       errors.uploadTokens = "Upload at least one photo.";
     }

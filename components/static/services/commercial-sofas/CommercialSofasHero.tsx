@@ -148,14 +148,14 @@ export default function CommercialSofasHero({
                         block
 
                         font-brand-sans
-                        text-[7px]
+                        text-[13px]
                         font-bold
                         uppercase
                         tracking-[0.2em]
 
                         text-[var(--brand-gold-700)]
 
-                        sm:text-[8px]
+                        sm:text-[11px]
                       "
                     >
                       Commercial Sofas · London
@@ -167,7 +167,7 @@ export default function CommercialSofasHero({
                         block
 
                         font-brand-sans
-                        text-[9px]
+                        text-[12px]
                         font-medium
 
                         text-[var(--brand-text-muted)]
@@ -403,7 +403,7 @@ function TrustPoint({ children }: { children: React.ReactNode }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-bold
           uppercase
 
@@ -411,7 +411,7 @@ function TrustPoint({ children }: { children: React.ReactNode }) {
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {children}
@@ -530,7 +530,7 @@ function HeroImage() {
 
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -566,7 +566,7 @@ function HeroImage() {
 
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 

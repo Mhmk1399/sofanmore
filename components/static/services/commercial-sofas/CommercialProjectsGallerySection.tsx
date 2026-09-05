@@ -159,14 +159,14 @@ export default function SeeWhatWeCreateSection() {
                   <span
                     className="
                       font-brand-sans
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
                       tracking-[0.25em]
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Selected Work
@@ -527,7 +527,7 @@ function GalleryCard({
                 <span
                   className="
                     font-brand-sans
-                    text-[6px]
+                    text-[13px]
                     font-bold
                     uppercase
                     tracking-[0.15em]
@@ -561,7 +561,7 @@ function GalleryCard({
             <span
               className="
                 font-brand-sans
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
                 tracking-[0.18em]
@@ -735,7 +735,7 @@ function MobileFeaturedGalleryCard({
               <span
                 className="
                   font-brand-sans
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
                   tracking-[0.13em]
@@ -759,7 +759,7 @@ function MobileFeaturedGalleryCard({
             <span
               className="
                 font-brand-sans
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
                 tracking-[0.16em]
@@ -1182,7 +1182,7 @@ function GalleryCTA() {
               <span
                 className="
                   font-brand-sans
-                  text-[7px]
+                  text-[13px]
                   font-bold
                   uppercase
                   tracking-[0.18em]

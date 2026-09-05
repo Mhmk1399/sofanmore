@@ -357,7 +357,7 @@ function HeroCopy() {
 
           <span
             className="
-              font-brand-sans text-[10px] font-bold uppercase
+              font-brand-sans text-[13px] font-bold uppercase
               tracking-[0.12em] text-[var(--brand-gold)]
               xl:text-[11px]
             "
@@ -672,7 +672,7 @@ function TrustDock() {
                 </div>
                 <div
                   className="
-                    mt-0.5 font-brand-sans text-[10px]
+                    mt-0.5 font-brand-sans text-[13px]
                     font-semibold text-[var(--brand-text-muted)]
                   "
                 >
@@ -755,7 +755,7 @@ function TabletMainHero() {
                     className="text-[var(--brand-gold)]"
                   />
                 </span>
-                <span className="font-brand-sans text-[9px] font-bold uppercase tracking-[0.12em] text-[var(--brand-gold)]">
+                <span className="font-brand-sans text-[12px] font-bold uppercase tracking-[0.12em] text-[var(--brand-gold)]">
                   London Craftsmanship
                 </span>
               </div>
@@ -815,7 +815,7 @@ function TabletMainHero() {
                     />
                   ))}
                 </div>
-                <span className="font-brand-sans text-[8px] font-semibold text-white/45">
+                <span className="font-brand-sans text-[11px] font-semibold text-white/45">
                   200+ happy clients
                 </span>
               </div>
@@ -849,7 +849,7 @@ function TabletMainHero() {
                   <Crown size={12} strokeWidth={1.8} />
                 </span>
                 <div className="flex flex-col">
-                  <span className="font-brand-sans text-[9px] font-extrabold uppercase text-[var(--brand-navy)]">
+                  <span className="font-brand-sans text-[12px] font-extrabold uppercase text-[var(--brand-navy)]">
                     Bespoke
                   </span>
                   <span className="font-brand-sans text-[7.5px] font-semibold text-[var(--brand-text-muted)]">
@@ -905,7 +905,7 @@ function TabletServiceCard({ service }: { service: Service }) {
           <span className="block font-brand-display text-[14px] font-semibold leading-tight text-[var(--brand-navy)]">
             {service.title}
           </span>
-          <p className="mt-1.5 font-brand-sans text-[9px] font-semibold leading-[1.4] text-[var(--brand-text-muted)]">
+          <p className="mt-1.5 font-brand-sans text-[12px] font-semibold leading-[1.4] text-[var(--brand-text-muted)]">
             {service.subtitle}
           </p>
         </div>
@@ -960,7 +960,7 @@ function TabletTrust() {
                 <div className="font-brand-display text-[12px] font-semibold leading-tight">
                   {item.title}
                 </div>
-                <div className="mt-0.5 font-brand-sans text-[8px] font-semibold text-[var(--brand-text-muted)]">
+                <div className="mt-0.5 font-brand-sans text-[11px] font-semibold text-[var(--brand-text-muted)]">
                   {item.subtitle}
                 </div>
               </div>
@@ -1091,7 +1091,7 @@ function MobileHeroMain() {
 
             <p
               className="
-                max-w-[245px] font-brand-sans text-[10px]
+                max-w-[245px] font-brand-sans text-[13px]
                 font-semibold leading-[1.6]
                 text-white/78
               "
@@ -1108,7 +1108,7 @@ function MobileHeroMain() {
                 fullWidth
                 showArrow
                 ariaLabel="Start your bespoke sofa project"
-                className="!min-h-[44px] !justify-between !rounded-[15px] !px-4 !text-[10px]"
+                className="!min-h-[44px] !justify-between !rounded-[15px] !px-4 !text-[13px]"
               >
                 Start Your Project
               </ClayButton>
@@ -1120,7 +1120,7 @@ function MobileHeroMain() {
                 fullWidth
                 showArrow
                 ariaLabel="View our sofa gallery"
-                className="!min-h-[44px] !justify-between !rounded-[15px] !px-4 !text-[10px]"
+                className="!min-h-[44px] !justify-between !rounded-[15px] !px-4 !text-[13px]"
               >
                 View Our Work
               </ClayButton>
@@ -1224,10 +1224,10 @@ function MobileTrust() {
               <span className="clay-icon flex h-10 w-10 items-center justify-center rounded-[13px]">
                 <Icon size={17} className="text-[var(--brand-gold)]" />
               </span>
-              <span className="mt-2.5 font-brand-display text-[10px] font-semibold">
+              <span className="mt-2.5 font-brand-display text-[13px] font-semibold">
                 {item.title}
               </span>
-              <span className="mt-0.5 font-brand-sans text-[7px] font-semibold text-[var(--brand-text-muted)]">
+              <span className="mt-0.5 font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                 {item.subtitle}
               </span>
             </div>

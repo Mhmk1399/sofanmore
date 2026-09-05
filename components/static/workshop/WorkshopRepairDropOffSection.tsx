@@ -124,7 +124,7 @@ export default function WorkshopRepairDropOffSection() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -132,7 +132,7 @@ export default function WorkshopRepairDropOffSection() {
 
                     text-[var(--brand-gold-700)]
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
                 >
                   Repair & Restoration Assessment
@@ -202,7 +202,7 @@ export default function WorkshopRepairDropOffSection() {
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.75]
 
@@ -321,7 +321,7 @@ export default function WorkshopRepairDropOffSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -452,7 +452,7 @@ export default function WorkshopRepairDropOffSection() {
                       className="
                         font-brand-sans
 
-                        text-[6px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -493,13 +493,13 @@ export default function WorkshopRepairDropOffSection() {
 
                         font-brand-sans
 
-                        text-[8px]
+                        text-[11px]
                         font-medium
                         leading-[1.6]
 
                         text-white/55
 
-                        sm:text-[9px]
+                        sm:text-[12px]
                       "
                     >
                       Walk-ins are welcome, but large-item drop-offs should be
@@ -541,13 +541,13 @@ export default function WorkshopRepairDropOffSection() {
 
                     font-brand-sans
 
-                    text-[8px]
+                    text-[11px]
                     font-semibold
                     leading-[1.5]
 
                     text-[var(--brand-text-muted)]
 
-                    sm:text-[9px]
+                    sm:text-[12px]
                   "
                 >
                   Unit G19, Atlas Business Centre, Oxgate Lane, Staples Corner
@@ -607,13 +607,13 @@ function ChecklistItem({ text }: { text: string }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.5]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {text}
@@ -698,13 +698,13 @@ function ProcessItem({
 
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-bold
           leading-[1.4]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {label}

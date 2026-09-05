@@ -119,7 +119,7 @@ export default function WorkshopServiceAreaSection() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -127,7 +127,7 @@ export default function WorkshopServiceAreaSection() {
 
                     text-[var(--brand-gold-700)]
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
                 >
                   Sofa N More · London NW2
@@ -195,7 +195,7 @@ export default function WorkshopServiceAreaSection() {
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.75]
 
@@ -244,7 +244,7 @@ export default function WorkshopServiceAreaSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -262,13 +262,13 @@ export default function WorkshopServiceAreaSection() {
 
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-semibold
                       leading-[1.6]
 
                       text-[var(--brand-navy)]
 
-                      sm:text-[10px]
+                      sm:text-[13px]
                     "
                   >
                     Unit G19, Atlas Business Centre, Oxgate Lane, Staples Corner
@@ -330,7 +330,7 @@ export default function WorkshopServiceAreaSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -429,13 +429,13 @@ export default function WorkshopServiceAreaSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-semibold
                       leading-[1.5]
 
                       text-[var(--brand-navy)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Nearby parts of North West London
@@ -513,7 +513,7 @@ export default function WorkshopServiceAreaSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -585,7 +585,7 @@ export default function WorkshopServiceAreaSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -605,13 +605,13 @@ export default function WorkshopServiceAreaSection() {
 
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-medium
                       leading-[1.65]
 
                       text-white/60
 
-                      sm:text-[10px]
+                      sm:text-[13px]
                     "
                   >
                     Collection, site visits, delivery and installation
@@ -670,13 +670,13 @@ function AreaItem({ area }: { area: string }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.4]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {area}

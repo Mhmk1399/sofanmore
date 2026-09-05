@@ -234,7 +234,7 @@ export default async function ProjectsSliderSection() {
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-bold
                   uppercase
 

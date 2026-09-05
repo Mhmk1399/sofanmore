@@ -175,7 +175,7 @@ export default function InteriorDesignServicesSection({
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -183,7 +183,7 @@ export default function InteriorDesignServicesSection({
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Interior Design Services
@@ -368,7 +368,7 @@ function ResidentialPanel({ id }: { id: string }) {
               className="
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -437,7 +437,7 @@ function ResidentialPanel({ id }: { id: string }) {
 
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.7]
 
@@ -514,7 +514,7 @@ function ResidentialPanel({ id }: { id: string }) {
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -631,7 +631,7 @@ function CommercialPanel() {
                   className="
                     font-brand-sans
 
-                    text-[6px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -690,7 +690,7 @@ function CommercialPanel() {
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-medium
                 leading-[1.7]
 
@@ -712,7 +712,7 @@ function CommercialPanel() {
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-medium
                 leading-[1.7]
 
@@ -757,7 +757,7 @@ function CommercialPanel() {
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -908,13 +908,13 @@ function CommercialServiceCard({ service }: { service: CommercialService }) {
             className="
                 font-brand-sans
 
-                text-[9px]
+                text-[12px]
                 font-medium
                 leading-[1.65]
 
                 text-white/58
 
-                sm:text-[10px]
+                sm:text-[13px]
               "
           >
             {paragraph}
@@ -972,7 +972,7 @@ function FocusItem({ icon, label }: { icon: React.ReactNode; label: string }) {
         className="
           font-brand-sans
 
-          text-[7px]
+          text-[13px]
           font-bold
           uppercase
 
@@ -982,7 +982,7 @@ function FocusItem({ icon, label }: { icon: React.ReactNode; label: string }) {
 
           text-[var(--brand-navy)]
 
-          sm:text-[8px]
+          sm:text-[11px]
         "
       >
         {label}

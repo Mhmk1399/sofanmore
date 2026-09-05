@@ -573,7 +573,7 @@ function ToastCard({
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-semibold
                 leading-[1.55]
 

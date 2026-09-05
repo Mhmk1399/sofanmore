@@ -128,7 +128,7 @@ export default function WorkshopPhotographySection({
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -136,7 +136,7 @@ export default function WorkshopPhotographySection({
 
                     text-[var(--brand-gold-700)]
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
                 >
                   Inside the Sofa N More Workshop
@@ -194,7 +194,7 @@ export default function WorkshopPhotographySection({
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.7]
 
@@ -335,7 +335,7 @@ export default function WorkshopPhotographySection({
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -373,13 +373,13 @@ export default function WorkshopPhotographySection({
 
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-medium
                       leading-[1.65]
 
                       text-white/55
 
-                      sm:text-[10px]
+                      sm:text-[13px]
                     "
                   >
                     It is a working space where sofas and upholstered seating
@@ -423,7 +423,7 @@ export default function WorkshopPhotographySection({
                   className="
                     font-brand-sans
 
-                    text-[6px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -483,7 +483,7 @@ export default function WorkshopPhotographySection({
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -611,7 +611,7 @@ function WorkshopPhotoFrame({
 
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -669,7 +669,7 @@ function WorkshopPhotoFrame({
               className="
                 font-brand-sans
 
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -732,13 +732,13 @@ function MomentItem({ text }: { text: string }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.5]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {text}

@@ -1,12 +1,7 @@
-const CACHE_VERSION = "sofanmore-2026-08-17";
+const CACHE_VERSION = "sofanmore-2026-09-05";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
-const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
 const PRECACHE_URLS = [
-  "/",
-  "/services",
-  "/gallery",
-  "/contact-us",
   "/manifest.webmanifest",
   "/icons/icon-192x192.png",
   "/icons/icon-512x512.png",
@@ -27,12 +22,16 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
-      const expectedCaches = new Set([STATIC_CACHE, RUNTIME_CACHE]);
+      const expectedCaches = new Set([STATIC_CACHE]);
       const cacheNames = await caches.keys();
 
       await Promise.all(
         cacheNames
-          .filter((cacheName) => !expectedCaches.has(cacheName))
+          .filter(
+            (cacheName) =>
+              cacheName.startsWith("sofanmore-") &&
+              !expectedCaches.has(cacheName),
+          )
           .map((cacheName) => caches.delete(cacheName)),
       );
 
@@ -51,12 +50,16 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== self.location.origin || url.pathname === "/sw.js") return;
 
   if (request.mode === "navigate") {
-    event.respondWith(networkFirst(request));
+    event.respondWith(fetch(request));
+    return;
+  }
+
+  if (url.pathname.startsWith("/_next/")) {
+    event.respondWith(fetch(request));
     return;
   }
 
   if (
-    url.pathname.startsWith("/_next/static/") ||
     url.pathname.startsWith("/assets/") ||
     url.pathname.startsWith("/icons/") ||
     url.pathname === "/favicon.ico" ||
@@ -65,22 +68,6 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(cacheFirst(request));
   }
 });
-
-async function networkFirst(request) {
-  const cache = await caches.open(RUNTIME_CACHE);
-
-  try {
-    const response = await fetch(request);
-
-    if (response.ok) {
-      await cache.put(request, response.clone());
-    }
-
-    return response;
-  } catch {
-    return (await cache.match(request)) || caches.match("/");
-  }
-}
 
 async function cacheFirst(request) {
   const cached = await caches.match(request);

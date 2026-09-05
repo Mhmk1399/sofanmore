@@ -106,7 +106,7 @@ export default function LeadFormShell({
                 <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[var(--brand-navy)] text-[var(--brand-gold)] shadow-[inset_2px_2px_5px_rgba(255,255,255,0.08)]">
                   {icon || <Sofa size={21} strokeWidth={1.5} />}
                 </span>
-                <p className="mt-4 font-brand-sans text-[8px] font-bold uppercase tracking-[0.22em] text-[var(--brand-gold-700)]">
+                <p className="mt-4 font-brand-sans text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--brand-gold-700)]">
                   {eyebrow}
                 </p>
                 <h2
@@ -134,7 +134,7 @@ export default function LeadFormShell({
                       <div className="clay-surface-strong rounded-[21px] p-[5px]">
                         <div className="flex flex-col gap-3 rounded-[17px] bg-white/18 p-3 sm:items-center sm:justify-between">
                           {footerNote && (
-                            <p className="font-brand-sans text-[10px] font-bold leading-[1.55] text-[var(--brand-text-muted)]">
+                            <p className="font-brand-sans text-[13px] font-bold leading-[1.55] text-[var(--brand-text-muted)]">
                               {footerNote}
                             </p>
                           )}

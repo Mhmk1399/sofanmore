@@ -360,7 +360,7 @@ export default function TermsAndConditionsPage() {
                     className="
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-bold
                       uppercase
 
@@ -469,7 +469,7 @@ export default function TermsAndConditionsPage() {
                       className="
                         font-brand-sans
 
-                        text-[7px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -512,7 +512,7 @@ export default function TermsAndConditionsPage() {
                     className="
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-medium
                       leading-[1.65]
 
@@ -669,7 +669,7 @@ export default function TermsAndConditionsPage() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -704,7 +704,7 @@ export default function TermsAndConditionsPage() {
 
                               font-brand-sans
 
-                              text-[9px]
+                              text-[12px]
                               font-semibold
 
                               text-[var(--brand-text-muted)]
@@ -722,7 +722,7 @@ export default function TermsAndConditionsPage() {
 
                                 shrink-0
 
-                                text-[7px]
+                                text-[13px]
                                 font-bold
 
                                 text-[var(--brand-gold-700)]/70
@@ -1364,7 +1364,7 @@ export default function TermsAndConditionsPage() {
                       className="
                         font-brand-sans
 
-                        text-[8px]
+                        text-[11px]
                         font-bold
                         uppercase
 
@@ -1401,7 +1401,7 @@ export default function TermsAndConditionsPage() {
 
                         font-brand-sans
 
-                        text-[9px]
+                        text-[12px]
                         font-medium
                         leading-[1.7]
 
@@ -1497,7 +1497,7 @@ function SummaryCard({
 
           font-brand-sans
 
-          text-[9px]
+          text-[12px]
           font-medium
           leading-[1.65]
 
@@ -1570,7 +1570,7 @@ function TermsSection({
 
             font-brand-sans
 
-            text-[8px]
+            text-[11px]
             font-bold
 
             text-[var(--brand-gold-700)]
@@ -1662,7 +1662,7 @@ function TermsList({ items }: { items: string[] }) {
 
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.7]
 
@@ -1733,13 +1733,13 @@ function ImportantNote({ children }: { children: ReactNode }) {
           className="
             font-brand-sans
 
-            text-[9px]
+            text-[12px]
             font-semibold
             leading-[1.7]
 
             text-[var(--brand-navy)]/75
 
-            sm:text-[10px]
+            sm:text-[13px]
           "
         >
           {children}
@@ -1794,7 +1794,7 @@ function ContactItem({
 
             font-brand-sans
 
-            text-[7px]
+            text-[13px]
             font-bold
             uppercase
 
@@ -1813,7 +1813,7 @@ function ContactItem({
 
             font-brand-sans
 
-            text-[9px]
+            text-[12px]
             font-semibold
             leading-[1.55]
 

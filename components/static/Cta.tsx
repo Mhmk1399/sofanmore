@@ -209,7 +209,7 @@ function DesktopCopy() {
         <span
           className="
             font-brand-sans
-            text-[10px]
+            text-[13px]
             font-bold
             uppercase
             tracking-[0.27em]
@@ -588,7 +588,7 @@ function MobileCTA({ chairSrc }: { chairSrc: string }) {
             <div
               className="
                 font-brand-sans
-                text-[9px]
+                text-[12px]
                 font-bold
                 uppercase
                 tracking-[0.26em]

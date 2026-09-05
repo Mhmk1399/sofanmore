@@ -194,7 +194,7 @@ export default function JournalSection() {
                 <div className="max-w-[760px]">
                   <span
                     className="
-                      font-brand-sans text-[10px] font-bold uppercase
+                      font-brand-sans text-[13px] font-bold uppercase
                       tracking-[0.24em] text-[var(--brand-gold-700)]
                     "
                   >
@@ -263,7 +263,7 @@ export default function JournalSection() {
                 <div>
                   <span
                     className="
-                      font-brand-sans text-[9px] font-bold uppercase
+                      font-brand-sans text-[12px] font-bold uppercase
                       tracking-[0.22em] text-[var(--brand-gold-700)]
                     "
                   >
@@ -333,7 +333,7 @@ function FeaturedPostCard({ post }: { post: JournalPost }) {
               className="
                 clay-dark inline-flex items-center gap-2 rounded-full
                 px-4 py-2
-                font-brand-sans text-[10px] font-bold uppercase
+                font-brand-sans text-[13px] font-bold uppercase
                 tracking-[0.14em] text-[var(--brand-gold)]
               "
             >
@@ -482,7 +482,7 @@ function TabletFeaturedPostCard({ post }: { post: JournalPost }) {
               className="
                 clay-dark inline-flex items-center gap-2 rounded-full
                 px-3 py-1.5
-                font-brand-sans text-[9px] font-bold uppercase
+                font-brand-sans text-[12px] font-bold uppercase
                 tracking-[0.12em] text-[var(--brand-gold)]
               "
             >
@@ -585,7 +585,7 @@ function MobileFeaturedPostCard({ post }: { post: JournalPost }) {
               className="
                 clay-dark inline-flex items-center gap-1.5 rounded-full
                 px-3 py-1.5
-                font-brand-sans text-[8px] font-bold uppercase
+                font-brand-sans text-[11px] font-bold uppercase
                 tracking-[0.14em] text-[var(--brand-gold)]
               "
             >
@@ -657,7 +657,7 @@ function MobileListPostCard({ post }: { post: JournalPost }) {
             href={`/blog/${post.id}`}
             className="
               mt-3 inline-flex items-center gap-2
-              font-brand-sans text-[10px] font-bold uppercase
+              font-brand-sans text-[13px] font-bold uppercase
               tracking-[0.12em] text-[var(--brand-navy)]
             "
           >
@@ -692,7 +692,7 @@ function MetaRow({
           bg-[rgba(255,255,255,0.45)]
           font-brand-sans font-bold uppercase tracking-[0.12em]
           text-[var(--brand-gold-700)]
-          ${tiny ? "px-2 py-1 text-[7px]" : small ? "px-2.5 py-1 text-[8px]" : "px-3 py-1.5 text-[9px]"}
+          ${tiny ? "px-2 py-1 text-[13px]" : small ? "px-2.5 py-1 text-[11px]" : "px-3 py-1.5 text-[12px]"}
         `}
       >
         {category}
@@ -702,7 +702,7 @@ function MetaRow({
         className={`
           shrink-0 font-brand-sans uppercase tracking-[0.1em]
           text-[var(--brand-text-muted)]
-          ${tiny ? "text-[7px]" : small ? "text-[8px]" : "text-[9px]"}
+          ${tiny ? "text-[13px]" : small ? "text-[11px]" : "text-[12px]"}
         `}
       >
         {date}
@@ -733,7 +733,7 @@ function PostLink({
         inline-flex items-center gap-2
         font-brand-sans font-bold uppercase tracking-[0.12em]
         text-[var(--brand-navy)]
-        ${small ? "text-[10px]" : "text-[11px]"}
+        ${small ? "text-[13px]" : "text-[11px]"}
         ${className}
       `}
     >

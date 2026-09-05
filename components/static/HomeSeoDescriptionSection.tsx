@@ -164,7 +164,7 @@ export default function HomeSeoDescriptionSection() {
                   id="home-seo-description-heading"
                   className="
     font-brand-sans
-    text-[9px]
+    text-[12px]
     font-bold
     uppercase
     tracking-[0.22em]

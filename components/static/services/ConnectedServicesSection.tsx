@@ -192,7 +192,7 @@ export default function ConnectedServicesSection({
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -200,7 +200,7 @@ export default function ConnectedServicesSection({
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Four Specialist Services
@@ -395,7 +395,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -458,7 +458,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
 
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.7]
 
@@ -492,7 +492,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -510,13 +510,13 @@ function ServiceCard({ service }: { service: ServiceItem }) {
 
               font-brand-sans
 
-              text-[9px]
+              text-[12px]
               font-medium
               leading-[1.6]
 
               text-white/62
 
-              sm:text-[10px]
+              sm:text-[13px]
             "
           >
             {service.useCase}

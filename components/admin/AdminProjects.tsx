@@ -119,7 +119,7 @@ export default function ProjectManagement({
               <h2 className="font-brand-sans text-[13px] font-bold text-[var(--brand-navy)]">
                 {form.id ? "Edit project" : "New project"}
               </h2>
-              <p className="font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+              <p className="font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                 {latestCode
                   ? `Latest project code: ${latestCode}`
                   : "First project code starts at 1000"}
@@ -187,10 +187,10 @@ export default function ProjectManagement({
             <div className="rounded-xl border border-white/60 bg-white/45 p-2.5 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_0_0_1px_rgba(255,255,255,0.5)_inset]">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="min-w-0">
-                  <p className="font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
+                  <p className="font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
                     Upload cover
                   </p>
-                  <p className="mt-1 font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+                  <p className="mt-1 font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                     JPG, PNG or WebP up to 10MB
                   </p>
                 </div>
@@ -236,7 +236,7 @@ export default function ProjectManagement({
                       size={20}
                       className="mx-auto text-[var(--brand-text-muted)]"
                     />
-                    <p className="mt-2 font-brand-sans text-[10px] font-bold text-[var(--brand-text-muted)]">
+                    <p className="mt-2 font-brand-sans text-[13px] font-bold text-[var(--brand-text-muted)]">
                       Cover preview
                     </p>
                   </div>
@@ -247,10 +247,10 @@ export default function ProjectManagement({
             <div className="rounded-xl border border-white/60 bg-white/45 p-2.5">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <p className="font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
+                  <p className="font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
                     Gallery images
                   </p>
-                  <p className="mt-1 font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+                  <p className="mt-1 font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                     Upload multiple images, then edit alt text and order.
                   </p>
                 </div>
@@ -302,7 +302,7 @@ export default function ProjectManagement({
                             className="h-[34px] w-full rounded-lg border border-white/60 bg-white/70 px-2.5 font-brand-sans text-[11px] font-semibold text-[var(--brand-navy)] outline-none"
                           />
                           <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
-                            <span className="font-brand-sans text-[9px] font-bold uppercase tracking-[0.12em] text-[var(--brand-text-muted)]">
+                            <span className="font-brand-sans text-[12px] font-bold uppercase tracking-[0.12em] text-[var(--brand-text-muted)]">
                               Image {index + 1}
                             </span>
                             <div className="flex gap-1">
@@ -435,7 +435,7 @@ export default function ProjectManagement({
             <h2 className="font-brand-sans text-[13px] font-bold text-[var(--brand-navy)]">
               Projects
             </h2>
-            <p className="font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+            <p className="font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
               {formatNumber(total)} projects
               {latestCode ? ` - latest code ${latestCode}` : ""}
             </p>
@@ -451,7 +451,7 @@ export default function ProjectManagement({
         </div>
 
         <div className="border-b border-black/[0.06] px-3 py-3 sm:px-4">
-          <span className="mb-1.5 block font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
+          <span className="mb-1.5 block font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)]/70">
             Search
           </span>
           <div className="flex h-[38px] items-center gap-2 rounded-xl border border-white/60 bg-white/50 px-3 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_0_0_1px_rgba(255,255,255,0.5)_inset]">
@@ -493,7 +493,7 @@ export default function ProjectManagement({
                       <h3 className="truncate font-brand-sans text-[13px] font-bold text-[var(--brand-navy)]">
                         {project.title}
                       </h3>
-                      <p className="mt-0.5 truncate font-brand-sans text-[9px] font-semibold text-[var(--brand-text-muted)]">
+                      <p className="mt-0.5 truncate font-brand-sans text-[12px] font-semibold text-[var(--brand-text-muted)]">
                         Code {project.projectCode} -{" "}
                         {formatDateTime(project.createdAt)}
                       </p>
@@ -550,7 +550,7 @@ function FormGroup({
 }) {
   return (
     <section className="grid gap-3 rounded-xl border border-black/[0.04] bg-white/30 p-3">
-      <h3 className="font-brand-sans text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--brand-gold-700)]">
+      <h3 className="font-brand-sans text-[13px] font-bold uppercase tracking-[0.14em] text-[var(--brand-gold-700)]">
         {title}
       </h3>
       {children}
@@ -593,14 +593,14 @@ function UploadProgress({ upload }: { upload: ProjectImageUploadState }) {
   return (
     <div className="mt-2.5 rounded-lg border border-black/[0.05] bg-white/45 p-2">
       <div className="flex items-center justify-between gap-2">
-        <p className="min-w-0 truncate font-brand-sans text-[10px] font-bold text-[var(--brand-navy)]">
+        <p className="min-w-0 truncate font-brand-sans text-[13px] font-bold text-[var(--brand-navy)]">
           {upload.fileName}
         </p>
-        <span className="shrink-0 font-brand-sans text-[9px] font-bold uppercase tracking-[0.12em] text-[var(--brand-text-muted)]">
+        <span className="shrink-0 font-brand-sans text-[12px] font-bold uppercase tracking-[0.12em] text-[var(--brand-text-muted)]">
           {upload.status}
         </span>
       </div>
-      <div className="mt-1 flex items-center justify-between gap-2 font-brand-sans text-[9px] font-semibold text-[var(--brand-text-muted)]">
+      <div className="mt-1 flex items-center justify-between gap-2 font-brand-sans text-[12px] font-semibold text-[var(--brand-text-muted)]">
         <span>{formatFileSize(upload.fileSize)}</span>
         <span>{upload.progress}%</span>
       </div>
@@ -616,7 +616,7 @@ function UploadProgress({ upload }: { upload: ProjectImageUploadState }) {
 
 function Badge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-md border border-black/[0.06] bg-white/60 px-1.5 py-0.5 font-brand-sans text-[9px] font-bold text-[var(--brand-text-muted)]">
+    <span className="rounded-md border border-black/[0.06] bg-white/60 px-1.5 py-0.5 font-brand-sans text-[12px] font-bold text-[var(--brand-text-muted)]">
       {children}
     </span>
   );

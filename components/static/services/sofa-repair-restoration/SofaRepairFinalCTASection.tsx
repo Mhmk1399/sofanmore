@@ -139,7 +139,7 @@ export default function SofaRepairFinalCTASection() {
                     className="
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -147,7 +147,7 @@ export default function SofaRepairFinalCTASection() {
 
                       text-[var(--brand-gold)]
 
-                      sm:text-[8px]
+                      sm:text-[11px]
                     "
                   >
                     Sofa Repair & Restoration
@@ -319,7 +319,7 @@ export default function SofaRepairFinalCTASection() {
                       className="
                         font-brand-sans
 
-                        text-[6px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -440,7 +440,7 @@ function RepairStep({ number, text }: { number: string; text: string }) {
 
           font-brand-display
 
-          text-[9px]
+          text-[12px]
           font-semibold
 
           text-[var(--brand-navy)]
@@ -455,13 +455,13 @@ function RepairStep({ number, text }: { number: string; text: string }) {
 
           font-brand-sans
 
-          text-[9px]
+          text-[12px]
           font-semibold
           leading-[1.5]
 
           text-white/70
 
-          sm:text-[10px]
+          sm:text-[13px]
         "
       >
         {text}

@@ -187,7 +187,7 @@ export default function SofaRestorationProcessSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -195,7 +195,7 @@ export default function SofaRestorationProcessSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Our Restoration Process
@@ -380,7 +380,7 @@ export default function SofaRestorationProcessSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -520,12 +520,12 @@ function ProcessOverview() {
 
                 font-brand-sans
 
-                text-[7px]
+                text-[13px]
                 font-semibold
 
                 text-white/60
 
-                lg:text-[8px]
+                lg:text-[11px]
               "
             >
               {step.eyebrow}
@@ -655,7 +655,7 @@ function ProcessStepCard({ step }: { step: ProcessStep }) {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -706,7 +706,7 @@ function ProcessStepCard({ step }: { step: ProcessStep }) {
             className="
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-medium
               leading-[1.7]
 
@@ -727,7 +727,7 @@ function ProcessStepCard({ step }: { step: ProcessStep }) {
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-medium
                 leading-[1.7]
 
@@ -850,7 +850,7 @@ function FeaturedStep({ step }: { step: ProcessStep }) {
               className="
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -899,7 +899,7 @@ function FeaturedStep({ step }: { step: ProcessStep }) {
           className="
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.7]
 
@@ -920,7 +920,7 @@ function FeaturedStep({ step }: { step: ProcessStep }) {
 
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-medium
               leading-[1.7]
 
@@ -961,7 +961,7 @@ function PhotoChecklist({ items }: { items: string[] }) {
         className="
           font-brand-sans
 
-          text-[6px]
+          text-[13px]
           font-bold
           uppercase
 
@@ -1017,13 +1017,13 @@ function PhotoChecklist({ items }: { items: string[] }) {
               className="
                 font-brand-sans
 
-                text-[8px]
+                text-[11px]
                 font-medium
                 leading-[1.5]
 
                 text-white/65
 
-                sm:text-[9px]
+                sm:text-[12px]
               "
             >
               {item}

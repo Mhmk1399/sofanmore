@@ -151,7 +151,7 @@ export default function InteriorDesignHero({ id = "service" }: { id?: string }) 
 
                         font-brand-sans
 
-                        text-[7px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -159,7 +159,7 @@ export default function InteriorDesignHero({ id = "service" }: { id?: string }) 
 
                         text-[var(--brand-gold-700)]
 
-                        sm:text-[8px]
+                        sm:text-[11px]
                       "
                     >
                       Interior Design · London
@@ -172,7 +172,7 @@ export default function InteriorDesignHero({ id = "service" }: { id?: string }) 
 
                         font-brand-sans
 
-                        text-[9px]
+                        text-[12px]
                         font-medium
 
                         text-[var(--brand-text-muted)]
@@ -309,7 +309,7 @@ export default function InteriorDesignHero({ id = "service" }: { id?: string }) 
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -490,7 +490,7 @@ function HeroPoint({ label }: { label: string }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-bold
           uppercase
 
@@ -498,7 +498,7 @@ function HeroPoint({ label }: { label: string }) {
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {label}
@@ -625,7 +625,7 @@ function InteriorHeroImage() {
 
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -662,7 +662,7 @@ function InteriorHeroImage() {
 
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 

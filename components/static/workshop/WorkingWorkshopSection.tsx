@@ -138,7 +138,7 @@ export default function WorkingWorkshopSection() {
                     className="
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -146,7 +146,7 @@ export default function WorkingWorkshopSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[8px]
+                      sm:text-[11px]
                     "
                   >
                     A Working London Workshop
@@ -334,7 +334,7 @@ export default function WorkingWorkshopSection() {
                         className="
                           font-brand-sans
 
-                          text-[6px]
+                          text-[13px]
                           font-bold
                           uppercase
 
@@ -419,13 +419,13 @@ export default function WorkingWorkshopSection() {
 
                           font-brand-sans
 
-                          text-[9px]
+                          text-[12px]
                           font-medium
                           leading-[1.6]
 
                           text-[var(--brand-text-muted)]
 
-                          sm:text-[10px]
+                          sm:text-[13px]
                         "
                       >
                         Catalogues, upholstery options and project requirements
@@ -493,7 +493,7 @@ export default function WorkingWorkshopSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -603,7 +603,7 @@ function ContrastItem({
 
               font-brand-sans
 
-              text-[8px]
+              text-[11px]
               font-bold
 
               ${muted ? "text-[var(--brand-navy)]" : "text-white"}
@@ -618,7 +618,7 @@ function ContrastItem({
 
               font-brand-sans
 
-              text-[8px]
+              text-[11px]
               font-medium
               leading-[1.5]
 
@@ -678,13 +678,13 @@ function ActivityRow({ text }: { text: string }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.5]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {text}

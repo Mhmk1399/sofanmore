@@ -186,7 +186,7 @@ export default function CommercialInteriorDesignSection({
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -194,7 +194,7 @@ export default function CommercialInteriorDesignSection({
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Commercial Interiors
@@ -326,7 +326,7 @@ export default function CommercialInteriorDesignSection({
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -425,7 +425,7 @@ export default function CommercialInteriorDesignSection({
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -522,7 +522,7 @@ function ExperienceExample({ label, text }: { label: string; text: string }) {
 
             font-brand-sans
 
-            text-[7px]
+            text-[13px]
             font-bold
             uppercase
 
@@ -540,13 +540,13 @@ function ExperienceExample({ label, text }: { label: string; text: string }) {
 
             font-brand-sans
 
-            text-[9px]
+            text-[12px]
             font-medium
             leading-[1.5]
 
             text-[var(--brand-text-muted)]
 
-            sm:text-[10px]
+            sm:text-[13px]
           "
         >
           {text}
@@ -596,7 +596,7 @@ function ConnectedExperiencePanel() {
             className="
               font-brand-sans
 
-              text-[7px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -638,7 +638,7 @@ function ConnectedExperiencePanel() {
 
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-medium
               leading-[1.65]
 
@@ -792,15 +792,15 @@ function CommercialFactor({
         className="
           font-brand-sans
 
-          text-[7px]
+          text-[13px]
           font-semibold
           leading-[1.3]
 
           text-white/80
 
-          sm:text-[8px]
+          sm:text-[11px]
 
-          lg:text-[9px]
+          lg:text-[12px]
         "
       >
         {label}

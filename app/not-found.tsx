@@ -138,7 +138,7 @@ export default function NotFound() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -146,7 +146,7 @@ export default function NotFound() {
 
                     text-[var(--brand-navy)]
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
                 >
                   Page Not Found
@@ -305,7 +305,7 @@ export default function NotFound() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 

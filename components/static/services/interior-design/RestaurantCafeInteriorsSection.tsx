@@ -156,7 +156,7 @@ export default function RestaurantCafeInteriorsSection({
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -164,7 +164,7 @@ export default function RestaurantCafeInteriorsSection({
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Restaurant & Café Interiors
@@ -266,7 +266,7 @@ export default function RestaurantCafeInteriorsSection({
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -301,7 +301,7 @@ export default function RestaurantCafeInteriorsSection({
 
                             font-brand-sans
 
-                            text-[7px]
+                            text-[13px]
                             font-bold
                             uppercase
 
@@ -309,7 +309,7 @@ export default function RestaurantCafeInteriorsSection({
 
                             text-[var(--brand-navy)]
 
-                            sm:text-[8px]
+                            sm:text-[11px]
                           "
                       >
                         {point}
@@ -334,7 +334,7 @@ export default function RestaurantCafeInteriorsSection({
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -493,7 +493,7 @@ function HospitalityExperiencePanel() {
               className="
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -562,7 +562,7 @@ function HospitalityExperiencePanel() {
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -680,13 +680,13 @@ function DesignExample({
 
               font-brand-sans
 
-              text-[9px]
+              text-[12px]
               font-medium
               leading-[1.6]
 
               text-white/55
 
-              sm:text-[10px]
+              sm:text-[13px]
             "
           >
             {text}

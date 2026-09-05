@@ -201,7 +201,7 @@ export default function WorkshopHero() {
 
                         font-brand-sans
 
-                        text-[7px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -209,7 +209,7 @@ export default function WorkshopHero() {
 
                         text-[var(--brand-gold-700)]
 
-                        sm:text-[8px]
+                        sm:text-[11px]
                       "
                     >
                       Sofa N More · London NW2
@@ -222,12 +222,12 @@ export default function WorkshopHero() {
 
                         font-brand-sans
 
-                        text-[8px]
+                        text-[11px]
                         font-medium
 
                         text-[var(--brand-text-muted)]
 
-                        sm:text-[9px]
+                        sm:text-[12px]
                       "
                     >
                       Cricklewood · Staples Corner · North West London
@@ -342,7 +342,7 @@ export default function WorkshopHero() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -547,7 +547,7 @@ function WorkshopVisitPanel() {
               className="
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -590,7 +590,7 @@ function WorkshopVisitPanel() {
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.65]
 
@@ -667,7 +667,7 @@ function WorkshopFactItem({ label, value, icon: Icon }: WorkshopFact) {
 
           font-brand-sans
 
-          text-[6px]
+          text-[13px]
           font-bold
           uppercase
 
@@ -686,13 +686,13 @@ function WorkshopFactItem({ label, value, icon: Icon }: WorkshopFact) {
 
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.35]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {value}
@@ -786,13 +786,13 @@ function WorkshopServiceRow({ service }: { service: WorkshopServiceLink }) {
 
             font-brand-sans
 
-            text-[8px]
+            text-[11px]
             font-medium
             leading-[1.5]
 
             text-[var(--brand-text-muted)]
 
-            sm:text-[9px]
+            sm:text-[12px]
           "
         >
           {service.description}

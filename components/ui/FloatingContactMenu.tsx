@@ -445,7 +445,7 @@ function ContactActionItem({
             className="
               mt-[2px]
               font-brand-sans
-              text-[8px]
+              text-[11px]
               font-medium
               text-[var(--brand-text-muted)]
             "
@@ -513,7 +513,7 @@ function ContactActionItem({
           px-3
           py-2
           font-brand-sans
-          text-[9px]
+          text-[12px]
           font-bold
           text-[var(--brand-navy)]
 

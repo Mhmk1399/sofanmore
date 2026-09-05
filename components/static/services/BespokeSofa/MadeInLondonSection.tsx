@@ -184,7 +184,7 @@ export default function MadeInLondonSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -192,7 +192,7 @@ export default function MadeInLondonSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     London Craftsmanship
@@ -500,7 +500,7 @@ function WorkshopVisual() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -634,7 +634,7 @@ function WorkshopVisual() {
 
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -729,7 +729,7 @@ function WorkshopVisual() {
 
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -867,7 +867,7 @@ function ValueItem({
           className="
             font-brand-sans
 
-            text-[6px]
+            text-[13px]
             font-bold
             uppercase
 
@@ -877,7 +877,7 @@ function ValueItem({
 
             text-[var(--brand-navy)]
 
-            sm:text-[7px]
+            sm:text-[13px]
           "
         >
           {label}
@@ -998,7 +998,7 @@ function WorkshopAddressCard() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -1056,7 +1056,7 @@ function WorkshopAddressCard() {
                   className="
                     font-brand-sans
 
-                    text-[6px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -1076,7 +1076,7 @@ function WorkshopAddressCard() {
 
                 font-brand-sans
 
-                text-[10px]
+                text-[13px]
                 font-medium
                 leading-[1.65]
 

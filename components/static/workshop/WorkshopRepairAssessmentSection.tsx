@@ -147,7 +147,7 @@ export default function WorkshopRepairAssessmentSection() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -155,7 +155,7 @@ export default function WorkshopRepairAssessmentSection() {
 
                     text-[var(--brand-gold-700)]
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
                 >
                   Sofa Repair · Workshop Assessment
@@ -224,7 +224,7 @@ export default function WorkshopRepairAssessmentSection() {
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.75]
 
@@ -263,7 +263,7 @@ export default function WorkshopRepairAssessmentSection() {
                   className="
                     font-brand-sans
 
-                    text-[6px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -367,7 +367,7 @@ export default function WorkshopRepairAssessmentSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -456,7 +456,7 @@ export default function WorkshopRepairAssessmentSection() {
                       className="
                         font-brand-sans
 
-                        text-[6px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -494,13 +494,13 @@ export default function WorkshopRepairAssessmentSection() {
 
                         font-brand-sans
 
-                        text-[8px]
+                        text-[11px]
                         font-medium
                         leading-[1.55]
 
                         text-white/55
 
-                        sm:text-[9px]
+                        sm:text-[12px]
                       "
                     >
                       The most appropriate arrangement depends on the item,
@@ -636,13 +636,13 @@ function AssessmentStepItem({ step }: { step: AssessmentStep }) {
 
             font-brand-sans
 
-            text-[8px]
+            text-[11px]
             font-medium
             leading-[1.55]
 
             text-[var(--brand-text-muted)]
 
-            sm:text-[9px]
+            sm:text-[12px]
           "
         >
           {step.description}
@@ -690,12 +690,12 @@ function SmallCheck({ label }: { label: string }) {
         className="
           font-brand-sans
 
-          text-[7px]
+          text-[13px]
           font-semibold
 
           text-[var(--brand-navy)]
 
-          sm:text-[8px]
+          sm:text-[11px]
         "
       >
         {label}

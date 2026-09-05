@@ -9,10 +9,8 @@ import { connection } from "next/server";
 import { notFound } from "next/navigation";
 
 import {
-  ArrowDown,
   ArrowRight,
   CheckCircle2,
-  ChevronRight,
   FileText,
   Hash,
   Images,
@@ -52,7 +50,6 @@ type ProjectDetailPageProps = {
 
 type StorySection = {
   id: string;
-  number: string;
   navLabel: string;
   title: string;
   body: string;
@@ -102,21 +99,6 @@ function createMetaDescription(value: string, maxLength = 160) {
 
   const shortened = normalized
     .slice(0, maxLength - 1)
-    .replace(/\s+\S*$/, "")
-    .trim();
-
-  return `${shortened}…`;
-}
-
-function createPreview(value: string, maxLength = 235) {
-  const normalized = value.replace(/\s+/g, " ").trim();
-
-  if (normalized.length <= maxLength) {
-    return normalized;
-  }
-
-  const shortened = normalized
-    .slice(0, maxLength)
     .replace(/\s+\S*$/, "")
     .trim();
 
@@ -316,7 +298,6 @@ export default async function ProjectDetailPage({
   const rawStorySections = [
     {
       id: "brief",
-      number: "01",
       navLabel: "The Brief",
       title: "The Brief",
       body: project.brief,
@@ -325,7 +306,6 @@ export default async function ProjectDetailPage({
 
     {
       id: "approach",
-      number: "02",
       navLabel: "The Approach",
       title: "The Approach",
       body: project.approach,
@@ -334,7 +314,6 @@ export default async function ProjectDetailPage({
 
     {
       id: "materials",
-      number: "03",
       navLabel: "Materials",
       title: "Materials & Details",
       body: project.details,
@@ -343,7 +322,6 @@ export default async function ProjectDetailPage({
 
     {
       id: "result",
-      number: "04",
       navLabel: "The Result",
       title: "The Result",
       body: project.result,
@@ -712,40 +690,6 @@ export default async function ProjectDetailPage({
                     gap-4
                   "
                 >
-                  <Link
-                    href="/projects"
-                    className="
-                      inline-flex
-
-                      items-center
-
-                      gap-2
-
-                      font-brand-sans
-
-                      text-[8px]
-                      font-bold
-                      uppercase
-
-                      tracking-[0.12em]
-
-                      text-white/75
-
-                      transition-colors
-
-                      hover:text-[var(--brand-gold)]
-                    "
-                  >
-                    <ChevronRight
-                      size={13}
-                      strokeWidth={1.6}
-                      className="
-                        rotate-180
-                      "
-                    />
-                    Back to Projects
-                  </Link>
-
                   <span
                     className="
                       hidden
@@ -762,7 +706,7 @@ export default async function ProjectDetailPage({
 
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -806,7 +750,7 @@ export default async function ProjectDetailPage({
                       className="
                         font-brand-sans
 
-                        text-[8px]
+                        text-[11px]
                         font-bold
                         uppercase
 
@@ -814,7 +758,7 @@ export default async function ProjectDetailPage({
 
                         text-[var(--brand-gold)]
 
-                        sm:text-[9px]
+                        sm:text-[12px]
                       "
                     >
                       Sofa N More Project
@@ -901,56 +845,6 @@ export default async function ProjectDetailPage({
                         </ClayButton>
                       )}
                     </div>
-
-                    {/* SCROLL */}
-
-                    <Link
-                      href="#overview"
-                      className="
-                        mt-8
-
-                        inline-flex
-
-                        items-center
-
-                        gap-2
-
-                        font-brand-sans
-
-                        text-[7px]
-                        font-bold
-                        uppercase
-
-                        tracking-[0.1em]
-
-                        text-white/60
-
-                        transition-colors
-
-                        hover:text-white
-                      "
-                    >
-                      Scroll to explore
-                      <span
-                        className="
-                          flex
-                          h-7
-                          w-7
-
-                          items-center
-                          justify-center
-
-                          rounded-full
-
-                          border
-                          border-[var(--brand-gold)]/45
-
-                          text-[var(--brand-gold)]
-                        "
-                      >
-                        <ArrowDown size={11} strokeWidth={1.6} />
-                      </span>
-                    </Link>
                   </div>
 
                   {/* =========================================
@@ -978,7 +872,7 @@ export default async function ProjectDetailPage({
                       className="
                         font-brand-sans
 
-                        text-[7px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -1059,7 +953,7 @@ export default async function ProjectDetailPage({
                 relative
                 z-20
 
-                -mt-[18px]
+                 mt-2 mb-2
 
                 px-3
 
@@ -1075,19 +969,23 @@ export default async function ProjectDetailPage({
 
                   overflow-hidden
 
-                  rounded-[17px]
+                  rounded-[22px]
 
                   border
                   border-[var(--brand-navy)]/[0.07]
 
-                  bg-[#FFFDF8]
+                  bg-[#FFFDF8]/95
 
-                  shadow-[0_8px_20px_rgba(70,50,30,0.08)]
+                  p-1.5
+
+                  shadow-[0_10px_30px_rgba(70,50,30,0.09)]
                 "
               >
                 <div
                   className="
                     flex
+
+                    gap-1
 
                     overflow-x-auto
 
@@ -1096,51 +994,41 @@ export default async function ProjectDetailPage({
                     [&::-webkit-scrollbar]:hidden
                   "
                 >
-                  {pageNavigation.map((item, index) => (
+                  {pageNavigation.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
-                      className={`
-                          relative
+                      className="
+                        flex
+                        h-[44px]
 
-                          flex
-                          h-[54px]
+                        shrink-0
 
-                          shrink-0
+                        items-center
+                        justify-center
 
-                          items-center
-                          justify-center
+                        rounded-[15px]
 
-                          px-5
+                        px-4
 
-                          font-brand-sans
+                        font-brand-sans
 
-                          text-[8px]
-                          font-semibold
+                        text-[11px]
+                        font-bold
 
-                          text-[var(--brand-navy)]
+                        tracking-[0.01em]
 
-                          transition-colors
+                        text-[var(--brand-navy)]/75
 
-                          hover:text-[var(--brand-gold-700)]
+                        transition-all
+                        duration-300
 
-                          sm:px-6
-                          sm:text-[9px]
+                        hover:bg-[#F3EBDF]
+                        hover:text-[var(--brand-navy)]
 
-                          ${
-                            index === 0
-                              ? `
-                                after:absolute
-                                after:bottom-0
-                                after:left-1/2
-                                after:h-[2px]
-                                after:w-10
-                                after:-translate-x-1/2
-                                after:bg-[var(--brand-gold)]
-                              `
-                              : ""
-                          }
-                        `}
+                        sm:px-5
+                        sm:text-[12px]
+                      "
                     >
                       {item.label}
                     </Link>
@@ -1173,20 +1061,24 @@ export default async function ProjectDetailPage({
                   mx-auto
                   max-w-[calc(var(--site-width)-48px)]
 
+                  rounded-b-[28px]
+
                   border-x
                   border-b
                   border-[var(--brand-navy)]/[0.06]
 
-                  bg-[#FFFDF8]
+                  bg-[linear-gradient(180deg,#FFFDF8_0%,#FAF6EF_100%)]
 
-                  px-4
-                  pb-7
-                  pt-10
+                  p-3
+                  pt-7
 
-                  sm:px-6
-                  sm:pt-12
+                  shadow-[0_18px_50px_rgba(70,50,30,0.045)]
 
-                  lg:px-7
+                  sm:p-4
+                  sm:pt-9
+
+                  lg:p-5
+                  lg:pt-10
                 "
               >
                 <h2 id="overview-heading" className="sr-only">
@@ -1197,7 +1089,9 @@ export default async function ProjectDetailPage({
                   className="
                     grid
 
-                    gap-0
+                    items-start
+
+                    gap-3
 
                     md:grid-cols-2
 
@@ -1206,219 +1100,6 @@ export default async function ProjectDetailPage({
                 >
                   {storySections.map((section) => (
                     <StoryOverviewCard key={section.id} section={section} />
-                  ))}
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* =================================================
-              DARK PROJECT IMAGE STRIP
-
-              Replaces the reference's fake "journey"
-              because our model has no stage-specific
-              journey data.
-          ================================================== */}
-
-          {showcaseImages.length > 1 && (
-            <section
-              aria-labelledby="inside-project-heading"
-              className="
-                px-3
-                pt-8
-
-                sm:px-5
-                sm:pt-10
-
-                lg:px-8
-              "
-            >
-              <div
-                className="
-                  mx-auto
-
-                  max-w-[calc(var(--site-width)-48px)]
-
-                  overflow-hidden
-
-                  rounded-[24px]
-
-                  border
-                  border-white/[0.07]
-
-                  bg-[#171818]
-
-                  p-5
-
-                  shadow-[0_12px_28px_rgba(18,20,22,0.16)]
-
-                  sm:p-6
-
-                  lg:grid
-                  lg:grid-cols-[210px_minmax(0,1fr)]
-                  lg:gap-6
-                  lg:p-7
-                "
-              >
-                {/* LEFT */}
-
-                <div
-                  className="
-                    mb-5
-
-                    lg:mb-0
-                  "
-                >
-                  <p
-                    className="
-                      font-brand-sans
-
-                      text-[7px]
-                      font-bold
-                      uppercase
-
-                      tracking-[0.18em]
-
-                      text-[var(--brand-gold)]
-                    "
-                  >
-                    Inside the Project
-                  </p>
-
-                  <h2
-                    id="inside-project-heading"
-                    className="
-                      mt-3
-
-                      font-brand-display
-
-                      text-[26px]
-                      font-medium
-                      leading-[1.05]
-
-                      tracking-[-0.03em]
-
-                      text-white
-
-                      sm:text-[31px]
-                    "
-                  >
-                    A closer look at the work.
-                  </h2>
-
-                  <p
-                    className="
-                      mt-3
-
-                      max-w-[190px]
-
-                      font-brand-sans
-
-                      text-[9px]
-                      font-medium
-                      leading-[1.7]
-
-                      text-white/55
-                    "
-                  >
-                    Selected views from this Sofa N More project.
-                  </p>
-
-                  <Link
-                    href="#project-gallery"
-                    className="
-                      mt-5
-
-                      inline-flex
-
-                      items-center
-
-                      gap-1.5
-
-                      font-brand-sans
-
-                      text-[7px]
-                      font-bold
-                      uppercase
-
-                      tracking-[0.1em]
-
-                      text-[var(--brand-gold)]
-                    "
-                  >
-                    View Gallery
-                    <ArrowRight size={11} />
-                  </Link>
-                </div>
-
-                {/* IMAGES */}
-
-                <div
-                  className="
-                    grid
-
-                    grid-cols-2
-
-                    gap-2
-
-                    sm:grid-cols-4
-                  "
-                >
-                  {showcaseImages.map((image, index) => (
-                    <div
-                      key={image.id}
-                      className="
-                          min-w-0
-                        "
-                    >
-                      <div
-                        className="
-                            relative
-
-                            aspect-[4/3]
-
-                            overflow-hidden
-
-                            rounded-[13px]
-
-                            border
-                            border-white/10
-
-                            bg-[#272827]
-                          "
-                      >
-                        <Image
-                          src={image.url}
-                          alt={image.alt}
-                          fill
-                          draggable={false}
-                          quality={76}
-                          sizes="
-                              (max-width: 639px) 45vw,
-                              (max-width: 1023px) 24vw,
-                              18vw
-                            "
-                          className="
-                              object-cover
-                            "
-                        />
-                      </div>
-
-                      <p
-                        className="
-                            mt-2
-
-                            font-brand-sans
-
-                            text-[7px]
-                            font-semibold
-
-                            text-white/55
-                          "
-                      >
-                        Project image {String(index + 1).padStart(2, "0")}
-                      </p>
-                    </div>
                   ))}
                 </div>
               </div>
@@ -1454,7 +1135,7 @@ export default async function ProjectDetailPage({
               >
                 <div
                   className="
-                    mb-6
+                    mb-8
 
                     flex
                     flex-col
@@ -1471,7 +1152,7 @@ export default async function ProjectDetailPage({
                       className="
                         font-brand-sans
 
-                        text-[7px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -1511,13 +1192,13 @@ export default async function ProjectDetailPage({
 
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-medium
                       leading-[1.7]
 
                       text-[var(--brand-text-muted)]
 
-                      sm:text-[10px]
+                      sm:text-[13px]
                     "
                   >
                     Open any image to explore the project in full screen.
@@ -1556,14 +1237,14 @@ export default async function ProjectDetailPage({
 
                 overflow-hidden
 
-                rounded-[25px]
+                rounded-[30px]
 
                 border
                 border-[var(--brand-navy)]/[0.07]
 
-                bg-[#FFFDF8]
+                bg-[linear-gradient(135deg,#FFFDF8_0%,#F7F0E6_100%)]
 
-                shadow-[0_10px_26px_rgba(70,50,30,0.08)]
+                shadow-[0_18px_45px_rgba(70,50,30,0.09)]
 
                 lg:grid-cols-[0.88fr_1.12fr]
               "
@@ -1578,7 +1259,7 @@ export default async function ProjectDetailPage({
 
                   overflow-hidden
 
-                  bg-[#171818]
+                  bg-[radial-gradient(circle_at_15%_15%,rgba(191,158,106,0.17),transparent_34%),#151716]
 
                   px-5
                   py-7
@@ -1618,7 +1299,7 @@ export default async function ProjectDetailPage({
                     className="
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -1644,7 +1325,7 @@ export default async function ProjectDetailPage({
 
                       tracking-[-0.035em]
 
-                      text-white
+                      text-black
 
                       sm:text-[37px]
                     "
@@ -1660,13 +1341,13 @@ export default async function ProjectDetailPage({
 
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-medium
                       leading-[1.75]
 
-                      text-white/60
+                      text-black/60
 
-                      sm:text-[10px]
+                      sm:text-[13px]
                     "
                   >
                     Have a similar sofa, interior or restoration project in
@@ -1716,7 +1397,7 @@ export default async function ProjectDetailPage({
                     className="
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -1753,13 +1434,13 @@ export default async function ProjectDetailPage({
 
                       font-brand-sans
 
-                      text-[9px]
+                      text-[12px]
                       font-medium
                       leading-[1.7]
 
                       text-[var(--brand-text-muted)]
 
-                      sm:text-[10px]
+                      sm:text-[13px]
                     "
                   >
                     Explore the service behind this project or speak with the
@@ -1871,7 +1552,7 @@ function ProjectSummaryItem({
 
             font-brand-sans
 
-            text-[6px]
+            text-[13px]
             font-bold
             uppercase
 
@@ -1890,13 +1571,13 @@ function ProjectSummaryItem({
 
             font-brand-sans
 
-            text-[9px]
+            text-[12px]
             font-semibold
             leading-[1.4]
 
             text-white
 
-            sm:text-[10px]
+            sm:text-[13px]
           "
         >
           {value}
@@ -1913,36 +1594,13 @@ function ProjectSummaryItem({
 function StoryOverviewCard({ section }: { section: StorySection }) {
   const Icon = section.icon;
 
-  return (
-    <div
-      id={section.id}
-      className="
-        scroll-mt-[120px]
+  const normalizedBody = section.body.replace(/\s+/g, " ").trim();
 
-        border-b
-        border-[var(--brand-navy)]/[0.07]
+  const isExpandable = normalizedBody.length > 235;
 
-        px-3
-        py-6
-
-        last:border-b-0
-
-        md:border-r
-
-        md:odd:border-r
-        md:even:border-r-0
-
-        xl:border-b-0
-        xl:border-r
-
-        xl:last:border-r-0
-
-        sm:px-5
-
-        lg:px-6
-      "
-    >
-      {/* ICON + NUMBER */}
+  const content = (
+    <>
+      {/* ICON + TITLE */}
 
       <div
         className="
@@ -1955,150 +1613,188 @@ function StoryOverviewCard({ section }: { section: StorySection }) {
         <span
           className="
             flex
-            h-9
-            w-9
+            h-10
+            w-10
+
+            shrink-0
 
             items-center
             justify-center
 
-            rounded-[11px]
+            rounded-[13px]
 
             border
             border-[var(--brand-gold)]/20
 
-            bg-[#F3EBDF]
+            bg-[#F2E9DC]
 
             text-[var(--brand-gold-700)]
+
+            shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]
           "
         >
-          <Icon size={14} strokeWidth={1.45} />
+          <Icon size={15} strokeWidth={1.45} />
         </span>
 
-        <span
+        <h3
           className="
-            font-brand-sans
+            min-w-0
 
-            text-[7px]
-            font-bold
+            font-brand-display
 
-            text-[var(--brand-text-muted)]
+            text-[22px]
+            font-medium
+            leading-[1.05]
+
+            tracking-[-0.025em]
+
+            text-[var(--brand-navy)]
+
+            sm:text-[23px]
           "
         >
-          {section.number}
-        </span>
+          {section.title}
+        </h3>
       </div>
 
-      {/* TITLE */}
-
-      <h3
-        className="
-          mt-5
-
-          font-brand-display
-
-          text-[24px]
-          font-medium
-          leading-none
-
-          tracking-[-0.025em]
-
-          text-[var(--brand-navy)]
-        "
-      >
-        {section.title}
-      </h3>
-
-      {/* PREVIEW */}
+      {/* SAME TEXT EXPANDS IN PLACE — NO SECOND PARAGRAPH BELOW */}
 
       <p
-        className="
-          mt-3
+        className={`
+          mt-5
 
-          min-h-[92px]
+          whitespace-pre-line
 
           font-brand-sans
 
-          text-[9px]
+          text-[12px]
           font-medium
-          leading-[1.75]
+          leading-[1.8]
 
           text-[var(--brand-text-muted)]
 
-          sm:text-[10px]
-        "
+          sm:text-[13px]
+
+          ${isExpandable ? "line-clamp-3 group-open/story:line-clamp-none" : ""}
+        `}
       >
-        {createPreview(section.body)}
+        {section.body}
       </p>
 
-      {/* FULL CONTENT — NATIVE / NO JS */}
-
-      {section.body.length > 235 && (
-        <details
+      {isExpandable && (
+        <span
           className="
-            group/details
+            pointer-events-auto
 
-            mt-4
+            mt-5
+
+            inline-flex
+            w-fit
+
+            cursor-pointer
+
+            items-center
+
+            gap-2
+
+            rounded-full
+
+            border
+            border-[var(--brand-gold)]/20
+
+            bg-[#F5EEE4]
+
+            px-3.5
+            py-2
+
+            font-brand-sans
+
+            text-[11px]
+            font-bold
+            uppercase
+
+            tracking-[0.08em]
+
+            text-[var(--brand-gold-700)]
+
+            transition-all
+            duration-300
+
+            hover:border-[var(--brand-gold)]/35
+            hover:bg-[#EEE2D2]
           "
         >
-          <summary
-            className="
-              flex
-              cursor-pointer
-
-              list-none
-
-              items-center
-
-              gap-1.5
-
-              font-brand-sans
-
-              text-[7px]
-              font-bold
-              uppercase
-
-              tracking-[0.08em]
-
-              text-[var(--brand-gold-700)]
-
-              [&::-webkit-details-marker]:hidden
-            "
-          >
+          <span className="group-open/story:hidden">
             Read full {section.navLabel.toLowerCase()}
-            <ArrowRight
-              size={10}
-              className="
-                transition-transform
+          </span>
 
-                group-open/details:rotate-90
-              "
-            />
-          </summary>
+          <span className="hidden group-open/story:inline">Show less</span>
 
-          <p
+          <ArrowRight
+            size={11}
+            strokeWidth={1.7}
             className="
-              mt-4
+              transition-transform
+              duration-300
 
-              whitespace-pre-line
-
-              border-t
-              border-[var(--brand-navy)]/[0.06]
-
-              pt-4
-
-              font-brand-sans
-
-              text-[9px]
-              font-medium
-              leading-[1.8]
-
-              text-[var(--brand-text-muted)]
+              group-open/story:-rotate-90
             "
-          >
-            {section.body}
-          </p>
-        </details>
+          />
+        </span>
       )}
-    </div>
+    </>
+  );
+
+  const cardClassName = `
+    min-h-full
+
+    rounded-[22px]
+
+    border
+    border-[var(--brand-navy)]/[0.07]
+
+    bg-[linear-gradient(145deg,#FFFDF9_0%,#F9F3EA_100%)]
+
+    px-5
+    py-6
+
+    shadow-[0_10px_28px_rgba(70,50,30,0.055)]
+
+    transition-all
+    duration-300
+
+    hover:-translate-y-[2px]
+    hover:border-[var(--brand-gold)]/20
+    hover:shadow-[0_16px_36px_rgba(70,50,30,0.08)]
+
+    sm:px-6
+    sm:py-7
+  `;
+
+  if (!isExpandable) {
+    return (
+      <div id={section.id} className={`scroll-mt-[120px] ${cardClassName}`}>
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <details
+      id={section.id}
+      className={`group/story scroll-mt-[120px] ${cardClassName}`}
+    >
+      <summary
+        className="
+          pointer-events-none
+
+          list-none
+
+          [&::-webkit-details-marker]:hidden
+        "
+      >
+        {content}
+      </summary>
+    </details>
   );
 }

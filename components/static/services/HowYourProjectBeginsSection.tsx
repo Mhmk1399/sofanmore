@@ -176,7 +176,7 @@ export default function HowYourProjectBeginsSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -184,7 +184,7 @@ export default function HowYourProjectBeginsSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Starting Your Project
@@ -245,7 +245,7 @@ export default function HowYourProjectBeginsSection() {
 
                     font-brand-sans
 
-                    text-[10px]
+                    text-[13px]
                     font-medium
                     leading-[1.7]
 
@@ -388,7 +388,7 @@ export default function HowYourProjectBeginsSection() {
 
                         font-brand-sans
 
-                        text-[10px]
+                        text-[13px]
                         font-medium
                         leading-[1.7]
 
@@ -488,7 +488,7 @@ export default function HowYourProjectBeginsSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -523,7 +523,7 @@ export default function HowYourProjectBeginsSection() {
                   className="
                     font-brand-sans
 
-                    text-[10px]
+                    text-[13px]
                     font-medium
                     leading-[1.7]
 
@@ -574,7 +574,7 @@ export default function HowYourProjectBeginsSection() {
                   className="
                     font-brand-sans
 
-                    text-[6px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -672,7 +672,7 @@ function StepCard({
 
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.7]
 
@@ -748,7 +748,7 @@ function StepHeader({
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -844,13 +844,13 @@ function DetailItem({ label }: { label: string }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-semibold
           leading-[1.45]
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {label}
@@ -930,12 +930,12 @@ function ServiceLinks() {
             className="
               font-brand-sans
 
-              text-[8px]
+              text-[11px]
               font-semibold
 
               text-[var(--brand-navy)]
 
-              sm:text-[9px]
+              sm:text-[12px]
             "
           >
             {link.label}
@@ -1040,13 +1040,13 @@ function BriefExampleItem({ item }: { item: BriefExample }) {
 
               font-brand-sans
 
-              text-[8px]
+              text-[11px]
               font-medium
               leading-[1.6]
 
               text-white/55
 
-              sm:text-[9px]
+              sm:text-[12px]
             "
           >
             {item.text}

@@ -344,7 +344,7 @@ function AboutEyebrow() {
       <span
         className="
           font-brand-sans
-          text-[10px]
+          text-[13px]
           font-bold uppercase
           tracking-[0.18em]
           text-[var(--brand-gold-700)]
@@ -494,7 +494,7 @@ function YearsBadge({ mobile = false }: { mobile?: boolean }) {
           className={`
             font-brand-sans font-bold uppercase tracking-[0.12em]
             text-[var(--brand-gold)]
-            ${mobile ? "text-[10px]" : "text-[12px]"}
+            ${mobile ? "text-[13px]" : "text-[12px]"}
           `}
         >
           Years

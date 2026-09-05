@@ -192,7 +192,7 @@ export default function BeforeYouReplaceSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -200,7 +200,7 @@ export default function BeforeYouReplaceSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Before Replacing
@@ -344,7 +344,7 @@ export default function BeforeYouReplaceSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -422,7 +422,7 @@ export default function BeforeYouReplaceSection() {
                     className="
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -461,7 +461,7 @@ export default function BeforeYouReplaceSection() {
 
                     font-brand-sans
 
-                    text-[10px]
+                    text-[13px]
                     font-medium
                     leading-[1.65]
 
@@ -574,7 +574,7 @@ function RestorationAssessmentPanel() {
               className="
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -679,7 +679,7 @@ function RestorationAssessmentPanel() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -792,13 +792,13 @@ function RestorationReason({
 
               font-brand-sans
 
-              text-[9px]
+              text-[12px]
               font-medium
               leading-[1.6]
 
               text-[var(--brand-text-muted)]
 
-              sm:text-[10px]
+              sm:text-[13px]
             "
           >
             {text}
@@ -912,13 +912,13 @@ function AssessmentStep({
 
             font-brand-sans
 
-            text-[9px]
+            text-[12px]
             font-medium
             leading-[1.6]
 
             text-[var(--brand-text-muted)]
 
-            sm:text-[10px]
+            sm:text-[13px]
           "
         >
           {text}

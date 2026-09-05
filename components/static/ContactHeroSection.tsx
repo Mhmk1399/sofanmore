@@ -573,7 +573,7 @@ function WorkshopMapCard({ mobile = false }: { mobile?: boolean }) {
               <span
                 className="
                   font-brand-sans
-                  text-[8px]
+                  text-[11px]
                   font-bold
                   uppercase
                   tracking-[0.2em]
@@ -606,7 +606,7 @@ function WorkshopMapCard({ mobile = false }: { mobile?: boolean }) {
                   className="
                     mt-1.5
                     font-brand-sans
-                    text-[9px]
+                    text-[12px]
                     leading-[1.45]
 
                     text-[var(--brand-text-muted)]
@@ -640,7 +640,7 @@ function WorkshopMapCard({ mobile = false }: { mobile?: boolean }) {
               py-2.5
 
               font-brand-sans
-              text-[8px]
+              text-[11px]
               font-bold
               uppercase
               tracking-[0.1em]
@@ -762,7 +762,7 @@ function WorkshopMapCard({ mobile = false }: { mobile?: boolean }) {
               <span
                 className="
                   font-brand-sans
-                  text-[7px]
+                  text-[13px]
                   font-bold
                   uppercase
                   tracking-[0.1em]
@@ -802,7 +802,7 @@ function WorkshopMapCard({ mobile = false }: { mobile?: boolean }) {
               px-4
 
               font-brand-sans
-              text-[9px]
+              text-[12px]
               font-bold
               uppercase
               tracking-[0.12em]
@@ -945,7 +945,7 @@ function DesktopContactCard({ item }: { item: ContactItem }) {
           <div
             className="
               font-brand-sans
-              text-[9px]
+              text-[12px]
               font-bold
               uppercase
               tracking-[0.22em]
@@ -1062,7 +1062,7 @@ function MobileContactHero() {
             <span
               className="
                 font-brand-sans
-                text-[9px]
+                text-[12px]
                 font-bold
                 uppercase
                 tracking-[0.24em]
@@ -1344,7 +1344,7 @@ function MobileContactCard({ item }: { item: ContactItem }) {
           <div
             className="
               font-brand-sans
-              text-[8px]
+              text-[11px]
               font-bold
               uppercase
               tracking-[0.2em]

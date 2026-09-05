@@ -185,7 +185,7 @@ export default function DesignedAroundYourSpaceSection({
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -193,7 +193,7 @@ export default function DesignedAroundYourSpaceSection({
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Space First
@@ -271,7 +271,7 @@ export default function DesignedAroundYourSpaceSection({
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -404,7 +404,7 @@ export default function DesignedAroundYourSpaceSection({
                     className="
                       font-brand-sans
 
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -522,7 +522,7 @@ export default function DesignedAroundYourSpaceSection({
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -625,7 +625,7 @@ function SpaceFirstPanel() {
 
                 font-brand-sans
 
-                text-[8px]
+                text-[11px]
                 font-bold
 
                 text-[var(--brand-gold)]
@@ -639,7 +639,7 @@ function SpaceFirstPanel() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -801,7 +801,7 @@ function SpaceFirstPanel() {
 
                 font-brand-sans
 
-                text-[8px]
+                text-[11px]
                 font-bold
 
                 text-[var(--brand-navy)]
@@ -815,7 +815,7 @@ function SpaceFirstPanel() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -852,13 +852,13 @@ function SpaceFirstPanel() {
 
                   font-brand-sans
 
-                  text-[9px]
+                  text-[12px]
                   font-medium
                   leading-[1.65]
 
                   text-white/58
 
-                  sm:text-[10px]
+                  sm:text-[13px]
                 "
               >
                 Layout, bespoke sofas,
@@ -928,13 +928,13 @@ function SpaceInput({
         className="
           font-brand-sans
 
-          text-[7px]
+          text-[13px]
           font-bold
           leading-[1.3]
 
           text-[var(--brand-navy)]
 
-          sm:text-[8px]
+          sm:text-[11px]
         "
       >
         {label}
@@ -1010,13 +1010,13 @@ function DesignExample({
 
           font-brand-sans
 
-          text-[9px]
+          text-[12px]
           font-medium
           leading-[1.65]
 
           text-[var(--brand-text-muted)]
 
-          sm:text-[10px]
+          sm:text-[13px]
         "
       >
         {text}

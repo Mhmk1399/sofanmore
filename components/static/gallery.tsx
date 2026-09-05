@@ -692,7 +692,7 @@ function GalleryHeader() {
             className="
               font-brand-sans
 
-              text-[8px]
+              text-[11px]
               font-bold
               uppercase
 
@@ -700,7 +700,7 @@ function GalleryHeader() {
 
               text-[var(--brand-gold-700)]
 
-              sm:text-[9px]
+              sm:text-[12px]
             "
           >
             Our Work
@@ -753,7 +753,7 @@ function GalleryHeader() {
           className="
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.75]
 
@@ -772,7 +772,7 @@ function GalleryHeader() {
 
             font-brand-sans
 
-            text-[7px]
+            text-[13px]
             font-bold
             uppercase
 
@@ -966,7 +966,7 @@ function GalleryTile({
 
             font-brand-sans
 
-            text-[7px]
+            text-[13px]
             font-bold
             uppercase
 
@@ -1045,7 +1045,7 @@ function GalleryTile({
           className="
             font-brand-sans
 
-            text-[7px]
+            text-[13px]
             font-bold
             uppercase
 
@@ -1061,7 +1061,7 @@ function GalleryTile({
           className="
             font-brand-sans
 
-            text-[7px]
+            text-[13px]
             font-bold
 
             text-[var(--brand-gold-700)]
@@ -1214,7 +1214,7 @@ function GalleryLightbox({
             className="
               font-brand-sans
 
-              text-[7px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -1456,7 +1456,7 @@ function GalleryCounter({
 
         font-brand-sans
 
-        text-[9px]
+        text-[12px]
         font-bold
 
         tracking-[0.08em]

@@ -478,7 +478,7 @@ function DesktopContactForm() {
                 className="
                   mt-2
                   font-brand-sans
-                  text-[7px]
+                  text-[13px]
                   font-bold
                   uppercase
                   tracking-[0.34em]
@@ -523,7 +523,7 @@ function DesktopContactForm() {
           <p
             className="
               font-brand-sans
-              text-[9px]
+              text-[12px]
               font-bold
               uppercase
               tracking-[0.28em]
@@ -641,7 +641,7 @@ function DesktopContactForm() {
               <p
                 className="
                   font-brand-sans
-                  text-[7px]
+                  text-[13px]
                   font-bold
                   uppercase
                   tracking-[0.13em]
@@ -655,7 +655,7 @@ function DesktopContactForm() {
                 className="
                   mt-1
                   font-brand-sans
-                  text-[7px]
+                  text-[13px]
                   text-[var(--brand-text-muted)]
                 "
               >
@@ -1288,7 +1288,7 @@ function ContactConsentFields({
   compact?: boolean;
   className?: string;
 }) {
-  const textSize = compact ? "text-[10px]" : "text-[11px]";
+  const textSize = compact ? "text-[13px]" : "text-[11px]";
   const privacyId = `${idPrefix}-privacy-consent`;
   const privacyErrorId = `${idPrefix}-privacy-error`;
   const marketingId = `${idPrefix}-marketing-consent`;
@@ -1343,7 +1343,7 @@ function ContactConsentFields({
       {errors.privacyConsent && (
         <p
           id={privacyErrorId}
-          className="font-brand-sans text-[10px] font-semibold text-red-700"
+          className="font-brand-sans text-[13px] font-semibold text-red-700"
         >
           {errors.privacyConsent}
         </p>
@@ -1424,7 +1424,7 @@ function MobileContactForm() {
           <p
             className="
               font-brand-sans
-              text-[8px]
+              text-[11px]
               font-bold
               uppercase
               tracking-[0.27em]
@@ -1590,7 +1590,7 @@ function MobileContactForm() {
               {form.errors.message && (
                 <p
                   id="mobile-message-error"
-                  className="mt-2 font-brand-sans text-[10px] font-semibold text-red-700"
+                  className="mt-2 font-brand-sans text-[13px] font-semibold text-red-700"
                 >
                   {form.errors.message}
                 </p>
@@ -1767,7 +1767,7 @@ function MobileHeader() {
           className="
             mt-1
             font-brand-sans
-            text-[6px]
+            text-[13px]
             font-bold
             uppercase
             tracking-[0.34em]
@@ -1876,7 +1876,7 @@ function MobileField({
       {error && (
         <p
           id={`${id}-error`}
-          className="mt-2 font-brand-sans text-[10px] font-semibold text-red-700"
+          className="mt-2 font-brand-sans text-[13px] font-semibold text-red-700"
         >
           {error}
         </p>

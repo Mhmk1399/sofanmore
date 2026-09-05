@@ -130,7 +130,7 @@ export default function CommercialSofasRealBusinessSpacesSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -138,7 +138,7 @@ export default function CommercialSofasRealBusinessSpacesSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Designed for Business
@@ -351,7 +351,7 @@ function SimpleComparison() {
               className="
                 font-brand-sans
 
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
 
@@ -442,7 +442,7 @@ function SimpleComparison() {
                 className="
                   font-brand-sans
 
-                  text-[7px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -478,7 +478,7 @@ function SimpleComparison() {
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.6]
 
@@ -586,7 +586,7 @@ function SimpleComparison() {
                 className="
                   font-brand-sans
 
-                  text-[7px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -622,7 +622,7 @@ function SimpleComparison() {
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.6]
 
@@ -658,7 +658,7 @@ function SimpleComparison() {
 
               font-brand-sans
 
-              text-[7px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -719,7 +719,7 @@ function SimpleComparison() {
 
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -727,7 +727,7 @@ function SimpleComparison() {
 
                       text-[var(--brand-navy)]
 
-                      sm:text-[7px]
+                      sm:text-[13px]
                     "
                 >
                   {label}

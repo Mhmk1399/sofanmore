@@ -161,7 +161,7 @@ export default function WorkshopVisitProcessSection() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -169,7 +169,7 @@ export default function WorkshopVisitProcessSection() {
 
                     text-[var(--brand-gold-700)]
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
                 >
                   Your Workshop Visit
@@ -212,7 +212,7 @@ export default function WorkshopVisitProcessSection() {
 
                     font-brand-sans
 
-                    text-[10px]
+                    text-[13px]
                     font-medium
                     leading-[1.75]
 
@@ -367,7 +367,7 @@ function VisitStep({ step, isLast }: { step: WorkshopStep; isLast: boolean }) {
                   className="
                     font-brand-sans
 
-                    text-[6px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -422,13 +422,13 @@ function VisitStep({ step, isLast }: { step: WorkshopStep; isLast: boolean }) {
 
                 font-brand-sans
 
-                text-[9px]
+                text-[12px]
                 font-medium
                 leading-[1.65]
 
                 text-white/75
 
-                sm:text-[10px]
+                sm:text-[13px]
               "
             >
               {step.description}
@@ -443,13 +443,13 @@ function VisitStep({ step, isLast }: { step: WorkshopStep; isLast: boolean }) {
 
                   font-brand-sans
 
-                  text-[8px]
+                  text-[11px]
                   font-medium
                   leading-[1.6]
 
                   text-white/50
 
-                  sm:text-[9px]
+                  sm:text-[12px]
                 "
               >
                 {step.note}
@@ -571,13 +571,13 @@ function VisitStep({ step, isLast }: { step: WorkshopStep; isLast: boolean }) {
 
               font-brand-sans
 
-              text-[9px]
+              text-[12px]
               font-medium
               leading-[1.65]
 
               text-[var(--brand-text-muted)]
 
-              sm:text-[10px]
+              sm:text-[13px]
             "
           >
             {step.description}
@@ -592,13 +592,13 @@ function VisitStep({ step, isLast }: { step: WorkshopStep; isLast: boolean }) {
 
                 font-brand-sans
 
-                text-[8px]
+                text-[11px]
                 font-medium
                 leading-[1.6]
 
                 text-[var(--brand-text-muted)]/75
 
-                sm:text-[9px]
+                sm:text-[12px]
               "
             >
               {step.note}
@@ -648,12 +648,12 @@ function SummaryPoint({ text }: { text: string }) {
         className="
           font-brand-sans
 
-          text-[7px]
+          text-[13px]
           font-semibold
 
           text-[var(--brand-navy)]
 
-          sm:text-[8px]
+          sm:text-[11px]
         "
       >
         {text}

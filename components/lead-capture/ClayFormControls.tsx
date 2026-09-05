@@ -84,7 +84,7 @@ function FieldChrome({
       <label
         htmlFor={id}
         className={`block font-brand-sans font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)] ${
-          isAdmin ? "text-[10px] text-[var(--brand-navy)]/70" : "text-[11px]"
+          isAdmin ? "text-[13px] text-[var(--brand-navy)]/70" : "text-[11px]"
         }`}
       >
         {label}
@@ -98,7 +98,7 @@ function FieldChrome({
       {hint && !error && (
         <p
           id={`${id}-hint`}
-          className="mt-2 font-brand-sans text-[10px] font-semibold leading-[1.45] text-[var(--brand-text-muted)]"
+          className="mt-2 font-brand-sans text-[13px] font-semibold leading-[1.45] text-[var(--brand-text-muted)]"
         >
           {hint}
         </p>
@@ -107,7 +107,7 @@ function FieldChrome({
       {error && (
         <p
           id={`${id}-error`}
-          className="mt-2 flex items-start gap-1.5 font-brand-sans text-[10px] font-bold leading-[1.45] text-[#9b2c2c]"
+          className="mt-2 flex items-start gap-1.5 font-brand-sans text-[13px] font-bold leading-[1.45] text-[#9b2c2c]"
         >
           <AlertTriangle
             className="mt-[1px] shrink-0"
@@ -759,7 +759,7 @@ export function ClayDatePicker({
                   setOpen(false);
                   buttonRef.current?.focus();
                 }}
-                className="font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-text-muted)] transition-colors hover:text-[var(--brand-navy)]"
+                className="font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--brand-text-muted)] transition-colors hover:text-[var(--brand-navy)]"
               >
                 Clear
               </button>
@@ -768,8 +768,8 @@ export function ClayDatePicker({
                 onClick={() => chooseDate(new Date())}
                 className={
                   isAdmin
-                    ? "rounded-lg bg-[var(--brand-navy)] px-3 py-1.5 font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[var(--brand-navy)]/90"
-                    : "rounded-full bg-[var(--brand-gold)]/18 px-3 py-2 font-brand-sans text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)] transition-colors hover:bg-[var(--brand-gold)]/28"
+                    ? "rounded-lg bg-[var(--brand-navy)] px-3 py-1.5 font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[var(--brand-navy)]/90"
+                    : "rounded-full bg-[var(--brand-gold)]/18 px-3 py-2 font-brand-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--brand-navy)] transition-colors hover:bg-[var(--brand-gold)]/28"
                 }
               >
                 Today
@@ -872,7 +872,7 @@ export function ClayRadioGroup({
       {hint && !error && (
         <p
           id={`${groupId}-hint`}
-          className="mt-2 font-brand-sans text-[10px] font-semibold leading-[1.45] text-[var(--brand-text-muted)]"
+          className="mt-2 font-brand-sans text-[13px] font-semibold leading-[1.45] text-[var(--brand-text-muted)]"
         >
           {hint}
         </p>
@@ -881,7 +881,7 @@ export function ClayRadioGroup({
       {error && (
         <p
           id={`${groupId}-error`}
-          className="mt-2 flex items-start gap-1.5 font-brand-sans text-[10px] font-bold leading-[1.45] text-[#9b2c2c]"
+          className="mt-2 flex items-start gap-1.5 font-brand-sans text-[13px] font-bold leading-[1.45] text-[#9b2c2c]"
         >
           <AlertTriangle className="mt-[1px] shrink-0" size={12} aria-hidden />
           {error}
@@ -949,7 +949,7 @@ export function ClayCheckbox({
       {hint && !error && (
         <p
           id={`${id}-hint`}
-          className="mt-2 font-brand-sans text-[10px] font-semibold leading-[1.45] text-[var(--brand-text-muted)]"
+          className="mt-2 font-brand-sans text-[13px] font-semibold leading-[1.45] text-[var(--brand-text-muted)]"
         >
           {hint}
         </p>
@@ -958,7 +958,7 @@ export function ClayCheckbox({
       {error && (
         <p
           id={`${id}-error`}
-          className="mt-2 flex items-start gap-1.5 font-brand-sans text-[10px] font-bold leading-[1.45] text-[#9b2c2c]"
+          className="mt-2 flex items-start gap-1.5 font-brand-sans text-[13px] font-bold leading-[1.45] text-[#9b2c2c]"
         >
           <AlertTriangle className="mt-[1px] shrink-0" size={12} aria-hidden />
           {error}
@@ -1066,7 +1066,7 @@ export function ClayCheckboxGroup({
       {hint && !error && (
         <p
           id={`${groupId}-hint`}
-          className="mt-2 font-brand-sans text-[10px] font-semibold leading-[1.45] text-[var(--brand-text-muted)]"
+          className="mt-2 font-brand-sans text-[13px] font-semibold leading-[1.45] text-[var(--brand-text-muted)]"
         >
           {hint}
         </p>
@@ -1075,7 +1075,7 @@ export function ClayCheckboxGroup({
       {error && (
         <p
           id={`${groupId}-error`}
-          className="mt-2 flex items-start gap-1.5 font-brand-sans text-[10px] font-bold leading-[1.45] text-[#9b2c2c]"
+          className="mt-2 flex items-start gap-1.5 font-brand-sans text-[13px] font-bold leading-[1.45] text-[#9b2c2c]"
         >
           <AlertTriangle className="mt-[1px] shrink-0" size={12} aria-hidden />
           {error}
@@ -1096,7 +1096,7 @@ export function FormSection({ eyebrow, title, children }: FormSectionProps) {
     <section className="border-t border-[var(--brand-navy)]/8 pt-5 first:border-t-0 first:pt-0">
       <div className="mb-4">
         {eyebrow && (
-          <p className="font-brand-sans text-[8px] font-bold uppercase tracking-[0.2em] text-[var(--brand-gold-700)]">
+          <p className="font-brand-sans text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--brand-gold-700)]">
             {eyebrow}
           </p>
         )}
@@ -1181,10 +1181,10 @@ export function UploadProgressItem({
               <p className="truncate font-brand-sans text-[12px] font-bold text-[var(--brand-navy)]">
                 {item.file.name}
               </p>
-              <p className="mt-1 font-brand-sans text-[10px] font-bold text-[var(--brand-gold-700)]">
+              <p className="mt-1 font-brand-sans text-[13px] font-bold text-[var(--brand-gold-700)]">
                 {Math.max(Math.min(item.progress, 100), 0)}%
               </p>
-              <p className="mt-1 font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+              <p className="mt-1 font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
                 {formatFileSize(item.file.size)} · {uploadStatusLabel(item.status)}
               </p>
             </div>
@@ -1222,7 +1222,7 @@ export function UploadProgressItem({
           </div>
 
           {item.error && (
-            <p className="mt-2 font-brand-sans text-[10px] font-bold leading-[1.45] text-[#9b2c2c]">
+            <p className="mt-2 font-brand-sans text-[13px] font-bold leading-[1.45] text-[#9b2c2c]">
               {item.error}
             </p>
           )}
@@ -1312,7 +1312,7 @@ export function ClayFileDropzone({
         >
           {label}
         </label>
-        <span className="font-brand-sans text-[10px] font-bold text-[var(--brand-text-muted)]">
+        <span className="font-brand-sans text-[13px] font-bold text-[var(--brand-text-muted)]">
           {items.length}/{maxFiles}
         </span>
       </div>
@@ -1418,7 +1418,7 @@ export function ClayFileDropzone({
       {error && (
         <p
           id={`${id}-error`}
-          className="mt-2 flex items-start gap-1.5 font-brand-sans text-[10px] font-bold leading-[1.45] text-[#9b2c2c]"
+          className="mt-2 flex items-start gap-1.5 font-brand-sans text-[13px] font-bold leading-[1.45] text-[#9b2c2c]"
         >
           <AlertTriangle className="mt-[1px] shrink-0" size={12} aria-hidden />
           {error}
@@ -1497,7 +1497,7 @@ export function FormSuccessState({
         <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--brand-navy)] text-[var(--brand-gold)] shadow-[inset_2px_2px_3px_rgba(255,255,255,0.08)]">
           <CheckCircle2 size={28} strokeWidth={1.6} />
         </span>
-        <p className="mt-6 font-brand-sans text-[8px] font-bold uppercase tracking-[0.22em] text-[var(--brand-gold-700)]">
+        <p className="mt-6 font-brand-sans text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--brand-gold-700)]">
           {eyebrow}
         </p>
         <h3 className="mx-auto mt-3 max-w-[620px] font-brand-display text-[34px] font-semibold leading-[1.03] text-[var(--brand-navy)] sm:text-[44px]">
@@ -1507,7 +1507,7 @@ export function FormSuccessState({
           {message}
         </p>
         {leadId && (
-          <p className="mx-auto mt-5 inline-flex rounded-full bg-[var(--brand-gold)]/12 px-4 py-2 font-brand-sans text-[10px] font-bold uppercase tracking-[0.13em] text-[var(--brand-gold-700)]">
+          <p className="mx-auto mt-5 inline-flex rounded-full bg-[var(--brand-gold)]/12 px-4 py-2 font-brand-sans text-[13px] font-bold uppercase tracking-[0.13em] text-[var(--brand-gold-700)]">
             Reference {leadId.slice(-8).toUpperCase()}
           </p>
         )}

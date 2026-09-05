@@ -148,7 +148,7 @@ export default function WorkshopCommercialSeatingSection() {
                   className="
                     font-brand-sans
 
-                    text-[7px]
+                    text-[13px]
                     font-bold
                     uppercase
 
@@ -156,7 +156,7 @@ export default function WorkshopCommercialSeatingSection() {
 
                     text-[var(--brand-gold-700)]
 
-                    sm:text-[8px]
+                    sm:text-[11px]
                   "
                 >
                   Commercial Seating · Workshop Consultation
@@ -226,7 +226,7 @@ export default function WorkshopCommercialSeatingSection() {
 
                   font-brand-sans
 
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   leading-[1.75]
 
@@ -320,7 +320,7 @@ export default function WorkshopCommercialSeatingSection() {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -425,7 +425,7 @@ export default function WorkshopCommercialSeatingSection() {
                       className="
                         font-brand-sans
 
-                        text-[6px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -546,12 +546,12 @@ function ProjectDetailItem({ detail }: { detail: ProjectDetail }) {
 
               font-brand-sans
 
-              text-[8px]
+              text-[11px]
               font-bold
 
               text-[var(--brand-navy)]
 
-              sm:text-[9px]
+              sm:text-[12px]
             "
           >
             {detail.label}
@@ -563,13 +563,13 @@ function ProjectDetailItem({ detail }: { detail: ProjectDetail }) {
 
               font-brand-sans
 
-              text-[7px]
+              text-[13px]
               font-medium
               leading-[1.5]
 
               text-[var(--brand-text-muted)]
 
-              sm:text-[8px]
+              sm:text-[11px]
             "
           >
             {detail.description}
@@ -590,7 +590,7 @@ function ProjectType({ label }: { label: string }) {
       className="
         font-brand-sans
 
-        text-[7px]
+        text-[13px]
         font-bold
         uppercase
 
@@ -598,7 +598,7 @@ function ProjectType({ label }: { label: string }) {
 
         text-[var(--brand-text-muted)]
 
-        sm:text-[8px]
+        sm:text-[11px]
       "
     >
       {label}

@@ -125,12 +125,12 @@ export default function CustomsofaForYourSpaceSection({
                   <span
                     className="
                       font-brand-sans
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
                       tracking-[0.25em]
                       text-[var(--brand-gold-700)]
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Designed Around You
@@ -233,7 +233,7 @@ export default function CustomsofaForYourSpaceSection({
                   <span
                     className="
                       font-brand-sans
-                      text-[7px]
+                      text-[13px]
                       font-bold
                       uppercase
                       tracking-[0.18em]
@@ -343,7 +343,7 @@ function ImageStage() {
               className="
                 whitespace-nowrap
                 font-brand-sans
-                text-[7px]
+                text-[13px]
                 font-bold
                 uppercase
                 tracking-[0.17em]
@@ -370,7 +370,7 @@ function ImageStage() {
             <span
               className="
                 font-brand-sans
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
                 tracking-[0.16em]
@@ -444,7 +444,7 @@ function ImageStage() {
               <span
                 className="
                   font-brand-sans
-                  text-[7px]
+                  text-[13px]
                   font-bold
                   uppercase
                   tracking-[0.1em]
@@ -513,12 +513,12 @@ function FloatingDetail({
           className="
             whitespace-nowrap
             font-brand-sans
-            text-[7px]
+            text-[13px]
             font-bold
             uppercase
             tracking-[0.12em]
             text-[var(--brand-navy)]
-            sm:text-[8px]
+            sm:text-[11px]
           "
         >
           {label}

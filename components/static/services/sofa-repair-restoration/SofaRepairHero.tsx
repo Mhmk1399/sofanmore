@@ -148,7 +148,7 @@ export default function SofaRepairHero({ id = "service" }: { id?: string }) {
 
                         font-brand-sans
 
-                        text-[7px]
+                        text-[13px]
                         font-bold
                         uppercase
 
@@ -156,7 +156,7 @@ export default function SofaRepairHero({ id = "service" }: { id?: string }) {
 
                         text-[var(--brand-gold-700)]
 
-                        sm:text-[8px]
+                        sm:text-[11px]
                       "
                     >
                       Sofa Repair & Restoration
@@ -169,7 +169,7 @@ export default function SofaRepairHero({ id = "service" }: { id?: string }) {
 
                         font-brand-sans
 
-                        text-[9px]
+                        text-[12px]
                         font-medium
 
                         text-[var(--brand-text-muted)]
@@ -301,7 +301,7 @@ export default function SofaRepairHero({ id = "service" }: { id?: string }) {
                     className="
                       font-brand-sans
 
-                      text-[6px]
+                      text-[13px]
                       font-bold
                       uppercase
 
@@ -455,7 +455,7 @@ function HeroPoint({ label }: { label: string }) {
         className="
           font-brand-sans
 
-          text-[8px]
+          text-[11px]
           font-bold
           uppercase
 
@@ -463,7 +463,7 @@ function HeroPoint({ label }: { label: string }) {
 
           text-[var(--brand-navy)]
 
-          sm:text-[9px]
+          sm:text-[12px]
         "
       >
         {label}
@@ -590,7 +590,7 @@ function RepairHeroVisual() {
 
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -643,7 +643,7 @@ function RepairHeroVisual() {
               className="
                 font-brand-sans
 
-                text-[6px]
+                text-[13px]
                 font-bold
                 uppercase
 

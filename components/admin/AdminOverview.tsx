@@ -115,7 +115,7 @@ function MetricCard({
   return (
     <div className="min-w-0 rounded-xl border border-white/70 bg-white/50 p-3 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
       <div className="flex items-center justify-between gap-2">
-        <p className="truncate font-brand-sans text-[10px] font-bold uppercase tracking-[0.08em] text-[var(--brand-text-muted)]">
+        <p className="truncate font-brand-sans text-[13px] font-bold uppercase tracking-[0.08em] text-[var(--brand-text-muted)]">
           {label}
         </p>
         <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[var(--brand-navy)] text-[var(--brand-gold)]">
@@ -125,7 +125,7 @@ function MetricCard({
       <p className="mt-1.5 truncate font-brand-sans text-[22px] font-bold leading-none text-[var(--brand-navy)] sm:text-[24px]">
         {value}
       </p>
-      <p className="mt-1 truncate font-brand-sans text-[10px] font-semibold text-[var(--brand-text-muted)]">
+      <p className="mt-1 truncate font-brand-sans text-[13px] font-semibold text-[var(--brand-text-muted)]">
         {detail}
       </p>
     </div>
@@ -162,10 +162,10 @@ function TrendChart({ analytics }: { analytics: AnalyticsResponse | null }) {
                     className="w-full max-w-[18px] rounded-t-md bg-gradient-to-t from-[var(--brand-navy)] to-[var(--brand-navy)]/70 transition-opacity group-hover:opacity-80"
                     style={{ height: `${height}%` }}
                   />
-                  <div className="pointer-events-none absolute bottom-[calc(100%+4px)] left-1/2 hidden -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--brand-navy)] px-2 py-1 font-brand-sans text-[9px] font-bold text-white shadow group-hover:block">
+                  <div className="pointer-events-none absolute bottom-[calc(100%+4px)] left-1/2 hidden -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--brand-navy)] px-2 py-1 font-brand-sans text-[12px] font-bold text-white shadow group-hover:block">
                     {formatDate(item.date)}: {item.count}
                   </div>
-                  <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap font-brand-sans text-[8px] font-semibold text-[var(--brand-text-muted)]">
+                  <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap font-brand-sans text-[11px] font-semibold text-[var(--brand-text-muted)]">
                     {item.date.slice(8)}
                   </span>
                 </div>
@@ -207,7 +207,7 @@ function ServiceBreakdown({
                     row.service}
                 </span>
               </span>
-              <span className="shrink-0 font-brand-sans text-[10px] font-bold text-[var(--brand-text-muted)]">
+              <span className="shrink-0 font-brand-sans text-[13px] font-bold text-[var(--brand-text-muted)]">
                 {formatNumber(row.count)}
               </span>
             </div>
@@ -254,7 +254,7 @@ function StatusBreakdown({
               <p className="mt-1.5 font-brand-sans text-[18px] font-bold leading-none">
                 {formatNumber(row.count)}
               </p>
-              <p className="mt-0.5 font-brand-sans text-[9px] font-semibold text-[var(--brand-text-muted)]">
+              <p className="mt-0.5 font-brand-sans text-[12px] font-semibold text-[var(--brand-text-muted)]">
                 {total > 0 ? formatPercent(row.count / total) : "0%"}
               </p>
             </div>
@@ -287,7 +287,7 @@ function RecentLeads({ analytics }: { analytics: AnalyticsResponse | null }) {
                 <p className="truncate font-brand-sans text-[12px] font-bold text-[var(--brand-navy)]">
                   {lead.name}
                 </p>
-                <p className="truncate font-brand-sans text-[9px] font-semibold text-[var(--brand-text-muted)]">
+                <p className="truncate font-brand-sans text-[12px] font-semibold text-[var(--brand-text-muted)]">
                   {services.find((s) => s.value === lead.service)?.shortLabel} ·{" "}
                   {formatDateTime(lead.createdAt)}
                 </p>

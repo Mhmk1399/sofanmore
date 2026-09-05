@@ -179,7 +179,7 @@ export default function WhichServiceIsRightSection() {
                     className="
                       font-brand-sans
 
-                      text-[8px]
+                      text-[11px]
                       font-bold
                       uppercase
 
@@ -187,7 +187,7 @@ export default function WhichServiceIsRightSection() {
 
                       text-[var(--brand-gold-700)]
 
-                      sm:text-[9px]
+                      sm:text-[12px]
                     "
                   >
                     Find Your Starting Point
@@ -251,7 +251,7 @@ export default function WhichServiceIsRightSection() {
 
                     font-brand-sans
 
-                    text-[10px]
+                    text-[13px]
                     font-medium
                     leading-[1.7]
 
@@ -401,7 +401,7 @@ function ServiceChoiceCard({ choice }: { choice: ServiceChoice }) {
             className="
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
@@ -488,7 +488,7 @@ function ServiceChoiceCard({ choice }: { choice: ServiceChoice }) {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -533,7 +533,7 @@ function ServiceChoiceCard({ choice }: { choice: ServiceChoice }) {
 
             font-brand-sans
 
-            text-[10px]
+            text-[13px]
             font-medium
             leading-[1.7]
 
@@ -648,7 +648,7 @@ function MultiServicePanel() {
                 className="
                   font-brand-sans
 
-                  text-[6px]
+                  text-[13px]
                   font-bold
                   uppercase
 
@@ -690,7 +690,7 @@ function MultiServicePanel() {
 
               font-brand-sans
 
-              text-[10px]
+              text-[13px]
               font-medium
               leading-[1.7]
 
@@ -849,7 +849,7 @@ function OverlapExample({
 
               font-brand-sans
 
-              text-[6px]
+              text-[13px]
               font-bold
               uppercase
 
