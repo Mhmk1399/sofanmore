@@ -580,7 +580,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 
       {/* Text */}
       <div className="mt-4">
-        <h3
+        <h2
           className="
             font-brand-display
             text-[18px]
@@ -591,7 +591,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           "
         >
           {service.title}
-        </h3>
+        </h2>
 
         <p
           className="

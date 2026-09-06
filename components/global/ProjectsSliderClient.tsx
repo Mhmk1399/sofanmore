@@ -812,7 +812,7 @@ export default function ProjectsSliderClient({
 
             <span
               className="
-                text-[var(--brand-text-muted)]/55
+                text-[var(--brand-text-muted)]
               "
             >
               {String(projects.length).padStart(2, "0")}

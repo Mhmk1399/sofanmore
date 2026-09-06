@@ -63,25 +63,11 @@ export default async function HomePage() {
       <ServicesSection />
 
       {/* Below fold */}
-      <div className="home-deferred-section">
-        <WhyChooseSection />
-      </div>
-
-      <div className="home-deferred-section">
-        <LuxuryCtaBanner />
-      </div>
-
-      <div className="home-deferred-section">
-        {/* <LatestListingsSection /> */}
-      </div>
-
-      <div className="home-deferred-section">
-        <FAQSection id="faq" />
-      </div>
-
-      <div className="home-deferred-section">
-        <HomeSeoDescriptionSection />
-      </div>
+      <WhyChooseSection />
+      <LuxuryCtaBanner />
+      {/* <LatestListingsSection /> */}
+      <FAQSection id="faq" />
+      <HomeSeoDescriptionSection />
     </main>
   );
 }
