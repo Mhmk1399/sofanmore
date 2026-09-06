@@ -12,12 +12,7 @@ import {
   MapPin,
 } from "lucide-react";
 
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import type {
   KeyboardEvent,
@@ -25,9 +20,7 @@ import type {
   ReactNode,
 } from "react";
 
-import type {
-  ProjectSliderItem,
-} from "./ProjectsSliderSection";
+import type { ProjectSliderItem } from "./ProjectsSliderSection";
 
 /* =========================================================
    TYPES
@@ -68,27 +61,12 @@ const DRAG_FOLLOW_FACTOR = 0.27;
    HELPERS
 ========================================================= */
 
-function clamp(
-  value: number,
-  min: number,
-  max: number,
-) {
-  return Math.min(
-    Math.max(value, min),
-    max,
-  );
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max);
 }
 
-function easeOutQuint(
-  progress: number,
-) {
-  return (
-    1 -
-    Math.pow(
-      1 - progress,
-      5,
-    )
-  );
+function easeOutQuint(progress: number) {
+  return 1 - Math.pow(1 - progress, 5);
 }
 
 /* =========================================================
@@ -98,160 +76,110 @@ function easeOutQuint(
 export default function ProjectsSliderClient({
   projects,
 }: ProjectsSliderClientProps) {
-  const sliderRef =
-    useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
-  const navigationFrameRef =
-    useRef<number | null>(
-      null,
-    );
+  const navigationFrameRef = useRef<number | null>(null);
 
-  const dragFrameRef =
-    useRef<number | null>(
-      null,
-    );
+  const dragFrameRef = useRef<number | null>(null);
 
-  const scrollFrameRef =
-    useRef<number | null>(
-      null,
-    );
+  const scrollFrameRef = useRef<number | null>(null);
 
-  const dragRef =
-    useRef<DragState>({
-      active: false,
-      moved: false,
+  const dragRef = useRef<DragState>({
+    active: false,
+    moved: false,
 
-      pointerId: null,
+    pointerId: null,
 
-      startX: 0,
-      currentX: 0,
+    startX: 0,
+    currentX: 0,
 
-      startScrollLeft: 0,
-      targetScrollLeft: 0,
+    startScrollLeft: 0,
+    targetScrollLeft: 0,
 
-      startIndex: 0,
-    });
+    startIndex: 0,
+  });
 
-  const [activeIndex, setActiveIndex] =
-    useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const [isDragging, setIsDragging] =
-    useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
-  const [isAnimating, setIsAnimating] =
-    useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   /* =======================================================
      GET SLIDES
   ======================================================= */
 
-  const getSlides =
-    useCallback(() => {
-      const container =
-        sliderRef.current;
+  const getSlides = useCallback(() => {
+    const container = sliderRef.current;
 
-      if (!container) {
-        return [];
-      }
+    if (!container) {
+      return [];
+    }
 
-      return Array.from(
-        container.querySelectorAll<HTMLElement>(
-          "[data-project-slide]",
-        ),
-      );
-    }, []);
+    return Array.from(
+      container.querySelectorAll<HTMLElement>("[data-project-slide]"),
+    );
+  }, []);
 
   /* =======================================================
      CANCEL NAVIGATION
   ======================================================= */
 
-  const cancelNavigation =
-    useCallback(() => {
-      if (
-        navigationFrameRef.current ===
-        null
-      ) {
-        return;
-      }
+  const cancelNavigation = useCallback(() => {
+    if (navigationFrameRef.current === null) {
+      return;
+    }
 
-      window.cancelAnimationFrame(
-        navigationFrameRef.current,
-      );
+    window.cancelAnimationFrame(navigationFrameRef.current);
 
-      navigationFrameRef.current =
-        null;
+    navigationFrameRef.current = null;
 
-      setIsAnimating(false);
-    }, []);
+    setIsAnimating(false);
+  }, []);
 
   /* =======================================================
      CANCEL DRAG
   ======================================================= */
 
-  const cancelDragFrame =
-    useCallback(() => {
-      if (
-        dragFrameRef.current ===
-        null
-      ) {
-        return;
-      }
+  const cancelDragFrame = useCallback(() => {
+    if (dragFrameRef.current === null) {
+      return;
+    }
 
-      window.cancelAnimationFrame(
-        dragFrameRef.current,
-      );
+    window.cancelAnimationFrame(dragFrameRef.current);
 
-      dragFrameRef.current =
-        null;
-    }, []);
+    dragFrameRef.current = null;
+  }, []);
 
   /* =======================================================
      FIND NEAREST
   ======================================================= */
 
-  const findNearestIndex =
-    useCallback(() => {
-      const container =
-        sliderRef.current;
+  const findNearestIndex = useCallback(() => {
+    const container = sliderRef.current;
 
-      const slides =
-        getSlides();
+    const slides = getSlides();
 
-      if (
-        !container ||
-        !slides.length
-      ) {
-        return 0;
+    if (!container || !slides.length) {
+      return 0;
+    }
+
+    let closestIndex = 0;
+
+    let closestDistance = Number.POSITIVE_INFINITY;
+
+    slides.forEach((slide, index) => {
+      const distance = Math.abs(slide.offsetLeft - container.scrollLeft);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+
+        closestIndex = index;
       }
+    });
 
-      let closestIndex = 0;
-
-      let closestDistance =
-        Number.POSITIVE_INFINITY;
-
-      slides.forEach(
-        (slide, index) => {
-          const distance =
-            Math.abs(
-              slide.offsetLeft -
-                container.scrollLeft,
-            );
-
-          if (
-            distance <
-            closestDistance
-          ) {
-            closestDistance =
-              distance;
-
-            closestIndex =
-              index;
-          }
-        },
-      );
-
-      return closestIndex;
-    }, [getSlides]);
+    return closestIndex;
+  }, [getSlides]);
 
   /* =======================================================
      ONE ANIMATION ENGINE
@@ -263,158 +191,94 @@ export default function ProjectsSliderClient({
      - mouse release
   ======================================================= */
 
-  const animateToIndex =
-    useCallback(
-      (
-        index: number,
-        duration =
-          NAVIGATION_DURATION,
-      ) => {
-        const container =
-          sliderRef.current;
+  const animateToIndex = useCallback(
+    (index: number, duration = NAVIGATION_DURATION) => {
+      const container = sliderRef.current;
 
-        const slides =
-          getSlides();
+      const slides = getSlides();
 
-        const target =
-          slides[index];
+      const target = slides[index];
 
-        if (
-          !container ||
-          !target
-        ) {
-          return;
-        }
+      if (!container || !target) {
+        return;
+      }
 
-        cancelNavigation();
-        cancelDragFrame();
+      cancelNavigation();
+      cancelDragFrame();
 
-        const startLeft =
-          container.scrollLeft;
+      const startLeft = container.scrollLeft;
 
-        const targetLeft =
-          target.offsetLeft;
+      const targetLeft = target.offsetLeft;
 
-        const distance =
-          targetLeft -
-          startLeft;
+      const distance = targetLeft - startLeft;
 
-        if (
-          Math.abs(distance) < 1
-        ) {
-          container.scrollLeft =
-            targetLeft;
+      if (Math.abs(distance) < 1) {
+        container.scrollLeft = targetLeft;
 
-          setActiveIndex(index);
+        setActiveIndex(index);
 
-          return;
-        }
+        return;
+      }
 
-        setIsAnimating(true);
+      setIsAnimating(true);
 
-        const startTime =
-          performance.now();
+      const startTime = performance.now();
 
-        function frame(
-          currentTime: number,
-        ) {
-          const currentContainer =
-            sliderRef.current;
+      function frame(currentTime: number) {
+        const currentContainer = sliderRef.current;
 
-          if (!currentContainer) {
-            navigationFrameRef.current =
-              null;
+        if (!currentContainer) {
+          navigationFrameRef.current = null;
 
-            setIsAnimating(false);
-
-            return;
-          }
-
-          const progress =
-            Math.min(
-              (currentTime -
-                startTime) /
-                duration,
-              1,
-            );
-
-          const eased =
-            easeOutQuint(
-              progress,
-            );
-
-          currentContainer.scrollLeft =
-            startLeft +
-            distance * eased;
-
-          if (progress < 1) {
-            navigationFrameRef.current =
-              window.requestAnimationFrame(
-                frame,
-              );
-
-            return;
-          }
-
-          currentContainer.scrollLeft =
-            targetLeft;
-
-          navigationFrameRef.current =
-            null;
-
-          setActiveIndex(index);
           setIsAnimating(false);
+
+          return;
         }
 
-        navigationFrameRef.current =
-          window.requestAnimationFrame(
-            frame,
-          );
-      },
-      [
-        cancelDragFrame,
-        cancelNavigation,
-        getSlides,
-      ],
-    );
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+
+        const eased = easeOutQuint(progress);
+
+        currentContainer.scrollLeft = startLeft + distance * eased;
+
+        if (progress < 1) {
+          navigationFrameRef.current = window.requestAnimationFrame(frame);
+
+          return;
+        }
+
+        currentContainer.scrollLeft = targetLeft;
+
+        navigationFrameRef.current = null;
+
+        setActiveIndex(index);
+        setIsAnimating(false);
+      }
+
+      navigationFrameRef.current = window.requestAnimationFrame(frame);
+    },
+    [cancelDragFrame, cancelNavigation, getSlides],
+  );
 
   /* =======================================================
      NAVIGATION
   ======================================================= */
 
-  const goPrevious =
-    useCallback(() => {
-      if (
-        activeIndex <= 0
-      ) {
-        return;
-      }
+  const goPrevious = useCallback(() => {
+    if (activeIndex <= 0) {
+      return;
+    }
 
-      animateToIndex(
-        activeIndex - 1,
-      );
-    }, [
-      activeIndex,
-      animateToIndex,
-    ]);
+    animateToIndex(activeIndex - 1);
+  }, [activeIndex, animateToIndex]);
 
-  const goNext =
-    useCallback(() => {
-      if (
-        activeIndex >=
-        projects.length - 1
-      ) {
-        return;
-      }
+  const goNext = useCallback(() => {
+    if (activeIndex >= projects.length - 1) {
+      return;
+    }
 
-      animateToIndex(
-        activeIndex + 1,
-      );
-    }, [
-      activeIndex,
-      animateToIndex,
-      projects.length,
-    ]);
+    animateToIndex(activeIndex + 1);
+  }, [activeIndex, animateToIndex, projects.length]);
 
   /* =======================================================
      SCROLL STATE
@@ -423,63 +287,39 @@ export default function ProjectsSliderClient({
   ======================================================= */
 
   useEffect(() => {
-    const container =
-      sliderRef.current;
+    const container = sliderRef.current;
 
     if (!container) {
       return;
     }
 
     function update() {
-      scrollFrameRef.current =
-        null;
+      scrollFrameRef.current = null;
 
-      const nextIndex =
-        findNearestIndex();
+      const nextIndex = findNearestIndex();
 
-      setActiveIndex(
-        (current) =>
-          current === nextIndex
-            ? current
-            : nextIndex,
+      setActiveIndex((current) =>
+        current === nextIndex ? current : nextIndex,
       );
     }
 
     function handleScroll() {
-      if (
-        scrollFrameRef.current !==
-        null
-      ) {
+      if (scrollFrameRef.current !== null) {
         return;
       }
 
-      scrollFrameRef.current =
-        window.requestAnimationFrame(
-          update,
-        );
+      scrollFrameRef.current = window.requestAnimationFrame(update);
     }
 
-    container.addEventListener(
-      "scroll",
-      handleScroll,
-      {
-        passive: true,
-      },
-    );
+    container.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
     return () => {
-      container.removeEventListener(
-        "scroll",
-        handleScroll,
-      );
+      container.removeEventListener("scroll", handleScroll);
 
-      if (
-        scrollFrameRef.current !==
-        null
-      ) {
-        window.cancelAnimationFrame(
-          scrollFrameRef.current,
-        );
+      if (scrollFrameRef.current !== null) {
+        window.cancelAnimationFrame(scrollFrameRef.current);
       }
     };
   }, [findNearestIndex]);
@@ -488,59 +328,37 @@ export default function ProjectsSliderClient({
      SMOOTH MOUSE FOLLOW
   ======================================================= */
 
-  const startDragFrame =
-    useCallback(() => {
-      if (
-        dragFrameRef.current !==
-        null
-      ) {
+  const startDragFrame = useCallback(() => {
+    if (dragFrameRef.current !== null) {
+      return;
+    }
+
+    function frame() {
+      const container = sliderRef.current;
+
+      const drag = dragRef.current;
+
+      if (!container) {
+        dragFrameRef.current = null;
+
         return;
       }
 
-      function frame() {
-        const container =
-          sliderRef.current;
+      const difference = drag.targetScrollLeft - container.scrollLeft;
 
-        const drag =
-          dragRef.current;
+      container.scrollLeft += difference * DRAG_FOLLOW_FACTOR;
 
-        if (!container) {
-          dragFrameRef.current =
-            null;
+      if (drag.active && Math.abs(difference) > 0.35) {
+        dragFrameRef.current = window.requestAnimationFrame(frame);
 
-          return;
-        }
-
-        const difference =
-          drag.targetScrollLeft -
-          container.scrollLeft;
-
-        container.scrollLeft +=
-          difference *
-          DRAG_FOLLOW_FACTOR;
-
-        if (
-          drag.active &&
-          Math.abs(difference) >
-            0.35
-        ) {
-          dragFrameRef.current =
-            window.requestAnimationFrame(
-              frame,
-            );
-
-          return;
-        }
-
-        dragFrameRef.current =
-          null;
+        return;
       }
 
-      dragFrameRef.current =
-        window.requestAnimationFrame(
-          frame,
-        );
-    }, []);
+      dragFrameRef.current = null;
+    }
+
+    dragFrameRef.current = window.requestAnimationFrame(frame);
+  }, []);
 
   /* =======================================================
      MOUSE DOWN
@@ -549,19 +367,12 @@ export default function ProjectsSliderClient({
      Touch keeps native browser swipe.
   ======================================================= */
 
-  function handlePointerDown(
-    event: ReactPointerEvent<HTMLDivElement>,
-  ) {
-    if (
-      event.pointerType !==
-        "mouse" ||
-      event.button !== 0
-    ) {
+  function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
+    if (event.pointerType !== "mouse" || event.button !== 0) {
       return;
     }
 
-    const container =
-      sliderRef.current;
+    const container = sliderRef.current;
 
     if (!container) {
       return;
@@ -574,64 +385,40 @@ export default function ProjectsSliderClient({
       active: true,
       moved: false,
 
-      pointerId:
-        event.pointerId,
+      pointerId: event.pointerId,
 
-      startX:
-        event.clientX,
+      startX: event.clientX,
 
-      currentX:
-        event.clientX,
+      currentX: event.clientX,
 
-      startScrollLeft:
-        container.scrollLeft,
+      startScrollLeft: container.scrollLeft,
 
-      targetScrollLeft:
-        container.scrollLeft,
+      targetScrollLeft: container.scrollLeft,
 
-      startIndex:
-        findNearestIndex(),
+      startIndex: findNearestIndex(),
     };
 
-    container.setPointerCapture(
-      event.pointerId,
-    );
+    container.setPointerCapture(event.pointerId);
   }
 
   /* =======================================================
      MOUSE MOVE
   ======================================================= */
 
-  function handlePointerMove(
-    event: ReactPointerEvent<HTMLDivElement>,
-  ) {
-    const container =
-      sliderRef.current;
+  function handlePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
+    const container = sliderRef.current;
 
-    const drag =
-      dragRef.current;
+    const drag = dragRef.current;
 
-    if (
-      !container ||
-      !drag.active ||
-      event.pointerType !==
-        "mouse"
-    ) {
+    if (!container || !drag.active || event.pointerType !== "mouse") {
       return;
     }
 
-    drag.currentX =
-      event.clientX;
+    drag.currentX = event.clientX;
 
-    const deltaX =
-      event.clientX -
-      drag.startX;
+    const deltaX = event.clientX - drag.startX;
 
-    if (
-      !drag.moved &&
-      Math.abs(deltaX) <
-        DRAG_START_THRESHOLD
-    ) {
+    if (!drag.moved && Math.abs(deltaX) < DRAG_START_THRESHOLD) {
       return;
     }
 
@@ -643,21 +430,17 @@ export default function ProjectsSliderClient({
 
     event.preventDefault();
 
-    const maxScroll =
-      Math.max(
-        0,
-        container.scrollWidth -
-          container.clientWidth,
-      );
+    const maxScroll = Math.max(
+      0,
+      container.scrollWidth - container.clientWidth,
+    );
 
-    drag.targetScrollLeft =
-      clamp(
-        drag.startScrollLeft -
-          deltaX * 0.9,
+    drag.targetScrollLeft = clamp(
+      drag.startScrollLeft - deltaX * 0.9,
 
-        0,
-        maxScroll,
-      );
+      0,
+      maxScroll,
+    );
 
     startDragFrame();
   }
@@ -666,45 +449,29 @@ export default function ProjectsSliderClient({
      MOUSE RELEASE
   ======================================================= */
 
-  function finishPointerDrag(
-    event: ReactPointerEvent<HTMLDivElement>,
-  ) {
-    const container =
-      sliderRef.current;
+  function finishPointerDrag(event: ReactPointerEvent<HTMLDivElement>) {
+    const container = sliderRef.current;
 
-    const drag =
-      dragRef.current;
+    const drag = dragRef.current;
 
-    if (
-      !drag.active ||
-      event.pointerType !==
-        "mouse"
-    ) {
+    if (!drag.active || event.pointerType !== "mouse") {
       return;
     }
 
-    const deltaX =
-      drag.currentX -
-      drag.startX;
+    const deltaX = drag.currentX - drag.startX;
 
-    const startIndex =
-      drag.startIndex;
+    const startIndex = drag.startIndex;
 
-    const moved =
-      drag.moved;
+    const moved = drag.moved;
 
     drag.active = false;
 
     if (
       container &&
       drag.pointerId !== null &&
-      container.hasPointerCapture(
-        drag.pointerId,
-      )
+      container.hasPointerCapture(drag.pointerId)
     ) {
-      container.releasePointerCapture(
-        drag.pointerId,
-      );
+      container.releasePointerCapture(drag.pointerId);
     }
 
     cancelDragFrame();
@@ -720,13 +487,9 @@ export default function ProjectsSliderClient({
       startX: 0,
       currentX: 0,
 
-      startScrollLeft:
-        container?.scrollLeft ??
-        0,
+      startScrollLeft: container?.scrollLeft ?? 0,
 
-      targetScrollLeft:
-        container?.scrollLeft ??
-        0,
+      targetScrollLeft: container?.scrollLeft ?? 0,
 
       startIndex,
     };
@@ -735,48 +498,25 @@ export default function ProjectsSliderClient({
       return;
     }
 
-    let targetIndex =
-      startIndex;
+    let targetIndex = startIndex;
 
-    if (
-      deltaX <
-      -DRAG_NAVIGATION_THRESHOLD
-    ) {
-      targetIndex =
-        Math.min(
-          startIndex + 1,
-          projects.length - 1,
-        );
+    if (deltaX < -DRAG_NAVIGATION_THRESHOLD) {
+      targetIndex = Math.min(startIndex + 1, projects.length - 1);
     }
 
-    if (
-      deltaX >
-      DRAG_NAVIGATION_THRESHOLD
-    ) {
-      targetIndex =
-        Math.max(
-          startIndex - 1,
-          0,
-        );
+    if (deltaX > DRAG_NAVIGATION_THRESHOLD) {
+      targetIndex = Math.max(startIndex - 1, 0);
     }
 
-    animateToIndex(
-      targetIndex,
-    );
+    animateToIndex(targetIndex);
   }
 
   /* =======================================================
      KEYBOARD
   ======================================================= */
 
-  function handleKeyDown(
-    event:
-      KeyboardEvent<HTMLDivElement>,
-  ) {
-    if (
-      event.key ===
-      "ArrowRight"
-    ) {
+  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === "ArrowRight") {
       event.preventDefault();
 
       goNext();
@@ -784,10 +524,7 @@ export default function ProjectsSliderClient({
       return;
     }
 
-    if (
-      event.key ===
-      "ArrowLeft"
-    ) {
+    if (event.key === "ArrowLeft") {
       event.preventDefault();
 
       goPrevious();
@@ -803,26 +540,17 @@ export default function ProjectsSliderClient({
       cancelNavigation();
       cancelDragFrame();
 
-      if (
-        scrollFrameRef.current !==
-        null
-      ) {
-        window.cancelAnimationFrame(
-          scrollFrameRef.current,
-        );
+      if (scrollFrameRef.current !== null) {
+        window.cancelAnimationFrame(scrollFrameRef.current);
       }
     };
-  }, [
-    cancelDragFrame,
-    cancelNavigation,
-  ]);
+  }, [cancelDragFrame, cancelNavigation]);
 
   if (!projects.length) {
     return null;
   }
 
-  const hasMultiple =
-    projects.length > 1;
+  const hasMultiple = projects.length > 1;
 
   /* =======================================================
      UI
@@ -895,21 +623,11 @@ export default function ProjectsSliderClient({
             aria-roledescription="carousel"
             aria-label="Selected Sofa N More projects"
             tabIndex={0}
-            onKeyDown={
-              handleKeyDown
-            }
-            onPointerDown={
-              handlePointerDown
-            }
-            onPointerMove={
-              handlePointerMove
-            }
-            onPointerUp={
-              finishPointerDrag
-            }
-            onPointerCancel={
-              finishPointerDrag
-            }
+            onKeyDown={handleKeyDown}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={finishPointerDrag}
+            onPointerCancel={finishPointerDrag}
             className={`
               flex
 
@@ -936,8 +654,7 @@ export default function ProjectsSliderClient({
               }
 
               ${
-                isDragging ||
-                isAnimating
+                isDragging || isAnimating
                   ? `
                     snap-none
                   `
@@ -948,32 +665,16 @@ export default function ProjectsSliderClient({
               }
             `}
           >
-            {projects.map(
-              (
-                project,
-                index,
-              ) => (
-                <ProjectSlide
-                  key={
-                    project.id
-                  }
-                  project={
-                    project
-                  }
-                  index={index}
-                  priority={
-                    index === 0
-                  }
-                  active={
-                    index ===
-                    activeIndex
-                  }
-                  dragging={
-                    isDragging
-                  }
-                />
-              ),
-            )}
+            {projects.map((project, index) => (
+              <ProjectSlide
+                key={project.id}
+                project={project}
+                index={index}
+                priority={index === 0}
+                active={index === activeIndex}
+                dragging={isDragging}
+              />
+            ))}
           </div>
         </div>
 
@@ -1019,20 +720,10 @@ export default function ProjectsSliderClient({
             >
               <SliderControl
                 label="Previous project"
-                onClick={
-                  goPrevious
-                }
-                disabled={
-                  activeIndex ===
-                  0
-                }
+                onClick={goPrevious}
+                disabled={activeIndex === 0}
               >
-                <ArrowLeft
-                  size={14}
-                  strokeWidth={
-                    1.7
-                  }
-                />
+                <ArrowLeft size={14} strokeWidth={1.7} />
               </SliderControl>
 
               <span
@@ -1047,22 +738,11 @@ export default function ProjectsSliderClient({
 
               <SliderControl
                 label="Next project"
-                onClick={
-                  goNext
-                }
-                disabled={
-                  activeIndex ===
-                  projects.length -
-                    1
-                }
+                onClick={goNext}
+                disabled={activeIndex === projects.length - 1}
                 featured
               >
-                <ArrowRight
-                  size={14}
-                  strokeWidth={
-                    1.7
-                  }
-                />
+                <ArrowRight size={14} strokeWidth={1.7} />
               </SliderControl>
             </div>
           </div>
@@ -1118,12 +798,7 @@ export default function ProjectsSliderClient({
               text-[var(--brand-navy)]
             "
           >
-            {String(
-              activeIndex + 1,
-            ).padStart(
-              2,
-              "0",
-            )}
+            {String(activeIndex + 1).padStart(2, "0")}
 
             <span
               className="
@@ -1140,12 +815,7 @@ export default function ProjectsSliderClient({
                 text-[var(--brand-text-muted)]/55
               "
             >
-              {String(
-                projects.length,
-              ).padStart(
-                2,
-                "0",
-              )}
+              {String(projects.length).padStart(2, "0")}
             </span>
           </span>
 
@@ -1181,12 +851,7 @@ export default function ProjectsSliderClient({
                 duration-300
               "
               style={{
-                width: `${
-                  ((activeIndex +
-                    1) /
-                    projects.length) *
-                  100
-                }%`,
+                width: `${((activeIndex + 1) / projects.length) * 100}%`,
               }}
             />
           </div>
@@ -1220,12 +885,7 @@ export default function ProjectsSliderClient({
               lg:flex
             "
           >
-            <GripHorizontal
-              size={12}
-              strokeWidth={1.5}
-            />
-
-            
+            <GripHorizontal size={12} strokeWidth={1.5} />
           </div>
         )}
       </div>
@@ -1248,35 +908,17 @@ export default function ProjectsSliderClient({
             lg:hidden
           "
         >
-          {projects.map(
-            (
-              project,
-              index,
-            ) => {
-              const active =
-                index ===
-                activeIndex;
+          {projects.map((project, index) => {
+            const active = index === activeIndex;
 
-              return (
-                <button
-                  key={
-                    project.id
-                  }
-                  type="button"
-                  aria-label={`Go to project ${
-                    index + 1
-                  }`}
-                  aria-current={
-                    active
-                      ? "true"
-                      : undefined
-                  }
-                  onClick={() =>
-                    animateToIndex(
-                      index,
-                    )
-                  }
-                  className={`
+            return (
+              <button
+                key={project.id}
+                type="button"
+                aria-label={`Go to project ${index + 1}`}
+                aria-current={active ? "true" : undefined}
+                onClick={() => animateToIndex(index)}
+                className={`
                     flex
                     h-11
                     w-11
@@ -1288,10 +930,10 @@ export default function ProjectsSliderClient({
                     transition-colors
                     duration-200
                   `}
-                >
-                  <span
-                    aria-hidden
-                    className={`
+              >
+                <span
+                  aria-hidden
+                  className={`
                       rounded-full
 
                       transition-[width,background-color]
@@ -1311,11 +953,10 @@ export default function ProjectsSliderClient({
                           `
                       }
                     `}
-                  />
-                </button>
-              );
-            },
-          )}
+                />
+              </button>
+            );
+          })}
         </div>
       )}
     </div>
@@ -1423,11 +1064,7 @@ function ProjectSlide({
             duration-500
             ease-out
 
-            ${
-              active
-                ? "opacity-100"
-                : "opacity-[0.96]"
-            }
+            ${active ? "opacity-100" : "opacity-[0.96]"}
 
             ${
               !dragging
@@ -1495,9 +1132,7 @@ function ProjectSlide({
               "
             />
 
-            {
-              project.projectCode
-            }
+            {project.projectCode}
           </span>
         </div>
       </div>
@@ -1553,9 +1188,7 @@ function ProjectSlide({
                 text-[#7a4b08]
               "
             >
-              {
-                project.serviceLabel
-              }
+              {project.serviceLabel}
             </span>
           )}
 
@@ -1596,9 +1229,7 @@ function ProjectSlide({
                   "
                 />
 
-                {
-                  project.locationLabel
-                }
+                {project.locationLabel}
               </span>
             </>
           )}
@@ -1677,28 +1308,6 @@ function ProjectSlide({
             pt-4
           "
         >
-          <span
-            className="
-              font-brand-sans
-
-              text-[13px]
-              font-bold
-              uppercase
-
-              tracking-[0.08em]
-
-              text-[var(--brand-navy)]/72
-            "
-          >
-            Project{" "}
-            {String(
-              index + 1,
-            ).padStart(
-              2,
-              "0",
-            )}
-          </span>
-
           {project.slug ? (
             <Link
               href={`/projects/${project.slug}`}
@@ -1722,7 +1331,7 @@ function ProjectSlide({
 
                 font-brand-sans
 
-                text-[13px]
+                text-[10px]
                 font-bold
                 uppercase
 
@@ -1741,7 +1350,6 @@ function ProjectSlide({
               "
             >
               View Project
-
               <ArrowUpRight
                 size={11}
                 strokeWidth={1.7}

@@ -83,7 +83,7 @@ export default function HomeSeoDescriptionSection() {
       itemType="https://schema.org/FurnitureStore"
       className="
         relative overflow-hidden
-        bg-[linear-gradient(180deg,#f5f2ea_0%,#fffdf8_52%,#f1e6d6_100%)]
+        bg-[linear-gradient(360deg,#f5f2ea_0%,#fffdf8_52%,#f1e6d6_100%)]
         px-3 py-8
         sm:px-5 sm:py-10
         lg:px-8 lg:py-12
@@ -129,22 +129,7 @@ export default function HomeSeoDescriptionSection() {
                 lg:px-7 lg:py-6
               "
             >
-              <div
-                aria-hidden
-                className="
-                  absolute bottom-0 left-0 top-0 w-[5px]
-                  bg-[linear-gradient(180deg,var(--brand-gold)_0%,#f2d396_48%,rgba(215,160,74,0.18)_100%)]
-                "
-              />
-
-              <div
-                aria-hidden
-                className="
-                  pointer-events-none absolute inset-x-6 top-0 h-px
-                  bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.95),transparent)]
-                "
-              />
-
+             
               <div className="mb-4 flex items-center gap-3 pl-2">
                 <span
                   className="

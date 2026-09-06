@@ -3,13 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { connection } from "next/server";
 
-import {
-  ArrowUpRight,
-  FolderOpen,
-  Hash,
-  MapPin,
-  Sofa,
-} from "lucide-react";
+import { ArrowUpRight, FolderOpen, Hash, MapPin, Sofa } from "lucide-react";
 
 import ClayButton from "@/components/ui/ClayButton";
 
@@ -419,10 +413,7 @@ export default async function ProjectsPage() {
                 "
               >
                 {projects.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                  />
+                  <ProjectCard key={project.id} project={project} />
                 ))}
               </div>
             ) : (
@@ -831,6 +822,7 @@ function ProjectCard({
           {/* TITLE */}
 
           <span
+            title={project.title}
             className="
               mt-2
 
@@ -848,7 +840,7 @@ function ProjectCard({
 
               text-[var(--brand-navy)]
 
-              sm:text-[24px]
+              sm:text-[24px] 
             "
           >
             {project.title}
@@ -916,7 +908,7 @@ function ProjectCard({
 
                 font-brand-sans
 
-                text-[13px]
+                text-[10px]
                 font-semibold
 
                 text-[var(--brand-text-muted)]
@@ -966,7 +958,7 @@ function ProjectCard({
 
                 font-brand-sans
 
-                text-[12px]
+                text-[10px]
                 font-bold
                 uppercase
 

@@ -203,53 +203,7 @@ export default async function ProjectsSliderSection() {
               max-w-[760px]
             "
           >
-            {/* EYEBROW */}
-
-            <div
-              className="
-                flex
-                items-center
-
-                gap-2.5
-              "
-            >
-              <span
-                aria-hidden
-                className="
-                  h-px
-                  w-8
-
-                  bg-[var(--brand-gold)]
-                "
-              />
-
-              <p
-                className="
-                  inline-flex
-                  min-h-7
-                  items-center
-                  rounded-full
-                  bg-[#fff8ec]
-                  px-3
-
-                  font-brand-sans
-
-                  text-[13px]
-                  font-bold
-                  uppercase
-
-                  tracking-[0.1em]
-
-                  text-[var(--brand-navy)]
-
-                  shadow-[inset_1px_1px_1px_rgba(255,255,255,0.9),0_2px_8px_rgba(75,53,30,0.08)]
-
-                  sm:text-[11px]
-                "
-              >
-                Selected Projects
-              </p>
-            </div>
+        
 
             {/* TITLE */}
 
