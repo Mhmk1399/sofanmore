@@ -39,31 +39,25 @@ const nextConfig: NextConfig = {
 
   poweredByHeader: false,
 
-  images: {
-    formats: ["image/avif", "image/webp"],
+images: {
+  formats: ["image/avif", "image/webp"],
+  minimumCacheTTL: 31536000,
 
-    minimumCacheTTL: 31536000,
-
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "storadge.arziplus.com",
-        port: "",
-        pathname: "/project-uploads/**",
-      },
-
-      ...(s3Bucket && s3Region
-        ? [
-            {
-              protocol: "https" as const,
-              hostname: `${s3Bucket}.s3.${s3Region}.amazonaws.com`,
-              port: "",
-              pathname: `/${s3Prefix}/**`,
-            },
-          ]
-        : []),
-    ],
-  },
+  remotePatterns: [
+    {
+      protocol: "https",
+      hostname: "storadge.arziplus.com",
+      port: "",
+      pathname: "/project-uploads/**",
+    },
+    {
+      protocol: "https",
+      hostname: "sofanmore.s3.eu-west-2.amazonaws.com",
+      port: "",
+      pathname: "/Image/**",
+    },
+  ],
+},
 
   async redirects() {
     return [
