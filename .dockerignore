@@ -10,3 +10,9 @@ Dockerfile*
 compose*.yaml
 README.md
 docs
+.env
+.env.local
+.env.production
+node_modules
+.next
+.git
