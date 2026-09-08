@@ -1034,25 +1034,7 @@ function MobileHeroMain() {
           />
 
           {/* Top badge */}
-          <div
-            className="
-              clay-surface-soft
-              flex justify-center top-3 z-20
-                items-center gap-2
-              rounded-[14px] px-2.5 py-2
-            "
-          >
-            <div className="clay-icon-inset flex h-10 w-28 items-center justify-center rounded-[10px]">
-              <Image
-                src={
-                  "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Sofa_Logo.webp"
-                }
-                height={200}
-                width={500}
-                alt="logo"
-              />
-            </div>
-          </div>
+      
 
           {/* Copy */}
           <div
