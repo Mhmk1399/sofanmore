@@ -114,7 +114,7 @@ export default function BespokesofaPageContent() {
       <CustomsofaForYourSpaceSection id="made-to-measure-sofas" />
       <BespokeSofasWeCanCreateSection />
       <WhyChooseBespokeSofasSection />
-      <BespokeProcessSection />
+      {/* <BespokeProcessSection /> */}
 
       <CommercialSofaProjectsSection />
        <FAQSection id="faq" items={bespokesofaFaqs} />

@@ -5,10 +5,11 @@ import LuxuryCtaBanner from "@/components/static/Cta";
 import FAQSection from "@/components/static/FAQSection";
 import HeroSection from "@/components/static/HeroSection";
 import HomeSeoDescriptionSection from "@/components/static/HomeSeoDescriptionSection";
- import ServicesSection from "@/components/static/servicesSection";
+import ServicesSection from "@/components/static/servicesSection";
 import WhyChooseSection from "@/components/static/WhyChooseSection";
 import { defaultOgImage, siteConfig } from "@/lib/site";
 import ProjectsSliderSection from "@/components/global/ProjectsSliderSection";
+import HomeServiceLeadChooser from "@/components/lead-capture/HomeServiceLeadChooser";
  
 export const metadata: Metadata = {
   title: "Bespoke Sofas, Sofa Repair & Interior Design London",
@@ -56,6 +57,7 @@ export default async function HomePage() {
       {/* ABOVE THE FOLD — render immediately */}
       <HeroSection />
 
+      <HomeServiceLeadChooser />
       <AboutSection />
       <ProjectsSliderSection   />
       {/* Keep Server shell.

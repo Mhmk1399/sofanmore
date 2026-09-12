@@ -64,7 +64,7 @@ const defaultFaqs: FAQItem[] = [
     id: 7,
     question: "What is the typical timeline for a bespoke project?",
     answer:
-      "Timelines vary depending on scope and complexity, but most bespoke sofa pieces are completed within 4–8 weeks from design approval.",
+      "Timelines vary depending on scope and complexity. We provide a more accurate estimate once the project requirements are discussed.",
   },
   {
     id: 8,

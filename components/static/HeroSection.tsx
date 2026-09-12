@@ -1008,7 +1008,7 @@ function MobileHeroMain() {
         >
           {/* Image background */}
           <Image
-            src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/67.webp"
+            src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/19.webp"
             alt="Bespoke luxury sofa by Sofa N More, handcrafted in London"
             fill
             loading="eager"

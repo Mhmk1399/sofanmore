@@ -111,7 +111,7 @@ export default function LeadFormShell({
                 </p>
                 <h2
                   id={`${id}-heading`}
-                  className="mx-auto mt-2 font-brand-display text-[34px] font-semibold leading-[1.04] text-[var(--brand-navy)] sm:text-[42px] lg:text-[48px]"
+                  className="mx-auto mt-2 font-brand-display text-[24px] font-bold leading-[1.04] text-[var(--brand-navy)] sm:text-[42px] lg:text-[48px]"
                 >
                   {title}
                 </h2>

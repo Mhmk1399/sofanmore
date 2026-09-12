@@ -70,7 +70,7 @@ const workshopFaqs: WorkshopFaqItem[] = [
     id: 1,
     question: "Is Sofa N More a showroom or a working workshop?",
     answer:
-      "Sofa N More is primarily a working sofa and upholstery workshop rather than a conventional furniture showroom. We do not keep rows of ready-made sofas for immediate purchase. Instead, you can explore our full catalogue collection, compare fabric samples, discuss a bespoke order, plan commercial seating or arrange repair and restoration work.",
+      "Sofa N More is primarily a working sofa and upholstery workshop rather than a conventional sofa showroom. We do not keep rows of ready-made sofas for immediate purchase. Instead, you can explore our full catalogue collection, compare fabric samples, discuss a bespoke order, plan commercial seating or arrange repair and restoration work.",
   },
   {
     id: 2,
