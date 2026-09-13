@@ -7,13 +7,15 @@ import HeroSection from "@/components/static/HeroSection";
 import HomeSeoDescriptionSection from "@/components/static/HomeSeoDescriptionSection";
 import ServicesSection from "@/components/static/servicesSection";
 import WhyChooseSection from "@/components/static/WhyChooseSection";
-import { defaultOgImage, siteConfig } from "@/lib/site";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 import ProjectsSliderSection from "@/components/global/ProjectsSliderSection";
 import HomeServiceLeadChooser from "@/components/lead-capture/HomeServiceLeadChooser";
- 
+
 const homeOgImage = {
-  ...defaultOgImage,
-  url: `${defaultOgImage.url}?v=home-2026-09-13`,
+  url: "/og-image.png?v=home-2026-09-13",
+  width: 1200,
+  height: 630,
+  alt: "Sofa N More bespoke sofa and interior craftsmanship in London",
 };
 
 export const metadata: Metadata = {
@@ -49,14 +51,11 @@ export const metadata: Metadata = {
     description:
       "Bespoke sofas, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
 
-    images: [homeOgImage.url],
+    images: [absoluteUrl(homeOgImage.url)],
   },
 };
 
- 
-
 export default async function HomePage() {
- 
   return (
     <main>
       {/* ABOVE THE FOLD — render immediately */}
@@ -64,7 +63,7 @@ export default async function HomePage() {
 
       <HomeServiceLeadChooser />
       <AboutSection />
-      <ProjectsSliderSection   />
+      <ProjectsSliderSection />
       {/* Keep Server shell.
           Client carousel should be isolated internally. */}
       <ServicesSection />
