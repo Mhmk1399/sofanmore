@@ -57,7 +57,7 @@ export function serializeProject(project: ProjectDocument): SerializedProject {
     id: project._id?.toHexString() || "",
     projectCode: project.projectCode,
     title: project.title,
-    slug: project.slug,
+    slug: project.slug || createProjectSlug(project.title),
     service: project.service,
     coverImageUrl: project.coverImageUrl,
     ...(project.coverImageStorageKey
@@ -279,12 +279,28 @@ export async function getPublishedProjectBySlug(slug: string) {
   await ensureProjectIndexes();
 
   const { projects } = await getProjectCollections();
+  const normalizedSlug = createProjectSlug(slug);
   const project = await projects.findOne({
-    slug: createProjectSlug(slug),
+    slug: normalizedSlug,
     published: true,
   });
 
-  return project ? serializeProject(project) : null;
+  if (project) {
+    return serializeProject(project);
+  }
+
+  const legacyProjects = await projects
+    .find({
+      published: true,
+      $or: [{ slug: { $exists: false } }, { slug: "" }],
+    })
+    .toArray();
+
+  const legacyProject = legacyProjects.find(
+    (candidate) => createProjectSlug(candidate.title) === normalizedSlug,
+  );
+
+  return legacyProject ? serializeProject(legacyProject) : null;
 }
 
 export async function listPublishedProjects(limit = 60) {

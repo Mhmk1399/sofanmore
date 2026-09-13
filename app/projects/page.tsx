@@ -805,7 +805,7 @@ function ProjectCard({
 
               font-brand-sans
 
-              text-[13px]
+              text-[11px]
               font-bold
               uppercase
 
@@ -836,7 +836,7 @@ function ProjectCard({
               font-medium
               leading-[1.08]
 
-              tracking-[-0.025em]
+             
 
               text-[var(--brand-navy)]
 
@@ -852,9 +852,9 @@ function ProjectCard({
             className="
               mt-3
 
-              line-clamp-3
+              line-clamp-2
 
-              min-h-[54px]
+              min-h-[44 px]
 
               font-brand-sans
 
