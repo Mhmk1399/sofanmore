@@ -669,7 +669,6 @@ export default function ProjectsSliderClient({
               <ProjectSlide
                 key={project.id}
                 project={project}
-                index={index}
                 priority={index === 0}
                 active={index === activeIndex}
                 dragging={isDragging}
@@ -969,14 +968,11 @@ export default function ProjectsSliderClient({
 
 function ProjectSlide({
   project,
-  index,
   priority,
   active,
   dragging,
 }: {
   project: ProjectSliderItem;
-
-  index: number;
 
   priority: boolean;
 
@@ -984,6 +980,8 @@ function ProjectSlide({
 
   dragging: boolean;
 }) {
+  const projectHref = project.slug ? `/projects/${project.slug}` : "/projects";
+
   return (
     <article
       data-project-slide
@@ -1308,17 +1306,16 @@ function ProjectSlide({
             pt-4
           "
         >
-          {project.slug ? (
-            <Link
-              href={`/projects/${project.slug}`}
-              draggable={false}
-              onPointerDown={(event) => {
-                event.stopPropagation();
-              }}
-              onClick={(event) => {
-                event.stopPropagation();
-              }}
-              className="
+          <Link
+            href={projectHref}
+            draggable={false}
+            onPointerDown={(event) => {
+              event.stopPropagation();
+            }}
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+            className="
                 inline-flex
                 min-h-11
                 items-center
@@ -1348,33 +1345,16 @@ function ProjectSlide({
                 focus-visible:outline-offset-2
                 focus-visible:outline-[var(--brand-gold)]
               "
-            >
-              View Project
-              <ArrowUpRight
-                size={11}
-                strokeWidth={1.7}
-                className="
+          >
+            View Project
+            <ArrowUpRight
+              size={11}
+              strokeWidth={1.7}
+              className="
                   text-[var(--brand-gold-700)]
                 "
-              />
-            </Link>
-          ) : (
-            <span
-              className="
-                font-brand-sans
-
-                text-[13px]
-                font-bold
-                uppercase
-
-                tracking-[0.08em]
-
-                text-[var(--brand-gold-700)]
-              "
-            >
-              Selected Work
-            </span>
-          )}
+            />
+          </Link>
         </div>
       </div>
     </article>

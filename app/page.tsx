@@ -11,6 +11,11 @@ import { defaultOgImage, siteConfig } from "@/lib/site";
 import ProjectsSliderSection from "@/components/global/ProjectsSliderSection";
 import HomeServiceLeadChooser from "@/components/lead-capture/HomeServiceLeadChooser";
  
+const homeOgImage = {
+  ...defaultOgImage,
+  url: `${defaultOgImage.url}?v=home-2026-09-13`,
+};
+
 export const metadata: Metadata = {
   title: "Bespoke Sofas, Sofa Repair & Interior Design London",
 
@@ -33,7 +38,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     locale: siteConfig.locale,
 
-    images: [defaultOgImage],
+    images: [homeOgImage],
   },
 
   twitter: {
@@ -44,7 +49,7 @@ export const metadata: Metadata = {
     description:
       "Bespoke sofas, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
 
-    images: [defaultOgImage.url],
+    images: [homeOgImage.url],
   },
 };
 

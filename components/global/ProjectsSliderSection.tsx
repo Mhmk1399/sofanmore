@@ -1,3 +1,5 @@
+import { connection } from "next/server";
+
 import ProjectsSliderClient from "./ProjectsSliderClient";
 
 import { listPublishedProjects } from "@/lib/project-repository";
@@ -150,6 +152,8 @@ async function getSliderProjects(): Promise<ProjectSliderItem[]> {
 ========================================================= */
 
 export default async function ProjectsSliderSection() {
+  await connection();
+
   const sliderProjects = await getSliderProjects();
 
   if (!sliderProjects.length) {
