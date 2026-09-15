@@ -684,7 +684,7 @@ export default function CommercialSofaLeadForm() {
           ? "Files need to finish before the brief can be sent."
           : "Required fields are marked with a gold star."
       }
-      submitLabel="Send Your Commercial Project Brief"
+      submitLabel="Submit"
       loadingLabel="Sending Your Project Brief..."
       onSubmit={handleSubmit}
     >

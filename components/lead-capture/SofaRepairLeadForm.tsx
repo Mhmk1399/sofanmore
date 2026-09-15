@@ -606,7 +606,7 @@ export default function SofaRepairLeadForm() {
           ? "Photos need to finish before the details can be sent."
           : "Start with at least one clear photo. Required fields are marked with a gold star."
       }
-      submitLabel="Send Photos for Assessment"
+      submitLabel="Send Photos"
       loadingLabel="Sending Your Sofa Details…"
       onSubmit={handleSubmit}
     >

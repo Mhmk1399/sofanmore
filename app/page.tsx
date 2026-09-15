@@ -19,7 +19,7 @@ const homeOgImage = {
 };
 
 export const metadata: Metadata = {
-  title: "Bespoke Sofas, Sofa Repair & Interior Design London",
+  title: "Sofa N More | Bespoke Sofas, Sofa Repair & Interior Design London",
 
   description:
     "Sofa N More creates bespoke sofas, commercial seating, interior design projects, and sofa repair and restoration from North West London.",
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
 
-    title: "Bespoke Sofas, Sofa Repair & Interior Design London",
+    title: "Sofa N More | Bespoke Sofas, Sofa Repair & Interior Design London",
 
     description:
-      "Bespoke sofas, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
+      "Sofa N More | Bespoke sofas, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
 
     siteName: siteConfig.name,
     locale: siteConfig.locale,
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     title: "Bespoke Sofas, Sofa Repair & Interior Design London",
 
     description:
-      "Bespoke sofas, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
+      "Sofa N More | Bespoke sofas, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
 
     images: [absoluteUrl(homeOgImage.url)],
   },

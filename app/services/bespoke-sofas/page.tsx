@@ -12,10 +12,10 @@ const SITE_URL = "https://sofanmore.co.uk";
 
 const CANONICAL_URL = "https://sofanmore.co.uk/services/bespoke-sofas";
 
-const SEO_TITLE = "Bespoke sofa London | Custom-Made | Sofa N More";
+const SEO_TITLE = "Sofa N More Bespoke sofa London | Custom-Made | Sofa N More";
 
 const META_DESCRIPTION =
-  "Bespoke sofa handcrafted in London and made around your space. Custom sofas, chairs, benches and more, tailored in size, style and finish.";
+  "Sofa N More, Bespoke sofa handcrafted in London and made around your space. Custom sofas, chairs, benches and more, tailored in size, style and finish.";
 
 const OG_TITLE = "Bespoke sofa in London | Sofa N More";
 

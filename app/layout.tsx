@@ -29,10 +29,7 @@ const playfair = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   applicationName: siteConfig.name,
-  title: {
-    default: "Sofa N More | Bespoke Sofas & Interiors London",
-    template: "%s | Sofa N More",
-  },
+  title: "Sofa N More | Bespoke Sofas & Interiors London",
   description: siteConfig.description,
   keywords: [
     "bespoke sofas London",

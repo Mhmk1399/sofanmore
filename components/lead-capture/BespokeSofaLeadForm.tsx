@@ -666,7 +666,7 @@ export default function BespokeSofaLeadForm() {
           ? "Images need to finish before the project can be sent."
           : "Required fields are marked with a gold star."
       }
-      submitLabel="Request a Bespoke Sofa Consultation"
+      submitLabel="Submit"
       loadingLabel="Sending Your Project..."
       onSubmit={handleSubmit}
     >

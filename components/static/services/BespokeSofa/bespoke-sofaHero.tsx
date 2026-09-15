@@ -67,7 +67,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
                   id="bespoke-sofa-heading"
                   className="mt-4 max-w-[620px] font-brand-display  font-medium leading-[0.98] tracking-[-0.04em] text-[var(--brand-navy)] min-[390px]:text-[38px] sm:mt-5 sm:text-[48px] lg:mt-7 lg:text-[clamp(48px,4.5vw,72px)]"
                 >
-                  Bespoke sofa in London,
+                  Sofa N More | Bespoke sofa in London,
                   <br className="hidden sm:block" />
                   Made Around Your Space
                   <span className="text-[var(--brand-gold)]">.</span>

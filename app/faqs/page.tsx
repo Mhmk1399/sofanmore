@@ -6,7 +6,7 @@ import { absoluteUrl, defaultOgImage, siteConfig } from "@/lib/site";
 
 const CANONICAL_PATH = "/faqs";
 const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
-const SEO_TITLE = "FAQs | Bespoke Sofa & Sofa Restoration London";
+const SEO_TITLE = "FAQs |Sofa N More Bespoke Sofa & Sofa Restoration London";
 const META_DESCRIPTION =
   "Answers to common questions about Sofa N More bespoke sofa, water-resistant and fire-retardant upholstery, home staging, interior design, delivery and sustainability.";
 

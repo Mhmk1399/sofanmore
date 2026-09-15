@@ -627,7 +627,7 @@ export default function InteriorDesignLeadForm() {
           ? "Files need to finish before the brief can be sent."
           : "Required fields are marked with a gold star."
       }
-      submitLabel="Start Your Interior Design Project"
+      submitLabel="Submit"
       loadingLabel="Sending Your Interior Brief…"
       onSubmit={handleSubmit}
     >

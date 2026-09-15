@@ -194,8 +194,8 @@ export default function HomeServiceLeadChooser() {
                       onClick={() => handleServiceSelect(choice.key)}
                       aria-pressed={active}
                       className={[
-                        "flex min-h-[64px] items-center gap-3 rounded-[16px]",
-                        "border px-4 py-3 text-left transition-all duration-200",
+                        "flex min-h-[64px] items-center gap-1 md:gap-3 rounded-[16px]",
+                        "border px-2 md:px-4 py-3 text-left transition-all duration-200",
                         active
                           ? "border-[var(--brand-navy)] bg-[var(--brand-navy)] text-white shadow-[0_8px_20px_rgba(18,37,62,.14)]"
                           : "border-[#dfd2c0] bg-white/45 text-[var(--brand-navy)] hover:border-[var(--brand-gold)] hover:bg-white/70",
@@ -203,7 +203,7 @@ export default function HomeServiceLeadChooser() {
                     >
                       <span
                         className={[
-                          "flex h-9 w-9 shrink-0 items-center justify-center rounded-full",
+                          "flex md:h-9 md:w-9 shrink-0 items-center justify-center rounded-full",
                           active
                             ? "bg-[var(--brand-gold)] text-[var(--brand-navy)]"
                             : "bg-white/70 text-[var(--brand-gold-700)]",
@@ -212,7 +212,7 @@ export default function HomeServiceLeadChooser() {
                         <Icon size={17} strokeWidth={1.6} />
                       </span>
 
-                      <span className="text-[11px] md:text-sm font-bold">
+                      <span className="text-[11px] text-nowrap md:text-sm font-bold">
                         {choice.label}
                       </span>
                     </button>

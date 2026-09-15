@@ -1156,25 +1156,25 @@ function MobileServiceCard({ service }: { service: Service }) {
       {/* Content */}
       <div className="mt-3 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2.5">
-          <span className="clay-icon-inset flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px]">
+          <span className="clay-icon-inset flex h-8 w-8 shrink-0 items-center justify-center rounded-[12px]">
             <Icon
-              size={16}
+              size={14}
               strokeWidth={1.5}
               className="text-[var(--brand-gold)]"
             />
           </span>
           <div>
-            <span className="block font-brand-display text-[12px] font-semibold leading-tight">
+            <span className="block font-brand-display text-nowrap text-[11px] font-semibold leading-tight">
               {service.title}
             </span>
-            <p className="mt-1 font-brand-sans text-[7.5px] font-semibold text-[var(--brand-text-muted)]">
+            <p className="mt-1 font-brand-sans text-[7.5px] text-nowrap font-semibold text-[var(--brand-text-muted)]">
               {service.subtitle}
             </p>
           </div>
         </div>
 
-        <span className="clay-icon flex h-7 w-7 shrink-0 items-center justify-center rounded-full">
-          <MoveRight size={11} className="text-[var(--brand-gold-700)]" />
+        <span className="clay-icon flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+          <MoveRight size={9} className="text-[var(--brand-gold-700)]" />
         </span>
       </div>
     </Link>
