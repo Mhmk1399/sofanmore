@@ -15,7 +15,7 @@ import ClayButton from "@/components/ui/ClayButton";
 const interiorElements = [
   {
     icon: Armchair,
-    label: "Bespoke Sofa",
+    label: "Upholstery",
   },
 
   {

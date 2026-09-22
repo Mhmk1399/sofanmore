@@ -240,7 +240,7 @@ export default function InteriorDesignLondonBaseSection() {
                   "
                 >
                   Our interior design service brings together creative direction
-                  and our experience in bespoke sofas, allowing the seating and
+                  and our experience in upholstery, allowing the seating and
                   wider interior to be considered as part of one project.
                 </p>
 
@@ -266,7 +266,7 @@ export default function InteriorDesignLondonBaseSection() {
 
                   <ApproachItem
                     icon={<Sofa size={14} strokeWidth={1.5} />}
-                    eyebrow="Bespoke Sofa Experience"
+                    eyebrow="Upholstery Experience"
                     title="Seating developed with the interior."
                   />
                 </div>

@@ -32,7 +32,7 @@ const workshopSteps: WorkshopStep[] = [
     title: "Visit or Arrange an Appointment",
     description:
       "Walk-ins are welcome during our customer hours, and appointments are available when you would prefer a dedicated project discussion.",
-    note: "Appointments are particularly useful for detailed bespoke sofa consultations, commercial briefs and large repair drop-offs.",
+    note: "Appointments are particularly useful for detailed upholstery consultations, commercial briefs and large repair drop-offs.",
     icon: CalendarDays,
   },
   {

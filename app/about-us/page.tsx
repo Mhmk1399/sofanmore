@@ -7,9 +7,9 @@ import { absoluteUrl, defaultOgImage, siteConfig } from "@/lib/site";
 
 const CANONICAL_PATH = "/about-us"; 
 const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
-const SEO_TITLE = "About Sofa N More | London Bespoke Sofa Makers";
+const SEO_TITLE = "About Sofa N More | London Upholstery Makers";
 const META_DESCRIPTION =
-  "Learn about Sofa N More, a North West London studio creating bespoke sofas, commercial seating, interiors, and sofa restoration work.";
+  "Learn about Sofa N More, a North West London studio creating upholstery, commercial seating, interiors, and sofa restoration work.";
 const PRIMARY_IMAGE = absoluteUrl(
   "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/6.webp",
 );
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     url: CANONICAL_PATH,
     title: SEO_TITLE,
     description:
-      "Discover the craft, workshop, and approach behind Sofa N More's bespoke sofas and interior services in London.",
+      "Discover the craft, workshop, and approach behind Sofa N More's upholstery and interior services in London.",
     siteName: siteConfig.name,
     locale: siteConfig.locale,
     images: [defaultOgImage],
@@ -85,10 +85,10 @@ const aboutPageSchema = {
     "@id": `${CANONICAL_URL}#primaryimage`,
     url: PRIMARY_IMAGE,
     contentUrl: PRIMARY_IMAGE,
-    caption: "Sofa N More bespoke sofa craftsmanship in London",
+    caption: "Sofa N More upholstery craftsmanship in London",
   },
   knowsAbout: [
-    "Bespoke sofas",
+    "Upholstery",
     "Custom seating",
     "Commercial sofas",
     "Interior design",

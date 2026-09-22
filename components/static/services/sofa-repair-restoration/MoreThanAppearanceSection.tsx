@@ -192,7 +192,7 @@ export default function MoreThanAppearanceSection({
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Repairing a Sofa Can Be About More Than Appearance
+                  Reupholstering a Sofa Can Be About More Than Appearance
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
 

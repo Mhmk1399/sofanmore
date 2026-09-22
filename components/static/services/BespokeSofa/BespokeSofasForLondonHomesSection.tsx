@@ -211,7 +211,7 @@ export default function BespokeSofasForLondonHomesSection() {
                     lg:text-[clamp(48px,4.15vw,64px)]
                   "
                 >
-                  Bespoke Sofas for
+                  Upholstery for
                   <br className="hidden xl:block" />
                   London Homes
                   <span className="text-[var(--brand-gold)]">.</span>
@@ -347,7 +347,7 @@ export default function BespokeSofasForLondonHomesSection() {
                           sm:text-[23px]
                         "
                       >
-                        A bespoke sofa gives you more control over those
+                        A upholstery gives you more control over those
                         decisions.
                       </p>
                     </div>
@@ -446,7 +446,7 @@ export default function BespokeSofasForLondonHomesSection() {
                     showArrow
                     className="max-sm:w-full"
                   >
-                    Discuss a Bespoke Sofa
+                    Discuss Upholstery
                   </ClayButton>
                 </div>
               </div>
@@ -827,7 +827,7 @@ function LondonRoomFitVisual() {
           </svg>
 
           {/* ===============================================
-              BESPOKE SOFA
+              UPHOLSTERY
           ================================================ */}
 
           <div

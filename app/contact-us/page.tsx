@@ -6,9 +6,9 @@ import { absoluteUrl, defaultOgImage, siteConfig } from "@/lib/site";
 
 const CANONICAL_PATH = "/contact-us";
 const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
-const SEO_TITLE = "Contact Sofa N More | Bespoke Sofa Consultation London";
+const SEO_TITLE = "Contact Sofa N More | Upholstery Consultation London";
 const META_DESCRIPTION =
-  "Contact Sofa N More in North West London to discuss bespoke sofas, commercial seating, interior design, or sofa repair and restoration.";
+  "Contact Sofa N More in North West London to discuss upholstery, commercial seating, interior design, or sofa repair and restoration.";
 
 export const metadata: Metadata = {
   title: SEO_TITLE,
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: CANONICAL_PATH,
     title: SEO_TITLE,
     description:
-      "Start a bespoke sofa, commercial seating, interior design, or sofa restoration project with Sofa N More.",
+      "Start a upholstery, commercial seating, interior design, or sofa restoration project with Sofa N More.",
     siteName: siteConfig.name,
     locale: siteConfig.locale,
     images: [defaultOgImage],

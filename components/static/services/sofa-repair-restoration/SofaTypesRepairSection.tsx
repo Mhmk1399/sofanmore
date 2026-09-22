@@ -23,23 +23,23 @@ const sofaTypes: SofaType[] = [
   {
     number: "01",
     eyebrow: "Modern Sofas",
-    title: "Contemporary Sofa Repair",
+    title: "Contemporary Sofa Reupholstery",
     icon: Sofa,
     lead: "A modern sofa can still be worth preserving when its size, shape and design continue to work for your home.",
     paragraphs: [
-      "If your sofa has become worn or damaged, we can assess its condition and discuss whether repair or restoration is an appropriate solution.",
+      "If your sofa has become worn or damaged, we can assess its condition and discuss whether reupholstery, repair or restoration is an appropriate solution.",
     ],
   },
 
   {
     number: "02",
     eyebrow: "Made Around Your Space",
-    title: "Bespoke Sofa Restoration",
+    title: "Upholstery Restoration",
     icon: Ruler,
     lead: "A sofa made specifically for a room can be difficult to replace.",
     paragraphs: [
       "Its proportions may have been chosen for a particular wall, alcove or layout.",
-      "Restoring an existing bespoke sofa can preserve those dimensions while giving the piece renewed life.",
+      "Restoring an existing upholstery can preserve those dimensions while giving the piece renewed life.",
     ],
   },
 
@@ -219,7 +219,7 @@ export default function SofaTypesRepairSection({
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Sofa Repair & Restoration for Different Types of Sofas
+                  Sofa Reupholstery & Restoration for Different Types of Sofas
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
               </div>
@@ -353,8 +353,8 @@ export default function SofaTypesRepairSection({
                       lg:text-[22px]
                     "
                   >
-                    We shape the restoration around the individual sofa — not a
-                    one-size-fits-all repair.
+                    We shape the reupholstery and restoration around the
+                    individual sofa — not a one-size-fits-all repair.
                   </p>
                 </div>
               </div>

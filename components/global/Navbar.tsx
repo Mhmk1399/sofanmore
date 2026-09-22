@@ -62,7 +62,7 @@ type MobileTab = {
 
 const serviceGroups: ServiceGroup[] = [
   {
-    title: "Bespoke Sofas",
+    title: "Upholstery",
     subtitle: "Made for your space",
     icon: Armchair,
     href: "/services/bespoke-sofas",

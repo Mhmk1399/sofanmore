@@ -32,7 +32,7 @@ export const commercialSofasFaqs = [
     id: 2,
     question: "Do you make bespoke commercial sofas in London?",
     answer:
-      "Yes. Sofa N More creates bespoke sofas in London and can develop commercial seating around the individual requirements of a business space.",
+      "Yes. Sofa N More creates upholstery in London and can develop commercial seating around the individual requirements of a business space.",
   },
 
   {
@@ -65,9 +65,9 @@ export const commercialSofasFaqs = [
 
   {
     id: 7,
-    question: "Do you make bespoke sofas for hotels?",
+    question: "Do you make upholstery for hotels?",
     answer:
-      "Yes. Bespoke sofas can be developed for hotel lobbies, lounges, reception areas, bars and other hospitality spaces.",
+      "Yes. Upholstery can be developed for hotel lobbies, lounges, reception areas, bars and other hospitality spaces.",
   },
 
   {

@@ -8,7 +8,7 @@ const workshopActivities = [
   "Browse our full collection of sofa catalogues",
   "Explore fabric samples in person",
   "Discuss dimensions, configuration and comfort",
-  "Plan a bespoke sofa around your room",
+  "Plan a upholstery around your room",
   "Review options for commercial seating",
   "Arrange a sofa repair or restoration assessment",
   "Bring a suitable sofa, chair or cushion for drop-off",

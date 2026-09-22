@@ -8,11 +8,11 @@ const COLLAPSED_LINES = 3;
 const COLLAPSED_HEIGHT = LINE_HEIGHT * COLLAPSED_LINES;
 
 const mainText =
-  "Sofa N More is a bespoke sofa and interior studio based in North West London, near Cricklewood, Staples Corner and Brent Cross. We create made-to-measure sofas, commercial seating and tailored interiors, and provide professional sofa repair and restoration for homes, hospitality venues, offices and other commercial spaces.";
+  "Sofa N More is a upholstery and interior studio based in North West London, near Cricklewood, Staples Corner and Brent Cross. We create made-to-measure sofas, commercial seating and tailored interiors, and provide professional sofa repair and restoration for homes, hospitality venues, offices and other commercial spaces.";
 
 const fullText = `${mainText}
 
-Our work is organised around four connected services: bespoke sofas for rooms that require specific dimensions or configurations; commercial sofas and contract seating for restaurants, cafés, hotels, offices and reception spaces; residential and commercial interior design; and sofa repair and restoration for existing pieces worth keeping.
+Our work is organised around four connected services: upholstery for rooms that require specific dimensions or configurations; commercial sofas and contract seating for restaurants, cafés, hotels, offices and reception spaces; residential and commercial interior design; and sofa repair and restoration for existing pieces worth keeping.
 
 Every project begins with the space, the people using it and the result the sofa or interior needs to achieve. We consider room proportions, circulation, access, comfort, upholstery, colour, materials, durability and the wider visual direction before recommending an appropriate approach. This helps us create seating and interiors that look considered, feel comfortable and continue to work in everyday use.
 

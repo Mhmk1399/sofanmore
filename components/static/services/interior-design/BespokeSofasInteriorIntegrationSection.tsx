@@ -205,7 +205,7 @@ export default function BespokeSofasInteriorIntegrationSection() {
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Bespoke Sofas as Part of the Interior
+                  Upholstery as Part of the Interior
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
 
@@ -263,7 +263,7 @@ export default function BespokeSofasInteriorIntegrationSection() {
                   </p>
 
                   <p>
-                    Through Sofa N More&apos;s bespoke sofa service, dimensions,
+                    Through Sofa N More&apos;s upholstery service, dimensions,
                     shape, upholstery and details can be developed around the
                     wider design direction.
                   </p>
@@ -572,7 +572,7 @@ function IntegratedSofaVisual() {
         >
           <Image
             src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/40.webp"
-            alt="Bespoke sofa designed as part of a complete interior by Sofa N More"
+            alt="Upholstery designed as part of a complete interior by Sofa N More"
             fill
             sizes="(max-width: 1023px) 100vw, 52vw"
             className="

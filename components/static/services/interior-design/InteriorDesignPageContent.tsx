@@ -31,7 +31,7 @@ export const interiorDesignFaqs = [
     id: 2,
     question: "Do you work on residential interiors?",
     answer:
-      "Yes. Residential interior design projects can be developed around the layout, visual direction, colour, materials and bespoke sofa requirements of the home.",
+      "Yes. Residential interior design projects can be developed around the layout, visual direction, colour, materials and upholstery requirements of the home.",
   },
 
   {
@@ -43,9 +43,9 @@ export const interiorDesignFaqs = [
 
   {
     id: 4,
-    question: "Can you design a bespoke sofa as part of my interior?",
+    question: "Can you design a upholstery as part of my interior?",
     answer:
-      "Yes. One advantage of working with Sofa N More is the ability to consider a bespoke sofa as part of the wider interior rather than treating it as a separate purchase. Dimensions, shape, upholstery and styling can be developed around the room and design direction.",
+      "Yes. One advantage of working with Sofa N More is the ability to consider a upholstery as part of the wider interior rather than treating it as a separate purchase. Dimensions, shape, upholstery and styling can be developed around the room and design direction.",
   },
 
   {
@@ -73,7 +73,7 @@ export const interiorDesignFaqs = [
     id: 8,
     question: "Can bespoke seating be included in a restaurant project?",
     answer:
-      "Yes. Bespoke sofas, banquettes, booths and other upholstered seating can be developed around the restaurant layout and wider interior concept.",
+      "Yes. Upholstery, banquettes, booths and other upholstered seating can be developed around the restaurant layout and wider interior concept.",
   },
 
   {
@@ -92,9 +92,9 @@ export const interiorDesignFaqs = [
 
   {
     id: 11,
-    question: "Can bespoke sofas in an interior project be waterproof and fire-resistant?",
+    question: "Can upholstery in an interior project be waterproof and fire-resistant?",
     answer:
-      "Yes. Bespoke sofas and upholstered seating can be specified with water-resistant upholstery and fire-retardant materials, depending on the design, fabric choice and intended use of the space.",
+      "Yes. Upholstery and upholstered seating can be specified with water-resistant upholstery and fire-retardant materials, depending on the design, fabric choice and intended use of the space.",
   },
 ] satisfies InteriorDesignFaqItem[];
 

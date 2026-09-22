@@ -184,7 +184,7 @@ export default function WorkshopBespokeSofaSection() {
               </div>
 
               {/* =================================================
-                  BESPOKE SOFA PANEL
+                  UPHOLSTERY PANEL
               ================================================== */}
 
               <article
@@ -271,7 +271,7 @@ export default function WorkshopBespokeSofaSection() {
                           sm:text-[27px]
                         "
                       >
-                        Discuss a Bespoke Sofa
+                        Discuss Upholstery
                       </h3>
                     </div>
                   </div>
@@ -443,9 +443,9 @@ export default function WorkshopBespokeSofaSection() {
                       variant="gold"
                       size="sm"
                       showArrow
-                      ariaLabel="Explore bespoke sofas from Sofa N More"
+                      ariaLabel="Explore upholstery from Sofa N More"
                     >
-                      Explore Bespoke Sofas
+                      Explore Upholstery
                     </ClayButton>
                   </div>
                 </div>

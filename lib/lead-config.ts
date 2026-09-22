@@ -197,7 +197,7 @@ export const leadServiceDefinitions = {
     ],
   },
   BESPOKE_SOFA: {
-    label: "Bespoke sofa",
+    label: "Upholstery",
     fields: [
       {
         key: "projectType",

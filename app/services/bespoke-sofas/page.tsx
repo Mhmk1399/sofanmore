@@ -12,15 +12,15 @@ const SITE_URL = "https://sofanmore.co.uk";
 
 const CANONICAL_URL = "https://sofanmore.co.uk/services/bespoke-sofas";
 
-const SEO_TITLE = "Sofa N More Bespoke sofa London | Custom-Made | Sofa N More";
+const SEO_TITLE = "Sofa N More Upholstery London | Custom-Made | Sofa N More";
 
 const META_DESCRIPTION =
-  "Sofa N More, Bespoke sofa handcrafted in London and made around your space. Custom sofas, chairs, benches and more, tailored in size, style and finish.";
+  "Sofa N More upholstery is handcrafted in London and made around your space. Custom sofas, chairs, benches and more, tailored in size, style and finish.";
 
-const OG_TITLE = "Bespoke sofa in London | Sofa N More";
+const OG_TITLE = "Upholstery in London | Sofa N More";
 
 const OG_DESCRIPTION =
-  "Discover custom-made sofa designed around your space, style and everyday life, handcrafted by Sofa N More in London.";
+  "Discover custom-made upholstery designed around your space, style and everyday life, handcrafted by Sofa N More in London.";
 
 /* =========================================================
    METADATA
@@ -109,7 +109,7 @@ const breadcrumbSchema = {
 
       position: 3,
 
-      name: "Bespoke sofa",
+      name: "Upholstery",
 
       item: CANONICAL_URL,
     },
@@ -129,9 +129,9 @@ const serviceSchema = {
 
   url: CANONICAL_URL,
 
-  name: "Bespoke sofa in London",
+  name: "Upholstery in London",
 
-  serviceType: "Bespoke sofa",
+  serviceType: "Upholstery",
 
   description: META_DESCRIPTION,
 

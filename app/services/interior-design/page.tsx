@@ -16,7 +16,7 @@ const SEO_TITLE =
   "Interior Design London | Residential & Commercial | Sofa N More";
 
 const META_DESCRIPTION =
-  "Bespoke interior design in London for homes, restaurants, cafés, hotels and offices. Tailored spaces, bespoke sofas and design from concept to completion.";
+  "Bespoke interior design in London for homes, restaurants, cafés, hotels and offices. Tailored spaces, upholstery and design from concept to completion.";
 
 const PAGE_H1 =
   "Interior Design in London, Shaped Around the Way You Live & Work";

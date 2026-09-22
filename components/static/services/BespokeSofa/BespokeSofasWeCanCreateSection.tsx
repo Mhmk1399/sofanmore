@@ -16,7 +16,7 @@ const bespokePieces = [
     id: "corner-modular-sofas",
     number: "01",
     eyebrow: "Signature Seating",
-    title: "Bespoke Sofas",
+    title: "Upholstery",
     description:
       "Create a sofa around the dimensions, comfort and character of your room rather than trying to make a standard model fit.",
     secondary:
@@ -205,7 +205,7 @@ export default function BespokeSofasWeCanCreateSection() {
                     lg:text-[clamp(50px,4.5vw,68px)]
                   "
                 >
-                  Bespoke Sofas
+                  Upholstery
                   <br className="hidden sm:block" />& Pieces We Can Create
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
@@ -232,7 +232,7 @@ export default function BespokeSofasWeCanCreateSection() {
                     lg:text-[14px]
                   "
                 >
-                  Every project is different, but our bespoke sofa and seating
+                  Every project is different, but our upholstery and seating
                   service can include custom pieces for living, dining, working
                   and hospitality spaces.
                 </p>

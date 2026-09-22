@@ -9,7 +9,7 @@ import ClayButton from "@/components/ui/ClayButton";
 const REPAIR_FORM_ID = "repair-assessment-form";
 
 const WHATSAPP_REPAIR_URL =
-  "https://wa.me/447400577844?text=Hi%20Sofa%20N%20More%2C%20I%27d%20like%20to%20send%20details%20and%20photos%20of%20my%20sofa%20for%20a%20repair%20or%20restoration%20assessment.";
+  "https://wa.me/447400577844?text=Hi%20Sofa%20N%20More%2C%20I%27d%20like%20to%20send%20details%20and%20photos%20of%20my%20sofa%20for%20a%20reupholstery%20or%20restoration%20assessment.";
 
 /* =========================================================
    DATA
@@ -150,7 +150,7 @@ export default function SofaRepairFinalCTASection() {
                       sm:text-[11px]
                     "
                   >
-                    Sofa Repair & Restoration
+                    Sofa Reupholstery & Restoration
                   </span>
                 </div>
 
@@ -252,9 +252,9 @@ export default function SofaRepairFinalCTASection() {
                     size="lg"
                     showArrow
                     className="max-sm:w-full"
-                    ariaLabel="Request a sofa repair assessment"
+                    ariaLabel="Request a sofa reupholstery assessment"
                   >
-                    Request a Sofa Repair Assessment
+                    Request a Sofa Reupholstery Assessment
                   </ClayButton>
 
                   <ClayButton
@@ -276,7 +276,7 @@ export default function SofaRepairFinalCTASection() {
               ================================================== */}
 
               <aside
-                aria-label="What to send for your sofa repair assessment"
+                aria-label="What to send for your sofa reupholstery assessment"
                 className="
                   rounded-[22px]
 
@@ -390,7 +390,7 @@ export default function SofaRepairFinalCTASection() {
                       sm:text-[18px]
                     "
                   >
-                    Repair, restore or preserve — the first step is
+                    Reupholster, restore or preserve — the first step is
                     understanding what your sofa needs.
                   </p>
                 </div>

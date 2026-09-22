@@ -203,7 +203,7 @@ export default function WorkshopFinalCTASection() {
                     lg:text-[13px]
                   "
                 >
-                  Whether you are ordering a bespoke sofa, bringing an existing
+                  Whether you are ordering a upholstery, bringing an existing
                   piece for assessment or planning seating for a commercial
                   space, a workshop visit can help turn the initial idea into a
                   clear next step.

@@ -11,7 +11,7 @@ const designConsiderations = [
   "Materials",
   "Texture",
   "Lighting",
-  "Bespoke Sofas",
+  "Upholstery",
 ];
 
 const outcomes = [
@@ -297,7 +297,7 @@ export default function BespokeInteriorDesignPhilosophySection() {
                 >
                   We consider how the room connects, how people move through it,
                   where attention should naturally fall and how colour,
-                  materials, textures, lighting and bespoke sofas can work
+                  materials, textures, lighting and upholstery can work
                   together as one complete environment.
                 </p>
               </div>

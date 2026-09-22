@@ -72,9 +72,9 @@ const processSteps: ProcessStep[] = [
   {
     number: "05",
     label: "Integrate",
-    title: "Integrate Bespoke Sofas & Seating",
+    title: "Integrate Upholstery & Seating",
     description:
-      "Where the project requires it, bespoke sofas and seating can be designed around the dimensions and character of the space.",
+      "Where the project requires it, upholstery and seating can be designed around the dimensions and character of the space.",
     secondary:
       "This creates a stronger connection between the room and one of its most important visual elements.",
     icon: Armchair,

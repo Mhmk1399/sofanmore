@@ -280,7 +280,7 @@ export default function MadeInLondonSection() {
                   "
                 >
                   <p>
-                    Sofa N More creates bespoke sofas, seating and custom pieces
+                    Sofa N More creates upholstery, seating and custom pieces
                     from its London workshop, combining design, material
                     selection and craftsmanship around individual spaces.
                   </p>

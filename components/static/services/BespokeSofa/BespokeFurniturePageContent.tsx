@@ -18,19 +18,19 @@ export const bespokesofaFaqs = [
   {
     id: 1,
 
-    question: "What does bespoke sofa mean?",
+    question: "What does custom upholstery mean?",
 
     answer:
-      "Bespoke sofa is created specifically for an individual customer or project rather than being produced to a fixed standard specification. Dimensions, design details, materials and finishes can be adapted around the requirements of the space.",
+      "Custom upholstery is created specifically for an individual customer or project rather than being produced to a fixed standard specification. Dimensions, design details, materials and finishes can be adapted around the requirements of the space.",
   },
 
   {
     id: 2,
 
-    question: "Can you make sofa to specific dimensions?",
+    question: "Can you make a sofa to specific dimensions?",
 
     answer:
-      "Yes. Custom dimensions are one of the main reasons clients choose bespoke sofa. Share the measurements and requirements of your space with us and we can explore the appropriate proportions for your project.",
+      "Yes. Custom dimensions are one of the main reasons clients choose upholstery. Share the measurements and requirements of your space with us and we can explore the appropriate proportions for your project.",
   },
 
   {
@@ -45,7 +45,7 @@ export const bespokesofaFaqs = [
   {
     id: 4,
 
-    question: "Do you make bespoke sofas?",
+    question: "Do you provide upholstery?",
 
     answer:
       "Yes. Sofa N More creates custom and made-to-measure sofas in London, with dimensions and design details developed around the individual project.",
@@ -54,16 +54,16 @@ export const bespokesofaFaqs = [
   {
     id: 5,
 
-    question: "How much does bespoke sofa cost?",
+    question: "How much does upholstery cost?",
 
     answer:
-      "The cost of bespoke sofa depends on factors including the type and size of the piece, construction, materials, upholstery and complexity of the design. Once we understand your requirements, we can prepare a quote based on the specification of your project.",
+      "The cost of upholstery depends on factors including the type and size of the piece, construction, materials, upholstery and complexity of the design. Once we understand your requirements, we can prepare a quote based on the specification of your project.",
   },
 
   {
     id: 6,
 
-    question: "How long does bespoke sofa take to make?",
+    question: "How long does an upholstery project take?",
 
     answer:
       "Timescales vary depending on the design, materials and complexity of the project. We can provide a more accurate indication once the specification and requirements have been discussed.",
@@ -72,7 +72,7 @@ export const bespokesofaFaqs = [
   {
     id: 7,
 
-    question: "Do you deliver bespoke sofa?",
+    question: "Do you deliver upholstery projects?",
 
     answer:
       "Yes. Delivery and installation can form part of the Sofa N More service.",
@@ -81,7 +81,7 @@ export const bespokesofaFaqs = [
   {
     id: 8,
 
-    question: "Do you make sofa for commercial projects?",
+    question: "Do you make sofas for commercial projects?",
 
     answer:
       "Yes. Sofa N More also works on sofa for commercial environments. Visit our Commercial sofa page to learn more about solutions for restaurants, cafés, offices and hospitality spaces.",
@@ -90,7 +90,7 @@ export const bespokesofaFaqs = [
   {
     id: 9,
 
-    question: "Are your bespoke sofas waterproof and fire-resistant?",
+    question: "Is your upholstery waterproof and fire-resistant?",
 
     answer:
       "The sofas we make can be specified with water-resistant upholstery and fire-retardant materials. Fabric choice, finish and intended use are discussed during the bespoke design process.",
@@ -108,7 +108,7 @@ export default function BespokesofaPageContent() {
     >
       <ServiceStickyCta
         href="#bespoke-sofa-enquiry"
-        label="Request Bespoke Sofa"
+        label="Request Upholstery"
       />
       <BespokesofaHero id="service" />
       <CustomsofaForYourSpaceSection id="made-to-measure-sofas" />

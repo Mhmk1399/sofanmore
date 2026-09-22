@@ -17,7 +17,7 @@ const segmentLabels: Record<string, string> = {
   faqs: "FAQs",
   faq: "FAQs",
   services: "Services",
-  "bespoke-sofa": "Bespoke Sofa",
+  "bespoke-sofa": "Upholstery",
   "commercial-sofas": "Commercial Sofas",
   "interior-design": "Interior Design",
   gallery: "Gallery",

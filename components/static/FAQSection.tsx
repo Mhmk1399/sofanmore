@@ -26,7 +26,7 @@ type TrustItem = {
 const defaultFaqs: FAQItem[] = [
   {
     id: 1,
-    question: "Do you offer fully bespoke sofa?",
+    question: "Do you offer fully upholstery?",
     answer:
       "Yes. We create made-to-measure sofas, chairs, benches and other sofa pieces tailored to your style, dimensions and functional needs.",
   },
@@ -56,7 +56,7 @@ const defaultFaqs: FAQItem[] = [
   },
   {
     id: 6,
-    question: "Are your bespoke sofas water-resistant and fire-retardant?",
+    question: "Is your upholstery water-resistant and fire-retardant?",
     answer:
       "Yes. The sofas we make can be specified with water-resistant upholstery and fire-retardant materials, with suitable fabric choices discussed during the design process.",
   },
@@ -148,7 +148,7 @@ const DesktopFAQ = memo(function DesktopFAQ({ items }: { items: FAQItem[] }) {
             </h2>
 
             <p className="mt-5 max-w-[340px] font-brand-sans text-[13px] font-medium leading-[1.65] text-[var(--brand-text-muted)]">
-              Find answers to common questions about our bespoke sofa, interior
+              Find answers to common questions about our upholstery, interior
               design, restoration and London-based craftsmanship.
             </p>
 
@@ -236,7 +236,7 @@ const MobileFAQ = memo(function MobileFAQ({ items }: { items: FAQItem[] }) {
         </h2>
 
         <p className="mt-3 max-w-[280px] font-brand-sans text-[12px] font-medium leading-[1.5] text-[var(--brand-text-muted)]">
-          Find answers about our bespoke sofa, interiors and London
+          Find answers about our upholstery, interiors and London
           craftsmanship.
         </p>
 

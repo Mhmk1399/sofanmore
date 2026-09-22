@@ -32,7 +32,7 @@ const services: ServiceItem[] = [
   {
     number: "01",
     eyebrow: "Made to Measure",
-    title: "Bespoke Sofas",
+    title: "Upholstery",
     description:
       "For spaces where standard sofa sizes, proportions or configurations do not give you the result you need.",
     useCase:
@@ -69,7 +69,7 @@ const services: ServiceItem[] = [
     description:
       "Residential and commercial interior design for projects that need more than one individual sofa.",
     useCase:
-      "For layouts, materials, colour, atmosphere and bespoke sofas brought into one clear direction.",
+      "For layouts, materials, colour, atmosphere and upholstery brought into one clear direction.",
     href: "/services/interior-design",
     icon: Building2,
   },

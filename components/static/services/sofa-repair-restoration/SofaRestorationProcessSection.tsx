@@ -64,7 +64,7 @@ const processSteps: ProcessStep[] = [
     description:
       "We consider the condition of the piece and the outcome you are looking for.",
     secondary:
-      "Where the project is suitable for our repair and restoration service, we can discuss the recommended scope and next steps.",
+      "Where the project is suitable for our reupholstery and restoration service, we can discuss the recommended scope and next steps.",
     icon: ClipboardCheck,
   },
 
@@ -82,7 +82,7 @@ const processSteps: ProcessStep[] = [
   {
     number: "05",
     eyebrow: "Craftsmanship",
-    title: "Repair & Restoration",
+    title: "Reupholstery & Restoration",
     description:
       "Once the scope is agreed, the sofa can move through the appropriate restoration process with attention to the original character and requirements of the piece.",
     icon: Hammer,

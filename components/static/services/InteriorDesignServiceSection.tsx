@@ -67,7 +67,7 @@ const designElements: DesignElement[] = [
     icon: LampDesk,
   },
   {
-    title: "Bespoke Sofas",
+    title: "Upholstery",
     icon: Sofa,
   },
   {
@@ -632,7 +632,7 @@ export default function InteriorDesignServiceSection() {
                       text-[var(--brand-gold)]
                     "
                   >
-                    Bespoke Sofa Expertise
+                    Upholstery Expertise
                   </span>
 
                   <h3
@@ -685,9 +685,9 @@ export default function InteriorDesignServiceSection() {
                     variant="ivory"
                     size="sm"
                     showArrow
-                    ariaLabel="Explore bespoke sofas from Sofa N More"
+                    ariaLabel="Explore upholstery from Sofa N More"
                   >
-                    Explore Bespoke Sofas
+                    Explore Upholstery
                   </ClayButton>
                 </div>
               </div>

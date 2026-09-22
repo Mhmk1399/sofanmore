@@ -308,8 +308,8 @@ export default function SofaRestorationChangingInteriorsSection() {
                     lg:text-[14px]
                   "
                 >
-                  Repair and restoration can be considered alongside the wider
-                  direction of your space, helping an existing sofa feel
+                  Reupholstery and restoration can be considered alongside the
+                  wider direction of your space, helping an existing sofa feel
                   relevant again without losing the qualities you wanted to
                   preserve.
                 </p>

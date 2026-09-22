@@ -53,7 +53,7 @@ const benefits = [
     title: "Greater Design Freedom",
 
     description:
-      "A bespoke sofa or seating piece gives you the freedom to create something that complements the wider interior rather than designing the room around a standard piece.",
+      "A upholstery or seating piece gives you the freedom to create something that complements the wider interior rather than designing the room around a standard piece.",
   },
 
   {
@@ -240,7 +240,7 @@ export default function WhyChooseBespokeSofasSection() {
                   lg:text-[clamp(50px,4.5vw,68px)]
                 "
               >
-                Why Choose a Bespoke Sofa
+                Why Choose Upholstery
                 <span
                   className="
                     text-[var(--brand-gold)]

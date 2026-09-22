@@ -146,7 +146,7 @@ export default function GalleryHero() {
                   lg:text-[14px]
                 "
               >
-                Explore a selection of bespoke sofas, commercial seating and
+                Explore a selection of upholstery, commercial seating and
                 interiors created around individual spaces, requirements and
                 ideas.
               </p>

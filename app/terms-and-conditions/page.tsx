@@ -141,7 +141,7 @@ export const metadata: Metadata = {
   title: "Terms & Conditions | Sofa N More London",
 
   description:
-    "Read the Sofa N More terms and conditions covering bespoke sofas, commercial seating, interior design, sofa repair and restoration, quotations, payments, delivery and cancellations.",
+    "Read the Sofa N More terms and conditions covering upholstery, commercial seating, interior design, sofa repair and restoration, quotations, payments, delivery and cancellations.",
 
   alternates: {
     canonical: PAGE_PATH,
@@ -159,7 +159,7 @@ export const metadata: Metadata = {
     title: "Terms & Conditions | Sofa N More London",
 
     description:
-      "Terms and conditions for Sofa N More services including bespoke sofas, commercial seating, interior design and sofa repair and restoration.",
+      "Terms and conditions for Sofa N More services including upholstery, commercial seating, interior design and sofa repair and restoration.",
 
     siteName: siteConfig.name,
     locale: siteConfig.locale,
@@ -789,7 +789,7 @@ export default function TermsAndConditionsPage() {
                 title="Our Products & Services"
               >
                 <TermsParagraph>
-                  Sofa N More provides services including bespoke sofas and
+                  Sofa N More provides services including upholstery and
                   seating, commercial seating, interior design, and sofa repair
                   and restoration.
                 </TermsParagraph>
@@ -851,7 +851,7 @@ export default function TermsAndConditionsPage() {
                 title="Bespoke & Made-to-Measure Orders"
               >
                 <TermsParagraph>
-                  Bespoke sofas and seating may be designed or produced around
+                  Upholstery and seating may be designed or produced around
                   dimensions, configurations, fabrics, colours, finishes or
                   other choices agreed specifically for you.
                 </TermsParagraph>

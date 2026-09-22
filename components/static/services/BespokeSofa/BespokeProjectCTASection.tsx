@@ -283,7 +283,7 @@ export default function BespokeProjectCTASection() {
                     size="lg"
                     showArrow
                     className="max-sm:w-full"
-                    ariaLabel="Discuss your bespoke sofa project with Sofa N More"
+                    ariaLabel="Discuss your upholstery project with Sofa N More"
                   >
                     Discuss Your Project
                   </ClayButton>

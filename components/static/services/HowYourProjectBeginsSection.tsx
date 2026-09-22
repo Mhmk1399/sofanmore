@@ -46,7 +46,7 @@ const usefulDetails: SharedDetail[] = [
 
 const briefExamples: BriefExample[] = [
   {
-    label: "Bespoke Sofas",
+    label: "Upholstery",
     text: "Dimensions, configuration, comfort and upholstery.",
     href: "/services/bespoke-sofas",
   },
@@ -866,7 +866,7 @@ function DetailItem({ label }: { label: string }) {
 function ServiceLinks() {
   const links = [
     {
-      label: "Bespoke Sofas",
+      label: "Upholstery",
       href: "/services/bespoke-sofas",
     },
     {

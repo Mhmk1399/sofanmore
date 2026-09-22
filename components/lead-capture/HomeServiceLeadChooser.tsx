@@ -25,7 +25,7 @@ type ServiceChoice = {
 const serviceChoices: ServiceChoice[] = [
   {
     key: "bespoke-sofa",
-    label: "Bespoke sofa",
+    label: "Upholstery",
     eyebrow: "Made to measure",
     summary: "A sofa designed around your home, measurements and references.",
     icon: Sofa,

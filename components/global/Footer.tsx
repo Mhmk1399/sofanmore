@@ -52,7 +52,7 @@ const columns: FooterColumn[] = [
         href: "/services",
       },
       {
-        label: "Bespoke Sofas",
+        label: "Upholstery",
         href: "/services/bespoke-sofas",
       },
       {
@@ -326,7 +326,7 @@ export default function Footer() {
                 sm:text-[11px]
               "
             >
-              Bespoke sofas, interiors and restoration in London.
+              Upholstery, interiors and restoration in London.
             </p>
           </div>
 
@@ -397,7 +397,7 @@ function BrandColumn() {
           sm:text-[13px]
         "
       >
-        Bespoke sofas, commercial seating, interior design and professional sofa
+        Upholstery, commercial seating, interior design and professional sofa
         repair from our North West London workshop.
       </p>
 

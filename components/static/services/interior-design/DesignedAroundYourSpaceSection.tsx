@@ -861,7 +861,7 @@ function SpaceFirstPanel() {
                   sm:text-[13px]
                 "
               >
-                Layout, bespoke sofas,
+                Layout, upholstery,
                 materials, colour and lighting
                 can now respond to something
                 real instead of an abstract

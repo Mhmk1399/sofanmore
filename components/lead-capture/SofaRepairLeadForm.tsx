@@ -579,7 +579,7 @@ export default function SofaRepairLeadForm() {
   return (
     <LeadFormShell
       id="sofa-repair-enquiry"
-      eyebrow="Sofa repair assessment"
+      eyebrow="Sofa reupholstery assessment"
       icon={<Camera size={21} strokeWidth={1.55} />}
       title={
         <>
@@ -595,7 +595,7 @@ export default function SofaRepairLeadForm() {
       }
       successLeadId={successLeadId}
       successTitle="Thank You — Your Sofa Is Ready for Review."
-      successMessage="We’ve received your details and photos. Our team can review the condition before discussing repair, restoration, workshop drop-off or collection."
+      successMessage="We’ve received your details and photos. Our team can review the condition before discussing reupholstery, restoration, workshop drop-off or collection."
       successEyebrow="Photos received"
       submitError={submitError}
       errorTitle="We couldn’t send your sofa details."

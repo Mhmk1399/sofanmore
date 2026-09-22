@@ -15,14 +15,14 @@ const homeOgImage = {
   url: "/og-image.png?v=home-2026-09-13",
   width: 1200,
   height: 630,
-  alt: "Sofa N More bespoke sofa and interior craftsmanship in London",
+  alt: "Sofa N More upholstery and interior craftsmanship in London",
 };
 
 export const metadata: Metadata = {
-  title: "Sofa N More | Bespoke Sofas, Sofa Repair & Interior Design London",
+  title: "Sofa N More | Upholstery, Sofa Repair & Interior Design London",
 
   description:
-    "Sofa N More creates bespoke sofas, commercial seating, interior design projects, and sofa repair and restoration from North West London.",
+    "Sofa N More creates upholstery, commercial seating, interior design projects, and sofa repair and restoration from North West London.",
 
   alternates: {
     canonical: "/",
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
 
-    title: "Sofa N More | Bespoke Sofas, Sofa Repair & Interior Design London",
+    title: "Sofa N More | Upholstery, Sofa Repair & Interior Design London",
 
     description:
-      "Sofa N More | Bespoke sofas, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
+      "Sofa N More | Upholstery, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
 
     siteName: siteConfig.name,
     locale: siteConfig.locale,
@@ -46,10 +46,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "Bespoke Sofas, Sofa Repair & Interior Design London",
+    title: "Upholstery, Sofa Repair & Interior Design London",
 
     description:
-      "Sofa N More | Bespoke sofas, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
+      "Sofa N More | Upholstery, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
 
     images: [absoluteUrl(homeOgImage.url)],
   },

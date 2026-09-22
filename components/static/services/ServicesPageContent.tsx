@@ -21,7 +21,7 @@ export const servicesFaqs = [
     id: 1,
     question: "What sofa services do you provide in North West London?",
     answer:
-      "Sofa N More provides four core services: bespoke sofas and made-to-measure seating, commercial sofas and contract seating, residential and commercial interior design, and sofa repair and restoration. Each service has a dedicated page explaining the relevant project types, process and next steps.",
+      "Sofa N More provides four core services: upholstery and made-to-measure seating, commercial sofas and contract seating, residential and commercial interior design, and sofa repair and restoration. Each service has a dedicated page explaining the relevant project types, process and next steps.",
   },
 
   {
@@ -40,9 +40,9 @@ export const servicesFaqs = [
 
   {
     id: 4,
-    question: "Do you make bespoke sofas near Cricklewood?",
+    question: "Do you make upholstery near Cricklewood?",
     answer:
-      "Yes. Our bespoke sofa service is available for suitable residential projects in Cricklewood and across North West London. Dimensions, configuration, comfort, upholstery and visible details can be developed around the room and agreed specification.",
+      "Yes. Our upholstery service is available for suitable residential projects in Cricklewood and across North West London. Dimensions, configuration, comfort, upholstery and visible details can be developed around the room and agreed specification.",
   },
 
   {
@@ -50,7 +50,7 @@ export const servicesFaqs = [
     question:
       "Do you make commercial sofas for restaurants, cafés and offices?",
     answer:
-      "Yes. Commercial projects can include bespoke sofas, banquettes, booths and upholstered seating for restaurants, cafés, hotels, offices, reception areas and hospitality spaces.",
+      "Yes. Commercial projects can include upholstery, banquettes, booths and upholstered seating for restaurants, cafés, hotels, offices, reception areas and hospitality spaces.",
   },
 
   {
@@ -76,7 +76,7 @@ export const servicesFaqs = [
 
   {
     id: 9,
-    question: "How much does a bespoke sofa or sofa service cost?",
+    question: "How much does a upholstery or sofa service cost?",
     answer:
       "Pricing depends on the selected service and project scope. Dimensions, configuration, materials, quantity, complexity, the condition of an existing sofa, access, delivery and installation requirements may all affect the quotation.",
   },
@@ -104,7 +104,7 @@ export const servicesFaqs = [
 
   {
     id: 13,
-    question: "Are your bespoke sofas waterproof and fire-resistant?",
+    question: "Is your upholstery waterproof and fire-resistant?",
     answer:
       "The sofas we make can be specified with water-resistant upholstery and fire-retardant materials. The right protective fabric or finish can be discussed during the design process for residential or commercial use.",
   },

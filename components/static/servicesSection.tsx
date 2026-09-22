@@ -60,7 +60,7 @@ const AUTO_ROTATE_INTERVAL = 3000;
 
 const services: Service[] = [
   {
-    title: "Bespoke sofa",
+    title: "Upholstery",
     shortDescription:
       "Made-to-measure sofa handcrafted in London, tailored to your space and style.",
     cta: "Explore Bespoke",
@@ -80,7 +80,7 @@ const services: Service[] = [
   {
     title: "All Services",
     shortDescription:
-      "Explore bespoke sofas, commercial seating, interiors and careful restoration from one London workshop.",
+      "Explore upholstery, commercial seating, interiors and careful restoration from one London workshop.",
     cta: "Explore Our Services",
     image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/30.webp",
     href: "/services",
@@ -843,7 +843,7 @@ function ServicesHeader() {
           lg:text-[13px]
         "
       >
-        From bespoke sofa to complete interiors and expert restoration, discover
+        From upholstery to complete interiors and expert restoration, discover
         services crafted around the way you live and work.
       </p>
     </div>

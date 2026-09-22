@@ -706,8 +706,8 @@ function RestorationAssessmentPanel() {
                   sm:text-[19px]
                 "
               >
-                You do not need to know what needs repairing before you contact
-                us.
+                You do not need to know whether it needs reupholstering,
+                restoration or a smaller repair before you contact us.
               </p>
             </div>
           </div>

@@ -13,14 +13,14 @@ const SITE_URL = "https://sofanmore.co.uk";
 const CANONICAL_URL =
   "https://sofanmore.co.uk/services/sofa-repair-restoration";
 
-const SEO_TITLE = "Sofa Repair & Restoration London | Sofa N More";
+const SEO_TITLE = "Sofa Reupholstery & Restoration London | Sofa N More";
 
 const META_DESCRIPTION =
-  "Professional sofa repair and restoration in London. Bring worn, damaged or much-loved sofas back to life with skilled craftsmanship from Sofa N More.";
+  "Professional sofa reupholstery, repair and restoration in London. Bring worn, damaged or much-loved sofas back to life with skilled craftsmanship from Sofa N More.";
 
-const PAGE_H1 = "Sofa Repair & Restoration in London, Made to Last Again";
+const PAGE_H1 = "Sofa Reupholstery & Restoration in London, Made to Last Again";
 
-const OG_TITLE = "Sofa Repair & Restoration in London | Sofa N More";
+const OG_TITLE = "Sofa Reupholstery & Restoration in London | Sofa N More";
 
 /*
   The OG description supplied for this page was incomplete,
@@ -117,7 +117,7 @@ const breadcrumbSchema = {
 
       position: 3,
 
-      name: "Sofa Repair & Restoration",
+      name: "Sofa Reupholstery & Restoration",
 
       item: CANONICAL_URL,
     },
@@ -135,9 +135,9 @@ const serviceSchema = {
 
   url: CANONICAL_URL,
 
-  name: "Sofa Repair & Restoration in London",
+  name: "Sofa Reupholstery & Restoration in London",
 
-  serviceType: "Sofa Repair and Restoration",
+  serviceType: "Sofa Reupholstery, Repair and Restoration",
 
   description: META_DESCRIPTION,
 
@@ -161,7 +161,7 @@ const serviceSchema = {
     "@type": "Audience",
 
     audienceType:
-      "Homeowners, businesses and clients looking to repair, restore or renew existing sofas",
+      "Homeowners, businesses and clients looking to reupholster, repair, restore or renew existing sofas",
   },
 };
 
@@ -213,7 +213,7 @@ const faqSchema = {
 
   url: `${CANONICAL_URL}#faq`,
 
-  name: "Frequently Asked Questions About Sofa Repair & Restoration",
+  name: "Frequently Asked Questions About Sofa Reupholstery & Restoration",
 
   inLanguage: "en-GB",
 

@@ -18,7 +18,7 @@ import ClayButton from "@/components/ui/ClayButton";
 
 const services = [
   {
-    title: "Bespoke sofa",
+    title: "Upholstery",
     description:
       "Made-to-measure sofas, chairs and sofa handcrafted around your space, style and requirements.",
     href: "/services/bespoke-sofas",
@@ -41,7 +41,7 @@ const services = [
   {
     title: "Commercial sofa",
     description:
-      "Bespoke sofa solutions for offices, hospitality spaces and distinctive commercial interiors.",
+      "Upholstery solutions for offices, hospitality spaces and distinctive commercial interiors.",
     href: "/services/commercial-sofas",
     icon: Building2,
   },
@@ -285,7 +285,7 @@ function DesktopStoryPanel() {
             text-[#FFFDF8]
           "
         >
-          Bespoke sofa
+          Upholstery
           <br />
           for Exceptional
           <br />
@@ -312,7 +312,7 @@ function DesktopStoryPanel() {
             xl:text-[14px]
           "
         >
-          From bespoke sofas and handcrafted sofa to complete interior
+          From upholstery and handcrafted sofas to complete interior
           design, commercial sofa and specialist restoration, Sofa N More
           brings London craftsmanship to spaces created around the people who
           use them.
@@ -769,7 +769,7 @@ function MobileLayout() {
               min-[390px]:text-[43px]
             "
           >
-            Bespoke sofa
+            Upholstery
             <br />
             for Exceptional
             <br />
@@ -802,7 +802,7 @@ function MobileLayout() {
               text-white/68
             "
           >
-            From bespoke sofas and handcrafted sofa to interior design,
+            From upholstery and handcrafted sofas to interior design,
             commercial sofa and specialist restoration, Sofa N More brings
             London craftsmanship to spaces designed around you.
           </p>
@@ -848,7 +848,7 @@ function MobileLayout() {
                 text-white/75
               "
             >
-              Bespoke sofa Studio · London
+              Upholstery Studio · London
             </span>
           </div>
 

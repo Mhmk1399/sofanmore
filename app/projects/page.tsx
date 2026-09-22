@@ -29,7 +29,7 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const PAGE_TITLE = "Sofa & Interior Projects in London | Sofa N More";
 
 const PAGE_DESCRIPTION =
-  "Explore completed Sofa N More projects across bespoke sofas, commercial seating, interior design and sofa repair and restoration in London.";
+  "Explore completed Sofa N More projects across upholstery, commercial seating, interior design and sofa repair and restoration in London.";
 
 /* =========================================================
    METADATA
@@ -369,7 +369,7 @@ export default async function ProjectsPage() {
                   lg:text-[16px]
                 "
               >
-                Explore completed Sofa N More work across bespoke sofas,
+                Explore completed Sofa N More work across upholstery,
                 commercial seating, interior design and sofa repair and
                 restoration.
               </p>

@@ -20,7 +20,7 @@ const CANONICAL_PATH = "/workshop";
 const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
 const SEO_TITLE = "Sofa Workshop North West London | Sofa N More";
 const META_DESCRIPTION =
-  "Visit Sofa N More's sofa workshop in North West London near Cricklewood for bespoke sofa consultations, upholstery, sofa repair and restoration.";
+  "Visit Sofa N More's sofa workshop in North West London near Cricklewood for upholstery consultations, upholstery, sofa repair and restoration.";
 const PRIMARY_IMAGE = absoluteUrl(
   "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/sofa-n-more-workshop-north-west-london.webp",
 );
@@ -33,11 +33,11 @@ export const metadata: Metadata = {
   keywords: [
     "sofa workshop North West London",
     "upholstery workshop London",
-    "bespoke sofa workshop London",
+    "upholstery workshop London",
     "sofa workshop near Cricklewood",
     "sofa makers North West London",
     "sofa repair workshop North West London",
-    "bespoke sofa consultation London",
+    "upholstery consultation London",
   ],
   alternates: {
     canonical: CANONICAL_URL,
@@ -154,7 +154,7 @@ const workshopSchema = {
   url: CANONICAL_URL,
   image: PRIMARY_IMAGE,
   description:
-    "Sofa workshop in North West London for bespoke sofa consultations, upholstery guidance, commercial seating and sofa repair assessments.",
+    "Sofa workshop in North West London for upholstery consultations, upholstery guidance, commercial seating and sofa repair assessments.",
   telephone: siteConfig.phoneInternational,
   email: siteConfig.email,
   priceRange: "GBP",
@@ -180,11 +180,11 @@ const workshopSchema = {
 const consultationServiceSchema = {
   "@type": "Service",
   "@id": `${CANONICAL_URL}#consultation`,
-  name: "Bespoke sofa consultation London",
-  serviceType: "Bespoke sofa consultation",
+  name: "Upholstery consultation London",
+  serviceType: "Upholstery consultation",
   url: CANONICAL_URL,
   description:
-    "Workshop consultation for bespoke sofas, upholstery, commercial seating and sofa repair projects in North West London.",
+    "Workshop consultation for upholstery, upholstery, commercial seating and sofa repair projects in North West London.",
   provider: {
     "@id": `${siteConfig.url}/#organization`,
   },

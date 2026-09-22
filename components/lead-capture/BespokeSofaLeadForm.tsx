@@ -644,7 +644,7 @@ export default function BespokeSofaLeadForm() {
   return (
     <LeadFormShell
       id="bespoke-sofa-enquiry"
-      eyebrow="Bespoke sofa enquiry"
+      eyebrow="Upholstery enquiry"
       title={
         <>
           Request a sofa made around your space

@@ -5,7 +5,7 @@ export const siteConfig = {
     "",
   ),
   description:
-    "Bespoke sofas, commercial seating, interior design, and sofa repair and restoration handcrafted in London.",
+    "Upholstery, commercial seating, interior design, and sofa repair and restoration handcrafted in London.",
   locale: "en_GB",
   language: "en-GB",
   email: "info@sofanmore.co.uk",
@@ -157,5 +157,5 @@ export const defaultOgImage = {
   url: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/30.webp",
   width: 1200,
   height: 630,
-  alt: "Sofa N More bespoke sofa and interior craftsmanship in London",
+  alt: "Sofa N More upholstery and interior craftsmanship in London",
 };

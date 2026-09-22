@@ -69,7 +69,7 @@ const restorationTypes: RestorationType[] = [
     icon: Heart,
   },
   {
-    title: "Existing bespoke sofas",
+    title: "Existing upholstery",
     icon: Sofa,
   },
   {
@@ -727,9 +727,9 @@ export default function SofaRepairServiceSection() {
                         variant="outline"
                         size="sm"
                         showArrow
-                        ariaLabel="Explore bespoke sofas from Sofa N More"
+                        ariaLabel="Explore upholstery from Sofa N More"
                       >
-                        Explore Bespoke Sofas
+                        Explore Upholstery
                       </ClayButton>
                     </div>
                   </div>

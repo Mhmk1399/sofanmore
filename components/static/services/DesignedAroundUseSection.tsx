@@ -422,7 +422,7 @@ export default function DesignedAroundUseSection() {
 
               <ServiceTextLink
                 href="/services/bespoke-sofas"
-                label="Bespoke Sofas"
+                label="Upholstery"
               />
 
               <Separator />

@@ -285,7 +285,7 @@ export default function WorkshopHero() {
                     sm:text-[22px]
                   "
                 >
-                  A real London workshop where bespoke sofas are discussed,
+                  A real London workshop where upholstery are discussed,
                   ordered, made and restored.
                 </p>
 

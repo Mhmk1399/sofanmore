@@ -33,7 +33,7 @@ type ServiceLink = {
 const services: ServiceLink[] = [
   {
     number: "01",
-    title: "Bespoke Sofas",
+    title: "Upholstery",
     description:
       "Made-to-measure sofas and seating designed around your dimensions, layout and style.",
     href: "/services/bespoke-sofas",

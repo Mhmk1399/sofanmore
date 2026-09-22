@@ -41,7 +41,7 @@ type TrustItem = {
 
 const services: Service[] = [
   {
-    title: "Bespoke sofa",
+    title: "Upholstery",
     subtitle: "Made for your space",
     description:
       "Custom-designed sofa tailored to your exact specifications and style.",
@@ -403,7 +403,7 @@ function HeroCopy() {
             text-white/70
           "
         >
-          Bespoke sofa, commercial interiors &amp; expert restoration —
+          Upholstery, commercial interiors &amp; expert restoration —
           handcrafted in London with premium materials.
         </p>
 
@@ -414,7 +414,7 @@ function HeroCopy() {
             variant="gold"
             size="md"
             showArrow
-            aria-label="Start your bespoke sofa project"
+            aria-label="Start your upholstery project"
           >
             Start Your Project
           </ClayButton>
@@ -450,7 +450,7 @@ function HeroImage() {
       <div className="relative h-full overflow-hidden rounded-[22px]">
         <Image
           src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/57.webp"
-          alt="Luxury bespoke sofa handcrafted in our London workshop, featuring premium Italian leather upholstery"
+          alt="Luxury upholstery handcrafted in our London workshop, featuring premium Italian leather upholstery"
           fill
           loading="eager"
           fetchPriority="high"
@@ -784,7 +784,7 @@ function TabletMainHero() {
               />
 
               <p className="max-w-[280px] font-brand-sans text-[11px] font-medium leading-[1.65] text-white/65">
-                Bespoke sofa, commercial interiors &amp; expert restoration,
+                Upholstery, commercial interiors &amp; expert restoration,
                 handcrafted in London.
               </p>
 
@@ -1078,7 +1078,7 @@ function MobileHeroMain() {
                 text-white/78
               "
             >
-              Bespoke sofa, commercial interiors &amp; expert restoration.
+              Upholstery, commercial interiors &amp; expert restoration.
             </p>
 
             {/* CTAs */}
@@ -1089,7 +1089,7 @@ function MobileHeroMain() {
                 size="md"
                 fullWidth
                 showArrow
-                ariaLabel="Start your bespoke sofa project"
+                ariaLabel="Start your upholstery project"
                 className="!min-h-[44px] !justify-between !rounded-[15px] !px-4 !text-[13px]"
               >
                 Start Your Project

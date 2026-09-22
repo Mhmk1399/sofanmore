@@ -10,7 +10,7 @@ import ClayButton from "@/components/ui/ClayButton";
 import { siteConfig } from "@/lib/site";
 
 const heroStats = [
-  "Bespoke sofas",
+  "Upholstery",
   "Commercial seating",
   "Interior design",
   "Repair and restoration",
@@ -40,7 +40,7 @@ export default function FaqHero() {
           </h1>
 
           <p className="mt-5 max-w-[610px] font-brand-sans text-[12px] font-medium leading-[1.85] text-[var(--brand-text-muted)] sm:text-[14px]">
-            Clear answers about bespoke sofas, commercial seating, interior
+            Clear answers about upholstery, commercial seating, interior
             design, restoration, delivery, materials and visiting our North West
             London workshop.
           </p>

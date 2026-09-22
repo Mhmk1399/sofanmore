@@ -41,14 +41,14 @@ export const demoProjects: ProjectSliderItem[] = [
 
     projectCode: 1001,
 
-    title: "Bespoke Sofa Project",
+    title: "Upholstery Project",
 
     coverImageUrl: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/8.webp",
 
     excerpt:
       "A made-to-measure sofa developed around the proportions, layout and character of the space.",
 
-    serviceLabel: "Bespoke Sofas",
+    serviceLabel: "Upholstery",
   },
 
   {

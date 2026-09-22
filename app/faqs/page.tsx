@@ -6,9 +6,9 @@ import { absoluteUrl, defaultOgImage, siteConfig } from "@/lib/site";
 
 const CANONICAL_PATH = "/faqs";
 const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
-const SEO_TITLE = "FAQs |Sofa N More Bespoke Sofa & Sofa Restoration London";
+const SEO_TITLE = "FAQs |Sofa N More Upholstery & Sofa Restoration London";
 const META_DESCRIPTION =
-  "Answers to common questions about Sofa N More bespoke sofa, water-resistant and fire-retardant upholstery, home staging, interior design, delivery and sustainability.";
+  "Answers to common questions about Sofa N More upholstery, water-resistant and fire-retardant upholstery, home staging, interior design, delivery and sustainability.";
 
 export const metadata: Metadata = {
   title: SEO_TITLE,
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: CANONICAL_PATH,
     title: SEO_TITLE,
     description:
-      "Answers to common questions about Sofa N More bespoke sofas, water-resistant and fire-retardant upholstery, interior design, delivery, and sofa restoration.",
+      "Answers to common questions about Sofa N More upholstery, water-resistant and fire-retardant upholstery, interior design, delivery, and sofa restoration.",
     siteName: siteConfig.name,
     locale: siteConfig.locale,
     images: [defaultOgImage],
@@ -39,7 +39,7 @@ const faqItems = [
     id: 1,
     question: "What types of sofa does Sofa N More offer?",
     answer:
-      "Sofa N More specialises in bespoke sofa, including sofas, dining tables, beds, and accessories. Each piece is handcrafted in our London workshop to ensure quality and uniqueness.",
+      "Sofa N More specialises in upholstery, including sofas, dining tables, beds, and accessories. Each piece is handcrafted in our London workshop to ensure quality and uniqueness.",
   },
   {
     id: 2,
@@ -62,9 +62,9 @@ const faqItems = [
   {
     id: 5,
     question:
-      "What are the benefits of choosing bespoke sofa over ready-made options?",
+      "What are the benefits of choosing upholstery over ready-made options?",
     answer:
-      "Bespoke sofa offers several advantages, including superior craftsmanship, personalised design to fit your exact requirements, and the use of high-quality materials for durability and longevity.",
+      "Upholstery offers several advantages, including superior craftsmanship, personalised design to fit your exact requirements, and the use of high-quality materials for durability and longevity.",
   },
   {
     id: 6,

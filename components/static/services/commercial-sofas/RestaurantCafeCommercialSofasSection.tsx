@@ -230,7 +230,7 @@ export default function RestaurantCafeCommercialSofasSection({
                   </p>
 
                   <p>
-                    A carefully planned combination of bespoke sofas, booths and
+                    A carefully planned combination of upholstery, booths and
                     banquette seating can help create intimate dining areas,
                     define the layout and establish a more memorable interior
                     identity.

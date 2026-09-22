@@ -15,15 +15,15 @@ const CANONICAL_URL = `${SITE_URL}/services`;
 const SEO_TITLE = "Sofa Services North West London | Sofa N More";
 
 const META_DESCRIPTION =
-  "Explore bespoke sofas, commercial seating, interior design, and sofa repair and restoration from our North West London base near Cricklewood, Brent Cross and Neasden.";
+  "Explore upholstery, commercial seating, interior design, and sofa repair and restoration from our North West London base near Cricklewood, Brent Cross and Neasden.";
 
 const PAGE_H1 = "Sofa Services in North West London";
 
-const OG_TITLE = "Bespoke Sofas, Repair & Interior Design in North West London";
+const OG_TITLE = "Upholstery, Repair & Interior Design in North West London";
 
 /*
   The supplied OG description was truncated after:
-  "Discover bespoke sofas, commercial seating, interior design,
+  "Discover upholstery, commercial seating, interior design,
    and sofa repair and restoration from Sofa N Mo..."
 
   Until the complete version is supplied, use the full meta
@@ -165,11 +165,11 @@ const servicesListSchema = {
 
         "@id": `${SITE_URL}/services/bespoke-sofas#service`,
 
-        name: "Bespoke Sofas",
+        name: "Upholstery",
 
         url: `${SITE_URL}/services/bespoke-sofas`,
 
-        serviceType: "Bespoke Sofa Design and Making",
+        serviceType: "Upholstery Design and Making",
 
         provider: {
           "@id": `${SITE_URL}/#organization`,
@@ -321,7 +321,7 @@ const localServiceAreaSchema = {
   name: "Sofa Services in North West London",
 
   description:
-    "Bespoke sofas, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
+    "Upholstery, commercial seating, interior design, and sofa repair and restoration from Sofa N More in North West London.",
 
   provider: {
     "@id": `${SITE_URL}/#organization`,
@@ -361,7 +361,7 @@ const localServiceAreaSchema = {
         itemOffered: {
           "@type": "Service",
 
-          name: "Bespoke Sofas",
+          name: "Upholstery",
         },
       },
 

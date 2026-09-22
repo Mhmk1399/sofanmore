@@ -162,7 +162,7 @@ export default function CommercialSofasMadeInLondonSection() {
                       text-[var(--brand-navy)]
                     "
                   >
-                    Bespoke Sofa Workshop · London
+                    Upholstery Workshop · London
                   </span>
                 </div>
               </div>
@@ -717,7 +717,7 @@ function WorkshopImage() {
         >
           <Image
             src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/65.webp"
-            alt="Sofa N More bespoke sofa workshop in London"
+            alt="Sofa N More upholstery workshop in London"
             fill
             sizes="(max-width: 1023px) 100vw, 45vw"
             className="

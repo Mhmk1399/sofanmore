@@ -205,7 +205,7 @@ export default function RepairRestoreReplaceSection() {
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Repair, Restore or Replace
+                  Reupholster, Restore or Replace
                   <span className="text-[var(--brand-gold)]">?</span>
                 </h2>
               </div>

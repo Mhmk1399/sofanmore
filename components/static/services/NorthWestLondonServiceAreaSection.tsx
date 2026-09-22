@@ -34,7 +34,7 @@ const localAreas = [
 
 const serviceLinks = [
   {
-    label: "Bespoke Sofas",
+    label: "Upholstery",
     href: "/services/bespoke-sofas",
   },
   {

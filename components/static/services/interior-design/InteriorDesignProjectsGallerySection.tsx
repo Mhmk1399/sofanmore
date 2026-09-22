@@ -225,7 +225,7 @@ export default function InteriorDesignProjectsGallerySection() {
                 lg:text-[13px]
               "
             >
-              Explore how layout, bespoke sofas, materials, colour and styling
+              Explore how layout, upholstery, materials, colour and styling
               come together across completed spaces.
             </p>
           </div>

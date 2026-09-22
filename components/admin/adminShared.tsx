@@ -310,7 +310,7 @@ export const services: {
     label: "Contact messages",
     shortLabel: "Contact",
   },
-  { value: "BESPOKE_SOFA", label: "Bespoke sofa", shortLabel: "Bespoke" },
+  { value: "BESPOKE_SOFA", label: "Upholstery", shortLabel: "Bespoke" },
   {
     value: "COMMERCIAL_SOFA",
     label: "Commercial sofas",
@@ -344,7 +344,7 @@ export const userRoles: { value: UserRole; label: string }[] = [
 ];
 
 export const projectServices: { value: ProjectService; label: string }[] = [
-  { value: "BESPOKE_SOFA", label: "Bespoke sofa" },
+  { value: "BESPOKE_SOFA", label: "Upholstery" },
   { value: "COMMERCIAL_SOFA", label: "Commercial sofa" },
   { value: "INTERIOR_DESIGN", label: "Interior design" },
   {

@@ -13,7 +13,7 @@ const HERO_IMAGE = "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/74.webp";
 const heroPoints = [
   "Residential Interiors",
   "Commercial Spaces",
-  "Bespoke Sofas",
+  "Upholstery",
 ];
 
 /* =========================================================
@@ -278,7 +278,7 @@ export default function InteriorDesignHero({ id = "service" }: { id?: string }) 
                   <p>
                     At Sofa N More, we create bespoke interior design solutions
                     in London for residential and commercial spaces, bringing
-                    together layout, colour, materials, bespoke sofas and
+                    together layout, colour, materials, upholstery and
                     carefully considered details to create interiors that feel
                     coherent from the moment you enter.
                   </p>

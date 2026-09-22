@@ -208,7 +208,7 @@ export default function PlanningBespokeSofaSection() {
                       sm:text-[11px]
                     "
                   >
-                    Bespoke Sofa Consultation
+                    Upholstery Consultation
                   </span>
                 </div>
 
@@ -236,7 +236,7 @@ export default function PlanningBespokeSofaSection() {
                     lg:text-[48px]
                   "
                 >
-                  Planning a Bespoke Sofa?
+                  Planning Upholstery?
                   <span className="block">
                     Start With the Space
                     <span className="text-[var(--brand-gold)]">.</span>
@@ -286,7 +286,7 @@ export default function PlanningBespokeSofaSection() {
                     lg:text-[12px]
                   "
                 >
-                  A bespoke sofa project can begin with something as simple as
+                  A upholstery project can begin with something as simple as
                   room photographs, approximate measurements and an image that
                   captures the style you like.
                 </p>
@@ -318,9 +318,9 @@ export default function PlanningBespokeSofaSection() {
                     size="lg"
                     showArrow
                     className="max-sm:w-full"
-                    ariaLabel="Discuss a bespoke sofa with Sofa N More"
+                    ariaLabel="Discuss a upholstery with Sofa N More"
                   >
-                    Discuss a Bespoke Sofa
+                    Discuss Upholstery
                   </ClayButton>
                 </div>
               </div>

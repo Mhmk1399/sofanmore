@@ -38,7 +38,7 @@ const commercialServices: CommercialService[] = [
 
       "We can help bring those elements together into a cohesive restaurant or café interior that reflects the character of the business.",
 
-      "Bespoke sofas, banquette seating and booth seating can also be developed around the layout, helping the seating become part of the interior architecture rather than an addition made at the end.",
+      "Upholstery, banquette seating and booth seating can also be developed around the layout, helping the seating become part of the interior architecture rather than an addition made at the end.",
     ],
   },
 
@@ -51,7 +51,7 @@ const commercialServices: CommercialService[] = [
 
       "From lobby and lounge environments to bars and guest-facing spaces, the design should communicate a clear atmosphere while remaining comfortable and welcoming.",
 
-      "Bespoke sofas, material palettes, textures and spatial composition can be developed as part of the wider interior concept.",
+      "Upholstery, material palettes, textures and spatial composition can be developed as part of the wider interior concept.",
     ],
   },
 
@@ -455,7 +455,7 @@ function ResidentialPanel({ id }: { id: string }) {
 
           <p>
             That can mean rethinking how a living room is arranged, developing a
-            stronger material and colour direction, creating bespoke sofas
+            stronger material and colour direction, creating upholstery
             around the dimensions of the room or bringing several spaces
             together under one cohesive design language.
           </p>
@@ -487,7 +487,7 @@ function ResidentialPanel({ id }: { id: string }) {
 
           <FocusItem
             icon={<Sofa size={13} strokeWidth={1.5} />}
-            label="Bespoke Sofas"
+            label="Upholstery"
           />
 
           <FocusItem

@@ -323,7 +323,7 @@ function DesktopContactHero() {
                 xl:text-[17px]
               "
             >
-              Looking to transform your space with bespoke sofa, expert home
+              Looking to transform your space with upholstery, expert home
               staging, or innovative interior design? Get in touch with Sofa N
               More today! Located in London, we are dedicated to creating
               tailored solutions that reflect your unique style and enhance your
@@ -1150,7 +1150,7 @@ function MobileContactHero() {
                 text-[var(--brand-text-muted)]
               "
             >
-              Looking to transform your space with bespoke sofa, expert home
+              Looking to transform your space with upholstery, expert home
               staging, or innovative interior design? Get in touch with Sofa N
               More today! Located in London, we are dedicated to creating
               tailored solutions that reflect your unique style.

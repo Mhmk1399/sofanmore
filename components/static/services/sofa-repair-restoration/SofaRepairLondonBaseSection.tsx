@@ -32,7 +32,7 @@ const startingSteps = [
   {
     number: "03",
     title: "We Assess the Starting Point",
-    text: "We can then consider whether the sofa is suitable for our repair and restoration service.",
+    text: "We can then consider whether the sofa is suitable for our reupholstery and restoration service.",
     icon: Search,
   },
 ] satisfies {
@@ -221,7 +221,7 @@ export default function SofaRepairLondonBaseSection() {
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Sofa Repair & Restoration in London
+                  Sofa Reupholstery & Restoration in London
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
 
@@ -246,8 +246,8 @@ export default function SofaRepairLondonBaseSection() {
                   "
                 >
                   Sofa N More is based in North West London, working with
-                  clients looking to preserve, repair and restore sofas worth
-                  keeping.
+                  clients looking to preserve, reupholster and restore sofas
+                  worth keeping.
                 </p>
 
                 {/* BODY */}
@@ -455,9 +455,9 @@ export default function SofaRepairLondonBaseSection() {
                     size="lg"
                     showArrow
                     className="max-sm:w-full"
-                    ariaLabel="Request a sofa repair assessment from Sofa N More"
+                    ariaLabel="Request a sofa reupholstery assessment from Sofa N More"
                   >
-                    Request a Sofa Repair Assessment
+                    Request a Sofa Reupholstery Assessment
                   </ClayButton>
                 </div>
               </div>

@@ -1208,7 +1208,7 @@ function GalleryCTA() {
                   lg:text-[24px]
                 "
               >
-                Discover bespoke sofas, seating and complete interiors created
+                Discover upholstery, seating and complete interiors created
                 for spaces across London.
               </p>
             </div>

@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 
 const CANONICAL_PATH = "/blog";
 const CANONICAL_URL = absoluteUrl(CANONICAL_PATH);
-const SEO_TITLE = "Sofa N More Journal | Bespoke sofa, Interiors & Craftsmanship";
+const SEO_TITLE = "Sofa N More Journal | Upholstery, Interiors & Craftsmanship";
 const META_DESCRIPTION =
-  "Explore the Sofa N More journal for bespoke sofa inspiration, London craftsmanship, interior design ideas, upholstery advice and sofa restoration stories.";
+  "Explore the Sofa N More journal for upholstery inspiration, London craftsmanship, interior design ideas, upholstery advice and sofa restoration stories.";
 
 export const metadata: Metadata = {
   title: SEO_TITLE,
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: CANONICAL_PATH,
     title: SEO_TITLE,
     description:
-      "Explore bespoke sofa inspiration, London craftsmanship, interior design ideas, upholstery advice and sofa restoration stories.",
+      "Explore upholstery inspiration, London craftsmanship, interior design ideas, upholstery advice and sofa restoration stories.",
     siteName: siteConfig.name,
     locale: siteConfig.locale,
     images: [defaultOgImage],

@@ -187,7 +187,7 @@ export default function BespokeSofasServiceSection() {
                       sm:text-[12px]
                     "
                   >
-                    Bespoke Sofas · Made to Measure
+                    Upholstery · Made to Measure
                   </span>
                 </div>
 
@@ -217,7 +217,7 @@ export default function BespokeSofasServiceSection() {
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Bespoke Sofas & Made-to-Measure Seating
+                  Upholstery & Made-to-Measure Seating
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
 
@@ -311,9 +311,9 @@ export default function BespokeSofasServiceSection() {
                     size="lg"
                     showArrow
                     className="max-sm:w-full"
-                    ariaLabel="Explore bespoke sofas in North West London"
+                    ariaLabel="Explore upholstery in North West London"
                   >
-                    Explore Bespoke Sofas in North West London
+                    Explore Upholstery in North West London
                   </ClayButton>
                 </div>
               </div>
@@ -710,7 +710,7 @@ function BespokeVisual() {
         >
           <Image
             src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/71.webp"
-            alt="Bespoke sofa designed around a London interior"
+            alt="Upholstery designed around a London interior"
             fill
             sizes="(max-width: 1023px) 100vw, 52vw"
             className="

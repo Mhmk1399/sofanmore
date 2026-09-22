@@ -29,10 +29,10 @@ const playfair = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   applicationName: siteConfig.name,
-  title: "Sofa N More | Bespoke Sofas & Interiors London",
+  title: "Sofa N More | Upholstery & Interiors London",
   description: siteConfig.description,
   keywords: [
-    "bespoke sofas London",
+    "upholstery London",
     "custom sofa London",
     "sofa repair London",
     "sofa restoration London",
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    title: "Sofa N More | Bespoke Sofas & Interiors London",
+    title: "Sofa N More | Upholstery & Interiors London",
     description: siteConfig.description,
     siteName: siteConfig.name,
     locale: siteConfig.locale,
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sofa N More | Bespoke Sofas & Interiors London",
+    title: "Sofa N More | Upholstery & Interiors London",
     description: siteConfig.description,
     images: [defaultOgImage.url],
   },
@@ -199,7 +199,7 @@ export default function RootLayout({
           phone={siteConfig.phoneDisplay}
           whatsapp={siteConfig.whatsappNumber}
           email={siteConfig.email}
-          whatsappMessage="Hello Sofa N More, I'd like to discuss a bespoke sofa project."
+          whatsappMessage="Hello Sofa N More, I'd like to discuss a upholstery project."
         />
         {children}
         <Footer />

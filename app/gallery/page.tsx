@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export type GalleryCategory =
   | "All"
-  | "Bespoke sofa"
+  | "Upholstery"
   | "Interiors"
   | "Restoration"
   | "Commercial";
@@ -22,7 +22,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 1,
     title: "Mayfair Residence",
-    category: "Bespoke sofa",
+    category: "Upholstery",
     image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/1.webp",
     alt: "Luxury bespoke navy sofa in London interior",
   },
@@ -31,7 +31,7 @@ const galleryItems: GalleryItem[] = [
     title: "Chelsea Curved Sofa",
     category: "Interiors",
     image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/2.webp",
-    alt: "Curved ivory bespoke sofa interior",
+    alt: "Curved ivory upholstery interior",
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 4,
     title: "Blue Curve Collection",
-    category: "Bespoke sofa",
+    category: "Upholstery",
     image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/4.webp",
     alt: "Deep navy bespoke curved sofa",
   },
@@ -92,7 +92,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 11,
     title: "Sculpted Armchair",
-    category: "Bespoke sofa",
+    category: "Upholstery",
     image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/3.webp",
     alt: "Luxury sculptural armchair",
   },
@@ -115,17 +115,17 @@ const SITE_URL = "https://sofanmore.co.uk";
 const CANONICAL_URL = `${SITE_URL}/gallery`;
 
 const SEO_TITLE =
-  "Sofa Gallery London | Bespoke Sofas & Interiors | Sofa N More";
+  "Sofa Gallery London | Upholstery & Interiors | Sofa N More";
 
 const META_DESCRIPTION =
-  "Explore the Sofa N More gallery featuring bespoke sofas, commercial seating, interior design and sofa restoration projects across London.";
+  "Explore the Sofa N More gallery featuring upholstery, commercial seating, interior design and sofa restoration projects across London.";
 
 const PAGE_H1 = "Spaces Made to Be Remembered";
 
-const OG_TITLE = "Bespoke Sofas, Interiors & Restoration Gallery | Sofa N More";
+const OG_TITLE = "Upholstery, Interiors & Restoration Gallery | Sofa N More";
 
 const OG_DESCRIPTION =
-  "Explore bespoke sofas, commercial seating, interior design and sofa restoration work from Sofa N More in London.";
+  "Explore upholstery, commercial seating, interior design and sofa restoration work from Sofa N More in London.";
 
 /* =========================================================
    METADATA
@@ -290,7 +290,7 @@ const imageGallerySchema = {
   },
 
   keywords: [
-    "bespoke sofas London",
+    "upholstery London",
     "commercial sofas",
     "interior design",
     "sofa restoration",
@@ -350,7 +350,7 @@ const webPageSchema = {
   },
 
   keywords: [
-    "bespoke sofa gallery",
+    "upholstery gallery",
     "London sofa makers",
     "custom sofa projects",
     "commercial seating gallery",

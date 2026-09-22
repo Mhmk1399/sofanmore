@@ -451,7 +451,7 @@ function CommercialStoryPanel() {
               xl:text-[54px]
             "
           >
-            Bespoke Sofas
+            Upholstery
             <br />
             for More Than
             <br />
@@ -1151,7 +1151,7 @@ function MobileHeader() {
               min-[390px]:text-[39px]
             "
           >
-            Bespoke Sofas & Seating for More Than Homes
+            Upholstery & Seating for More Than Homes
             <span className="text-[var(--brand-gold)]">.</span>
           </h2>
 

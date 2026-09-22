@@ -184,7 +184,7 @@ export default function WorkshopPhotographySection({
                   sm:text-[20px]
                 "
               >
-                A bespoke sofa is the result of many individual decisions and
+                A upholstery is the result of many individual decisions and
                 many hours of hands-on work.
               </p>
 

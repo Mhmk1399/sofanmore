@@ -22,7 +22,7 @@ const features = [
   {
     icon: Armchair,
     label: "Made in London",
-    description: "Bespoke sofa crafted with care.",
+    description: "Upholstery crafted with care.",
   },
   {
     icon: Sparkles,
@@ -58,7 +58,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
                 <div className="flex items-center gap-3 lg:mt-10">
                   <span className="h-px w-8 bg-[var(--brand-gold)]" />
                   <span className="font-brand-sans text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-gold-700)] sm:text-[12px]">
-                    Bespoke sofa · London
+                    Upholstery · London
                   </span>
                 </div>
 
@@ -67,7 +67,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
                   id="bespoke-sofa-heading"
                   className="mt-4 max-w-[620px] font-brand-display  font-medium leading-[0.98] tracking-[-0.04em] text-[var(--brand-navy)] min-[390px]:text-[38px] sm:mt-5 sm:text-[48px] lg:mt-7 lg:text-[clamp(48px,4.5vw,72px)]"
                 >
-                  Sofa N More | Bespoke sofa in London,
+                  Sofa N More | Upholstery in London,
                   <br className="hidden sm:block" />
                   Made Around Your Space
                   <span className="text-[var(--brand-gold)]">.</span>
@@ -88,7 +88,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
                 {/* DESCRIPTION */}
                 <div className="mt-4 max-w-[580px] space-y-3 font-brand-sans text-[11.5px] font-medium leading-[1.7] text-[var(--brand-text-muted)] sm:mt-5 sm:space-y-4 sm:text-[13px] lg:text-[14px] lg:leading-[1.75]">
                   <p>
-                    At Sofa N More, we create bespoke sofa in London for homes
+                    At Sofa N More, we create upholstery in London for homes
                     and spaces where standard sizes, limited finishes and
                     off-the-shelf designs simply aren&apos;t enough.
                   </p>
@@ -152,7 +152,7 @@ export default function BespokesofaHero({ id = "service" }: { id?: string }) {
                   <div className="clay-inset relative h-100 lg:h-150 overflow-hidden rounded-t-[29%] rounded-b-[19px] bg-[#DCD0BE] sm:rounded-b-[23px] lg:rounded-b-[24px]">
                     <Image
                       src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/49.webp"
-                      alt="Bespoke sofa handcrafted for a luxury London living room"
+                      alt="Upholstery handcrafted for a luxury London living room"
                       fill
                       preload
                       sizes="(max-width: 1023px) 100vw, 52vw"

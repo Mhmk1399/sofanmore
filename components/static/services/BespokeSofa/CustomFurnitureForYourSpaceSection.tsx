@@ -209,7 +209,7 @@ export default function CustomsofaForYourSpaceSection({
                       text-[var(--brand-navy)]
                     "
                   >
-                    Bespoke sofa removes those compromises.
+                    Upholstery removes those compromises.
                   </p>
 
                   <p>
@@ -308,7 +308,7 @@ function ImageStage() {
           {/* IMAGE */}
           <Image
                   src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/19.webp"
-            alt="Craftsperson finishing bespoke sofa upholstery in a London workshop"
+            alt="Craftsperson finishing upholstery upholstery in a London workshop"
             fill
             sizes="(max-width: 1024px) 90vw, 55vw"
             className="object-cover object-center"
