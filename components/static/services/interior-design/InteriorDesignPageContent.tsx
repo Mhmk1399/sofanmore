@@ -1,3 +1,5 @@
+import GoogleReviewsSection from "@/components/global/GoogleReviewsSection";
+import RelatedProjectsSection from "@/components/global/RelatedProjectsSection";
 import FAQSection from "../../FAQSection";
 import InteriorDesignLeadForm from "@/components/lead-capture/InteriorDesignLeadForm";
 import ServiceStickyCta from "@/components/static/services/ServiceStickyCta";
@@ -113,6 +115,7 @@ export default function InteriorDesignPageContent() {
         note="Design enquiry"
       />
       <InteriorDesignHero id="service" />
+      <GoogleReviewsSection />
       <BespokeInteriorDesignPhilosophySection />
       <InteriorDesignServicesSection residentialId="residential" />
       <DesignedAroundYourSpaceSection id="interior-styling" />
@@ -121,7 +124,8 @@ export default function InteriorDesignPageContent() {
       <CommercialInteriorDesignSection id="commercial" />
       <RestaurantCafeInteriorsSection id="restaurant-cafe" />
       <InteriorDesignLondonBaseSection />
-       <InteriorDesignLeadForm />
+      <RelatedProjectsSection service="INTERIOR_DESIGN" />
+      <InteriorDesignLeadForm />
       <FAQSection id="faq" items={interiorDesignFaqs} />
       <InteriorDesignFinalCTASection />
     </main>

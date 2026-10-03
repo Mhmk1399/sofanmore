@@ -1,3 +1,5 @@
+import GoogleReviewsSection from "@/components/global/GoogleReviewsSection";
+import RelatedProjectsSection from "@/components/global/RelatedProjectsSection";
 import FAQSection from "../../FAQSection";
 import SofaRepairLeadForm from "@/components/lead-capture/SofaRepairLeadForm";
 import ServiceStickyCta from "@/components/static/services/ServiceStickyCta";
@@ -108,6 +110,7 @@ export default function SofaRepairPageContent() {
         note="Quick assessment"
       />
       <SofaRepairHero id="service" />
+      <GoogleReviewsSection />
       <BeforeYouReplaceSection />
       <SofaTypesRepairSection id="sofa-restoration" />
       <WhatSofaRestorationMeansSection />
@@ -117,6 +120,7 @@ export default function SofaRepairPageContent() {
       <SofaRestorationChangingInteriorsSection />
       <SofaRepairLondonBaseSection />
       <MoreThanAppearanceSection id="before-after-projects" />
+      <RelatedProjectsSection service="SOFA_REPAIR_RESTORATION" />
       <SofaRepairLeadForm />
       <SofaRepairFinalCTASection />
 

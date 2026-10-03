@@ -1,3 +1,5 @@
+import GoogleReviewsSection from "@/components/global/GoogleReviewsSection";
+import RelatedProjectsSection from "@/components/global/RelatedProjectsSection";
 import BespokeSofaLeadForm from "@/components/lead-capture/BespokeSofaLeadForm";
 import ServiceStickyCta from "@/components/static/services/ServiceStickyCta";
 import FAQSection from "../../FAQSection";
@@ -111,13 +113,15 @@ export default function BespokesofaPageContent() {
         label="Request Upholstery"
       />
       <BespokesofaHero id="service" />
+      <GoogleReviewsSection />
       <CustomsofaForYourSpaceSection id="made-to-measure-sofas" />
       <BespokeSofasWeCanCreateSection />
       <WhyChooseBespokeSofasSection />
+      <RelatedProjectsSection service="BESPOKE_SOFA" />
       {/* <BespokeProcessSection /> */}
 
       <CommercialSofaProjectsSection />
-       <FAQSection id="faq" items={bespokesofaFaqs} />
+      <FAQSection id="faq" items={bespokesofaFaqs} />
       <BespokeSofaLeadForm />
     </main>
   );

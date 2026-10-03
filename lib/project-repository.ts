@@ -206,6 +206,49 @@ export async function listProjects(query: ProjectListQuery = {}) {
   };
 }
 
+export async function listPublishedProjectCards(
+  service: ProjectService,
+  limit: number,
+) {
+  await ensureProjectIndexes();
+  const { projects } = await getProjectCollections();
+  const filter: Filter<ProjectDocument> = { service, published: true };
+  const [total, documents] = await Promise.all([
+    projects.countDocuments(filter),
+    projects
+      .find(filter, {
+        projection: {
+          projectCode: 1,
+          title: 1,
+          slug: 1,
+          service: 1,
+          coverImageUrl: 1,
+          excerpt: 1,
+          locationLabel: 1,
+          createdAt: 1,
+        },
+      })
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .toArray(),
+  ]);
+
+  return {
+    projects: documents.map((project) => ({
+      id: project._id?.toHexString() || "",
+      projectCode: project.projectCode,
+      title: project.title,
+      slug: project.slug || createProjectSlug(project.title),
+      service: project.service,
+      coverImageUrl: project.coverImageUrl,
+      excerpt: project.excerpt,
+      ...(project.locationLabel ? { locationLabel: project.locationLabel } : {}),
+      createdAt: project.createdAt.toISOString(),
+    })),
+    total,
+  };
+}
+
 export async function createProject(input: ValidatedProjectInput) {
   await ensureProjectIndexes();
 

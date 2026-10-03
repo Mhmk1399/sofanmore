@@ -1,3 +1,5 @@
+import GoogleReviewsSection from "@/components/global/GoogleReviewsSection";
+import RelatedProjectsSection from "@/components/global/RelatedProjectsSection";
 import CommercialSofaLeadForm from "@/components/lead-capture/CommercialSofaLeadForm";
 import ServiceStickyCta from "@/components/static/services/ServiceStickyCta";
 
@@ -120,6 +122,7 @@ export default function CommercialSofasPageContent() {
         note="Business project"
       />
       <CommercialSofasHero id="service" />
+      <GoogleReviewsSection />
       <CommercialSofasRealBusinessSpacesSection />
       <CommercialSofaSolutionsSection />
       <WhyChooseCommercialSofasSection />
@@ -128,7 +131,8 @@ export default function CommercialSofasPageContent() {
       <HotelHospitalityCommercialSofasSection id="hotel-hospitality-seating" />
       <OfficeWorkspaceCommercialSofasSection id="office-seating" />
       <CommercialSofasMadeInLondonSection />
-       <CommercialSofaLeadForm />
+      <RelatedProjectsSection service="COMMERCIAL_SOFA" />
+      <CommercialSofaLeadForm />
       <FAQSection id="faq" items={commercialSofasFaqs} />
       <CommercialSofasFinalCTASection />
     </main>

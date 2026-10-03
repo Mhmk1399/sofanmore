@@ -21,6 +21,7 @@ import {
   MoveRight,
   Palette,
   Phone,
+  UserRound,
   Wrench,
   X,
 } from "lucide-react";
@@ -220,6 +221,11 @@ const mobileTabs: MobileTab[] = [
     label: "Home",
     icon: Home,
     href: "/",
+  },
+  {
+    label: "Sign In",
+    icon: UserRound,
+    href: "/login",
   },
   {
     label: "Projects",
@@ -775,9 +781,22 @@ function DesktopBar({
         ))}
       </nav>
 
-      <ClayButton href="tel:+447400577844" variant="navy" size="md">
-        Call +44 7400 577844
-      </ClayButton>
+      <div className="flex shrink-0 items-center gap-2">
+        <ClayButton
+          href="/login"
+          variant="ivory"
+          size="sm"
+          startIcon={<UserRound size={15} strokeWidth={1.8} />}
+          ariaLabel="Sign in or create a Sofa N More account"
+          className="border border-[var(--brand-navy)]/10 px-[10px] xl:px-[15px]"
+        >
+          Sign In
+        </ClayButton>
+
+        <ClayButton href="tel:+447400577844" variant="navy" size="md">
+          Call +44 7400 577844
+        </ClayButton>
+      </div>
     </div>
   );
 }
@@ -980,12 +999,12 @@ function DesktopMegaMenu({
                 const isActive = index === activeGroup;
 
                 return (
-                  <button
+                  <Link
                     key={group.title}
-                    type="button"
+                    href={group.href}
                     onMouseEnter={() => setActiveGroup(index)}
                     onFocus={() => setActiveGroup(index)}
-                    onClick={() => setActiveGroup(index)}
+                    onClick={close}
                     className={`
                         flex
                         items-center
@@ -1094,7 +1113,7 @@ function DesktopMegaMenu({
                           }
                         `}
                     />
-                  </button>
+                  </Link>
                 );
               })}
             </div>
@@ -2260,6 +2279,67 @@ function IslandMainPanel({
           Start Your Project
         </ClayButton>
       </div>
+
+      <Link
+        href="/login"
+        onClick={close}
+        className="
+          mt-2
+          flex
+          min-h-[52px]
+          w-full
+          items-center
+          justify-between
+          rounded-[15px]
+          border
+          border-[var(--brand-navy)]/10
+          bg-[var(--brand-navy)]
+          px-3.5
+          text-white
+          shadow-[var(--shadow-clay-sm)]
+          transition-[transform,border-color,box-shadow]
+          duration-200
+          hover:-translate-y-0.5
+          hover:border-[var(--brand-gold)]/55
+          hover:shadow-[0_10px_22px_rgba(4,17,30,0.24)]
+          active:scale-[0.985]
+          focus-visible:outline-2
+          focus-visible:outline-offset-2
+          focus-visible:outline-[var(--brand-gold)]
+        "
+      >
+        <span className="flex items-center gap-3">
+          <span
+            className="
+              flex
+              h-8
+              w-8
+              items-center
+              justify-center
+              rounded-[10px]
+              bg-white/10
+              text-[var(--brand-gold)]
+            "
+          >
+            <UserRound aria-hidden size={14} strokeWidth={1.7} />
+          </span>
+
+          <span className="text-left">
+            <span className="block font-brand-sans text-[12px] font-bold text-[var(--brand-ivory-50)]">
+              Your Account
+            </span>
+            <span className="mt-0.5 block font-brand-sans text-[9px] font-medium text-white/65">
+              Sign in or create an account
+            </span>
+          </span>
+        </span>
+
+        <ChevronRight
+          aria-hidden
+          size={15}
+          className="text-[var(--brand-gold)]"
+        />
+      </Link>
     </div>
   );
 }

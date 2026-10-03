@@ -120,6 +120,9 @@ The application uses these environment variables:
 - `S3_PREFIX`: optional root key prefix. It defaults to `Image`.
 - `ACCESS_KEY_ID`: AWS access key used by the server to sign and manage uploads.
 - `SECRET_ACCESS_KEY`: AWS secret access key. It must remain server-only.
+- `RESEND_API_KEY`: server-only Resend API key used for new lead notifications.
+- `OWNER_EMAIL`: recipient for notification emails from every lead form.
+- `RESEND_FROM_EMAIL`: sender identity used by Resend. Use a verified domain address in production.
 
 `UPLOAD_ENDPOINT` and `UPLOAD_PUBLIC_BASE_URL` are not required. Public object URLs are derived as `https://<bucket>.s3.<region>.amazonaws.com/<key>`.
 

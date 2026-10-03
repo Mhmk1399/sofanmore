@@ -37,6 +37,32 @@ a {
   text-decoration: none;
 }
 
+@keyframes google-reviews-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.google-reviews-track {
+  animation: google-reviews-marquee 58s linear infinite;
+  will-change: transform;
+}
+
+.google-reviews-marquee:hover .google-reviews-track,
+.google-reviews-marquee:focus .google-reviews-track,
+.google-reviews-marquee:focus-within .google-reviews-track,
+.google-reviews-marquee:active .google-reviews-track,
+.google-reviews-marquee[data-user-paused="true"] .google-reviews-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .google-reviews-track {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+}
+
 ::selection {
   background: var(--brand-gold);
   color: var(--brand-navy-950);

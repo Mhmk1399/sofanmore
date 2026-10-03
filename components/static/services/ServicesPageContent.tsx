@@ -1,3 +1,4 @@
+import GoogleReviewsSection from "@/components/global/GoogleReviewsSection";
 import FAQSection from "../FAQSection";
 import BespokeSofasServiceSection from "./BespokeSofasServiceSection";
 import CommercialSofasServiceSection from "./CommercialSofasServiceSection";
@@ -114,6 +115,7 @@ export default function ServicesPageContent() {
   return (
     <main id="webpage" className="overflow-hidden bg-[var(--brand-ivory)]">
       <ServicesHero />
+      <GoogleReviewsSection />
       <ConnectedServicesSection id="services" />
       <BespokeSofasServiceSection />
       <CommercialSofasServiceSection />
