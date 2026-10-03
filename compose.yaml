@@ -11,5 +11,9 @@ services:
     env_file:
       - .env
 
+    environment:
+      OWNER_EMAIL: ${OWNER_EMAIL:?OWNER_EMAIL must be set in .env}
+      RESEND_API_KEY: ${RESEND_API_KEY:?RESEND_API_KEY must be set in .env}
+
     ports:
       - "127.0.0.1:3000:3000"
