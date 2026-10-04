@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 
 import { Spinner } from "@/components/lead-capture/ClayFormControls";
 import { useToast } from "@/components/ui/ToastProvider";
@@ -23,6 +24,14 @@ import AdminProfile, {
 } from "./AdminProfile";
 import AdminSidebar from "./AdminSidebar";
 import AdminUsers from "./AdminUsers";
+
+const AdminGallery = dynamic(() => import("./AdminGallery"), {
+  loading: () => (
+    <div className="flex min-h-[420px] items-center justify-center rounded-xl border border-white/70 bg-white/50">
+      <Spinner />
+    </div>
+  ),
+});
 
 import {
   ConfirmModal,
@@ -860,6 +869,7 @@ export default function LeadAdminDashboard({
                   {activeSection === "overview" && "Overview"}
                   {activeSection === "leads" && "Leads"}
                   {activeSection === "projects" && "Projects"}
+                  {activeSection === "gallery" && "Gallery"}
                   {activeSection === "users" && "Users"}
                   {activeSection === "profile" && "Profile"}
                 </h1>
@@ -985,6 +995,8 @@ export default function LeadAdminDashboard({
                   onRefresh={() => setRefreshKey((c) => c + 1)}
                 />
               )}
+
+              {activeSection === "gallery" && <AdminGallery />}
 
               {activeSection === "profile" && (
                 <AdminProfile

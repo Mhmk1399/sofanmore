@@ -59,7 +59,7 @@ export function emptyOk(init?: ResponseInit) {
   });
 }
 
-export function errorResponse(problem: ApiProblem) {
+export function errorResponse(problem: ApiProblem, init?: ResponseInit) {
   const body: ApiErrorBody = {
     ok: false,
     code: problem.code,
@@ -70,7 +70,7 @@ export function errorResponse(problem: ApiProblem) {
     body.fieldErrors = problem.fieldErrors;
   }
 
-  return Response.json(body, { status: problem.status });
+  return Response.json(body, { status: problem.status, ...init });
 }
 
 export function validationError(
@@ -80,9 +80,9 @@ export function validationError(
   return new ApiProblem("VALIDATION_ERROR", message, 400, fieldErrors);
 }
 
-export function handleApiError(error: unknown) {
+export function handleApiError(error: unknown, init?: ResponseInit) {
   if (error instanceof ApiProblem) {
-    return errorResponse(error);
+    return errorResponse(error, init);
   }
 
   console.error("Lead capture API error", error);
@@ -93,5 +93,6 @@ export function handleApiError(error: unknown) {
       "Something went wrong. Please try again.",
       500,
     ),
+    init,
   );
 }

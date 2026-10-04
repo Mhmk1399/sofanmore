@@ -126,6 +126,20 @@ function withStoragePrefix(storageKey: string) {
   return `${prefix}/${storageKey}`;
 }
 
+function escapedPattern(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+export function isOwnedGalleryStorageKey(storageKey: string) {
+  const prefix = (process.env.S3_PREFIX?.trim() || "Image").replace(
+    /^\/+|\/+$/g,
+    "",
+  );
+  return new RegExp(
+    `^${escapedPattern(prefix)}/gallery-images/[0-9]{4}/[0-9]{2}/[a-f0-9]{48}\\.(?:jpg|png|webp)$`,
+  ).test(storageKey);
+}
+
 export function createStorageKey(input: {
   service: LeadService;
   safeName: string;
@@ -147,6 +161,10 @@ export function createProjectImageStorageKey(input: {
     getFileExtension(input.safeName) || defaultExtensionForMime(input.mimeType);
 
   return withStoragePrefix(datedRandomKey("project-uploads", extension));
+}
+
+export function createGalleryImageStorageKey(extension: "jpg" | "png" | "webp") {
+  return withStoragePrefix(datedRandomKey("gallery-images", extension));
 }
 
 export async function uploadObject(input: {

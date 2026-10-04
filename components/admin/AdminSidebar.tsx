@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   LogOut,
   FolderOpen,
+  Images,
   RefreshCw,
   ShieldCheck,
   UserCircle,
@@ -103,6 +104,12 @@ export default function Sidebar({
           icon={<FolderOpen size={15} />}
           label="Projects"
           onClick={() => onNavigate("projects")}
+        />
+        <NavItem
+          active={activeSection === "gallery"}
+          icon={<Images size={15} />}
+          label="Gallery"
+          onClick={() => onNavigate("gallery")}
         />
         <NavItem
           active={activeSection === "users"}

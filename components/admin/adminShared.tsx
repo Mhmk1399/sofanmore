@@ -17,6 +17,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode,
   useEffect,
+  useId,
   useRef,
   useState,
 } from "react";
@@ -635,6 +636,7 @@ export type ActiveSection =
   | "overview"
   | "leads"
   | "projects"
+  | "gallery"
   | "users"
   | "profile";
 
@@ -657,14 +659,68 @@ export function ConfirmModal({
   onConfirm: () => void;
   onCancel: () => void;
 }) {
+  const titleId = useId();
+  const descriptionId = useId();
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const cancelRef = useRef<HTMLButtonElement>(null);
+  const onCancelRef = useRef(onCancel);
+  const loadingRef = useRef(loading);
+
+  useEffect(() => {
+    onCancelRef.current = onCancel;
+    loadingRef.current = loading;
+  }, [loading, onCancel]);
+
+  useEffect(() => {
+    if (!open) return;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    cancelRef.current?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !loadingRef.current) {
+        event.preventDefault();
+        onCancelRef.current();
+        return;
+      }
+      if (event.key !== "Tab" || !dialogRef.current) return;
+      const controls = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(
+          "button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled])",
+        ),
+      );
+      if (!controls.length) return;
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus();
+    };
+  }, [open]);
+
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
       <div
+        aria-hidden="true"
         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-        onClick={onCancel}
+        onClick={() => !loading && onCancel()}
       />
-      <div className="relative w-full max-w-[380px] rounded-2xl bg-white shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+        className="relative w-full max-w-[380px] rounded-2xl bg-white shadow-[0_20px_60px_rgba(0,0,0,0.25)]"
+      >
         <div className="p-5">
           <div className="mb-3 flex items-center gap-3">
             <span
@@ -672,16 +728,17 @@ export function ConfirmModal({
             >
               <AlertTriangle size={18} />
             </span>
-            <h3 className="font-brand-sans text-[15px] font-bold text-[var(--brand-navy)]">
+            <h3 id={titleId} className="font-brand-sans text-[15px] font-bold text-[var(--brand-navy)]">
               {title}
             </h3>
           </div>
-          <p className="font-brand-sans text-[13px] leading-relaxed text-[var(--brand-text-muted)]">
+          <p id={descriptionId} className="font-brand-sans text-[13px] leading-relaxed text-[var(--brand-text-muted)]">
             {message}
           </p>
         </div>
         <div className="flex items-center justify-end gap-2 border-t border-gray-100 px-5 py-3">
           <button
+            ref={cancelRef}
             type="button"
             onClick={onCancel}
             disabled={loading}

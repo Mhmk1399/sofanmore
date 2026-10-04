@@ -5,12 +5,14 @@ import type {
   LeadDocument,
 } from "@/models/lead";
 import type { ProjectDocument } from "@/models/project";
+import type { GalleryImageDocument } from "@/models/gallery-image";
 import type { UserDocument } from "@/models/user";
 
 const globalForMongo = globalThis as typeof globalThis & {
   mongoClientPromise?: Promise<MongoClient>;
   leadIndexesPromise?: Promise<void>;
   projectIndexesPromise?: Promise<void>;
+  galleryImageIndexesPromise?: Promise<void>;
   userIndexesPromise?: Promise<void>;
 };
 
@@ -69,6 +71,32 @@ export async function getProjectCollections() {
   return {
     projects: db.collection<ProjectDocument>("projects"),
   };
+}
+
+export async function getGalleryImageCollections() {
+  const db = await getDb();
+  return { galleryImages: db.collection<GalleryImageDocument>("gallery_images") };
+}
+
+export function ensureGalleryImageIndexes() {
+  if (!globalForMongo.galleryImageIndexesPromise) {
+    globalForMongo.galleryImageIndexesPromise = (async () => {
+      const { galleryImages } = await getGalleryImageCollections();
+      await Promise.all([
+        galleryImages.createIndex({ code: 1 }, { unique: true, name: "unique_gallery_code" }),
+        galleryImages.createIndex(
+          { active: 1, service: 1, sortOrder: 1, createdAt: -1 },
+          { name: "public_gallery_active_service_order" },
+        ),
+        galleryImages.createIndex(
+          { service: 1, active: 1, updatedAt: -1 },
+          { name: "admin_gallery_service_status_updated" },
+        ),
+        galleryImages.createIndex({ updatedAt: -1 }, { name: "gallery_updated_desc" }),
+      ]);
+    })();
+  }
+  return globalForMongo.galleryImageIndexesPromise;
 }
 
 export function ensureLeadIndexes() {
