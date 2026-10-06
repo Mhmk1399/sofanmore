@@ -122,7 +122,6 @@ export default function CommercialSofasPageContent() {
         note="Business project"
       />
       <CommercialSofasHero id="service" />
-      <GoogleReviewsSection />
       <CommercialSofasRealBusinessSpacesSection />
       <CommercialSofaSolutionsSection />
       <WhyChooseCommercialSofasSection />
@@ -133,6 +132,7 @@ export default function CommercialSofasPageContent() {
       <CommercialSofasMadeInLondonSection />
       <RelatedProjectsSection service="COMMERCIAL_SOFA" />
       <CommercialSofaLeadForm />
+      <GoogleReviewsSection />
       <FAQSection id="faq" items={commercialSofasFaqs} />
       <CommercialSofasFinalCTASection />
     </main>

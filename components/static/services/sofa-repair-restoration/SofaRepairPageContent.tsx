@@ -110,7 +110,6 @@ export default function SofaRepairPageContent() {
         note="Quick assessment"
       />
       <SofaRepairHero id="service" />
-      <GoogleReviewsSection />
       <BeforeYouReplaceSection />
       <SofaTypesRepairSection id="sofa-restoration" />
       <WhatSofaRestorationMeansSection />
@@ -123,7 +122,7 @@ export default function SofaRepairPageContent() {
       <RelatedProjectsSection service="SOFA_REPAIR_RESTORATION" />
       <SofaRepairLeadForm />
       <SofaRepairFinalCTASection />
-
+      <GoogleReviewsSection />
       <FAQSection id="faq" items={sofaRepairFaqs} />
     </main>
   );

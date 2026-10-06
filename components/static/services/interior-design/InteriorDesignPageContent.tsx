@@ -115,7 +115,6 @@ export default function InteriorDesignPageContent() {
         note="Design enquiry"
       />
       <InteriorDesignHero id="service" />
-      <GoogleReviewsSection />
       <BespokeInteriorDesignPhilosophySection />
       <InteriorDesignServicesSection residentialId="residential" />
       <DesignedAroundYourSpaceSection id="interior-styling" />
@@ -126,6 +125,7 @@ export default function InteriorDesignPageContent() {
       <InteriorDesignLondonBaseSection />
       <RelatedProjectsSection service="INTERIOR_DESIGN" />
       <InteriorDesignLeadForm />
+      <GoogleReviewsSection />
       <FAQSection id="faq" items={interiorDesignFaqs} />
       <InteriorDesignFinalCTASection />
     </main>

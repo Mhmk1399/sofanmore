@@ -113,7 +113,6 @@ export default function BespokesofaPageContent() {
         label="Request Upholstery"
       />
       <BespokesofaHero id="service" />
-      <GoogleReviewsSection />
       <CustomsofaForYourSpaceSection id="made-to-measure-sofas" />
       <BespokeSofasWeCanCreateSection />
       <WhyChooseBespokeSofasSection />
@@ -121,6 +120,7 @@ export default function BespokesofaPageContent() {
       {/* <BespokeProcessSection /> */}
 
       <CommercialSofaProjectsSection />
+       <GoogleReviewsSection />
       <FAQSection id="faq" items={bespokesofaFaqs} />
       <BespokeSofaLeadForm />
     </main>

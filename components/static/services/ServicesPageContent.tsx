@@ -115,7 +115,6 @@ export default function ServicesPageContent() {
   return (
     <main id="webpage" className="overflow-hidden bg-[var(--brand-ivory)]">
       <ServicesHero />
-      <GoogleReviewsSection />
       <ConnectedServicesSection id="services" />
       <BespokeSofasServiceSection />
       <CommercialSofasServiceSection />
@@ -125,6 +124,7 @@ export default function ServicesPageContent() {
       <WhichServiceIsRightSection />
       <DesignedAroundUseSection />
       <HowYourProjectBeginsSection />
+      <GoogleReviewsSection />
       <FAQSection id="faq" items={servicesFaqs} />
     </main>
   );

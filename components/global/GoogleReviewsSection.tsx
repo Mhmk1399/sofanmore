@@ -33,14 +33,14 @@ function ReviewCard({ review, duplicate = false }: { review: (typeof reviews)[nu
       tabIndex={duplicate ? -1 : undefined}
       aria-hidden={duplicate || undefined}
       aria-label={duplicate ? undefined : `Read ${review.name}'s review on Google (opens in a new tab)`}
-      className="group flex w-[292px] shrink-0 snap-start flex-col rounded-[24px] border border-white/12 bg-white/[0.075] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_34px_rgba(0,0,0,0.13)] transition-[transform,background-color,border-color] duration-300 hover:-translate-y-1 hover:border-[var(--brand-gold)]/45 hover:bg-white/[0.11] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand-gold)] sm:w-[340px] sm:p-6"
+      className="group flex w-[292px] shrink-0 snap-start flex-col rounded-[24px] border border-white/12 bg-white/[0.075] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_34px_rgba(0,0,0,0.13)] transition-[transform,background-color,border-color] duration-300 hover:-translate-y-1 hover:border-[var(--brand-gold)]/45 hover:bg-white/[0.11] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand-gold)] sm:w-[310px] sm:p-6"
     >
       <div className="flex items-center justify-between gap-4">
         <Stars compact />
         <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-white/35 transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--brand-gold)]" />
       </div>
       <p className="mt-5 font-brand-sans text-[9px] font-bold uppercase tracking-[0.18em] text-[var(--brand-gold)]/85">Google review summary</p>
-      <p className="mt-3 flex-1 font-brand-display text-[20px] font-medium leading-[1.28] text-white sm:text-[22px]">{review.summary}</p>
+      <p className="mt-3 flex-1 font-brand-display text-[14px] font-medium leading-[1.28] text-white sm:text-[16px]">{review.summary}</p>
       <div className="mt-6 border-t border-white/12 pt-4">
         <p className="font-brand-sans text-[12px] font-extrabold text-white">{review.name}</p>
         <p className="mt-1 font-brand-sans text-[11px] font-semibold uppercase tracking-[0.1em] text-white/68">{review.date} · Google</p>
@@ -78,7 +78,7 @@ export default function GoogleReviewsSection() {
 
   return (
     <section aria-labelledby="google-reviews-heading" className="relative px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-      <div className="mx-auto max-w-[1240px]">
+      <div className="mx-auto max-w-full">
         <div className="clay-surface-strong rounded-[34px] p-[6px] sm:rounded-[42px] sm:p-[8px]">
           <div className="relative isolate overflow-hidden rounded-[29px] bg-[var(--brand-navy)] py-10 text-white sm:rounded-[34px] sm:py-12 lg:py-14">
             <div aria-hidden="true" className="absolute -right-20 -top-28 h-80 w-80 rounded-full border border-[var(--brand-gold)]/20 bg-[var(--brand-gold)]/[0.06]" />
