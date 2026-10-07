@@ -19,6 +19,7 @@ import {
   COMMERCIAL_UPLOAD_COUNT,
   COMMERCIAL_UPLOAD_SIZE_BYTES,
 } from "@/lib/lead-config";
+import { useLeadSuccessConfirmation } from "@/components/lead-capture/useLeadSuccessConfirmation";
 
 type FormErrors = Record<string, string>;
 
@@ -145,6 +146,7 @@ function trackCommercialLeadEvent(
   details: Record<string, unknown> = {},
 ) {
   const payload = {
+    event: eventName,
     eventName,
     service: "commercial_sofa",
     sourcePage:
@@ -338,10 +340,17 @@ export default function CommercialSofaLeadForm() {
   const [uploadError, setUploadError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [successLeadId, setSuccessLeadId] = useState("");
-  const [uploadSessionId] = useState(() => createClientId("upload"));
-  const [idempotencyKey] = useState(() => createClientId("lead"));
-  const [formStartedAt] = useState(() => Date.now());
+  const { successLeadId, showSuccessConfirmation } =
+    useLeadSuccessConfirmation({
+      service: "commercial_sofa",
+    });
+  const [uploadSessionId, setUploadSessionId] = useState(() =>
+    createClientId("upload"),
+  );
+  const [idempotencyKey, setIdempotencyKey] = useState(() =>
+    createClientId("lead"),
+  );
+  const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
   const startedEventSent = useRef(false);
   const uploadsRef = useRef<UploadItem[]>([]);
 
@@ -537,6 +546,24 @@ export default function CommercialSofaLeadForm() {
     });
   }
 
+  function resetFormAfterSuccess() {
+    setValues(initialValues);
+    setErrors({});
+    setUploadError("");
+    setSubmitError("");
+    setUploads((current) => {
+      for (const item of current) {
+        revokePreviewUrl(item);
+      }
+
+      return [];
+    });
+    setUploadSessionId(createClientId("upload"));
+    setIdempotencyKey(createClientId("lead"));
+    setFormStartedAt(Date.now());
+    startedEventSent.current = false;
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     markStarted();
@@ -627,11 +654,13 @@ export default function CommercialSofaLeadForm() {
         }),
       });
       const result = await readApiResponse<LeadResponse>(response);
+      const submittedFileCount = uploads.length;
 
-      setSuccessLeadId(result.leadId);
       trackCommercialLeadEvent("commercial_lead_success", {
-        fileCount: uploads.length,
+        fileCount: submittedFileCount,
       });
+      resetFormAfterSuccess();
+      showSuccessConfirmation(result.leadId);
     } catch (error) {
       const errorWithFields = error as Error & { fieldErrors?: FormErrors };
 

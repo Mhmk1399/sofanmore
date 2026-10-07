@@ -16,6 +16,7 @@ import {
 } from "@/components/lead-capture/ClayFormControls";
 import LeadFormShell from "@/components/lead-capture/LeadFormShell";
 import { MAX_UPLOAD_COUNT, MAX_UPLOAD_SIZE_BYTES } from "@/lib/lead-config";
+import { useLeadSuccessConfirmation } from "@/components/lead-capture/useLeadSuccessConfirmation";
 
 type FormErrors = Record<string, string>;
 
@@ -121,6 +122,7 @@ function trackRepairLeadEvent(
   details: Record<string, unknown> = {},
 ) {
   const payload = {
+    event: eventName,
     eventName,
     service: "sofa_repair_restoration",
     sourcePage:
@@ -289,10 +291,17 @@ export default function SofaRepairLeadForm() {
   const [uploadError, setUploadError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [successLeadId, setSuccessLeadId] = useState("");
-  const [uploadSessionId] = useState(() => createClientId("upload"));
-  const [idempotencyKey] = useState(() => createClientId("lead"));
-  const [formStartedAt] = useState(() => Date.now());
+  const { successLeadId, showSuccessConfirmation } =
+    useLeadSuccessConfirmation({
+      service: "sofa_repair_restoration",
+    });
+  const [uploadSessionId, setUploadSessionId] = useState(() =>
+    createClientId("upload"),
+  );
+  const [idempotencyKey, setIdempotencyKey] = useState(() =>
+    createClientId("lead"),
+  );
+  const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
   const startedEventSent = useRef(false);
   const uploadsRef = useRef<UploadItem[]>([]);
 
@@ -489,6 +498,24 @@ export default function SofaRepairLeadForm() {
     });
   }
 
+  function resetFormAfterSuccess() {
+    setValues(initialValues);
+    setErrors({});
+    setUploadError("");
+    setSubmitError("");
+    setUploads((current) => {
+      for (const item of current) {
+        revokePreviewUrl(item);
+      }
+
+      return [];
+    });
+    setUploadSessionId(createClientId("upload"));
+    setIdempotencyKey(createClientId("lead"));
+    setFormStartedAt(Date.now());
+    startedEventSent.current = false;
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     markStarted();
@@ -554,11 +581,13 @@ export default function SofaRepairLeadForm() {
         }),
       });
       const result = await readApiResponse<LeadResponse>(response);
+      const submittedFileCount = uploads.length;
 
-      setSuccessLeadId(result.leadId);
       trackRepairLeadEvent("repair_form_success", {
-        fileCount: uploads.length,
+        fileCount: submittedFileCount,
       });
+      resetFormAfterSuccess();
+      showSuccessConfirmation(result.leadId);
     } catch (error) {
       const errorWithFields = error as Error & { fieldErrors?: FormErrors };
 
