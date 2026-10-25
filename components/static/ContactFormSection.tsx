@@ -25,7 +25,9 @@ type ContactFormValues = {
   honeypot: string;
 };
 
-type ContactFormErrors = Partial<Record<keyof ContactFormValues | "form", string>>;
+type ContactFormErrors = Partial<
+  Record<keyof ContactFormValues | "form", string>
+>;
 
 type ContactLeadResponse = {
   ok: true;
@@ -275,7 +277,9 @@ function useContactLeadForm() {
         fieldErrors?: ContactFormErrors;
       };
       const message =
-        error instanceof Error ? error.message : "We couldn't send your message.";
+        error instanceof Error
+          ? error.message
+          : "We couldn't send your message.";
 
       if (errorWithFields.fieldErrors) {
         setErrors(errorWithFields.fieldErrors);
@@ -508,20 +512,20 @@ function DesktopContactForm() {
             xl:pl-[285px]
           "
         >
-        {/* =================================================
+          {/* =================================================
             LEFT COPY
         ================================================== */}
 
-        <div
-          className="
+          <div
+            className="
             relative
             z-30
             min-w-0
             max-w-[410px]
           "
-        >
-          <p
-            className="
+          >
+            <p
+              className="
               font-brand-sans
               text-[12px]
               font-bold
@@ -529,22 +533,22 @@ function DesktopContactForm() {
               tracking-[0.28em]
               text-[var(--brand-gold-700)]
             "
-          >
-            Contact Form
-          </p>
+            >
+              Contact Form
+            </p>
 
-          <div
-            className="
+            <div
+              className="
               mt-4
               h-[2px]
               w-10
               rounded-full
               bg-[var(--brand-gold)]
             "
-          />
+            />
 
-          <h2
-            className="
+            <h2
+              className="
               mt-6
               font-brand-display
               text-[clamp(44px,3.7vw,61px)]
@@ -553,23 +557,23 @@ function DesktopContactForm() {
               tracking-[-0.045em]
               text-[var(--brand-navy)]
             "
-          >
-            We would love
-            <br />
-            to hear from
-            <br />
-            you
-            <span
-              className="
+            >
+              We would love
+              <br />
+              to hear from
+              <br />
+              you
+              <span
+                className="
                 text-[var(--brand-gold)]
               "
-            >
-              .
-            </span>
-          </h2>
+              >
+                .
+              </span>
+            </h2>
 
-          <p
-            className="
+            <p
+              className="
               mt-5
               max-w-[380px]
               font-brand-sans
@@ -580,32 +584,32 @@ function DesktopContactForm() {
 
               xl:text-[13px]
             "
-          >
-            {description}
-          </p>
+            >
+              {description}
+            </p>
 
-          <div
-            className="
+            <div
+              className="
               mt-6
               h-[2px]
               w-10
               rounded-full
               bg-[var(--brand-gold)]
             "
-          />
+            />
 
-          {/* mini brand item */}
+            {/* mini brand item */}
 
-          <div
-            className="
+            <div
+              className="
               mt-8
               flex
               items-center
               gap-4
             "
-          >
-            <div
-              className="
+            >
+              <div
+                className="
                 clay-surface-strong
                 flex
                 h-[54px]
@@ -615,9 +619,9 @@ function DesktopContactForm() {
                 justify-center
                 rounded-full
               "
-            >
-              <div
-                className="
+              >
+                <div
+                  className="
                   flex
                   h-[43px]
                   w-[43px]
@@ -626,20 +630,20 @@ function DesktopContactForm() {
                   rounded-full
                   bg-[var(--brand-navy)]
                 "
-              >
-                <Armchair
-                  size={21}
-                  strokeWidth={1.4}
-                  className="
+                >
+                  <Armchair
+                    size={21}
+                    strokeWidth={1.4}
+                    className="
                     text-[var(--brand-gold)]
                   "
-                />
+                  />
+                </div>
               </div>
-            </div>
 
-            <div>
-              <p
-                className="
+              <div>
+                <p
+                  className="
                   font-brand-sans
                   text-[13px]
                   font-bold
@@ -647,48 +651,48 @@ function DesktopContactForm() {
                   tracking-[0.13em]
                   text-[var(--brand-navy)]
                 "
-              >
-                Bespoke. Refined. Made for you.
-              </p>
+                >
+                  Bespoke. Refined. Made for you.
+                </p>
 
-              <p
-                className="
+                <p
+                  className="
                   mt-1
                   font-brand-sans
                   text-[13px]
                   text-[var(--brand-text-muted)]
                 "
-              >
-                Crafted in London. Designed around you.
-              </p>
+                >
+                  Crafted in London. Designed around you.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* =================================================
+          {/* =================================================
             FORM CARD
         ================================================== */}
 
-        <div
-          className="
+          <div
+            className="
             relative
             z-30
             min-w-0
             w-full
           "
-        >
-          <div
-            className="
+          >
+            <div
+              className="
               clay-surface-strong
               rounded-[38px]
               p-[8px]
               shadow-[0_22px_42px_rgba(70,58,42,0.16)]
             "
-          >
-            <form
-              onSubmit={form.handleSubmit}
-              noValidate
-              className="
+            >
+              <form
+                onSubmit={form.handleSubmit}
+                noValidate
+                className="
                 clay-inset
                 flex
                 flex-col
@@ -699,93 +703,95 @@ function DesktopContactForm() {
                 xl:px-11
                 xl:py-10
               "
-            >
-              {/* NAME */}
+              >
+                {/* NAME */}
 
-              <FormField
-                id="contact-name"
-                name="name"
-                label="Name"
-                autoComplete="name"
-                required
-                value={form.values.name}
-                onChange={(value) => form.updateValue("name", value)}
-                error={form.errors.name}
-              />
+                <FormField
+                  id="contact-name"
+                  name="name"
+                  label="Name"
+                  autoComplete="name"
+                  required
+                  value={form.values.name}
+                  onChange={(value) => form.updateValue("name", value)}
+                  error={form.errors.name}
+                />
 
-              {/* EMAIL / PHONE */}
+                {/* EMAIL / PHONE */}
 
-              <div
-                className="
+                <div
+                  className="
                   mt-6
                   grid
                   grid-cols-2
                   gap-6
                 "
-              >
-                <FormField
-                  id="contact-email"
-                  name="email"
-                  label="Email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={form.values.email}
-                  onChange={(value) => form.updateValue("email", value)}
-                  error={form.errors.email}
-                />
+                >
+                  <FormField
+                    id="contact-email"
+                    name="email"
+                    label="Email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={form.values.email}
+                    onChange={(value) => form.updateValue("email", value)}
+                    error={form.errors.email}
+                  />
 
-                <FormField
-                  id="contact-phone"
-                  name="phone"
-                  label="Phone"
-                  type="tel"
-                  autoComplete="tel"
-                  required
-                  value={form.values.phone}
-                  onChange={(value) => form.updateValue("phone", value)}
-                  error={form.errors.phone}
-                />
-              </div>
+                  <FormField
+                    id="contact-phone"
+                    name="phone"
+                    label="Phone"
+                    type="tel"
+                    autoComplete="tel"
+                    required
+                    value={form.values.phone}
+                    onChange={(value) => form.updateValue("phone", value)}
+                    error={form.errors.phone}
+                  />
+                </div>
 
-              {/* MESSAGE */}
+                {/* MESSAGE */}
 
-              <div className="mt-6">
-                <label
-                  htmlFor="contact-message"
-                  className="
+                <div className="mt-6">
+                  <label
+                    htmlFor="contact-message"
+                    className="
                     block
                     font-brand-sans
                     text-[12px]
                     font-semibold
                     text-[var(--brand-navy)]
                   "
-                >
-                  Your Message
-                </label>
+                  >
+                    Your Message
+                  </label>
 
-                <div
-                  className="
+                  <div
+                    className="
                     clay-inset
                     mt-3
                     rounded-[20px]
                     p-[3px]
                   "
-                >
-                  <textarea
-                    id="contact-message"
-                    name="message"
-                    rows={5}
-                    value={form.values.message}
-                    onChange={(event) =>
-                      form.updateValue("message", event.target.value)
-                    }
-                    required
-                    aria-invalid={Boolean(form.errors.message)}
-                    aria-describedby={
-                      form.errors.message ? "contact-message-error" : undefined
-                    }
-                    className="
+                  >
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      rows={5}
+                      value={form.values.message}
+                      onChange={(event) =>
+                        form.updateValue("message", event.target.value)
+                      }
+                      required
+                      aria-invalid={Boolean(form.errors.message)}
+                      aria-describedby={
+                        form.errors.message
+                          ? "contact-message-error"
+                          : undefined
+                      }
+                      className="
                       block
                       min-h-[145px]
                       w-full
@@ -802,43 +808,43 @@ function DesktopContactForm() {
                       transition-colors
                       focus:bg-white/35
                     "
-                  />
+                    />
+                  </div>
+                  {form.errors.message && (
+                    <p
+                      id="contact-message-error"
+                      className="mt-2 font-brand-sans text-[11px] font-semibold text-red-700"
+                    >
+                      {form.errors.message}
+                    </p>
+                  )}
                 </div>
-                {form.errors.message && (
-                  <p
-                    id="contact-message-error"
-                    className="mt-2 font-brand-sans text-[11px] font-semibold text-red-700"
+
+                <ContactConsentFields
+                  values={form.values}
+                  errors={form.errors}
+                  updateValue={form.updateValue}
+                  idPrefix="contact"
+                  className="mt-5"
+                />
+
+                {/* BUTTON */}
+
+                <div className="mt-5">
+                  <ClayButton
+                    type="submit"
+                    variant="gold"
+                    size="lg"
+                    fullWidth
+                    loading={form.isSubmitting}
+                    disabled={Boolean(form.successLeadId)}
                   >
-                    {form.errors.message}
-                  </p>
-                )}
-              </div>
-
-              <ContactConsentFields
-                values={form.values}
-                errors={form.errors}
-                updateValue={form.updateValue}
-                idPrefix="contact"
-                className="mt-5"
-              />
-
-              {/* BUTTON */}
-
-              <div className="mt-5">
-                <ClayButton
-                  type="submit"
-                  variant="gold"
-                  size="lg"
-                  fullWidth
-                  loading={form.isSubmitting}
-                  disabled={Boolean(form.successLeadId)}
-                >
-                  {form.successLeadId ? "Message Sent" : "Send Message"}
-                </ClayButton>
-              </div>
-            </form>
+                    {form.successLeadId ? "Message Sent" : "Send Message"}
+                  </ClayButton>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
         </div>
 
         {/* =================================================
@@ -846,58 +852,6 @@ function DesktopContactForm() {
 
             کامل داخل bounds قرار گرفته.
         ================================================== */}
-
-        {/* GOLD RING */}
-
-        <div
-          aria-hidden
-          className="
-            absolute
-            bottom-[88px]
-            left-[33px]
-            z-10
-            h-[140px]
-            w-[100px]
-            rounded-[50%]
-            border-[2px]
-            border-[var(--brand-gold)]/90
-          "
-        />
-
-        {/* IVORY SPHERE */}
-
-        <div
-          aria-hidden
-          className="
-            clay-sphere
-            absolute
-            bottom-[56px]
-            left-[64px]
-            z-20
-            h-[110px]
-            w-[110px]
-          "
-        >
-          <div className="clay-sphere-shadow" />
-          <div className="clay-sphere-ball" />
-        </div>
-
-        {/* GOLD SPHERE */}
-
-        <div
-          aria-hidden
-          className="
-            absolute
-            bottom-[58px]
-            left-[230px]
-            z-20
-            h-[48px]
-            w-[48px]
-            rounded-full
-            bg-[radial-gradient(circle_at_30%_25%,#FFE7A8_0%,#D7A04A_48%,#8E5718_100%)]
-            shadow-[0_10px_18px_rgba(106,67,17,0.26)]
-          "
-        />
       </div>
     </div>
   );
