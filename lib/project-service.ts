@@ -1,7 +1,7 @@
 import type { ProjectService } from "@/models/project";
 
 export const projectServiceLabels: Record<ProjectService, string> = {
-  BESPOKE_SOFA: "Upholstery",
+  BESPOKE_SOFA: "Bespoke Sofas",
   COMMERCIAL_SOFA: "Commercial sofa",
   INTERIOR_DESIGN: "Interior design",
   SOFA_REPAIR_RESTORATION: "Repair and restoration",

@@ -209,6 +209,7 @@ export async function listProjects(query: ProjectListQuery = {}) {
 export async function listPublishedProjectCards(
   service: ProjectService,
   limit: number,
+  includeCaseStudy = false,
 ) {
   await ensureProjectIndexes();
   const { projects } = await getProjectCollections();
@@ -224,6 +225,7 @@ export async function listPublishedProjectCards(
           service: 1,
           coverImageUrl: 1,
           excerpt: 1,
+          ...(includeCaseStudy ? { brief: 1, approach: 1, result: 1 } : {}),
           locationLabel: 1,
           createdAt: 1,
         },
@@ -242,6 +244,9 @@ export async function listPublishedProjectCards(
       service: project.service,
       coverImageUrl: project.coverImageUrl,
       excerpt: project.excerpt,
+      ...(includeCaseStudy && project.brief ? { brief: project.brief.slice(0, 600) } : {}),
+      ...(includeCaseStudy && project.approach ? { approach: project.approach.slice(0, 600) } : {}),
+      ...(includeCaseStudy && project.result ? { result: project.result.slice(0, 600) } : {}),
       ...(project.locationLabel ? { locationLabel: project.locationLabel } : {}),
       createdAt: project.createdAt.toISOString(),
     })),

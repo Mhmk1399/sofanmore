@@ -165,11 +165,11 @@ const servicesListSchema = {
 
         "@id": `${SITE_URL}/services/bespoke-sofas#service`,
 
-        name: "Upholstery",
+        name: "Bespoke Sofas",
 
         url: `${SITE_URL}/services/bespoke-sofas`,
 
-        serviceType: "Upholstery Design and Making",
+        serviceType: "Bespoke Sofa Design and Making",
 
         provider: {
           "@id": `${SITE_URL}/#organization`,

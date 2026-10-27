@@ -1,4 +1,4 @@
-import { Camera, Check, Hammer, Heart } from "lucide-react";
+import { PhoneCall, Check, Hammer, Heart } from "lucide-react";
 
 import ClayButton from "@/components/ui/ClayButton";
 
@@ -6,10 +6,7 @@ import ClayButton from "@/components/ui/ClayButton";
    CONFIG
 ========================================================= */
 
-const REPAIR_FORM_ID = "repair-assessment-form";
-
-const WHATSAPP_REPAIR_URL =
-  "https://wa.me/447400577844?text=Hi%20Sofa%20N%20More%2C%20I%27d%20like%20to%20send%20details%20and%20photos%20of%20my%20sofa%20for%20a%20reupholstery%20or%20restoration%20assessment.";
+const REPAIR_FORM_ID = "sofa-repair-enquiry";
 
 /* =========================================================
    DATA
@@ -178,11 +175,7 @@ export default function SofaRepairFinalCTASection() {
                     lg:text-[54px]
                   "
                 >
-                  Before You Say Goodbye
-                  <span className="block">
-                    to Your Sofa
-                    <span className="text-[var(--brand-gold)]">.</span>
-                  </span>
+                  Considering Full Reupholstery or Sofa Restoration?
                 </h2>
 
                 {/* LEAD */}
@@ -204,8 +197,9 @@ export default function SofaRepairFinalCTASection() {
                     sm:text-[21px]
                   "
                 >
-                  If the sofa still belongs in your home, it may be worth
-                  finding out whether it can be given another life.
+                  If your sofa still fits your space but needs substantial work
+                  to its upholstery, comfort, foam, wood or structure, send us
+                  photographs and let our workshop assess the project.
                 </p>
 
                 {/* CLOSING */}
@@ -252,21 +246,20 @@ export default function SofaRepairFinalCTASection() {
                     size="lg"
                     showArrow
                     className="max-sm:w-full"
-                    ariaLabel="Request a sofa reupholstery assessment"
+                    ariaLabel="Send Photos for Assessment"
                   >
-                    Request a Sofa Reupholstery Assessment
+                    Send Photos for Assessment
                   </ClayButton>
 
                   <ClayButton
-                    href={WHATSAPP_REPAIR_URL}
+                    href="tel:+447400577844"
                     variant="ivory"
                     size="lg"
-                    startIcon={<Camera size={15} strokeWidth={1.6} />}
-                    target="_blank"
+                    startIcon={<PhoneCall size={15} strokeWidth={1.6} />}
                     className="max-sm:w-full"
-                    ariaLabel="Send Sofa N More your sofa details and photographs"
+                    ariaLabel="Call Our London Workshop"
                   >
-                    Send Us Your Sofa Details
+                    Call Our London Workshop
                   </ClayButton>
                 </div>
               </div>

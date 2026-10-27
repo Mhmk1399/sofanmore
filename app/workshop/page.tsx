@@ -288,7 +288,7 @@ export default function WorkshopPage() {
   return (
     <>
       <JsonLd data={structuredData} />
-      <main className="overflow-hidden mt-20 bg-[var(--brand-ivory)]">
+      <main className="overflow-hidden lg:flow-root lg:overflow-clip mt-20 bg-[var(--brand-ivory)]">
         <WorkshopHero />
         <WorkshopHighlightsSection />
         <WorkingWorkshopSection />

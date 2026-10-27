@@ -179,10 +179,7 @@ function validateUploadSessionId(
     128,
   );
 
-  if (
-    uploadSessionId &&
-    !/^[A-Za-z0-9._:-]{16,128}$/.test(uploadSessionId)
-  ) {
+  if (uploadSessionId && !/^[A-Za-z0-9._:-]{16,128}$/.test(uploadSessionId)) {
     errors[field] = "Use a valid upload session id.";
   }
 
@@ -209,11 +206,7 @@ function validateUploadToken(
   return token;
 }
 
-function validateUrlLike(
-  value: unknown,
-  field: string,
-  errors: FieldErrors,
-) {
+function validateUrlLike(value: unknown, field: string, errors: FieldErrors) {
   const cleaned = optionalCleanString(value, field, errors, 500);
 
   if (!cleaned) {
@@ -439,7 +432,8 @@ function validateServiceData(
       if (
         definition.allowedValues &&
         items.some(
-          (item) => !(definition.allowedValues as readonly string[]).includes(item),
+          (item) =>
+            !(definition.allowedValues as readonly string[]).includes(item),
         )
       ) {
         errors[fieldPath] = "Choose valid options.";
@@ -512,7 +506,10 @@ export function validateUploadSignInput(
     typeof input.sizeBytes === "number"
       ? input.sizeBytes
       : Number(input.sizeBytes);
-  const uploadSessionId = validateUploadSessionId(input.uploadSessionId, errors);
+  const uploadSessionId = validateUploadSessionId(
+    input.uploadSessionId,
+    errors,
+  );
 
   if (!Number.isInteger(sizeBytes)) {
     errors.sizeBytes = "Use a valid file size.";
@@ -703,7 +700,7 @@ export function validateLeadSubmissionInput(
 
   if (service === "COMMERCIAL_SOFA") {
     if (!email && !errors.email) {
-      errors.email = "Enter a work email address.";
+      errors.email = "Enter an email address.";
     }
 
     if (!message || message.length < 20) {
@@ -730,6 +727,16 @@ export function validateLeadSubmissionInput(
   }
 
   if (service === "SOFA_REPAIR_RESTORATION") {
+    for (const key of [
+      "itemType",
+      "projectScope",
+      "attentionExtent",
+    ] as const) {
+      if (!serviceData[key] && !errors[`serviceData.${key}`]) {
+        errors[`serviceData.${key}`] = "Choose an option.";
+      }
+    }
+
     if (uploadTokens.length < 1 && !errors.uploadTokens) {
       errors.uploadTokens = "Upload at least one photo.";
     }

@@ -177,9 +177,7 @@ export default function CommercialSofasFinalCTASection() {
                     lg:text-[clamp(48px,4vw,62px)]
                   "
                 >
-                  Planning a
-                  <br className="hidden sm:block" />
-                  Commercial Space
+                  Planning a Commercial Seating Project
                   <span
                     className="
                       text-[var(--brand-gold)]
@@ -209,7 +207,8 @@ export default function CommercialSofasFinalCTASection() {
                     sm:text-[22px]
                   "
                 >
-                  Your sofas should work as hard as the rest of your interior.
+                  Your commercial seating should work as hard as the rest of
+                  your business space.
                 </p>
 
                 {/* BODY */}
@@ -265,25 +264,25 @@ export default function CommercialSofasFinalCTASection() {
                   "
                 >
                   <ClayButton
-                    href="/contact-us"
+                    href="#commercial-sofa-enquiry"
                     variant="gold"
                     size="lg"
                     showArrow
                     className="max-sm:w-full"
-                    ariaLabel="Request a commercial sofa quote"
+                    ariaLabel="Request a commercial seating quote"
                   >
-                    Request a Commercial Sofa Quote
+                    Request a Commercial Seating Quote
                   </ClayButton>
 
                   <ClayButton
-                    href="/contact-us"
+                    href="#commercial-sofa-enquiry"
                     variant="ivory"
                     size="lg"
                     showArrow
                     className="max-sm:w-full"
                     ariaLabel="Tell Sofa N More about your commercial project"
                   >
-                    Tell Us About Your Project
+                    Send Plans &amp; Project Details
                   </ClayButton>
                 </div>
               </div>

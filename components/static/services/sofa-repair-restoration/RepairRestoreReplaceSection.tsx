@@ -205,7 +205,7 @@ export default function RepairRestoreReplaceSection() {
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Reupholster, Restore or Replace
+                  Reupholster, Restore or Replace the Sofa
                   <span className="text-[var(--brand-gold)]">?</span>
                 </h2>
               </div>
@@ -225,8 +225,8 @@ export default function RepairRestoreReplaceSection() {
                     sm:text-[21px]
                   "
                 >
-                  One of the first questions many people have is whether their
-                  sofa is actually worth restoring.
+                  Not every sofa is worth restoring, and not every repair
+                  justifies a full workshop project.
                 </p>
 
                 <p
@@ -246,8 +246,12 @@ export default function RepairRestoreReplaceSection() {
                     lg:text-[13px]
                   "
                 >
-                  There is no universal answer. The right decision starts with
-                  understanding the sofa itself.
+                  Restoration usually makes the most sense where the sofa is
+                  well made, fits the room well, has personal or design value,
+                  or needs substantial work that can meaningfully extend its
+                  useful life. Photographs and a description of the condition
+                  help us assess whether professional restoration is a sensible
+                  option before work is discussed.
                 </p>
               </div>
             </div>

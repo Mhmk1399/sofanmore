@@ -21,10 +21,10 @@ const benefits = [
     title: "Made to Fit",
 
     description:
-      "Dimensions are considered around your actual space rather than predetermined by a standard catalogue.",
+      "Your sofa dimensions are developed around the actual space rather than predetermined by a standard catalogue or ready-made size.",
 
     secondary:
-      "That can be especially valuable in London properties where layouts, alcoves, period architecture and room proportions often make standard pieces difficult to place.",
+      "This is especially useful in London properties where alcoves, unusual layouts, period architecture and restricted room proportions can make standard sofas difficult to place.",
   },
 
   {
@@ -37,7 +37,7 @@ const benefits = [
     title: "Designed Around You",
 
     description:
-      "Choose the elements that matter to you — from dimensions and proportions to upholstery, materials and finishing details.",
+      "Choose the elements that matter to you — from dimensions, proportions and seating comfort to fabric, materials and finishing details.",
 
     secondary:
       "The objective is not to choose the closest available option. It is to create the right one.",
@@ -53,7 +53,7 @@ const benefits = [
     title: "Greater Design Freedom",
 
     description:
-      "A upholstery or seating piece gives you the freedom to create something that complements the wider interior rather than designing the room around a standard piece.",
+      "A bespoke sofa gives you the freedom to create a piece that complements the wider interior instead of designing the room around standard furniture.",
   },
 
   {
@@ -66,10 +66,10 @@ const benefits = [
     title: "Made for the Way You Use Your Space",
 
     description:
-      "Beautiful seating still needs to work. Comfort, seating requirements, available space and day-to-day use are considered alongside aesthetics.",
+      "A beautiful sofa still needs to work in everyday life. Comfort, seating requirements, available space and day-to-day use are considered alongside appearance.",
 
     secondary:
-      "The result is a bespoke piece designed to become part of your everyday environment.",
+      "The result is a custom sofa designed to fit naturally into your everyday environment.",
   },
 ];
 
@@ -97,7 +97,6 @@ export default function WhyChooseBespokeSofasSection() {
         lg:py-16
       "
     >
- 
       <div
         className="
           relative
@@ -240,7 +239,7 @@ export default function WhyChooseBespokeSofasSection() {
                   lg:text-[clamp(50px,4.5vw,68px)]
                 "
               >
-                Why Choose Upholstery
+                Why Choose a Bespoke Sofa
                 <span
                   className="
                     text-[var(--brand-gold)]
@@ -270,153 +269,28 @@ export default function WhyChooseBespokeSofasSection() {
                   lg:text-[14px]
                 "
               >
-                Because the right piece should respond to your room, your
-                preferences and the way you use the space — rather than asking
-                you to compromise around a standard design.
+                Because the right sofa should respond to your room, your
+                dimensions, your comfort preferences and the way you use the
+                space — rather than forcing you to compromise around a standard
+                design.
               </p>
             </div>
 
-            {/* =================================================
-                DESKTOP COMPOSITION
-            ================================================== */}
-
-            <div
-              className="
-                relative
-                z-20
-
-                mt-10
-
-                hidden
-
-                min-h-[720px]
-
-                lg:block
-              "
-            >
-              {/* TOP LEFT */}
-
-              <div
-                className="
-                  absolute
-
-                  left-0
-                  top-0
-
-                  w-[36%]
-                "
-              >
+            <div className="relative z-20 mt-8 grid gap-5 lg:mt-10 lg:grid-cols-[1fr_0.85fr_1fr] lg:items-center">
+              <div className="min-w-0 lg:col-start-1 lg:row-start-1">
                 <BenefitCard item={benefits[0]} align="left" />
               </div>
-
-              {/* TOP RIGHT */}
-
-              <div
-                className="
-                  absolute
-
-                  right-0
-                  top-0
-
-                  w-[36%]
-                "
-              >
+              <div className="min-w-0 lg:col-start-3 lg:row-start-1">
                 <BenefitCard item={benefits[1]} align="right" />
               </div>
-
-              {/* BOTTOM LEFT */}
-
-              <div
-                className="
-                  absolute
-
-                  bottom-0
-                  left-0
-
-                  w-[36%]
-                "
-              >
+              <div className="min-w-0 lg:col-start-1 lg:row-start-2">
                 <BenefitCard item={benefits[2]} align="left" />
               </div>
-
-              {/* BOTTOM RIGHT */}
-
-              <div
-                className="
-                  absolute
-
-                  bottom-0
-                  right-0
-
-                  w-[36%]
-                "
-              >
+              <div className="min-w-0 lg:col-start-3 lg:row-start-2">
                 <BenefitCard item={benefits[3]} align="right" />
               </div>
-
-              {/* CENTRAL OBJECT */}
-
-              <div
-                className="
-                  absolute
-
-                  left-1/2
-                  top-1/2
-
-                  z-30
-
-                  w-[31%]
-
-                  -translate-x-1/2
-                  -translate-y-1/2
-                "
-              >
+              <div className="order-first mx-auto w-full min-w-0 max-w-[330px] lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2">
                 <CentralBespokeObject />
-              </div>
-
-              {/* CONNECTOR LINES */}
-
-              <ConnectorLines />
-            </div>
-
-            {/* =================================================
-                MOBILE COMPOSITION
-            ================================================== */}
-
-            <div
-              className="
-                relative
-                z-20
-
-                mt-8
-
-                lg:hidden
-              "
-            >
-              {/* CENTRAL VISUAL FIRST */}
-
-              <div
-                className="
-                  mx-auto
-
-                  max-w-[330px]
-                "
-              >
-                <CentralBespokeObject mobile />
-              </div>
-
-              {/* BENEFITS */}
-
-              <div
-                className="
-                  mt-5
-
-                  space-y-3
-                "
-              >
-                {benefits.map((item) => (
-                  <MobileBenefitCard key={item.number} item={item} />
-                ))}
               </div>
             </div>
           </div>
@@ -470,7 +344,7 @@ function BenefitCard({
 
           rounded-[24px]
 
-          px-6
+          px-5 sm:px-6
           py-6
 
           xl:px-7
@@ -583,7 +457,7 @@ function BenefitCard({
               font-semibold
               leading-[1.02]
 
-              tracking-[-0.03em]
+              tracking-normal
 
               text-[var(--brand-navy)]
 
@@ -599,7 +473,7 @@ function BenefitCard({
 
               font-brand-sans
 
-              text-[11px]
+              text-[13px]
               font-medium
               leading-[1.7]
 
@@ -637,7 +511,7 @@ function BenefitCard({
    CENTRAL OBJECT
 ========================================================= */
 
-function CentralBespokeObject({ mobile = false }: { mobile?: boolean }) {
+function CentralBespokeObject() {
   return (
     <div
       className="
@@ -722,7 +596,7 @@ function CentralBespokeObject({ mobile = false }: { mobile?: boolean }) {
             className="
               font-brand-sans
 
-              text-[13px]
+              text-[11px]
               font-bold
               uppercase
 
@@ -754,7 +628,7 @@ function CentralBespokeObject({ mobile = false }: { mobile?: boolean }) {
               text-[18px]
               italic
 
-              text-white/55
+              text-white/80
             "
           >
             Not the closest option.
@@ -769,11 +643,11 @@ function CentralBespokeObject({ mobile = false }: { mobile?: boolean }) {
               font-semibold
               leading-[0.95]
 
-              tracking-[-0.04em]
+              tracking-normal
 
               text-white
 
-              ${mobile ? "text-[34px]" : "text-[38px] xl:text-[43px]"}
+              text-[34px] xl:text-[38px]
             `}
           >
             The Right
@@ -842,13 +716,13 @@ function CentralBespokeObject({ mobile = false }: { mobile?: boolean }) {
                 className="
                     font-brand-sans
 
-                    text-[13px]
+                    text-[11px]
                     font-bold
                     uppercase
 
-                    tracking-[0.11em]
+                    tracking-normal
 
-                    text-white/65
+                    text-white/85
                   "
               >
                 {item}
@@ -858,184 +732,6 @@ function CentralBespokeObject({ mobile = false }: { mobile?: boolean }) {
         </div>
       </div>
     </div>
-  );
-}
-
-/* =========================================================
-   MOBILE BENEFIT
-========================================================= */
-
-function MobileBenefitCard({ item }: { item: (typeof benefits)[number] }) {
-  const Icon = item.icon;
-
-  return (
-    <article
-      className="
-        clay-surface-soft
-
-        rounded-[21px]
-
-        p-[5px]
-      "
-    >
-      <div
-        className="
-          clay-inset
-
-          relative
-
-          overflow-hidden
-
-          rounded-[17px]
-
-          px-4
-          py-4
-        "
-      >
-        <div
-          className="
-            flex
-            items-start
-
-            gap-4
-          "
-        >
-          {/* ICON */}
-
-          <div
-            className="
-              clay-surface-strong
-
-              flex
-              h-12
-              w-12
-
-              shrink-0
-
-              items-center
-              justify-center
-
-              rounded-full
-            "
-          >
-            <div
-              className="
-                flex
-                h-10
-                w-10
-
-                items-center
-                justify-center
-
-                rounded-full
-
-                bg-[var(--brand-navy)]
-
-                text-[var(--brand-gold)]
-              "
-            >
-              <Icon size={17} strokeWidth={1.5} />
-            </div>
-          </div>
-
-          {/* COPY */}
-
-          <div
-            className="
-              min-w-0
-              flex-1
-            "
-          >
-            <div
-              className="
-                flex
-                items-center
-                justify-between
-                gap-4
-              "
-            >
-              <span
-                className="
-                  font-brand-sans
-
-                  text-[13px]
-                  font-bold
-                  uppercase
-
-                  tracking-[0.16em]
-
-                  text-[var(--brand-gold-700)]
-                "
-              >
-                {item.eyebrow}
-              </span>
-
-              <span
-                className="
-                  font-brand-display
-
-                  text-[21px]
-
-                  text-[var(--brand-navy)]/[0.10]
-                "
-              >
-                {item.number}
-              </span>
-            </div>
-
-            <h3
-              className="
-                mt-2
-
-                font-brand-display
-
-                text-[21px]
-                font-semibold
-                leading-[1.04]
-
-                tracking-[-0.025em]
-
-                text-[var(--brand-navy)]
-              "
-            >
-              {item.title}
-            </h3>
-
-            <p
-              className="
-                mt-2.5
-
-                font-brand-sans
-
-                text-[13px]
-                leading-[1.65]
-
-                text-[var(--brand-text-muted)]
-              "
-            >
-              {item.description}
-            </p>
-
-            {item.secondary && (
-              <p
-                className="
-                  mt-2
-
-                  font-brand-sans
-
-                  text-[12px]
-                  leading-[1.6]
-
-                  text-[var(--brand-text-muted)]
-                "
-              >
-                {item.secondary}
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
-    </article>
   );
 }
 
@@ -1225,105 +921,6 @@ function CentralSofaSvg() {
 }
 
 /* =========================================================
-   CONNECTOR LINES
-========================================================= */
-
-function ConnectorLines() {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 1200 720"
-      preserveAspectRatio="none"
-      className="
-        pointer-events-none
-
-        absolute
-        inset-0
-
-        z-10
-
-        h-full
-        w-full
-      "
-    >
-      {/* TOP LEFT */}
-
-      <path
-        d="
-          M395 150
-          C470 150
-           492 200
-           520 270
-        "
-        fill="none"
-        stroke="#D7A04A"
-        strokeWidth="1.5"
-        strokeDasharray="5 7"
-        opacity="0.43"
-      />
-
-      {/* TOP RIGHT */}
-
-      <path
-        d="
-          M805 150
-          C730 150
-           708 200
-           680 270
-        "
-        fill="none"
-        stroke="#D7A04A"
-        strokeWidth="1.5"
-        strokeDasharray="5 7"
-        opacity="0.43"
-      />
-
-      {/* BOTTOM LEFT */}
-
-      <path
-        d="
-          M395 570
-          C470 570
-           492 520
-           520 450
-        "
-        fill="none"
-        stroke="#D7A04A"
-        strokeWidth="1.5"
-        strokeDasharray="5 7"
-        opacity="0.43"
-      />
-
-      {/* BOTTOM RIGHT */}
-
-      <path
-        d="
-          M805 570
-          C730 570
-           708 520
-           680 450
-        "
-        fill="none"
-        stroke="#D7A04A"
-        strokeWidth="1.5"
-        strokeDasharray="5 7"
-        opacity="0.43"
-      />
-
-      <g fill="#D7A04A">
-        <circle cx="395" cy="150" r="4" />
-
-        <circle cx="805" cy="150" r="4" />
-
-        <circle cx="395" cy="570" r="4" />
-
-        <circle cx="805" cy="570" r="4" />
-      </g>
-    </svg>
-  );
-}
-
-/* =========================================================
    CARD ARCHITECTURE
 ========================================================= */
 
@@ -1474,78 +1071,5 @@ function ArchitecturalBackground() {
         ))}
       </div>
     </>
-  );
-}
-
-/* =========================================================
-   SECTION BACKGROUND
-========================================================= */
-
-function SectionBackground() {
-  return (
-    <div
-      aria-hidden
-      className="
-        pointer-events-none
-
-        absolute
-        inset-0
-
-        overflow-hidden
-      "
-    >
-      <div
-        className="
-          absolute
-          inset-0
-
-          bg-[linear-gradient(180deg,#F5F2EA_0%,#FFFDF8_48%,#EEE2D2_100%)]
-        "
-      />
-
-      {/* GOLD RING */}
-
-      <div
-        className="
-          absolute
-          -left-[100px]
-          top-[190px]
-
-          hidden
-
-          h-[240px]
-          w-[240px]
-
-          rounded-full
-
-          border-[3px]
-          border-[var(--brand-gold)]/45
-
-          lg:block
-        "
-      />
-
-      {/* SPHERE */}
-
-      <div
-        className="
-          clay-sphere
-
-          absolute
-          -right-[42px]
-          bottom-[100px]
-
-          hidden
-
-          h-[135px]
-          w-[135px]
-
-          lg:block
-        "
-      >
-        <div className="clay-sphere-shadow" />
-        <div className="clay-sphere-ball" />
-      </div>
-    </div>
   );
 }

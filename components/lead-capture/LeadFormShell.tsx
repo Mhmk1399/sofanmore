@@ -296,7 +296,7 @@ export default function LeadFormShell({
                             type="submit"
                             disabled={!canSubmit || isSubmitting}
                             aria-busy={isSubmitting}
-                            className="snm-button snm-button--gold snm-button--lg snm-button--full sm:min-w-[310px] lg:min-w-[360px] disabled:pointer-events-none disabled:opacity-55"
+                            className="snm-button snm-button--gold snm-button--lg snm-button--full !min-w-0 !whitespace-normal sm:min-w-[310px] lg:min-w-[360px] disabled:pointer-events-none disabled:opacity-55"
                           >
                             <span className="snm-button__icon">
                               {isSubmitting ? (
@@ -305,7 +305,7 @@ export default function LeadFormShell({
                                 <Send size={16} strokeWidth={1.8} />
                               )}
                             </span>
-                            <span className="snm-button__label">
+                            <span className="snm-button__label min-w-0 py-2 text-center !leading-snug">
                               {isSubmitting ? loadingLabel : submitLabel}
                             </span>
                           </button>

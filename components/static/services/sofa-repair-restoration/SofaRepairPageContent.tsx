@@ -4,9 +4,7 @@ import FAQSection from "../../FAQSection";
 import SofaRepairLeadForm from "@/components/lead-capture/SofaRepairLeadForm";
 import ServiceStickyCta from "@/components/static/services/ServiceStickyCta";
 import BeforeYouReplaceSection from "./BeforeYouReplaceSection";
-import MoreThanAppearanceSection from "./MoreThanAppearanceSection";
 import RepairRestoreReplaceSection from "./RepairRestoreReplaceSection";
-import RestoreTheSofaYouKnowSection from "./RestoreTheSofaYouKnowSection";
 import SofaRepairHero from "./SofaRepairHero";
 import SofaRepairLondonBaseSection from "./SofaRepairLondonBaseSection";
 import SofaRestorationChangingInteriorsSection from "./SofaRestorationChangingInteriorsSection";
@@ -14,6 +12,11 @@ import SofaRestorationProcessSection from "./SofaRestorationProcessSection";
 import SofaTypesRepairSection from "./SofaTypesRepairSection";
 import WhatSofaRestorationMeansSection from "./WhatSofaRestorationMeansSection";
 import SofaRepairFinalCTASection from "./SofaRepairFinalCTASection";
+import {
+  SofaRestorationQualificationSection,
+  SofaRestorationServicesSection,
+  SofaRestorationGoodFitSection,
+} from "./SofaRestorationServiceSections";
 
 export type SofaRepairFaqItem = {
   id: number;
@@ -26,104 +29,97 @@ export const sofaRepairFaqs = [
     id: 1,
     question: "Do you provide sofa reupholstery in London?",
     answer:
-      "Yes. Sofa N More provides sofa reupholstery, repair and restoration services in London for worn, damaged and older pieces that may benefit from professional attention.",
+      "Yes. Sofa N More provides professional sofa reupholstery and substantial restoration through our North West London workshop for sofas that are worth preserving and renewing.",
   },
-
   {
     id: 2,
-    question: "Can an old sofa be restored?",
+    question: "What type of sofa repair projects do you take on?",
     answer:
-      "Potentially, yes. Whether restoration is appropriate depends on the condition of the sofa, the work required and what you want to preserve or improve. Send us photographs and details of the piece so the project can be assessed.",
+      "Our workshop is best suited to substantial projects such as complete reupholstery, upholstery replacement, foam and comfort renewal, wood or frame restoration and combined restoration work. For very small cosmetic spot repairs, we may not always be the most suitable service.",
   },
-
   {
     id: 3,
-    question: "Is it worth reupholstering an old sofa?",
+    question: "Do you replace sofa foam and cushions?",
     answer:
-      "It can be. A sofa may be worth reupholstering when you still like its design, it fits the room particularly well, it is a bespoke or well-made piece, or it has personal significance. The extent of the required restoration should also be considered before deciding.",
+      "Yes, where suitable for the project. We can assess tired or collapsed seating and discuss foam or comfort renewal as part of a sofa refurbishment or restoration project.",
   },
-
   {
     id: 4,
-    question: "Should I reupholster my sofa or buy a new one?",
+    question: "Can you restore wooden parts of a sofa?",
     answer:
-      "That depends on the sofa. If you no longer like the design or the piece is unsuitable for your space, replacement may make more sense. If you still value the sofa and reupholstery or restoration is appropriate, preserving the existing piece may be the better option. An assessment can help clarify the decision.",
+      "Suitable wooden or frame sections can be assessed as part of the restoration. Send photographs showing the complete sofa and the areas that need attention so we can determine what work may be appropriate.",
   },
-
   {
     id: 5,
-    question: "Can you restore a upholstery?",
+    question: "Can you completely reupholster a sofa?",
     answer:
-      "Upholstery can be considered for restoration. Because made-to-measure pieces may have been designed around a specific space, preserving the original dimensions can be particularly valuable.",
+      "Yes. Where the sofa is suitable, complete reupholstery can renew the material and appearance while preserving the proportions and characteristics of the existing piece.",
   },
-
   {
     id: 6,
-    question: "Can you restore older or vintage sofas?",
-    answer:
-      "Sofa N More works with older and worn pieces as part of its reupholstery and restoration service. The appropriate approach depends on the individual piece and its condition.",
-  },
-
-  {
-    id: 7,
-    question: "Can you match the original look of my sofa?",
-    answer:
-      "The achievable result depends on the sofa, its existing materials, condition and the restoration required. Where preserving the original character is important, let us know at the beginning of the project so this can form part of the assessment.",
-  },
-
-  {
-    id: 8,
     question: "How much does sofa reupholstery cost in London?",
     answer:
-      "The cost depends on the condition of the sofa and the work required. Rather than giving a generic figure that may not reflect your project, we recommend sending photographs and details so the scope can be assessed first.",
+      "The cost depends on the sofa size, condition, upholstery material, amount of work required, foam or comfort requirements and whether structural or wooden areas also need restoration. Send photographs and project details so the scope can be assessed before a tailored quotation is discussed.",
   },
-
+  {
+    id: 7,
+    question: "Is it worth reupholstering an old sofa?",
+    answer:
+      "It can be, particularly when the sofa is well made, fits the room well, has personal value or would be difficult to replace with something of similar quality and proportions.",
+  },
+  {
+    id: 8,
+    question:
+      "Do you repair small holes, scratches or isolated cosmetic damage?",
+    answer:
+      "Our workshop mainly focuses on substantial reupholstery and restoration projects rather than very small cosmetic spot repairs. Send a photograph if you are unsure and we can confirm whether the project is suitable.",
+  },
   {
     id: 9,
-    question: "How long does sofa restoration take?",
+    question: "How do I get a sofa restoration quote?",
     answer:
-      "Timescales vary according to the condition of the sofa and the extent of the agreed restoration work. A more relevant timeframe can be discussed after the project has been assessed.",
-  },
-
-  {
-    id: 10,
-    question: "How do I get a sofa reupholstery quote?",
-    answer:
-      "Start by contacting Sofa N More with photographs of the complete sofa and close-ups of the areas that need attention. Include a short description of the issue and what you would like to achieve. We can then advise you on the appropriate next step.",
-  },
-
-  {
-    id: 11,
-    question:
-      "Can water-resistant and fire-retardant upholstery be used during restoration?",
-    answer:
-      "Where suitable, new upholstery for a restoration project can be discussed with water-resistant and fire-retardant fabric options. The right material depends on the sofa, the restoration approach and how the piece will be used.",
+      "Send clear photographs of the complete sofa, close-ups of the areas that need attention and a short description of what you would like to improve. We will review the starting point before discussing the most suitable next step.",
   },
 ] satisfies SofaRepairFaqItem[];
 
 export default function SofaRepairPageContent() {
   return (
-    <main id="webpage" className="overflow-hidden bg-[var(--brand-ivory)]">
+    <main id="webpage" className="overflow-hidden lg:flow-root lg:overflow-clip bg-[var(--brand-ivory)]">
       <ServiceStickyCta
         href="#sofa-repair-enquiry"
-        label="Send Sofa Photos"
-        note="Quick assessment"
+        label="Send Photos"
+        note="Sofa assessment"
+        heroId="service"
+        hideWhileFormVisible
+        showContactActions
       />
       <SofaRepairHero id="service" />
+      <SofaRestorationQualificationSection />
+      <SofaRestorationServicesSection />
+      <RelatedProjectsSection
+        service="SOFA_REPAIR_RESTORATION"
+        id="before-after-projects"
+        title="Recent Sofa Reupholstery & Restoration Work"
+      />
+      <SofaRestorationGoodFitSection />
+      <SofaRestorationProcessSection />
       <BeforeYouReplaceSection />
       <SofaTypesRepairSection id="sofa-restoration" />
       <WhatSofaRestorationMeansSection />
       <RepairRestoreReplaceSection />
-      <SofaRestorationProcessSection />
-      <RestoreTheSofaYouKnowSection />
       <SofaRestorationChangingInteriorsSection />
       <SofaRepairLondonBaseSection />
-      <MoreThanAppearanceSection id="before-after-projects" />
-      <RelatedProjectsSection service="SOFA_REPAIR_RESTORATION" />
+      <GoogleReviewsSection variant="restoration" />
       <SofaRepairLeadForm />
+      <FAQSection
+        id="faq"
+        title="Sofa Reupholstery & Restoration FAQ"
+        intro="Find answers about sofa reupholstery, foam replacement, restoration, major repairs and our London workshop assessment process."
+        contactHref="#sofa-repair-enquiry"
+        contactLabel="Send Photos for Assessment"
+        items={sofaRepairFaqs}
+      />
       <SofaRepairFinalCTASection />
-      <GoogleReviewsSection />
-      <FAQSection id="faq" items={sofaRepairFaqs} />
     </main>
   );
 }

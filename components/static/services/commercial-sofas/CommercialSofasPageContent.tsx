@@ -4,7 +4,7 @@ import CommercialSofaLeadForm from "@/components/lead-capture/CommercialSofaLead
 import ServiceStickyCta from "@/components/static/services/ServiceStickyCta";
 
 import FAQSection from "../../FAQSection";
-import CommercialProjectsGallerySection from "./CommercialProjectsGallerySection";
+import CommercialSeatingIntroSection from "./CommercialSeatingIntroSection";
 import CommercialSofaProcessSection from "./CommercialSofaProcessSection";
 import CommercialSofasFinalCTASection from "./CommercialSofasFinalCTASection";
 import CommercialSofasHero from "./CommercialSofasHero";
@@ -25,23 +25,23 @@ export type CommercialSofasFaqItem = {
 export const commercialSofasFaqs = [
   {
     id: 1,
-    question: "What is a commercial sofa?",
+    question: "What is bespoke commercial seating?",
     answer:
-      "A commercial sofa is designed for use within a business or hospitality environment such as a restaurant, café, hotel, office, reception area or shared space. A bespoke commercial sofa can be developed around the specific dimensions, layout, visual direction and use requirements of the project.",
+      "Bespoke commercial seating is designed and made specifically for a business space rather than selected from standard ready-made furniture. Dimensions, layout, configuration, upholstery and finishing details can be developed around the venue and the way the seating will be used.",
   },
 
   {
     id: 2,
     question: "Do you make bespoke commercial sofas in London?",
     answer:
-      "Yes. Sofa N More creates upholstery in London and can develop commercial seating around the individual requirements of a business space.",
+      "Yes. Sofa N More designs and manufactures bespoke commercial sofas and seating through our North West London workshop for restaurants, cafés, hotels, offices and other commercial spaces.",
   },
 
   {
     id: 3,
-    question: "Can you make restaurant sofas to specific dimensions?",
+    question: "Can you make restaurant seating to exact dimensions?",
     answer:
-      "Yes. Made-to-measure dimensions are particularly useful for restaurants and cafés where seating may need to work with a precise wall run, corner, booth layout or floor plan.",
+      "Yes. Restaurant sofas, banquettes, booths and other upholstered seating can be developed around your floor plan, available dimensions, customer flow and seating requirements.",
   },
 
   {
@@ -67,16 +67,16 @@ export const commercialSofasFaqs = [
 
   {
     id: 7,
-    question: "Do you make upholstery for hotels?",
+    question: "Do you make bespoke seating for hotels and hospitality spaces?",
     answer:
-      "Yes. Upholstery can be developed for hotel lobbies, lounges, reception areas, bars and other hospitality spaces.",
+      "Yes. Bespoke sofas, chairs and upholstered seating can be developed for hotel lobbies, lounges, reception areas, bars and other hospitality spaces.",
   },
 
   {
     id: 8,
-    question: "Do you make office sofas?",
+    question: "Do you make custom office seating and sofas?",
     answer:
-      "Yes. Custom office sofas can be developed for reception areas, breakout zones, informal meeting areas and workplace lounges.",
+      "Yes. Custom office seating and sofas can be developed for reception areas, breakout zones, informal meeting areas and workplace lounges.",
   },
 
   {
@@ -102,9 +102,15 @@ export const commercialSofasFaqs = [
 
   {
     id: 12,
-    question: "Can commercial sofas be waterproof and fire-resistant?",
+    question: "Can you specify upholstery suitable for commercial use?",
     answer:
-      "Commercial sofas can be specified with water-resistant upholstery and fire-retardant materials where suitable for the project. Fabric performance, cleaning requirements and intended use are discussed before production.",
+      "Material and upholstery requirements depend on the venue, intended use and project specification. Tell us about your commercial requirements and we can discuss suitable material options and any relevant performance requirements before production.",
+  },
+  {
+    id: 13,
+    question: "Can you work from floor plans and venue measurements?",
+    answer:
+      "Yes. Floor plans, approximate measurements, site photographs and design references are useful starting points for a bespoke commercial seating project.",
   },
 ] satisfies CommercialSofasFaqItem[];
 export default function CommercialSofasPageContent() {
@@ -113,27 +119,44 @@ export default function CommercialSofasPageContent() {
       id="webpage"
       className="
         overflow-hidden
+        lg:flow-root
+        lg:overflow-clip
         bg-[var(--brand-ivory)]
       "
     >
       <ServiceStickyCta
         href="#commercial-sofa-enquiry"
-        label="Send Commercial Brief"
-        note="Business project"
+        label="Get Quote"
+        note="Commercial seating"
+        heroId="service"
+        hideWhileFormVisible
+        showContactActions
       />
       <CommercialSofasHero id="service" />
-      <CommercialSofasRealBusinessSpacesSection />
+      <CommercialSeatingIntroSection />
       <CommercialSofaSolutionsSection />
+      <RelatedProjectsSection
+        service="COMMERCIAL_SOFA"
+        id="commercial-projects"
+        title="Recent Commercial Seating Projects in London"
+      />
+      <CommercialSofasRealBusinessSpacesSection />
       <WhyChooseCommercialSofasSection />
       <CommercialSofaProcessSection />
       <RestaurantCafeCommercialSofasSection id="restaurant-cafe-seating" />
       <HotelHospitalityCommercialSofasSection id="hotel-hospitality-seating" />
       <OfficeWorkspaceCommercialSofasSection id="office-seating" />
       <CommercialSofasMadeInLondonSection />
-      <RelatedProjectsSection service="COMMERCIAL_SOFA" />
-      <CommercialSofaLeadForm />
-      <GoogleReviewsSection />
-      <FAQSection id="faq" items={commercialSofasFaqs} />
+      <CommercialSofaLeadForm projectsHref="#commercial-projects" />
+      <GoogleReviewsSection variant="commercial" />
+      <FAQSection
+        id="faq"
+        items={commercialSofasFaqs}
+        title="Commercial Seating FAQ"
+        intro="Find answers to common questions about bespoke commercial sofas, restaurant seating, banquettes, booths, office seating and made-to-measure commercial projects."
+        contactHref="#commercial-sofa-enquiry"
+        contactLabel="Request a Commercial Seating Quote"
+      />
       <CommercialSofasFinalCTASection />
     </main>
   );

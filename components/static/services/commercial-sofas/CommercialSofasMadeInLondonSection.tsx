@@ -304,7 +304,7 @@ export default function CommercialSofasMadeInLondonSection() {
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Commercial Sofas Made in London
+                  Commercial Sofas & Seating Made in London
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
 
@@ -329,8 +329,8 @@ export default function CommercialSofasMadeInLondonSection() {
                   "
                 >
                   Sofa N More is based in North West London, where our bespoke
-                  sofas are created around the individual requirements of each
-                  project.
+                  commercial sofas, chairs and seating are made around the
+                  individual requirements of each business project.
                 </p>
 
                 {/* BODY */}

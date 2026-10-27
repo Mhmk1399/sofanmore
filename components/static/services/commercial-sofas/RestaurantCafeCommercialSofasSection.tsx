@@ -168,7 +168,7 @@ export default function RestaurantCafeCommercialSofasSection({
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Commercial Sofas for Restaurants & Cafés
+                  Custom Restaurant & Café Seating in London
                   <span
                     className="
                       text-[var(--brand-gold)]
@@ -225,15 +225,16 @@ export default function RestaurantCafeCommercialSofasSection({
                   "
                 >
                   <p>
-                    It influences how the room feels, how guests interact with
-                    the space and how efficiently different areas can be used.
+                    Consider guest comfort, customer flow and available space
+                    together.
                   </p>
 
                   <p>
-                    A carefully planned combination of upholstery, booths and
-                    banquette seating can help create intimate dining areas,
-                    define the layout and establish a more memorable interior
-                    identity.
+                    A carefully planned combination of restaurant sofas,
+                    upholstered chairs, booths and banquette seating can help
+                    create comfortable dining areas, improve the use of
+                    available space and establish a stronger identity throughout
+                    the venue.
                   </p>
                 </div>
 
@@ -270,33 +271,6 @@ export default function RestaurantCafeCommercialSofasSection({
                     venue work around a standard sofa.
                   </p>
                 </div>
-
-                {/* FINAL COPY */}
-
-                <p
-                  className="
-                    mt-6
-
-                    max-w-[610px]
-
-                    font-brand-sans
-
-                    text-[12px]
-                    font-medium
-                    leading-[1.75]
-
-                    text-[var(--brand-text-muted)]
-
-                    sm:text-[13px]
-
-                    lg:text-[14px]
-                  "
-                >
-                  Whether you are opening a new restaurant, redesigning an
-                  established café or upgrading an existing hospitality space,
-                  the seating can become part of the design rather than
-                  something added at the end.
-                </p>
 
                 {/* CTA */}
 

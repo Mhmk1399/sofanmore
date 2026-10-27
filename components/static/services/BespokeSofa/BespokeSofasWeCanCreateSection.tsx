@@ -1,11 +1,4 @@
-import {
-  Armchair,
-  BedDouble,
-  Sofa,
-  Sparkles,
-  UsersRound,
-} from "lucide-react";
-import ClayButton from "@/components/ui/ClayButton";
+import { Armchair, BedDouble, Sofa, UsersRound } from "lucide-react";
 
 /* =========================================================
    DATA
@@ -16,11 +9,11 @@ const bespokePieces = [
     id: "corner-modular-sofas",
     number: "01",
     eyebrow: "Signature Seating",
-    title: "Upholstery",
+    title: "Bespoke Sofas",
     description:
-      "Create a sofa around the dimensions, comfort and character of your room rather than trying to make a standard model fit.",
+      "Create a bespoke sofa around the exact dimensions, comfort requirements and character of your room instead of adapting your space around a standard model.",
     secondary:
-      "From compact sofas for London apartments to larger statement seating, the proportions, upholstery and details can be tailored around your project.",
+      "From compact sofas for London apartments to larger statement pieces, the proportions, depth, configuration, upholstery and finishing details can be tailored around your project.",
     icon: Sofa,
     featured: true,
   },
@@ -31,7 +24,7 @@ const bespokePieces = [
     eyebrow: "Individual Seating",
     title: "Custom Chairs & Armchairs",
     description:
-      "Commission seating designed around the look and feel you want, with considered proportions, upholstery and finishing details.",
+      "Commission custom chairs and armchairs designed around the proportions, comfort, fabric and finishing details you want.",
     icon: Armchair,
   },
 
@@ -41,7 +34,7 @@ const bespokePieces = [
     eyebrow: "Made for the Space",
     title: "Bespoke Benches & Seating",
     description:
-      "Custom bench seating can make better use of difficult layouts, alcoves and spaces where conventional pieces do not work.",
+      "Custom bench seating can make better use of alcoves, awkward layouts and spaces where standard furniture cannot provide the right fit.",
     icon: UsersRound,
   },
 
@@ -51,9 +44,9 @@ const bespokePieces = [
     eyebrow: "Beyond Seating",
     title: "Beds, Headboards & Bespoke Pieces",
     description:
-      "Looking for something beyond seating? Talk to us about made-to-measure pieces for bedrooms, dining spaces and other areas of your interior.",
+      "Looking for something beyond a sofa? We can also create made-to-measure beds, headboards and selected bespoke furniture pieces designed around the dimensions and requirements of your space.",
     secondary:
-      "We can explore the requirements of the project and recommend the most suitable approach.",
+      "Share your measurements, photographs or design ideas and we can explore the most suitable approach for your project.",
     icon: BedDouble,
   },
 ];
@@ -84,7 +77,6 @@ export default function BespokeSofasWeCanCreateSection() {
         lg:py-16
       "
     >
- 
       <div
         className="
           relative
@@ -205,8 +197,7 @@ export default function BespokeSofasWeCanCreateSection() {
                     lg:text-[clamp(50px,4.5vw,68px)]
                   "
                 >
-                  Upholstery
-                  <br className="hidden sm:block" />& Pieces We Can Create
+                  Bespoke Sofas &amp; Seating We Can Create
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
               </div>
@@ -232,9 +223,9 @@ export default function BespokeSofasWeCanCreateSection() {
                     lg:text-[14px]
                   "
                 >
-                  Every project is different, but our upholstery and seating
-                  service can include custom pieces for living, dining, working
-                  and hospitality spaces.
+                  Every project is different. We create bespoke sofas and custom
+                  seating for homes, businesses and spaces where standard
+                  furniture does not provide the right size, fit or design.
                 </p>
 
                 <div
@@ -282,100 +273,15 @@ export default function BespokeSofasWeCanCreateSection() {
               </div>
             </div>
 
-            <div aria-hidden className="relative z-20">
-              {bespokePieces.map((item) => (
-                <span
-                  key={item.id}
-                  id={item.id}
-                  className="block scroll-mt-24"
-                />
-              ))}
-            </div>
-
-            {/* =================================================
-                DESKTOP EDITORIAL GRID
-            ================================================== */}
-
-            <div
-              className="
-                relative
-                z-20
-
-                mt-9
-
-                hidden
-
-                grid-cols-[1.05fr_0.95fr]
-                gap-5
-
-                lg:grid
-              "
-            >
-              {/* =============================================
-                  FEATURED SOFA CARD
-              ============================================== */}
-
+            <div className="relative z-20 mt-7 grid gap-5 lg:mt-9 lg:grid-cols-[1.05fr_0.95fr]">
               <FeaturedSofaCard item={featured} />
-
-              {/* =============================================
-                  SUPPORTING CARDS
-              ============================================== */}
-
-              <div
-                className="
-                  grid
-                  grid-cols-2
-                  gap-5
-                "
-              >
+              <div className="grid gap-5 sm:grid-cols-2">
                 <SupportingCard item={supporting[0]} />
-
                 <SupportingCard item={supporting[1]} />
-
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <WideSupportingCard item={supporting[2]} />
                 </div>
               </div>
-            </div>
-
-            {/* =================================================
-                MOBILE
-            ================================================== */}
-
-            <div
-              className="
-                relative
-                z-20
-
-                mt-7
-
-                space-y-3
-
-                lg:hidden
-              "
-            >
-              <MobileFeaturedCard item={featured} />
-
-              {supporting.map((item) => (
-                <MobilePieceCard key={item.id} item={item} />
-              ))}
-            </div>
-
-            {/* =================================================
-                COMMERCIAL LINK
-            ================================================== */}
-
-            <div
-              className="
-                relative
-                z-20
-
-                mt-7
-
-                lg:mt-9
-              "
-            >
-              <CommercialProjectCallout />
             </div>
           </div>
         </div>
@@ -393,12 +299,13 @@ function FeaturedSofaCard({ item }: { item: (typeof bespokePieces)[number] }) {
 
   return (
     <article
+      id={item.id}
       className="
-        clay-surface-strong
+        clay-surface-strong scroll-mt-28
         group
 
         relative
-        min-h-[570px]
+        min-h-[420px] lg:min-h-[570px]
 
         rounded-[34px]
         p-[7px]
@@ -417,7 +324,7 @@ function FeaturedSofaCard({ item }: { item: (typeof bespokePieces)[number] }) {
 
           rounded-[28px]
 
-          px-8
+          px-5 sm:px-8
           pb-8
           pt-8
 
@@ -534,10 +441,10 @@ function FeaturedSofaCard({ item }: { item: (typeof bespokePieces)[number] }) {
               mt-4
 
               font-brand-display
-              text-[42px]
+              text-[32px] sm:text-[42px]
               font-medium
               leading-[0.98]
-              tracking-[-0.035em]
+              tracking-normal
 
               text-white
 
@@ -567,7 +474,7 @@ function FeaturedSofaCard({ item }: { item: (typeof bespokePieces)[number] }) {
               font-medium
               leading-[1.75]
 
-              text-white/68
+              text-white/85
             "
           >
             {item.description}
@@ -582,7 +489,7 @@ function FeaturedSofaCard({ item }: { item: (typeof bespokePieces)[number] }) {
                 text-[12px]
                 leading-[1.72]
 
-                text-white/52
+                text-white/80
               "
             >
               {item.secondary}
@@ -619,12 +526,13 @@ function SupportingCard({ item }: { item: (typeof bespokePieces)[number] }) {
 
   return (
     <article
+      id={item.id}
       className="
-        clay-surface-soft
+        clay-surface-soft scroll-mt-28
 
         group
 
-        min-h-[330px]
+        sm:min-h-[330px]
 
         rounded-[29px]
 
@@ -651,7 +559,7 @@ function SupportingCard({ item }: { item: (typeof bespokePieces)[number] }) {
 
           rounded-[23px]
 
-          px-6
+          px-5 sm:px-6
           py-6
         "
       >
@@ -733,7 +641,7 @@ function SupportingCard({ item }: { item: (typeof bespokePieces)[number] }) {
               text-[26px]
               font-semibold
               leading-[1.02]
-              tracking-[-0.03em]
+              tracking-normal
 
               text-[var(--brand-navy)]
             "
@@ -746,7 +654,7 @@ function SupportingCard({ item }: { item: (typeof bespokePieces)[number] }) {
               mt-4
 
               font-brand-sans
-              text-[11px]
+              text-[13px]
               leading-[1.68]
 
               text-[var(--brand-text-muted)]
@@ -773,8 +681,9 @@ function WideSupportingCard({
 
   return (
     <article
+      id={item.id}
       className="
-        clay-surface-soft
+        clay-surface-soft scroll-mt-28
 
         rounded-[29px]
         p-[6px]
@@ -789,7 +698,7 @@ function WideSupportingCard({
 
           rounded-[23px]
 
-          px-6
+          px-5 sm:px-6
           py-6
         "
       >
@@ -816,7 +725,7 @@ function WideSupportingCard({
             z-10
 
             grid
-            grid-cols-[auto_1fr]
+            sm:grid-cols-[auto_minmax(0,1fr)]
 
             items-start
             gap-5
@@ -847,7 +756,7 @@ function WideSupportingCard({
 
           <div
             className="
-              max-w-[520px]
+              min-w-0 max-w-[520px]
             "
           >
             <div
@@ -875,7 +784,7 @@ function WideSupportingCard({
               <span
                 className="
                   font-brand-display
-                  text-[29px]
+                  text-[24px] sm:text-[29px]
 
                   text-[var(--brand-navy)]/[0.10]
                 "
@@ -891,10 +800,10 @@ function WideSupportingCard({
                 max-w-[430px]
 
                 font-brand-display
-                text-[29px]
+                text-[24px] sm:text-[29px]
                 font-semibold
                 leading-[1.03]
-                tracking-[-0.03em]
+                tracking-normal
 
                 text-[var(--brand-navy)]
               "
@@ -907,7 +816,7 @@ function WideSupportingCard({
                 mt-4
 
                 font-brand-sans
-                text-[11px]
+                text-[13px]
                 leading-[1.68]
 
                 text-[var(--brand-text-muted)]
@@ -935,449 +844,6 @@ function WideSupportingCard({
         </div>
       </div>
     </article>
-  );
-}
-
-/* =========================================================
-   MOBILE FEATURED
-========================================================= */
-
-function MobileFeaturedCard({
-  item,
-}: {
-  item: (typeof bespokePieces)[number];
-}) {
-  const Icon = item.icon;
-
-  return (
-    <article
-      className="
-        clay-surface-strong
-
-        rounded-[27px]
-
-        p-[6px]
-      "
-    >
-      <div
-        className="
-          clay-dark
-          relative
-
-          overflow-hidden
-
-          rounded-[21px]
-
-          px-5
-          pb-5
-          pt-5
-        "
-      >
-        <div
-          className="
-            flex
-            items-center
-            justify-between
-          "
-        >
-          <div
-            className="
-              flex
-              h-11
-              w-11
-
-              items-center
-              justify-center
-
-              rounded-full
-
-              bg-[var(--brand-gold)]
-
-              text-[var(--brand-navy)]
-            "
-          >
-            <Icon size={19} strokeWidth={1.5} />
-          </div>
-
-          <span
-            className="
-              font-brand-display
-              text-[34px]
-
-              text-white/10
-            "
-          >
-            {item.number}
-          </span>
-        </div>
-
-        <span
-          className="
-            mt-6
-            block
-
-            font-brand-sans
-            text-[13px]
-            font-bold
-            uppercase
-            tracking-[0.18em]
-
-            text-[var(--brand-gold)]
-          "
-        >
-          {item.eyebrow}
-        </span>
-
-        <h3
-          className="
-            mt-3
-
-            font-brand-display
-            text-[30px]
-            font-medium
-            leading-[1]
-            tracking-[-0.03em]
-
-            text-white
-          "
-        >
-          {item.title}
-          <span className="text-[var(--brand-gold)]">.</span>
-        </h3>
-
-        <p
-          className="
-            mt-4
-
-            font-brand-sans
-            text-[11px]
-            leading-[1.7]
-
-            text-white/68
-          "
-        >
-          {item.description}
-        </p>
-
-        {item.secondary && (
-          <p
-            className="
-              mt-3
-
-              font-brand-sans
-              text-[13px]
-              leading-[1.65]
-
-              text-white/48
-            "
-          >
-            {item.secondary}
-          </p>
-        )}
-
-        <div className="mt-6">
-          <SofaIllustration />
-        </div>
-      </div>
-    </article>
-  );
-}
-
-/* =========================================================
-   MOBILE SUPPORTING CARD
-========================================================= */
-
-function MobilePieceCard({ item }: { item: (typeof bespokePieces)[number] }) {
-  const Icon = item.icon;
-
-  return (
-    <article
-      className="
-        clay-surface-soft
-
-        rounded-[21px]
-
-        p-[5px]
-      "
-    >
-      <div
-        className="
-          clay-inset
-
-          relative
-
-          flex
-          items-start
-
-          gap-4
-
-          overflow-hidden
-
-          rounded-[17px]
-
-          px-4
-          py-4
-        "
-      >
-        <div
-          className="
-            clay-surface-strong
-
-            flex
-            h-11
-            w-11
-
-            shrink-0
-
-            items-center
-            justify-center
-
-            rounded-full
-          "
-        >
-          <Icon
-            size={18}
-            strokeWidth={1.5}
-            className="
-              text-[var(--brand-gold-700)]
-            "
-          />
-        </div>
-
-        <div className="min-w-0">
-          <div
-            className="
-              flex
-              items-center
-              justify-between
-
-              gap-3
-            "
-          >
-            <span
-              className="
-                font-brand-sans
-                text-[13px]
-                font-bold
-                uppercase
-                tracking-[0.15em]
-
-                text-[var(--brand-gold-700)]
-              "
-            >
-              {item.eyebrow}
-            </span>
-
-            <span
-              className="
-                font-brand-display
-                text-[22px]
-
-                text-[var(--brand-navy)]/[0.10]
-              "
-            >
-              {item.number}
-            </span>
-          </div>
-
-          <h3
-            className="
-              mt-2
-
-              font-brand-display
-              text-[21px]
-              font-semibold
-              leading-[1.05]
-
-              text-[var(--brand-navy)]
-            "
-          >
-            {item.title}
-          </h3>
-
-          <p
-            className="
-              mt-2.5
-
-              font-brand-sans
-              text-[13px]
-              leading-[1.65]
-
-              text-[var(--brand-text-muted)]
-            "
-          >
-            {item.description}
-          </p>
-
-          {item.secondary && (
-            <p
-              className="
-                mt-2
-
-                font-brand-sans
-                text-[12px]
-                leading-[1.6]
-
-                text-[var(--brand-text-muted)]
-              "
-            >
-              {item.secondary}
-            </p>
-          )}
-        </div>
-      </div>
-    </article>
-  );
-}
-
-/* =========================================================
-   COMMERCIAL PROJECT CALLOUT
-========================================================= */
-
-function CommercialProjectCallout() {
-  return (
-    <div
-      className="
-        clay-surface-strong
-
-        rounded-[25px]
-
-        p-[6px]
-      "
-    >
-      <div
-        className="
-          clay-inset
-
-          flex
-          flex-col
-
-          gap-5
-
-          rounded-[20px]
-
-          px-5
-          py-5
-
-          sm:flex-row
-          sm:items-center
-          sm:justify-between
-
-          lg:px-7
-        "
-      >
-        <div
-          className="
-            flex
-            items-start
-            gap-4
-          "
-        >
-          <div
-            className="
-              flex
-              h-12
-              w-12
-
-              shrink-0
-
-              items-center
-              justify-center
-
-              rounded-full
-
-              bg-[var(--brand-navy)]
-
-              text-[var(--brand-gold)]
-            "
-          >
-            <Sparkles size={19} strokeWidth={1.5} />
-          </div>
-
-          <div>
-            <span
-              className="
-                font-brand-sans
-                text-[13px]
-                font-bold
-                uppercase
-                tracking-[0.18em]
-
-                text-[var(--brand-gold-700)]
-              "
-            >
-              Hospitality & Commercial
-            </span>
-
-            <p
-              className="
-                mt-1.5
-                max-w-[650px]
-
-                font-brand-display
-                text-[19px]
-                font-semibold
-                leading-[1.25]
-
-                text-[var(--brand-navy)]
-
-                sm:text-[21px]
-              "
-            >
-              Planning bespoke seating for a restaurant, café, office or
-              hospitality space?
-            </p>
-          </div>
-        </div>
-
-        {/*
-          URL فعلی سرویس تجاری پروژه حفظ شده.
-          متن قابل مشاهده دیگر از واژه‌ی sofa استفاده نمی‌کند.
-        */}
-
-        <ClayButton
-          href="/services/commercial-sofas"
-          showArrow
-          className="
-            group
-
-            inline-flex
-
-            shrink-0
-
-            items-center
-            justify-between
-
-            gap-4
-
-            rounded-full
-
-            bg-[var(--brand-navy)]
-
-            px-5
-            py-3.5
-
-            font-brand-sans
-            text-[11px]
-            font-bold
-            uppercase
-            tracking-[0.13em]
-
-            text-white
-
-            transition-transform
-            duration-300
-
-            hover:-translate-y-[1px]
-
-            sm:justify-center
-          "
-        >
-          Commercial Projects
-        
-        </ClayButton>
-      </div>
-    </div>
   );
 }
 
@@ -1714,79 +1180,5 @@ function ArchitecturalDetails() {
         ))}
       </div>
     </>
-  );
-}
-
-/* =========================================================
-   SECTION BACKGROUND
-========================================================= */
-
-function SectionBackground() {
-  return (
-    <div
-      aria-hidden
-      className="
-        pointer-events-none
-
-        absolute
-        inset-0
-
-        overflow-hidden
-      "
-    >
-      <div
-        className="
-          absolute
-          inset-0
-
-          bg-[linear-gradient(180deg,#EFE4D5_0%,#FFFDF8_50%,#F5F2EA_100%)]
-        "
-      />
-
-      {/* LEFT GOLD RING */}
-
-      <div
-        className="
-          absolute
-          -left-[95px]
-          top-[170px]
-
-          hidden
-
-          h-[230px]
-          w-[230px]
-
-          rounded-full
-
-          border-[3px]
-          border-[var(--brand-gold)]/45
-
-          lg:block
-        "
-      />
-
-      {/* RIGHT SPHERE */}
-
-      <div
-        className="
-          clay-sphere
-
-          absolute
-          -right-[40px]
-          bottom-[120px]
-
-          hidden
-
-          h-[125px]
-          w-[125px]
-
-          lg:block
-        "
-      >
-        <div className="clay-sphere-shadow" />
-
-        <div className="clay-sphere-ball" />
-      </div>
-    </div>
   );
 }

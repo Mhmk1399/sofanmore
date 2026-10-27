@@ -213,7 +213,7 @@ export default function HotelHospitalityCommercialSofasSection({
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Commercial Sofas for Hotels & Hospitality Spaces
+                  Bespoke Hospitality Seating for Hotels & Guest Spaces
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
 
@@ -264,14 +264,11 @@ export default function HotelHospitalityCommercialSofasSection({
                     lg:text-[14px]
                   "
                 >
-                  <p>
-                    The seating needs to communicate the character of the space
-                    immediately.
-                  </p>
+                  <p>Seating helps communicate the character of the space.</p>
 
                   <p>
-                    Bespoke hotel sofas can be developed around the layout,
-                    atmosphere and guest experience of the wider interior.
+                    Bespoke sofas and upholstered chairs can be developed around
+                    your lobby, lounge or reception layout.
                   </p>
                 </div>
 
@@ -327,31 +324,6 @@ export default function HotelHospitalityCommercialSofasSection({
                   </p>
                 </div>
 
-                {/* FINAL COPY */}
-
-                <p
-                  className="
-                    mt-6
-
-                    max-w-[610px]
-
-                    font-brand-sans
-
-                    text-[12px]
-                    font-medium
-                    leading-[1.75]
-
-                    text-[var(--brand-text-muted)]
-
-                    sm:text-[13px]
-
-                    lg:text-[14px]
-                  "
-                >
-                  From a sculptural statement sofa to an understated lounge
-                  configuration, the seating can be developed to feel like a
-                  natural part of the wider hospitality environment.
-                </p>
                 {/* CTA */}
 
                 <div

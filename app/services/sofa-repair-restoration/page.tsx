@@ -13,19 +13,16 @@ const SITE_URL = "https://sofanmore.co.uk";
 const CANONICAL_URL =
   "https://sofanmore.co.uk/services/sofa-repair-restoration";
 
-const SEO_TITLE = "Sofa Reupholstery & Restoration London | Sofa N More";
+const SEO_TITLE =
+  "Sofa Reupholstery, Repair & Restoration London | Sofa N More";
 
 const META_DESCRIPTION =
-  "Professional sofa reupholstery, repair and restoration in London. Bring worn, damaged or much-loved sofas back to life with skilled craftsmanship from Sofa N More.";
+  "Professional sofa reupholstery, restoration and substantial repair in London. Fabric renewal, foam replacement, wood and frame restoration for sofas worth keeping. Send photos for an assessment.";
 
-const PAGE_H1 = "Sofa Reupholstery & Restoration in London, Made to Last Again";
+const PAGE_H1 = "Sofa Reupholstery, Restoration & Major Repairs in London.";
 
-const OG_TITLE = "Sofa Reupholstery & Restoration in London | Sofa N More";
+const OG_TITLE = SEO_TITLE;
 
-/*
-  The OG description supplied for this page was incomplete,
-  so we temporarily use META_DESCRIPTION here.
-*/
 const OG_DESCRIPTION = META_DESCRIPTION;
 
 /* =========================================================
@@ -135,7 +132,7 @@ const serviceSchema = {
 
   url: CANONICAL_URL,
 
-  name: "Sofa Reupholstery & Restoration in London",
+  name: "Sofa Reupholstery, Restoration & Major Repairs in London",
 
   serviceType: "Sofa Reupholstery, Repair and Restoration",
 
@@ -161,7 +158,7 @@ const serviceSchema = {
     "@type": "Audience",
 
     audienceType:
-      "Homeowners, businesses and clients looking to reupholster, repair, restore or renew existing sofas",
+      "Homeowners and businesses looking for substantial sofa reupholstery, foam and comfort renewal, wood or frame restoration",
   },
 };
 
@@ -230,10 +227,7 @@ const faqSchema = {
   })),
 };
 /* =========================================================
-   STRUCTURED DATA
-
-   FAQPage will be added later from the same FAQ source
-   used by the visible FAQ component.
+   STRUCTURED DATA: FAQPage shares the visible FAQ source.
 ========================================================= */
 
 const structuredData = {

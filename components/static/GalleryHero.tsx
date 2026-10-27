@@ -8,9 +8,9 @@ export default function GalleryHero() {
       aria-labelledby="gallery-hero-heading"
       className="
         relative mt-6
-        overflow-hidden
+        overflow-hidden ali-22
 
-        bg-[var(--brand-ivory)]
+        
 
         px-3
         pb-8
@@ -55,7 +55,7 @@ export default function GalleryHero() {
 
               bg-[linear-gradient(135deg,#FFFDF8_0%,#F7F1E8_58%,#EFE5D8_100%)]
 
-              px-5
+              px-5 
               py-11
 
               sm:rounded-[29px]

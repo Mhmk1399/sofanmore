@@ -225,7 +225,7 @@ export default function WhyChooseCommercialSofasSection() {
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Why Choose Bespoke Commercial Sofas
+                  Why Choose Bespoke Commercial Seating
                   <span className="text-[var(--brand-gold)]">?</span>
                 </h2>
               </div>
@@ -248,9 +248,10 @@ export default function WhyChooseCommercialSofasSection() {
                   lg:text-[13px]
                 "
               >
-                Commercial seating needs to work with the layout, the people
-                using the space and the identity of the business. A bespoke
-                approach gives you greater control over each of those decisions.
+                Commercial seating needs to work with the floor plan, the people
+                using the space, day-to-day business requirements and the
+                identity of the venue. A bespoke approach gives you greater
+                control over each of those decisions.
               </p>
             </div>
 

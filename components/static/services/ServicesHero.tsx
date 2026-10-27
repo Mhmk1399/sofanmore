@@ -33,7 +33,7 @@ type ServiceLink = {
 const services: ServiceLink[] = [
   {
     number: "01",
-    title: "Upholstery",
+    title: "Bespoke Sofas",
     description:
       "Made-to-measure sofas and seating designed around your dimensions, layout and style.",
     href: "/services/bespoke-sofas",
@@ -412,8 +412,8 @@ export default function ServicesHero() {
                     href="/contact-us"
                     variant="gold"
                     size="lg"
-                    showArrow
-                    className="max-sm:w-full"
+                    showArrow fullWidth
+                    className="max-sm:w-full lg:w-auto!"
                     ariaLabel="Discuss your project with Sofa N More"
                   >
                     Discuss Your Project
@@ -423,8 +423,8 @@ export default function ServicesHero() {
                     href="#services"
                     variant="navy"
                     size="lg"
-                    showArrow
-                    className="max-sm:w-full"
+                    showArrow fullWidth
+                    className="max-sm:w-full lg:w-auto!"
                     ariaLabel="Explore Sofa N More services"
                   >
                     Explore Our Services

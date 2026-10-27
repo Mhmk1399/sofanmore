@@ -32,7 +32,7 @@ const services: ServiceItem[] = [
   {
     number: "01",
     eyebrow: "Made to Measure",
-    title: "Upholstery",
+    title: "Bespoke Sofas",
     description:
       "For spaces where standard sofa sizes, proportions or configurations do not give you the result you need.",
     useCase:

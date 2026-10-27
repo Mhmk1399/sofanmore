@@ -1,162 +1,110 @@
 import Image from "next/image";
-import { Armchair, Phone, Ruler, Sparkles } from "lucide-react";
 import ClayButton from "@/components/ui/ClayButton";
-
-/* =========================================================
-   CONSTANTS
-========================================================= */
-
-const PHONE_NUMBER = "+4407400577844";
-const PHONE_DISPLAY = "07400 577 844";
-
-/* =========================================================
-   FEATURE DATA
-========================================================= */
-
-const features = [
-  {
-    icon: Ruler,
-    label: "Made to Measure",
-    description: "Designed around your exact dimensions.",
-  },
-  {
-    icon: Armchair,
-    label: "Made in London",
-    description: "Upholstery crafted with care.",
-  },
-  {
-    icon: Sparkles,
-    label: "Your Finish",
-    description: "Choose materials, fabric and details.",
-  },
-];
-
-/* =========================================================
-   HERO
-========================================================= */
 
 export default function BespokesofaHero({ id = "service" }: { id?: string }) {
   return (
     <section
       id={id}
       aria-labelledby="bespoke-sofa-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-[var(--brand-ivory)] px-3 pb-10 pt-20 sm:px-5 sm:pb-12 sm:pt-24 lg:px-7 lg:pb-16 lg:pt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-[var(--brand-ivory)] px-3 pb-6 pt-20 sm:px-5 sm:pb-8 sm:pt-24 lg:px-7 lg:pb-10 lg:pt-28"
     >
       <HeroPageBackground />
 
       <div className="relative z-10 mx-auto max-w-[var(--site-width)]">
         {/* OUTER CLAY SHELL */}
         <div className="clay-surface-strong relative rounded-[28px] p-[6px] sm:rounded-[36px] sm:p-[7px] lg:rounded-[52px] lg:p-[10px]">
-          <div className="clay-inset relative overflow-hidden rounded-[23px] bg-[linear-gradient(145deg,#FFFDF8_0%,#F6EFE4_54%,#EDE0CF_100%)] sm:rounded-[30px] lg:min-h-[760px] lg:rounded-[43px]">
+          <div className="clay-inset relative overflow-hidden rounded-[23px] bg-[linear-gradient(145deg,#FFFDF8_0%,#F6EFE4_54%,#EDE0CF_100%)] sm:rounded-[30px] lg:rounded-[43px]">
             <HeroArchitecture />
 
             {/* CONTENT GRID */}
-            <div className="relative z-20 grid px-4 pb-5 pt-5 sm:px-6 sm:pb-7 sm:pt-7 lg:min-h-[760px] lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-8 lg:px-10 lg:py-10 xl:gap-12 xl:px-14 xl:py-12">
+            <div className="relative z-20 grid gap-6 px-4 py-5 sm:px-6 sm:py-7 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-8 lg:px-10 lg:py-8 xl:gap-12 xl:px-12 xl:py-10">
               {/* COPY */}
-              <div className="relative z-30 lg:pl-4 xl:pl-8 mb-20">
+              <div className="relative z-30 min-w-0">
                 {/* EYEBROW */}
-                <div className="flex items-center gap-3 lg:mt-10">
+                <div className="flex items-center gap-3">
                   <span className="h-px w-8 bg-[var(--brand-gold)]" />
                   <span className="font-brand-sans text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--brand-gold-700)] sm:text-[12px]">
-                    Upholstery · London
+                    Bespoke Sofas · London
                   </span>
                 </div>
 
                 {/* H1 */}
                 <h1
                   id="bespoke-sofa-heading"
-                  className="mt-4 max-w-[620px] font-brand-display  font-medium leading-[0.98] tracking-[-0.04em] text-[var(--brand-navy)] min-[390px]:text-[38px] sm:mt-5 sm:text-[48px] lg:mt-7 lg:text-[clamp(48px,4.5vw,72px)]"
+                  className="mt-4 max-w-[620px] font-brand-display text-[30px] font-medium leading-[1.08] tracking-normal text-[var(--brand-navy)] sm:text-[40px] xl:text-[46px]"
                 >
-                  Sofa N More | Upholstery in London,
-                  <br className="hidden sm:block" />
-                  Made Around Your Space
+                  Bespoke Sofas in London, <br className="hidden sm:block" />
+                  Made to Measure for Your Space
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h1>
 
                 {/* GOLD DETAIL */}
-                <div className="mt-4 flex items-center gap-3 sm:mt-5 lg:mt-7">
+                <div className="mt-4 flex items-center gap-3">
                   <span className="h-[2px] w-14 rounded-full bg-[var(--brand-gold)]" />
                   <span className="h-[6px] w-[6px] rounded-full bg-[var(--brand-gold)]" />
                 </div>
 
                 {/* LEAD */}
-                <p className="mt-4 max-w-[570px] font-brand-display text-[16px] font-medium italic leading-[1.35] text-[var(--brand-navy)] min-[390px]:text-[18px] sm:mt-5 sm:text-[21px] lg:mt-6 lg:text-[23px]">
-                  A sofa should fit more than a room. It should fit the way you
-                  live.
+                <p className="mt-4 max-w-[570px] font-brand-display text-[16px] font-medium italic leading-[1.45] text-[var(--brand-navy)] sm:text-[19px]">
+                  A bespoke sofa should fit more than a room. It should fit the
+                  way you live and the space it was designed for.
                 </p>
 
                 {/* DESCRIPTION */}
-                <div className="mt-4 max-w-[580px] space-y-3 font-brand-sans text-[11.5px] font-medium leading-[1.7] text-[var(--brand-text-muted)] sm:mt-5 sm:space-y-4 sm:text-[13px] lg:text-[14px] lg:leading-[1.75]">
+                <div className="mt-4 max-w-[580px] space-y-3 font-brand-sans text-[14px] font-medium leading-[1.6] text-[var(--brand-text-muted)]">
                   <p>
-                    At Sofa N More, we create upholstery in London for homes
-                    and spaces where standard sizes, limited finishes and
-                    off-the-shelf designs simply aren&apos;t enough.
-                  </p>
-                  <p className="hidden sm:block">
-                    From a made-to-measure sofa designed around the proportions
-                    of your living room to custom chairs, benches and statement
-                    sofa, every project starts with your space, your
-                    requirements and the way you want the finished piece to
-                    feel.
+                    Custom-made sofas, built to your exact dimensions in our
+                    North West London workshop.
                   </p>
                   <p className="font-semibold text-[var(--brand-navy)]">
-                    Choose the dimensions, materials, fabric, details and finish
-                    — create sofa that belongs exactly where it was designed to
-                    be.
+                    We do not sell ready-made sofa stock. Every sofa is designed
+                    and made specifically for the customer, the space and the
+                    project.
                   </p>
                 </div>
 
                 {/* =====================================
-                    CTA GROUP — 3 actions with clear
-                    hierarchy. Phone is prominent.
+                    ENQUIRY ACTIONS
                 ====================================== */}
-                <div className="mt-6 flex flex-col gap-2.5 sm:mt-7 lg:mt-8">
-                  {/* Primary row — Quote + Phone */}
-                  <div className="flex flex-col gap-2.5 sm:flex-row sm:items-stretch">
+                <div className="mt-5 flex flex-col gap-2.5">
+                  <div className="flex flex-col gap-2.5 min-[1440px]:flex-row">
                     <ClayButton
                       href="#bespoke-sofa-enquiry"
                       variant="gold"
                       size="md"
-                      showArrow
                       fullWidth
-                      className="w-full   sm:flex-1"
+                      showArrow
+                      className="w-full lg:w-auto! !min-w-0 !whitespace-normal !text-center [&_.snm-button__label]:py-2 [&_.snm-button__label]:leading-snug min-[1440px]:w-auto"
                     >
-                      Get a Bespoke Quote
+                      Request a Bespoke Sofa Quote
                     </ClayButton>
 
-                    <a
-                      href={`tel:${PHONE_NUMBER}`}
-                      aria-label={`Call Sofa N More on ${PHONE_DISPLAY}`}
-                      className="clay-surface-strong group inline-flex items-center justify-center gap-2.5 rounded-full bg-[var(--brand-navy)] px-5 py-3.5 text-white transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 active:translate-y-0 sm:px-4"
+                    <ClayButton
+                      href="#bespoke-sofa-enquiry"
+                      variant="navy"
+                      size="md"
+                      fullWidth
+                      showArrow
+                      className="w-full lg:w-auto! !min-w-0 !whitespace-normal !text-center [&_.snm-button__label]:py-2 [&_.snm-button__label]:leading-snug min-[1440px]:w-auto"
                     >
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--brand-gold)]/95 text-[var(--brand-navy)]">
-                        <Phone size={14} strokeWidth={2} />
-                      </span>
-                      <span className="flex flex-col items-start leading-tight">
-                        <span className="font-brand-sans text-[13px] font-bold uppercase tracking-[0.18em] text-[var(--brand-gold)]">
-                          Call Us
-                        </span>
-                        <span className="  text-[14px] tracking-[-0.01em]">
-                          {PHONE_DISPLAY}
-                        </span>
-                      </span>
-                    </a>
+                      Send Measurements &amp; Photos
+                    </ClayButton>
                   </div>
                 </div>
               </div>
 
               {/* VISUAL */}
-              <div className="relative mt-8 min-h-[360px] sm:mt-10 sm:min-h-[500px] lg:mt-0 lg:min-h-[650px]">
+              <div className="relative mx-auto w-full max-w-[680px]">
                 {/* SCULPTURAL ARCH */}
-                <div className="clay-surface-strong absolute bottom-[52px] left-1/2 -mt-20 md:-mt-0 top-0 w-[99%] -translate-x-1/2 rounded-t-[29%] rounded-b-[24px] p-[6px] sm:w-[86%] sm:bottom-[60px] sm:p-[8px] sm:rounded-b-[28px] lg:bottom-[45px] lg:w-[96%] lg:p-[9px] lg:rounded-b-[30px] xl:w-[91%]">
-                  <div className="clay-inset relative h-100 lg:h-150 overflow-hidden rounded-t-[29%] rounded-b-[19px] bg-[#DCD0BE] sm:rounded-b-[23px] lg:rounded-b-[24px]">
+                <div className="clay-surface-strong rounded-t-[29%] rounded-b-[24px] p-[6px] sm:p-[8px] sm:rounded-b-[28px] lg:p-[9px] lg:rounded-b-[30px]">
+                  <div className="clay-inset relative aspect-[3/2] overflow-hidden rounded-t-[29%] rounded-b-[19px] bg-[#DCD0BE] sm:rounded-b-[23px] lg:aspect-[6/5] lg:rounded-b-[24px]">
                     <Image
-                      src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/49.webp"
-                      alt="Upholstery handcrafted for a luxury London living room"
+                      src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/bespoke-sofa-london-sofa-n-more.webp"
+                      alt="Bespoke sofa handcrafted for a London living room"
                       fill
                       preload
-                      sizes="(max-width: 1023px) 100vw, 52vw"
-                      className="object-cover object-center"
+                      sizes="(max-width: 639px) 90vw, (max-width: 1023px) 94vw, 44vw"
+                      className="object-cover object-[70%_center]"
                     />
 
                     {/* IMAGE GRADING */}

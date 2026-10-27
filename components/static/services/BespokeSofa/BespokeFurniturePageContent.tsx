@@ -4,11 +4,15 @@ import BespokeSofaLeadForm from "@/components/lead-capture/BespokeSofaLeadForm";
 import ServiceStickyCta from "@/components/static/services/ServiceStickyCta";
 import FAQSection from "../../FAQSection";
 import BespokesofaHero from "./bespoke-sofaHero";
-import BespokeProcessSection from "./BespokeProcessSection";
+import {
+  BespokeSofaTrustBar,
+  CustomSofaMakersSection,
+  MadeToMeasureSofasSection,
+} from "./BespokeSofaDetailsSections";
 import BespokeSofasWeCanCreateSection from "./BespokeSofasWeCanCreateSection";
 import CommercialSofaProjectsSection from "./CommercialSofaProjectsSection";
 import CustomsofaForYourSpaceSection from "./CustomFurnitureForYourSpaceSection";
- import WhyChooseBespokeSofasSection from "./WhyChooseBespokeSofasSection";
+import WhyChooseBespokeSofasSection from "./WhyChooseBespokeSofasSection";
 
 export type BespokesofaFaqItem = {
   id: number;
@@ -19,110 +23,106 @@ export type BespokesofaFaqItem = {
 export const bespokesofaFaqs = [
   {
     id: 1,
-
-    question: "What does custom upholstery mean?",
-
+    question: "What is a bespoke sofa?",
     answer:
-      "Custom upholstery is created specifically for an individual customer or project rather than being produced to a fixed standard specification. Dimensions, design details, materials and finishes can be adapted around the requirements of the space.",
+      "A bespoke sofa is designed and made specifically for an individual customer and space rather than produced to a fixed ready-made specification. Dimensions, proportions, comfort, fabric and finishing details can all be developed around your requirements.",
   },
-
   {
     id: 2,
-
-    question: "Can you make a sofa to specific dimensions?",
-
+    question: "Can you make a sofa to exact dimensions?",
     answer:
-      "Yes. Custom dimensions are one of the main reasons clients choose upholstery. Share the measurements and requirements of your space with us and we can explore the appropriate proportions for your project.",
+      "Yes. Made-to-measure dimensions are one of the main reasons clients choose a bespoke sofa. Send us the measurements, photographs and requirements of your space and we can develop suitable proportions for the project.",
   },
-
   {
     id: 3,
-
-    question: "Can I choose the fabric and finish?",
-
+    question: "Do you make custom sofas in London?",
     answer:
-      "Yes. Fabric, colour and finishing choices can form part of the bespoke design process, allowing the finished sofa to work with your wider interior.",
+      "Yes. Our bespoke sofas are developed and handcrafted through our North West London workshop for residential and selected commercial projects.",
   },
-
   {
     id: 4,
-
-    question: "Do you provide upholstery?",
-
+    question: "What is the difference between a bespoke and ready-made sofa?",
     answer:
-      "Yes. Sofa N More creates custom and made-to-measure sofas in London, with dimensions and design details developed around the individual project.",
+      "A ready-made sofa is produced in predetermined sizes and specifications. A bespoke sofa is designed around your individual space, dimensions, seating requirements, fabric preferences and finishing details.",
   },
-
   {
     id: 5,
-
-    question: "How much does upholstery cost?",
-
+    question: "Can I choose the fabric and finish?",
     answer:
-      "The cost of upholstery depends on factors including the type and size of the piece, construction, materials, upholstery and complexity of the design. Once we understand your requirements, we can prepare a quote based on the specification of your project.",
+      "Yes. Fabric, materials, colour, upholstery details and finishing options can be selected as part of the bespoke design process.",
   },
-
   {
     id: 6,
-
-    question: "How long does an upholstery project take?",
-
+    question: "Can you make custom corner or unusual-size sofas?",
     answer:
-      "Timescales vary depending on the design, materials and complexity of the project. We can provide a more accurate indication once the specification and requirements have been discussed.",
+      "Yes. Bespoke construction allows us to explore corner sofas, unusual proportions and other custom configurations where standard furniture may not fit the available space.",
   },
-
   {
     id: 7,
-
-    question: "Do you deliver upholstery projects?",
-
+    question: "How much does a bespoke sofa cost?",
     answer:
-      "Yes. Delivery and installation can form part of the Sofa N More service.",
+      "The cost depends on the dimensions, configuration, materials, fabric, construction requirements and finishing details. Once we understand your project, we can provide a tailored quotation.",
   },
-
   {
     id: 8,
-
-    question: "Do you make sofas for commercial projects?",
-
+    question: "How long does a made-to-measure sofa take?",
     answer:
-      "Yes. Sofa N More also works on sofa for commercial environments. Visit our Commercial sofa page to learn more about solutions for restaurants, cafés, offices and hospitality spaces.",
+      "Lead time depends on the design, size, materials and current workshop schedule. We confirm the expected timeline once the specification and scope have been agreed.",
   },
-
   {
     id: 9,
-
-    question: "Is your upholstery waterproof and fire-resistant?",
-
+    question: "Do you deliver bespoke sofas in London?",
     answer:
-      "The sofas we make can be specified with water-resistant upholstery and fire-retardant materials. Fabric choice, finish and intended use are discussed during the bespoke design process.",
+      "Yes. Delivery arrangements are discussed as part of the project and depend on the finished piece, access requirements and delivery location.",
+  },
+  {
+    id: 10,
+    question: "Do you make bespoke sofas for businesses?",
+    answer:
+      "Yes. We also create bespoke sofas and commercial seating for restaurants, caf\u00e9s, offices and hospitality spaces. Larger commercial seating projects are handled through our dedicated Commercial Sofas service.",
+  },
+  {
+    id: 11,
+    question: "Can I send photos and measurements before requesting a quote?",
+    answer:
+      "Yes. Room photographs, approximate measurements, access information and inspiration images are useful starting points and can be uploaded with your enquiry.",
+  },
+  {
+    id: 12,
+    question: "Can I visit your London workshop?",
+    answer:
+      "Yes. Suitable projects can be discussed at our North West London workshop, where we can review requirements, materials and next steps.",
   },
 ] satisfies BespokesofaFaqItem[];
 
 export default function BespokesofaPageContent() {
   return (
-    <main
-      id="webpage"
-      className="
-        overflow-hidden mt-6
-        bg-[var(--brand-ivory)]
-      "
-    >
+    <main id="webpage" className="mt-6 overflow-hidden lg:flow-root lg:overflow-clip bg-[var(--brand-ivory)]">
       <ServiceStickyCta
         href="#bespoke-sofa-enquiry"
-        label="Request Upholstery"
+        label="Bespoke Sofa Quote"
+        heroId="service"
+        hideWhileFormVisible
       />
       <BespokesofaHero id="service" />
+      <BespokeSofaTrustBar />
+      <MadeToMeasureSofasSection />
+      <RelatedProjectsSection service="BESPOKE_SOFA" />
       <CustomsofaForYourSpaceSection id="made-to-measure-sofas" />
       <BespokeSofasWeCanCreateSection />
+      <CustomSofaMakersSection />
       <WhyChooseBespokeSofasSection />
-      <RelatedProjectsSection service="BESPOKE_SOFA" />
-      {/* <BespokeProcessSection /> */}
-
       <CommercialSofaProjectsSection />
-       <GoogleReviewsSection />
-      <FAQSection id="faq" items={bespokesofaFaqs} />
-      <BespokeSofaLeadForm />
+      <GoogleReviewsSection variant="bespoke" />
+      <FAQSection
+        id="faq"
+        items={bespokesofaFaqs}
+        title="Bespoke Sofa FAQ"
+        contactHref="#bespoke-sofa-enquiry"
+        contactLabel="Request a Bespoke Sofa Quote"
+        intro="Find answers to common questions about bespoke sofas, custom dimensions, fabrics, pricing and our London workshop."
+      />
+      <BespokeSofaLeadForm defaultProjectType="single-sofa" />
     </main>
   );
 }

@@ -113,7 +113,7 @@ export const servicesFaqs = [
 
 export default function ServicesPageContent() {
   return (
-    <main id="webpage" className="overflow-hidden bg-[var(--brand-ivory)]">
+    <main id="webpage" className="overflow-hidden lg:flow-root lg:overflow-clip bg-[var(--brand-ivory)]">
       <ServicesHero />
       <ConnectedServicesSection id="services" />
       <BespokeSofasServiceSection />

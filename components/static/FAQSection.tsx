@@ -1,6 +1,6 @@
 "use client";
 
-import { Armchair, Building2, Landmark } from "lucide-react";
+import { Armchair, Building2, Landmark, Minus, Plus } from "lucide-react";
 import { memo, useCallback, useId, useState } from "react";
 import ClayButton from "@/components/ui/ClayButton";
 
@@ -87,160 +87,75 @@ const trustItems: TrustItem[] = [
 export default function FAQSection({
   id = "faq",
   items = defaultFaqs,
+  title = "Frequently Asked Questions",
+  intro = "Find answers to common questions about our upholstery, interior design, restoration and London-based craftsmanship.",
+  contactHref = "/contact-us",
+  contactLabel = "Contact Our Team",
 }: {
   id?: string;
   items?: FAQItem[];
+  title?: string;
+  intro?: string;
+  contactHref?: string;
+  contactLabel?: string;
 }) {
+  const headingId = useId();
+  const [openItem, setOpenItem] = useState<number | null>(items[0]?.id ?? null);
+  const toggle = useCallback((itemId: number) => {
+    setOpenItem((current) => (current === itemId ? null : itemId));
+  }, []);
+
   return (
     <section
       id={id}
-      aria-labelledby="faq-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-[var(--brand-ivory)] px-3 py-12 sm:px-5 sm:py-14 lg:px-8 lg:py-20"
+      aria-labelledby={headingId}
+      className="relative scroll-mt-28 bg-[var(--brand-ivory)] px-3 py-12 sm:px-5 sm:py-14 lg:px-8 lg:py-20"
     >
-      {/* بک‌گراند خیلی ساده */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#fffdf8_0%,#f7efe5_55%,#f2e8d9_100%)]"
-      />
-
-      <div className="relative z-10 hidden lg:block">
-        <DesktopFAQ items={items} />
-      </div>
-
-      <div className="relative z-10 lg:hidden">
-        <MobileFAQ items={items} />
-      </div>
-    </section>
-  );
-}
-
-/* =========================================================
-   DESKTOP
-========================================================= */
-
-const DesktopFAQ = memo(function DesktopFAQ({ items }: { items: FAQItem[] }) {
-  const [openItem, setOpenItem] = useState<number | null>(2);
-
-  const toggle = useCallback((id: number) => {
-    setOpenItem((current) => (current === id ? null : id));
-  }, []);
-
-  return (
-    <div className="clay-surface-strong mx-auto max-w-[1320px] rounded-[40px] p-3">
-      <div className="grid grid-cols-[0.75fr_1.25fr] gap-4 rounded-[32px] p-3">
-        {/* Intro */}
-        <div className="clay-surface-soft sticky top-6 flex h-[560px] flex-col justify-between rounded-[28px] px-8 py-9">
-          <div>
-            <span className="font-brand-sans text-[13px] font-bold uppercase tracking-[0.18em] text-[var(--brand-gold-700)]">
-              FAQs
-            </span>
-            <div className="mt-2 h-[2px] w-10 rounded-full bg-[var(--brand-gold)]" />
-
-            <h2
-              id="faq-heading"
-              className="mt-5 max-w-[340px] font-brand-display text-[46px] font-semibold leading-[0.98] tracking-[-0.035em] text-[var(--brand-navy)]"
+      <div className="mx-auto grid max-w-[1320px] gap-8 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:items-start lg:gap-12">
+        <header className="min-w-0 lg:sticky lg:top-28">
+          <p className="font-brand-sans text-[12px] font-bold uppercase text-[var(--brand-gold-700)]">
+            FAQs
+          </p>
+          <h2
+            id={headingId}
+            className="mt-4 max-w-[460px] font-brand-display text-[32px] font-semibold leading-[1.1] text-[var(--brand-navy)] sm:text-[40px] lg:text-[46px]"
+          >
+            {title}
+          </h2>
+          <p className="mt-5 max-w-[460px] font-brand-sans text-[14px] font-medium leading-[1.75] text-[var(--brand-text-muted)]">
+            {intro}
+          </p>
+          <div className="mt-6">
+            <ClayButton
+              href={contactHref}
+              variant="navy"
+              size="md"
+              showArrow
+              className="max-w-full !min-w-0 !whitespace-normal [&_.snm-button__label]:py-2 [&_.snm-button__label]:leading-snug"
             >
-              Frequently
-              <br />
-              Asked
-              <br />
-              Questions
-            </h2>
-
-            <p className="mt-5 max-w-[340px] font-brand-sans text-[13px] font-medium leading-[1.65] text-[var(--brand-text-muted)]">
-              Find answers to common questions about our upholstery, interior
-              design, restoration and London-based craftsmanship.
-            </p>
-
-            <div className="mt-6">
-              <ClayButton
-                href="/contact-us"
-                variant="navy"
-                size="md"
-                showArrow
-                fullWidth
-                ariaLabel="Contact our team"
-              >
-                Contact Our Team
-              </ClayButton>
-            </div>
+              {contactLabel}
+            </ClayButton>
           </div>
-
-          {/* Trust items - ساده‌تر */}
-          <div className="grid grid-cols-3 gap-2.5">
-            {trustItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.title}
-                  className="clay-surface flex flex-col items-center justify-center rounded-[18px] px-2 py-3 text-center"
-                >
-                  <span className="clay-icon-inset flex h-10 w-10 items-center justify-center rounded-[12px]">
-                    <Icon
-                      size={18}
-                      strokeWidth={1.4}
-                      className="text-[var(--brand-gold)]"
-                    />
-                  </span>
-                  <span className="mt-2.5 whitespace-pre-line font-brand-sans text-[12px] font-semibold leading-[1.3] text-[var(--brand-navy)]">
-                    {item.title}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Accordion list */}
-        <div className="clay-surface-strong rounded-[28px] p-3">
-          <div className="flex flex-col gap-2.5 rounded-[22px] p-3">
-            {items.map((faq) => (
-              <FAQItem
-                key={faq.id}
-                faq={faq}
-                open={openItem === faq.id}
-                onToggle={toggle}
-                desktop
-              />
+          <ul
+            className="mt-8 flex w-full gap-x-2 gap-y-4"
+            aria-label="Our service"
+          >
+            {trustItems.map(({ title: trustTitle, icon: Icon }) => (
+              <li key={trustTitle} className="flex items-center gap-2">
+                <Icon
+                  aria-hidden="true"
+                  size={14}
+                  strokeWidth={1.5}
+                  className="shrink-0 text-[var(--brand-gold-700)]"
+                />
+                <span className=" lg:text-nowrap font-brand-sans text-[11px] font-semibold leading-snug text-[var(--brand-navy)]">
+                  {trustTitle}
+                </span>
+              </li>
             ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-});
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-const MobileFAQ = memo(function MobileFAQ({ items }: { items: FAQItem[] }) {
-  const [openItem, setOpenItem] = useState<number | null>(1);
-
-  const toggle = useCallback((id: number) => {
-    setOpenItem((current) => (current === id ? null : id));
-  }, []);
-
-  return (
-    <div className="clay-surface-strong mx-auto max-w-[430px] rounded-[32px] p-2">
-      <div className="clay-surface-soft rounded-[26px] px-4 pb-5 pt-6">
-        <span className="font-brand-sans text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--brand-gold-700)]">
-          FAQs
-        </span>
-        <div className="mt-1.5 h-[2px] w-7 bg-[var(--brand-gold)]" />
-
-        <h2 className="mt-3 font-brand-display text-[30px] font-semibold leading-[0.98] tracking-[-0.035em] text-[var(--brand-navy)]">
-          Frequently
-          <br />
-          Asked Questions
-        </h2>
-
-        <p className="mt-3 max-w-[280px] font-brand-sans text-[12px] font-medium leading-[1.5] text-[var(--brand-text-muted)]">
-          Find answers about our upholstery, interiors and London
-          craftsmanship.
-        </p>
-
-        <div className="mt-5 space-y-2">
+          </ul>
+        </header>
+        <div className="min-w-0 space-y-3">
           {items.map((faq) => (
             <FAQItem
               key={faq.id}
@@ -250,126 +165,66 @@ const MobileFAQ = memo(function MobileFAQ({ items }: { items: FAQItem[] }) {
             />
           ))}
         </div>
-
-        <div className="mt-5">
-          <ClayButton
-            href="/contact-us"
-            variant="navy"
-            size="md"
-            fullWidth
-            showArrow
-            ariaLabel="Still have questions? Contact our team"
-          >
-            Still Have Questions?
-          </ClayButton>
-        </div>
       </div>
-    </div>
+    </section>
   );
-});
-
-/* =========================================================
-   FAQ ITEM (بدون انیمیشن)
-========================================================= */
+}
 
 const FAQItem = memo(function FAQItem({
   faq,
   open,
   onToggle,
-  desktop = false,
 }: {
   faq: FAQItem;
   open: boolean;
   onToggle: (id: number) => void;
-  desktop?: boolean;
 }) {
   const reactId = useId();
   const buttonId = `faq-btn-${reactId}`;
   const panelId = `faq-panel-${reactId}`;
+  const Icon = open ? Minus : Plus;
 
   return (
-    <div
-      className={`clay-surface overflow-hidden ${
-        desktop ? "rounded-[18px]" : "rounded-[15px]"
-      }`}
-    >
-      <button
-        id={buttonId}
-        type="button"
-        onClick={() => onToggle(faq.id)}
-        aria-expanded={open}
-        aria-controls={panelId}
-        className={`flex w-full items-center justify-between gap-3 text-left ${
-          desktop ? "min-h-[60px] px-4 py-3" : "min-h-[48px] px-3.5 py-2.5"
-        }`}
-      >
-        <span className="flex min-w-0 items-start gap-2.5">
-          <span
-            className={`shrink-0 font-brand-display font-semibold text-[var(--brand-navy)] ${
-              desktop ? "text-[14px]" : "text-[13px]"
-            }`}
-          >
-            {faq.id}.
-          </span>
-          <span
-            className={`font-brand-sans font-semibold leading-[1.35] text-[var(--brand-navy)] ${
-              desktop ? "text-[13px]" : "text-[13px]"
-            }`}
-          >
-            {faq.question}
-          </span>
-        </span>
-
-        {/* آیکون ساده + / − */}
-        <span
-          className={`flex shrink-0 items-center justify-center rounded-full ${
-            desktop ? "h-8 w-8" : "h-7 w-7"
-          } ${
-            open
-              ? "bg-[linear-gradient(145deg,#d9a34c,#a97020)] text-white"
-              : "clay-icon text-[var(--brand-gold-700)]"
-          }`}
+    <div className="clay-surface overflow-hidden rounded-[16px]">
+      <h3>
+        <button
+          id={buttonId}
+          type="button"
+          onClick={() => onToggle(faq.id)}
+          aria-expanded={open}
+          aria-controls={panelId}
+          className="flex min-h-[52px] w-full items-center justify-between gap-3 px-4 py-4 text-left focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[var(--brand-gold-700)] sm:min-h-[60px] sm:px-5"
         >
-          <svg
-            width={desktop ? 14 : 12}
-            height={desktop ? 14 : 12}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-          >
-            <line x1="5" y1="12" x2="19" y2="12" />
-            {!open && <line x1="12" y1="5" x2="12" y2="19" />}
-          </svg>
-        </span>
-      </button>
-
-      {/* محتوا - بدون انیمیشن */}
-      {open && (
-        <div
-          id={panelId}
-          role="region"
-          aria-labelledby={buttonId}
-          className={desktop ? "px-4 pb-4" : "px-3.5 pb-3"}
-        >
-          <div
-            className={`clay-inset rounded-[14px] ${
-              desktop ? "px-5 py-4" : "px-3.5 py-3"
-            }`}
-          >
-            <p
-              className={`font-brand-sans font-medium text-[var(--brand-text-muted)] ${
-                desktop
-                  ? "text-[12px] leading-[1.7]"
-                  : "text-[12px] leading-[1.55]"
-              }`}
+          <span className="flex min-w-0 items-start gap-2.5">
+            <span
+              aria-hidden="true"
+              className="shrink-0 font-brand-sans text-[14px] font-semibold text-[var(--brand-gold-700)]"
             >
-              {faq.answer}
-            </p>
-          </div>
-        </div>
-      )}
+              {faq.id}.
+            </span>
+            <span className="font-brand-sans text-[14px] font-semibold leading-[1.45] text-[var(--brand-navy)]">
+              {faq.question}
+            </span>
+          </span>
+          <span
+            aria-hidden="true"
+            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${open ? "bg-[var(--brand-navy)] text-[var(--brand-gold)]" : "clay-icon text-[var(--brand-gold-700)]"}`}
+          >
+            <Icon size={15} strokeWidth={2} />
+          </span>
+        </button>
+      </h3>
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={buttonId}
+        hidden={!open}
+        className="px-4 pb-5 sm:px-5"
+      >
+        <p className="font-brand-sans text-[14px] font-medium leading-[1.75] text-[var(--brand-text-muted)]">
+          {faq.answer}
+        </p>
+      </div>
     </div>
   );
 });

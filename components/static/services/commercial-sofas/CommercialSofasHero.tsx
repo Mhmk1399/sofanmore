@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Building2, Check, PhoneCall } from "lucide-react";
+import { Building2, Check } from "lucide-react";
 
 import ClayButton from "@/components/ui/ClayButton";
 
@@ -9,8 +9,6 @@ import ClayButton from "@/components/ui/ClayButton";
 ========================================================= */
 
 const HERO_IMAGE = "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/44.webp";
-
-const PHONE_NUMBER = "+447400577844";
 
 /* =========================================================
    ROOT
@@ -158,7 +156,7 @@ export default function CommercialSofasHero({
                         sm:text-[11px]
                       "
                     >
-                      Commercial Sofas · London
+                      Commercial Sofas & Seating · London
                     </span>
 
                     <span
@@ -189,22 +187,23 @@ export default function CommercialSofasHero({
 
                     font-brand-display
 
-                    text-[40px]
+                    text-[32px]
                     font-semibold
                     leading-[0.98]
 
-                    tracking-[-0.04em]
+                    tracking-normal
 
                     text-[var(--brand-navy)]
 
-                    min-[390px]:text-[44px]
+                    min-[390px]:text-[34px]
 
-                    sm:text-[52px]
+                    sm:text-[40px]
 
-                    lg:text-[clamp(50px,4.4vw,68px)]
+                    lg:text-[42px] xl:text-[46px]
                   "
                 >
-                  Bespoke Commercial Sofas in London, Built Around Your Business
+                  Bespoke Commercial Sofas &amp; Seating in London, Made to
+                  Measure for Your Business
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h1>
 
@@ -233,6 +232,45 @@ export default function CommercialSofasHero({
                   Your space needs more than seating that simply looks good.
                 </p>
 
+                {/* =================================================
+                    CTA
+                ================================================== */}
+
+                <div
+                  className="
+                    mt-7
+
+                    grid
+                    gap-3
+
+                    sm:flex
+                    sm:flex-wrap
+                    sm:items-center
+                  "
+                >
+                  <ClayButton
+                    href="#commercial-sofa-enquiry"
+                    variant="gold"
+                    size="lg" 
+                    showArrow fullWidth
+                    className="max-sm:w-full lg:w-auto! max-w-full !min-w-0 !whitespace-normal [&_.snm-button__label]:py-2 [&_.snm-button__label]:leading-snug"
+                    ariaLabel="Request a commercial seating quote"
+                  >
+                    Request a Commercial Seating Quote
+                  </ClayButton>
+
+                  <ClayButton
+                    href="#commercial-sofa-enquiry"
+                    variant="navy"
+                    size="lg" fullWidth
+                    showArrow
+                    className="max-sm:w-full lg:w-auto!  max-w-full !min-w-0 !whitespace-normal [&_.snm-button__label]:py-2 [&_.snm-button__label]:leading-snug"
+                    ariaLabel="Send plans and measurements for your commercial seating project"
+                  >
+                    Send Plans &amp; Measurements
+                  </ClayButton>
+                </div>
+
                 {/* BODY */}
 
                 <div
@@ -257,24 +295,26 @@ export default function CommercialSofasHero({
                   "
                 >
                   <p>
-                    At Sofa N More, we create bespoke commercial sofas in London
-                    for restaurants, cafés, hotels, offices and hospitality
-                    spaces where comfort, layout, durability and brand character
-                    all matter.
+                    At Sofa N More, we design and manufacture bespoke commercial
+                    sofas and contract seating in London for restaurants, cafés,
+                    hotels, offices and hospitality spaces where comfort,
+                    layout, durability and brand character all matter.
                   </p>
 
                   <p>
-                    From made-to-measure restaurant sofas and upholstered
-                    banquettes to hotel lounge sofas, office breakout seating
-                    and custom booth seating, every project is developed around
-                    the space, the way it will be used and the atmosphere you
-                    want to create.
+                    From custom restaurant seating, sofas and banquettes to
+                    booth seating, upholstered commercial chairs, hotel lounge
+                    seating and office sofas, every project is developed around
+                    the exact space, intended use and requirements of the
+                    business.
                   </p>
 
                   <p>
-                    Choose the dimensions, configuration, upholstery and
-                    finishing details that suit your project, then create
-                    seating designed to belong in the space from day one.
+                    Choose the dimensions, configuration, upholstery, materials
+                    and finishing details that suit your project. Every
+                    commercial seating project is made to order around your
+                    business and space rather than selected from ready-made
+                    stock.
                   </p>
                 </div>
 
@@ -297,47 +337,9 @@ export default function CommercialSofasHero({
                   <TrustPoint>London Workshop</TrustPoint>
 
                   <TrustPoint>Commercial Projects</TrustPoint>
-                </div>
-
-                {/* =================================================
-                    CTA
-                ================================================== */}
-
-                <div
-                  className="
-                    mt-7
-
-                    grid
-                    gap-3
-
-                    sm:flex
-                    sm:flex-wrap
-                    sm:items-center
-                  "
-                >
-                  <ClayButton
-                    href="#commercial-sofa-enquiry"
-                    variant="gold"
-                    size="lg"
-                    showArrow
-                    className="max-sm:w-full"
-                    ariaLabel="Request a commercial sofa quote"
-                  >
-                    Request a Commercial Sofa Quote
-                  </ClayButton>
-
-                 
-
-                  <ClayButton
-                    href={`tel:${PHONE_NUMBER}`}
-                    variant="navy"
-                    size="lg"
-                    startIcon={<PhoneCall size={16} strokeWidth={1.7} />}
-                    className="max-sm:w-full"
-                    ariaLabel="Call Sofa N More"
-                  >
-                    Call Us
-                  </ClayButton>
+                  <TrustPoint note="No Ready-Made Stock">
+                    Made to Order
+                  </TrustPoint>
                 </div>
               </div>
 
@@ -369,7 +371,13 @@ export default function CommercialSofasHero({
    TRUST POINT
 ========================================================= */
 
-function TrustPoint({ children }: { children: React.ReactNode }) {
+function TrustPoint({
+  children,
+  note,
+}: {
+  children: React.ReactNode;
+  note?: string;
+}) {
   return (
     <div
       className="
@@ -415,6 +423,11 @@ function TrustPoint({ children }: { children: React.ReactNode }) {
         "
       >
         {children}
+        {note && (
+          <span className="mt-1 block text-[11px] font-medium normal-case tracking-normal text-[var(--brand-text-muted)]">
+            {note}
+          </span>
+        )}
       </span>
     </div>
   );
@@ -485,7 +498,7 @@ function HeroImage() {
             sizes="(max-width: 1023px) 100vw, 52vw"
             className="
               
-              object-center
+              object-cover object-center
             "
           />
 

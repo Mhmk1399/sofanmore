@@ -78,10 +78,10 @@ const processSteps: ProcessStep[] = [
 
     shortLabel: "Production",
 
-    title: "Your Commercial Sofas Are Made",
+    title: "Your Commercial Seating Is Made",
 
     description:
-      "Once the design and specification have been agreed, your sofas move into production.",
+      "Once the design and specification have been agreed, your commercial sofas, chairs or seating move into production in our London workshop.",
 
     secondary:
       "Each element is produced around the approved project requirements.",
@@ -304,45 +304,7 @@ export default function CommercialSofaProcessSection() {
               </div>
             </div>
 
-            {/* =================================================
-                QUICK PROCESS RAIL
-            ================================================== */}
-
-            <div
-              className="
-                mt-7
-
-                hidden
-
-                rounded-[22px]
-
-                bg-[var(--brand-navy)]
-
-                px-5
-                py-5
-
-                md:block
-
-                lg:mt-8
-                lg:px-7
-              "
-            >
-              <DesktopProcessRail />
-            </div>
-
-            {/* =================================================
-                MOBILE QUICK PATH
-            ================================================== */}
-
-            <div
-              className="
-                mt-6
-
-                md:hidden
-              "
-            >
-              <MobileProcessRail />
-            </div>
+            <ResponsiveProcessRail />
 
             {/* =================================================
                 FULL PROCESS
@@ -429,239 +391,36 @@ export default function CommercialSofaProcessSection() {
   );
 }
 
-/* =========================================================
-   DESKTOP PROCESS RAIL
-========================================================= */
-
-function DesktopProcessRail() {
+function ResponsiveProcessRail() {
   return (
-    <div
-      className="
-        relative
-
-        grid
-        grid-cols-5
-        gap-4
-      "
+    <ol
+      aria-label="Commercial seating project stages"
+      className="mt-7 grid grid-cols-2 gap-4 rounded-[22px] bg-[var(--brand-navy)] p-5 text-center md:grid-cols-5"
     >
-      {/* CONNECTING LINE */}
-
-      <div
-        aria-hidden
-        className="
-          absolute
-
-          left-[9%]
-          right-[9%]
-          top-[18px]
-
-          h-px
-
-          bg-white/12
-        "
-      />
-
-      {processSteps.map((step, index) => {
+      {processSteps.map((step) => {
         const Icon = step.icon;
-
         return (
-          <div
+          <li
             key={step.number}
-            className="
-              relative
-              z-10
-
-              text-center
-            "
+            className="flex min-w-0 flex-col items-center gap-2"
           >
-            {/* NODE */}
-
-            <div
-              className={`
-                mx-auto
-
-                flex
-                h-9
-                w-9
-
-                items-center
-                justify-center
-
-                rounded-full
-
-                ${
-                  step.highlight
-                    ? "bg-[var(--brand-gold)] text-[var(--brand-navy)]"
-                    : "border border-white/12 bg-[#1B3652] text-[var(--brand-gold)]"
-                }
-              `}
-            >
-              <Icon size={14} strokeWidth={1.5} />
-            </div>
-
-            {/* NUMBER */}
-
             <span
-              className="
-                mt-3
-                block
-
-                font-brand-sans
-
-                text-[13px]
-                font-bold
-                uppercase
-
-                tracking-[0.16em]
-
-                text-[var(--brand-gold)]
-              "
+              className={`flex h-9 w-9 items-center justify-center rounded-full ${step.highlight ? "bg-[var(--brand-gold)] text-[var(--brand-navy)]" : "bg-white/10 text-[var(--brand-gold)]"}`}
             >
-              {step.number}
+              <Icon aria-hidden="true" size={16} strokeWidth={1.5} />
             </span>
-
-            {/* LABEL */}
-
-            <span
-              className="
-                mt-1
-                block
-
-                font-brand-sans
-
-                text-[11px]
-                font-semibold
-
-                text-white/75
-
-                lg:text-[12px]
-              "
-            >
+            <span className="font-brand-sans text-[12px] font-semibold leading-snug text-white">
+              <span className="mr-1.5 text-[var(--brand-gold)]">
+                {step.number}
+              </span>
               {step.shortLabel}
             </span>
-
-            {index < processSteps.length - 1 && (
-              <span className="sr-only">Next step</span>
-            )}
-          </div>
+          </li>
         );
       })}
-    </div>
+    </ol>
   );
 }
-
-/* =========================================================
-   MOBILE PROCESS RAIL
-========================================================= */
-
-function MobileProcessRail() {
-  return (
-    <div
-      className="
-        clay-surface-soft
-
-        overflow-x-auto
-
-        rounded-[18px]
-
-        px-3
-        py-3
-
-        [scrollbar-width:none]
-
-        [&::-webkit-scrollbar]:hidden
-      "
-    >
-      <div
-        className="
-          flex
-
-          min-w-max
-
-          items-center
-
-          gap-2
-        "
-      >
-        {processSteps.map((step, index) => {
-          const Icon = step.icon;
-
-          return (
-            <div
-              key={step.number}
-              className="
-                flex
-                items-center
-                gap-2
-              "
-            >
-              <div
-                className={`
-                  flex
-                  items-center
-
-                  gap-2
-
-                  rounded-full
-
-                  px-3
-                  py-2
-
-                  ${
-                    step.highlight
-                      ? "bg-[var(--brand-navy)] text-white"
-                      : "bg-[#FFFDF8] text-[var(--brand-navy)]"
-                  }
-                `}
-              >
-                <Icon
-                  size={12}
-                  strokeWidth={1.5}
-                  className={
-                    step.highlight
-                      ? "text-[var(--brand-gold)]"
-                      : "text-[var(--brand-gold-700)]"
-                  }
-                />
-
-                <span
-                  className="
-                    font-brand-sans
-
-                    text-[13px]
-                    font-bold
-                    uppercase
-
-                    tracking-[0.1em]
-                  "
-                >
-                  {step.number} · {step.shortLabel}
-                </span>
-              </div>
-
-              {index < processSteps.length - 1 && (
-                <span
-                  aria-hidden
-                  className="
-                    text-[13px]
-
-                    text-[var(--brand-gold-700)]/55
-                  "
-                >
-                  →
-                </span>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-/* =========================================================
-   PROCESS ROW
-========================================================= */
 
 function ProcessRow({ step }: { step: ProcessStep }) {
   const Icon = step.icon;

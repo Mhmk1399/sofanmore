@@ -52,7 +52,7 @@ const columns: FooterColumn[] = [
         href: "/services",
       },
       {
-        label: "Upholstery",
+        label: "Bespoke Sofas",
         href: "/services/bespoke-sofas",
       },
       {

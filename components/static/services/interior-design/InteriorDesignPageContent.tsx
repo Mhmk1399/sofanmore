@@ -106,6 +106,8 @@ export default function InteriorDesignPageContent() {
       id="webpage"
       className="
         overflow-hidden
+        lg:flow-root
+        lg:overflow-clip
         bg-[var(--brand-ivory)]
       "
     >

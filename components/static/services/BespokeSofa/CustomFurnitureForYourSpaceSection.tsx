@@ -155,7 +155,7 @@ export default function CustomsofaForYourSpaceSection({
                     lg:text-[clamp(46px,4vw,62px)]
                   "
                 >
-                  Custom sofa Designed for
+                  Custom Sofas Designed Around{" "}
                   <br className="hidden xl:block" />
                   Your Space
                   <span className="text-[var(--brand-gold)]">.</span>
@@ -175,7 +175,7 @@ export default function CustomsofaForYourSpaceSection({
                     lg:text-[22px]
                   "
                 >
-                  No two homes, rooms or projects are exactly alike.
+                  No two homes, rooms or sofa projects are exactly alike.
                 </p>
 
                 {/* BODY */}
@@ -194,10 +194,10 @@ export default function CustomsofaForYourSpaceSection({
                   "
                 >
                   <p>
-                    A sofa that looks right in a showroom may be too deep for a
-                    London living room. A standard bench may leave valuable
-                    space unused. The right dimensions may exist, but not in the
-                    fabric, finish or style you want.
+                    A sofa that looks right in a showroom may be too deep, too
+                    wide or simply the wrong proportion for your room. Standard
+                    furniture often forces you to compromise on size, comfort,
+                    fabric or layout.
                   </p>
 
                   <p
@@ -209,19 +209,19 @@ export default function CustomsofaForYourSpaceSection({
                       text-[var(--brand-navy)]
                     "
                   >
-                    Upholstery removes those compromises.
+                    A bespoke sofa removes those compromises.
                   </p>
 
                   <p>
-                    We design and make custom sofa around your individual
-                    requirements, giving you greater control over proportion,
-                    comfort, materials and appearance.
+                    We design and make custom sofas around your individual
+                    requirements, giving you control over dimensions, proportion,
+                    seating comfort, materials, fabric and finish.
                   </p>
 
                   <p>
                     Whether you already have a clear design in mind or simply
-                    know what you need the sofa to achieve, our team can
-                    help turn the idea into a finished piece made specifically
+                    know the size, shape or function you need, our team can help
+                    develop the idea into a finished sofa made specifically
                     for your space.
                   </p>
                 </div>
@@ -308,7 +308,7 @@ function ImageStage() {
           {/* IMAGE */}
           <Image
                   src="https://sofanmore.s3.eu-west-2.amazonaws.com/Image/19.webp"
-            alt="Craftsperson finishing upholstery upholstery in a London workshop"
+            alt="Craftsperson finishing a bespoke sofa in our London workshop"
             fill
             sizes="(max-width: 1024px) 90vw, 55vw"
             className="object-cover object-center"

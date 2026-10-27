@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 type LeadSuccessConfirmationOptions = {
   service: string;
+  leadService?: string;
   autoReturnMs?: number;
 };
 
@@ -19,6 +20,7 @@ function getCurrentRelativeUrl() {
 
 export function useLeadSuccessConfirmation({
   service,
+  leadService = service,
   autoReturnMs = DEFAULT_AUTO_RETURN_MS,
 }: LeadSuccessConfirmationOptions) {
   const [successLeadId, setSuccessLeadId] = useState("");
@@ -75,7 +77,7 @@ export function useLeadSuccessConfirmation({
         event_category: "Lead",
         event_action: "success_confirmation_view",
         event_label: service,
-        lead_service: service,
+        lead_service: leadService,
         lead_id: leadId,
         lead_status: "success",
         page_path: confirmationPath,
@@ -90,7 +92,7 @@ export function useLeadSuccessConfirmation({
         clearSuccessConfirmation();
       }, autoReturnMs);
     },
-    [autoReturnMs, clearSuccessConfirmation, service],
+    [autoReturnMs, clearSuccessConfirmation, leadService, service],
   );
 
   useEffect(() => {

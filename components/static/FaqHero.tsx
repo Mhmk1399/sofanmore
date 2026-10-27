@@ -59,7 +59,7 @@ export default function FaqHero() {
             </ClayButton>
           </div>
 
-          <div className="mt-7 grid max-w-[620px] grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="mt-7 grid max-w-[720px] grid-cols-2 gap-2 sm:grid-cols-4">
             {heroStats.map((item) => (
               <div
                 key={item}
@@ -71,7 +71,7 @@ export default function FaqHero() {
                   className="text-[var(--brand-gold-700)]"
                   aria-hidden
                 />
-                <p className="mt-2 font-brand-sans text-[12px] font-bold leading-[1.35] text-[var(--brand-navy)]">
+                <p className="mt-2 lg:text-nowrap font-brand-sans text-[12px] font-bold leading-[1.35] text-[var(--brand-navy)]">
                   {item}
                 </p>
               </div>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Check, Hammer, Heart, PhoneCall, Sparkles } from "lucide-react";
+import { Check, Hammer, Heart, Camera, Sparkles } from "lucide-react";
 
 import ClayButton from "@/components/ui/ClayButton";
 
@@ -8,12 +8,23 @@ import ClayButton from "@/components/ui/ClayButton";
    CONFIG
 ========================================================= */
 
-const HERO_IMAGE = "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Repair.webp";
+const HERO_IMAGE =
+  "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/Repair.webp";
 
 const heroPoints = [
-  "Professional Reupholstery",
-  "Careful Restoration",
-  "London Workshop",
+  { label: "Full Reupholstery", note: "Complete upholstery renewal" },
+  {
+    label: "Foam & Comfort Renewal",
+    note: "Restore support and seating comfort",
+  },
+  {
+    label: "Wood & Frame Restoration",
+    note: "Repair and restore suitable structural elements",
+  },
+  {
+    label: "London Workshop",
+    note: "Professional restoration in North West London",
+  },
 ];
 
 /* =========================================================
@@ -193,22 +204,22 @@ export default function SofaRepairHero({ id = "service" }: { id?: string }) {
 
                     font-brand-display
 
-                    text-[39px]
+                    text-[32px]
                     font-semibold
                     leading-[0.98]
 
-                    tracking-[-0.04em]
+                    tracking-normal
 
                     text-[var(--brand-navy)]
 
-                    min-[390px]:text-[43px]
+                    min-[390px]:text-[34px]
 
-                    sm:text-[51px]
+                    sm:text-[40px]
 
-                    lg:text-[clamp(49px,4.3vw,66px)]
+                    lg:text-[42px] xl:text-[46px]
                   "
                 >
-                  Sofa Reupholstery & Restoration in London, Made to Last Again
+                  Sofa Reupholstery, Restoration & Major Repairs in London
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h1>
 
@@ -234,12 +245,34 @@ export default function SofaRepairHero({ id = "service" }: { id?: string }) {
                     sm:text-[22px]
                   "
                 >
-                  Some sofas deserve more than replacing.
+                  Professional sofa reupholstery and restoration for sofas that
+                  need more than a small cosmetic fix.
                 </p>
 
-                {/* =================================================
-                    BODY
-                ================================================== */}
+                <div className="mt-6 grid min-w-0 gap-3 sm:flex sm:flex-wrap sm:items-center">
+                  <ClayButton
+                    href="#sofa-repair-enquiry"
+                    variant="gold"
+                    size="lg"
+                    showArrow
+                    fullWidth
+                    className="max-w-full lg:w-auto! !min-w-0 !whitespace-normal !leading-snug max-sm:w-full [&_.snm-button__label]:whitespace-normal"
+                    ariaLabel="Request a Sofa Restoration Assessment"
+                  >
+                    Request a Sofa Restoration Assessment
+                  </ClayButton>
+                  <ClayButton
+                    href="#sofa-repair-enquiry"
+                    variant="navy"
+                    size="lg"
+                    fullWidth
+                    startIcon={<Camera size={16} strokeWidth={1.7} />}
+                    className="max-w-full lg:w-auto! !min-w-0 !whitespace-normal !leading-snug max-sm:w-full [&_.snm-button__label]:whitespace-normal"
+                    ariaLabel="Send Photos for Assessment"
+                  >
+                    Send Photos for Assessment
+                  </ClayButton>
+                </div>
 
                 <div
                   className="
@@ -263,75 +296,16 @@ export default function SofaRepairHero({ id = "service" }: { id?: string }) {
                   "
                 >
                   <p>
-                    A sofa may have years of life, memories and character behind
-                    it — even when time, everyday use or damage has changed the
-                    way it looks and feels.
+                    Sofa N More works on substantial restoration projects
+                    including complete reupholstery, fabric renewal, foam and
+                    comfort replacement, wood and frame restoration, and
+                    projects where several parts of the sofa need attention
+                    together.
                   </p>
-
                   <p>
-                    At Sofa N More, we provide professional sofa reupholstery
-                    and restoration in London, helping bring worn, damaged and
-                    much-loved sofas back to a condition in which they can be
-                    enjoyed again.
-                  </p>
-
-                  <p>
-                    From contemporary sofas that need careful attention to older
-                    pieces worth preserving, every project begins by
-                    understanding the sofa, its condition and what you would
-                    like to restore.
-                  </p>
-                </div>
-
-                {/* =================================================
-                    CORE MESSAGE
-                ================================================== */}
-
-                <div
-                  className="
-                    mt-6
-
-                    border-l-2
-                    border-[var(--brand-gold)]
-
-                    pl-4
-                  "
-                >
-                  <span
-                    className="
-                      font-brand-sans
-
-                      text-[13px]
-                      font-bold
-                      uppercase
-
-                      tracking-[0.17em]
-
-                      text-[var(--brand-gold-700)]
-                    "
-                  >
-                    Another Life
-                  </span>
-
-                  <p
-                    className="
-                      mt-1.5
-
-                      max-w-[590px]
-
-                      font-brand-display
-
-                      text-[21px]
-                      font-semibold
-                      leading-[1.3]
-
-                      text-[var(--brand-navy)]
-
-                      sm:text-[24px]
-                    "
-                  >
-                    Because sometimes the right answer isn&apos;t a new sofa.
-                    It&apos;s giving the right sofa another life.
+                    Our service is designed for sofas that are worth restoring -
+                    whether because of their quality, comfort, dimensions,
+                    character or value to the owner.
                   </p>
                 </div>
 
@@ -351,47 +325,12 @@ export default function SofaRepairHero({ id = "service" }: { id?: string }) {
                   "
                 >
                   {heroPoints.map((point) => (
-                    <HeroPoint key={point} label={point} />
+                    <HeroPoint
+                      key={point.label}
+                      label={point.label}
+                      note={point.note}
+                    />
                   ))}
-                </div>
-
-                {/* =================================================
-                    CTA
-                ================================================== */}
-
-                <div
-                  className="
-                    mt-7
-
-                    grid
-                    gap-3
-
-                    sm:flex
-                    sm:flex-wrap
-                    sm:items-center
-                  "
-                >
-                  <ClayButton
-                    href="#sofa-repair-enquiry"
-                    variant="gold"
-                    size="lg"
-                    showArrow
-                    className="max-sm:w-full"
-                    ariaLabel="Request a sofa reupholstery assessment from Sofa N More"
-                  >
-                    Request a Sofa Reupholstery Assessment
-                  </ClayButton>
-
-                  <ClayButton
-                    href="tel:+447400577844"
-                    variant="navy"
-                    size="lg"
-                    startIcon={<PhoneCall size={16} strokeWidth={1.7} />}
-                    className="max-sm:w-full"
-                    ariaLabel="Call Sofa N More about your sofa reupholstery"
-                  >
-                    Call Our London Team
-                  </ClayButton>
                 </div>
               </div>
 
@@ -421,7 +360,7 @@ export default function SofaRepairHero({ id = "service" }: { id?: string }) {
    HERO POINT
 ========================================================= */
 
-function HeroPoint({ label }: { label: string }) {
+function HeroPoint({ label, note }: { label: string; note: string }) {
   return (
     <div
       className="
@@ -467,6 +406,9 @@ function HeroPoint({ label }: { label: string }) {
         "
       >
         {label}
+        <span className="mt-1 block text-[11px] font-medium normal-case leading-relaxed tracking-normal text-[var(--brand-text-muted)]">
+          {note}
+        </span>
       </span>
     </div>
   );

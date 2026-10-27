@@ -15,7 +15,12 @@ import {
   type UploadItem,
 } from "@/components/lead-capture/ClayFormControls";
 import LeadFormShell from "@/components/lead-capture/LeadFormShell";
-import { MAX_UPLOAD_COUNT, MAX_UPLOAD_SIZE_BYTES } from "@/lib/lead-config";
+import {
+  MAX_UPLOAD_COUNT,
+  MAX_UPLOAD_SIZE_BYTES,
+  repairProjectScopes,
+  repairAttentionExtents,
+} from "@/lib/lead-config";
 import { useLeadSuccessConfirmation } from "@/components/lead-capture/useLeadSuccessConfirmation";
 
 type FormErrors = Record<string, string>;
@@ -26,6 +31,8 @@ type RepairFormValues = {
   email: string;
   postcode: string;
   itemType: string;
+  projectScope: string;
+  attentionExtent: string;
   issues: string[];
   approximateAge: string;
   transportPreference: string;
@@ -60,6 +67,8 @@ const initialValues: RepairFormValues = {
   email: "",
   postcode: "",
   itemType: "",
+  projectScope: "",
+  attentionExtent: "",
   issues: [],
   approximateAge: "",
   transportPreference: "",
@@ -152,6 +161,8 @@ function normalizeServerFieldErrors(fieldErrors?: FormErrors) {
   const fieldMap: Record<string, string> = {
     name: "fullName",
     "serviceData.itemType": "itemType",
+    "serviceData.projectScope": "projectScope",
+    "serviceData.attentionExtent": "attentionExtent",
     "serviceData.issues": "issues",
     "serviceData.approximateAge": "approximateAge",
     "serviceData.transportPreference": "transportPreference",
@@ -170,7 +181,7 @@ async function readApiResponse<T extends { ok: true }>(
 ): Promise<T> {
   const body = (await response.json()) as unknown;
 
-  if (!response.ok || !body || typeof body !== "object" || !("ok" in body)) {
+  if (!body || typeof body !== "object" || !("ok" in body)) {
     const error = new Error("Request failed.") as Error & {
       fieldErrors?: FormErrors;
     };
@@ -184,6 +195,10 @@ async function readApiResponse<T extends { ok: true }>(
     };
     error.fieldErrors = normalizeServerFieldErrors(errorBody.fieldErrors);
     throw error;
+  }
+
+  if (!response.ok || body.ok !== true) {
+    throw new Error("Request failed.");
   }
 
   return body as T;
@@ -264,6 +279,20 @@ function validateForm(values: RepairFormValues, uploads: UploadItem[]) {
     errors.itemType = "Choose the item type.";
   }
 
+  if (
+    !repairProjectScopes.some((option) => option.value === values.projectScope)
+  ) {
+    errors.projectScope = "Choose the project scope.";
+  }
+
+  if (
+    !repairAttentionExtents.some(
+      (option) => option.value === values.attentionExtent,
+    )
+  ) {
+    errors.attentionExtent = "Choose how much of the sofa needs attention.";
+  }
+
   if (uploads.length < 1) {
     errors.uploads = "Upload at least one photo.";
   } else if (uploads.some((item) => item.status === "failed")) {
@@ -291,10 +320,11 @@ export default function SofaRepairLeadForm() {
   const [uploadError, setUploadError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const { successLeadId, showSuccessConfirmation } =
-    useLeadSuccessConfirmation({
+  const { successLeadId, showSuccessConfirmation } = useLeadSuccessConfirmation(
+    {
       service: "sofa_repair_restoration",
-    });
+    },
+  );
   const [uploadSessionId, setUploadSessionId] = useState(() =>
     createClientId("upload"),
   );
@@ -537,6 +567,8 @@ export default function SofaRepairLeadForm() {
         : "/services/sofa-repair-restoration";
     const serviceData: Record<string, string | string[]> = {
       itemType: values.itemType,
+      projectScope: values.projectScope,
+      attentionExtent: values.attentionExtent,
     };
 
     if (values.issues.length > 0) {
@@ -612,14 +644,18 @@ export default function SofaRepairLeadForm() {
       icon={<Camera size={21} strokeWidth={1.55} />}
       title={
         <>
-          Show Us What Needs Attention
+          Send Photos for a Sofa Restoration Assessment
           <span className="text-[var(--brand-gold)]">.</span>
         </>
       }
       intro={
         <>
-          You do not need to diagnose the problem yourself. Send us a few
-          photographs, tell us what has changed and we can review the next step.
+          Send clear photographs of the complete sofa and the areas that need
+          attention. Tell us whether the main issue is upholstery, comfort,
+          foam, wood or frame condition, or a combination of several problems.
+          We focus on substantial reupholstery and restoration projects, so
+          seeing the overall condition helps us quickly determine whether the
+          sofa is suitable for our workshop.
         </>
       }
       successLeadId={successLeadId}
@@ -635,7 +671,7 @@ export default function SofaRepairLeadForm() {
           ? "Photos need to finish before the details can be sent."
           : "Start with at least one clear photo. Required fields are marked with a gold star."
       }
-      submitLabel="Send Photos"
+      submitLabel="Request My Sofa Assessment"
       loadingLabel="Sending Your Sofa Details…"
       onSubmit={handleSubmit}
     >
@@ -658,12 +694,15 @@ export default function SofaRepairLeadForm() {
               </p>
               <div className="mt-4 space-y-2.5">
                 {[
-                  "One full-item photo",
-                  "One close-up of wear or damage",
-                  "Any label, fabric or cushion detail",
+                  "One full photo of the complete sofa",
+                  "Photos from the front, side and back where useful",
+                  "Close-ups of worn or damaged areas",
+                  "Photos of any wooden or structural areas needing attention",
+                  "Photos of cushions or seating that has lost comfort",
+                  "Any label, manufacturer or material information you know",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-2.5">
-                    <span className="h-2 w-2 rounded-full bg-[var(--brand-gold)]" />
+                  <div key={item} className="flex items-start gap-2.5">
+                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[var(--brand-gold)]" />
                     <span className="font-brand-sans text-[11px] font-bold text-[var(--brand-navy)]">
                       {item}
                     </span>
@@ -732,6 +771,31 @@ export default function SofaRepairLeadForm() {
             options={itemTypeOptions}
             required
             error={errors.itemType}
+          />
+        </div>
+      </FormSection>
+
+      <FormSection title="About the Restoration">
+        <div className="grid min-w-0 gap-3.5 lg:grid-cols-2">
+          <ClaySelect
+            id="repair-project-scope"
+            label="Project scope"
+            value={values.projectScope}
+            onChange={(value) => updateValue("projectScope", value)}
+            options={[...repairProjectScopes]}
+            required
+            disabled={isSubmitting}
+            error={errors.projectScope}
+          />
+          <ClaySelect
+            id="repair-attention-extent"
+            label="How much of the sofa needs attention?"
+            value={values.attentionExtent}
+            onChange={(value) => updateValue("attentionExtent", value)}
+            options={[...repairAttentionExtents]}
+            required
+            disabled={isSubmitting}
+            error={errors.attentionExtent}
           />
         </div>
       </FormSection>

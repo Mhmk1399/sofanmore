@@ -30,6 +30,7 @@ type CommercialFormValues = {
   phone: string;
   postcode: string;
   venueType: string;
+  projectLocation: string;
   projectType: string;
   projectStage: string;
   approximateQuantity: string;
@@ -71,6 +72,7 @@ const initialValues: CommercialFormValues = {
   phone: "",
   postcode: "",
   venueType: "",
+  projectLocation: "",
   projectType: "",
   projectStage: "",
   approximateQuantity: "",
@@ -88,12 +90,12 @@ const initialValues: CommercialFormValues = {
 
 const venueTypeOptions = [
   { label: "Restaurant", value: "restaurant" },
-  { label: "Cafe", value: "cafe" },
-  { label: "Hotel", value: "hotel" },
-  { label: "Office", value: "office" },
-  { label: "Hospitality", value: "hospitality" },
-  { label: "Retail", value: "retail" },
-  { label: "Other", value: "other" },
+  { label: "Caf\u00e9", value: "cafe" },
+  { label: "Hotel / Hospitality", value: "hotel" },
+  { label: "Office / Workspace", value: "office" },
+  { label: "Reception / Waiting Area", value: "reception" },
+  { label: "Studio", value: "studio" },
+  { label: "Other Commercial Space", value: "other" },
 ] satisfies SelectOption[];
 
 const acceptedUploadMimeTypes = new Set([
@@ -178,6 +180,7 @@ function normalizeServerFieldErrors(fieldErrors?: FormErrors) {
     email: "workEmail",
     "serviceData.companyName": "companyName",
     "serviceData.venueType": "venueType",
+    "serviceData.projectLocation": "projectLocation",
     "serviceData.projectType": "projectType",
     "serviceData.projectStage": "projectStage",
     "serviceData.approximateQuantity": "approximateQuantity",
@@ -201,7 +204,7 @@ async function readApiResponse<T extends { ok: true }>(
 ): Promise<T> {
   const body = (await response.json()) as unknown;
 
-  if (!response.ok || !body || typeof body !== "object" || !("ok" in body)) {
+  if (!body || typeof body !== "object" || !("ok" in body)) {
     const error = new Error("Request failed.") as Error & {
       fieldErrors?: FormErrors;
     };
@@ -215,6 +218,10 @@ async function readApiResponse<T extends { ok: true }>(
     };
     error.fieldErrors = normalizeServerFieldErrors(errorBody.fieldErrors);
     throw error;
+  }
+
+  if (!response.ok || body.ok !== true) {
+    throw new Error("Request failed.");
   }
 
   return body as T;
@@ -281,7 +288,7 @@ function validateForm(values: CommercialFormValues, uploads: UploadItem[]) {
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.workEmail.trim())) {
-    errors.workEmail = "Enter a valid work email address.";
+    errors.workEmail = "Enter a valid email address.";
   }
 
   if (!/^\+?[0-9][0-9\s().-]{6,30}$/.test(values.phone.trim())) {
@@ -290,6 +297,10 @@ function validateForm(values: CommercialFormValues, uploads: UploadItem[]) {
 
   if (!values.venueType) {
     errors.venueType = "Choose a venue type.";
+  }
+
+  if (values.projectLocation.trim().length > 180) {
+    errors.projectLocation = "Use 180 characters or fewer.";
   }
 
   if (values.approximateQuantity) {
@@ -333,17 +344,22 @@ function validateForm(values: CommercialFormValues, uploads: UploadItem[]) {
   return errors;
 }
 
-export default function CommercialSofaLeadForm() {
+export default function CommercialSofaLeadForm({
+  projectsHref = "/services/commercial-sofas#commercial-projects",
+}: {
+  projectsHref?: string;
+}) {
   const [values, setValues] = useState<CommercialFormValues>(initialValues);
   const [errors, setErrors] = useState<FormErrors>({});
   const [uploads, setUploads] = useState<UploadItem[]>([]);
   const [uploadError, setUploadError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const { successLeadId, showSuccessConfirmation } =
-    useLeadSuccessConfirmation({
+  const { successLeadId, showSuccessConfirmation } = useLeadSuccessConfirmation(
+    {
       service: "commercial_sofa",
-    });
+    },
+  );
   const [uploadSessionId, setUploadSessionId] = useState(() =>
     createClientId("upload"),
   );
@@ -611,6 +627,10 @@ export default function CommercialSofaLeadForm() {
       serviceData.approximateQuantity = Number(values.approximateQuantity);
     }
 
+    if (values.projectLocation.trim()) {
+      serviceData.projectLocation = values.projectLocation.trim();
+    }
+
     if (values.dimensionsKnown === "yes" && values.widthCm && values.depthCm) {
       serviceData.widthCm = Number(values.widthCm);
       serviceData.depthCm = Number(values.depthCm);
@@ -681,19 +701,15 @@ export default function CommercialSofaLeadForm() {
   return (
     <LeadFormShell
       id="commercial-sofa-enquiry"
-      eyebrow="Commercial sofa brief"
+      eyebrow="Commercial Seating Enquiry"
       icon={<Building2 size={21} strokeWidth={1.55} />}
-      title={
-        <>
-          Tell Us About Your Commercial Seating Project
-          <span className="text-[var(--brand-gold)]">.</span>
-        </>
-      }
+      title={<>Request Your Commercial Seating Quote</>}
       intro={
         <>
-          Share your venue, plans and seating requirements. Floor plans, site
-          photographs and reference images help us understand the project before
-          the first conversation.
+          Send us your venue details, floor plans, approximate dimensions,
+          photographs and seating requirements. The more information you
+          provide, the easier it is for us to review your commercial seating
+          project.
         </>
       }
       successLeadId={successLeadId}
@@ -701,7 +717,7 @@ export default function CommercialSofaLeadForm() {
       successMessage="Thank you. Our team can review your project details, plans and uploaded references before getting in touch."
       successEyebrow="Commercial brief received"
       successAction={{
-        href: "#commercial-projects",
+        href: projectsHref,
         label: "Explore Our Commercial Projects",
       }}
       submitError={submitError}
@@ -713,7 +729,7 @@ export default function CommercialSofaLeadForm() {
           ? "Files need to finish before the brief can be sent."
           : "Required fields are marked with a gold star."
       }
-      submitLabel="Submit"
+      submitLabel="Request My Commercial Seating Quote"
       loadingLabel="Sending Your Project Brief..."
       onSubmit={handleSubmit}
     >
@@ -744,7 +760,7 @@ export default function CommercialSofaLeadForm() {
           <div className="lg:col-span-3">
             <ClayInput
               id="commercial-work-email"
-              label="Work email"
+              label="Email address"
               type="email"
               inputMode="email"
               value={values.workEmail}
@@ -778,12 +794,32 @@ export default function CommercialSofaLeadForm() {
               error={errors.venueType}
             />
           </div>
+          <div className="lg:col-span-6">
+            <ClayInput
+              id="commercial-project-location"
+              label="Project location / postcode"
+              value={values.projectLocation}
+              onChange={(value) => updateValue("projectLocation", value)}
+              autoComplete="off"
+              error={errors.projectLocation}
+            />
+          </div>
+          <div className="lg:col-span-6">
+            <ClayInput
+              id="commercial-seating-quantity"
+              label="Approximate seating quantity"
+              type="number"
+              inputMode="numeric"
+              min={1}
+              max={10000}
+              value={values.approximateQuantity}
+              onChange={(value) => updateValue("approximateQuantity", value)}
+              error={errors.approximateQuantity}
+            />
+          </div>
         </div>
       </FormSection>
 
- 
-
-     
       <FormSection title="Plans & References">
         <ClayFileDropzone
           id="commercial-plan-uploads"

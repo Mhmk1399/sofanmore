@@ -14,6 +14,12 @@ export type LeadAnalyticsEvent = {
 
 export function trackLeadEvent(event: LeadAnalyticsEvent) {
   if (process.env.NODE_ENV !== "production") {
-    console.info("Lead analytics event", event);
+    console.info("Lead analytics event", {
+      ...event,
+      lead_service:
+        event.service === "BESPOKE_SOFA"
+          ? "bespoke_sofas"
+          : event.service.toLowerCase(),
+    });
   }
 }

@@ -30,7 +30,7 @@ const commercialSolutions: CommercialSolution[] = [
   {
     number: "01",
 
-    title: "Restaurant Sofas & Banquette Seating",
+    title: "Custom Restaurant Seating, Sofas & Banquettes",
 
     shortDescription:
       "Made-to-measure seating developed around dining layouts, customer flow and the character of the venue.",
@@ -49,7 +49,7 @@ const commercialSolutions: CommercialSolution[] = [
   {
     number: "02",
 
-    title: "Café Sofas & Booth Seating",
+    title: "Custom Café Seating, Sofas & Booths",
 
     shortDescription:
       "Welcoming custom seating created for compact layouts, walls, corners, windows and social areas.",
@@ -68,7 +68,7 @@ const commercialSolutions: CommercialSolution[] = [
   {
     number: "03",
 
-    title: "Hotel & Hospitality Sofas",
+    title: "Bespoke Hotel & Hospitality Seating",
 
     shortDescription:
       "Considered bespoke seating for lobbies, lounges, bars, receptions and other guest-facing interiors.",
@@ -87,7 +87,7 @@ const commercialSolutions: CommercialSolution[] = [
   {
     number: "04",
 
-    title: "Office & Workspace Sofas",
+    title: "Custom Office & Workspace Seating",
 
     shortDescription:
       "Comfortable custom seating for reception areas, breakout spaces, meeting zones and workplace lounges.",
@@ -108,7 +108,7 @@ const commercialSolutions: CommercialSolution[] = [
 
     number: "05",
 
-    title: "Bespoke Banquette, Booth & Fixed Seating",
+    title: "Bespoke Commercial Banquette, Booth & Fixed Seating",
 
     shortDescription:
       "Made-to-measure seating developed around alcoves, corners, columns and unusual commercial layouts.",
@@ -121,6 +121,17 @@ const commercialSolutions: CommercialSolution[] = [
       "This can make underused areas more purposeful while creating a stronger visual structure within restaurants, cafés, hotels and other commercial environments.",
     ],
 
+    icon: Armchair,
+  },
+  {
+    id: "custom-commercial-chairs",
+    number: "06",
+    title: "Custom Commercial Chairs & Upholstered Seating",
+    shortDescription:
+      "Made-to-order upholstered chairs for restaurants, cafés, hotels and workspaces.",
+    paragraphs: [
+      "Custom upholstered chairs and seating can be developed around the dimensions, comfort, materials and visual direction of your restaurant, café, hotel, office or other commercial space.",
+    ],
     icon: Armchair,
   },
 ];
@@ -262,7 +273,7 @@ export default function CommercialSofaSolutionsSection() {
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Commercial Sofa Solutions We Can Create
+                  Commercial Seating &amp; Sofa Solutions We Can Create
                   <span
                     className="
                       text-[var(--brand-gold)]
@@ -318,74 +329,6 @@ export default function CommercialSofaSolutionsSection() {
                   using it and the result the business needs.
                 </p>
               </div>
-            </div>
-
-            {/* =================================================
-                QUICK OVERVIEW
-            ================================================== */}
-
-            <div
-              className="
-                mt-7
-
-                grid
-                grid-cols-2
-
-                gap-2
-
-                sm:grid-cols-5
-              "
-            >
-              {commercialSolutions.map(({ number, title, icon: Icon }) => (
-                <div
-                  key={number}
-                  className="
-                      clay-surface-soft
-
-                      rounded-[16px]
-
-                      px-3
-                      py-3
-                    "
-                >
-                  <div
-                    className="
-                        flex
-                        items-center
-
-                        gap-2
-                      "
-                  >
-                    <Icon
-                      size={14}
-                      strokeWidth={1.5}
-                      className="
-                          shrink-0
-
-                          text-[var(--brand-gold-700)]
-                        "
-                    />
-
-                    <span
-                      className="
-                          truncate
-
-                          font-brand-sans
-
-                          text-[13px]
-                          font-bold
-                          uppercase
-
-                          tracking-[0.08em]
-
-                          text-[var(--brand-navy)]
-                        "
-                    >
-                      {getShortLabel(title)}
-                    </span>
-                  </div>
-                </div>
-              ))}
             </div>
 
             {/* =================================================
@@ -641,8 +584,6 @@ function CommercialSolutionRow({
               className="
                 mt-1.5
 
-                hidden
-
                 max-w-[760px]
 
                 font-brand-sans
@@ -652,8 +593,6 @@ function CommercialSolutionRow({
                 leading-[1.5]
 
                 text-[var(--brand-text-muted)]
-
-                sm:block
 
                 lg:text-[13px]
               "
@@ -745,66 +684,14 @@ function CommercialSolutionRow({
             sm:px-5
             sm:py-5
 
-            lg:grid
-            lg:grid-cols-[0.34fr_0.66fr]
-            lg:gap-8
+
           "
         >
-          {/* SHORT SUMMARY */}
-
-          <div>
-            <span
-              className="
-                font-brand-sans
-
-                text-[13px]
-                font-bold
-                uppercase
-
-                tracking-[0.16em]
-
-                text-[var(--brand-gold-700)]
-              "
-            >
-              Designed for the Space
-            </span>
-
-            <p
-              className="
-                mt-2
-
-                font-brand-display
-
-                text-[17px]
-                font-semibold
-                leading-[1.3]
-
-                text-[var(--brand-navy)]
-
-                sm:text-[18px]
-              "
-            >
-              {solution.shortDescription}
-            </p>
-          </div>
-
           {/* FULL COPY */}
 
           <div
             className="
-              mt-4
               space-y-3
-
-              border-t
-              border-[var(--brand-navy)]/8
-
-              pt-4
-
-              lg:mt-0
-              lg:border-l
-              lg:border-t-0
-              lg:pl-8
-              lg:pt-0
             "
           >
             {solution.paragraphs.map((paragraph, index) => (
@@ -832,28 +719,4 @@ function CommercialSolutionRow({
       </div>
     </details>
   );
-}
-
-/* =========================================================
-   SHORT LABEL
-========================================================= */
-
-function getShortLabel(title: string) {
-  if (title.startsWith("Restaurant")) {
-    return "Restaurants";
-  }
-
-  if (title.startsWith("Café")) {
-    return "Cafés";
-  }
-
-  if (title.startsWith("Hotel")) {
-    return "Hotels";
-  }
-
-  if (title.startsWith("Office")) {
-    return "Offices";
-  }
-
-  return "Fixed Seating";
 }

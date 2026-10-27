@@ -221,7 +221,7 @@ export default function SofaRepairLondonBaseSection() {
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Sofa Reupholstery & Restoration in London
+                  Professional Sofa Reupholstery & Restoration in London
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
 
@@ -245,9 +245,9 @@ export default function SofaRepairLondonBaseSection() {
                     sm:text-[21px]
                   "
                 >
-                  Sofa N More is based in North West London, working with
-                  clients looking to preserve, reupholster and restore sofas
-                  worth keeping.
+                  Sofa N More works from our North West London workshop on
+                  substantial sofa reupholstery, restoration and repair
+                  projects.
                 </p>
 
                 {/* BODY */}
@@ -274,13 +274,14 @@ export default function SofaRepairLondonBaseSection() {
                   "
                 >
                   <p>
-                    If you are unsure whether your sofa can be restored, start
-                    by sending us photographs and a short description of its
-                    condition.
+                    If your sofa needs more than a minor cosmetic fix, send us
+                    photographs of the complete piece and the areas that need
+                    attention.
                   </p>
 
                   <p>
-                    You do not need to know the technical cause of the problem.
+                    We can review the condition and determine whether the
+                    project is suitable for our workshop.
                   </p>
                 </div>
 
@@ -457,7 +458,7 @@ export default function SofaRepairLondonBaseSection() {
                     className="max-sm:w-full"
                     ariaLabel="Request a sofa reupholstery assessment from Sofa N More"
                   >
-                    Request a Sofa Reupholstery Assessment
+                    Request a Sofa Restoration Assessment
                   </ClayButton>
                 </div>
               </div>

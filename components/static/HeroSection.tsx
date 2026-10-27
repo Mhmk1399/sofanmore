@@ -41,7 +41,7 @@ type TrustItem = {
 
 const services: Service[] = [
   {
-    title: "Upholstery",
+    title: "Bespoke Sofas",
     subtitle: "Made for your space",
     description:
       "Custom-designed sofa tailored to your exact specifications and style.",

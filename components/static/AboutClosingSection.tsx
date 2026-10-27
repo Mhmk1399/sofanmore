@@ -18,7 +18,7 @@ import ClayButton from "@/components/ui/ClayButton";
 
 const services = [
   {
-    title: "Upholstery",
+    title: "Bespoke Sofas",
     description:
       "Made-to-measure sofas, chairs and sofa handcrafted around your space, style and requirements.",
     href: "/services/bespoke-sofas",

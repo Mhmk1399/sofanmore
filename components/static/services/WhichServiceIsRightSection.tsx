@@ -26,11 +26,11 @@ const serviceChoices: ServiceChoice[] = [
   {
     number: "01",
     question: "I Need a New Sofa Made to Particular Dimensions",
-    service: "Upholstery & Made-to-Measure Seating",
+    service: "Bespoke Sofas & Made-to-Measure Seating",
     description:
       "For new sofas and upholstered seating designed around a particular room, layout, comfort preference and visual direction.",
     href: "/services/bespoke-sofas",
-    cta: "Explore Upholstery",
+    cta: "Explore Bespoke Sofas",
     icon: Ruler,
   },
 
@@ -747,14 +747,14 @@ function MultiServicePanel() {
 
           <OverlapExample
             title="Residential Project"
-            text="Interior Design + Upholstery"
+            text="Interior Design + Bespoke Sofas"
             links={[
               {
                 label: "Interior Design",
                 href: "/services/interior-design",
               },
               {
-                label: "Upholstery",
+                label: "Bespoke Sofas",
                 href: "/services/bespoke-sofas",
               },
             ]}

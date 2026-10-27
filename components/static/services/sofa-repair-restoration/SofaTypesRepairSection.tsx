@@ -25,21 +25,21 @@ const sofaTypes: SofaType[] = [
     eyebrow: "Modern Sofas",
     title: "Contemporary Sofa Reupholstery",
     icon: Sofa,
-    lead: "A modern sofa can still be worth preserving when its size, shape and design continue to work for your home.",
+    lead: "A modern sofa can still justify professional restoration when its frame, dimensions and overall design continue to work well for your home.",
     paragraphs: [
-      "If your sofa has become worn or damaged, we can assess its condition and discuss whether reupholstery, repair or restoration is an appropriate solution.",
+      "Where the upholstery is significantly worn, the seating has lost comfort or several parts of the sofa need attention, we can assess whether substantial reupholstery or restoration is the right approach.",
     ],
   },
 
   {
     number: "02",
     eyebrow: "Made Around Your Space",
-    title: "Upholstery Restoration",
+    title: "Bespoke Sofa Restoration",
     icon: Ruler,
     lead: "A sofa made specifically for a room can be difficult to replace.",
     paragraphs: [
       "Its proportions may have been chosen for a particular wall, alcove or layout.",
-      "Restoring an existing upholstery can preserve those dimensions while giving the piece renewed life.",
+      "Restoring an existing bespoke sofa can preserve those dimensions while giving the piece renewed life.",
     ],
   },
 
@@ -219,7 +219,7 @@ export default function SofaTypesRepairSection({
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Sofa Reupholstery & Restoration for Different Types of Sofas
+                  Sofas Worth Reupholstering or Restoring
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
               </div>
@@ -239,7 +239,8 @@ export default function SofaTypesRepairSection({
                     sm:text-[21px]
                   "
                 >
-                  Every sofa arrives with a different history.
+                  The strongest restoration projects usually begin with a sofa
+                  that is still worth keeping but needs meaningful work.
                 </p>
 
                 <p
@@ -259,10 +260,10 @@ export default function SofaTypesRepairSection({
                     lg:text-[13px]
                   "
                 >
-                  Some need attention because of everyday wear. Some have
-                  visible damage. Some have lost the appearance or comfort they
-                  once had. Others are older pieces their owners simply do not
-                  want to replace.
+                  That may be a well-made modern sofa with worn upholstery, an
+                  older piece with good proportions, a bespoke sofa that would
+                  be difficult to replace, or a much-loved piece that needs its
+                  comfort, finish or structure renewed.
                 </p>
               </div>
             </div>
@@ -593,8 +594,6 @@ function SofaTypeCard({ item }: { item: SofaType }) {
         {/* =====================================================
             FOOTER MARK
         ====================================================== */}
-
-       
       </div>
     </article>
   );

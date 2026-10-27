@@ -47,6 +47,10 @@ export const bespokeSofaSpaceTypes = [
   "living-room",
   "apartment",
   "house",
+  "bedroom",
+  "dining-area",
+  "home-office",
+  "commercial-space",
   "office",
   "hospitality",
   "other",
@@ -92,6 +96,8 @@ export const commercialSofaVenueTypes = [
   "office",
   "hospitality",
   "retail",
+  "reception",
+  "studio",
   "other",
 ] as const;
 
@@ -156,6 +162,30 @@ export const repairItemTypes = [
   "other",
 ] as const;
 
+export const repairProjectScopes = [
+  { value: "complete-reupholstery", label: "Complete Reupholstery" },
+  {
+    value: "fabric-upholstery-replacement",
+    label: "Fabric / Upholstery Replacement",
+  },
+  { value: "foam-comfort-replacement", label: "Foam & Comfort Replacement" },
+  { value: "wood-frame-restoration", label: "Wood / Frame Restoration" },
+  {
+    value: "leather-reupholstery-restoration",
+    label: "Leather Reupholstery / Restoration",
+  },
+  { value: "combined-restoration", label: "Combined Restoration" },
+  { value: "not-sure", label: "Not Sure - Please Assess" },
+] as const;
+
+export const repairAttentionExtents = [
+  { value: "whole-sofa", label: "Whole Sofa" },
+  { value: "most-of-sofa", label: "Most of the Sofa" },
+  { value: "several-seating-areas", label: "Several Seating Areas" },
+  { value: "one-major-section", label: "One Major Section" },
+  { value: "not-sure", label: "Not Sure" },
+] as const;
+
 export const repairIssueTypes = [
   "worn-upholstery",
   "tear-damage",
@@ -197,7 +227,7 @@ export const leadServiceDefinitions = {
     ],
   },
   BESPOKE_SOFA: {
-    label: "Upholstery",
+    label: "Bespoke Sofas",
     fields: [
       {
         key: "projectType",
@@ -275,6 +305,12 @@ export const leadServiceDefinitions = {
   COMMERCIAL_SOFA: {
     label: "Commercial sofa",
     fields: [
+      {
+        key: "projectLocation",
+        label: "Project location / postcode",
+        type: "text",
+        maxLength: 180,
+      },
       {
         key: "companyName",
         label: "Company name",
@@ -408,6 +444,22 @@ export const leadServiceDefinitions = {
         required: true,
         allowedValues: repairItemTypes,
         maxLength: 120,
+      },
+      {
+        key: "projectScope",
+        label: "Project scope",
+        type: "text",
+        required: true,
+        allowedValues: repairProjectScopes.map((option) => option.value),
+        maxLength: 80,
+      },
+      {
+        key: "attentionExtent",
+        label: "How much of the sofa needs attention?",
+        type: "text",
+        required: true,
+        allowedValues: repairAttentionExtents.map((option) => option.value),
+        maxLength: 80,
       },
       {
         key: "issues",
@@ -591,7 +643,7 @@ export function uploadValidationError(input: {
 
 export function defaultExtensionForMime(mimeType: string) {
   return (
-    allowedUploadTypes.find((item) => item.mimeType === mimeType)?.extensions[0] ||
-    "bin"
+    allowedUploadTypes.find((item) => item.mimeType === mimeType)
+      ?.extensions[0] || "bin"
   );
 }

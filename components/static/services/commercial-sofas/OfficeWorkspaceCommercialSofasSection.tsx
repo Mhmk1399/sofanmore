@@ -210,7 +210,7 @@ export default function OfficeWorkspaceCommercialSofasSection({
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Commercial Sofas for Offices & Workspaces
+                  Custom Office Seating & Commercial Sofas
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
 
@@ -262,14 +262,13 @@ export default function OfficeWorkspaceCommercialSofasSection({
                   "
                 >
                   <p>
-                    Teams also need informal spaces to talk, collaborate,
-                    welcome visitors or simply step away from their desk.
+                    Create comfortable spaces to meet, collaborate and welcome
+                    visitors.
                   </p>
 
                   <p>
-                    Bespoke office sofas can create more comfortable
-                    environments for different moments throughout the working
-                    day.
+                    Custom office sofas and upholstered seating can be developed
+                    around breakout zones, reception areas and meeting spaces.
                   </p>
                 </div>
 
@@ -324,32 +323,6 @@ export default function OfficeWorkspaceCommercialSofasSection({
                     welcome visitors.
                   </p>
                 </div>
-
-                {/* FINAL COPY */}
-
-                <p
-                  className="
-                    mt-6
-
-                    max-w-[620px]
-
-                    font-brand-sans
-
-                    text-[12px]
-                    font-medium
-                    leading-[1.75]
-
-                    text-[var(--brand-text-muted)]
-
-                    sm:text-[13px]
-
-                    lg:text-[14px]
-                  "
-                >
-                  Dimensions can be developed around the workplace layout, while
-                  upholstery and finishes help keep the seating visually aligned
-                  with the rest of the interior.
-                </p>
 
                 {/* CTA */}
 

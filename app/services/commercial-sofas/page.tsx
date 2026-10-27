@@ -13,13 +13,13 @@ const SITE_URL = "https://sofanmore.co.uk";
 const CANONICAL_URL = "https://sofanmore.co.uk/services/commercial-sofas";
 
 const SEO_TITLE =
-  "Commercial Sofas London | Bespoke Contract Seating | Sofa N More";
+  "Commercial Sofas & Seating London | Bespoke Contract Seating | Sofa N More";
 
 const META_DESCRIPTION =
-  "Bespoke commercial sofas in London for restaurants, cafés, hotels, offices and hospitality spaces. Made to measure and built around your project.";
+  "Bespoke commercial sofas and contract seating in London. Made-to-measure restaurant seating, banquettes, booths, chairs and office seating for your business.";
 
 const PAGE_H1 =
-  "Bespoke Commercial Sofas in London, Built Around Your Business";
+  "Bespoke Commercial Sofas & Seating in London, Made to Measure for Your Business";
 
 /* =========================================================
    METADATA
@@ -110,7 +110,7 @@ const breadcrumbSchema = {
 
       position: 3,
 
-      name: "Commercial Sofas",
+      name: "Commercial Sofas & Seating",
 
       item: CANONICAL_URL,
     },
@@ -128,7 +128,7 @@ const serviceSchema = {
 
   url: CANONICAL_URL,
 
-  name: "Bespoke Commercial Sofas in London",
+  name: "Bespoke Commercial Sofas & Seating in London",
 
   serviceType: "Commercial sofas and bespoke contract seating",
 
@@ -169,7 +169,7 @@ const faqSchema = {
 
   url: `${CANONICAL_URL}#faq`,
 
-  name: "Frequently Asked Questions About Commercial Sofas",
+  name: "Frequently Asked Questions About Commercial Sofas and Seating",
 
   inLanguage: "en-GB",
 

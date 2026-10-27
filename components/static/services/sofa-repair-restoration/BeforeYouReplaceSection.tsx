@@ -706,8 +706,11 @@ function RestorationAssessmentPanel() {
                   sm:text-[19px]
                 "
               >
-                You do not need to know whether it needs reupholstering,
-                restoration or a smaller repair before you contact us.
+                You do not need to diagnose the technical problem before
+                contacting us. Start by showing us the complete sofa and
+                explaining what has changed. We can assess whether the project
+                is suitable for substantial reupholstery, foam and comfort
+                renewal, wood or frame restoration, or a combined restoration.
               </p>
             </div>
           </div>

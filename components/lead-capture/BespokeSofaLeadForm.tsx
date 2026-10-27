@@ -81,7 +81,7 @@ const initialValues: BespokeFormValues = {
 };
 
 const projectTypeOptions = [
-  { label: "Single sofa", value: "single-sofa" },
+  { label: "Bespoke Sofa", value: "single-sofa" },
   { label: "Corner sofa", value: "corner-sofa" },
   { label: "Modular sofa", value: "modular-sofa" },
   { label: "Armchair", value: "armchair" },
@@ -90,11 +90,13 @@ const projectTypeOptions = [
 ] satisfies SelectOption[];
 
 const spaceTypeOptions = [
-  { label: "Living room", value: "living-room" },
+  { label: "Living Room", value: "living-room" },
   { label: "Apartment", value: "apartment" },
   { label: "House", value: "house" },
-  { label: "Office", value: "office" },
-  { label: "Hospitality", value: "hospitality" },
+  { label: "Bedroom", value: "bedroom" },
+  { label: "Dining Area", value: "dining-area" },
+  { label: "Home Office", value: "home-office" },
+  { label: "Commercial Space", value: "commercial-space" },
   { label: "Other", value: "other" },
 ] satisfies SelectOption[];
 
@@ -142,6 +144,7 @@ function trackLeadFormEvent(
     event: eventName,
     eventName,
     service: "bespoke_sofa",
+    lead_service: "bespoke_sofas",
     sourcePage:
       typeof window !== "undefined"
         ? `${window.location.pathname}${window.location.search}`
@@ -331,8 +334,15 @@ function validateForm(values: BespokeFormValues, uploads: UploadItem[]) {
   return errors;
 }
 
-export default function BespokeSofaLeadForm() {
-  const [values, setValues] = useState<BespokeFormValues>(initialValues);
+export default function BespokeSofaLeadForm({
+  defaultProjectType = "",
+}: {
+  defaultProjectType?: (typeof projectTypeOptions)[number]["value"] | "";
+}) {
+  const [values, setValues] = useState<BespokeFormValues>(() => ({
+    ...initialValues,
+    projectType: defaultProjectType,
+  }));
   const [errors, setErrors] = useState<FormErrors>({});
   const [uploads, setUploads] = useState<UploadItem[]>([]);
   const [uploadError, setUploadError] = useState("");
@@ -341,6 +351,7 @@ export default function BespokeSofaLeadForm() {
   const { successLeadId, showSuccessConfirmation } =
     useLeadSuccessConfirmation({
       service: "bespoke_sofa",
+      leadService: "bespoke_sofas",
     });
   const [uploadSessionId, setUploadSessionId] = useState(() =>
     createClientId("upload"),
@@ -549,7 +560,7 @@ export default function BespokeSofaLeadForm() {
   }
 
   function resetFormAfterSuccess() {
-    setValues(initialValues);
+    setValues({ ...initialValues, projectType: defaultProjectType });
     setErrors({});
     setUploadError("");
     setSubmitError("");
@@ -675,17 +686,17 @@ export default function BespokeSofaLeadForm() {
   return (
     <LeadFormShell
       id="bespoke-sofa-enquiry"
-      eyebrow="Upholstery enquiry"
+      eyebrow="Bespoke Sofa Enquiry"
       title={
         <>
-          Request a sofa made around your space
-          <span className="text-[var(--brand-gold)]">.</span>
+          Request Your Bespoke Sofa Quote
         </>
       }
       intro={
         <>
-          Share the shape of the project, the room, and any useful images. The
-          details go straight into the Sofa N More lead workflow.
+          Send us your room dimensions, photographs, inspiration or design ideas
+          and tell us what you would like to create. We will review the details
+          and contact you about the next step.
         </>
       }
       successLeadId={successLeadId}

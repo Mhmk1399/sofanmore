@@ -28,9 +28,22 @@ export async function GET(request: Request) {
       );
     }
 
+    const caseStudy = searchParams.get("caseStudy");
+    if (caseStudy !== null && caseStudy !== "0" && caseStudy !== "1") {
+      throw new ApiProblem(
+        "VALIDATION_ERROR",
+        "Use a valid case study option.",
+        400,
+        {
+          caseStudy: "Use 0 or 1.",
+        },
+      );
+    }
+
     const result = await listPublishedProjectCards(
       service as ProjectService,
       limit,
+      caseStudy === "1",
     );
     return ok(result, {
       headers: {

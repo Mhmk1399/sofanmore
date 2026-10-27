@@ -169,7 +169,7 @@ export default function CommercialSofasRealBusinessSpacesSection() {
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  Commercial Sofas Designed for Real Business Spaces
+                  Commercial Seating Designed for Real Business Spaces
                   <span className="text-[var(--brand-gold)]">.</span>
                 </h2>
 
@@ -191,8 +191,8 @@ export default function CommercialSofasRealBusinessSpacesSection() {
                     sm:text-[21px]
                   "
                 >
-                  A commercial interior has different demands from a private
-                  home.
+                  Commercial seating has different demands from furniture made
+                  for a private home.
                 </p>
 
                 <div
@@ -223,9 +223,9 @@ export default function CommercialSofasRealBusinessSpacesSection() {
                   </p>
 
                   <p>
-                    Standard sofa sizes can leave awkward gaps, waste valuable
-                    space or force the rest of the room to work around the
-                    seating.
+                    Standard commercial sofas and seating can leave awkward
+                    gaps, waste valuable floor space or force the rest of the
+                    venue to work around fixed furniture dimensions.
                   </p>
                 </div>
 
@@ -252,7 +252,7 @@ export default function CommercialSofasRealBusinessSpacesSection() {
                       sm:text-[24px]
                     "
                   >
-                    A bespoke commercial sofa gives you more control.
+                    Bespoke commercial seating gives you more control.
                   </p>
                 </div>
 
@@ -275,10 +275,10 @@ export default function CommercialSofasRealBusinessSpacesSection() {
                     lg:text-[14px]
                   "
                 >
-                  We can develop the size, shape, proportions, upholstery and
-                  layout around the requirements of your venue, helping create a
-                  more coherent and practical interior without sacrificing
-                  comfort or appearance.
+                  We can develop the size, shape, proportions, configuration and
+                  upholstery around the requirements of your venue, helping you
+                  create restaurant seating, office seating, banquettes, booths
+                  and commercial sofas that fit the space more effectively.
                 </p>
               </div>
 
@@ -378,7 +378,7 @@ function SimpleComparison() {
                 sm:text-[26px]
               "
             >
-              Standard vs Bespoke
+              Standard Furniture vs Bespoke Commercial Seating
             </h3>
           </div>
         </div>

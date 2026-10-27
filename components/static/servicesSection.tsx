@@ -60,7 +60,7 @@ const AUTO_ROTATE_INTERVAL = 3000;
 
 const services: Service[] = [
   {
-    title: "Upholstery",
+    title: "Bespoke Sofas",
     shortDescription:
       "Made-to-measure sofa handcrafted in London, tailored to your space and style.",
     cta: "Explore Bespoke",

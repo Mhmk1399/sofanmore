@@ -9,24 +9,24 @@ import type { LucideIcon } from "lucide-react";
 const restorationAreas = [
   {
     anchorIds: ["sofa-reupholstery", "commercial-upholstery"],
-    title: "Appearance",
-    text: "The visible condition, upholstery and details that shape how the sofa looks.",
+    title: "Reupholstery & Finish",
+    text: "Renew worn upholstery and restore the overall appearance of the sofa with an agreed material and finish.",
     icon: Sparkles,
   },
   {
     anchorIds: ["cushion-refilling"],
-    title: "Comfort",
-    text: "How the sofa supports you and how comfortable it feels in everyday use.",
+    title: "Foam & Comfort",
+    text: "Address tired or collapsed seating where foam or internal comfort components need renewal.",
     icon: Armchair,
   },
   {
-    title: "Structure",
-    text: "The underlying condition of the piece and the areas that may need attention.",
+    title: "Wood & Frame",
+    text: "Assess suitable wooden and structural areas that may need repair, restoration or reinforcement.",
     icon: ShieldCheck,
   },
   {
     title: "Combined Restoration",
-    text: "Where appropriate, several elements can be considered together as one restoration project.",
+    text: "Where several parts of the sofa have deteriorated, upholstery, comfort and structural work can be considered together as one restoration project.",
     icon: Layers3,
   },
 ] satisfies {
@@ -194,7 +194,7 @@ export default function WhatSofaRestorationMeansSection() {
                     lg:text-[clamp(46px,3.8vw,60px)]
                   "
                 >
-                  What Does Sofa Restoration Mean
+                  What Can Professional Sofa Restoration Include
                   <span className="text-[var(--brand-gold)]">?</span>
                 </h2>
 
@@ -218,7 +218,8 @@ export default function WhatSofaRestorationMeansSection() {
                     sm:text-[21px]
                   "
                 >
-                  Restoration is not simply about making an old sofa look new.
+                  Professional sofa restoration can involve much more than
+                  improving one visible damaged area.
                 </p>
 
                 {/* BODY */}
@@ -245,15 +246,14 @@ export default function WhatSofaRestorationMeansSection() {
                   "
                 >
                   <p>
-                    It is about understanding what should be preserved, what
-                    needs attention and how the piece can continue to work in
-                    your home.
+                    For suitable projects, the work may address upholstery,
+                    seating comfort, foam, wooden or structural elements, or
+                    several areas together.
                   </p>
 
                   <p>
-                    Depending on the condition of the sofa and the agreed scope,
-                    the process may focus on its appearance, comfort, structure
-                    or a combination of different elements.
+                    The scope depends on the condition of the sofa and the
+                    result you want to achieve.
                   </p>
                 </div>
 

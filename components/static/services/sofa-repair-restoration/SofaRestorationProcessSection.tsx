@@ -62,9 +62,9 @@ const processSteps: ProcessStep[] = [
     eyebrow: "Assessment",
     title: "We Assess the Project",
     description:
-      "We consider the condition of the piece and the outcome you are looking for.",
+      "We review the overall condition of the sofa, not only the most visible damaged area.",
     secondary:
-      "Where the project is suitable for our reupholstery and restoration service, we can discuss the recommended scope and next steps.",
+      "Where the project is suitable, we identify whether the sofa requires substantial reupholstery, foam and comfort renewal, wood or frame restoration, or a combined scope of work.",
     icon: ClipboardCheck,
   },
 
@@ -82,9 +82,11 @@ const processSteps: ProcessStep[] = [
   {
     number: "05",
     eyebrow: "Craftsmanship",
-    title: "Reupholstery & Restoration",
+    title: "Professional Reupholstery & Restoration",
     description:
-      "Once the scope is agreed, the sofa can move through the appropriate restoration process with attention to the original character and requirements of the piece.",
+      "Once the scope is agreed, the sofa moves through the appropriate workshop process.",
+    secondary:
+      "Depending on the project, this may include removal and renewal of upholstery, replacement of suitable foam or comfort materials, restoration of wooden or structural sections and the finishing work required to bring the sofa back into use.",
     icon: Hammer,
   },
 
