@@ -207,8 +207,6 @@ export default async function ProjectsSliderSection() {
               max-w-[760px]
             "
           >
-        
-
             {/* TITLE */}
 
             <h2
@@ -220,8 +218,8 @@ export default async function ProjectsSliderSection() {
 
                 font-brand-display
 
-                text-[25px]
-                font-bold
+                text-[20px]
+                font-semibold
                 leading-[0.98]
 
                 tracking-[-0.04em]
@@ -233,7 +231,7 @@ export default async function ProjectsSliderSection() {
                 lg:text-[50px]
               "
             >
-              Made for real spaces. Built around people.
+              Our Projects
             </h2>
           </div>
 

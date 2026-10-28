@@ -15,6 +15,7 @@ import {
   type UploadItem,
 } from "@/components/lead-capture/ClayFormControls";
 import LeadFormShell from "@/components/lead-capture/LeadFormShell";
+import { focusFirstInvalidField } from "@/lib/lead-form-feedback";
 import {
   COMMERCIAL_UPLOAD_COUNT,
   COMMERCIAL_UPLOAD_SIZE_BYTES,
@@ -151,10 +152,7 @@ function trackCommercialLeadEvent(
     event: eventName,
     eventName,
     service: "commercial_sofa",
-    sourcePage:
-      typeof window !== "undefined"
-        ? `${window.location.pathname}${window.location.search}`
-        : undefined,
+    sourcePage: typeof window !== "undefined" ? window.location.pathname : undefined,
     ...details,
   };
 
@@ -193,7 +191,9 @@ function normalizeServerFieldErrors(fieldErrors?: FormErrors) {
   };
 
   for (const [key, message] of Object.entries(fieldErrors)) {
-    mappedErrors[fieldMap[key] || key] = message;
+    mappedErrors[
+      key.startsWith("uploadTokens.") ? "uploads" : fieldMap[key] || key
+    ] = message;
   }
 
   return mappedErrors;
@@ -355,11 +355,10 @@ export default function CommercialSofaLeadForm({
   const [uploadError, setUploadError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const { successLeadId, showSuccessConfirmation } = useLeadSuccessConfirmation(
-    {
+  const { successLeadId, showSuccessConfirmation, onConfirmationVisible } =
+    useLeadSuccessConfirmation({
       service: "commercial_sofa",
-    },
-  );
+    });
   const [uploadSessionId, setUploadSessionId] = useState(() =>
     createClientId("upload"),
   );
@@ -368,6 +367,7 @@ export default function CommercialSofaLeadForm({
   );
   const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
   const startedEventSent = useRef(false);
+  const submissionLock = useRef(false);
   const uploadsRef = useRef<UploadItem[]>([]);
 
   useEffect(() => {
@@ -582,6 +582,8 @@ export default function CommercialSofaLeadForm({
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submissionLock.current || successLeadId) return;
+    const formElement = event.currentTarget;
     markStarted();
     setSubmitError("");
 
@@ -589,10 +591,12 @@ export default function CommercialSofaLeadForm({
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      focusFirstInvalidField(formElement);
       return;
     }
 
     setErrors({});
+    submissionLock.current = true;
     setIsSubmitting(true);
 
     const sourcePage =
@@ -675,17 +679,27 @@ export default function CommercialSofaLeadForm({
       });
       const result = await readApiResponse<LeadResponse>(response);
       const submittedFileCount = uploads.length;
+      showSuccessConfirmation(
+        result.leadId,
+        {
+          serviceData,
+          photoCount: uploads.filter(
+            (item) =>
+              item.status === "complete" && item.file.type.startsWith("image/"),
+          ).length,
+        },
+        resetFormAfterSuccess,
+      );
 
       trackCommercialLeadEvent("commercial_lead_success", {
         fileCount: submittedFileCount,
       });
-      resetFormAfterSuccess();
-      showSuccessConfirmation(result.leadId);
     } catch (error) {
       const errorWithFields = error as Error & { fieldErrors?: FormErrors };
 
       if (errorWithFields.fieldErrors) {
         setErrors(errorWithFields.fieldErrors);
+        focusFirstInvalidField(formElement);
       }
 
       setSubmitError(
@@ -694,6 +708,7 @@ export default function CommercialSofaLeadForm({
           : "Please try again or contact Sofa N More directly.",
       );
     } finally {
+      submissionLock.current = false;
       setIsSubmitting(false);
     }
   }
@@ -713,6 +728,8 @@ export default function CommercialSofaLeadForm({
         </>
       }
       successLeadId={successLeadId}
+      onSuccessVisible={onConfirmationVisible}
+      fieldErrors={errors}
       successTitle="Your Commercial Project Brief Has Been Received."
       successMessage="Thank you. Our team can review your project details, plans and uploaded references before getting in touch."
       successEyebrow="Commercial brief received"

@@ -64,7 +64,8 @@ const services: Service[] = [
     shortDescription:
       "Made-to-measure sofa handcrafted in London, tailored to your space and style.",
     cta: "Explore Bespoke",
-    image: "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/bespoke-sofa-london-sofa-n-more.webp",
+    image:
+      "https://sofanmore.s3.eu-west-2.amazonaws.com/Image/bespoke-sofa-london-sofa-n-more.webp",
     href: "/services/bespoke-sofas",
   },
 
@@ -730,8 +731,6 @@ export default function ServicesSection() {
             <ChevronRight size={21} strokeWidth={1.6} />
           </button>
         </div>
-
-        <Pagination activeIndex={activeIndex} onChange={goTo} />
       </div>
     </section>
   );
@@ -808,7 +807,7 @@ function ServicesHeader() {
         id="services-heading"
         className="
           font-brand-display
-          text-[35px]
+          text-[24px]
           font-semibold
           leading-[0.98]
           tracking-[-0.035em]
@@ -821,9 +820,7 @@ function ServicesHeader() {
           xl:text-[54px]
         "
       >
-        Expertise for
-        <br className="sm:hidden" />
-        <span className="sm:ml-[0.22em]">Every Space</span>
+        Expertise for Every Space
         <span className="text-[var(--brand-gold)]">.</span>
       </h2>
 
@@ -1176,43 +1173,6 @@ function ServiceCard({
           xl:pb-4
         "
       >
-        {/* NUMBER */}
-
-        <div
-          className="
-            flex
-            items-center
-            gap-2
-          "
-        >
-          <span
-            className={`
-              font-brand-display
-              font-medium
-              text-[var(--brand-gold-700)]
-
-              ${
-                isActive
-                  ? "text-[17px]"
-                  : isSide
-                    ? "text-[14px]"
-                    : "text-[13px]"
-              }
-            `}
-          >
-            {String(serviceIndex + 1).padStart(2, "0")}
-          </span>
-
-          <span
-            className={`
-              h-px
-              bg-[var(--brand-gold)]
-
-              ${isActive ? "w-7" : isSide ? "w-5" : "w-3"}
-            `}
-          />
-        </div>
-
         {/* TITLE */}
 
         <h3
@@ -1248,14 +1208,14 @@ function ServiceCard({
             leading-[1.55]
             text-[var(--brand-text-muted)]
 
-            text-[13px]
+            text-[13px] line-clamp-2
 
             ${
               isActive
                 ? "lg:text-[13px]"
                 : isSide
-                  ? "lg:text-[13px]"
-                  : "lg:line-clamp-3 lg:text-[13px]"
+                  ? "lg:text-[13px] "
+                  : "lg:line-clamp-2 lg:text-[13px]"
             }
           `}
         >
@@ -1334,68 +1294,6 @@ function ServiceCard({
         </div>
       </div>
     </article>
-  );
-}
-
-/* =========================================================
-   PAGINATION
-========================================================= */
-
-function Pagination({
-  activeIndex,
-  onChange,
-}: {
-  activeIndex: number;
-  onChange: (index: number) => void;
-}) {
-  return (
-    <div
-      className="
-        relative
-        z-20
-        mt-1
-        flex
-        items-center
-        justify-center
-         
-
-        lg:mt-3
-      "
-    >
-      {services.map((service, index) => {
-        const active = index === activeIndex;
-
-        return (
-          <button
-            key={service.title}
-            type="button"
-            onClick={() => onChange(index)}
-            aria-label={`Show ${service.title}`}
-            aria-current={active}
-            className={`
-                flex h-11 min-w-11 items-center justify-center
-                rounded-full
-                transition-all
-                duration-300
-              `}
-          >
-            <span
-              aria-hidden
-              className={`
-                rounded-full
-                transition-all
-                duration-300
-                ${
-                  active
-                    ? "h-[5px] w-9 bg-[var(--brand-gold)] shadow-[0_2px_7px_rgba(168,109,31,0.28)]"
-                    : "h-[7px] w-[7px] border border-[var(--brand-navy)]/30 bg-[var(--brand-ivory-50)]"
-                }
-              `}
-            />
-          </button>
-        );
-      })}
-    </div>
   );
 }
 
@@ -1573,10 +1471,6 @@ function ServicesBackground() {
       {/* =============================================
           LEFT LOWER PODIUM
       ============================================== */}
-
-   
-
-     
     </div>
   );
 }

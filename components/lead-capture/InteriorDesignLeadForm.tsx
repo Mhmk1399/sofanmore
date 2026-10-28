@@ -15,6 +15,7 @@ import {
   type UploadItem,
 } from "@/components/lead-capture/ClayFormControls";
 import LeadFormShell from "@/components/lead-capture/LeadFormShell";
+import { focusFirstInvalidField } from "@/lib/lead-form-feedback";
 import {
   INTERIOR_UPLOAD_COUNT,
   INTERIOR_UPLOAD_SIZE_BYTES,
@@ -138,10 +139,7 @@ function trackInteriorLeadEvent(
     event: eventName,
     eventName,
     service: "interior_design",
-    sourcePage:
-      typeof window !== "undefined"
-        ? `${window.location.pathname}${window.location.search}`
-        : undefined,
+    sourcePage: typeof window !== "undefined" ? window.location.pathname : undefined,
     ...details,
   };
 
@@ -173,7 +171,9 @@ function normalizeServerFieldErrors(fieldErrors?: FormErrors) {
   };
 
   for (const [key, message] of Object.entries(fieldErrors)) {
-    mappedErrors[fieldMap[key] || key] = message;
+    mappedErrors[
+      key.startsWith("uploadTokens.") ? "uploads" : fieldMap[key] || key
+    ] = message;
   }
 
   return mappedErrors;
@@ -184,7 +184,7 @@ async function readApiResponse<T extends { ok: true }>(
 ): Promise<T> {
   const body = (await response.json()) as unknown;
 
-  if (!response.ok || !body || typeof body !== "object" || !("ok" in body)) {
+  if (!body || typeof body !== "object" || !("ok" in body)) {
     const error = new Error("Request failed.") as Error & {
       fieldErrors?: FormErrors;
     };
@@ -200,6 +200,7 @@ async function readApiResponse<T extends { ok: true }>(
     throw error;
   }
 
+  if (!response.ok || body.ok !== true) throw new Error("Request failed.");
   return body as T;
 }
 
@@ -304,7 +305,7 @@ export default function InteriorDesignLeadForm() {
   const [uploadError, setUploadError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const { successLeadId, showSuccessConfirmation } =
+  const { successLeadId, showSuccessConfirmation, onConfirmationVisible } =
     useLeadSuccessConfirmation({
       service: "interior_design",
     });
@@ -316,6 +317,7 @@ export default function InteriorDesignLeadForm() {
   );
   const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
   const startedEventSent = useRef(false);
+  const submissionLock = useRef(false);
   const uploadsRef = useRef<UploadItem[]>([]);
 
   useEffect(() => {
@@ -530,6 +532,8 @@ export default function InteriorDesignLeadForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submissionLock.current || successLeadId) return;
+    const formElement = event.currentTarget;
     markStarted();
     setSubmitError("");
 
@@ -537,10 +541,12 @@ export default function InteriorDesignLeadForm() {
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      focusFirstInvalidField(formElement);
       return;
     }
 
     setErrors({});
+    submissionLock.current = true;
     setIsSubmitting(true);
 
     const sourcePage =
@@ -602,17 +608,27 @@ export default function InteriorDesignLeadForm() {
       });
       const result = await readApiResponse<LeadResponse>(response);
       const submittedFileCount = uploads.length;
+      showSuccessConfirmation(
+        result.leadId,
+        {
+          serviceData,
+          photoCount: uploads.filter(
+            (item) =>
+              item.status === "complete" && item.file.type.startsWith("image/"),
+          ).length,
+        },
+        resetFormAfterSuccess,
+      );
 
       trackInteriorLeadEvent("interior_form_success", {
         fileCount: submittedFileCount,
       });
-      resetFormAfterSuccess();
-      showSuccessConfirmation(result.leadId);
     } catch (error) {
       const errorWithFields = error as Error & { fieldErrors?: FormErrors };
 
       if (errorWithFields.fieldErrors) {
         setErrors(errorWithFields.fieldErrors);
+        focusFirstInvalidField(formElement);
       }
 
       setSubmitError(
@@ -621,6 +637,7 @@ export default function InteriorDesignLeadForm() {
           : "Please try again or contact Sofa N More directly.",
       );
     } finally {
+      submissionLock.current = false;
       setIsSubmitting(false);
     }
   }
@@ -644,6 +661,8 @@ export default function InteriorDesignLeadForm() {
         </>
       }
       successLeadId={successLeadId}
+      onSuccessVisible={onConfirmationVisible}
+      fieldErrors={errors}
       successTitle="Thank You — We’ve Received Your Interior Project."
       successMessage="Our team can now review your space, project requirements and uploaded references before discussing the next step."
       successEyebrow="Interior project received"

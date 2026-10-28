@@ -1,6 +1,15 @@
 "use client";
 
-import { useState, type FormEvent, type InputHTMLAttributes } from "react";
+import {
+  useRef,
+  useState,
+  type FormEvent,
+  type InputHTMLAttributes,
+} from "react";
+import { useLeadSuccessConfirmation } from "@/components/lead-capture/useLeadSuccessConfirmation";
+import LeadSuccessDialog from "@/components/lead-capture/LeadSuccessDialog";
+import FormSubmissionError from "@/components/lead-capture/FormSubmissionError";
+import { focusFirstInvalidField } from "@/lib/lead-form-feedback";
 
 import Link from "next/link";
 import { Armchair, Crown } from "lucide-react";
@@ -77,7 +86,7 @@ function trackContactFormEvent(
   const payload = {
     eventName,
     service: "contact_enquiry",
-    sourcePage: `${window.location.pathname}${window.location.search}`,
+    sourcePage: window.location.pathname,
     ...details,
   };
 
@@ -178,7 +187,9 @@ function useContactLeadForm() {
   const [errors, setErrors] = useState<ContactFormErrors>({});
   const [submitError, setSubmitError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successLeadId, setSuccessLeadId] = useState<string | null>(null);
+  const { successLeadId, showSuccessConfirmation, onConfirmationVisible } =
+    useLeadSuccessConfirmation({ service: "contact_enquiry" });
+  const submissionLock = useRef(false);
   const [hasStarted, setHasStarted] = useState(false);
   const [idempotencyKey, setIdempotencyKey] = useState(() =>
     createClientId("contact-lead"),
@@ -200,12 +211,6 @@ function useContactLeadForm() {
     });
     setSubmitError("");
 
-    if (successLeadId) {
-      setSuccessLeadId(null);
-      setIdempotencyKey(createClientId("contact-lead"));
-      setFormStartedAt(Date.now());
-    }
-
     if (!hasStarted) {
       setHasStarted(true);
       trackContactFormEvent("contact_form_started");
@@ -214,6 +219,8 @@ function useContactLeadForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submissionLock.current || successLeadId) return;
+    const formElement = event.currentTarget;
 
     const nextErrors = validateContactValues(values);
 
@@ -225,9 +232,11 @@ function useContactLeadForm() {
         stage: "client_validation",
       });
       toast.error("Please check the highlighted fields.");
+      focusFirstInvalidField(formElement);
       return;
     }
 
+    submissionLock.current = true;
     setIsSubmitting(true);
 
     try {
@@ -264,14 +273,26 @@ function useContactLeadForm() {
       });
       const result = await readContactApiResponse(response);
 
-      setSuccessLeadId(result.leadId);
-      trackContactFormEvent("contact_form_success", {
-        leadId: result.leadId,
-      });
-      toast.success(
-        "Thank you. Your message has been received.",
-        "Our team will get back to you soon.",
+      showSuccessConfirmation(
+        result.leadId,
+        {
+          serviceData: { enquiryType: "general" },
+          photoCount: 0,
+        },
+        () => {
+          setValues(emptyContactValues);
+          setErrors({});
+          setSubmitError("");
+          setHasStarted(false);
+          setIdempotencyKey(createClientId("contact-lead"));
+          setFormStartedAt(Date.now());
+          toast.success(
+            "Thank you. Your message has been received.",
+            "Our team will get back to you soon.",
+          );
+        },
       );
+      trackContactFormEvent("contact_form_success");
     } catch (error) {
       const errorWithFields = error as Error & {
         fieldErrors?: ContactFormErrors;
@@ -283,12 +304,14 @@ function useContactLeadForm() {
 
       if (errorWithFields.fieldErrors) {
         setErrors(errorWithFields.fieldErrors);
+        focusFirstInvalidField(formElement);
       }
 
       setSubmitError(message);
       toast.error("We couldn't send your message.", message);
       trackContactFormEvent("contact_form_error", { stage: "submit" });
     } finally {
+      submissionLock.current = false;
       setIsSubmitting(false);
     }
   }
@@ -299,6 +322,7 @@ function useContactLeadForm() {
     submitError,
     isSubmitting,
     successLeadId,
+    onConfirmationVisible,
     updateValue,
     handleSubmit,
   };
@@ -309,8 +333,10 @@ function useContactLeadForm() {
 ========================================================= */
 
 export default function ContactFormSection() {
+  const form = useContactLeadForm();
   return (
     <section
+      id="contact-enquiry"
       aria-label="Contact Sofa N More"
       className="
         relative
@@ -351,7 +377,7 @@ export default function ContactFormSection() {
         ====================================================== */}
 
         <div className="hidden lg:block">
-          <DesktopContactForm />
+          <DesktopContactForm form={form} />
         </div>
 
         {/* =====================================================
@@ -359,9 +385,16 @@ export default function ContactFormSection() {
         ====================================================== */}
 
         <div className="lg:hidden">
-          <MobileContactForm />
+          <MobileContactForm form={form} />
         </div>
       </div>
+      <LeadSuccessDialog
+        id="contact-enquiry"
+        successLeadId={form.successLeadId}
+        successTitle="Thank you. Your message has been received."
+        successMessage="Our team will get back to you soon."
+        onVisible={form.onConfirmationVisible}
+      />
     </section>
   );
 }
@@ -370,9 +403,11 @@ export default function ContactFormSection() {
    DESKTOP
 ========================================================= */
 
-function DesktopContactForm() {
-  const form = useContactLeadForm();
-
+function DesktopContactForm({
+  form,
+}: {
+  form: ReturnType<typeof useContactLeadForm>;
+}) {
   return (
     <div
       className="
@@ -690,7 +725,10 @@ function DesktopContactForm() {
             "
             >
               <form
+                id="contact-form"
                 onSubmit={form.handleSubmit}
+                inert={Boolean(form.successLeadId)}
+                aria-hidden={form.successLeadId ? true : undefined}
                 noValidate
                 className="
                 clay-inset
@@ -841,6 +879,11 @@ function DesktopContactForm() {
                   >
                     {form.successLeadId ? "Message Sent" : "Send Message"}
                   </ClayButton>
+                  <FormSubmissionError
+                    id="contact-submit-error"
+                    fieldErrors={form.errors}
+                    submitError={form.submitError}
+                  />
                 </div>
               </form>
             </div>
@@ -1331,9 +1374,11 @@ function ContactConsentFields({
    MOBILE
 ========================================================= */
 
-function MobileContactForm() {
-  const form = useContactLeadForm();
-
+function MobileContactForm({
+  form,
+}: {
+  form: ReturnType<typeof useContactLeadForm>;
+}) {
   return (
     <div
       className="
@@ -1447,7 +1492,10 @@ function MobileContactForm() {
           {/* FORM */}
 
           <form
+            id="mobile-contact-form"
             onSubmit={form.handleSubmit}
+            inert={Boolean(form.successLeadId)}
+            aria-hidden={form.successLeadId ? true : undefined}
             noValidate
             className="
               mt-7
@@ -1569,6 +1617,11 @@ function MobileContactForm() {
             >
               {form.successLeadId ? "Message Sent" : "Send Message"}
             </ClayButton>
+            <FormSubmissionError
+              id="mobile-contact-submit-error"
+              fieldErrors={form.errors}
+              submitError={form.submitError}
+            />
           </form>
         </div>
       </div>

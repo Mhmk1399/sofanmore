@@ -368,17 +368,7 @@ export default function LoginPageContent() {
               </span>
             </button>
 
-            <div className="mt-5 grid gap-2 sm:grid-cols-3">
-              <AuthHint icon={<Phone size={15} />} label="Phone login" />
-              <AuthHint
-                icon={<LockKeyhole size={15} />}
-                label="Strong password"
-              />
-              <AuthHint
-                icon={<UserRound size={15} />}
-                label="User by default"
-              />
-            </div>
+         
           </form>
         </section>
       </div>

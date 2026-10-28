@@ -1,10 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  buildLeadConfirmationEvent,
+  type LeadConfirmationSnapshot,
+  type LeadTrackingService,
+} from "@/lib/lead-confirmation-tracking";
 
 type LeadSuccessConfirmationOptions = {
-  service: string;
-  leadService?: string;
+  service: LeadTrackingService;
   autoReturnMs?: number;
 };
 
@@ -15,25 +19,31 @@ type DataLayerWindow = typeof window & {
 const DEFAULT_AUTO_RETURN_MS = 4500;
 
 function getCurrentRelativeUrl() {
-  return `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  return (
+    window.location.pathname + window.location.search + window.location.hash
+  );
 }
 
 export function useLeadSuccessConfirmation({
   service,
-  leadService = service,
   autoReturnMs = DEFAULT_AUTO_RETURN_MS,
 }: LeadSuccessConfirmationOptions) {
   const [successLeadId, setSuccessLeadId] = useState("");
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const returnUrlRef = useRef("");
+  const trackedIds = useRef(new Set<string>());
+  const pendingConfirmation = useRef<{
+    leadId: string;
+    event: ReturnType<typeof buildLeadConfirmationEvent>;
+    afterTracking: () => void;
+  } | null>(null);
 
   const clearSuccessConfirmation = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
-
-    if (typeof window !== "undefined" && returnUrlRef.current) {
+    if (returnUrlRef.current) {
       window.history.replaceState(
         window.history.state,
         "",
@@ -41,66 +51,80 @@ export function useLeadSuccessConfirmation({
       );
       returnUrlRef.current = "";
     }
-
+    pendingConfirmation.current = null;
     setSuccessLeadId("");
   }, []);
 
   const showSuccessConfirmation = useCallback(
-    (leadId: string) => {
-      if (typeof window === "undefined") {
-        setSuccessLeadId(leadId);
-        return;
+    (
+      leadId: string,
+      snapshot: LeadConfirmationSnapshot,
+      afterTracking: () => void,
+    ) => {
+      if (typeof leadId !== "string" || !leadId.trim()) {
+        throw new Error(
+          "The server did not confirm that your enquiry was saved. Please try again.",
+        );
       }
-
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
-      const originalUrl = getCurrentRelativeUrl();
-      returnUrlRef.current = originalUrl;
-
+      if (trackedIds.current.has(leadId) || pendingConfirmation.current) return;
+      const event = buildLeadConfirmationEvent(
+        service,
+        snapshot,
+        window.location.href,
+      );
+      pendingConfirmation.current = { leadId, event, afterTracking };
+      returnUrlRef.current = getCurrentRelativeUrl();
       const confirmationUrl = new URL(window.location.href);
       confirmationUrl.searchParams.set("lead_confirmation", service);
       confirmationUrl.searchParams.set("lead_status", "success");
-
       window.history.pushState(
         { leadConfirmation: service },
         "",
-        `${confirmationUrl.pathname}${confirmationUrl.search}${confirmationUrl.hash}`,
+        confirmationUrl.pathname +
+          confirmationUrl.search +
+          confirmationUrl.hash,
       );
-
-      const analyticsWindow = window as DataLayerWindow;
-      const confirmationPath = `${confirmationUrl.pathname}${confirmationUrl.search}`;
-      analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
-      analyticsWindow.dataLayer.push({
-        event: "lead_confirmation_view",
-        event_category: "Lead",
-        event_action: "success_confirmation_view",
-        event_label: service,
-        lead_service: leadService,
-        lead_id: leadId,
-        lead_status: "success",
-        page_path: confirmationPath,
-        page_location: confirmationUrl.href,
-        virtual_page_path: confirmationPath,
-        virtual_page_title: `Lead confirmation - ${service}`,
-      });
-
       setSuccessLeadId(leadId);
-
-      timeoutRef.current = setTimeout(() => {
-        clearSuccessConfirmation();
-      }, autoReturnMs);
     },
-    [autoReturnMs, clearSuccessConfirmation, leadService, service],
+    [service],
   );
 
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
+  const onConfirmationVisible = useCallback(
+    (leadId: string) => {
+      const pending = pendingConfirmation.current;
+      if (
+        !pending ||
+        pending.leadId !== leadId ||
+        trackedIds.current.has(leadId)
+      )
+        return;
+      // Consume first: Strict Mode, rerenders and repeated callbacks must not count twice.
+      pendingConfirmation.current = null;
+      trackedIds.current.add(leadId);
+      try {
+        const analyticsWindow = window as DataLayerWindow;
+        analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
+        analyticsWindow.dataLayer.push(pending.event);
+        console.log("Lead tracking pushed to dataLayer", {
+          event: "lead_confirmation_view",
+          lead_service: service,
+          lead_status: "success",
+        });
+      } catch {
+        // Analytics failure must not turn an already saved enquiry into a failed submission.
+        console.warn("Lead tracking could not be delivered to dataLayer.");
+      } finally {
+        pending.afterTracking();
       }
+      timeoutRef.current = setTimeout(clearSuccessConfirmation, autoReturnMs);
+    },
+    [autoReturnMs, clearSuccessConfirmation, service],
+  );
 
+  useEffect(
+    () => () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      pendingConfirmation.current = null;
       if (returnUrlRef.current) {
         window.history.replaceState(
           window.history.state,
@@ -108,12 +132,14 @@ export function useLeadSuccessConfirmation({
           returnUrlRef.current,
         );
       }
-    };
-  }, []);
+    },
+    [],
+  );
 
   return {
     successLeadId,
     showSuccessConfirmation,
+    onConfirmationVisible,
     clearSuccessConfirmation,
   };
 }

@@ -15,6 +15,7 @@ import {
   type UploadItem,
 } from "@/components/lead-capture/ClayFormControls";
 import LeadFormShell from "@/components/lead-capture/LeadFormShell";
+import { focusFirstInvalidField } from "@/lib/lead-form-feedback";
 import {
   MAX_UPLOAD_COUNT,
   MAX_UPLOAD_SIZE_BYTES,
@@ -134,10 +135,7 @@ function trackRepairLeadEvent(
     event: eventName,
     eventName,
     service: "sofa_repair_restoration",
-    sourcePage:
-      typeof window !== "undefined"
-        ? `${window.location.pathname}${window.location.search}`
-        : undefined,
+    sourcePage: typeof window !== "undefined" ? window.location.pathname : undefined,
     ...details,
   };
 
@@ -170,7 +168,9 @@ function normalizeServerFieldErrors(fieldErrors?: FormErrors) {
   };
 
   for (const [key, message] of Object.entries(fieldErrors)) {
-    mappedErrors[fieldMap[key] || key] = message;
+    mappedErrors[
+      key.startsWith("uploadTokens.") ? "uploads" : fieldMap[key] || key
+    ] = message;
   }
 
   return mappedErrors;
@@ -320,11 +320,10 @@ export default function SofaRepairLeadForm() {
   const [uploadError, setUploadError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const { successLeadId, showSuccessConfirmation } = useLeadSuccessConfirmation(
-    {
+  const { successLeadId, showSuccessConfirmation, onConfirmationVisible } =
+    useLeadSuccessConfirmation({
       service: "sofa_repair_restoration",
-    },
-  );
+    });
   const [uploadSessionId, setUploadSessionId] = useState(() =>
     createClientId("upload"),
   );
@@ -333,6 +332,7 @@ export default function SofaRepairLeadForm() {
   );
   const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
   const startedEventSent = useRef(false);
+  const submissionLock = useRef(false);
   const uploadsRef = useRef<UploadItem[]>([]);
 
   useEffect(() => {
@@ -548,6 +548,8 @@ export default function SofaRepairLeadForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submissionLock.current || successLeadId) return;
+    const formElement = event.currentTarget;
     markStarted();
     setSubmitError("");
 
@@ -555,10 +557,12 @@ export default function SofaRepairLeadForm() {
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      focusFirstInvalidField(formElement);
       return;
     }
 
     setErrors({});
+    submissionLock.current = true;
     setIsSubmitting(true);
 
     const sourcePage =
@@ -614,17 +618,27 @@ export default function SofaRepairLeadForm() {
       });
       const result = await readApiResponse<LeadResponse>(response);
       const submittedFileCount = uploads.length;
+      showSuccessConfirmation(
+        result.leadId,
+        {
+          serviceData,
+          photoCount: uploads.filter(
+            (item) =>
+              item.status === "complete" && item.file.type.startsWith("image/"),
+          ).length,
+        },
+        resetFormAfterSuccess,
+      );
 
       trackRepairLeadEvent("repair_form_success", {
         fileCount: submittedFileCount,
       });
-      resetFormAfterSuccess();
-      showSuccessConfirmation(result.leadId);
     } catch (error) {
       const errorWithFields = error as Error & { fieldErrors?: FormErrors };
 
       if (errorWithFields.fieldErrors) {
         setErrors(errorWithFields.fieldErrors);
+        focusFirstInvalidField(formElement);
       }
 
       setSubmitError(
@@ -633,6 +647,7 @@ export default function SofaRepairLeadForm() {
           : "Please try again or contact Sofa N More directly.",
       );
     } finally {
+      submissionLock.current = false;
       setIsSubmitting(false);
     }
   }
@@ -659,6 +674,8 @@ export default function SofaRepairLeadForm() {
         </>
       }
       successLeadId={successLeadId}
+      onSuccessVisible={onConfirmationVisible}
+      fieldErrors={errors}
       successTitle="Thank You — Your Sofa Is Ready for Review."
       successMessage="We’ve received your details and photos. Our team can review the condition before discussing reupholstery, restoration, workshop drop-off or collection."
       successEyebrow="Photos received"

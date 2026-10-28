@@ -1322,6 +1322,8 @@ export function ClayFileDropzone({
         tabIndex={disabled ? -1 : 0}
         aria-describedby={error ? `${id}-error` : `${id}-hint`}
         aria-disabled={disabled}
+        data-invalid-field={error ? "true" : undefined}
+        aria-label={label}
         onClick={() => inputRef.current?.click()}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {

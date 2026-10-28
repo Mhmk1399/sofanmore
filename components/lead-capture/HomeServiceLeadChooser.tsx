@@ -166,7 +166,7 @@ export default function HomeServiceLeadChooser() {
                 Start your enquiry
               </p>
 
-              <h2 className="mt-2 font-brand-display text-[26px] font-semibold leading-tight text-[var(--brand-navy)] sm:text-[42px]">
+              <h2 className="mt-2 font-brand-display text-[24px] font-semibold leading-tight text-[var(--brand-navy)] sm:text-[42px]">
                 Tell us about your project.
               </h2>
 
@@ -178,7 +178,7 @@ export default function HomeServiceLeadChooser() {
 
             {/* First form question */}
             <fieldset className="mx-auto px-4 mt-9 max-w-[950px]">
-              <legend className="mb-3 font-brand-sans text-[13px] font-bold text-[var(--brand-navy)]">
+              <legend className="mb-3 text-center font-brand-sans text-[13px] font-bold text-[var(--brand-navy)]">
                 What can we help you with?
               </legend>
 

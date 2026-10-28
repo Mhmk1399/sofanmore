@@ -1055,7 +1055,7 @@ function ProjectSlide({
 
             select-none
 
-            object-contain
+            object-cover
             object-center
 
             transition-[transform,opacity]
@@ -1190,47 +1190,7 @@ function ProjectSlide({
             </span>
           )}
 
-          {project.locationLabel && (
-            <>
-              <span
-                aria-hidden
-                className="
-                  h-1
-                  w-1
-
-                  rounded-full
-
-                  bg-[var(--brand-navy)]/15
-                "
-              />
-
-              <span
-                className="
-                  inline-flex
-                  items-center
-
-                  gap-1
-
-                  font-brand-sans
-
-                  text-[11px]
-                  font-bold
-
-                  text-[var(--brand-navy)]
-                "
-              >
-                <MapPin
-                  size={9}
-                  strokeWidth={1.5}
-                  className="
-                    text-[var(--brand-gold-700)]
-                  "
-                />
-
-                {project.locationLabel}
-              </span>
-            </>
-          )}
+      
         </div>
 
         {/* TITLE */}

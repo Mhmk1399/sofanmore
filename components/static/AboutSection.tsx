@@ -123,9 +123,6 @@ function DesktopAbout() {
         "
       >
         {/* LEFT SIDE DECOR */}
- 
-
-     
 
         {/* MAIN GRID */}
 
@@ -164,8 +161,7 @@ function DesktopAbout() {
           ))}
         </div>
       </div>
-
-     </div>
+    </div>
   );
 }
 
@@ -177,8 +173,6 @@ function AboutCopy() {
   return (
     <div className="relative z-10 max-w-[520px]">
       {/* Monogram */}
-
-       
 
       {/* eyebrow */}
 
@@ -242,10 +236,10 @@ function AboutCopy() {
           xl:text-[14px]
         "
       >
-        Sofa N More creates timeless, upholstery that brings together
-        master craftsmanship, refined design and enduring comfort. From concept
-        to completion, we offer a personalised service encompassing bespoke
-        design, interior design and expert restoration.
+        Sofa N More creates timeless, upholstery that brings together master
+        craftsmanship, refined design and enduring comfort. From concept to
+        completion, we offer a personalised service encompassing bespoke design,
+        interior design and expert restoration.
       </p>
 
       <div className="mt-8">
@@ -317,9 +311,6 @@ function DesktopImage() {
           />
         </div>
       </div>
-
- 
-      
     </div>
   );
 }
@@ -402,8 +393,6 @@ function DesktopFeatureCard({ card }: { card: FeatureCard }) {
   );
 }
 
- 
-
 /* =========================================================
    MOBILE
 ========================================================= */
@@ -432,8 +421,6 @@ function MobileAbout() {
           pt-7
         "
       >
-        
-
         <MobileCopy />
 
         <MobileImage />
@@ -444,8 +431,7 @@ function MobileAbout() {
           ))}
         </div>
       </div>
-
-     </div>
+    </div>
   );
 }
 
@@ -482,13 +468,13 @@ function MobileCopy() {
       <h2
         className="
           font-brand-display
-          text-[30px]
+          text-[26px]
           font-semibold
           leading-[1.03]
           tracking-[-0.025em]
           text-[var(--brand-navy)]
 
-          min-[390px]:text-[33px]
+         
         "
       >
         Crafted in London.
@@ -510,10 +496,10 @@ function MobileCopy() {
           text-[var(--brand-text-muted)]
         "
       >
-        Sofa N More creates timeless, upholstery that brings together
-        master craftsmanship, refined design and enduring comfort. From concept
-        to completion, we offer a personalised service encompassing bespoke
-        design, interior design and expert restoration.
+        Sofa N More creates timeless, upholstery that brings together master
+        craftsmanship, refined design and enduring comfort. From concept to
+        completion, we offer a personalised service encompassing bespoke design,
+        interior design and expert restoration.
       </p>
 
       <div className="mt-5">
@@ -570,9 +556,6 @@ function MobileImage() {
           />
         </div>
       </div>
-
- 
-      
     </div>
   );
 }
@@ -603,8 +586,8 @@ function MobileFeatureCard({ card }: { card: FeatureCard }) {
         className="
           clay-icon
           flex
-          h-[46px]
-          w-[46px]
+          h-[40px]
+          w-[40px]
           shrink-0
           items-center
           justify-center
@@ -612,7 +595,7 @@ function MobileFeatureCard({ card }: { card: FeatureCard }) {
         "
       >
         <Icon
-          size={20}
+          size={16}
           strokeWidth={1.4}
           className="text-[var(--brand-gold)]"
         />
@@ -634,7 +617,7 @@ function MobileFeatureCard({ card }: { card: FeatureCard }) {
           className="
             mt-1
             font-brand-sans
-            text-[11px]
+            text-[10px]
             font-medium
             leading-[1.4]
             text-[var(--brand-text-muted)]
@@ -644,70 +627,5 @@ function MobileFeatureCard({ card }: { card: FeatureCard }) {
         </p>
       </div>
     </div>
-  );
-}
-
-/* =========================================================
-   MOBILE DECOR
-========================================================= */
-
-function MobileDecorations() {
-  return (
-    <>
-      {/* bottom left sphere */}
-
-      
-
-      {/* small gold sphere */}
-
-      <div
-        aria-hidden
-        className="
-          clay-sphere
-          absolute
-          -bottom-[4px]
-          left-[48px]
-          z-30
-          h-[42px]
-          w-[42px]
-        "
-      >
-        <div className="clay-sphere-ball clay-sphere-ball--gold" />
-      </div>
-
-      {/* right sphere */}
-
-      <div
-        aria-hidden
-        className="
-          clay-sphere
-          absolute
-          bottom-[100px]
-          -right-[32px]
-          z-20
-          h-[100px]
-          w-[100px]
-        "
-      >
-        <div className="clay-sphere-shadow" />
-        <div className="clay-sphere-ball" />
-      </div>
-
-      {/* gold ring */}
-
-      <div
-        aria-hidden
-        className="
-          absolute
-          -bottom-[6px]
-          -right-[18px]
-          z-30
-          h-[105px]
-          w-[105px]
-        "
-      >
-        <div className="clay-sphere-ring" />
-      </div>
-    </>
   );
 }

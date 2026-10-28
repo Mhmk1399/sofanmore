@@ -1,6 +1,6 @@
 # Sofa N More Technical Documentation
 
-Last updated: 2026-08-19
+Last updated: 2026-10-28
 
 This document describes the Sofa N More Next.js application, including the public website, lead capture platform, file upload flow, authentication, admin dashboard, project portfolio system, MongoDB models, API routes, and the important `lib` modules.
 
@@ -971,6 +971,39 @@ File: `components/static/ContactFormSection.tsx`
 Service: `CONTACT_ENQUIRY`
 
 Purpose: Capture general contact messages from the contact page.
+
+### 9.6 Lead Confirmation Tracking and Validation Feedback
+
+The service forms (including their homepage and project-page instances) and Contact Us share the same confirmation flow:
+
+1. Validate fields locally. Invalid submissions focus and scroll to the first visible invalid control, with a summary directly below Submit.
+2. Await a successful lead API response with a non-empty `leadId`. API and network failures preserve values and completed uploads.
+3. Mount the existing thank-you dialog through a body-level React portal.
+4. Once the dialog is committed, push one `lead_confirmation_view` event to `window.dataLayer`.
+5. Reset the form only after that push. The popup closes after 4.5 seconds and restores the original URL.
+
+| Form | lead_service | form_id |
+| --- | --- | --- |
+| Sofa Repair & Restoration | sofa_repair_restoration | sofa_repair_form |
+| Bespoke Sofa | bespoke_sofa | bespoke_sofa_form |
+| Commercial Sofa | commercial_sofa | commercial_sofa_form |
+| Interior Design | interior_design | interior_design_form |
+| Contact Us | contact_enquiry | contact_form |
+
+Shared modules:
+
+- `lib/lead-confirmation-tracking.ts`: builds a whitelist-only event payload from known service options. Free-text and contact fields are never spread into analytics.
+- `components/lead-capture/useLeadSuccessConfirmation.ts`: accepts a backend-confirmed lead, snapshots its non-personal dimensions and deduplicates confirmation callbacks.
+- `components/lead-capture/LeadSuccessDialog.tsx`: owns the shared portal, focus handling and visible-dialog callback.
+- `lib/lead-form-feedback.ts` and `FormSubmissionError.tsx`: shared first-error focus and submit-error summaries.
+
+Repair dimensions map `itemType` to `sofa_type`, `projectScope` to `repair_type`, and `transportPreference` to `collection_required`. Fields not collected by the current form remain empty; they are not inferred. `has_photos` is only `yes` or `no` and counts completed image uploads, not PDFs.
+
+Payloads exclude names, email, phone, addresses, postcodes, messages, notes, file names, upload URLs and lead IDs. `page_path` is the actual route; `page_location` contains its origin and path without query strings or fragments, which may contain personal information. Existing virtual-confirmation path/title parameters remain available separately.
+
+A temporary console message, `Lead tracking pushed to dataLayer`, logs only the event name, service and success status. It never logs form values.
+
+Marketing integrations should consume the single `lead_confirmation_view` event and distinguish forms by `lead_service`; clicking Submit is not a confirmed lead. Publishing tags or changing the GTM/GA4 account is a separate operation.
 
 ## 10. File Upload Flow
 

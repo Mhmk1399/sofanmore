@@ -84,8 +84,6 @@ export default function GalleryHero() {
                 text-center
               "
             >
-              
-
               {/* =================================================
                   H1
               ================================================== */}
@@ -100,7 +98,7 @@ export default function GalleryHero() {
 
                   font-brand-display
 
-                  text-[42px]
+                  text-[32px]
                   font-semibold
                   leading-[0.94]
 
@@ -108,18 +106,14 @@ export default function GalleryHero() {
 
                   text-[var(--brand-navy)]
 
-                  min-[390px]:text-[38px]
+              
 
                   sm:text-[60px]
 
                   lg:text-[clamp(60px,5.7vw,82px)]
                 "
               >
-                Spaces Made
-                <span className="block">
-                  to Be Remembered
-                  <span className="text-[var(--brand-gold)]">.</span>
-                </span>
+                Spaces Made to Be Remembered
               </h1>
 
               {/* =================================================
@@ -151,48 +145,7 @@ export default function GalleryHero() {
                 ideas.
               </p>
 
-              {/* =================================================
-                  CATEGORIES
-              ================================================== */}
-
-              <div
-                className="
-                  mx-auto
-                  mt-6
-
-                  flex
-                  w-fit
-                  max-w-full
-
-                  items-center
-                  justify-center
-                  gap-2
-                "
-              >
-                <Sparkles
-                  size={11}
-                  strokeWidth={1.5}
-                  className="shrink-0 text-[var(--brand-gold-700)]"
-                />
-
-                <span
-                  className="
-                    font-brand-sans
-
-                    text-[13px]
-                    font-bold
-                    uppercase
-
-                    tracking-[0.17em]
-
-                    text-[var(--brand-gold-700)]
-
-                    sm:text-[11px]
-                  "
-                >
-                  Bespoke · Commercial · Interiors · Restoration
-                </span>
-              </div>
+          
 
               {/* =================================================
                   CTA

@@ -1172,10 +1172,7 @@ function MobileServiceCard({ service }: { service: Service }) {
             </p>
           </div>
         </div>
-
-        <span className="clay-icon flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-          <MoveRight size={9} className="text-[var(--brand-gold-700)]" />
-        </span>
+ 
       </div>
     </Link>
   );

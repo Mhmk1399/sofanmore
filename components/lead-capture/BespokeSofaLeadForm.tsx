@@ -14,6 +14,7 @@ import {
   type UploadItem,
 } from "@/components/lead-capture/ClayFormControls";
 import LeadFormShell from "@/components/lead-capture/LeadFormShell";
+import { focusFirstInvalidField } from "@/lib/lead-form-feedback";
 import { MAX_UPLOAD_COUNT, MAX_UPLOAD_SIZE_BYTES } from "@/lib/lead-config";
 import { useLeadSuccessConfirmation } from "@/components/lead-capture/useLeadSuccessConfirmation";
 
@@ -144,11 +145,8 @@ function trackLeadFormEvent(
     event: eventName,
     eventName,
     service: "bespoke_sofa",
-    lead_service: "bespoke_sofas",
-    sourcePage:
-      typeof window !== "undefined"
-        ? `${window.location.pathname}${window.location.search}`
-        : undefined,
+    lead_service: "bespoke_sofa",
+    sourcePage: typeof window !== "undefined" ? window.location.pathname : undefined,
     ...details,
   };
 
@@ -184,7 +182,9 @@ function normalizeServerFieldErrors(fieldErrors?: FormErrors) {
   };
 
   for (const [key, message] of Object.entries(fieldErrors)) {
-    mappedErrors[fieldMap[key] || key] = message;
+    mappedErrors[
+      key.startsWith("uploadTokens.") ? "uploads" : fieldMap[key] || key
+    ] = message;
   }
 
   return mappedErrors;
@@ -195,7 +195,7 @@ async function readApiResponse<T extends { ok: true }>(
 ): Promise<T> {
   const body = (await response.json()) as unknown;
 
-  if (!response.ok || !body || typeof body !== "object" || !("ok" in body)) {
+  if (!body || typeof body !== "object" || !("ok" in body)) {
     const error = new Error("Request failed.") as Error & {
       fieldErrors?: FormErrors;
     };
@@ -211,6 +211,7 @@ async function readApiResponse<T extends { ok: true }>(
     throw error;
   }
 
+  if (!response.ok || body.ok !== true) throw new Error("Request failed.");
   return body as T;
 }
 
@@ -348,10 +349,9 @@ export default function BespokeSofaLeadForm({
   const [uploadError, setUploadError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const { successLeadId, showSuccessConfirmation } =
+  const { successLeadId, showSuccessConfirmation, onConfirmationVisible } =
     useLeadSuccessConfirmation({
       service: "bespoke_sofa",
-      leadService: "bespoke_sofas",
     });
   const [uploadSessionId, setUploadSessionId] = useState(() =>
     createClientId("upload"),
@@ -361,6 +361,7 @@ export default function BespokeSofaLeadForm({
   );
   const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
   const startedEventSent = useRef(false);
+  const submissionLock = useRef(false);
   const uploadsRef = useRef<UploadItem[]>([]);
 
   useEffect(() => {
@@ -579,6 +580,8 @@ export default function BespokeSofaLeadForm({
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submissionLock.current || successLeadId) return;
+    const formElement = event.currentTarget;
     markStarted();
     setSubmitError("");
 
@@ -586,11 +589,13 @@ export default function BespokeSofaLeadForm({
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      focusFirstInvalidField(formElement);
       trackLeadFormEvent("lead_form_error", { stage: "client_validation" });
       return;
     }
 
     setErrors({});
+    submissionLock.current = true;
     setIsSubmitting(true);
     trackLeadFormEvent("lead_form_submit", { fileCount: uploads.length });
 
@@ -659,17 +664,27 @@ export default function BespokeSofaLeadForm({
       });
       const result = await readApiResponse<LeadResponse>(response);
       const submittedFileCount = uploads.length;
+      showSuccessConfirmation(
+        result.leadId,
+        {
+          serviceData,
+          photoCount: uploads.filter(
+            (item) =>
+              item.status === "complete" && item.file.type.startsWith("image/"),
+          ).length,
+        },
+        resetFormAfterSuccess,
+      );
 
       trackLeadFormEvent("lead_form_success", {
         fileCount: submittedFileCount,
       });
-      resetFormAfterSuccess();
-      showSuccessConfirmation(result.leadId);
     } catch (error) {
       const errorWithFields = error as Error & { fieldErrors?: FormErrors };
 
       if (errorWithFields.fieldErrors) {
         setErrors(errorWithFields.fieldErrors);
+        focusFirstInvalidField(formElement);
       }
 
       setSubmitError(
@@ -679,6 +694,7 @@ export default function BespokeSofaLeadForm({
       );
       trackLeadFormEvent("lead_form_error", { stage: "submit" });
     } finally {
+      submissionLock.current = false;
       setIsSubmitting(false);
     }
   }
@@ -687,11 +703,7 @@ export default function BespokeSofaLeadForm({
     <LeadFormShell
       id="bespoke-sofa-enquiry"
       eyebrow="Bespoke Sofa Enquiry"
-      title={
-        <>
-          Request Your Bespoke Sofa Quote
-        </>
-      }
+      title={<>Request Your Bespoke Sofa Quote</>}
       intro={
         <>
           Send us your room dimensions, photographs, inspiration or design ideas
@@ -700,6 +712,8 @@ export default function BespokeSofaLeadForm({
         </>
       }
       successLeadId={successLeadId}
+      onSuccessVisible={onConfirmationVisible}
+      fieldErrors={errors}
       submitError={submitError}
       isSubmitting={isSubmitting}
       canSubmit={canSubmit}
