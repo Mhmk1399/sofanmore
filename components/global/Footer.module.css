@@ -6,6 +6,9 @@
   --paper: var(--brand-ivory, #f7f1e8);
   background: var(--paper);
   color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: clamp(24px, 4vw, 56px) 12px calc(126px + env(safe-area-inset-bottom, 0px));
 }
 

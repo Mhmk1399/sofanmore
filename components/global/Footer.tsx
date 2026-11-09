@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import styles from "./Footer.module.css";
+import CheetahNovaCredit from "./credit";
 
 type FooterLink = { label: string; href: string };
 type FooterSection = {
@@ -244,6 +245,18 @@ export default function Footer() {
             </a>
           </div>
         </div>
+      </div>
+      <div className="mx-auto  w-fit text-center flex justify-center items-center">
+        {" "}
+        <CheetahNovaCredit
+          href="https://www.cheetahnova.uk/"
+          text="Powered by"
+          theme="light"
+          layout="inline"
+          target="_blank"
+          variant="minimal"
+          size="sm"
+        />
       </div>
     </footer>
   );

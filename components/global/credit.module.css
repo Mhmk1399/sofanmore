@@ -1,0 +1,277 @@
+.root {
+  --cn-text: #b6c3d6;
+  --cn-brand: #f4f8fd;
+  --cn-accent: #e8b76c;
+  --cn-background: #101925;
+  --cn-border: rgb(176 200 224 / 18%);
+  --cn-trace-end: #65b9d8;
+  --cn-default-radius: 14px;
+  --cn-padding-block: 6px;
+  --cn-padding-inline: 14px;
+  --cn-prefix-size: 11.5px;
+  --cn-brand-size: 16px;
+  --cn-shadow: rgb(5 15 30 / 8%);
+
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--cn-gap, 10px);
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  min-block-size: 44px;
+  padding: var(--cn-padding-block) var(--cn-padding-inline);
+  border: 1px solid var(--cn-border);
+  border-radius: var(--cn-radius, var(--cn-default-radius));
+  background: var(--cn-background);
+  box-shadow: 0 2px 5px var(--cn-shadow);
+  color: var(--cn-brand);
+  font-family: var(--cn-font-family, inherit);
+  font-style: normal;
+  line-height: 1.3;
+  text-align: start;
+  text-decoration: none;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+.root[data-theme="light"],
+.root[data-theme="auto"] {
+  --cn-text: #536076;
+  --cn-brand: #152438;
+  --cn-accent: #8f5d1c;
+  --cn-background: #ffffff;
+  --cn-border: rgb(37 62 90 / 16%);
+  --cn-trace-end: #2c7d9b;
+  --cn-shadow: rgb(25 51 78 / 5%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .root[data-theme="auto"] {
+    --cn-text: #b6c3d6;
+    --cn-brand: #f4f8fd;
+    --cn-accent: #e8b76c;
+    --cn-background: #101925;
+    --cn-border: rgb(176 200 224 / 18%);
+    --cn-trace-end: #65b9d8;
+    --cn-shadow: rgb(5 15 30 / 8%);
+  }
+}
+
+.root[data-size="sm"] {
+  --cn-prefix-size: 11px;
+  --cn-brand-size: 14px;
+  --cn-padding-block: 4px;
+  --cn-padding-inline: 11px;
+  --cn-default-radius: 11px;
+}
+
+.root[data-size="lg"] {
+  --cn-prefix-size: 12px;
+  --cn-brand-size: 18px;
+  --cn-padding-block: 9px;
+  --cn-padding-inline: 17px;
+  --cn-default-radius: 17px;
+}
+
+.root[data-variant="pill"] {
+  --cn-default-radius: 999px;
+}
+
+.root[data-variant="minimal"] {
+  --cn-background: transparent;
+  --cn-border: transparent;
+  --cn-default-radius: 8px;
+  --cn-padding-block: 2px;
+  --cn-padding-inline: 5px;
+
+  box-shadow: none;
+}
+
+.logo {
+  box-sizing: border-box;
+  display: block;
+  flex: 0 0 var(--cn-logo-size);
+  inline-size: var(--cn-logo-size);
+  block-size: var(--cn-logo-size);
+  min-inline-size: 0;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  object-fit: contain;
+  background: transparent;
+}
+
+.copy {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-inline-size: 0;
+}
+
+.prefix {
+  color: var(--cn-text);
+  font-size: var(--cn-prefix-size);
+  font-weight: 450;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.brand {
+  position: relative;
+  display: block;
+  min-inline-size: 0;
+  color: var(--cn-brand);
+  font-size: var(--cn-brand-size);
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+
+.root[data-variant="signature"] .brand::after {
+  position: absolute;
+  inset-block-end: -3px;
+  inset-inline-start: 0;
+  inline-size: 29px;
+  block-size: 1px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--cn-accent),
+    var(--cn-trace-end) 75%,
+    transparent
+  );
+  opacity: 0.8;
+  content: "";
+}
+
+.root[data-layout="inline"] .copy {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.35em;
+  row-gap: 0;
+}
+
+.root[data-layout="inline"] .prefix {
+  font-size: var(--cn-brand-size);
+}
+
+.arrow {
+  display: block;
+  flex: 0 0 16px;
+  inline-size: 16px;
+  block-size: 16px;
+  margin-inline-start: 5px;
+  color: var(--cn-text);
+}
+
+.root[dir="rtl"] .arrow {
+  scale: -1 1;
+}
+
+.root[data-animated="true"] {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.root[data-animated="true"] .arrow {
+  transition:
+    color 180ms ease,
+    translate 180ms ease;
+}
+
+.root:focus-visible {
+  outline: 2px solid var(--cn-accent);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) {
+  .root:hover {
+    border-color: color-mix(in srgb, var(--cn-accent) 50%, var(--cn-border));
+    box-shadow: 0 5px 18px color-mix(in srgb, var(--cn-accent) 12%, transparent);
+  }
+
+  .root:hover .arrow {
+    color: var(--cn-accent);
+  }
+
+  .root[data-animated="true"]:hover {
+    transform: translateY(-1px);
+  }
+
+  .root[data-animated="true"]:hover .arrow {
+    translate: 1px -1px;
+  }
+
+  .root[data-animated="true"][dir="rtl"]:hover .arrow {
+    translate: -1px -1px;
+  }
+
+  .root[data-variant="minimal"]:hover {
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.root:active {
+  box-shadow: none;
+  opacity: 0.85;
+}
+
+.root[data-animated="true"]:active {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root[data-animated="true"],
+  .root[data-animated="true"] .arrow {
+    transition: none;
+  }
+
+  .root[data-animated="true"]:hover,
+  .root[data-animated="true"]:active {
+    transform: none;
+  }
+
+  .root[data-animated="true"]:hover .arrow,
+  .root[data-animated="true"][dir="rtl"]:hover .arrow {
+    translate: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .root,
+  .root:hover,
+  .root[data-variant="minimal"]:hover {
+    border-color: LinkText;
+    background: Canvas;
+    box-shadow: none;
+    color: LinkText;
+  }
+
+  .prefix,
+  .brand,
+  .arrow,
+  .root:hover .arrow {
+    color: LinkText;
+  }
+
+  .root:focus-visible {
+    outline-color: Highlight;
+  }
+
+  .root[data-variant="signature"] .brand::after {
+    display: none;
+  }
+}
